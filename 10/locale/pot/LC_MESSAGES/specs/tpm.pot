@@ -1,0 +1,928 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/tpm.rst:5
+msgid "QEMU TPM Device"
+msgstr ""
+
+#: ../../../specs/tpm.rst:8
+msgid "Guest-side hardware interface"
+msgstr ""
+
+#: ../../../specs/tpm.rst:11
+msgid "TIS interface"
+msgstr ""
+
+#: ../../../specs/tpm.rst:13
+msgid ""
+"The QEMU TPM emulation implements a TPM TIS hardware interface following the "
+"Trusted Computing Group's specification \"TCG PC Client Specific TPM "
+"Interface Specification (TIS)\", Specification Version 1.3, 21 March 2013. "
+"(see the `TIS specification`_, or a later version of it)."
+msgstr ""
+
+#: ../../../specs/tpm.rst:19
+msgid ""
+"The TIS interface makes a memory mapped IO region in the area "
+"0xfed40000-0xfed44fff available to the guest operating system."
+msgstr ""
+
+#: ../../../specs/tpm.rst:22
+msgid "QEMU files related to TPM TIS interface:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:23
+msgid "``hw/tpm/tpm_tis_common.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:24
+msgid "``hw/tpm/tpm_tis_isa.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:25
+msgid "``hw/tpm/tpm_tis_sysbus.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:26
+msgid "``hw/tpm/tpm_tis_i2c.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:27
+msgid "``hw/tpm/tpm_tis.h``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:29
+msgid ""
+"Both an ISA device and a sysbus device are available. The former is used "
+"with pc/q35 machine while the latter can be instantiated in the Arm virt "
+"machine."
+msgstr ""
+
+#: ../../../specs/tpm.rst:33
+msgid ""
+"An I2C device support is also provided which can be instantiated in the Arm "
+"based emulation machines. This device only supports the TPM 2 protocol."
+msgstr ""
+
+#: ../../../specs/tpm.rst:37
+msgid "CRB interface"
+msgstr ""
+
+#: ../../../specs/tpm.rst:39
+msgid ""
+"QEMU also implements a TPM CRB interface following the Trusted Computing "
+"Group's specification \"TCG PC Client Platform TPM Profile (PTP) "
+"Specification\", Family \"2.0\", Level 00 Revision 01.03 v22, May 22, 2017. "
+"(see the `CRB specification`_, or a later version of it)"
+msgstr ""
+
+#: ../../../specs/tpm.rst:44
+msgid ""
+"The CRB interface makes a memory mapped IO region in the area "
+"0xfed40000-0xfed40fff (1 locality) available to the guest operating system."
+msgstr ""
+
+#: ../../../specs/tpm.rst:48
+msgid "QEMU files related to TPM CRB interface:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:49
+msgid "``hw/tpm/tpm_crb.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:52
+msgid "SPAPR interface"
+msgstr ""
+
+#: ../../../specs/tpm.rst:54
+msgid "pSeries (ppc64) machines offer a tpm-spapr device model."
+msgstr ""
+
+#: ../../../specs/tpm.rst:56
+msgid "QEMU files related to the SPAPR interface:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:57
+msgid "``hw/tpm/tpm_spapr.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:60
+msgid "fw_cfg interface"
+msgstr ""
+
+#: ../../../specs/tpm.rst:62
+msgid ""
+"The bios/firmware may read the ``\"etc/tpm/config\"`` fw_cfg entry for "
+"configuring the guest appropriately."
+msgstr ""
+
+#: ../../../specs/tpm.rst:65
+msgid "The entry of 6 bytes has the following content, in little-endian:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:67
+msgid ""
+"#define TPM_VERSION_UNSPEC          0\n"
+"#define TPM_VERSION_1_2             1\n"
+"#define TPM_VERSION_2_0             2\n"
+"\n"
+"#define TPM_PPI_VERSION_NONE        0\n"
+"#define TPM_PPI_VERSION_1_30        1\n"
+"\n"
+"struct FwCfgTPMConfig {\n"
+"    uint32_t tpmppi_address;         /* PPI memory location */\n"
+"    uint8_t tpm_version;             /* TPM version */\n"
+"    uint8_t tpmppi_version;          /* PPI version */\n"
+"};"
+msgstr ""
+
+#: ../../../specs/tpm.rst:83
+msgid "ACPI interface"
+msgstr ""
+
+#: ../../../specs/tpm.rst:85
+msgid ""
+"The TPM device is defined with ACPI ID \"PNP0C31\". QEMU builds a SSDT and "
+"passes it into the guest through the fw_cfg device. The device description "
+"contains the base address of the TIS interface 0xfed40000 and the size of "
+"the MMIO area (0x5000). In case a TPM2 is used by QEMU, a TPM2 ACPI table is "
+"also provided.  The device is described to be used in polling mode rather "
+"than interrupt mode primarily because no unused IRQ could be found."
+msgstr ""
+
+#: ../../../specs/tpm.rst:93
+msgid ""
+"To support measurement logs to be written by the firmware, e.g. SeaBIOS, a "
+"TCPA table is implemented. This table provides a 64kb buffer where the "
+"firmware can write its log into. For TPM 2 only a more recent version of the "
+"TPM2 table provides support for measurements logs and a TCPA table does not "
+"need to be created."
+msgstr ""
+
+#: ../../../specs/tpm.rst:99
+msgid ""
+"The TCPA and TPM2 ACPI tables follow the Trusted Computing Group "
+"specification \"TCG ACPI Specification\" Family \"1.2\" and \"2.0\", Level "
+"00 Revision 00.37. (see the `ACPI specification`_, or a later version of it)"
+msgstr ""
+
+#: ../../../specs/tpm.rst:105
+msgid "ACPI PPI Interface"
+msgstr ""
+
+#: ../../../specs/tpm.rst:107
+msgid ""
+"QEMU supports the Physical Presence Interface (PPI) for TPM 1.2 and TPM 2. "
+"This interface requires ACPI and firmware support. (see the `PPI "
+"specification`_)"
+msgstr ""
+
+#: ../../../specs/tpm.rst:111
+msgid ""
+"PPI enables a system administrator (root) to request a modification to the "
+"TPM upon reboot. The PPI specification defines the operation requests and "
+"the actions the firmware has to take. The system administrator passes the "
+"operation request number to the firmware through an ACPI interface which "
+"writes this number to a memory location that the firmware knows. Upon "
+"reboot, the firmware finds the number and sends commands to the TPM. The "
+"firmware writes the TPM result code and the operation request number to a "
+"memory location that ACPI can read from and pass the result on to the "
+"administrator."
+msgstr ""
+
+#: ../../../specs/tpm.rst:121
+msgid ""
+"The PPI specification defines a set of mandatory and optional operations for "
+"the firmware to implement. The ACPI interface also allows an administrator "
+"to list the supported operations. In QEMU the ACPI code is generated by "
+"QEMU, yet the firmware needs to implement support on a per-operations basis, "
+"and different firmwares may support a different subset. Therefore, QEMU "
+"introduces the virtual memory device for PPI where the firmware can indicate "
+"which operations it supports and ACPI can enable the ones that are supported "
+"and disable all others. This interface lies in main memory and has the "
+"following layout:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:133
+msgid "Field"
+msgstr ""
+
+#: ../../../specs/tpm.rst:133
+msgid "Length"
+msgstr ""
+
+#: ../../../specs/tpm.rst:133
+msgid "Offset"
+msgstr ""
+
+#: ../../../specs/tpm.rst:133 ../../../specs/tpm.rst:172
+msgid "Description"
+msgstr ""
+
+#: ../../../specs/tpm.rst:135
+msgid "``func``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:135 ../../../specs/tpm.rst:138
+msgid "0x100"
+msgstr ""
+
+#: ../../../specs/tpm.rst:135
+msgid "0x000"
+msgstr ""
+
+#: ../../../specs/tpm.rst:135
+msgid ""
+"Firmware sets values for each supported operation. See defined values below."
+msgstr ""
+
+#: ../../../specs/tpm.rst:138
+msgid "``ppin``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:138 ../../../specs/tpm.rst:162
+#: ../../../specs/tpm.rst:165
+msgid "0x1"
+msgstr ""
+
+#: ../../../specs/tpm.rst:138
+msgid "SMI interrupt to use. Set by firmware. Not supported."
+msgstr ""
+
+#: ../../../specs/tpm.rst:141
+msgid "``ppip``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:141 ../../../specs/tpm.rst:144
+#: ../../../specs/tpm.rst:147 ../../../specs/tpm.rst:151
+#: ../../../specs/tpm.rst:154 ../../../specs/tpm.rst:157
+msgid "0x4"
+msgstr ""
+
+#: ../../../specs/tpm.rst:141
+msgid "0x101"
+msgstr ""
+
+#: ../../../specs/tpm.rst:141
+msgid "ACPI function index to pass to SMM code. Set by ACPI. Not supported."
+msgstr ""
+
+#: ../../../specs/tpm.rst:144
+msgid "``pprp``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:144
+msgid "0x105"
+msgstr ""
+
+#: ../../../specs/tpm.rst:144
+msgid ""
+"Result of last executed operation. Set by firmware. See function index 5 for "
+"values."
+msgstr ""
+
+#: ../../../specs/tpm.rst:147
+msgid "``pprq``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:147
+msgid "0x109"
+msgstr ""
+
+#: ../../../specs/tpm.rst:147
+msgid ""
+"Operation request number to execute. See 'Physical Presence Interface "
+"Operation Summary' tables in specs. Set by ACPI."
+msgstr ""
+
+#: ../../../specs/tpm.rst:151
+msgid "``pprm``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:151
+msgid "0x10d"
+msgstr ""
+
+#: ../../../specs/tpm.rst:151
+msgid ""
+"Operation request optional parameter. Values depend on operation. Set by "
+"ACPI."
+msgstr ""
+
+#: ../../../specs/tpm.rst:154
+msgid "``lppr``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:154
+msgid "0x111"
+msgstr ""
+
+#: ../../../specs/tpm.rst:154
+msgid ""
+"Last executed operation request number. Copied from pprq field by firmware."
+msgstr ""
+
+#: ../../../specs/tpm.rst:157
+msgid "``fret``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:157
+msgid "0x115"
+msgstr ""
+
+#: ../../../specs/tpm.rst:157
+msgid "Result code from SMM function. Not supported."
+msgstr ""
+
+#: ../../../specs/tpm.rst:160
+msgid "``res1``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:160
+msgid "0x40"
+msgstr ""
+
+#: ../../../specs/tpm.rst:160
+msgid "0x119"
+msgstr ""
+
+#: ../../../specs/tpm.rst:160
+msgid "Reserved for future use"
+msgstr ""
+
+#: ../../../specs/tpm.rst:162
+msgid "``next_step``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:162
+msgid "0x159"
+msgstr ""
+
+#: ../../../specs/tpm.rst:162
+msgid "Operation to execute after reboot by firmware. Used by firmware."
+msgstr ""
+
+#: ../../../specs/tpm.rst:165
+msgid "``movv``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:165
+msgid "0x15a"
+msgstr ""
+
+#: ../../../specs/tpm.rst:165
+msgid "Memory overwrite variable"
+msgstr ""
+
+#: ../../../specs/tpm.rst:168
+msgid ""
+"The following values are supported for the ``func`` field. They correspond "
+"to the values used by ACPI function index 8."
+msgstr ""
+
+#: ../../../specs/tpm.rst:172
+msgid "Value"
+msgstr ""
+
+#: ../../../specs/tpm.rst:174
+msgid "0"
+msgstr ""
+
+#: ../../../specs/tpm.rst:174
+msgid "Operation is not implemented."
+msgstr ""
+
+#: ../../../specs/tpm.rst:176
+msgid "1"
+msgstr ""
+
+#: ../../../specs/tpm.rst:176
+msgid "Operation is only accessible through firmware."
+msgstr ""
+
+#: ../../../specs/tpm.rst:178
+msgid "2"
+msgstr ""
+
+#: ../../../specs/tpm.rst:178
+msgid "Operation is blocked for OS by firmware configuration."
+msgstr ""
+
+#: ../../../specs/tpm.rst:180
+msgid "3"
+msgstr ""
+
+#: ../../../specs/tpm.rst:180
+msgid "Operation is allowed and physically present user required."
+msgstr ""
+
+#: ../../../specs/tpm.rst:182
+msgid "4"
+msgstr ""
+
+#: ../../../specs/tpm.rst:182
+msgid "Operation is allowed and physically present user is not required."
+msgstr ""
+
+#: ../../../specs/tpm.rst:186
+msgid ""
+"The location of the table is given by the fw_cfg ``tpmppi_address`` field.  "
+"The PPI memory region size is 0x400 (``TPM_PPI_ADDR_SIZE``) to leave enough "
+"room for future updates."
+msgstr ""
+
+#: ../../../specs/tpm.rst:190
+msgid "QEMU files related to TPM ACPI tables:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:191
+msgid "``hw/i386/acpi-build.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:192
+msgid "``include/hw/acpi/tpm.h``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:195
+msgid "TPM backend devices"
+msgstr ""
+
+#: ../../../specs/tpm.rst:197
+msgid ""
+"The TPM implementation is split into two parts, frontend and backend. The "
+"frontend part is the hardware interface, such as the TPM TIS interface "
+"described earlier, and the other part is the TPM backend interface. The "
+"backend interfaces implement the interaction with a TPM device, which may be "
+"a physical or an emulated device. The split between the front- and backend "
+"devices allows a frontend to be connected with any available backend. This "
+"enables the TIS interface to be used with the passthrough backend or the "
+"swtpm backend."
+msgstr ""
+
+#: ../../../specs/tpm.rst:206
+msgid "QEMU files related to TPM backends:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:207
+msgid "``backends/tpm.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:208
+msgid "``include/system/tpm.h``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:209
+msgid "``include/system/tpm_backend.h``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:212
+msgid "The QEMU TPM passthrough device"
+msgstr ""
+
+#: ../../../specs/tpm.rst:214
+msgid ""
+"In case QEMU is run on Linux as the host operating system it is possible to "
+"make the hardware TPM device available to a single QEMU guest. In this case "
+"the user must make sure that no other program is using the device, e.g., /"
+"dev/tpm0, before trying to start QEMU with it."
+msgstr ""
+
+#: ../../../specs/tpm.rst:220
+msgid ""
+"The passthrough driver uses the host's TPM device for sending TPM commands "
+"and receiving responses from. Besides that it accesses the TPM device's "
+"sysfs entry for support of command cancellation. Since none of the state of "
+"a hardware TPM can be migrated between hosts, virtual machine migration is "
+"disabled when the TPM passthrough driver is used."
+msgstr ""
+
+#: ../../../specs/tpm.rst:227
+msgid ""
+"Since the host's TPM device will already be initialized by the host's "
+"firmware, certain commands, e.g. ``TPM_Startup()``, sent by the virtual "
+"firmware for device initialization, will fail. In this case the firmware "
+"should not use the TPM."
+msgstr ""
+
+#: ../../../specs/tpm.rst:232
+msgid ""
+"Sharing the device with the host is generally not a recommended usage "
+"scenario for a TPM device. The primary reason for this is that two operating "
+"systems can then access the device's single set of resources, such as "
+"platform configuration registers (PCRs). Applications or kernel security "
+"subsystems, such as the Linux Integrity Measurement Architecture (IMA), are "
+"not expecting to share PCRs."
+msgstr ""
+
+#: ../../../specs/tpm.rst:240
+msgid "QEMU files related to the TPM passthrough device:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:241
+msgid "``backends/tpm/tpm_passthrough.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:242 ../../../specs/tpm.rst:303
+msgid "``backends/tpm/tpm_util.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:243 ../../../specs/tpm.rst:304
+msgid "``include/system/tpm_util.h``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:246
+msgid ""
+"Command line to start QEMU with the TPM passthrough device using the host's "
+"hardware TPM ``/dev/tpm0``:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:249
+msgid ""
+"qemu-system-x86_64 -display sdl -accel kvm \\\n"
+"-m 1024 -boot d -bios bios-256k.bin -boot menu=on \\\n"
+"-tpmdev passthrough,id=tpm0,path=/dev/tpm0 \\\n"
+"-device tpm-tis,tpmdev=tpm0 test.img"
+msgstr ""
+
+#: ../../../specs/tpm.rst:257
+msgid ""
+"The following commands should result in similar output inside the VM with a "
+"Linux kernel that either has the TPM TIS driver built-in or available as a "
+"module (assuming a TPM 2 is passed through):"
+msgstr ""
+
+#: ../../../specs/tpm.rst:261 ../../../specs/tpm.rst:390
+msgid ""
+"# dmesg | grep -i tpm\n"
+"[    0.012560] ACPI: TPM2 0x000000000BFFD1900 00004C (v04 BOCHS  \\\n"
+"    BXPC     0000001 BXPC 00000001)\n"
+"\n"
+"# ls -l /dev/tpm*\n"
+"crw-rw----. 1 tss root  10,   224 Sep  6 12:36 /dev/tpm0\n"
+"crw-rw----. 1 tss rss  253, 65536 Sep  6 12:36 /dev/tpmrm0\n"
+"\n"
+"Starting with Linux 5.12 there are PCR entries for TPM 2 in sysfs:\n"
+"# find /sys/devices/ -type f | grep pcr-sha\n"
+"...\n"
+"/sys/devices/LNXSYSTEM:00/LNXSYBUS:00/MSFT0101:00/tpm/tpm0/pcr-sha256/1\n"
+"...\n"
+"/sys/devices/LNXSYSTEM:00/LNXSYBUS:00/MSFT0101:00/tpm/tpm0/pcr-sha256/9\n"
+"..."
+msgstr ""
+
+#: ../../../specs/tpm.rst:280
+msgid "The QEMU TPM emulator device"
+msgstr ""
+
+#: ../../../specs/tpm.rst:282
+msgid ""
+"The TPM emulator device uses an external TPM emulator called 'swtpm' for "
+"sending TPM commands to and receiving responses from. The swtpm program must "
+"have been started before trying to access it through the TPM emulator with "
+"QEMU."
+msgstr ""
+
+#: ../../../specs/tpm.rst:287
+msgid ""
+"The TPM emulator implements a command channel for transferring TPM commands "
+"and responses as well as a control channel over which control commands can "
+"be sent. (see the `SWTPM protocol`_ specification)"
+msgstr ""
+
+#: ../../../specs/tpm.rst:291
+msgid ""
+"The control channel serves the purpose of resetting, initializing, and "
+"migrating the TPM state, among other things."
+msgstr ""
+
+#: ../../../specs/tpm.rst:294
+msgid ""
+"The swtpm program behaves like a hardware TPM and therefore needs to be "
+"initialized by the firmware running inside the QEMU virtual machine.  One "
+"necessary step for initializing the device is to send the TPM_Startup "
+"command to it. SeaBIOS, for example, has been instrumented to initialize a "
+"TPM 1.2 or TPM 2 device using this command."
+msgstr ""
+
+#: ../../../specs/tpm.rst:301
+msgid "QEMU files related to the TPM emulator device:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:302
+msgid "``backends/tpm/tpm_emulator.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:306
+msgid ""
+"The following commands start the swtpm with a UnixIO control channel over a "
+"socket interface. They do not need to be run as root."
+msgstr ""
+
+#: ../../../specs/tpm.rst:309 ../../../specs/tpm.rst:422
+msgid ""
+"mkdir /tmp/mytpm1\n"
+"swtpm socket --tpmstate dir=/tmp/mytpm1 \\\n"
+"  --ctrl type=unixio,path=/tmp/mytpm1/swtpm-sock \\\n"
+"  --tpm2 \\\n"
+"  --log level=20"
+msgstr ""
+
+#: ../../../specs/tpm.rst:317
+msgid ""
+"Command line to start QEMU with the TPM emulator device communicating with "
+"the swtpm (x86):"
+msgstr ""
+
+#: ../../../specs/tpm.rst:320
+msgid ""
+"qemu-system-x86_64 -display sdl -accel kvm \\\n"
+"  -m 1024 -boot d -bios bios-256k.bin -boot menu=on \\\n"
+"  -chardev socket,id=chrtpm,path=/tmp/mytpm1/swtpm-sock \\\n"
+"  -tpmdev emulator,id=tpm0,chardev=chrtpm \\\n"
+"  -device tpm-tis,tpmdev=tpm0 test.img"
+msgstr ""
+
+#: ../../../specs/tpm.rst:328
+msgid "In case a pSeries machine is emulated, use the following command line:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:330
+msgid ""
+"qemu-system-ppc64 -display sdl -machine pseries,accel=kvm \\\n"
+"  -m 1024 -bios slof.bin -boot menu=on \\\n"
+"  -nodefaults -device VGA -device pci-ohci -device usb-kbd \\\n"
+"  -chardev socket,id=chrtpm,path=/tmp/mytpm1/swtpm-sock \\\n"
+"  -tpmdev emulator,id=tpm0,chardev=chrtpm \\\n"
+"  -device tpm-spapr,tpmdev=tpm0 \\\n"
+"  -device spapr-vscsi,id=scsi0,reg=0x00002000 \\\n"
+"  -device virtio-blk-pci,bus=pci.0,addr=0x3,drive=drive-virtio-disk0,"
+"id=virtio-disk0 \\\n"
+"  -drive file=test.img,format=raw,if=none,id=drive-virtio-disk0"
+msgstr ""
+
+#: ../../../specs/tpm.rst:342
+msgid ""
+"In case an Arm virt machine is emulated, use the following command line:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:344
+msgid ""
+"qemu-system-aarch64 -machine virt,gic-version=3,acpi=off \\\n"
+"  -cpu host -m 4G \\\n"
+"  -nographic -accel kvm \\\n"
+"  -chardev socket,id=chrtpm,path=/tmp/mytpm1/swtpm-sock \\\n"
+"  -tpmdev emulator,id=tpm0,chardev=chrtpm \\\n"
+"  -device tpm-tis-device,tpmdev=tpm0 \\\n"
+"  -device virtio-blk-pci,drive=drv0 \\\n"
+"  -drive format=qcow2,file=hda.qcow2,if=none,id=drv0 \\\n"
+"  -drive if=pflash,format=raw,file=flash0.img,readonly=on \\\n"
+"  -drive if=pflash,format=raw,file=flash1.img"
+msgstr ""
+
+#: ../../../specs/tpm.rst:357
+msgid ""
+"In case a ast2600-evb bmc machine is emulated and you want to use a TPM "
+"device attached to I2C bus, use the following command line:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:360
+msgid ""
+"qemu-system-arm -M ast2600-evb -nographic \\\n"
+"  -kernel arch/arm/boot/zImage \\\n"
+"  -dtb arch/arm/boot/dts/aspeed-ast2600-evb.dtb \\\n"
+"  -initrd rootfs.cpio \\\n"
+"  -chardev socket,id=chrtpm,path=/tmp/mytpm1/swtpm-sock \\\n"
+"  -tpmdev emulator,id=tpm0,chardev=chrtpm \\\n"
+"  -device tpm-tis-i2c,tpmdev=tpm0,bus=aspeed.i2c.bus.12,address=0x2e\n"
+"\n"
+"For testing, use this command to load the driver to the correct address\n"
+"\n"
+"echo tpm_tis_i2c 0x2e > /sys/bus/i2c/devices/i2c-12/new_device"
+msgstr ""
+
+#: ../../../specs/tpm.rst:374
+msgid ""
+"In case SeaBIOS is used as firmware, it should show the TPM menu item after "
+"entering the menu with 'ESC'."
+msgstr ""
+
+#: ../../../specs/tpm.rst:377
+msgid ""
+"Select boot device:\n"
+"1. DVD/CD [ata1-0: QEMU DVD-ROM ATAPI-4 DVD/CD]\n"
+"[...]\n"
+"5. Legacy option rom\n"
+"\n"
+"t. TPM Configuration"
+msgstr ""
+
+#: ../../../specs/tpm.rst:386
+msgid ""
+"The following commands should result in similar output inside the VM with a "
+"Linux kernel that either has the TPM TIS driver built-in or available as a "
+"module:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:409
+msgid "Migration with the TPM emulator"
+msgstr ""
+
+#: ../../../specs/tpm.rst:411
+msgid ""
+"The TPM emulator supports the following types of virtual machine migration:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:414
+msgid "VM save / restore (migration into a file)"
+msgstr ""
+
+#: ../../../specs/tpm.rst:415
+msgid "Network migration"
+msgstr ""
+
+#: ../../../specs/tpm.rst:416
+msgid "Snapshotting (migration into storage like QoW2 or QED)"
+msgstr ""
+
+#: ../../../specs/tpm.rst:418
+msgid "The following command sequences can be used to test VM save / restore."
+msgstr ""
+
+#: ../../../specs/tpm.rst:420
+msgid ""
+"In a 1st terminal start an instance of a swtpm using the following command:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:430
+msgid "In a 2nd terminal start the VM:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:432
+msgid ""
+"qemu-system-x86_64 -display sdl -accel kvm \\\n"
+"  -m 1024 -boot d -bios bios-256k.bin -boot menu=on \\\n"
+"  -chardev socket,id=chrtpm,path=/tmp/mytpm1/swtpm-sock \\\n"
+"  -tpmdev emulator,id=tpm0,chardev=chrtpm \\\n"
+"  -device tpm-tis,tpmdev=tpm0 \\\n"
+"  -monitor stdio \\\n"
+"  test.img"
+msgstr ""
+
+#: ../../../specs/tpm.rst:442
+msgid ""
+"Verify that the attached TPM is working as expected using applications "
+"inside the VM."
+msgstr ""
+
+#: ../../../specs/tpm.rst:445
+msgid ""
+"To store the state of the VM use the following command in the QEMU monitor "
+"in the 2nd terminal:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:448
+msgid ""
+"(qemu) migrate \"exec:cat > testvm.bin\"\n"
+"(qemu) quit"
+msgstr ""
+
+#: ../../../specs/tpm.rst:453
+msgid ""
+"At this point a file called ``testvm.bin`` should exists and the swtpm and "
+"QEMU processes should have ended."
+msgstr ""
+
+#: ../../../specs/tpm.rst:456
+msgid ""
+"To test 'VM restore' you have to start the swtpm with the same parameters as "
+"before. If previously a TPM 2 [--tpm2] was saved, --tpm2 must now be passed "
+"again on the command line."
+msgstr ""
+
+#: ../../../specs/tpm.rst:460
+msgid ""
+"In the 1st terminal restart the swtpm with the same command line as before:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:463
+msgid ""
+"swtpm socket --tpmstate dir=/tmp/mytpm1 \\\n"
+"  --ctrl type=unixio,path=/tmp/mytpm1/swtpm-sock \\\n"
+"  --log level=20 --tpm2"
+msgstr ""
+
+#: ../../../specs/tpm.rst:469
+msgid ""
+"In the 2nd terminal restore the state of the VM using the additional '-"
+"incoming' option."
+msgstr ""
+
+#: ../../../specs/tpm.rst:472
+msgid ""
+"qemu-system-x86_64 -display sdl -accel kvm \\\n"
+"  -m 1024 -boot d -bios bios-256k.bin -boot menu=on \\\n"
+"  -chardev socket,id=chrtpm,path=/tmp/mytpm1/swtpm-sock \\\n"
+"  -tpmdev emulator,id=tpm0,chardev=chrtpm \\\n"
+"  -device tpm-tis,tpmdev=tpm0 \\\n"
+"  -incoming \"exec:cat < testvm.bin\" \\\n"
+"  test.img"
+msgstr ""
+
+#: ../../../specs/tpm.rst:483
+msgid "Troubleshooting migration"
+msgstr ""
+
+#: ../../../specs/tpm.rst:485
+msgid ""
+"There are several reasons why migration may fail. In case of problems, "
+"please ensure that the command lines adhere to the following rules and, if "
+"possible, that identical versions of QEMU and swtpm are used at all times."
+msgstr ""
+
+#: ../../../specs/tpm.rst:490
+msgid "VM save and restore:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:492
+msgid ""
+"QEMU command line parameters should be identical apart from the '-incoming' "
+"option on VM restore"
+msgstr ""
+
+#: ../../../specs/tpm.rst:495 ../../../specs/tpm.rst:512
+#: ../../../specs/tpm.rst:517
+msgid "swtpm command line parameters should be identical"
+msgstr ""
+
+#: ../../../specs/tpm.rst:497
+msgid "VM migration to 'localhost':"
+msgstr ""
+
+#: ../../../specs/tpm.rst:499 ../../../specs/tpm.rst:509
+msgid ""
+"QEMU command line parameters should be identical apart from the '-incoming' "
+"option on the destination side"
+msgstr ""
+
+#: ../../../specs/tpm.rst:502
+msgid ""
+"swtpm command line parameters should point to two different directories on "
+"the source and destination swtpm (--tpmstate dir=...) (especially if "
+"different versions of libtpms were to be used on the same machine)."
+msgstr ""
+
+#: ../../../specs/tpm.rst:507
+msgid "VM migration across the network:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:514
+msgid "VM Snapshotting:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:515
+msgid "QEMU command line parameters should be identical"
+msgstr ""
+
+#: ../../../specs/tpm.rst:520
+msgid ""
+"Besides that, migration failure reasons on the swtpm level may include the "
+"following:"
+msgstr ""
+
+#: ../../../specs/tpm.rst:523
+msgid ""
+"the versions of the swtpm on the source and destination sides are "
+"incompatible"
+msgstr ""
+
+#: ../../../specs/tpm.rst:526
+msgid "downgrading of TPM state may not be supported"
+msgstr ""
+
+#: ../../../specs/tpm.rst:528
+msgid ""
+"the source and destination libtpms were compiled with different compile-time "
+"options and the destination side refuses to accept the state"
+msgstr ""
+
+#: ../../../specs/tpm.rst:532
+msgid ""
+"different migration keys are used on the source and destination side and the "
+"destination side cannot decrypt the migrated state (swtpm ... --migration-"
+"key ... )"
+msgstr ""

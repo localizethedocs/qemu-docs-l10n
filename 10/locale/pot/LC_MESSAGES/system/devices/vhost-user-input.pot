@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/devices/vhost-user-input.rst:4
+msgid "QEMU vhost-user-input - Input emulation"
+msgstr ""
+
+#: ../../../system/devices/vhost-user-input.rst:6
+msgid ""
+"This document describes the setup and usage of the Virtio input device. The "
+"Virtio input device is a paravirtualized device for input events."
+msgstr ""
+
+#: ../../../system/devices/vhost-user-input.rst:10
+msgid "Description"
+msgstr ""
+
+#: ../../../system/devices/vhost-user-input.rst:12
+msgid ""
+"The vhost-user-input device implementation was designed to work with a "
+"daemon polling on input devices and passes input events to the guest."
+msgstr ""
+
+#: ../../../system/devices/vhost-user-input.rst:15
+msgid "QEMU provides a backend implementation in contrib/vhost-user-input."
+msgstr ""
+
+#: ../../../system/devices/vhost-user-input.rst:18
+msgid "Linux kernel support"
+msgstr ""
+
+#: ../../../system/devices/vhost-user-input.rst:20
+msgid ""
+"Virtio input requires a guest Linux kernel built with the "
+"``CONFIG_VIRTIO_INPUT`` option."
+msgstr ""
+
+#: ../../../system/devices/vhost-user-input.rst:24
+msgid "Examples"
+msgstr ""
+
+#: ../../../system/devices/vhost-user-input.rst:26
+msgid "The backend daemon should be started first:"
+msgstr ""
+
+#: ../../../system/devices/vhost-user-input.rst:30
+msgid ""
+"host# vhost-user-input --socket-path=input.sock       \\\n"
+"    --evdev-path=/dev/input/event17"
+msgstr ""
+
+#: ../../../system/devices/vhost-user-input.rst:33
+msgid ""
+"The QEMU invocation needs to create a chardev socket to communicate with the "
+"backend daemon and access the VirtIO queues with the guest over the :ref:"
+"`shared memory <shared_memory_object>`."
+msgstr ""
+
+#: ../../../system/devices/vhost-user-input.rst:39
+msgid ""
+"host# qemu-"
+"system                                                             \\\n"
+"    -chardev socket,path=/tmp/input.sock,"
+"id=mouse0                            \\\n"
+"    -device vhost-user-input-pci,"
+"chardev=mouse0                               \\\n"
+"    -m "
+"4096                                                                   \\\n"
+"    -object memory-backend-file,id=mem,size=4G,mem-path=/dev/shm,"
+"share=on     \\\n"
+"    -numa node,"
+"memdev=mem                                                     \\\n"
+"    ..."
+msgstr ""
