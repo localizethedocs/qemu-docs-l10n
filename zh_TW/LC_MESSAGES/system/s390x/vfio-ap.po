@@ -1,0 +1,1564 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/s390x/vfio-ap.rst:2
+msgid "Adjunct Processor (AP) Device"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:4
+msgid "Contents"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:7
+msgid "Introduction"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:9
+msgid ""
+"The IBM Adjunct Processor (AP) Cryptographic Facility is comprised of three "
+"AP instructions and from 1 to 256 PCIe cryptographic adapter cards. These AP "
+"devices provide cryptographic functions to all CPUs assigned to a linux "
+"system running in an IBM Z system LPAR."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:14
+msgid ""
+"On s390x, AP adapter cards are exposed via the AP bus. This document "
+"describes how those cards may be made available to KVM guests using the VFIO "
+"mediated device framework."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:19
+msgid "AP Architectural Overview"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:21
+msgid ""
+"In order understand the terminology used in the rest of this document, let's "
+"start with some definitions:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:24
+msgid "AP adapter"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:26
+msgid ""
+"An AP adapter is an IBM Z adapter card that can perform cryptographic "
+"functions. There can be from 0 to 256 adapters assigned to an LPAR depending "
+"on the machine model. Adapters assigned to the LPAR in which a linux host is "
+"running will be available to the linux host. Each adapter is identified by a "
+"number from 0 to 255; however, the maximum adapter number allowed is "
+"determined by machine model. When installed, an AP adapter is accessed by AP "
+"instructions executed by any CPU."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:34
+msgid "AP domain"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:36
+msgid ""
+"An adapter is partitioned into domains. Each domain can be thought of as a "
+"set of hardware registers for processing AP instructions. An adapter can "
+"hold up to 256 domains; however, the maximum domain number allowed is "
+"determined by machine model. Each domain is identified by a number from 0 to "
+"255. Domains can be further classified into two types:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:42
+msgid ""
+"Usage domains are domains that can be accessed directly to process AP "
+"commands"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:45
+msgid ""
+"Control domains are domains that are accessed indirectly by AP commands sent "
+"to a usage domain to control or change the domain; for example, to set a "
+"secure private key for the domain."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:49
+msgid "AP Queue"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:51
+msgid ""
+"An AP queue is the means by which an AP command-request message is sent to "
+"an AP usage domain inside a specific AP. An AP queue is identified by a "
+"tuple comprised of an AP adapter ID (APID) and an AP queue index (APQI). The "
+"APQI corresponds to a given usage domain number within the adapter. This "
+"tuple forms an AP Queue Number (APQN) uniquely identifying an AP queue. AP "
+"instructions include a field containing the APQN to identify the AP queue to "
+"which the AP command-request message is to be sent for processing."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:59
+msgid "AP Instructions:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:61
+msgid "There are three AP instructions:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:63
+msgid "NQAP: to enqueue an AP command-request message to a queue"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:64
+msgid "DQAP: to dequeue an AP command-reply message from a queue"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:65
+msgid "PQAP: to administer the queues"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:67
+msgid ""
+"AP instructions identify the domain that is targeted to process the AP "
+"command; this must be one of the usage domains. An AP command may modify a "
+"domain that is not one of the usage domains, but the modified domain must be "
+"one of the control domains."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:73
+msgid "Start Interpretive Execution (SIE) Instruction"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:75
+msgid ""
+"A KVM guest is started by executing the Start Interpretive Execution (SIE) "
+"instruction. The SIE state description is a control block that contains the "
+"state information for a KVM guest and is supplied as input to the SIE "
+"instruction. The SIE state description contains a satellite control block "
+"called the Crypto Control Block (CRYCB). The CRYCB contains three fields to "
+"identify the adapters, usage domains and control domains assigned to the KVM "
+"guest:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:82
+msgid ""
+"The AP Mask (APM) field is a bit mask that identifies the AP adapters "
+"assigned to the KVM guest. Each bit in the mask, from left to right, "
+"corresponds to an APID from 0-255. If a bit is set, the corresponding "
+"adapter is valid for use by the KVM guest."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:87
+msgid ""
+"The AP Queue Mask (AQM) field is a bit mask identifying the AP usage domains "
+"assigned to the KVM guest. Each bit in the mask, from left to right, "
+"corresponds to  an AP queue index (APQI) from 0-255. If a bit is set, the "
+"corresponding queue is valid for use by the KVM guest."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:92
+msgid ""
+"The AP Domain Mask field is a bit mask that identifies the AP control "
+"domains assigned to the KVM guest. The ADM bit mask controls which domains "
+"can be changed by an AP command-request message sent to a usage domain from "
+"the guest. Each bit in the mask, from left to right, corresponds to a domain "
+"from 0-255. If a bit is set, the corresponding domain can be modified by an "
+"AP command-request message sent to a usage domain."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:99
+msgid ""
+"If you recall from the description of an AP Queue, AP instructions include "
+"an APQN to identify the AP adapter and AP queue to which an AP command-"
+"request message is to be sent (NQAP and PQAP instructions), or from which a "
+"command-reply message is to be received (DQAP instruction). The validity of "
+"an APQN is defined by the matrix calculated from the APM and AQM; it is the "
+"cross product of all assigned adapter numbers (APM) with all assigned queue "
+"indexes (AQM). For example, if adapters 1 and 2 and usage domains 5 and 6 "
+"are assigned to a guest, the APQNs (1,5), (1,6), (2,5) and (2,6) will be "
+"valid for the guest."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:109
+msgid ""
+"The APQNs can provide secure key functionality - i.e., a private key is "
+"stored on the adapter card for each of its domains - so each APQN must be "
+"assigned to at most one guest or the linux host."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:114
+msgid "Example 1: Valid configuration"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:117 ../../../system/s390x/vfio-ap.rst:133
+#: ../../../system/s390x/vfio-ap.rst:149
+msgid "Guest1"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:117 ../../../system/s390x/vfio-ap.rst:133
+#: ../../../system/s390x/vfio-ap.rst:149
+msgid "Guest2"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:119 ../../../system/s390x/vfio-ap.rst:135
+#: ../../../system/s390x/vfio-ap.rst:151
+msgid "adapters"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:119 ../../../system/s390x/vfio-ap.rst:135
+#: ../../../system/s390x/vfio-ap.rst:151
+msgid "1, 2"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:121 ../../../system/s390x/vfio-ap.rst:137
+#: ../../../system/s390x/vfio-ap.rst:153
+msgid "domains"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:121 ../../../system/s390x/vfio-ap.rst:137
+#: ../../../system/s390x/vfio-ap.rst:153
+msgid "5, 6"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:121
+msgid "7"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:124
+msgid "This is valid because both guests have a unique set of APQNs:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:126
+msgid "Guest1 has APQNs (1,5), (1,6), (2,5) and (2,6);"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:127
+msgid "Guest2 has APQNs (1,7) and (2,7)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:130
+msgid "Example 2: Valid configuration"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:135
+msgid "3, 4"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:140
+msgid "This is also valid because both guests have a unique set of APQNs:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:142
+msgid "Guest1 has APQNs (1,5), (1,6), (2,5), (2,6);"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:143
+msgid "Guest2 has APQNs (3,5), (3,6), (4,5), (4,6)"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:146
+msgid "Example 3: Invalid configuration"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:151
+msgid "1"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:153
+msgid "6, 7"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:156
+msgid ""
+"This is an invalid configuration because both guests have access to APQN "
+"(1,6)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:160
+msgid "AP Matrix Configuration on Linux Host"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:162
+msgid ""
+"A linux system is a guest of the LPAR in which it is running and has access "
+"to the AP resources configured for the LPAR. The LPAR's AP matrix is "
+"configured via its Activation Profile which can be edited on the HMC. When "
+"the linux system is started, the AP bus will detect the AP devices assigned "
+"to the LPAR and create the following in sysfs::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:168
+msgid ""
+"/sys/bus/ap\n"
+"... [devices]\n"
+"...... xx.yyyy\n"
+"...... ...\n"
+"...... cardxx\n"
+"...... ..."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:175 ../../../system/s390x/vfio-ap.rst:522
+#: ../../../system/s390x/vfio-ap.rst:545 ../../../system/s390x/vfio-ap.rst:575
+msgid "Where:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:177
+msgid "``cardxx``"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:178
+msgid "is AP adapter number xx (in hex)"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:180
+msgid "``xx.yyyy``"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:181
+msgid "is an APQN with xx specifying the APID and yyyy specifying the APQI"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:183
+msgid ""
+"For example, if AP adapters 5 and 6 and domains 4, 71 (0x47), 171 (0xab) and "
+"255 (0xff) are configured for the LPAR, the sysfs representation on the "
+"linux host system would look like this::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:187
+msgid ""
+"/sys/bus/ap\n"
+"... [devices]\n"
+"...... 05.0004\n"
+"...... 05.0047\n"
+"...... 05.00ab\n"
+"...... 05.00ff\n"
+"...... 06.0004\n"
+"...... 06.0047\n"
+"...... 06.00ab\n"
+"...... 06.00ff\n"
+"...... card05\n"
+"...... card06"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:200
+msgid ""
+"A set of default device drivers are also created to control each type of AP "
+"device that can be assigned to the LPAR on which a linux host is running::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:203
+msgid ""
+"/sys/bus/ap\n"
+"... [drivers]\n"
+"...... [cex2acard]        for Crypto Express 2/3 accelerator cards\n"
+"...... [cex2aqueue]       for AP queues served by Crypto Express 2/3\n"
+"                          accelerator cards\n"
+"...... [cex4card]         for Crypto Express 4/5/6 accelerator and "
+"coprocessor\n"
+"                          cards\n"
+"...... [cex4queue]        for AP queues served by Crypto Express 4/5/6\n"
+"                          accelerator and coprocessor cards\n"
+"...... [pcixcccard]       for Crypto Express 2/3 coprocessor cards\n"
+"...... [pcixccqueue]      for AP queues served by Crypto Express 2/3\n"
+"                          coprocessor cards"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:217
+msgid "Binding AP devices to device drivers"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:219
+msgid ""
+"There are two sysfs files that specify bitmasks marking a subset of the APQN "
+"range as 'usable by the default AP queue device drivers' or 'not usable by "
+"the default device drivers' and thus available for use by the alternate "
+"device driver(s). The sysfs locations of the masks are::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:224
+msgid ""
+"/sys/bus/ap/apmask\n"
+"/sys/bus/ap/aqmask"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:227
+msgid ""
+"The ``apmask`` is a 256-bit mask that identifies a set of AP adapter IDs "
+"(APID). Each bit in the mask, from left to right (i.e., from most "
+"significant to least significant bit in big endian order), corresponds to an "
+"APID from 0-255. If a bit is set, the APID is marked as usable only by the "
+"default AP queue device drivers; otherwise, the APID is usable by the "
+"vfio_ap device driver."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:234
+msgid ""
+"The ``aqmask`` is a 256-bit mask that identifies a set of AP queue indexes "
+"(APQI). Each bit in the mask, from left to right (i.e., from most "
+"significant to least significant bit in big endian order), corresponds to an "
+"APQI from 0-255. If a bit is set, the APQI is marked as usable only by the "
+"default AP queue device drivers; otherwise, the APQI is usable by the "
+"vfio_ap device driver."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:241
+msgid "Take, for example, the following mask::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:243
+msgid "0x7dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:245
+msgid "It indicates:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:247
+msgid ""
+"1, 2, 3, 4, 5, and 7-255 belong to the default drivers' pool, and 0 and 6 "
+"belong to the vfio_ap device driver's pool."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:250
+msgid ""
+"The APQN of each AP queue device assigned to the linux host is checked by "
+"the AP bus against the set of APQNs derived from the cross product of APIDs "
+"and APQIs marked as usable only by the default AP queue device drivers. If a "
+"match is detected,  only the default AP queue device drivers will be probed; "
+"otherwise, the vfio_ap device driver will be probed."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:256
+msgid ""
+"By default, the two masks are set to reserve all APQNs for use by the "
+"default AP queue device drivers. There are two ways the default masks can be "
+"changed:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:259
+msgid ""
+"The sysfs mask files can be edited by echoing a string into the respective "
+"sysfs mask file in one of two formats:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:262
+msgid ""
+"An absolute hex string starting with 0x - like \"0x12345678\" - sets the "
+"mask. If the given string is shorter than the mask, it is padded with 0s on "
+"the right; for example, specifying a mask value of 0x41 is the same as "
+"specifying::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:267
+msgid "0x4100000000000000000000000000000000000000000000000000000000000000"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:269
+msgid ""
+"Keep in mind that the mask reads from left to right (i.e., most significant "
+"to least significant bit in big endian order), so the mask above identifies "
+"device numbers 1 and 7 (``01000001``)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:273
+msgid ""
+"If the string is longer than the mask, the operation is terminated with an "
+"error (EINVAL)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:276
+msgid ""
+"Individual bits in the mask can be switched on and off by specifying each "
+"bit number to be switched in a comma separated list. Each bit number string "
+"must be prepended with a (``+``) or minus (``-``) to indicate the "
+"corresponding bit is to be switched on (``+``) or off (``-``). Some valid "
+"values are::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:282
+msgid ""
+"\"+0\"    switches bit 0 on\n"
+"\"-13\"   switches bit 13 off\n"
+"\"+0x41\" switches bit 65 on\n"
+"\"-0xff\" switches bit 255 off"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:287
+msgid "The following example::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:289
+msgid "+0,-6,+0x47,-0xf0"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:291
+msgid "Switches bits 0 and 71 (0x47) on Switches bits 6 and 240 (0xf0) off"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:294
+msgid ""
+"Note that the bits not specified in the list remain as they were before the "
+"operation."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:297
+msgid ""
+"The masks can also be changed at boot time via parameters on the kernel "
+"command line like this::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:300
+msgid "ap.apmask=0xffff ap.aqmask=0x40"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:302
+msgid "This would create the following masks:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:304
+msgid "apmask::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:306
+msgid "0xffff000000000000000000000000000000000000000000000000000000000000"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:308
+msgid "aqmask::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:310
+msgid "0x4000000000000000000000000000000000000000000000000000000000000000"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:312
+msgid "Resulting in these two pools::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:314
+msgid ""
+"default drivers pool:    adapter 0-15, domain 1\n"
+"alternate drivers pool:  adapter 16-255, domains 0, 2-255"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:318
+msgid "Configuring an AP matrix for a linux guest"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:320
+msgid ""
+"The sysfs interfaces for configuring an AP matrix for a guest are built on "
+"the VFIO mediated device framework. To configure an AP matrix for a guest, a "
+"mediated matrix device must first be created for the ``/sys/devices/vfio_ap/"
+"matrix`` device. When the vfio_ap device driver is loaded, it registers with "
+"the VFIO mediated device framework. When the driver registers, the sysfs "
+"interfaces for creating mediated matrix devices is created::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:327
+msgid ""
+"/sys/devices\n"
+"... [vfio_ap]\n"
+"......[matrix]\n"
+"......... [mdev_supported_types]\n"
+"............ [vfio_ap-passthrough]\n"
+"............... create\n"
+"............... [devices]"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:335
+msgid ""
+"A mediated AP matrix device is created by writing a UUID to the attribute "
+"file named ``create``, for example::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:338
+msgid "uuidgen > create"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:340 ../../../system/s390x/vfio-ap.rst:778
+msgid "or"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:344
+msgid "echo $uuid > create"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:346
+msgid ""
+"When a mediated AP matrix device is created, a sysfs directory named after "
+"the UUID is created in the ``devices`` subdirectory::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:349
+msgid ""
+"/sys/devices\n"
+"... [vfio_ap]\n"
+"......[matrix]\n"
+"......... [mdev_supported_types]\n"
+"............ [vfio_ap-passthrough]\n"
+"............... create\n"
+"............... [devices]\n"
+".................. [$uuid]"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:358
+msgid ""
+"There will also be three sets of attribute files created in the mediated "
+"matrix device's sysfs directory to configure an AP matrix for the KVM guest::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:362
+msgid ""
+"/sys/devices\n"
+"... [vfio_ap]\n"
+"......[matrix]\n"
+"......... [mdev_supported_types]\n"
+"............ [vfio_ap-passthrough]\n"
+"............... create\n"
+"............... [devices]\n"
+".................. [$uuid]\n"
+"..................... assign_adapter\n"
+"..................... assign_control_domain\n"
+"..................... assign_domain\n"
+"..................... matrix\n"
+"..................... unassign_adapter\n"
+"..................... unassign_control_domain\n"
+"..................... unassign_domain"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:378
+msgid "``assign_adapter``"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:379
+msgid ""
+"To assign an AP adapter to the mediated matrix device, its APID is written "
+"to the ``assign_adapter`` file. This may be done multiple times to assign "
+"more than one adapter. The APID may be specified using conventional "
+"semantics as a decimal, hexadecimal, or octal number. For example, to assign "
+"adapters 4, 5 and 16 to a mediated matrix device in decimal, hexadecimal and "
+"octal respectively::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:386
+msgid ""
+"echo 4 > assign_adapter\n"
+"echo 0x5 > assign_adapter\n"
+"echo 020 > assign_adapter"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:390
+msgid "In order to successfully assign an adapter:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:392
+msgid ""
+"The adapter number specified must represent a value from 0 up to the maximum "
+"adapter number allowed by the machine model. If an adapter number higher "
+"than the maximum is specified, the operation will terminate with an error "
+"(ENODEV)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:397
+msgid ""
+"All APQNs that can be derived from the adapter ID being assigned and the IDs "
+"of the previously assigned domains must be bound to the vfio_ap device "
+"driver. If no domains have yet been assigned, then there must be at least "
+"one APQN with the specified APID bound to the vfio_ap driver. If no such "
+"APQNs are bound to the driver, the operation will terminate with an error "
+"(EADDRNOTAVAIL)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:404
+msgid ""
+"No APQN that can be derived from the adapter ID and the IDs of the "
+"previously assigned domains can be assigned to another mediated matrix "
+"device. If an APQN is assigned to another mediated matrix device, the "
+"operation will terminate with an error (EADDRINUSE)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:409
+msgid "``unassign_adapter``"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:410
+msgid ""
+"To unassign an AP adapter, its APID is written to the ``unassign_adapter`` "
+"file. This may also be done multiple times to unassign more than one adapter."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:413
+msgid "``assign_domain``"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:414
+msgid ""
+"To assign a usage domain, the domain number is written into the "
+"``assign_domain`` file. This may be done multiple times to assign more than "
+"one usage domain. The domain number is specified using conventional "
+"semantics as a decimal, hexadecimal, or octal number. For example, to assign "
+"usage domains 4, 8, and 71 to a mediated matrix device in decimal, "
+"hexadecimal and octal respectively::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:421 ../../../system/s390x/vfio-ap.rst:457
+msgid ""
+"echo 4 > assign_domain\n"
+"echo 0x8 > assign_domain\n"
+"echo 0107 > assign_domain"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:425
+msgid "In order to successfully assign a domain:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:427
+msgid ""
+"The domain number specified must represent a value from 0 up to the maximum "
+"domain number allowed by the machine model. If a domain number higher than "
+"the maximum is specified, the operation will terminate with an error "
+"(ENODEV)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:432
+msgid ""
+"All APQNs that can be derived from the domain ID being assigned and the IDs "
+"of the previously assigned adapters must be bound to the vfio_ap device "
+"driver. If no domains have yet been assigned, then there must be at least "
+"one APQN with the specified APQI bound to the vfio_ap driver. If no such "
+"APQNs are bound to the driver, the operation will terminate with an error "
+"(EADDRNOTAVAIL)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:439
+msgid ""
+"No APQN that can be derived from the domain ID being assigned and the IDs of "
+"the previously assigned adapters can be assigned to another mediated matrix "
+"device. If an APQN is assigned to another mediated matrix device, the "
+"operation will terminate with an error (EADDRINUSE)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:444
+msgid "``unassign_domain``"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:445
+msgid ""
+"To unassign a usage domain, the domain number is written into the "
+"``unassign_domain`` file. This may be done multiple times to unassign more "
+"than one usage domain."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:449
+msgid "``assign_control_domain``"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:450
+msgid ""
+"To assign a control domain, the domain number is written into the "
+"``assign_control_domain`` file. This may be done multiple times to assign "
+"more than one control domain. The domain number may be specified using "
+"conventional semantics as a decimal, hexadecimal, or octal number. For "
+"example, to assign  control domains 4, 8, and 71 to  a mediated matrix "
+"device in decimal, hexadecimal and octal respectively::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:461
+msgid ""
+"In order to successfully assign a control domain, the domain number "
+"specified must represent a value from 0 up to the maximum domain number "
+"allowed by the machine model. If a control domain number higher than the "
+"maximum is specified, the operation will terminate with an error (ENODEV)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:466
+msgid "``unassign_control_domain``"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:467
+msgid ""
+"To unassign a control domain, the domain number is written into the "
+"``unassign_domain`` file. This may be done multiple times to unassign more "
+"than one control domain."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:471
+msgid ""
+"Notes: No changes to the AP matrix will be allowed while a guest using the "
+"mediated matrix device is running. Attempts to assign an adapter, domain or "
+"control domain will be rejected and an error (EBUSY) returned."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:476
+msgid "Starting a Linux Guest Configured with an AP Matrix"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:478
+msgid ""
+"To provide a mediated matrix device for use by a guest, the following option "
+"must be specified on the QEMU command line::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:481
+msgid "-device vfio_ap,sysfsdev=$path-to-mdev"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:483
+msgid ""
+"The sysfsdev parameter specifies the path to the mediated matrix device. "
+"There are a number of ways to specify this path::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:486
+msgid ""
+"/sys/devices/vfio_ap/matrix/$uuid\n"
+"/sys/bus/mdev/devices/$uuid\n"
+"/sys/bus/mdev/drivers/vfio_mdev/$uuid\n"
+"/sys/devices/vfio_ap/matrix/mdev_supported_types/vfio_ap-passthrough/devices/"
+"$uuid"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:491
+msgid ""
+"When the linux guest is started, the guest will open the mediated matrix "
+"device's file descriptor to get information about the mediated matrix "
+"device. The ``vfio_ap`` device driver will update the APM, AQM, and ADM "
+"fields in the guest's CRYCB with the adapter, usage domain and control "
+"domains assigned via the mediated matrix device's sysfs attribute files. "
+"Programs running on the linux guest will then:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:498
+msgid ""
+"Have direct access to the APQNs derived from the cross product of the AP "
+"adapter numbers (APID) and queue indexes (APQI) specified in the APM and AQM "
+"fields of the guests's CRYCB respectively. These APQNs identify the AP "
+"queues that are valid for use by the guest; meaning, AP commands can be sent "
+"by the guest to any of these queues for processing."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:504
+msgid ""
+"Have authorization to process AP commands to change a control domain "
+"identified in the ADM field of the guest's CRYCB. The AP command must be "
+"sent to a valid APQN (see 1 above)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:508
+msgid "CPU model features:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:510
+msgid ""
+"Three CPU model features are available for controlling guest access to AP "
+"facilities:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:513
+msgid "AP facilities feature"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:515
+msgid ""
+"The AP facilities feature indicates that AP facilities are installed on the "
+"guest. This feature will be exposed for use only if the AP facilities are "
+"installed on the host system. The feature is s390-specific and is "
+"represented as a parameter of the -cpu option on the QEMU command line::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:520
+msgid "qemu-system-s390x -cpu $model,ap=on|off"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:524 ../../../system/s390x/vfio-ap.rst:547
+#: ../../../system/s390x/vfio-ap.rst:577
+msgid "``$model``"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:525 ../../../system/s390x/vfio-ap.rst:578
+msgid ""
+"is the CPU model defined for the guest (defaults to the model of the host "
+"system if not specified)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:528
+msgid "``ap=on|off``"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:529
+msgid ""
+"indicates whether AP facilities are installed (on) or not (off). The default "
+"for CPU models zEC12 or newer is ``ap=on``. AP facilities must be installed "
+"on the guest if a vfio-ap device (``-device vfio-ap,sysfsdev=$path``) is "
+"configured for the guest, or the guest will fail to start."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:535
+msgid "Query Configuration Information (QCI) facility"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:537
+msgid ""
+"The QCI facility is used by the AP bus running on the guest to query the "
+"configuration of the AP facilities. This facility will be available only if "
+"the QCI facility is installed on the host system. The feature is s390-"
+"specific and is represented as a parameter of the -cpu option on the QEMU "
+"command line::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:543
+msgid "qemu-system-s390x -cpu $model,apqci=on|off"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:548
+msgid "is the CPU model defined for the guest"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:550
+msgid "``apqci=on|off``"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:551
+msgid ""
+"indicates whether the QCI facility is installed (on) or not (off). The "
+"default for CPU models zEC12 or newer is ``apqci=on``; for older models, QCI "
+"will not be installed."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:555
+msgid ""
+"If QCI is installed (``apqci=on``) but AP facilities are not (``ap=off``), "
+"an error message will be logged, but the guest will be allowed to start. It "
+"makes no sense to have QCI installed if the AP facilities are not; this is "
+"considered an invalid configuration."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:561
+msgid ""
+"If the QCI facility is not installed, APQNs with an APQI greater than 15 "
+"will not be detected by the AP bus running on the guest."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:565
+msgid "Adjunct Process Facility Test (APFT) facility"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:567
+msgid ""
+"The APFT facility is used by the AP bus running on the guest to test the AP "
+"facilities available for a given AP queue. This facility will be available "
+"only if the APFT facility is installed on the host system. The feature is "
+"s390-specific and is represented as a parameter of the -cpu option on the "
+"QEMU command line::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:573
+msgid "qemu-system-s390x -cpu $model,apft=on|off"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:581
+msgid "``apft=on|off``"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:582
+msgid ""
+"indicates whether the APFT facility is installed (on) or not (off). The "
+"default for CPU models zEC12 and newer is ``apft=on`` for older models, APFT "
+"will not be installed."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:587
+msgid ""
+"If APFT is installed (``apft=on``) but AP facilities are not (``ap=off``), "
+"an error message will be logged, but the guest will be allowed to start. It "
+"makes no sense to have APFT installed if the AP facilities are not; this is "
+"considered an invalid configuration."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:593
+msgid ""
+"It also makes no sense to turn APFT off because the AP bus running on the "
+"guest will not detect CEX4 and newer devices without it. Since only CEX4 and "
+"newer devices are supported for guest usage, no AP devices can be made "
+"accessible to a guest started without APFT installed."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:600
+msgid "Hot plug a vfio-ap device into a running guest"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:602
+msgid ""
+"Only one vfio-ap device can be attached to the virtual machine's ap-bus, so "
+"a vfio-ap device can be hot plugged if and only if no vfio-ap device is "
+"attached to the bus already, whether via the QEMU command line or a prior "
+"hot plug action."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:607
+msgid "To hot plug a vfio-ap device, use the QEMU ``device_add`` command::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:609
+msgid "(qemu) device_add vfio-ap,sysfsdev=\"$path-to-mdev\",id=\"$id\""
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:611
+msgid ""
+"Where the ``$path-to-mdev`` value specifies the absolute path to a mediated "
+"device to which AP resources to be used by the guest have been assigned. "
+"``$id`` is the name value for the optional id parameter."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:615
+msgid ""
+"Note that on Linux guests, the AP devices will be created in the ``/sys/bus/"
+"ap/devices`` directory when the AP bus subsequently performs its periodic "
+"scan, so there may be a short delay before the AP devices are accessible on "
+"the guest."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:620
+msgid "The command will fail if:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:622
+msgid ""
+"A vfio-ap device has already been attached to the virtual machine's ap-bus."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:624
+msgid ""
+"The CPU model features for controlling guest access to AP facilities are not "
+"enabled (see 'CPU model features' subsection in the previous section)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:628
+msgid "Hot unplug a vfio-ap device from a running guest"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:630
+msgid ""
+"A vfio-ap device can be unplugged from a running KVM guest if a vfio-ap "
+"device has been attached to the virtual machine's ap-bus via the QEMU "
+"command line or a prior hot plug action."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:634
+msgid "To hot unplug a vfio-ap device, use the QEMU ``device_del`` command::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:636
+msgid "(qemu) device_del \"$id\""
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:638
+msgid "Where ``$id`` is the same id that was specified at device creation."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:640
+msgid ""
+"On a Linux guest, the AP devices will be removed from the ``/sys/bus/ap/"
+"devices`` directory on the guest when the AP bus subsequently performs its "
+"periodic scan, so there may be a short delay before the AP devices are no "
+"longer accessible by the guest."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:645
+msgid ""
+"The command will fail if the ``$path-to-mdev`` specified on the "
+"``device_del`` command does not match the value specified when the vfio-ap "
+"device was attached to the virtual machine's ap-bus."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:650
+msgid "Example: Configure AP Matrices for Three Linux Guests"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:652
+msgid ""
+"Let's now provide an example to illustrate how KVM guests may be given "
+"access to AP facilities. For this example, we will show how to configure "
+"three guests such that executing the lszcrypt command on the guests would "
+"look like this:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:657
+msgid "Guest1::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:659
+msgid ""
+"CARD.DOMAIN TYPE  MODE\n"
+"------------------------------\n"
+"05          CEX5C CCA-Coproc\n"
+"05.0004     CEX5C CCA-Coproc\n"
+"05.00ab     CEX5C CCA-Coproc\n"
+"06          CEX5A Accelerator\n"
+"06.0004     CEX5A Accelerator\n"
+"06.00ab     CEX5C CCA-Coproc"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:668
+msgid "Guest2::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:670
+msgid ""
+"CARD.DOMAIN TYPE  MODE\n"
+"------------------------------\n"
+"05          CEX5A Accelerator\n"
+"05.0047     CEX5A Accelerator\n"
+"05.00ff     CEX5A Accelerator"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:676
+msgid "Guest3::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:678
+msgid ""
+"CARD.DOMAIN TYPE  MODE\n"
+"------------------------------\n"
+"06          CEX5A Accelerator\n"
+"06.0047     CEX5A Accelerator\n"
+"06.00ff     CEX5A Accelerator"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:684
+msgid "These are the steps:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:686
+msgid ""
+"Install the vfio_ap module on the linux host. The dependency chain for the "
+"vfio_ap module is:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:689
+msgid "iommu"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:690
+msgid "s390"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:691
+msgid "zcrypt"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:692
+msgid "vfio"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:693
+msgid "vfio_mdev"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:694
+msgid "vfio_mdev_device"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:695 ../../../system/s390x/vfio-ap.rst:707
+msgid "KVM"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:697
+msgid ""
+"To build the vfio_ap module, the kernel build must be configured with the "
+"following Kconfig elements selected:"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:700
+msgid "IOMMU_SUPPORT"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:701
+msgid "S390"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:702
+msgid "ZCRYPT"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:703
+msgid "S390_AP_IOMMU"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:704
+msgid "VFIO"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:705
+msgid "VFIO_MDEV"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:706
+msgid "VFIO_MDEV_DEVICE"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:709
+msgid ""
+"If using make menuconfig select the following to build the vfio_ap module::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:710
+msgid "-> Device Drivers"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:711
+msgid "-> IOMMU Hardware Support"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:712
+msgid "select S390 AP IOMMU Support"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:713
+msgid "-> VFIO Non-Privileged userspace driver framework"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:714
+msgid "-> Mediated device driver framework"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:715
+msgid "-> VFIO driver for Mediated devices"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:716
+msgid "-> I/O subsystem"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:717
+msgid "-> VFIO support for AP devices"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:719
+msgid ""
+"Secure the AP queues to be used by the three guests so that the host can not "
+"access them. To secure the AP queues 05.0004, 05.0047, 05.00ab, 05.00ff, "
+"06.0004, 06.0047, 06.00ab, and 06.00ff for use by the vfio_ap device driver, "
+"the corresponding APQNs must be removed from the default queue drivers pool "
+"as follows::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:725
+msgid ""
+"echo -5,-6 > /sys/bus/ap/apmask\n"
+"\n"
+"echo -4,-0x47,-0xab,-0xff > /sys/bus/ap/aqmask"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:729
+msgid ""
+"This will result in AP queues 05.0004, 05.0047, 05.00ab, 05.00ff, 06.0004, "
+"06.0047, 06.00ab, and 06.00ff getting bound to the vfio_ap device driver. "
+"The sysfs directory for the vfio_ap device driver will now contain symbolic "
+"links to the AP queue devices bound to it::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:734
+msgid ""
+"/sys/bus/ap\n"
+"... [drivers]\n"
+"...... [vfio_ap]\n"
+"......... [05.0004]\n"
+"......... [05.0047]\n"
+"......... [05.00ab]\n"
+"......... [05.00ff]\n"
+"......... [06.0004]\n"
+"......... [06.0047]\n"
+"......... [06.00ab]\n"
+"......... [06.00ff]"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:746
+msgid ""
+"Keep in mind that only type 10 and newer adapters (i.e., CEX4 and later) can "
+"be bound to the vfio_ap device driver. The reason for this is to simplify "
+"the implementation by not needlessly complicating the design by supporting "
+"older devices that will go out of service in the relatively near future, and "
+"for which there are few older systems on which to test."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:752
+msgid ""
+"The administrator, therefore, must take care to secure only AP queues that "
+"can be bound to the vfio_ap device driver. The device type for a given AP "
+"queue device can be read from the parent card's sysfs directory. For "
+"example, to see the hardware type of the queue 05.0004::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:757
+msgid "cat /sys/bus/ap/devices/card05/hwtype"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:759
+msgid ""
+"The hwtype must be 10 or higher (CEX4 or newer) in order to be bound to the "
+"vfio_ap device driver."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:762
+msgid ""
+"Create the mediated devices needed to configure the AP matrixes for the "
+"three guests and to provide an interface to the vfio_ap driver for use by "
+"the guests::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:766
+msgid ""
+"/sys/devices/vfio_ap/matrix/\n"
+"... [mdev_supported_types]\n"
+"...... [vfio_ap-passthrough] (passthrough mediated matrix device type)\n"
+"......... create\n"
+"......... [devices]"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:772
+msgid "To create the mediated devices for the three guests::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:774
+msgid ""
+"uuidgen > create\n"
+"uuidgen > create\n"
+"uuidgen > create"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:782
+msgid ""
+"echo $uuid1 > create\n"
+"echo $uuid2 > create\n"
+"echo $uuid3 > create"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:786
+msgid ""
+"This will create three mediated devices in the [devices] subdirectory named "
+"after the UUID used to create the mediated device. We'll call them $uuid1, "
+"$uuid2 and $uuid3 and this is the sysfs directory structure after creation::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:790
+msgid ""
+"/sys/devices/vfio_ap/matrix/\n"
+"... [mdev_supported_types]\n"
+"...... [vfio_ap-passthrough]\n"
+"......... [devices]\n"
+"............ [$uuid1]\n"
+"............... assign_adapter\n"
+"............... assign_control_domain\n"
+"............... assign_domain\n"
+"............... matrix\n"
+"............... unassign_adapter\n"
+"............... unassign_control_domain\n"
+"............... unassign_domain\n"
+"\n"
+"............ [$uuid2]\n"
+"............... assign_adapter\n"
+"............... assign_control_domain\n"
+"............... assign_domain\n"
+"............... matrix\n"
+"............... unassign_adapter\n"
+"............... unassign_control_domain\n"
+"............... unassign_domain\n"
+"\n"
+"............ [$uuid3]\n"
+"............... assign_adapter\n"
+"............... assign_control_domain\n"
+"............... assign_domain\n"
+"............... matrix\n"
+"............... unassign_adapter\n"
+"............... unassign_control_domain\n"
+"............... unassign_domain"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:821
+msgid ""
+"The administrator now needs to configure the matrixes for the mediated "
+"devices $uuid1 (for Guest1), $uuid2 (for Guest2) and $uuid3 (for Guest3)."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:824
+msgid "This is how the matrix is configured for Guest1::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:826
+msgid ""
+"echo 5 > assign_adapter\n"
+"echo 6 > assign_adapter\n"
+"echo 4 > assign_domain\n"
+"echo 0xab > assign_domain"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:831
+msgid ""
+"Control domains can similarly be assigned using the assign_control_domain "
+"sysfs file."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:834
+msgid ""
+"If a mistake is made configuring an adapter, domain or control domain, you "
+"can use the ``unassign_xxx`` interfaces to unassign the adapter, domain or "
+"control domain."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:838
+msgid "To display the matrix configuration for Guest1::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:840
+msgid "cat matrix"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:842
+msgid ""
+"The output will display the APQNs in the format ``xx.yyyy``, where xx is the "
+"adapter number and yyyy is the domain number. The output for Guest1 will "
+"look like this::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:846
+msgid ""
+"05.0004\n"
+"05.00ab\n"
+"06.0004\n"
+"06.00ab"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:851
+msgid "This is how the matrix is configured for Guest2::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:853
+msgid ""
+"echo 5 > assign_adapter\n"
+"echo 0x47 > assign_domain\n"
+"echo 0xff > assign_domain"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:857
+msgid "This is how the matrix is configured for Guest3::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:859
+msgid ""
+"echo 6 > assign_adapter\n"
+"echo 0x47 > assign_domain\n"
+"echo 0xff > assign_domain"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:863
+msgid "Start Guest1::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:865
+msgid ""
+"/usr/bin/qemu-system-s390x ... -cpu host,ap=on,apqci=on,apft=on -device vfio-"
+"ap,sysfsdev=/sys/devices/vfio_ap/matrix/$uuid1 ..."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:867
+msgid "Start Guest2::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:869
+msgid ""
+"/usr/bin/qemu-system-s390x ... -cpu host,ap=on,apqci=on,apft=on -device vfio-"
+"ap,sysfsdev=/sys/devices/vfio_ap/matrix/$uuid2 ..."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:871
+msgid "Start Guest3::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:873
+msgid ""
+"/usr/bin/qemu-system-s390x ... -cpu host,ap=on,apqci=on,apft=on -device vfio-"
+"ap,sysfsdev=/sys/devices/vfio_ap/matrix/$uuid3 ..."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:875
+msgid ""
+"When the guest is shut down, the mediated matrix devices may be removed."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:877
+msgid "Using our example again, to remove the mediated matrix device $uuid1::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:879
+msgid ""
+"/sys/devices/vfio_ap/matrix/\n"
+"... [mdev_supported_types]\n"
+"...... [vfio_ap-passthrough]\n"
+"......... [devices]\n"
+"............ [$uuid1]\n"
+"............... remove\n"
+"\n"
+"\n"
+"echo 1 > remove"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:889
+msgid ""
+"This will remove all of the mdev matrix device's sysfs structures including "
+"the mdev device itself. To recreate and reconfigure the mdev matrix device, "
+"all of the steps starting with step 3 will have to be performed again. Note "
+"that the remove will fail if a guest using the mdev is still running."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:894
+msgid ""
+"It is not necessary to remove an mdev matrix device, but one may want to "
+"remove it if no guest will use it during the remaining lifetime of the linux "
+"host. If the mdev matrix device is removed, one may want to also reconfigure "
+"the pool of adapters and queues reserved for use by the default drivers."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:900
+msgid "Limitations"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:902
+msgid ""
+"The KVM/kernel interfaces do not provide a way to prevent restoring an APQN "
+"to the default drivers pool of a queue that is still assigned to a mediated "
+"device in use by a guest. It is incumbent upon the administrator to ensure "
+"there is no mediated device in use by a guest to which the APQN is assigned "
+"lest the host be given access to the private data of the AP queue device, "
+"such as a private key configured specifically for the guest."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:909
+msgid ""
+"Dynamically assigning AP resources to or unassigning AP resources from a "
+"mediated matrix device - see `Configuring an AP matrix for a linux guest`_ "
+"section above - while a running guest is using it is currently not supported."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ap.rst:913
+msgid ""
+"Live guest migration is not supported for guests using AP devices. If a "
+"guest is using AP devices, the vfio-ap device configured for the guest must "
+"be unplugged before migrating the guest (see `Hot unplug a vfio-ap device "
+"from a running guest`_ section above.)"
+msgstr ""

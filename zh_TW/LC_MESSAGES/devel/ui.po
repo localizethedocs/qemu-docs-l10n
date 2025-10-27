@@ -1,0 +1,539 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/ui.rst:3
+msgid "QEMU UI subsystem"
+msgstr ""
+
+#: ../../../devel/ui.rst:6
+msgid "QEMU Clipboard"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:3
+msgid "**Introduction**"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:8
+msgid "The header ``ui/clipboard.h`` declares the qemu clipboard interface."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:10
+msgid ""
+"All qemu elements which want use the clipboard can register as clipboard "
+"peer.  Subsequently they can set the clipboard content and get notifications "
+"for clipboard updates."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:14
+msgid ""
+"Typical users are user interfaces (gtk), remote access protocols (vnc) and "
+"devices talking to the guest (vdagent)."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:17
+msgid ""
+"Even though the design allows different data types only plain text is "
+"supported for now."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:38 ../../../../include/ui/clipboard.h:50
+#: ../../../../include/ui/clipboard.h:81
+msgid "**Constants**"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:40
+msgid "``QEMU_CLIPBOARD_TYPE_TEXT``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:41
+msgid "text/plain; charset=utf-8"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:43
+msgid "``QEMU_CLIPBOARD_TYPE__COUNT``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:44
+msgid "type count."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:52
+msgid "``QEMU_CLIPBOARD_SELECTION_CLIPBOARD``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:53
+msgid "clipboard (explitcit cut+paste)."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:55
+msgid "``QEMU_CLIPBOARD_SELECTION_PRIMARY``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:56
+msgid "primary selection (select + middle mouse button)."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:58
+msgid "``QEMU_CLIPBOARD_SELECTION_SECONDARY``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:59
+msgid "secondary selection (dunno)."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:61
+msgid "``QEMU_CLIPBOARD_SELECTION__COUNT``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:62
+msgid "selection count."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:65 ../../../../include/ui/clipboard.h:94
+#: ../../../../include/ui/clipboard.h:110
+#: ../../../../include/ui/clipboard.h:127
+msgid "**Definition**::"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:67
+msgid ""
+"struct QemuClipboardPeer {\n"
+"    const char *name;\n"
+"    Notifier notifier;\n"
+"    void (*request)(QemuClipboardInfo *info, QemuClipboardType type);\n"
+"};"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:73 ../../../../include/ui/clipboard.h:103
+#: ../../../../include/ui/clipboard.h:119
+#: ../../../../include/ui/clipboard.h:138
+msgid "**Members**"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:63
+msgid "``name``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:64
+msgid "peer name."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:64
+msgid "``notifier``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:65
+msgid "notifier for clipboard updates."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:65
+msgid "``request``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:66
+msgid "callback for clipboard data requests."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:3 ../../../../include/ui/clipboard.h:69
+#: ../../../../include/ui/clipboard.h:89 ../../../../include/ui/clipboard.h:97
+#: ../../../../include/ui/clipboard.h:115
+#: ../../../../include/ui/clipboard.h:132
+#: ../../../../include/ui/clipboard.h:148
+#: ../../../../include/ui/clipboard.h:159
+#: ../../../../include/ui/clipboard.h:169
+#: ../../../../include/ui/clipboard.h:180
+#: ../../../../include/ui/clipboard.h:190
+#: ../../../../include/ui/clipboard.h:200
+#: ../../../../include/ui/clipboard.h:210
+#: ../../../../include/ui/clipboard.h:224
+#: ../../../../include/ui/clipboard.h:233
+#: ../../../../include/ui/clipboard.h:243
+#: ../../../../include/ui/clipboard.h:265
+#: ../../../../include/ui/clipboard.h:282
+msgid "**Description**"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:62
+msgid "Clipboard peer description."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:83
+msgid "``QEMU_CLIPBOARD_UPDATE_INFO``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:84
+msgid "clipboard info update"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:86
+msgid "``QEMU_CLIPBOARD_RESET_SERIAL``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:87
+msgid "reset clipboard serial"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:78
+msgid "Clipboard notify type."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:96
+msgid ""
+"struct QemuClipboardNotify {\n"
+"    QemuClipboardNotifyType type;\n"
+"    union {\n"
+"        QemuClipboardInfo *info;\n"
+"    };\n"
+"};"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:92
+msgid "``type``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:93
+msgid "the type of event."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:1
+msgid "``{unnamed_union}``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:2
+msgid "anonymous"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:93
+msgid "``info``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:94
+msgid "a QemuClipboardInfo event."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:91
+msgid "Clipboard notify data."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:112
+msgid ""
+"struct QemuClipboardContent {\n"
+"    bool available;\n"
+"    bool requested;\n"
+"    uint32_t size;\n"
+"    void *data;\n"
+"};"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:108
+msgid "``available``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:109
+msgid "whether the data is available"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:109
+msgid "``requested``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:110
+msgid "whether the data was requested"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:110
+msgid "``size``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:111
+msgid "the size of the **data**"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:111
+msgid "``data``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:112
+msgid "the clipboard data"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:107
+msgid "Clipboard content."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:129
+msgid ""
+"struct QemuClipboardInfo {\n"
+"    uint32_t refcount;\n"
+"    QemuClipboardPeer *owner;\n"
+"    int selection;\n"
+"    bool has_serial;\n"
+"    uint32_t serial;\n"
+"    QemuClipboardContent types[QEMU_CLIPBOARD_TYPE__COUNT];\n"
+"};"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:125
+msgid "``refcount``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:126
+msgid "reference counter."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:126
+msgid "``owner``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:127
+#: ../../../../include/ui/clipboard.h:207
+msgid "clipboard owner."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:127
+msgid "``selection``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:128
+#: ../../../../include/ui/clipboard.h:167
+#: ../../../../include/ui/clipboard.h:178
+#: ../../../../include/ui/clipboard.h:188
+#: ../../../../include/ui/clipboard.h:208
+msgid "clipboard selection."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:129
+msgid "``has_serial``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:130
+msgid "whether **serial** is available."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:130
+msgid "``serial``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:131
+msgid "the grab serial counter."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:128
+msgid "``types``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:129
+msgid "clipboard data array (one entry per type)."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:124
+msgid "Clipboard content data and metadata."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:148
+#: ../../../../include/ui/clipboard.h:159
+#: ../../../../include/ui/clipboard.h:168
+#: ../../../../include/ui/clipboard.h:179
+#: ../../../../include/ui/clipboard.h:190
+#: ../../../../include/ui/clipboard.h:199
+#: ../../../../include/ui/clipboard.h:209
+#: ../../../../include/ui/clipboard.h:224
+#: ../../../../include/ui/clipboard.h:233
+#: ../../../../include/ui/clipboard.h:243
+#: ../../../../include/ui/clipboard.h:257
+#: ../../../../include/ui/clipboard.h:264
+#: ../../../../include/ui/clipboard.h:277
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:150
+#: ../../../../include/ui/clipboard.h:161
+#: ../../../../include/ui/clipboard.h:170
+#: ../../../../include/ui/clipboard.h:181
+#: ../../../../include/ui/clipboard.h:279
+msgid "``QemuClipboardPeer *peer``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:146
+#: ../../../../include/ui/clipboard.h:157
+#: ../../../../include/ui/clipboard.h:166
+#: ../../../../include/ui/clipboard.h:177
+msgid "peer information."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:145
+msgid ""
+"Register clipboard peer.  Registering is needed for both active (set+grab "
+"clipboard) and passive (watch clipboard for updates) interaction with the "
+"qemu clipboard."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:156
+msgid "Unregister clipboard peer."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:168
+#: ../../../../include/ui/clipboard.h:179
+#: ../../../../include/ui/clipboard.h:192
+#: ../../../../include/ui/clipboard.h:209
+msgid "``QemuClipboardSelection selection``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:165
+msgid "Return TRUE if the peer owns the clipboard."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:176
+msgid "If the peer owns the clipboard, release it."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:187
+msgid "Return the current clipboard data & owner information."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:201
+#: ../../../../include/ui/clipboard.h:226
+#: ../../../../include/ui/clipboard.h:235
+#: ../../../../include/ui/clipboard.h:245
+#: ../../../../include/ui/clipboard.h:266
+#: ../../../../include/ui/clipboard.h:277
+msgid "``QemuClipboardInfo *info``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:197
+#: ../../../../include/ui/clipboard.h:222
+#: ../../../../include/ui/clipboard.h:231
+#: ../../../../include/ui/clipboard.h:241
+#: ../../../../include/ui/clipboard.h:262
+#: ../../../../include/ui/clipboard.h:276
+msgid "clipboard info."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:199
+msgid "``bool client``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:198
+msgid "whether to check from the client context and priority."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:196
+msgid ""
+"Return TRUE if the **info** has a higher serial than the current clipboard."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:211
+msgid "``QemuClipboardPeer *owner``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:206
+msgid ""
+"Allocate a new QemuClipboardInfo and initialize it with the given **owner** "
+"and **selection**."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:209
+msgid ""
+"QemuClipboardInfo is a reference-counted struct.  The new struct is returned "
+"with a reference already taken (i.e. reference count is one)."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:221
+msgid "Increase **info** reference count."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:230
+msgid ""
+"Decrease **info** reference count.  When the count goes down to zero free "
+"the **info** struct itself and all clipboard data."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:240
+msgid ""
+"Update the qemu clipboard.  Notify all registered peers (including the "
+"clipboard owner) that the qemu clipboard has been updated."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:243
+msgid ""
+"This is used for both new completely clipboard content and for clipboard "
+"data updates in response to qemu_clipboard_request() calls."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:259
+msgid "``void``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:1
+msgid "no arguments"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:254
+msgid "Reset the clipboard serial."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:264
+#: ../../../../include/ui/clipboard.h:278
+msgid "``QemuClipboardType type``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:263
+#: ../../../../include/ui/clipboard.h:277
+msgid "clipboard data type."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:261
+msgid ""
+"Request clipboard content.  Typically the clipboard owner only advertises "
+"the available data types and provides the actual data only on request."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:275
+msgid "clipboard peer."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:279
+msgid "``uint32_t size``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:278
+msgid "data size."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:280
+msgid "``const void *data``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:279
+msgid "data blob."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:281
+msgid "``bool update``"
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:280
+msgid "notify peers about the update."
+msgstr ""
+
+#: ../../../../include/ui/clipboard.h:274
+msgid ""
+"Set clipboard content for the given **type**.  This function will make a "
+"copy of the content data and store that."
+msgstr ""
