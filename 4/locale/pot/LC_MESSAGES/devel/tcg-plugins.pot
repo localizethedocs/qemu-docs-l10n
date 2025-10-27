@@ -1,0 +1,204 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:38+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/tcg-plugins.rst:8
+msgid "QEMU TCG Plugins"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:10
+msgid ""
+"QEMU TCG plugins provide a way for users to run experiments taking advantage "
+"of the total system control emulation can have over a guest. It provides a "
+"mechanism for plugins to subscribe to events during translation and "
+"execution and optionally callback into the plugin during these events. TCG "
+"plugins are unable to change the system state only monitor it passively. "
+"However they can do this down to an individual instruction granularity "
+"including potentially subscribing to all load and store operations."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:20
+msgid "API Stability"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:22
+msgid ""
+"This is a new feature for QEMU and it does allow people to develop out-of-"
+"tree plugins that can be dynamically linked into a running QEMU process. "
+"However the project reserves the right to change or break the API should it "
+"need to do so. The best way to avoid this is to submit your plugin upstream "
+"so they can be updated if/when the API changes."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:29
+msgid "API versioning"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:31
+msgid ""
+"All plugins need to declare a symbol which exports the plugin API version "
+"they were built against. This can be done simply by::"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:34
+msgid "QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:36
+msgid ""
+"The core code will refuse to load a plugin that doesn't export a "
+"`qemu_plugin_version` symbol or if plugin version is outside of QEMU's "
+"supported range of API versions."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:40
+msgid ""
+"Additionally the `qemu_info_t` structure which is passed to the "
+"`qemu_plugin_install` method of a plugin will detail the minimum and current "
+"API versions supported by QEMU. The API version will be incremented if new "
+"APIs are added. The minimum API version will be incremented if existing APIs "
+"are changed or removed."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:47
+msgid "Exposure of QEMU internals"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:49
+msgid ""
+"The plugin architecture actively avoids leaking implementation details about "
+"how QEMU's translation works to the plugins. While there are conceptions "
+"such as translation time and translation blocks the details are opaque to "
+"plugins. The plugin is able to query select details of instructions and "
+"system configuration only through the exported *qemu_plugin* functions. The "
+"types used to describe instructions and events are opaque to the plugins "
+"themselves."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:58
+msgid "Usage"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:60
+msgid "The QEMU binary needs to be compiled for plugin support::"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:62
+msgid "configure --enable-plugins"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:64
+msgid ""
+"Once built a program can be run with multiple plugins loaded each with their "
+"own arguments::"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:67
+msgid ""
+"$QEMU $OTHER_QEMU_ARGS \\\n"
+"    -plugin tests/plugin/libhowvec.so,arg=inline,arg=hint \\\n"
+"    -plugin tests/plugin/libhotblocks.so"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:71
+msgid ""
+"Arguments are plugin specific and can be used to modify their behaviour. In "
+"this case the howvec plugin is being asked to use inline ops to count and "
+"break down the hint instructions by type."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:76
+msgid "Plugin Life cycle"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:78
+msgid ""
+"First the plugin is loaded and the public qemu_plugin_install function is "
+"called. The plugin will then register callbacks for various plugin events. "
+"Generally plugins will register a handler for the *atexit* if they want to "
+"dump a summary of collected information once the program/system has finished "
+"running."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:84
+msgid ""
+"When a registered event occurs the plugin callback is invoked. The callbacks "
+"may provide additional information. In the case of a translation event the "
+"plugin has an option to enumerate the instructions in a block of "
+"instructions and optionally register callbacks to some or all instructions "
+"when they are executed."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:90
+msgid ""
+"There is also a facility to add an inline event where code to increment a "
+"counter can be directly inlined with the translation. Currently only a "
+"simple increment is supported. This is not atomic so can miss counts. If you "
+"want absolute precision you should use a callback which can then ensure "
+"atomicity itself."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:96
+msgid ""
+"Finally when QEMU exits all the registered *atexit* callbacks are invoked."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:100
+msgid "Internals"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:103
+msgid "Locking"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:105
+msgid ""
+"We have to ensure we cannot deadlock, particularly under MTTCG. For this we "
+"acquire a lock when called from plugin code. We also keep the list of "
+"callbacks under RCU so that we do not have to hold the lock when calling the "
+"callbacks. This is also for performance, since some callbacks (e.g. memory "
+"access callbacks) might be called very frequently."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:112
+msgid ""
+"A consequence of this is that we keep our own list of CPUs, so that we do "
+"not have to worry about locking order wrt cpu_list_lock."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:114
+msgid ""
+"Use a recursive lock, since we can get registration calls from callbacks."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:117
+msgid ""
+"As a result registering/unregistering callbacks is \"slow\", since it takes "
+"a lock. But this is very infrequent; we want performance when calling (or "
+"not calling) callbacks, not when registering them. Using RCU is great for "
+"this."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:122
+msgid ""
+"We support the uninstallation of a plugin at any time (e.g. from plugin "
+"callbacks). This allows plugins to remove themselves if they no longer want "
+"to instrument the code. This operation is asynchronous which means callbacks "
+"may still occur after the uninstall operation is requested. The plugin isn't "
+"completely uninstalled until the safe work has executed while all vCPUs are "
+"quiescent."
+msgstr ""
