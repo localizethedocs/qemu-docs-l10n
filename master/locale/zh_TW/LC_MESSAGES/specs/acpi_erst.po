@@ -1,0 +1,330 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/acpi_erst.rst:2
+msgid "ACPI ERST DEVICE"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:4
+msgid ""
+"The ACPI ERST device is utilized to support the ACPI Error Record "
+"Serialization Table, ERST, functionality. This feature is designed for "
+"storing error records in persistent storage for future reference and/or "
+"debugging."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:9
+msgid ""
+"The ACPI specification[1], in Chapter \"ACPI Platform Error Interfaces "
+"(APEI)\", and specifically subsection \"Error Serialization\", outlines a "
+"method for storing error records into persistent storage."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:13
+msgid ""
+"The format of error records is described in the UEFI specification[2], in "
+"Appendix N \"Common Platform Error Record\"."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:16
+msgid ""
+"While the ACPI specification allows for an NVRAM \"mode\" (see "
+"GET_ERROR_LOG_ADDRESS_RANGE_ATTRIBUTES) where non-volatile RAM is directly "
+"exposed for direct access by the OS/guest, this device implements the non-"
+"NVRAM \"mode\". This non-NVRAM \"mode\" is what is implemented by most BIOS "
+"(since flash memory requires programming operations in order to update its "
+"contents). Furthermore, as of the time of this writing, Linux only supports "
+"the non-NVRAM \"mode\"."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:26
+msgid "Background/Motivation"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:28
+msgid ""
+"Linux uses the persistent storage filesystem, pstore, to record information "
+"(eg. dmesg tail) upon panics and shutdowns.  Pstore is independent of, and "
+"runs before, kdump.  In certain scenarios (ie. hosts/guests with root "
+"filesystems on NFS/iSCSI where networking software and/or hardware fails, "
+"and thus kdump fails), pstore may contain information available for post-"
+"mortem debugging."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:35
+msgid ""
+"Two common storage backends for the pstore filesystem are ACPI ERST and "
+"UEFI. Most BIOS implement ACPI ERST. UEFI is not utilized in all guests. "
+"With QEMU supporting ACPI ERST, it becomes a viable pstore storage backend "
+"for virtual machines (as it is now for bare metal machines)."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:41
+msgid ""
+"Enabling support for ACPI ERST facilitates a consistent method to capture "
+"kernel panic information in a wide range of guests: from resource-"
+"constrained microvms to very large guests, and in particular, in direct-boot "
+"environments (which would lack UEFI run-time services)."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:46
+msgid ""
+"Note that Microsoft Windows also utilizes the ACPI ERST for certain crash "
+"information, if available[3]."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:51
+msgid "Configuration|Usage"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:53
+msgid ""
+"To use ACPI ERST, a memory-backend-file object and acpi-erst device can be "
+"created, for example:"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:56
+msgid ""
+"qemu ... -object memory-backend-file,id=erstnvram,mem-path=acpi-erst.backing,"
+"size=0x10000,share=on \\ -device acpi-erst,memdev=erstnvram"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:60
+msgid ""
+"For proper operation, the ACPI ERST device needs a memory-backend-file "
+"object with the following parameters:"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:63
+msgid ""
+"id: The id of the memory-backend-file object is used to associate this "
+"memory with the acpi-erst device."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:65
+msgid ""
+"size: The size of the ACPI ERST backing storage. This parameter is required."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:67
+msgid ""
+"mem-path: The location of the ACPI ERST backing storage file. This parameter "
+"is also required."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:69
+msgid ""
+"share: The share=on parameter is required so that updates to the ERST "
+"backing store are written to the file."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:72
+msgid "and ERST device:"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:74
+msgid "memdev: Is the object id of the memory-backend-file."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:75
+msgid ""
+"record_size: Specifies the size of the records (or slots) in the backend "
+"storage. Must be a power of two value greater than or equal to 4096 "
+"(PAGE_SIZE)."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:81
+msgid "PCI Interface"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:83
+msgid ""
+"The ERST device is a PCI device with two BARs, one for accessing the "
+"programming registers, and the other for accessing the record exchange "
+"buffer."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:87
+msgid ""
+"BAR0 contains the programming interface consisting of ACTION and VALUE 64-"
+"bit registers.  All ERST actions/operations/side effects happen on the write "
+"to the ACTION, by design. Any data needed by the action must be placed into "
+"VALUE prior to writing ACTION.  Reading the VALUE simply returns the "
+"register contents, which can be updated by a previous ACTION."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:94
+msgid ""
+"BAR1 contains the 8KiB record exchange buffer, which is the implemented "
+"maximum record size."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:99
+msgid "Backend Storage Format"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:101
+msgid ""
+"The backend storage is divided into fixed size \"slots\", 8KiB in length, "
+"with each slot storing a single record.  Not all slots need to be occupied, "
+"and they need not be occupied in a contiguous fashion. The ability to clear/"
+"erase specific records allows for the formation of unoccupied slots."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:107
+msgid ""
+"Slot 0 contains a backend storage header that identifies the contents as "
+"ERST and also facilitates efficient access to the records. Depending upon "
+"the size of the backend storage, additional slots will be designated to be a "
+"part of the slot 0 header. For example, at 8KiB, the slot 0 header can "
+"accommodate 1021 records. Thus a storage size of 8MiB (8KiB * 1024) requires "
+"an additional slot for use by the header. In this scenario, slot 0 and slot "
+"1 form the backend storage header, and records can be stored starting at "
+"slot 2."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:116
+msgid ""
+"Below is an example layout of the backend storage format (for storage size "
+"less than 8MiB). The size of the storage is a multiple of 8KiB, and contains "
+"N number of slots to store records. The example below shows two records (in "
+"CPER format) in the backend storage, while the remaining slots are empty/"
+"available."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:124
+msgid ""
+"Slot   Record\n"
+"       <------------------ 8KiB -------------------->\n"
+"       +--------------------------------------------+\n"
+"   0   | storage header                             |\n"
+"       +--------------------------------------------+\n"
+"   1   | empty/available                            |\n"
+"       +--------------------------------------------+\n"
+"   2   | CPER                                       |\n"
+"       +--------------------------------------------+\n"
+"   3   | CPER                                       |\n"
+"       +--------------------------------------------+\n"
+" ...   |                                            |\n"
+"       +--------------------------------------------+\n"
+"   N   | empty/available                            |\n"
+"       +--------------------------------------------+"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:140
+msgid ""
+"The storage header consists of some basic information and an array of CPER "
+"record_id's to efficiently access records in the backend storage."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:144
+msgid "All fields in the header are stored in little endian format."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:148
+msgid ""
+"+--------------------------------------------+\n"
+"| magic                                      | 0x0000\n"
+"+--------------------------------------------+\n"
+"| record_offset        | record_size         | 0x0008\n"
+"+--------------------------------------------+\n"
+"| record_count         | reserved | version  | 0x0010\n"
+"+--------------------------------------------+\n"
+"| record_id[0]                               | 0x0018\n"
+"+--------------------------------------------+\n"
+"| record_id[1]                               | 0x0020\n"
+"+--------------------------------------------+\n"
+"| record_id[...]                             |\n"
+"+--------------------------------------------+\n"
+"| record_id[N]                               | 0x1FF8\n"
+"+--------------------------------------------+"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:164
+msgid "The 'magic' field contains the value 0x524F545354535245."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:166
+msgid "The 'record_size' field contains the value 0x2000, 8KiB."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:168
+msgid ""
+"The 'record_offset' field points to the first record_id in the array, 0x0018."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:171
+msgid "The 'version' field contains 0x0100, the first version."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:173
+msgid ""
+"The 'record_count' field contains the number of valid records in the backend "
+"storage."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:176
+msgid ""
+"The 'record_id' array fields are the 64-bit record identifiers of the CPER "
+"record in the corresponding slot. Stated differently, the location of a CPER "
+"record_id in the record_id[] array provides the slot index for the "
+"corresponding record in the backend storage."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:181
+msgid ""
+"Note that, for example, with a backend storage less than 8MiB, slot 0 "
+"contains the header, so the record_id[0] will never contain a valid CPER "
+"record_id. Instead slot 1 is the first available slot and thus record_id_[1] "
+"may contain a CPER."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:186
+msgid ""
+"A 'record_id' of all 0s or all 1s indicates an invalid record (ie. the slot "
+"is available)."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:191
+msgid "References"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:193
+msgid "[1] \"Advanced Configuration and Power Interface Specification\","
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:194
+msgid "version 4.0, June 2009."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:196
+msgid "[2] \"Unified Extensible Firmware Interface Specification\","
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:197
+msgid "version 2.1, October 2008."
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:199
+msgid "[3] \"Windows Hardware Error Architecture\", specifically"
+msgstr ""
+
+#: ../../../specs/acpi_erst.rst:200
+msgid "\"Error Record Persistence Mechanism\"."
+msgstr ""

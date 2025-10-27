@@ -1,0 +1,1009 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/writing-monitor-commands.rst:2
+msgid "How to write monitor commands"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:4
+msgid ""
+"This document is a step-by-step guide on how to write new QMP commands using "
+"the QAPI framework and HMP commands."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:7
+msgid ""
+"This document doesn't discuss QMP protocol level details, nor does it dive "
+"into the QAPI framework implementation."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:10
+msgid ""
+"For an in-depth introduction to the QAPI framework, please refer to :doc:"
+"`qapi-code-gen`.  For the QMP protocol, see the :doc:`/interop/qmp-spec`."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:14
+msgid ""
+"New commands may be implemented in QMP only.  New HMP commands should be "
+"implemented on top of QMP.  The typical HMP command wraps around an "
+"equivalent QMP command, but HMP convenience commands built from QMP building "
+"blocks are also fine.  The long term goal is to make all existing HMP "
+"commands conform to this, to fully isolate HMP from the internals of QEMU. "
+"Refer to the `Writing a debugging aid returning unstructured text`_ section "
+"for further guidance on commands that would have traditionally been HMP only."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:24
+msgid "Overview"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:26
+msgid ""
+"Generally speaking, the following steps should be taken in order to write a "
+"new QMP command."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:29
+msgid ""
+"Define the command and any types it needs in the appropriate QAPI schema "
+"module."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:32
+msgid ""
+"Write the QMP command itself, which is a regular C function. Preferably, the "
+"command should be exported by some QEMU subsystem. But it can also be added "
+"to the monitor/qmp-cmds.c file"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:36
+msgid "At this point the command can be tested under the QMP protocol"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:38
+msgid ""
+"Write the HMP command equivalent. This is not required and should only be "
+"done if it does make sense to have the functionality in HMP. The HMP command "
+"is implemented in terms of the QMP command"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:42
+msgid ""
+"The following sections will demonstrate each of the steps above. We will "
+"start very simple and get more complex as we progress."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:47
+msgid "Testing"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:49
+msgid ""
+"For all the examples in the next sections, the test setup is the same and is "
+"shown here."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:52
+msgid "First, QEMU should be started like this::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:54
+msgid ""
+"# qemu-system-TARGET [...] \\\n"
+"    -chardev socket,id=qmp,port=4444,host=localhost,server=on \\\n"
+"    -mon chardev=qmp,mode=control,pretty=on"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:58
+msgid "Then, in a different terminal::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:60
+msgid ""
+"$ telnet localhost 4444\n"
+"Trying 127.0.0.1...\n"
+"Connected to localhost.\n"
+"Escape character is '^]'.\n"
+"{\n"
+"    \"QMP\": {\n"
+"        \"version\": {\n"
+"            \"qemu\": {\n"
+"                \"micro\": 50,\n"
+"                \"minor\": 2,\n"
+"                \"major\": 8\n"
+"            },\n"
+"            \"package\": ...\n"
+"        },\n"
+"        \"capabilities\": [\n"
+"            \"oob\"\n"
+"        ]\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:80
+msgid ""
+"The above output is the QMP server saying you're connected. The server is "
+"actually in capabilities negotiation mode. To enter in command mode type::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:83
+msgid "{ \"execute\": \"qmp_capabilities\" }"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:85
+msgid "Then the server should respond::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:87
+msgid ""
+"{\n"
+"    \"return\": {\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:92
+msgid ""
+"Which is QMP's way of saying \"the latest command executed OK and didn't "
+"return any data\". Now you're ready to enter the QMP example commands as "
+"explained in the following sections."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:98
+msgid "Writing a simple command: hello-world"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:100
+msgid ""
+"That's the most simple QMP command that can be written. Usually, this kind "
+"of command carries some meaningful action in QEMU but here it will just "
+"print \"Hello, world\" to the standard output."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:104
+msgid ""
+"Our command will be called \"hello-world\". It takes no arguments, nor does "
+"it return any data."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:107
+msgid ""
+"The first step is defining the command in the appropriate QAPI schema "
+"module.  We pick module qapi/misc.json, and add the following line at the "
+"bottom::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:111
+msgid ""
+"##\n"
+"# @hello-world:\n"
+"#\n"
+"# Since: 9.0\n"
+"##\n"
+"{ 'command': 'hello-world' }"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:118
+msgid ""
+"The \"command\" keyword defines a new QMP command. It instructs QAPI to "
+"generate any prototypes and the necessary code to marshal and unmarshal "
+"protocol data."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:122
+msgid ""
+"The next step is to write the \"hello-world\" implementation. As explained "
+"earlier, it's preferable for commands to live in QEMU subsystems. But "
+"\"hello-world\" doesn't pertain to any, so we put its implementation in "
+"monitor/qmp-cmds.c::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:127
+msgid ""
+"void qmp_hello_world(Error **errp)\n"
+"{\n"
+"    printf(\"Hello, world!\\n\");\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:132
+msgid "There are a few things to be noticed:"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:134
+msgid "QMP command implementation functions must be prefixed with \"qmp\\_\""
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:135
+msgid ""
+"qmp_hello_world() returns void, this is in accordance with the fact that the "
+"command doesn't return any data"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:137
+msgid ""
+"It takes an \"Error \\*\\*\" argument. This is required. Later we will see "
+"how to return errors and take additional arguments. The Error argument "
+"should not be touched if the command doesn't return errors"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:140
+msgid ""
+"We won't add the function's prototype. That's automatically done by QAPI"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:141
+msgid ""
+"Printing to the terminal is discouraged for QMP commands, we do it here "
+"because it's the easiest way to demonstrate a QMP command"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:144
+msgid ""
+"You're done. Now build QEMU, run it as suggested in the \"Testing\" section, "
+"and then type the following QMP command::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:147
+msgid "{ \"execute\": \"hello-world\" }"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:149
+msgid ""
+"Then check the terminal running QEMU and look for the \"Hello, world\" "
+"string. If you don't see it then something went wrong."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:154
+msgid "Arguments"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:156
+msgid "Let's add arguments to our \"hello-world\" command."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:158
+msgid ""
+"The first change we have to do is to modify the command specification in the "
+"schema file to the following::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:161
+msgid ""
+"##\n"
+"# @hello-world:\n"
+"#\n"
+"# @message: message to be printed (default: \"Hello, world!\")\n"
+"#\n"
+"# @times: how many times to print the message (default: 1)\n"
+"#\n"
+"# Since: 9.0\n"
+"##\n"
+"{ 'command': 'hello-world',\n"
+"  'data': { '*message': 'str', '*times': 'int' } }"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:173
+msgid ""
+"Notice the new 'data' member in the schema. It specifies an argument "
+"'message' of QAPI type 'str', and an argument 'times' of QAPI type 'int'.  "
+"Also notice the asterisk, it's used to mark the argument optional."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:178
+msgid "Now, let's update our C implementation in monitor/qmp-cmds.c::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:180
+msgid ""
+"void qmp_hello_world(const char *message, bool has_times, int64_t times,\n"
+"                     Error **errp)\n"
+"{\n"
+"    if (!message) {\n"
+"        message = \"Hello, world\";\n"
+"    }\n"
+"    if (!has_times) {\n"
+"        times = 1;\n"
+"    }\n"
+"\n"
+"    for (int i = 0; i < times; i++) {\n"
+"        printf(\"%s\\n\", message);\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:195
+msgid "There are two important details to be noticed:"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:197
+msgid ""
+"Optional arguments other than pointers are accompanied by a 'has\\_' "
+"boolean, which is set if the optional argument is present or false otherwise"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:200
+msgid ""
+"The C implementation signature must follow the schema's argument ordering, "
+"which is defined by the \"data\" member"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:203
+msgid ""
+"Time to test our new version of the \"hello-world\" command. Build QEMU, run "
+"it as described in the \"Testing\" section and then send two commands::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:206
+msgid ""
+"{ \"execute\": \"hello-world\" }\n"
+"{\n"
+"    \"return\": {\n"
+"    }\n"
+"}\n"
+"\n"
+"{ \"execute\": \"hello-world\", \"arguments\": { \"message\": \"We love "
+"QEMU\" } }\n"
+"{\n"
+"    \"return\": {\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:218
+msgid ""
+"You should see \"Hello, world\" and \"We love QEMU\" in the terminal running "
+"QEMU, if you don't see these strings, then something went wrong."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:223
+msgid "Errors"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:225
+msgid ""
+"QMP commands should use the error interface exported by the error.h header "
+"file. Basically, most errors are set by calling the error_setg() function."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:228
+msgid ""
+"Let's say we don't accept the string \"message\" to contain the word "
+"\"love\". If it does contain it, we want the \"hello-world\" command to "
+"return an error::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:231
+msgid ""
+"void qmp_hello_world(const char *message, Error **errp)\n"
+"{\n"
+"    if (message) {\n"
+"        if (strstr(message, \"love\")) {\n"
+"            error_setg(errp, \"the word 'love' is not allowed\");\n"
+"            return;\n"
+"        }\n"
+"        printf(\"%s\\n\", message);\n"
+"    } else {\n"
+"        printf(\"Hello, world\\n\");\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:244
+msgid ""
+"The first argument to the error_setg() function is the Error pointer to "
+"pointer, which is passed to all QMP functions. The next argument is a human "
+"description of the error, this is a free-form printf-like string."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:248
+msgid ""
+"Let's test the example above. Build QEMU, run it as defined in the "
+"\"Testing\" section, and then issue the following command::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:251
+msgid ""
+"{ \"execute\": \"hello-world\", \"arguments\": { \"message\": \"all you need "
+"is love\" } }"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:253
+msgid "The QMP server's response should be::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:255
+msgid ""
+"{\n"
+"    \"error\": {\n"
+"        \"class\": \"GenericError\",\n"
+"        \"desc\": \"the word 'love' is not allowed\"\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:262
+msgid ""
+"Note that error_setg() produces a \"GenericError\" class.  In general, all "
+"QMP errors should have that error class.  There are two exceptions to this "
+"rule:"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:266
+msgid ""
+"To support a management application's need to recognize a specific error for "
+"special handling"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:269
+msgid "Backward compatibility"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:271
+msgid ""
+"If the failure you want to report falls into one of the two cases above, use "
+"error_set() with a second argument of an ErrorClass value."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:276
+#: ../../../devel/writing-monitor-commands.rst:601
+msgid "Implementing the HMP command"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:278
+msgid ""
+"Now that the QMP command is in place, we can also make it available in the "
+"human monitor (HMP)."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:281
+msgid ""
+"With the introduction of QAPI, HMP commands make QMP calls. Most of the time "
+"HMP commands are simple wrappers."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:284
+msgid "Here's the implementation of the \"hello-world\" HMP command::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:286
+msgid ""
+"void hmp_hello_world(Monitor *mon, const QDict *qdict)\n"
+"{\n"
+"    const char *message = qdict_get_try_str(qdict, \"message\");\n"
+"    Error *err = NULL;\n"
+"\n"
+"    qmp_hello_world(!!message, message, &err);\n"
+"    if (hmp_handle_error(mon, err)) {\n"
+"        return;\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:297
+msgid ""
+"Add it to monitor/hmp-cmds.c.  Also, add its prototype to include/monitor/"
+"hmp.h."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:300
+msgid "There are four important points to be noticed:"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:302
+msgid ""
+"The \"mon\" and \"qdict\" arguments are mandatory for all HMP functions. The "
+"former is the monitor object. The latter is how the monitor passes arguments "
+"entered by the user to the command implementation"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:305
+msgid "We chose not to support the \"times\" argument in HMP"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:306
+msgid ""
+"hmp_hello_world() performs error checking. In this example we just call "
+"hmp_handle_error() which prints a message to the user, but we could do more, "
+"like taking different actions depending on the error qmp_hello_world() "
+"returns"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:310
+msgid ""
+"The \"err\" variable must be initialized to NULL before performing the QMP "
+"call"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:313
+msgid ""
+"There's one last step to actually make the command available to monitor "
+"users, we should add it to the hmp-commands.hx file::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:316
+msgid ""
+"   {\n"
+"       .name       = \"hello-world\",\n"
+"       .args_type  = \"message:s?\",\n"
+"       .params     = \"hello-world [message]\",\n"
+"       .help       = \"Print message to the standard output\",\n"
+"       .cmd        = hmp_hello_world,\n"
+"   },\n"
+"\n"
+"SRST\n"
+"``hello_world`` *message*\n"
+"  Print message to the standard output\n"
+"ERST"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:329
+msgid ""
+"To test this you have to open a user monitor and issue the \"hello-world\" "
+"command. It might be instructive to check the command's documentation with "
+"HMP's \"help\" command."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:333
+msgid ""
+"Please check the \"-monitor\" command-line option to know how to open a user "
+"monitor."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:338
+msgid "Writing more complex commands"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:340
+msgid ""
+"A QMP command is capable of returning any data QAPI supports like integers, "
+"strings, booleans, enumerations and user defined types."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:343
+msgid ""
+"In this section we will focus on user defined types. Please check the QAPI "
+"documentation for information about the other types."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:348
+msgid "Modelling data in QAPI"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:350
+msgid ""
+"For a QMP command that to be considered stable and supported long term, "
+"there is a requirement returned data should be explicitly modelled using "
+"fine-grained QAPI types. As a general guide, a caller of the QMP command "
+"should never need to parse individual returned data fields. If a field "
+"appears to need parsing, then it should be split into separate fields "
+"corresponding to each distinct data item. This should be the common case for "
+"any new QMP command that is intended to be used by machines, as opposed to "
+"exclusively human operators."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:359
+msgid ""
+"Some QMP commands, however, are only intended as ad hoc debugging aids for "
+"human operators. While they may return large amounts of formatted data, it "
+"is not expected that machines will need to parse the result. The overhead of "
+"defining a fine grained QAPI type for the data may not be justified by the "
+"potential benefit. In such cases, it is permitted to have a command return a "
+"simple string that contains formatted data, however, it is mandatory for the "
+"command to be marked unstable. This indicates that the command is not "
+"guaranteed to be long term stable / liable to change in future and is not "
+"following QAPI design best practices. An example where this approach is "
+"taken is the QMP command \"x-query-registers\". This returns a formatted "
+"dump of the architecture specific CPU state. The way the data is formatted "
+"varies across QEMU targets, is liable to change over time, and is only "
+"intended to be consumed as an opaque string by machines. Refer to the "
+"`Writing a debugging aid returning unstructured text`_ section for an "
+"illustration."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:377
+msgid "User Defined Types"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:379
+msgid ""
+"For this example we will write the query-option-roms command, which returns "
+"information about ROMs loaded into the option ROM space. For more "
+"information about it, please check the \"-option-rom\" command-line option."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:384
+msgid ""
+"For each option ROM, we want to return two pieces of information: the ROM "
+"image's file name, and its bootindex, if any.  We need to create a new QAPI "
+"type for that, as shown below::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:388
+msgid ""
+"##\n"
+"# @OptionRomInfo:\n"
+"#\n"
+"# @filename: option ROM image file name\n"
+"#\n"
+"# @bootindex: option ROM's bootindex\n"
+"#\n"
+"# Since: 9.0\n"
+"##\n"
+"{ 'struct': 'OptionRomInfo',\n"
+"  'data': { 'filename': 'str', '*bootindex': 'int' } }"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:400
+msgid ""
+"The \"struct\" keyword defines a new QAPI type. Its \"data\" member contains "
+"the type's members. In this example our members are \"filename\" and "
+"\"bootindex\". The latter is optional."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:404
+msgid "Now let's define the query-option-roms command::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:406
+msgid ""
+"##\n"
+"# @query-option-roms:\n"
+"#\n"
+"# Query information on ROMs loaded into the option ROM space.\n"
+"#\n"
+"# Returns: OptionRomInfo\n"
+"#\n"
+"# Since: 9.0\n"
+"##\n"
+"{ 'command': 'query-option-roms',\n"
+"  'returns': ['OptionRomInfo'] }"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:418
+msgid ""
+"Notice the \"returns\" keyword. As its name suggests, it's used to define "
+"the data returned by a command."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:421
+msgid ""
+"Notice the syntax ['OptionRomInfo']\". This should be read as \"returns a "
+"list of OptionRomInfo\"."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:424
+msgid ""
+"It's time to implement the qmp_query_option_roms() function.  Add to monitor/"
+"qmp-cmds.c::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:427
+msgid ""
+"OptionRomInfoList *qmp_query_option_roms(Error **errp)\n"
+"{\n"
+"    OptionRomInfoList *info_list = NULL;\n"
+"    OptionRomInfoList **tailp = &info_list;\n"
+"    OptionRomInfo *info;\n"
+"\n"
+"    for (int i = 0; i < nb_option_roms; i++) {\n"
+"        info = g_malloc0(sizeof(*info));\n"
+"        info->filename = g_strdup(option_rom[i].name);\n"
+"        info->has_bootindex = option_rom[i].bootindex >= 0;\n"
+"        if (info->has_bootindex) {\n"
+"            info->bootindex = option_rom[i].bootindex;\n"
+"        }\n"
+"        QAPI_LIST_APPEND(tailp, info);\n"
+"    }\n"
+"\n"
+"    return info_list;\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:446
+msgid "There are a number of things to be noticed:"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:448
+msgid ""
+"Type OptionRomInfo is automatically generated by the QAPI framework, its "
+"members correspond to the type's specification in the schema file"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:451
+msgid "Type OptionRomInfoList is also generated.  It's a singly linked list."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:453
+msgid ""
+"As specified in the schema file, the function returns a OptionRomInfoList, "
+"and takes no arguments (besides the \"errp\" one, which is mandatory for all "
+"QMP functions)"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:456
+msgid "The returned object is dynamically allocated"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:457
+msgid ""
+"All strings are dynamically allocated. This is so because QAPI also "
+"generates a function to free its types and it cannot distinguish between "
+"dynamically or statically allocated strings"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:460
+msgid ""
+"Remember that \"bootindex\" is optional? As a non-pointer optional member, "
+"it comes with a 'has_bootindex' member that needs to be set by the "
+"implementation, as shown above"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:464
+msgid ""
+"Time to test the new command. Build QEMU, run it as described in the "
+"\"Testing\" section and try this::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:467
+msgid ""
+"{ \"execute\": \"query-option-rom\" }\n"
+"{\n"
+"    \"return\": [\n"
+"        {\n"
+"            \"filename\": \"kvmvapic.bin\"\n"
+"        }\n"
+"    ]\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:478
+msgid "The HMP command"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:480
+msgid "Here's the HMP counterpart of the query-option-roms command::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:482
+msgid ""
+"void hmp_info_option_roms(Monitor *mon, const QDict *qdict)\n"
+"{\n"
+"    Error *err = NULL;\n"
+"    OptionRomInfoList *info_list, *tail;\n"
+"    OptionRomInfo *info;\n"
+"\n"
+"    info_list = qmp_query_option_roms(&err);\n"
+"    if (hmp_handle_error(mon, err)) {\n"
+"        return;\n"
+"    }\n"
+"\n"
+"    for (tail = info_list; tail; tail = tail->next) {\n"
+"        info = tail->value;\n"
+"        monitor_printf(mon, \"%s\", info->filename);\n"
+"        if (info->has_bootindex) {\n"
+"            monitor_printf(mon, \" %\" PRId64, info->bootindex);\n"
+"        }\n"
+"        monitor_printf(mon, \"\\n\");\n"
+"    }\n"
+"\n"
+"    qapi_free_OptionRomInfoList(info_list);\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:505
+msgid ""
+"It's important to notice that hmp_info_option_roms() calls "
+"qapi_free_OptionRomInfoList() to free the data returned by "
+"qmp_query_option_roms().  For user defined types, QAPI will generate a "
+"qapi_free_QAPI_TYPE_NAME() function, and that's what you have to use to free "
+"the types you define and qapi_free_QAPI_TYPE_NAMEList() for list types "
+"(explained in the next section). If the QMP function returns a string, then "
+"you should g_free() to free it."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:513
+msgid ""
+"Also note that hmp_info_option_roms() performs error handling. That's not "
+"strictly required when you're sure the QMP function doesn't return errors; "
+"you could instead pass it &error_abort then."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:517
+msgid ""
+"Another important detail is that HMP's \"info\" commands go into hmp-"
+"commands-info.hx, not hmp-commands.hx. The entry for the \"info option-"
+"roms\" follows::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:521
+msgid ""
+"    {\n"
+"        .name       = \"option-roms\",\n"
+"        .args_type  = \"\",\n"
+"        .params     = \"\",\n"
+"        .help       = \"show roms\",\n"
+"        .cmd        = hmp_info_option_roms,\n"
+"    },\n"
+"SRST\n"
+"``info option-roms``\n"
+"  Show the option ROMs.\n"
+"ERST"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:533
+msgid ""
+"To test this, run QEMU and type \"info option-roms\" in the user monitor."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:537
+msgid "Writing a debugging aid returning unstructured text"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:539
+msgid ""
+"As discussed in section `Modelling data in QAPI`_, it is required that "
+"commands expecting machine usage be using fine-grained QAPI data types. The "
+"exception to this rule applies when the command is solely intended as a "
+"debugging aid and allows for returning unstructured text, such as a query "
+"command that report aspects of QEMU's internal state that are useful only to "
+"human operators."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:546
+msgid ""
+"In this example we will consider the existing QMP command ``x-query-roms`` "
+"in qapi/machine.json.  It has no parameters and returns a "
+"``HumanReadableText``::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:550
+msgid ""
+"##\n"
+"# @x-query-roms:\n"
+"#\n"
+"# Query information on the registered ROMS\n"
+"#\n"
+"# Features:\n"
+"#\n"
+"# @unstable: This command is meant for debugging.\n"
+"#\n"
+"# Returns: registered ROMs\n"
+"#\n"
+"# Since: 6.2\n"
+"##\n"
+"{ 'command': 'x-query-roms',\n"
+"  'returns': 'HumanReadableText',\n"
+"  'features': [ 'unstable' ] }"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:567
+msgid ""
+"The ``HumanReadableText`` struct is defined in qapi/common.json as a struct "
+"with a string member. It is intended to be used for all commands that are "
+"returning unstructured text targeted at humans. These should all have "
+"feature 'unstable'.  Note that the feature's documentation states why the "
+"command is unstable.  We commonly use a ``x-`` command name prefix to make "
+"lack of stability obvious to human users."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:576
+msgid "Implementing the QMP command"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:578
+msgid ""
+"The QMP implementation will typically involve creating a ``GString`` object "
+"and printing formatted data into it, like this::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:581
+msgid ""
+"HumanReadableText *qmp_x_query_roms(Error **errp)\n"
+"{\n"
+"    g_autoptr(GString) buf = g_string_new(\"\");\n"
+"    Rom *rom;\n"
+"\n"
+"    QTAILQ_FOREACH(rom, &roms, next) {\n"
+"       g_string_append_printf(\"%s size=0x%06zx name=\\\"%s\\\"\\n\",\n"
+"                              memory_region_name(rom->mr),\n"
+"                              rom->romsize,\n"
+"                              rom->name);\n"
+"    }\n"
+"\n"
+"    return human_readable_text_from_str(buf);\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:596
+msgid ""
+"The actual implementation emits more information.  You can find it in hw/"
+"core/loader.c."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:603
+msgid ""
+"Now that the QMP command is in place, we can also make it available in the "
+"human monitor (HMP) as shown in previous examples. The HMP implementations "
+"will all look fairly similar, as all they need do is invoke the QMP command "
+"and then print the resulting text or error message. Here's an implementation "
+"of the \"info roms\" HMP command::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:609
+msgid ""
+"void hmp_info_roms(Monitor *mon, const QDict *qdict)\n"
+"{\n"
+"    Error err = NULL;\n"
+"    g_autoptr(HumanReadableText) info = qmp_x_query_roms(&err);\n"
+"\n"
+"    if (hmp_handle_error(mon, err)) {\n"
+"        return;\n"
+"    }\n"
+"    monitor_puts(mon, info->human_readable_text);\n"
+"}"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:620
+msgid "Also, you have to add the function's prototype to the hmp.h file."
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:622
+msgid ""
+"There's one last step to actually make the command available to monitor "
+"users, we should add it to the hmp-commands-info.hx file::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:625
+msgid ""
+"{\n"
+"    .name       = \"roms\",\n"
+"    .args_type  = \"\",\n"
+"    .params     = \"\",\n"
+"    .help       = \"show roms\",\n"
+"    .cmd        = hmp_info_roms,\n"
+"},"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:633
+msgid ""
+"The case of writing a HMP info handler that calls a no-parameter QMP query "
+"command is quite common. To simplify the implementation there is a general "
+"purpose HMP info handler for this scenario. All that is required to expose a "
+"no-parameter QMP query command via HMP is to declare it using the '."
+"cmd_info_hrt' field to point to the QMP handler, and leave the '.cmd' field "
+"NULL::"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:640
+msgid ""
+"{\n"
+"    .name         = \"roms\",\n"
+"    .args_type    = \"\",\n"
+"    .params       = \"\",\n"
+"    .help         = \"show roms\",\n"
+"    .cmd_info_hrt = qmp_x_query_roms,\n"
+"},"
+msgstr ""
+
+#: ../../../devel/writing-monitor-commands.rst:648
+msgid "This is how the actual HMP command is done."
+msgstr ""
