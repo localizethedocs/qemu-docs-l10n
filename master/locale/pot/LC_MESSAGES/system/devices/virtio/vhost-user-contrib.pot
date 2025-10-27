@@ -1,0 +1,135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:2
+msgid "vhost-user daemons in contrib"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:4
+msgid ""
+"QEMU provides a number of :ref:`vhost_user` daemons in the contrib "
+"directory. They were often written when vhost-user was initially added to "
+"the code base. You should also consider if other vhost-user daemons such as "
+"those from the rust-vmm `vhost-device repository`_ are better suited for "
+"production use."
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:15
+msgid "vhost-user-block - block device"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:17
+msgid ""
+"vhost-user-block is a backend for exposing block devices. It can present a "
+"flat file or block device as a simple block device to the guest. You almost "
+"certainly want to use the :ref:`storage-daemon` instead which supports a "
+"wide variety of storage modes and exports a number of interfaces including "
+"vhost-user."
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:26
+msgid "vhost-user-gpu - gpu device"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:28
+msgid ""
+"vhost-user-gpu presents a paravirtualized GPU and display controller. You "
+"probably want to use the internal :ref:`virtio_gpu` implementation if you "
+"want the latest features. There is also a `vhost_device_gpu`_ daemon as part "
+"of the rust-vmm project."
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:38
+msgid "vhost-user-input - Input emulation"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:40
+msgid "The Virtio input device is a paravirtualized device for input events."
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:43
+msgid "Description"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:45
+msgid ""
+"The vhost-user-input device implementation was designed to work with a "
+"daemon polling on input devices and passes input events to the guest."
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:48
+msgid "QEMU provides a backend implementation in contrib/vhost-user-input."
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:51
+msgid "Linux kernel support"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:53
+msgid ""
+"Virtio input requires a guest Linux kernel built with the "
+"``CONFIG_VIRTIO_INPUT`` option."
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:57
+msgid "Examples"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:59
+msgid "The backend daemon should be started first:"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:63
+msgid ""
+"host# vhost-user-input --socket-path=input.sock       \\\n"
+"    --evdev-path=/dev/input/event17"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:66
+msgid ""
+"The QEMU invocation needs to create a chardev socket to communicate with the "
+"backend daemon and access the VirtIO queues with the guest over the :ref:"
+"`shared memory <shared_memory_object>`."
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:72
+msgid ""
+"host# qemu-"
+"system                                                             \\\n"
+"    -chardev socket,path=/tmp/input.sock,"
+"id=mouse0                            \\\n"
+"    -device vhost-user-input-pci,"
+"chardev=mouse0                               \\\n"
+"    -m "
+"4096                                                                   \\\n"
+"    -object memory-backend-file,id=mem,size=4G,mem-path=/dev/shm,"
+"share=on     \\\n"
+"    -numa node,"
+"memdev=mem                                                     \\\n"
+"    ..."
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:84
+msgid "vhost-user-scsi - SCSI controller"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:86
+msgid ""
+"The vhost-user-scsi daemon can proxy iSCSI devices onto a virtualized SCSI "
+"controller."
+msgstr ""
