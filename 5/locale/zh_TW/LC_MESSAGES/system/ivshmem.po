@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/ivshmem.rst:4
+msgid "Inter-VM Shared Memory device"
+msgstr ""
+
+#: ../../../system/ivshmem.rst:6
+msgid ""
+"On Linux hosts, a shared memory device is available. The basic syntax is:"
+msgstr ""
+
+#: ../../../system/ivshmem.rst:11
+msgid "|qemu_system_x86| -device ivshmem-plain,memdev=hostmem"
+msgstr ""
+
+#: ../../../system/ivshmem.rst:13
+msgid ""
+"where hostmem names a host memory backend. For a POSIX shared memory "
+"backend, use something like"
+msgstr ""
+
+#: ../../../system/ivshmem.rst:18
+msgid ""
+"-object memory-backend-file,size=1M,share,mem-path=/dev/shm/ivshmem,"
+"id=hostmem"
+msgstr ""
+
+#: ../../../system/ivshmem.rst:20
+msgid ""
+"If desired, interrupts can be sent between guest VMs accessing the same "
+"shared memory region. Interrupt support requires using a shared memory "
+"server and using a chardev socket to connect to it. The code for the shared "
+"memory server is qemu.git/contrib/ivshmem-server. An example syntax when "
+"using the shared memory server is:"
+msgstr ""
+
+#: ../../../system/ivshmem.rst:28
+msgid ""
+"# First start the ivshmem server once and for all\n"
+"ivshmem-server -p pidfile -S path -m shm-name -l shm-size -n vectors\n"
+"\n"
+"# Then start your qemu instances with matching arguments\n"
+"|qemu_system_x86| -device ivshmem-doorbell,vectors=vectors,chardev=id\n"
+"                 -chardev socket,path=path,id=id"
+msgstr ""
+
+#: ../../../system/ivshmem.rst:35
+msgid ""
+"When using the server, the guest will be assigned a VM ID (>=0) that allows "
+"guests using the same server to communicate via interrupts. Guests can read "
+"their VM ID from a device register (see ivshmem-spec.txt)."
+msgstr ""
+
+#: ../../../system/ivshmem.rst:41
+msgid "Migration with ivshmem"
+msgstr ""
+
+#: ../../../system/ivshmem.rst:43
+msgid ""
+"With device property ``master=on``, the guest will copy the shared memory on "
+"migration to the destination host. With ``master=off``, the guest will not "
+"be able to migrate with the device attached. In the latter case, the device "
+"should be detached and then reattached after migration using the PCI hotplug "
+"support."
+msgstr ""
+
+#: ../../../system/ivshmem.rst:49
+msgid ""
+"At most one of the devices sharing the same memory can be master. The master "
+"must complete migration before you plug back the other devices."
+msgstr ""
+
+#: ../../../system/ivshmem.rst:53
+msgid "ivshmem and hugepages"
+msgstr ""
+
+#: ../../../system/ivshmem.rst:55
+msgid ""
+"Instead of specifying the <shm size> using POSIX shm, you may specify a "
+"memory backend that has hugepage support:"
+msgstr ""
+
+#: ../../../system/ivshmem.rst:60
+msgid ""
+"|qemu_system_x86| -object memory-backend-file,size=1G,mem-path=/dev/"
+"hugepages/my-shmem-file,share,id=mb1\n"
+"                 -device ivshmem-plain,memdev=mb1"
+msgstr ""
+
+#: ../../../system/ivshmem.rst:63
+msgid ""
+"ivshmem-server also supports hugepages mount points with the ``-m`` memory "
+"path argument."
+msgstr ""
