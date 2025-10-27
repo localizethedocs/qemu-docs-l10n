@@ -1,0 +1,325 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/igvm.rst:2
+msgid "Independent Guest Virtual Machine (IGVM) support"
+msgstr ""
+
+#: ../../../system/igvm.rst:4
+msgid ""
+"IGVM files are designed to encapsulate all the information required to "
+"launch a virtual machine on any given virtualization stack in a "
+"deterministic way. This allows the cryptographic measurement of initial "
+"guest state for Confidential Guests to be calculated when the IGVM file is "
+"built, allowing a relying party to verify the initial state of a guest via a "
+"remote attestation."
+msgstr ""
+
+#: ../../../system/igvm.rst:10
+msgid ""
+"Although IGVM files are designed with Confidential Computing in mind, they "
+"can also be used to configure non-confidential guests. Multiple platforms "
+"can be defined by a single IGVM file, allowing a single IGVM file to "
+"configure a virtual machine that can run on, for example, TDX, SEV and non-"
+"confidential hosts."
+msgstr ""
+
+#: ../../../system/igvm.rst:16
+msgid ""
+"QEMU supports IGVM files through the user-creatable ``igvm-cfg`` object. "
+"This object is used to define the filename of the IGVM file to process. A "
+"reference to the object is added to the ``-machine`` to configure the "
+"virtual machine to use the IGVM file for configuration."
+msgstr ""
+
+#: ../../../system/igvm.rst:21
+msgid ""
+"Confidential platform support is provided through the use of the "
+"``ConfidentialGuestSupport`` object. If the virtual machine provides an "
+"instance of this object then this is used by the IGVM loader to configure "
+"the isolation properties of the directives within the file."
+msgstr ""
+
+#: ../../../system/igvm.rst:27
+msgid "Further Information on IGVM"
+msgstr ""
+
+#: ../../../system/igvm.rst:29
+msgid ""
+"Information about the IGVM format, including links to the format "
+"specification and documentation for the Rust and C libraries can be found at "
+"the project repository:"
+msgstr ""
+
+#: ../../../system/igvm.rst:33
+msgid "https://github.com/microsoft/igvm"
+msgstr ""
+
+#: ../../../system/igvm.rst:37
+msgid "Supported Platforms"
+msgstr ""
+
+#: ../../../system/igvm.rst:39
+msgid ""
+"Currently, IGVM files can be provided for Confidential Guests on host "
+"systems that support AMD SEV, SEV-ES and SEV-SNP with KVM. IGVM files can "
+"also be provided for non-confidential guests."
+msgstr ""
+
+#: ../../../system/igvm.rst:45
+msgid "Limitations when using IGVM with AMD SEV, SEV-ES and SEV-SNP"
+msgstr ""
+
+#: ../../../system/igvm.rst:47
+msgid ""
+"IGVM files configure the initial state of the guest using a set of "
+"directives. Not every directive is supported by every Confidential Guest "
+"type. For example, AMD SEV does not support encrypted save state regions, "
+"therefore setting the initial CPU state using IGVM for SEV is not possible. "
+"When an IGVM file contains directives that are not supported for the active "
+"platform, an error is generated and the guest launch is aborted."
+msgstr ""
+
+#: ../../../system/igvm.rst:54
+msgid ""
+"The table below describes the list of directives that are supported for SEV, "
+"SEV-ES, SEV-SNP and non-confidential platforms."
+msgstr ""
+
+#: ../../../system/igvm.rst:57
+msgid "SEV, SEV-ES, SEV-SNP & non-confidential Supported Directives"
+msgstr ""
+
+#: ../../../system/igvm.rst:61 ../../../system/igvm.rst:80
+#: ../../../system/igvm.rst:91
+msgid "IGVM directive"
+msgstr ""
+
+#: ../../../system/igvm.rst:62 ../../../system/igvm.rst:81
+#: ../../../system/igvm.rst:92
+msgid "Notes"
+msgstr ""
+
+#: ../../../system/igvm.rst:63
+msgid "IGVM_VHT_PAGE_DATA"
+msgstr ""
+
+#: ../../../system/igvm.rst:64
+msgid ""
+"``NORMAL`` zero, measured and unmeasured page types are supported. Other "
+"page types result in an error."
+msgstr ""
+
+#: ../../../system/igvm.rst:66
+msgid "IGVM_VHT_PARAMETER_AREA"
+msgstr ""
+
+#: ../../../system/igvm.rst:68
+msgid "IGVM_VHT_PARAMETER_INSERT"
+msgstr ""
+
+#: ../../../system/igvm.rst:70
+msgid "IGVM_VHT_VP_COUNT_PARAMETER"
+msgstr ""
+
+#: ../../../system/igvm.rst:71
+msgid "The guest parameter page is populated with the CPU count."
+msgstr ""
+
+#: ../../../system/igvm.rst:72
+msgid "IGVM_VHT_ENVIRONMENT_INFO_PARAMETER"
+msgstr ""
+
+#: ../../../system/igvm.rst:73
+msgid ""
+"The ``memory_is_shared`` parameter is set to 1 in the guest parameter page."
+msgstr ""
+
+#: ../../../system/igvm.rst:76
+msgid "Additional SEV, SEV-ES & SEV_SNP Supported Directives"
+msgstr ""
+
+#: ../../../system/igvm.rst:82
+msgid "IGVM_VHT_MEMORY_MAP"
+msgstr ""
+
+#: ../../../system/igvm.rst:83
+msgid "The memory map page is populated using entries from the E820 table."
+msgstr ""
+
+#: ../../../system/igvm.rst:84
+msgid "IGVM_VHT_REQUIRED_MEMORY"
+msgstr ""
+
+#: ../../../system/igvm.rst:85
+msgid "Ensures memory is available in the guest at the specified range."
+msgstr ""
+
+#: ../../../system/igvm.rst:87
+msgid "Additional SEV-ES & SEV-SNP Supported Directives"
+msgstr ""
+
+#: ../../../system/igvm.rst:93
+msgid "IGVM_VHT_VP_CONTEXT"
+msgstr ""
+
+#: ../../../system/igvm.rst:94
+msgid ""
+"Setting of the initial CPU state for the boot CPU and additional CPUs is "
+"supported with limitations on the fields that can be provided in the VMSA. "
+"See below for details on which fields are supported."
+msgstr ""
+
+#: ../../../system/igvm.rst:99
+msgid "Initial CPU state with VMSA"
+msgstr ""
+
+#: ../../../system/igvm.rst:101
+msgid ""
+"The initial state of guest CPUs can be defined in the IGVM file for AMD SEV-"
+"ES and SEV-SNP. The state data is provided as a VMSA structure as defined in "
+"Table B-4 in the AMD64 Architecture Programmer's Manual, Volume 2 [1]."
+msgstr ""
+
+#: ../../../system/igvm.rst:105
+msgid ""
+"The IGVM VMSA is translated to CPU state in QEMU which is then synchronized "
+"by KVM to the guest VMSA during the launch process where it contributes to "
+"the launch measurement. See :ref:`amd-sev` for details on the launch process "
+"and guest launch measurement."
+msgstr ""
+
+#: ../../../system/igvm.rst:110
+msgid ""
+"It is important that no information is lost or changed when translating the "
+"VMSA provided by the IGVM file into the VSMA that is used to launch the "
+"guest. Therefore, QEMU restricts the VMSA fields that can be provided in the "
+"IGVM VMSA structure to the following registers:"
+msgstr ""
+
+#: ../../../system/igvm.rst:115
+msgid ""
+"RAX, RCX, RDX, RBX, RBP, RSI, RDI, R8-R15, RSP, RIP, CS, DS, ES, FS, GS, SS, "
+"CR0, CR3, CR4, XCR0, EFER, PAT, GDT, IDT, LDTR, TR, DR6, DR7, RFLAGS, "
+"X87_FCW, MXCSR."
+msgstr ""
+
+#: ../../../system/igvm.rst:119
+msgid ""
+"When processing the IGVM file, QEMU will check if any fields other than the "
+"above are non-zero and generate an error if this is the case."
+msgstr ""
+
+#: ../../../system/igvm.rst:122
+msgid ""
+"KVM uses a hardcoded GPA of 0xFFFFFFFFF000 for the VMSA. When an IGVM file "
+"defines initial CPU state, the GPA for each VMSA must match this hardcoded "
+"value."
+msgstr ""
+
+#: ../../../system/igvm.rst:127
+msgid "Firmware Images with IGVM"
+msgstr ""
+
+#: ../../../system/igvm.rst:129
+msgid ""
+"When an IGVM filename is specified for a Confidential Guest Support object "
+"it overrides the default handling of system firmware: the firmware image, "
+"such as an OVMF binary should be contained as a payload of the IGVM file and "
+"not provided as a flash drive or via the ``-bios`` parameter. The default "
+"QEMU firmware is not automatically populated into the guest memory space."
+msgstr ""
+
+#: ../../../system/igvm.rst:135
+msgid ""
+"If an IGVM file is provided along with either the ``-bios`` parameter or "
+"pflash devices then an error is displayed and the guest startup is aborted."
+msgstr ""
+
+#: ../../../system/igvm.rst:139
+msgid "Running a guest configured using IGVM"
+msgstr ""
+
+#: ../../../system/igvm.rst:141
+msgid ""
+"To run a guest configured with IGVM you firstly need to generate an IGVM "
+"file that contains a guest configuration compatible with the platform you "
+"are targeting."
+msgstr ""
+
+#: ../../../system/igvm.rst:145
+msgid ""
+"The ``buildigvm`` tool [2] is an example of a tool that can be used to "
+"generate IGVM files for non-confidential X86 platforms as well as for SEV, "
+"SEV-ES and SEV-SNP confidential platforms."
+msgstr ""
+
+#: ../../../system/igvm.rst:149
+msgid "Example using this tool to generate an IGVM file for AMD SEV-SNP::"
+msgstr ""
+
+#: ../../../system/igvm.rst:151
+msgid ""
+"buildigvm --firmware /path/to/OVMF.fd --output sev-snp.igvm \\\n"
+"          --cpucount 4 sev-snp"
+msgstr ""
+
+#: ../../../system/igvm.rst:154
+msgid ""
+"To run a guest configured with the generated IGVM you need to add an ``igvm-"
+"cfg`` object and refer to it from the ``-machine`` parameter:"
+msgstr ""
+
+#: ../../../system/igvm.rst:157
+msgid "Example (for AMD SEV)::"
+msgstr ""
+
+#: ../../../system/igvm.rst:159
+msgid ""
+"qemu-system-x86_64 \\\n"
+"    <other parameters> \\\n"
+"    -machine ...,confidential-guest-support=sev0,igvm-cfg=igvm0 \\\n"
+"    -object sev-guest,id=sev0,cbitpos=47,reduced-phys-bits=1 \\\n"
+"    -object igvm-cfg,id=igvm0,file=/path/to/sev-snp.igvm"
+msgstr ""
+
+#: ../../../system/igvm.rst:166
+msgid "References"
+msgstr ""
+
+#: ../../../system/igvm.rst:168
+msgid ""
+"[1] AMD64 Architecture Programmer's Manual, Volume 2: System Programming"
+msgstr ""
+
+#: ../../../system/igvm.rst:169
+msgid ""
+"Rev 3.41 https://www.amd.com/content/dam/amd/en/documents/processor-tech-"
+"docs/programmer-references/24593.pdf"
+msgstr ""
+
+#: ../../../system/igvm.rst:172
+msgid ""
+"[2] ``buildigvm`` - A tool to build example IGVM files containing OVMF "
+"firmware"
+msgstr ""
+
+#: ../../../system/igvm.rst:173
+msgid "https://github.com/roy-hopkins/buildigvm"
+msgstr ""

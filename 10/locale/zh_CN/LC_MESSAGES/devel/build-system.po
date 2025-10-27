@@ -1,0 +1,1049 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/build-system.rst:3
+msgid "The QEMU build system architecture"
+msgstr ""
+
+#: ../../../devel/build-system.rst:5
+msgid ""
+"This document aims to help developers understand the architecture of the "
+"QEMU build system. As with projects using GNU autotools, the QEMU build "
+"system has two stages; first the developer runs the \"configure\" script to "
+"determine the local build environment characteristics, then they run "
+"\"make\" to build the project.  This is about where the similarities with "
+"GNU autotools end, so try to forget what you know about them."
+msgstr ""
+
+#: ../../../devel/build-system.rst:12
+msgid "The two general ways to perform a build are as follows:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:14
+msgid "build artifacts outside of QEMU source tree entirely::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:16
+msgid ""
+"cd ../\n"
+"mkdir build\n"
+"cd build\n"
+"../qemu/configure\n"
+"make"
+msgstr ""
+
+#: ../../../devel/build-system.rst:22
+msgid "build artifacts in a subdir of QEMU source tree::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:24
+msgid ""
+"mkdir build\n"
+"cd build\n"
+"../configure\n"
+"make"
+msgstr ""
+
+#: ../../../devel/build-system.rst:29
+msgid ""
+"Most of the actual build process uses Meson under the hood, therefore build "
+"artifacts cannot be placed in the source tree itself."
+msgstr ""
+
+#: ../../../devel/build-system.rst:34
+msgid "Stage 1: configure"
+msgstr ""
+
+#: ../../../devel/build-system.rst:36
+msgid "The configure script has five tasks:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:38
+msgid "detect the host architecture"
+msgstr ""
+
+#: ../../../devel/build-system.rst:40
+msgid ""
+"list the targets for which to build emulators; the list of targets also "
+"affects which firmware binaries and tests to build"
+msgstr ""
+
+#: ../../../devel/build-system.rst:43
+msgid ""
+"find the compilers (native and cross) used to build executables, firmware "
+"and tests.  The results are written as either Makefile fragments (``config-"
+"host.mak``) or a Meson machine file (``config-meson.cross``)"
+msgstr ""
+
+#: ../../../devel/build-system.rst:48
+msgid ""
+"create a virtual environment in which all Python code runs during the build, "
+"and possibly install packages into it from PyPI"
+msgstr ""
+
+#: ../../../devel/build-system.rst:51
+msgid ""
+"invoke Meson in the virtual environment, to perform the actual configuration "
+"step for the emulator build"
+msgstr ""
+
+#: ../../../devel/build-system.rst:54
+msgid ""
+"The configure script automatically recognizes command line options for which "
+"a same-named Meson option exists; dashes in the command line are replaced "
+"with underscores."
+msgstr ""
+
+#: ../../../devel/build-system.rst:58
+msgid ""
+"Almost all QEMU developers that need to modify the build system will only be "
+"concerned with Meson, and therefore can skip the rest of this section."
+msgstr ""
+
+#: ../../../devel/build-system.rst:64
+msgid "Modifying ``configure``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:66
+msgid ""
+"``configure`` is a shell script; it uses ``#!/bin/sh`` and therefore should "
+"be compatible with any POSIX shell. It is important to avoid using bash-isms "
+"to avoid breaking development platforms where bash is the primary host."
+msgstr ""
+
+#: ../../../devel/build-system.rst:71
+msgid ""
+"The configure script provides a variety of functions to help writing "
+"portable shell code and providing consistent behavior across architectures "
+"and operating systems:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:75
+msgid "``error_exit $MESSAGE $MORE...``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:76
+msgid ""
+"Print $MESSAGE to stderr, followed by $MORE... and then exit from the "
+"configure script with non-zero status."
+msgstr ""
+
+#: ../../../devel/build-system.rst:79
+msgid "``has $COMMAND``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:80
+msgid ""
+"Determine if $COMMAND exists in the current environment, either as a shell "
+"builtin, or executable binary, returning 0 on success.  The replacement in "
+"Meson is ``find_program()``."
+msgstr ""
+
+#: ../../../devel/build-system.rst:84
+msgid "``probe_target_compiler $TARGET``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:85
+msgid ""
+"Detect a cross compiler and cross tools for the QEMU target $TARGET (e.g., "
+"``$CPU-softmmu``, ``$CPU-linux-user``, ``$CPU-bsd-user``).  If a working "
+"compiler is present, return success and set variables ``$target_cc``, "
+"``$target_ar``, etc. to non-empty values."
+msgstr ""
+
+#: ../../../devel/build-system.rst:90
+msgid "``write_target_makefile``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:91
+msgid ""
+"Write a Makefile fragment to stdout, exposing the result of the most "
+"``probe_target_compiler`` call as the usual Make variables (``CC``, ``AR``, "
+"``LD``, etc.)."
+msgstr ""
+
+#: ../../../devel/build-system.rst:96
+msgid ""
+"Configure does not generally perform tests for compiler options beyond basic "
+"checks to detect the host platform and ensure the compiler is functioning.  "
+"These are performed using a few more helper functions:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:100
+msgid "``compile_object $CFLAGS``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:101
+msgid ""
+"Attempt to compile a test program with the system C compiler using $CFLAGS. "
+"The test program must have been previously written to a file called $TMPC."
+msgstr ""
+
+#: ../../../devel/build-system.rst:105
+msgid "``compile_prog $CFLAGS $LDFLAGS``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:106
+msgid ""
+"Attempt to compile a test program with the system C compiler using $CFLAGS "
+"and link it with the system linker using $LDFLAGS. The test program must "
+"have been previously written to a file called $TMPC."
+msgstr ""
+
+#: ../../../devel/build-system.rst:110
+msgid "``check_define $NAME``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:111
+msgid "Determine if the macro $NAME is defined by the system C compiler."
+msgstr ""
+
+#: ../../../devel/build-system.rst:113
+msgid "``do_compiler $CC $ARGS...``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:114
+msgid ""
+"Attempt to run the C compiler $CC, passing it $ARGS...  This function does "
+"not use flags passed via options such as ``--extra-cflags``, and therefore "
+"can be used to check for cross compilers.  However, most such checks are "
+"done at ``make`` time instead (see for example the ``cc-option`` macro in "
+"``pc-bios/option-rom/Makefile``)."
+msgstr ""
+
+#: ../../../devel/build-system.rst:120
+msgid "``write_c_skeleton``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:121
+msgid ""
+"Write a minimal C program main() function to the temporary file indicated by "
+"$TMPC."
+msgstr ""
+
+#: ../../../devel/build-system.rst:126
+msgid "Python virtual environments and the build process"
+msgstr ""
+
+#: ../../../devel/build-system.rst:128
+msgid ""
+"An important step in ``configure`` is to create a Python virtual environment "
+"(venv) during the configuration phase.  The Python interpreter comes from "
+"the ``--python`` command line option, the ``$PYTHON`` variable from the "
+"environment, or the system PATH, in this order.  The venv resides in the "
+"``pyvenv`` directory in the build tree, and provides consistency in how the "
+"build process runs Python code."
+msgstr ""
+
+#: ../../../devel/build-system.rst:135
+msgid ""
+"At this stage, ``configure`` also queries the chosen Python interpreter "
+"about QEMU's build dependencies.  Note that the build process does  *not* "
+"look for ``meson`` or ``sphinx-build`` binaries in the PATH; likewise, there "
+"are no options such as ``--meson`` or ``--sphinx-build``. This avoids a "
+"potential mismatch, where Meson and Sphinx binaries on the PATH might "
+"operate in a different Python environment than the one chosen by the user "
+"during the build process.  On the other hand, it introduces a potential "
+"source of confusion where the user installs a dependency but ``configure`` "
+"is not able to find it.  When this happens, the dependency was installed in "
+"the ``site-packages`` directory of another interpreter, or with the wrong "
+"``pip`` program."
+msgstr ""
+
+#: ../../../devel/build-system.rst:147
+msgid ""
+"If a package is available for the chosen interpreter, ``configure`` prepares "
+"a small script that invokes it from the venv itself\\ [#distlib]_. If not, "
+"``configure`` can also optionally install dependencies in the virtual "
+"environment with ``pip``, either from wheels in ``python/wheels`` or by "
+"downloading the package with PyPI.  Downloading can be disabled with ``--"
+"disable-download``; and anyway, it only happens when a ``configure`` option "
+"(currently, only ``--enable-docs``) is explicitly enabled but the "
+"dependencies are not present."
+msgstr ""
+
+#: ../../../devel/build-system.rst:156
+msgid ""
+"The scripts are created based on the package's metadata, specifically the "
+"``console_script`` entry points.  This is the same mechanism that ``pip`` "
+"uses when installing a package. Currently, in all cases it would be possible "
+"to use ``python -m`` instead of an entry point script, which makes this "
+"approach a bit overkill.  On the other hand, creating the scripts is future "
+"proof and it makes the contents of the ``pyvenv/bin`` directory more "
+"informative.  Portability is also not an issue, because the Python Packaging "
+"Authority provides a package ``distlib.scripts`` to perform this task."
+msgstr ""
+
+#: ../../../devel/build-system.rst:167
+msgid ""
+"The required versions of the packages are stored in a configuration file "
+"``pythondeps.toml``.  The format is custom to QEMU, but it is documented at "
+"the top of the file itself and it should be easy to understand.  The "
+"requirements should make it possible to use the version that is packaged by "
+"QEMU's supported distros."
+msgstr ""
+
+#: ../../../devel/build-system.rst:173
+msgid ""
+"When dependencies are downloaded, instead, ``configure`` uses a \"known "
+"good\" version that is also listed in ``pythondeps.toml``.  In this "
+"scenario, ``pythondeps.toml`` behaves like the \"lock file\" used by "
+"``cargo``, ``poetry`` or other dependency management systems."
+msgstr ""
+
+#: ../../../devel/build-system.rst:180
+msgid "Bundled Python packages"
+msgstr ""
+
+#: ../../../devel/build-system.rst:182
+msgid ""
+"Python packages that are **mandatory** dependencies to build QEMU, but are "
+"not available in all supported distros, are bundled with the QEMU sources.  "
+"The only one is currently Meson (outdated in Ubuntu 22.04 and openSUSE Leap)."
+msgstr ""
+
+#: ../../../devel/build-system.rst:187
+msgid ""
+"In order to include a new or updated wheel, modify and rerun the ``python/"
+"scripts/vendor.py`` script.  The script embeds the sha256 hash of package "
+"sources and checks it.  The pypi.org web site provides an easy way to "
+"retrieve the sha256 hash of the sources."
+msgstr ""
+
+#: ../../../devel/build-system.rst:194
+msgid "Stage 2: Meson"
+msgstr ""
+
+#: ../../../devel/build-system.rst:196
+msgid "The Meson build system describes the build and install process for:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:198
+msgid "executables, which include:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:200
+msgid "Tools - ``qemu-img``, ``qemu-nbd``, ``qemu-ga`` (guest agent), etc"
+msgstr ""
+
+#: ../../../devel/build-system.rst:202
+msgid "System emulators - ``qemu-system-$ARCH``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:204
+msgid "Userspace emulators - ``qemu-$ARCH``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:206
+msgid "Unit tests"
+msgstr ""
+
+#: ../../../devel/build-system.rst:208
+msgid "documentation"
+msgstr ""
+
+#: ../../../devel/build-system.rst:210
+msgid ""
+"ROMs, whether provided as binary blobs in the QEMU distributions or cross "
+"compiled under the direction of the configure script"
+msgstr ""
+
+#: ../../../devel/build-system.rst:213
+msgid "other data files, such as icons or desktop files"
+msgstr ""
+
+#: ../../../devel/build-system.rst:215
+msgid ""
+"All executables are built by default, except for some ``contrib/`` binaries "
+"that are known to fail to build on some platforms (for example 32-bit or big-"
+"endian platforms).  Tests are also built by default, though that might "
+"change in the future."
+msgstr ""
+
+#: ../../../devel/build-system.rst:220
+msgid ""
+"The source code is highly modularized, split across many files to facilitate "
+"building of all of these components with as little duplicated compilation as "
+"possible. Using the Meson \"sourceset\" functionality, ``meson.build`` files "
+"group the source files in rules that are enabled according to the available "
+"system libraries and to various configuration symbols.  Sourcesets belong to "
+"one of four groups:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:227
+msgid "Subsystem sourcesets:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:228
+msgid ""
+"Various subsystems that are common to both tools and emulators have their "
+"own sourceset, for example ``block_ss`` for the block device subsystem, "
+"``chardev_ss`` for the character device subsystem, etc.  These sourcesets "
+"are then turned into static libraries as follows::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:233
+msgid ""
+"libchardev = static_library('chardev', chardev_ss.sources(),\n"
+"                            build_by_default: false)\n"
+"\n"
+"chardev = declare_dependency(objects: libchardev."
+"extract_all_objects(recursive: false),\n"
+"                             dependencies: chardev_ss.dependencies())"
+msgstr ""
+
+#: ../../../devel/build-system.rst:239
+msgid "Target-independent emulator sourcesets:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:240
+msgid ""
+"Various general purpose helper code is compiled only once and the .o files "
+"are linked into all output binaries that need it. This includes error "
+"handling infrastructure, standard data structures, platform portability "
+"wrapper functions, etc."
+msgstr ""
+
+#: ../../../devel/build-system.rst:245
+msgid ""
+"Target-independent code lives in the ``common_ss``, ``system_ss`` and "
+"``user_ss`` sourcesets.  ``common_ss`` is linked into all emulators, "
+"``system_ss`` only in system emulators, ``user_ss`` only in user-mode "
+"emulators."
+msgstr ""
+
+#: ../../../devel/build-system.rst:250
+msgid "Target-dependent emulator sourcesets:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:251
+msgid ""
+"In the target-dependent set lives CPU emulation, some device emulation and "
+"much glue code. This sometimes also has to be compiled multiple times, once "
+"for each target being built.  Target-dependent files are included in the "
+"``specific_ss`` sourceset."
+msgstr ""
+
+#: ../../../devel/build-system.rst:256
+msgid ""
+"Each emulator also includes sources for files in the ``hw/`` and ``target/`` "
+"subdirectories.  The subdirectory used for each emulator comes from the "
+"target's definition of ``TARGET_BASE_ARCH`` or (if missing) ``TARGET_ARCH``, "
+"as found in ``configs/targets/*.mak``."
+msgstr ""
+
+#: ../../../devel/build-system.rst:261
+msgid ""
+"Each subdirectory in ``hw/`` adds one sourceset to the ``hw_arch`` "
+"dictionary, for example::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:264
+msgid ""
+"arm_ss = ss.source_set()\n"
+"arm_ss.add(files('boot.c'), fdt)\n"
+"...\n"
+"hw_arch += {'arm': arm_ss}"
+msgstr ""
+
+#: ../../../devel/build-system.rst:269
+msgid "The sourceset is only used for system emulators."
+msgstr ""
+
+#: ../../../devel/build-system.rst:271
+msgid ""
+"Each subdirectory in ``target/`` instead should add one sourceset to each of "
+"the ``target_arch`` and ``target_system_arch``, which are used respectively "
+"for all emulators and for system emulators only.  For example::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:275
+msgid ""
+"arm_ss = ss.source_set()\n"
+"arm_system_ss = ss.source_set()\n"
+"...\n"
+"target_arch += {'arm': arm_ss}\n"
+"target_system_arch += {'arm': arm_system_ss}"
+msgstr ""
+
+#: ../../../devel/build-system.rst:281
+msgid "Module sourcesets:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:282
+msgid ""
+"There are two dictionaries for modules: ``modules`` is used for target-"
+"independent modules and ``target_modules`` is used for target-dependent "
+"modules.  When modules are disabled the ``module`` source sets are added to "
+"``system_ss`` and the ``target_modules`` source sets are added to "
+"``specific_ss``."
+msgstr ""
+
+#: ../../../devel/build-system.rst:288
+msgid ""
+"Both dictionaries are nested.  One dictionary is created per subdirectory, "
+"and these per-subdirectory dictionaries are added to the toplevel "
+"dictionaries.  For example::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:292
+msgid ""
+"hw_display_modules = {}\n"
+"qxl_ss = ss.source_set()\n"
+"...\n"
+"hw_display_modules += { 'qxl': qxl_ss }\n"
+"modules += { 'hw-display': hw_display_modules }"
+msgstr ""
+
+#: ../../../devel/build-system.rst:298
+msgid "Utility sourcesets:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:299
+msgid ""
+"All binaries link with a static library ``libqemuutil.a``.  This library is "
+"built from several sourcesets; most of them however host generated code, and "
+"the only two of general interest are ``util_ss`` and ``stub_ss``."
+msgstr ""
+
+#: ../../../devel/build-system.rst:303
+msgid ""
+"The separation between these two is purely for documentation purposes. "
+"``util_ss`` contains generic utility files.  Even though this code is only "
+"linked in some binaries, sometimes it requires hooks only in some of these "
+"and depend on other functions that are not fully implemented by all QEMU "
+"binaries.  ``stub_ss`` links dummy stubs that will only be linked into the "
+"binary if the real implementation is not present.  In a way, the stubs can "
+"be thought of as a portable implementation of the weak symbols concept."
+msgstr ""
+
+#: ../../../devel/build-system.rst:313
+msgid ""
+"The following files concur in the definition of which files are linked into "
+"each emulator:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:316
+msgid "``configs/devices/*.mak``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:317
+msgid ""
+"The files under ``configs/devices/`` control the boards and devices that are "
+"built into each QEMU system emulation targets. They merely contain a list of "
+"config variable definitions such as::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:321
+msgid ""
+"include arm-softmmu.mak\n"
+"CONFIG_XLNX_ZYNQMP_ARM=y\n"
+"CONFIG_XLNX_VERSAL=y"
+msgstr ""
+
+#: ../../../devel/build-system.rst:325
+msgid "``*/Kconfig``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:326
+msgid ""
+"These files are processed together with ``configs/devices/*.mak`` and "
+"describe the dependencies between various features, subsystems and device "
+"models.  They are described in :ref:`kconfig`"
+msgstr ""
+
+#: ../../../devel/build-system.rst:330
+msgid "``configs/targets/*.mak``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:331
+msgid ""
+"These files mostly define symbols that appear in the ``*-config-target.h`` "
+"file for each emulator\\ [#cfgtarget]_.  However, the ``TARGET_ARCH`` and "
+"``TARGET_BASE_ARCH`` will also be used to select the ``hw/`` and ``target/`` "
+"subdirectories that are compiled into each target."
+msgstr ""
+
+#: ../../../devel/build-system.rst:336
+msgid ""
+"This header is included by ``qemu/osdep.h`` when compiling files from the "
+"target-specific sourcesets."
+msgstr ""
+
+#: ../../../devel/build-system.rst:339
+msgid ""
+"These files rarely need changing unless you are adding a completely new "
+"target, or enabling new devices or hardware for a particular system/"
+"userspace emulation target"
+msgstr ""
+
+#: ../../../devel/build-system.rst:345
+msgid "Adding checks"
+msgstr ""
+
+#: ../../../devel/build-system.rst:347
+msgid "Compiler checks can be as simple as the following::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:349
+msgid "config_host_data.set('HAVE_BTRFS_H', cc.has_header('linux/btrfs.h'))"
+msgstr ""
+
+#: ../../../devel/build-system.rst:351
+msgid ""
+"A more complex task such as adding a new dependency usually comprises the "
+"following tasks:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:354
+msgid "Add a Meson build option to meson_options.txt."
+msgstr ""
+
+#: ../../../devel/build-system.rst:356
+msgid "Add code to perform the actual feature check."
+msgstr ""
+
+#: ../../../devel/build-system.rst:358
+msgid "Add code to include the feature status in ``config-host.h``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:360
+msgid ""
+"Add code to print out the feature status in the configure summary upon "
+"completion."
+msgstr ""
+
+#: ../../../devel/build-system.rst:363
+msgid ""
+"Taking the probe for SDL2_Image as an example, we have the following in "
+"``meson_options.txt``::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:366
+msgid ""
+"option('sdl_image', type : 'feature', value : 'auto',\n"
+"       description: 'SDL Image support for icons')"
+msgstr ""
+
+#: ../../../devel/build-system.rst:369
+msgid ""
+"Unless the option was given a non-``auto`` value (on the configure command "
+"line), the detection code must be performed only if the dependency will be "
+"used::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:373
+msgid ""
+"sdl_image = not_found\n"
+"if not get_option('sdl_image').auto() or have_system\n"
+"  sdl_image = dependency('SDL2_image', required: get_option('sdl_image'),\n"
+"                         method: 'pkg-config')\n"
+"endif"
+msgstr ""
+
+#: ../../../devel/build-system.rst:379
+msgid ""
+"This avoids warnings on static builds of user-mode emulators, for example. "
+"Most of the libraries used by system-mode emulators are not available for "
+"static linking."
+msgstr ""
+
+#: ../../../devel/build-system.rst:383
+msgid "The other supporting code is generally simple::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:385
+msgid ""
+"# Create config-host.h (if applicable)\n"
+"config_host_data.set('CONFIG_SDL_IMAGE', sdl_image.found())\n"
+"\n"
+"# Summary\n"
+"summary_info += {'SDL image support': sdl_image.found()}"
+msgstr ""
+
+#: ../../../devel/build-system.rst:391
+msgid ""
+"For the configure script to parse the new option, the ``scripts/meson-"
+"buildoptions.sh`` file must be up-to-date; ``make update-buildoptions`` (or "
+"just ``make``) will take care of updating it."
+msgstr ""
+
+#: ../../../devel/build-system.rst:397
+msgid "Support scripts"
+msgstr ""
+
+#: ../../../devel/build-system.rst:399
+msgid ""
+"Meson has a special convention for invoking Python scripts: if their first "
+"line is ``#! /usr/bin/env python3`` and the file is *not* executable, "
+"find_program() arranges to invoke the script under the same Python "
+"interpreter that was used to invoke Meson.  This is the most common and "
+"preferred way to invoke support scripts from Meson build files, because it "
+"automatically uses the value of configure's --python= option."
+msgstr ""
+
+#: ../../../devel/build-system.rst:406
+msgid ""
+"In case the script is not written in Python, use a ``#! /usr/bin/env ...`` "
+"line and make the script executable."
+msgstr ""
+
+#: ../../../devel/build-system.rst:409
+msgid ""
+"Scripts written in Python, where it is desirable to make the script "
+"executable (for example for test scripts that developers may want to invoke "
+"from the command line, such as tests/qapi-schema/test-qapi.py), should be "
+"invoked through the ``python`` variable in meson.build. For example::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:415
+msgid ""
+"test('QAPI schema regression tests', python,\n"
+"     args: files('test-qapi.py'),\n"
+"     env: test_env, suite: ['qapi-schema', 'qapi-frontend'])"
+msgstr ""
+
+#: ../../../devel/build-system.rst:419
+msgid ""
+"This is needed to obey the --python= option passed to the configure script, "
+"which may point to something other than the first python3 binary on the path."
+msgstr ""
+
+#: ../../../devel/build-system.rst:423
+msgid ""
+"By the time Meson runs, Python dependencies are available in the virtual "
+"environment and should be invoked through the scripts that ``configure`` "
+"places under ``pyvenv``.  One way to do so is as follows, using Meson's "
+"``find_program`` function::"
+msgstr ""
+
+#: ../../../devel/build-system.rst:428
+msgid ""
+"sphinx_build = find_program(\n"
+"     fs.parent(python.full_path()) / 'sphinx-build',\n"
+"     required: get_option('docs'))"
+msgstr ""
+
+#: ../../../devel/build-system.rst:434
+msgid "Stage 3: Make"
+msgstr ""
+
+#: ../../../devel/build-system.rst:436
+msgid ""
+"The next step in building QEMU is to invoke make.  GNU Make is required to "
+"build QEMU, and may be installed as ``gmake`` on some hosts."
+msgstr ""
+
+#: ../../../devel/build-system.rst:439
+msgid ""
+"The output of Meson is a ``build.ninja`` file, which is used with the Ninja "
+"build tool.  However, QEMU's build comprises other components than just the "
+"emulators (namely firmware and the tests in ``tests/tcg``) which need "
+"different cross compilers.  The QEMU Makefile wraps both Ninja and the "
+"smaller build systems for firmware and tests; it also takes care of running "
+"``configure`` again when the script changes.  Apart from invoking these sub-"
+"Makefiles, the resulting build is largely non-recursive."
+msgstr ""
+
+#: ../../../devel/build-system.rst:447
+msgid ""
+"Tests, whether defined in ``meson.build`` or not, are also ran by the "
+"Makefile with the traditional ``make check`` phony target, while benchmarks "
+"are run with ``make bench``.  Meson test suites such as ``unit`` can be ran "
+"with ``make check-unit``, and ``make check-tcg`` builds and runs \"non-"
+"Meson\" tests for all targets."
+msgstr ""
+
+#: ../../../devel/build-system.rst:453
+msgid ""
+"If desired, it is also possible to use ``ninja`` and ``meson test``, "
+"respectively to build emulators and run tests defined in meson.build. The "
+"main difference is that ``make`` needs the ``-jN`` flag in order to enable "
+"parallel builds or tests."
+msgstr ""
+
+#: ../../../devel/build-system.rst:459
+msgid "Useful make targets"
+msgstr ""
+
+#: ../../../devel/build-system.rst:461
+msgid "``help``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:462
+msgid "Print a help message for the most common build targets."
+msgstr ""
+
+#: ../../../devel/build-system.rst:464
+msgid "``print-VAR``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:465
+msgid ""
+"Print the value of the variable VAR. Useful for debugging the build system."
+msgstr ""
+
+#: ../../../devel/build-system.rst:470
+msgid "Important files for the build system"
+msgstr ""
+
+#: ../../../devel/build-system.rst:473
+msgid "Statically defined files"
+msgstr ""
+
+#: ../../../devel/build-system.rst:475
+msgid ""
+"The following key files are statically defined in the source tree, with the "
+"rules needed to build QEMU. Their behaviour is influenced by a number of "
+"dynamically created files listed later."
+msgstr ""
+
+#: ../../../devel/build-system.rst:479
+msgid "``Makefile``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:480
+msgid ""
+"The main entry point used when invoking make to build all the components of "
+"QEMU. The default 'all' target will naturally result in the build of every "
+"component."
+msgstr ""
+
+#: ../../../devel/build-system.rst:484
+msgid "``*/meson.build``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:485
+msgid ""
+"The meson.build file in the root directory is the main entry point for the "
+"Meson build system, and it coordinates the configuration and build of all "
+"executables.  Build rules for various subdirectories are included in other "
+"meson.build files spread throughout the QEMU source tree."
+msgstr ""
+
+#: ../../../devel/build-system.rst:490
+msgid "``python/scripts/mkvenv.py``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:491
+msgid ""
+"A wrapper for the Python ``venv`` and ``distlib.scripts`` packages. It "
+"handles creating the virtual environment, creating scripts in ``pyvenv/"
+"bin``, and calling ``pip`` to install dependencies."
+msgstr ""
+
+#: ../../../devel/build-system.rst:495
+msgid "``tests/Makefile.include``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:496
+msgid "Rules for external test harnesses like the TCG tests."
+msgstr ""
+
+#: ../../../devel/build-system.rst:498
+msgid "``tests/docker/Makefile.include``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:499
+msgid ""
+"Rules for Docker tests. Like ``tests/Makefile.include``, this file is "
+"included directly by the top level Makefile, anything defined in this file "
+"will influence the entire build system."
+msgstr ""
+
+#: ../../../devel/build-system.rst:503
+msgid "``tests/vm/Makefile.include``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:504
+msgid ""
+"Rules for VM-based tests. Like ``tests/Makefile.include``, this file is "
+"included directly by the top level Makefile, anything defined in this file "
+"will influence the entire build system."
+msgstr ""
+
+#: ../../../devel/build-system.rst:509
+msgid "Dynamically created files"
+msgstr ""
+
+#: ../../../devel/build-system.rst:511
+msgid ""
+"The following files are generated at run-time in order to control the "
+"behaviour of the Makefiles. This avoids the need for QEMU makefiles to go "
+"through any pre-processing as seen with autotools, where configure generates "
+"``Makefile`` from ``Makefile.in``."
+msgstr ""
+
+#: ../../../devel/build-system.rst:516
+msgid "Built by configure:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:518
+msgid "``config-host.mak``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:519
+msgid ""
+"When configure has determined the characteristics of the build host it will "
+"write the paths to various tools to this file, for use in ``Makefile`` and "
+"to a smaller extent ``meson.build``."
+msgstr ""
+
+#: ../../../devel/build-system.rst:523
+msgid ""
+"``config-host.mak`` is also used as a dependency checking mechanism. If make "
+"sees that the modification timestamp on configure is newer than that on "
+"``config-host.mak``, then configure will be re-run."
+msgstr ""
+
+#: ../../../devel/build-system.rst:527
+msgid "``config-meson.cross``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:529
+msgid ""
+"A Meson \"cross file\" (or native file) used to communicate the paths to the "
+"toolchain and other configuration options."
+msgstr ""
+
+#: ../../../devel/build-system.rst:532
+msgid "``config.status``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:534
+msgid ""
+"A small shell script that will invoke configure again with the same "
+"environment variables that were set during the first run.  It's used to "
+"rerun configure after changes to the source code, but it can also be "
+"inspected manually to check the contents of the environment."
+msgstr ""
+
+#: ../../../devel/build-system.rst:539
+msgid "``Makefile.prereqs``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:541
+msgid ""
+"A set of Makefile dependencies that order the build and execution of "
+"firmware and tests after the container images and emulators that they need."
+msgstr ""
+
+#: ../../../devel/build-system.rst:545
+msgid ""
+"``pc-bios/*/config.mak``, ``tests/tcg/config-host.mak``, ``tests/tcg/*/"
+"config-target.mak``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:547
+msgid ""
+"Configuration variables used to build the firmware and TCG tests, including "
+"paths to cross compilation toolchains."
+msgstr ""
+
+#: ../../../devel/build-system.rst:550
+msgid "``pyvenv``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:552
+msgid ""
+"A Python virtual environment that is used for all Python code running during "
+"the build.  Using a virtual environment ensures that even code that is run "
+"via ``sphinx-build``, ``meson`` etc. uses the same interpreter and packages."
+msgstr ""
+
+#: ../../../devel/build-system.rst:557
+msgid "Built by Meson:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:559
+msgid "``config-host.h``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:560
+msgid ""
+"Used by C code to determine the properties of the build environment and the "
+"set of enabled features for the entire build."
+msgstr ""
+
+#: ../../../devel/build-system.rst:563
+msgid "``${TARGET-NAME}-config-devices.mak``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:564
+msgid ""
+"TARGET-NAME is the name of a system emulator. The file is generated by Meson "
+"using files under ``configs/devices`` as input."
+msgstr ""
+
+#: ../../../devel/build-system.rst:567
+msgid "``${TARGET-NAME}-config-target.mak``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:568
+msgid ""
+"TARGET-NAME is the name of a system or usermode emulator. The file is "
+"generated by Meson using files under ``configs/targets`` as input."
+msgstr ""
+
+#: ../../../devel/build-system.rst:571
+msgid "``$TARGET_NAME-config-target.h``, ``$TARGET_NAME-config-devices.h``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:572
+msgid ""
+"Used by C code to determine the properties and enabled features for each "
+"target.  enabled.  They are generated from the contents of the corresponding "
+"``*.mak`` files using Meson's ``configure_file()`` function; each target can "
+"include them using the ``CONFIG_TARGET`` and ``CONFIG_DEVICES`` macro "
+"respectively."
+msgstr ""
+
+#: ../../../devel/build-system.rst:578
+msgid "``build.ninja``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:579
+msgid "The build rules."
+msgstr ""
+
+#: ../../../devel/build-system.rst:582
+msgid "Built by Makefile:"
+msgstr ""
+
+#: ../../../devel/build-system.rst:584
+msgid "``Makefile.ninja``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:585
+msgid ""
+"A Makefile include that bridges to ninja for the actual build.  The Makefile "
+"is mostly a list of targets that Meson included in build.ninja."
+msgstr ""
+
+#: ../../../devel/build-system.rst:588
+msgid "``Makefile.mtest``"
+msgstr ""
+
+#: ../../../devel/build-system.rst:589
+msgid ""
+"The Makefile definitions that let \"make check\" run tests defined in meson."
+"build.  The rules are produced from Meson's JSON description of tests "
+"(obtained with \"meson introspect --tests\") through the script scripts/"
+"mtest2make.py."
+msgstr ""

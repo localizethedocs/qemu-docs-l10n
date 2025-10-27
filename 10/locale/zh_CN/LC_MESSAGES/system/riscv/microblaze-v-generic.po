@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/riscv/microblaze-v-generic.rst:2
+msgid "Microblaze-V generic board (``amd-microblaze-v-generic``)"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:3
+msgid ""
+"The AMD MicroBlaze™ V processor is a soft-core RISC-V processor IP for AMD "
+"adaptive SoCs and FPGAs. The MicroBlaze™ V processor is based on the 32-bit "
+"(or 64-bit) RISC-V instruction set architecture (ISA) and contains "
+"interfaces compatible with the classic MicroBlaze™ V processor (i.e it is a "
+"drop in replacement for the classic MicroBlaze™ processor in existing RTL "
+"designs). More information can be found in below document."
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:10
+msgid ""
+"https://docs.amd.com/r/en-US/ug1629-microblaze-v-user-guide/MicroBlaze-V-"
+"Architecture"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:12
+msgid ""
+"The MicroBlaze™ V generic board in QEMU has following supported devices:"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:14
+msgid "timer"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:15
+msgid "uartlite"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:16
+msgid "uart16550"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:17
+msgid "emaclite"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:18
+msgid "timer2"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:19
+msgid "axi emac"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:20
+msgid "axi dma"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:22
+msgid "The MicroBlaze™ V core in QEMU has the following configuration:"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:24
+msgid "RV32I base integer instruction set"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:25
+msgid "\"Zicsr\" Control and Status register instructions"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:26
+msgid "\"Zifencei\" instruction-fetch"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:27
+msgid "Extensions: m, a, f, c"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:30
+msgid "Running"
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:31
+msgid ""
+"Below is an example command line for launching mainline U-boot "
+"(xilinx_mbv32_defconfig) on the Microblaze-V generic board."
+msgstr ""
+
+#: ../../../system/riscv/microblaze-v-generic.rst:34
+msgid ""
+"$ qemu-system-riscv32 -M amd-microblaze-v-generic \\\n"
+"  -display none \\\n"
+"  -device loader,addr=0x80000000,file=u-boot-spl.bin,cpu-num=0 \\\n"
+"  -device loader,addr=0x80200000,file=u-boot.img \\\n"
+"  -serial mon:stdio \\\n"
+"  -device loader,addr=0x83000000,file=system.dtb \\\n"
+"  -m 2g"
+msgstr ""
