@@ -1,0 +1,510 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../user/main.rst:2
+msgid "QEMU User space emulator"
+msgstr ""
+
+#: ../../../user/main.rst:5
+msgid "Supported Operating Systems"
+msgstr ""
+
+#: ../../../user/main.rst:7
+msgid "The following OS are supported in user space emulation:"
+msgstr ""
+
+#: ../../../user/main.rst:9
+msgid "Linux (referred as qemu-linux-user)"
+msgstr ""
+
+#: ../../../user/main.rst:11
+msgid "BSD (referred as qemu-bsd-user)"
+msgstr ""
+
+#: ../../../user/main.rst:14
+msgid "Features"
+msgstr ""
+
+#: ../../../user/main.rst:16
+msgid "QEMU user space emulation has the following notable features:"
+msgstr ""
+
+#: ../../../user/main.rst:18
+msgid "**System call translation:**"
+msgstr ""
+
+#: ../../../user/main.rst:19
+msgid ""
+"QEMU includes a generic system call translator. This means that the "
+"parameters of the system calls can be converted to fix endianness and 32/64-"
+"bit mismatches between hosts and targets. IOCTLs can be converted too."
+msgstr ""
+
+#: ../../../user/main.rst:24
+msgid "**POSIX signal handling:**"
+msgstr ""
+
+#: ../../../user/main.rst:25
+msgid ""
+"QEMU can redirect to the running program all signals coming from the host "
+"(such as ``SIGALRM``), as well as synthesize signals from virtual CPU "
+"exceptions (for example ``SIGFPE`` when the program executes a division by "
+"zero)."
+msgstr ""
+
+#: ../../../user/main.rst:30
+msgid ""
+"QEMU relies on the host kernel to emulate most signal system calls, for "
+"example to emulate the signal mask. On Linux, QEMU supports both normal and "
+"real-time signals."
+msgstr ""
+
+#: ../../../user/main.rst:34
+msgid "**Threading:**"
+msgstr ""
+
+#: ../../../user/main.rst:35
+msgid ""
+"On Linux, QEMU can emulate the ``clone`` syscall and create a real host "
+"thread (with a separate virtual CPU) for each emulated thread. Note that not "
+"all targets currently emulate atomic operations correctly. x86 and Arm use a "
+"global lock in order to preserve their semantics."
+msgstr ""
+
+#: ../../../user/main.rst:41
+msgid ""
+"QEMU was conceived so that ultimately it can emulate itself. Although it is "
+"not very useful, it is an important test to show the power of the emulator."
+msgstr ""
+
+#: ../../../user/main.rst:46
+msgid "Linux User space emulator"
+msgstr ""
+
+#: ../../../user/main.rst:49 ../../../user/main.rst:245
+msgid "Quick Start"
+msgstr ""
+
+#: ../../../user/main.rst:51
+msgid ""
+"In order to launch a Linux process, QEMU needs the process executable itself "
+"and all the target (x86) dynamic libraries used by it."
+msgstr ""
+
+#: ../../../user/main.rst:54
+msgid ""
+"On x86, you can just try to launch any process by using the native "
+"libraries::"
+msgstr ""
+
+#: ../../../user/main.rst:57
+msgid "qemu-i386 -L / /bin/ls"
+msgstr ""
+
+#: ../../../user/main.rst:59
+msgid ""
+"``-L /`` tells that the x86 dynamic linker must be searched with a ``/`` "
+"prefix."
+msgstr ""
+
+#: ../../../user/main.rst:62
+msgid ""
+"Since QEMU is also a linux process, you can launch QEMU with QEMU (NOTE: you "
+"can only do that if you compiled QEMU from the sources)::"
+msgstr ""
+
+#: ../../../user/main.rst:65
+msgid "qemu-i386 -L / qemu-i386 -L / /bin/ls"
+msgstr ""
+
+#: ../../../user/main.rst:67
+msgid ""
+"On non x86 CPUs, you need first to download at least an x86 glibc (``qemu-"
+"runtime-i386-XXX-.tar.gz`` on the QEMU web page). Ensure that "
+"``LD_LIBRARY_PATH`` is not set::"
+msgstr ""
+
+#: ../../../user/main.rst:71
+msgid "unset LD_LIBRARY_PATH"
+msgstr ""
+
+#: ../../../user/main.rst:73
+msgid "Then you can launch the precompiled ``ls`` x86 executable::"
+msgstr ""
+
+#: ../../../user/main.rst:75
+msgid "qemu-i386 tests/i386/ls"
+msgstr ""
+
+#: ../../../user/main.rst:77
+msgid ""
+"You can look at ``scripts/qemu-binfmt-conf.sh`` so that QEMU is "
+"automatically launched by the Linux kernel when you try to launch x86 "
+"executables. It requires the ``binfmt_misc`` module in the Linux kernel."
+msgstr ""
+
+#: ../../../user/main.rst:82
+msgid ""
+"The x86 version of QEMU is also included. You can try weird things such as::"
+msgstr ""
+
+#: ../../../user/main.rst:85
+msgid ""
+"qemu-i386 /usr/local/qemu-i386/bin/qemu-i386 \\\n"
+"          /usr/local/qemu-i386/bin/ls-i386"
+msgstr ""
+
+#: ../../../user/main.rst:89
+msgid "Wine launch"
+msgstr ""
+
+#: ../../../user/main.rst:91
+msgid ""
+"Ensure that you have a working QEMU with the x86 glibc distribution (see "
+"previous section). In order to verify it, you must be able to do::"
+msgstr ""
+
+#: ../../../user/main.rst:95
+msgid "qemu-i386 /usr/local/qemu-i386/bin/ls-i386"
+msgstr ""
+
+#: ../../../user/main.rst:97
+msgid ""
+"Download the binary x86 Wine install (``qemu-XXX-i386-wine.tar.gz`` on the "
+"QEMU web page)."
+msgstr ""
+
+#: ../../../user/main.rst:100
+msgid ""
+"Configure Wine on your account. Look at the provided script ``/usr/local/"
+"qemu-i386/bin/wine-conf.sh``. Your previous ``${HOME}/.wine`` directory is "
+"saved to ``${HOME}/.wine.org``."
+msgstr ""
+
+#: ../../../user/main.rst:104
+msgid "Then you can try the example ``putty.exe``::"
+msgstr ""
+
+#: ../../../user/main.rst:106
+msgid ""
+"qemu-i386 /usr/local/qemu-i386/wine/bin/wine \\\n"
+"          /usr/local/qemu-i386/wine/c/Program\\ Files/putty.exe"
+msgstr ""
+
+#: ../../../user/main.rst:110 ../../../user/main.rst:256
+msgid "Command line options"
+msgstr ""
+
+#: ../../../user/main.rst:114
+msgid ""
+"qemu-i386 [-h] [-d] [-L path] [-s size] [-cpu model] [-g port] [-B offset] [-"
+"R size] program [arguments...]"
+msgstr ""
+
+#: ../../../user/main.rst:116 ../../../user/main.rst:262
+msgid "``-h``"
+msgstr ""
+
+#: ../../../user/main.rst:117 ../../../user/main.rst:263
+msgid "Print the help"
+msgstr ""
+
+#: ../../../user/main.rst:119 ../../../user/main.rst:265
+msgid "``-L path``"
+msgstr ""
+
+#: ../../../user/main.rst:120
+msgid "Set the x86 elf interpreter prefix (default=/usr/local/qemu-i386)"
+msgstr ""
+
+#: ../../../user/main.rst:122 ../../../user/main.rst:268
+msgid "``-s size``"
+msgstr ""
+
+#: ../../../user/main.rst:123
+msgid "Set the x86 stack size in bytes (default=524288)"
+msgstr ""
+
+#: ../../../user/main.rst:125
+msgid "``-cpu model``"
+msgstr ""
+
+#: ../../../user/main.rst:126
+msgid "Select CPU model (-cpu help for list and additional feature selection)"
+msgstr ""
+
+#: ../../../user/main.rst:129 ../../../user/main.rst:275
+msgid "``-E var=value``"
+msgstr ""
+
+#: ../../../user/main.rst:130 ../../../user/main.rst:276
+msgid "Set environment var to value."
+msgstr ""
+
+#: ../../../user/main.rst:132 ../../../user/main.rst:278
+msgid "``-U var``"
+msgstr ""
+
+#: ../../../user/main.rst:133 ../../../user/main.rst:279
+msgid "Remove var from the environment."
+msgstr ""
+
+#: ../../../user/main.rst:135
+msgid "``-B offset``"
+msgstr ""
+
+#: ../../../user/main.rst:136
+msgid ""
+"Offset guest address by the specified number of bytes. This is useful when "
+"the address region required by guest applications is reserved on the host. "
+"This option is currently only supported on some hosts."
+msgstr ""
+
+#: ../../../user/main.rst:140
+msgid "``-R size``"
+msgstr ""
+
+#: ../../../user/main.rst:141
+msgid ""
+"Pre-allocate a guest virtual address space of the given size (in bytes). \\"
+"\"G\\\", \\\"M\\\", and \\\"k\\\" suffixes may be used when specifying the "
+"size."
+msgstr ""
+
+#: ../../../user/main.rst:145 ../../../user/main.rst:285
+msgid "Debug options:"
+msgstr ""
+
+#: ../../../user/main.rst:147 ../../../user/main.rst:287
+msgid "``-d item1,...``"
+msgstr ""
+
+#: ../../../user/main.rst:148 ../../../user/main.rst:288
+msgid ""
+"Activate logging of the specified items (use '-d help' for a list of log "
+"items)"
+msgstr ""
+
+#: ../../../user/main.rst:151 ../../../user/main.rst:291
+msgid "``-p pagesize``"
+msgstr ""
+
+#: ../../../user/main.rst:152 ../../../user/main.rst:292
+msgid "Act as if the host page size was 'pagesize' bytes"
+msgstr ""
+
+#: ../../../user/main.rst:154
+msgid "``-g port``"
+msgstr ""
+
+#: ../../../user/main.rst:155
+msgid "Wait gdb connection to port"
+msgstr ""
+
+#: ../../../user/main.rst:157 ../../../user/main.rst:294
+msgid "``-singlestep``"
+msgstr ""
+
+#: ../../../user/main.rst:158 ../../../user/main.rst:295
+msgid "Run the emulation in single step mode."
+msgstr ""
+
+#: ../../../user/main.rst:160
+msgid "Environment variables:"
+msgstr ""
+
+#: ../../../user/main.rst:162
+msgid "QEMU_STRACE"
+msgstr ""
+
+#: ../../../user/main.rst:163
+msgid ""
+"Print system calls and arguments similar to the 'strace' program (NOTE: the "
+"actual 'strace' program will not work because the user space emulator hasn't "
+"implemented ptrace). At the moment this is incomplete. All system calls that "
+"don't have a specific argument format are printed with information for six "
+"arguments. Many flag-style arguments don't have decoders and will show up as "
+"numbers."
+msgstr ""
+
+#: ../../../user/main.rst:171
+msgid "Other binaries"
+msgstr ""
+
+#: ../../../user/main.rst:173
+msgid "user mode (Alpha) ``qemu-alpha`` TODO."
+msgstr ""
+
+#: ../../../user/main.rst:176
+msgid "user mode (Arm) ``qemu-armeb`` TODO."
+msgstr ""
+
+#: ../../../user/main.rst:179
+msgid ""
+"user mode (Arm) ``qemu-arm`` is also capable of running Arm \\\"Angel\\\" "
+"semihosted ELF binaries (as implemented by the arm-elf and arm-eabi Newlib/"
+"GDB configurations), and arm-uclinux bFLT format binaries."
+msgstr ""
+
+#: ../../../user/main.rst:184
+msgid ""
+"user mode (ColdFire) user mode (M68K) ``qemu-m68k`` is capable of running "
+"semihosted binaries using the BDM (m5xxx-ram-hosted.ld) or m68k-sim (sim.ld) "
+"syscall interfaces, and coldfire uClinux bFLT format binaries."
+msgstr ""
+
+#: ../../../user/main.rst:190
+msgid "The binary format is detected automatically."
+msgstr ""
+
+#: ../../../user/main.rst:192
+msgid "user mode (Cris) ``qemu-cris`` TODO."
+msgstr ""
+
+#: ../../../user/main.rst:195
+msgid "user mode (i386) ``qemu-i386`` TODO. ``qemu-x86_64`` TODO."
+msgstr ""
+
+#: ../../../user/main.rst:198
+msgid "user mode (Microblaze) ``qemu-microblaze`` TODO."
+msgstr ""
+
+#: ../../../user/main.rst:201
+msgid ""
+"user mode (MIPS) ``qemu-mips`` executes 32-bit big endian MIPS binaries "
+"(MIPS O32 ABI)."
+msgstr ""
+
+#: ../../../user/main.rst:204
+msgid ""
+"``qemu-mipsel`` executes 32-bit little endian MIPS binaries (MIPS O32 ABI)."
+msgstr ""
+
+#: ../../../user/main.rst:207
+msgid ""
+"``qemu-mips64`` executes 64-bit big endian MIPS binaries (MIPS N64 ABI)."
+msgstr ""
+
+#: ../../../user/main.rst:209
+msgid ""
+"``qemu-mips64el`` executes 64-bit little endian MIPS binaries (MIPS N64 ABI)."
+msgstr ""
+
+#: ../../../user/main.rst:212
+msgid ""
+"``qemu-mipsn32`` executes 32-bit big endian MIPS binaries (MIPS N32 ABI)."
+msgstr ""
+
+#: ../../../user/main.rst:215
+msgid ""
+"``qemu-mipsn32el`` executes 32-bit little endian MIPS binaries (MIPS N32 "
+"ABI)."
+msgstr ""
+
+#: ../../../user/main.rst:218
+msgid "user mode (NiosII) ``qemu-nios2`` TODO."
+msgstr ""
+
+#: ../../../user/main.rst:221
+msgid ""
+"user mode (PowerPC) ``qemu-ppc64abi32`` TODO. ``qemu-ppc64`` TODO. ``qemu-"
+"ppc`` TODO."
+msgstr ""
+
+#: ../../../user/main.rst:224
+msgid "user mode (SH4) ``qemu-sh4eb`` TODO. ``qemu-sh4`` TODO."
+msgstr ""
+
+#: ../../../user/main.rst:227
+msgid ""
+"user mode (SPARC) ``qemu-sparc`` can execute Sparc32 binaries (Sparc32 CPU, "
+"32 bit ABI)."
+msgstr ""
+
+#: ../../../user/main.rst:230
+msgid ""
+"``qemu-sparc32plus`` can execute Sparc32 and SPARC32PLUS binaries (Sparc64 "
+"CPU, 32 bit ABI)."
+msgstr ""
+
+#: ../../../user/main.rst:233
+msgid ""
+"``qemu-sparc64`` can execute some Sparc64 (Sparc64 CPU, 64 bit ABI) and "
+"SPARC32PLUS binaries (Sparc64 CPU, 32 bit ABI)."
+msgstr ""
+
+#: ../../../user/main.rst:237
+msgid "BSD User space emulator"
+msgstr ""
+
+#: ../../../user/main.rst:240
+msgid "BSD Status"
+msgstr ""
+
+#: ../../../user/main.rst:242
+msgid "target Sparc64 on Sparc64: Some trivial programs work."
+msgstr ""
+
+#: ../../../user/main.rst:247
+msgid ""
+"In order to launch a BSD process, QEMU needs the process executable itself "
+"and all the target dynamic libraries used by it."
+msgstr ""
+
+#: ../../../user/main.rst:250
+msgid ""
+"On Sparc64, you can just try to launch any process by using the native "
+"libraries::"
+msgstr ""
+
+#: ../../../user/main.rst:253
+msgid "qemu-sparc64 /bin/ls"
+msgstr ""
+
+#: ../../../user/main.rst:260
+msgid ""
+"qemu-sparc64 [-h] [-d] [-L path] [-s size] [-bsd type] program [arguments...]"
+msgstr ""
+
+#: ../../../user/main.rst:266
+msgid "Set the library root path (default=/)"
+msgstr ""
+
+#: ../../../user/main.rst:269
+msgid "Set the stack size in bytes (default=524288)"
+msgstr ""
+
+#: ../../../user/main.rst:271
+msgid "``-ignore-environment``"
+msgstr ""
+
+#: ../../../user/main.rst:272
+msgid ""
+"Start with an empty environment. Without this option, the initial "
+"environment is a copy of the caller's environment."
+msgstr ""
+
+#: ../../../user/main.rst:281
+msgid "``-bsd type``"
+msgstr ""
+
+#: ../../../user/main.rst:282
+msgid ""
+"Set the type of the emulated BSD Operating system. Valid values are FreeBSD, "
+"NetBSD and OpenBSD (default)."
+msgstr ""

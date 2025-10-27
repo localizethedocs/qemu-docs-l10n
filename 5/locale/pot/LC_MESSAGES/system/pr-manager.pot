@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/pr-manager.rst:3
+msgid "Persistent reservation managers"
+msgstr ""
+
+#: ../../../system/pr-manager.rst:5
+msgid ""
+"SCSI persistent reservations allow restricting access to block devices to "
+"specific initiators in a shared storage setup.  When implementing clustering "
+"of virtual machines, it is a common requirement for virtual machines to send "
+"persistent reservation SCSI commands.  However, the operating system "
+"restricts sending these commands to unprivileged programs because incorrect "
+"usage can disrupt regular operation of the storage fabric."
+msgstr ""
+
+#: ../../../system/pr-manager.rst:13
+msgid ""
+"For this reason, QEMU's SCSI passthrough devices, ``scsi-block`` and ``scsi-"
+"generic`` (both are only available on Linux) can delegate implementation of "
+"persistent reservations to a separate object, the \"persistent reservation "
+"manager\".  Only PERSISTENT RESERVE OUT and PERSISTENT RESERVE IN commands "
+"are passed to the persistent reservation manager object; other commands are "
+"processed by QEMU as usual."
+msgstr ""
+
+#: ../../../system/pr-manager.rst:22
+msgid "Defining a persistent reservation manager"
+msgstr ""
+
+#: ../../../system/pr-manager.rst:24
+msgid ""
+"A persistent reservation manager is an instance of a subclass of the \"pr-"
+"manager\" QOM class."
+msgstr ""
+
+#: ../../../system/pr-manager.rst:27
+msgid ""
+"Right now only one subclass is defined, ``pr-manager-helper``, which "
+"forwards the commands to an external privileged helper program over Unix "
+"sockets.  The helper program only allows sending persistent reservation "
+"commands to devices for which QEMU has a file descriptor, so that QEMU will "
+"not be able to effect persistent reservations unless it has access to both "
+"the socket and the device."
+msgstr ""
+
+#: ../../../system/pr-manager.rst:34
+msgid ""
+"``pr-manager-helper`` has a single string property, ``path``, which accepts "
+"the path to the helper program's Unix socket.  For example, the following "
+"command line defines a ``pr-manager-helper`` object and attaches it to a "
+"SCSI passthrough device::"
+msgstr ""
+
+#: ../../../system/pr-manager.rst:39
+msgid ""
+"$ qemu-system-x86_64\n"
+"    -device virtio-scsi \\\n"
+"    -object pr-manager-helper,id=helper0,path=/var/run/qemu-pr-helper.sock\n"
+"    -drive if=none,id=hd,driver=raw,file.filename=/dev/sdb,file.pr-"
+"manager=helper0\n"
+"    -device scsi-block,drive=hd"
+msgstr ""
+
+#: ../../../system/pr-manager.rst:45
+msgid "Alternatively, using ``-blockdev``::"
+msgstr ""
+
+#: ../../../system/pr-manager.rst:47
+msgid ""
+"$ qemu-system-x86_64\n"
+"    -device virtio-scsi \\\n"
+"    -object pr-manager-helper,id=helper0,path=/var/run/qemu-pr-helper.sock\n"
+"    -blockdev node-name=hd,driver=raw,file.driver=host_device,file.filename=/"
+"dev/sdb,file.pr-manager=helper0\n"
+"    -device scsi-block,drive=hd"
+msgstr ""
+
+#: ../../../system/pr-manager.rst:53
+msgid ""
+"You will also need to ensure that the helper program :command:`qemu-pr-"
+"helper` is running, and that it has been set up to use the same socket "
+"filename as your QEMU commandline specifies. See the qemu-pr-helper "
+"documentation or manpage for further details."
+msgstr ""
+
+#: ../../../system/pr-manager.rst:61
+msgid "Multipath devices and persistent reservations"
+msgstr ""
+
+#: ../../../system/pr-manager.rst:63
+msgid ""
+"Proper support of persistent reservation for multipath devices requires "
+"communication with the multipath daemon, so that the reservation is "
+"registered and applied when a path is newly discovered or becomes online "
+"again.  :command:`qemu-pr-helper` can do this if the ``libmpathpersist`` "
+"library was available on the system at build time."
+msgstr ""
+
+#: ../../../system/pr-manager.rst:69
+msgid ""
+"As of August 2017, a reservation key must be specified in ``multipath.conf`` "
+"for ``multipathd`` to check for persistent reservation for newly discovered "
+"paths or reinstated paths.  The attribute can be added to the ``defaults`` "
+"section or the ``multipaths`` section; for example::"
+msgstr ""
+
+#: ../../../system/pr-manager.rst:74
+msgid ""
+"multipaths {\n"
+"    multipath {\n"
+"        wwid   XXXXXXXXXXXXXXXX\n"
+"        alias      yellow\n"
+"        reservation_key  0x123abc\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../system/pr-manager.rst:82
+msgid ""
+"Linking :program:`qemu-pr-helper` to ``libmpathpersist`` does not impede its "
+"usage on regular SCSI devices."
+msgstr ""
