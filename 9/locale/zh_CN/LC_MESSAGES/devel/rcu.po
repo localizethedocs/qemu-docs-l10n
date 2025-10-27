@@ -1,0 +1,637 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/rcu.rst:2
+msgid "Using RCU (Read-Copy-Update) for synchronization"
+msgstr ""
+
+#: ../../../devel/rcu.rst:4
+msgid ""
+"Read-copy update (RCU) is a synchronization mechanism that is used to "
+"protect read-mostly data structures.  RCU is very efficient and scalable on "
+"the read side (it is wait-free), and thus can make the read paths extremely "
+"fast."
+msgstr ""
+
+#: ../../../devel/rcu.rst:9
+msgid ""
+"RCU supports concurrency between a single writer and multiple readers, thus "
+"it is not used alone.  Typically, the write-side will use a lock to "
+"serialize multiple updates, but other approaches are possible (e.g., "
+"restricting updates to a single task).  In QEMU, when a lock is used, this "
+"will often be the \"iothread mutex\", also known as the \"big QEMU "
+"lock\" (BQL).  Also, restricting updates to a single task is done in QEMU "
+"using the \"bottom half\" API."
+msgstr ""
+
+#: ../../../devel/rcu.rst:17
+msgid ""
+"RCU is fundamentally a \"wait-to-finish\" mechanism.  The read side marks "
+"sections of code with \"critical sections\", and the update side will wait "
+"for the execution of all *currently running* critical sections before "
+"proceeding, or before asynchronously executing a callback."
+msgstr ""
+
+#: ../../../devel/rcu.rst:22
+msgid ""
+"The key point here is that only the currently running critical sections are "
+"waited for; critical sections that are started **after** the beginning of "
+"the wait do not extend the wait, despite running concurrently with the "
+"updater.  This is the reason why RCU is more scalable than, for example, "
+"reader-writer locks.  It is so much more scalable that the system will have "
+"a single instance of the RCU mechanism; a single mechanism can be used for "
+"an arbitrary number of \"things\", without having to worry about things such "
+"as contention or deadlocks."
+msgstr ""
+
+#: ../../../devel/rcu.rst:31
+msgid ""
+"How is this possible?  The basic idea is to split updates in two phases, "
+"\"removal\" and \"reclamation\".  During removal, we ensure that subsequent "
+"readers will not be able to get a reference to the old data.  After removal "
+"has completed, a critical section will not be able to access the old data.  "
+"Therefore, critical sections that begin after removal do not matter; as soon "
+"as all previous critical sections have finished, there cannot be any readers "
+"who hold references to the data structure, and these can now be safely "
+"reclaimed (e.g., freed or unref'ed)."
+msgstr ""
+
+#: ../../../devel/rcu.rst:40
+msgid "Here is a picture::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:42
+msgid ""
+"    thread 1                  thread 2                  thread 3\n"
+"-------------------    ------------------------    -------------------\n"
+"enter RCU crit.sec.\n"
+"       |                finish removal phase\n"
+"       |                begin wait\n"
+"       |                      |                    enter RCU crit.sec.\n"
+"exit RCU crit.sec             |                           |\n"
+"                        complete wait                     |\n"
+"                        begin reclamation phase           |\n"
+"                                                   exit RCU crit.sec."
+msgstr ""
+
+#: ../../../devel/rcu.rst:54
+msgid ""
+"Note how thread 3 is still executing its critical section when thread 2 "
+"starts reclaiming data.  This is possible, because the old version of the "
+"data structure was not accessible at the time thread 3 began executing that "
+"critical section."
+msgstr ""
+
+#: ../../../devel/rcu.rst:61
+msgid "RCU API"
+msgstr ""
+
+#: ../../../devel/rcu.rst:63
+msgid "The core RCU API is small:"
+msgstr ""
+
+#: ../../../devel/rcu.rst:65
+msgid "``void rcu_read_lock(void);``"
+msgstr ""
+
+#: ../../../devel/rcu.rst:66
+msgid ""
+"Used by a reader to inform the reclaimer that the reader is entering an RCU "
+"read-side critical section."
+msgstr ""
+
+#: ../../../devel/rcu.rst:69
+msgid "``void rcu_read_unlock(void);``"
+msgstr ""
+
+#: ../../../devel/rcu.rst:70
+msgid ""
+"Used by a reader to inform the reclaimer that the reader is exiting an RCU "
+"read-side critical section.  Note that RCU read-side critical sections may "
+"be nested and/or overlapping."
+msgstr ""
+
+#: ../../../devel/rcu.rst:74
+msgid "``void synchronize_rcu(void);``"
+msgstr ""
+
+#: ../../../devel/rcu.rst:75
+msgid ""
+"Blocks until all pre-existing RCU read-side critical sections on all threads "
+"have completed.  This marks the end of the removal phase and the beginning "
+"of reclamation phase."
+msgstr ""
+
+#: ../../../devel/rcu.rst:79
+msgid ""
+"Note that it would be valid for another update to come while "
+"``synchronize_rcu`` is running.  Because of this, it is better that the "
+"updater releases any locks it may hold before calling ``synchronize_rcu``.  "
+"If this is not possible (for example, because the updater is protected by "
+"the BQL), you can use ``call_rcu``."
+msgstr ""
+
+#: ../../../devel/rcu.rst:85
+msgid ""
+"``void call_rcu1(struct rcu_head * head, void (*func)(struct rcu_head "
+"*head));``"
+msgstr ""
+
+#: ../../../devel/rcu.rst:86
+msgid ""
+"This function invokes ``func(head)`` after all pre-existing RCU read-side "
+"critical sections on all threads have completed.  This marks the end of the "
+"removal phase, with func taking care asynchronously of the reclamation phase."
+msgstr ""
+
+#: ../../../devel/rcu.rst:91
+msgid ""
+"The ``foo`` struct needs to have an ``rcu_head`` structure added, perhaps as "
+"follows::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:94
+msgid ""
+"struct foo {\n"
+"    struct rcu_head rcu;\n"
+"    int a;\n"
+"    char b;\n"
+"    long c;\n"
+"};"
+msgstr ""
+
+#: ../../../devel/rcu.rst:101
+msgid ""
+"so that the reclaimer function can fetch the ``struct foo`` address and free "
+"it::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:104
+msgid ""
+"call_rcu1(&foo.rcu, foo_reclaim);\n"
+"\n"
+"void foo_reclaim(struct rcu_head *rp)\n"
+"{\n"
+"    struct foo *fp = container_of(rp, struct foo, rcu);\n"
+"    g_free(fp);\n"
+"}"
+msgstr ""
+
+#: ../../../devel/rcu.rst:112
+msgid ""
+"``call_rcu1`` is typically used via either the ``call_rcu`` or "
+"``g_free_rcu`` macros, which handle the common case where the ``rcu_head`` "
+"member is the first of the struct."
+msgstr ""
+
+#: ../../../devel/rcu.rst:116
+msgid "``void call_rcu(T *p, void (*func)(T *p), field-name);``"
+msgstr ""
+
+#: ../../../devel/rcu.rst:117
+msgid ""
+"If the ``struct rcu_head`` is the first field in the struct, you can use "
+"this macro instead of ``call_rcu1``."
+msgstr ""
+
+#: ../../../devel/rcu.rst:120
+msgid "``void g_free_rcu(T *p, field-name);``"
+msgstr ""
+
+#: ../../../devel/rcu.rst:121
+msgid ""
+"This is a special-case version of ``call_rcu`` where the callback function "
+"is ``g_free``. In the example given in ``call_rcu1``, one could have written "
+"simply::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:125
+msgid "g_free_rcu(&foo, rcu);"
+msgstr ""
+
+#: ../../../devel/rcu.rst:127
+msgid "``typeof(*p) qatomic_rcu_read(p);``"
+msgstr ""
+
+#: ../../../devel/rcu.rst:128
+msgid ""
+"``qatomic_rcu_read()`` is similar to ``qatomic_load_acquire()``, but it "
+"makes some assumptions on the code that calls it.  This allows a more "
+"optimized implementation."
+msgstr ""
+
+#: ../../../devel/rcu.rst:132
+msgid ""
+"``qatomic_rcu_read`` assumes that whenever a single RCU critical section "
+"reads multiple shared data, these reads are either data-dependent or need no "
+"ordering.  This is almost always the case when using RCU, because read-side "
+"critical sections typically navigate one or more pointers (the pointers that "
+"are changed on every update) until reaching a data structure of interest, "
+"and then read from there."
+msgstr ""
+
+#: ../../../devel/rcu.rst:140
+msgid ""
+"RCU read-side critical sections must use ``qatomic_rcu_read()`` to read "
+"data, unless concurrent writes are prevented by another synchronization "
+"mechanism."
+msgstr ""
+
+#: ../../../devel/rcu.rst:144
+msgid ""
+"Furthermore, RCU read-side critical sections should traverse the data "
+"structure in a single direction, opposite to the direction in which the "
+"updater initializes it."
+msgstr ""
+
+#: ../../../devel/rcu.rst:148
+msgid "``void qatomic_rcu_set(p, typeof(*p) v);``"
+msgstr ""
+
+#: ../../../devel/rcu.rst:149
+msgid ""
+"``qatomic_rcu_set()`` is similar to ``qatomic_store_release()``, though it "
+"also makes assumptions on the code that calls it in order to allow a more "
+"optimized implementation."
+msgstr ""
+
+#: ../../../devel/rcu.rst:153
+msgid ""
+"In particular, ``qatomic_rcu_set()`` suffices for synchronization with "
+"readers, if the updater never mutates a field within a data item that is "
+"already accessible to readers.  This is the case when initializing a new "
+"copy of the RCU-protected data structure; just ensure that initialization of "
+"``*p`` is carried out before ``qatomic_rcu_set()`` makes the data item "
+"visible to readers. If this rule is observed, writes will happen in the "
+"opposite order as reads in the RCU read-side critical sections (or if there "
+"is just one update), and there will be no need for other synchronization "
+"mechanism to coordinate the accesses."
+msgstr ""
+
+#: ../../../devel/rcu.rst:164
+msgid "The following APIs must be used before RCU is used in a thread:"
+msgstr ""
+
+#: ../../../devel/rcu.rst:166
+msgid "``void rcu_register_thread(void);``"
+msgstr ""
+
+#: ../../../devel/rcu.rst:167
+msgid ""
+"Mark a thread as taking part in the RCU mechanism.  Such a thread will have "
+"to report quiescent points regularly, either manually or through the "
+"``QemuCond``/``QemuSemaphore``/``QemuEvent`` APIs."
+msgstr ""
+
+#: ../../../devel/rcu.rst:171
+msgid "``void rcu_unregister_thread(void);``"
+msgstr ""
+
+#: ../../../devel/rcu.rst:172
+msgid ""
+"Mark a thread as not taking part anymore in the RCU mechanism. It is not a "
+"problem if such a thread reports quiescent points, either manually or by "
+"using the ``QemuCond``/``QemuSemaphore``/``QemuEvent`` APIs."
+msgstr ""
+
+#: ../../../devel/rcu.rst:177
+msgid ""
+"Note that these APIs are relatively heavyweight, and should **not** be "
+"nested."
+msgstr ""
+
+#: ../../../devel/rcu.rst:181
+msgid "Convenience macros"
+msgstr ""
+
+#: ../../../devel/rcu.rst:183
+msgid ""
+"Two macros are provided that automatically release the read lock at the end "
+"of the scope."
+msgstr ""
+
+#: ../../../devel/rcu.rst:186
+msgid "``RCU_READ_LOCK_GUARD()``"
+msgstr ""
+
+#: ../../../devel/rcu.rst:187
+msgid ""
+"Takes the lock and will release it at the end of the block it's used in."
+msgstr ""
+
+#: ../../../devel/rcu.rst:190
+msgid "``WITH_RCU_READ_LOCK_GUARD()  { code }``"
+msgstr ""
+
+#: ../../../devel/rcu.rst:191
+msgid "Is used at the head of a block to protect the code within the block."
+msgstr ""
+
+#: ../../../devel/rcu.rst:193
+msgid "Note that a ``goto`` out of the guarded block will also drop the lock."
+msgstr ""
+
+#: ../../../devel/rcu.rst:196
+msgid "Differences with Linux"
+msgstr ""
+
+#: ../../../devel/rcu.rst:198
+msgid ""
+"Waiting on a mutex is possible, though discouraged, within an RCU critical "
+"section.  This is because spinlocks are rarely (if ever) used in userspace "
+"programming; not allowing this would prevent upgrading an RCU read-side "
+"critical section to become an updater."
+msgstr ""
+
+#: ../../../devel/rcu.rst:203
+msgid ""
+"``qatomic_rcu_read`` and ``qatomic_rcu_set`` replace ``rcu_dereference`` and "
+"``rcu_assign_pointer``.  They take a **pointer** to the variable being "
+"accessed."
+msgstr ""
+
+#: ../../../devel/rcu.rst:206
+msgid ""
+"``call_rcu`` is a macro that has an extra argument (the name of the first "
+"field in the struct, which must be a struct ``rcu_head``), and expects the "
+"type of the callback's argument to be the type of the first argument. "
+"``call_rcu1`` is the same as Linux's ``call_rcu``."
+msgstr ""
+
+#: ../../../devel/rcu.rst:213
+msgid "RCU Patterns"
+msgstr ""
+
+#: ../../../devel/rcu.rst:215
+msgid ""
+"Many patterns using read-writer locks translate directly to RCU, with the "
+"advantages of higher scalability and deadlock immunity."
+msgstr ""
+
+#: ../../../devel/rcu.rst:218
+msgid ""
+"In general, RCU can be used whenever it is possible to create a new "
+"\"version\" of a data structure every time the updater runs.  This may sound "
+"like a very strict restriction, however:"
+msgstr ""
+
+#: ../../../devel/rcu.rst:222
+msgid ""
+"the updater does not mean \"everything that writes to a data structure\", "
+"but rather \"everything that involves a reclamation step\".  See the array "
+"example below"
+msgstr ""
+
+#: ../../../devel/rcu.rst:226
+msgid ""
+"in some cases, creating a new version of a data structure may actually be "
+"very cheap.  For example, modifying the \"next\" pointer of a singly linked "
+"list is effectively creating a new version of the list."
+msgstr ""
+
+#: ../../../devel/rcu.rst:230
+msgid "Here are some frequently-used RCU idioms that are worth noting."
+msgstr ""
+
+#: ../../../devel/rcu.rst:234
+msgid "RCU list processing"
+msgstr ""
+
+#: ../../../devel/rcu.rst:236
+msgid "TBD (not yet used in QEMU)"
+msgstr ""
+
+#: ../../../devel/rcu.rst:240
+msgid "RCU reference counting"
+msgstr ""
+
+#: ../../../devel/rcu.rst:242
+msgid ""
+"Because grace periods are not allowed to complete while there is an RCU read-"
+"side critical section in progress, the RCU read-side primitives may be used "
+"as a restricted reference-counting mechanism.  For example, consider the "
+"following code fragment::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:247
+msgid ""
+"rcu_read_lock();\n"
+"p = qatomic_rcu_read(&foo);\n"
+"/* do something with p. */\n"
+"rcu_read_unlock();"
+msgstr ""
+
+#: ../../../devel/rcu.rst:252
+msgid ""
+"The RCU read-side critical section ensures that the value of ``p`` remains "
+"valid until after the ``rcu_read_unlock()``.  In some sense, it is acquiring "
+"a reference to ``p`` that is later released when the critical section ends. "
+"The write side looks simply like this (with appropriate locking)::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:257
+msgid ""
+"qemu_mutex_lock(&foo_mutex);\n"
+"old = foo;\n"
+"qatomic_rcu_set(&foo, new);\n"
+"qemu_mutex_unlock(&foo_mutex);\n"
+"synchronize_rcu();\n"
+"free(old);"
+msgstr ""
+
+#: ../../../devel/rcu.rst:264
+msgid ""
+"If the processing cannot be done purely within the critical section, it is "
+"possible to combine this idiom with a \"real\" reference count::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:267
+msgid ""
+"rcu_read_lock();\n"
+"p = qatomic_rcu_read(&foo);\n"
+"foo_ref(p);\n"
+"rcu_read_unlock();\n"
+"/* do something with p. */\n"
+"foo_unref(p);"
+msgstr ""
+
+#: ../../../devel/rcu.rst:274
+msgid "The write side can be like this::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:276
+msgid ""
+"qemu_mutex_lock(&foo_mutex);\n"
+"old = foo;\n"
+"qatomic_rcu_set(&foo, new);\n"
+"qemu_mutex_unlock(&foo_mutex);\n"
+"synchronize_rcu();\n"
+"foo_unref(old);"
+msgstr ""
+
+#: ../../../devel/rcu.rst:283
+msgid "or with ``call_rcu``::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:285
+msgid ""
+"qemu_mutex_lock(&foo_mutex);\n"
+"old = foo;\n"
+"qatomic_rcu_set(&foo, new);\n"
+"qemu_mutex_unlock(&foo_mutex);\n"
+"call_rcu(foo_unref, old, rcu);"
+msgstr ""
+
+#: ../../../devel/rcu.rst:291
+msgid ""
+"In both cases, the write side only performs removal.  Reclamation happens "
+"when the last reference to a ``foo`` object is dropped. Using "
+"``synchronize_rcu()`` is undesirably expensive, because the last reference "
+"may be dropped on the read side.  Hence you can use ``call_rcu()`` instead::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:297
+msgid ""
+" foo_unref(struct foo *p) {\n"
+"    if (qatomic_fetch_dec(&p->refcount) == 1) {\n"
+"        call_rcu(foo_destroy, p, rcu);\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../devel/rcu.rst:304
+msgid "Note that the same idioms would be possible with reader/writer locks::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:307
+msgid ""
+"read_lock(&foo_rwlock);         write_mutex_lock(&foo_rwlock);\n"
+"p = foo;                        p = foo;\n"
+"/* do something with p. */      foo = new;\n"
+"read_unlock(&foo_rwlock);       free(p);\n"
+"                                write_mutex_unlock(&foo_rwlock);\n"
+"                                free(p);\n"
+"\n"
+"------------------------------------------------------------------\n"
+"\n"
+"read_lock(&foo_rwlock);         write_mutex_lock(&foo_rwlock);\n"
+"p = foo;                        old = foo;\n"
+"foo_ref(p);                     foo = new;\n"
+"read_unlock(&foo_rwlock);       foo_unref(old);\n"
+"/* do something with p. */      write_mutex_unlock(&foo_rwlock);\n"
+"read_lock(&foo_rwlock);\n"
+"foo_unref(p);\n"
+"read_unlock(&foo_rwlock);"
+msgstr ""
+
+#: ../../../devel/rcu.rst:325
+msgid ""
+"``foo_unref`` could use a mechanism such as bottom halves to move "
+"deallocation out of the write-side critical section."
+msgstr ""
+
+#: ../../../devel/rcu.rst:330
+msgid "RCU resizable arrays"
+msgstr ""
+
+#: ../../../devel/rcu.rst:332
+msgid ""
+"Resizable arrays can be used with RCU.  The expensive RCU synchronization "
+"(or ``call_rcu``) only needs to take place when the array is resized. The "
+"two items to take care of are:"
+msgstr ""
+
+#: ../../../devel/rcu.rst:336
+msgid ""
+"ensuring that the old version of the array is available between removal and "
+"reclamation;"
+msgstr ""
+
+#: ../../../devel/rcu.rst:339
+msgid ""
+"avoiding mismatches in the read side between the array data and the array "
+"size."
+msgstr ""
+
+#: ../../../devel/rcu.rst:342
+msgid ""
+"The first problem is avoided simply by not using ``realloc``.  Instead, each "
+"resize will allocate a new array and copy the old data into it. The second "
+"problem would arise if the size and the data pointers were two members of a "
+"larger struct::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:347
+msgid ""
+"struct mystuff {\n"
+"    ...\n"
+"    int data_size;\n"
+"    int data_alloc;\n"
+"    T   *data;\n"
+"    ...\n"
+"};"
+msgstr ""
+
+#: ../../../devel/rcu.rst:355
+msgid "Instead, we store the size of the array with the array itself::"
+msgstr ""
+
+#: ../../../devel/rcu.rst:357
+msgid ""
+"struct arr {\n"
+"    int size;\n"
+"    int alloc;\n"
+"    T   data[];\n"
+"};\n"
+"struct arr *global_array;\n"
+"\n"
+"read side:\n"
+"    rcu_read_lock();\n"
+"    struct arr *array = qatomic_rcu_read(&global_array);\n"
+"    x = i < array->size ? array->data[i] : -1;\n"
+"    rcu_read_unlock();\n"
+"    return x;\n"
+"\n"
+"write side (running under a lock):\n"
+"    if (global_array->size == global_array->alloc) {\n"
+"        /* Creating a new version.  */\n"
+"        new_array = g_malloc(sizeof(struct arr) +\n"
+"                             global_array->alloc * 2 * sizeof(T));\n"
+"        new_array->size = global_array->size;\n"
+"        new_array->alloc = global_array->alloc * 2;\n"
+"        memcpy(new_array->data, global_array->data,\n"
+"               global_array->alloc * sizeof(T));\n"
+"\n"
+"        /* Removal phase.  */\n"
+"        old_array = global_array;\n"
+"        qatomic_rcu_set(&global_array, new_array);\n"
+"        synchronize_rcu();\n"
+"\n"
+"        /* Reclamation phase.  */\n"
+"        free(old_array);\n"
+"    }"
+msgstr ""
+
+#: ../../../devel/rcu.rst:392
+msgid "References"
+msgstr ""
+
+#: ../../../devel/rcu.rst:394
+msgid "The `Linux kernel RCU documentation <https://docs.kernel.org/RCU/>`__"
+msgstr ""

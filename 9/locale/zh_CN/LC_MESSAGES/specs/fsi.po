@@ -1,0 +1,185 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/fsi.rst:3
+msgid "IBM's Flexible Service Interface (FSI)"
+msgstr ""
+
+#: ../../../specs/fsi.rst:5
+msgid ""
+"The QEMU FSI emulation implements hardware interfaces between ASPEED SOC, "
+"FSI master/slave and the end engine."
+msgstr ""
+
+#: ../../../specs/fsi.rst:8
+msgid ""
+"FSI is a point-to-point two wire interface which is capable of supporting "
+"distances of up to 4 meters. FSI interfaces have been used successfully for "
+"many years in IBM servers to attach IBM Flexible Support Processors(FSP) to "
+"CPUs and IBM ASICs."
+msgstr ""
+
+#: ../../../specs/fsi.rst:13
+msgid ""
+"FSI allows a service processor access to the internal buses of a host POWER "
+"processor to perform configuration or debugging. FSI has long existed in "
+"POWER processes and so comes with some baggage, including how it has been "
+"integrated into the ASPEED SoC."
+msgstr ""
+
+#: ../../../specs/fsi.rst:18
+msgid ""
+"Working backwards from the POWER processor, the fundamental pieces of "
+"interest for the implementation are: (see the `FSI specification`_ for more "
+"details)"
+msgstr ""
+
+#: ../../../specs/fsi.rst:21
+msgid ""
+"The Common FRU Access Macro (CFAM), an address space containing various "
+"\"engines\" that drive accesses on buses internal and external to the POWER "
+"chip. Examples include the SBEFIFO and I2C masters. The engines hang off of "
+"an internal Local Bus (LBUS) which is described by the CFAM configuration "
+"block."
+msgstr ""
+
+#: ../../../specs/fsi.rst:27
+msgid ""
+"The FSI slave: The slave is the terminal point of the FSI bus for FSI "
+"symbols addressed to it. Slaves can be cascaded off of one another. The "
+"slave's configuration registers appear in address space of the CFAM to which "
+"it is attached."
+msgstr ""
+
+#: ../../../specs/fsi.rst:32
+msgid ""
+"The FSI master: A controller in the platform service processor (e.g. BMC) "
+"driving CFAM engine accesses into the POWER chip. At the hardware level FSI "
+"is a bit-based protocol supporting synchronous and DMA-driven accesses of "
+"engines in a CFAM."
+msgstr ""
+
+#: ../../../specs/fsi.rst:37
+msgid ""
+"The On-Chip Peripheral Bus (OPB): A low-speed bus typically found in POWER "
+"processors. This now makes an appearance in the ASPEED SoC due to tight "
+"integration of the FSI master IP with the OPB, mainly the existence of an "
+"MMIO-mapping of the CFAM address straight onto a sub-region of the OPB "
+"address space."
+msgstr ""
+
+#: ../../../specs/fsi.rst:43
+msgid ""
+"An APB-to-OPB bridge enabling access to the OPB from the ARM core in the "
+"AST2600. Hardware limitations prevent the OPB from being directly mapped "
+"into APB, so all accesses are indirect through the bridge."
+msgstr ""
+
+#: ../../../specs/fsi.rst:47
+msgid ""
+"The LBUS is modelled to maintain the qdev bus hierarchy and to take "
+"advantages of the object model to automatically generate the CFAM "
+"configuration block. The configuration block presents engines in the order "
+"they are attached to the CFAM's LBUS. Engine implementations should subclass "
+"the LBusDevice and set the 'config' member of LBusDeviceClass to match the "
+"engine's type."
+msgstr ""
+
+#: ../../../specs/fsi.rst:53
+msgid ""
+"CFAM designs offer a lot of flexibility, for instance it is possible for a "
+"CFAM to be simultaneously driven from multiple FSI links. The modeling is "
+"not so complete; it's assumed that each CFAM is attached to a single FSI "
+"slave (as a consequence the CFAM subclasses the FSI slave)."
+msgstr ""
+
+#: ../../../specs/fsi.rst:58
+msgid ""
+"As for FSI, its symbols and wire-protocol are not modelled at all. This is "
+"not necessary to get FSI off the ground thanks to the mapping of the CFAM "
+"address space onto the OPB address space - the models follow this directly "
+"and map the CFAM memory region into the OPB's memory region."
+msgstr ""
+
+#: ../../../specs/fsi.rst:63
+msgid ""
+"The following commands start the ``rainier-bmc`` machine with built-in FSI "
+"model. There are no model specific arguments. Please check this document to "
+"learn more about Aspeed ``rainier-bmc`` machine: (:doc:`../../system/arm/"
+"aspeed`)"
+msgstr ""
+
+#: ../../../specs/fsi.rst:67
+msgid ""
+"qemu-system-arm -M rainier-bmc -nographic \\\n"
+"-kernel fitImage-linux.bin \\\n"
+"-dtb aspeed-bmc-ibm-rainier.dtb \\\n"
+"-initrd obmc-phosphor-initramfs.rootfs.cpio.xz \\\n"
+"-drive file=obmc-phosphor-image.rootfs.wic.qcow2,if=sd,index=2 \\\n"
+"-append \"rootwait console=ttyS4,115200n8 root=PARTLABEL=rofs-a\""
+msgstr ""
+
+#: ../../../specs/fsi.rst:76
+msgid "The implementation appears as following in the qemu device tree:"
+msgstr ""
+
+#: ../../../specs/fsi.rst:78
+msgid ""
+"(qemu) info qtree\n"
+"bus: main-system-bus\n"
+"  type System\n"
+"  ...\n"
+"  dev: aspeed.apb2opb, id \"\"\n"
+"    gpio-out \"sysbus-irq\" 1\n"
+"    mmio 000000001e79b000/0000000000001000\n"
+"    bus: opb.1\n"
+"      type opb\n"
+"      dev: fsi.master, id \"\"\n"
+"        bus: fsi.bus.1\n"
+"          type fsi.bus\n"
+"          dev: cfam.config, id \"\"\n"
+"          dev: cfam, id \"\"\n"
+"            bus: lbus.1\n"
+"              type lbus\n"
+"              dev: scratchpad, id \"\"\n"
+"                address = 0 (0x0)\n"
+"    bus: opb.0\n"
+"      type opb\n"
+"      dev: fsi.master, id \"\"\n"
+"        bus: fsi.bus.0\n"
+"          type fsi.bus\n"
+"          dev: cfam.config, id \"\"\n"
+"          dev: cfam, id \"\"\n"
+"            bus: lbus.0\n"
+"              type lbus\n"
+"              dev: scratchpad, id \"\"\n"
+"                address = 0 (0x0)"
+msgstr ""
+
+#: ../../../specs/fsi.rst:110
+msgid ""
+"pdbg is a simple application to allow debugging of the host POWER processors "
+"from the BMC. (see the `pdbg source repository`_ for more details)"
+msgstr ""
+
+#: ../../../specs/fsi.rst:113
+msgid ""
+"root@p10bmc:~# pdbg -a getcfam 0x0\n"
+"p0: 0x0 = 0xc0022d15"
+msgstr ""

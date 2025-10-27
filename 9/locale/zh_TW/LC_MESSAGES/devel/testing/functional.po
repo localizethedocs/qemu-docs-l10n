@@ -1,0 +1,547 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/testing/functional.rst:4
+msgid "Functional testing with Python"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:6
+msgid ""
+"The ``tests/functional`` directory hosts functional tests written in Python. "
+"They are usually higher level tests, and may interact with external "
+"resources and with various guest operating systems. The functional tests "
+"have initially evolved from the Avocado tests, so there is a lot of "
+"similarity to those tests here (see :ref:`checkavocado-ref` for details "
+"about the Avocado tests)."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:13
+msgid ""
+"The tests should be written in the style of the Python `unittest`_ "
+"framework, using stdio for the TAP protocol. The folder ``tests/functional/"
+"qemu_test`` provides classes (e.g. the ``QemuBaseTest``, ``QemuUserTest`` "
+"and the ``QemuSystemTest`` classes) and utility functions that help to get "
+"your test into the right shape, e.g. by replacing the 'stdout' python object "
+"to redirect the normal output of your test to stderr instead."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:20
+msgid ""
+"Note that if you don't use one of the QemuBaseTest based classes for your "
+"test, or if you spawn subprocesses from your test, you have to make sure "
+"that there is no TAP-incompatible output written to stdio, e.g. either by "
+"prefixing every line with a \"# \" to mark the output as a TAP comment, or e."
+"g. by capturing the stdout output of subprocesses (redirecting it to stderr "
+"is OK)."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:27
+msgid "Tests based on ``qemu_test.QemuSystemTest`` can easily:"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:29
+msgid ""
+"Customize the command line arguments given to the convenience ``self.vm`` "
+"attribute (a QEMUMachine instance)"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:32
+msgid ""
+"Interact with the QEMU monitor, send QMP commands and check their results"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:35
+msgid ""
+"Interact with the guest OS, using the convenience console device (which may "
+"be useful to assert the effectiveness and correctness of command line "
+"arguments or QMP commands)"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:39
+msgid ""
+"Download (and cache) remote data files, such as firmware and kernel images"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:43
+msgid "Running tests"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:45
+msgid "You can run the functional tests simply by executing:"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:47
+msgid "make check-functional"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:51
+msgid ""
+"It is also possible to run tests for a certain target only, for example the "
+"following line will only run the tests for the x86_64 target:"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:54
+msgid "make check-functional-x86_64"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:58
+msgid ""
+"To run a single test file without the meson test runner, you can also "
+"execute the file directly by specifying two environment variables first, the "
+"PYTHONPATH that has to include the python folder and the tests/functional "
+"folder of the source tree, and QEMU_TEST_QEMU_BINARY that has to point to "
+"the QEMU binary that should be used for the test. The current working "
+"directory should be your build folder. For example::"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:65
+msgid ""
+"$ export PYTHONPATH=../python:../tests/functional\n"
+"$ export QEMU_TEST_QEMU_BINARY=$PWD/qemu-system-x86_64\n"
+"$ pyvenv/bin/python3 ../tests/functional/test_file.py"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:69
+msgid ""
+"The test framework will automatically purge any scratch files created during "
+"the tests. If needing to debug a failed test, it is possible to keep these "
+"files around on disk by setting ```QEMU_TEST_KEEP_SCRATCH=1``` as an env "
+"variable.  Any preserved files will be deleted the next time the test is run "
+"without this variable set."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:76
+msgid "Overview"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:78
+msgid ""
+"The ``tests/functional/qemu_test`` directory provides the ``qemu_test`` "
+"Python module, containing the ``qemu_test.QemuSystemTest`` class. Here is a "
+"simple usage example:"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:82
+msgid ""
+"#!/usr/bin/env python3\n"
+"\n"
+"from qemu_test import QemuSystemTest\n"
+"\n"
+"class Version(QemuSystemTest):\n"
+"\n"
+"    def test_qmp_human_info_version(self):\n"
+"        self.vm.launch()\n"
+"        res = self.vm.cmd('human-monitor-command',\n"
+"                          command_line='info version')\n"
+"        self.assertRegex(res, r'^(\\d+\\.\\d+\\.\\d)')\n"
+"\n"
+"if __name__ == '__main__':\n"
+"    QemuSystemTest.main()"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:99
+msgid ""
+"By providing the \"hash bang\" line at the beginning of the script, marking "
+"the file as executable and by calling into QemuSystemTest.main(), the test "
+"can also be run stand-alone, without a test runner. OTOH when run via a test "
+"runner, the QemuSystemTest.main() function takes care of running the test "
+"functions in the right fassion (e.g. with TAP output that is required by the "
+"meson test runner)."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:107
+msgid "The ``qemu_test.QemuSystemTest`` base test class"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:109
+msgid ""
+"The ``qemu_test.QemuSystemTest`` class has a number of characteristics that "
+"are worth being mentioned."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:112
+msgid ""
+"First of all, it attempts to give each test a ready to use QEMUMachine "
+"instance, available at ``self.vm``.  Because many tests will tweak the QEMU "
+"command line, launching the QEMUMachine (by using ``self.vm.launch()``) is "
+"left to the test writer."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:117
+msgid ""
+"The base test class has also support for tests with more than one "
+"QEMUMachine. The way to get machines is through the ``self.get_vm()`` method "
+"which will return a QEMUMachine instance. The ``self.get_vm()`` method "
+"accepts arguments that will be passed to the QEMUMachine creation and also "
+"an optional ``name`` attribute so you can identify a specific machine and "
+"get it more than once through the tests methods. A simple and hypothetical "
+"example follows:"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:125
+msgid ""
+"from qemu_test import QemuSystemTest\n"
+"\n"
+"class MultipleMachines(QemuSystemTest):\n"
+"    def test_multiple_machines(self):\n"
+"        first_machine = self.get_vm()\n"
+"        second_machine = self.get_vm()\n"
+"        self.get_vm(name='third_machine').launch()\n"
+"\n"
+"        first_machine.launch()\n"
+"        second_machine.launch()\n"
+"\n"
+"        first_res = first_machine.cmd(\n"
+"            'human-monitor-command',\n"
+"            command_line='info version')\n"
+"\n"
+"        second_res = second_machine.cmd(\n"
+"            'human-monitor-command',\n"
+"            command_line='info version')\n"
+"\n"
+"        third_res = self.get_vm(name='third_machine').cmd(\n"
+"            'human-monitor-command',\n"
+"            command_line='info version')\n"
+"\n"
+"        self.assertEqual(first_res, second_res, third_res)"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:152
+msgid ""
+"At test \"tear down\", ``qemu_test.QemuSystemTest`` handles all the "
+"QEMUMachines shutdown."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:156
+msgid "QEMUMachine"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:158
+msgid ""
+"The QEMUMachine API is already widely used in the Python iotests, device-"
+"crash-test and other Python scripts.  It's a wrapper around the execution of "
+"a QEMU binary, giving its users:"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:162
+msgid ""
+"the ability to set command line arguments to be given to the QEMU binary"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:165
+msgid ""
+"a ready to use QMP connection and interface, which can be used to send "
+"commands and inspect its results, as well as asynchronous events"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:169
+msgid ""
+"convenience methods to set commonly used command line arguments in a more "
+"succinct and intuitive way"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:173
+msgid "QEMU binary selection"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:175
+msgid ""
+"The QEMU binary used for the ``self.vm`` QEMUMachine instance will primarily "
+"depend on the value of the ``qemu_bin`` class attribute. If it is not "
+"explicitly set by the test code, its default value will be the result the "
+"QEMU_TEST_QEMU_BINARY environment variable."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:181
+msgid "Debugging hung QEMU"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:183
+msgid ""
+"When test cases go wrong it may be helpful to debug a stalled QEMU process. "
+"While the QEMUMachine class owns the primary QMP monitor socket, it is "
+"possible to request a second QMP monitor be created by setting the "
+"``QEMU_TEST_QMP_BACKDOOR`` env variable to refer to a UNIX socket name. The "
+"``qmp-shell`` command can then be attached to the stalled QEMU to examine "
+"its live state."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:191
+msgid "Attribute reference"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:194
+msgid "QemuBaseTest"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:196
+msgid ""
+"The following attributes are available on any ``qemu_test.QemuBaseTest`` "
+"instance."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:200
+msgid "arch"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:202
+msgid "The target architecture of the QEMU binary."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:204
+msgid ""
+"Tests are also free to use this attribute value, for their own needs. A test "
+"may, for instance, use this value when selecting the architecture of a "
+"kernel or disk image to boot a VM with."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:209
+msgid "qemu_bin"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:211
+msgid ""
+"The preserved value of the ``QEMU_TEST_QEMU_BINARY`` environment variable."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:215
+msgid "QemuUserTest"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:217
+msgid ""
+"The QemuUserTest class can be used for running an executable via the "
+"usermode emulation binaries."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:221
+msgid "QemuSystemTest"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:223
+msgid ""
+"The QemuSystemTest class can be used for running tests via one of the qemu-"
+"system-* binaries."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:227
+msgid "vm"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:229
+msgid ""
+"A QEMUMachine instance, initially configured according to the given "
+"``qemu_bin`` parameter."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:233
+msgid "cpu"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:235
+msgid ""
+"The cpu model that will be set to all QEMUMachine instances created by the "
+"test."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:239
+msgid "machine"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:241
+msgid ""
+"The machine type that will be set to all QEMUMachine instances created by "
+"the test. By using the set_machine() function of the QemuSystemTest class to "
+"set this attribute, you can automatically check whether the machine is "
+"available to skip the test in case it is not built into the QEMU binary."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:248
+msgid "Asset handling"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:250
+msgid ""
+"Many functional tests download assets (e.g. Linux kernels, initrds, firmware "
+"images, etc.) from the internet to be able to run tests with them. This "
+"imposes additional challenges to the test framework."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:254
+msgid ""
+"First there is the the problem that some people might not have an "
+"unconstrained internet connection, so such tests should not be run by "
+"default when running ``make check``. To accomplish this situation, the tests "
+"that download files should only be added to the \"thorough\" speed mode in "
+"the meson.build file, while the \"quick\" speed mode is fine for functional "
+"tests that can be run without downloading files. ``make check`` then only "
+"runs the quick functional tests along with the other quick tests from the "
+"other test suites. If you choose to run only run ``make check-functional``, "
+"the \"thorough\" tests will be executed, too. And to run all functional "
+"tests along with the others, you can use something like::"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:266
+msgid "make -j$(nproc) check SPEED=thorough"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:268
+msgid ""
+"The second problem with downloading files from the internet are time "
+"constraints. The time for downloading files should not be taken into account "
+"when the test is running and the timeout of the test is ticking (since "
+"downloading can be very slow, depending on the network bandwidth). This "
+"problem is solved by downloading the assets ahead of time, before the tests "
+"are run. This pre-caching is done with the qemu_test.Asset class. To use it "
+"in your test, declare an asset in your test class with its URL and SHA256 "
+"checksum like this::"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:277
+msgid ""
+"ASSET_somename = (\n"
+"    ('https://www.qemu.org/assets/images/qemu_head_200.png'),\n"
+"    '34b74cad46ea28a2966c1d04e102510daf1fd73e6582b6b74523940d5da029dd')"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:281
+msgid ""
+"In your test function, you can then get the file name of the cached asset "
+"like this::"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:284
+msgid ""
+"def test_function(self):\n"
+"    file_path = self.ASSET_somename.fetch()"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:287
+msgid ""
+"The pre-caching will be done automatically when running ``make check-"
+"functional`` (but not when running e.g. ``make check-functional-<target>``). "
+"In case you just want to download the assets without running the tests, you "
+"can do so by running::"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:292
+msgid "make precache-functional"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:294
+msgid ""
+"The cache is populated in the ``~/.cache/qemu/download`` directory by "
+"default, but the location can be changed by setting the "
+"``QEMU_TEST_CACHE_DIR`` environment variable."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:299
+msgid "Skipping tests"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:301
+msgid ""
+"Since the test framework is based on the common Python unittest framework, "
+"you can use the usual Python decorators which allow for easily skipping "
+"tests running under certain conditions, for example, on the lack of a binary "
+"on the test system or when the running environment is a CI system. For "
+"further information about those decorators, please refer to:"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:307
+msgid ""
+"https://docs.python.org/3/library/unittest.html#skipping-tests-and-expected-"
+"failures"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:309
+msgid ""
+"While the conditions for skipping tests are often specifics of each one, "
+"there are recurring scenarios identified by the QEMU developers and the use "
+"of environment variables became a kind of standard way to enable/disable "
+"tests."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:313
+msgid "Here is a list of the most used variables:"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:316
+msgid "QEMU_TEST_ALLOW_LARGE_STORAGE"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:317
+msgid ""
+"Tests which are going to fetch or produce assets considered *large* are not "
+"going to run unless that ``QEMU_TEST_ALLOW_LARGE_STORAGE=1`` is exported on "
+"the environment."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:321
+msgid ""
+"The definition of *large* is a bit arbitrary here, but it usually means an "
+"asset which occupies at least 1GB of size on disk when uncompressed."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:325
+msgid "QEMU_TEST_ALLOW_UNTRUSTED_CODE"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:326
+msgid ""
+"There are tests which will boot a kernel image or firmware that can be "
+"considered not safe to run on the developer's workstation, thus they are "
+"skipped by default. The definition of *not safe* is also arbitrary but "
+"usually it means a blob which either its source or build process aren't "
+"public available."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:332
+msgid ""
+"You should export ``QEMU_TEST_ALLOW_UNTRUSTED_CODE=1`` on the environment in "
+"order to allow tests which make use of those kind of assets."
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:336
+msgid "QEMU_TEST_FLAKY_TESTS"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:337
+msgid ""
+"Some tests are not working reliably and thus are disabled by default. This "
+"includes tests that don't run reliably on GitLab's CI which usually expose "
+"real issues that are rarely seen on developer machines due to the "
+"constraints of the CI environment. If you encounter a similar situation then "
+"raise a bug and then mark the test as shown on the code snippet below:"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:344
+msgid ""
+"# See https://gitlab.com/qemu-project/qemu/-/issues/nnnn\n"
+"@skipUnless(os.getenv('QEMU_TEST_FLAKY_TESTS'), 'Test is unstable on "
+"GitLab')\n"
+"def test(self):\n"
+"    do_something()"
+msgstr ""
+
+#: ../../../devel/testing/functional.rst:351
+msgid ""
+"Tests should not live in this state forever and should either be fixed or "
+"eventually removed."
+msgstr ""
