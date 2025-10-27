@@ -1,0 +1,170 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/migration/virtio.rst:3
+msgid "Virtio device migration"
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:5
+msgid "Copyright 2015 IBM Corp."
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:7
+msgid ""
+"This work is licensed under the terms of the GNU GPL, version 2 or later.  "
+"See the COPYING file in the top-level directory."
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:10
+msgid ""
+"Saving and restoring the state of virtio devices is a bit of a twisty maze, "
+"for several reasons:"
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:13
+msgid "state is distributed between several parts:"
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:15
+msgid "virtio core, for common fields like features, number of queues, ..."
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:17
+msgid ""
+"virtio transport (pci, ccw, ...), for the different proxy devices and "
+"transport specific state (msix vectors, indicators, ...)"
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:20
+msgid ""
+"virtio device (net, blk, ...), for the different device types and their "
+"state (mac address, request queue, ...)"
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:23
+msgid ""
+"most fields are saved via the stream interface; subsequently, subsections "
+"have been added to make cross-version migration possible"
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:26
+msgid ""
+"This file attempts to document the current procedure and point out some "
+"caveats."
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:30
+msgid "Save state procedure"
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:34
+msgid ""
+"virtio core               virtio transport          virtio device\n"
+"-----------               ----------------          -------------\n"
+"\n"
+"                                                    save() function "
+"registered\n"
+"                                                    via VMState wrapper on\n"
+"                                                    device class\n"
+"virtio_save()                                       <----------\n"
+"             ------>      save_config()\n"
+"                          - save proxy device\n"
+"                          - save transport-specific\n"
+"                            device fields\n"
+"- save common device\n"
+"  fields\n"
+"- save common virtqueue\n"
+"  fields\n"
+"             ------>      save_queue()\n"
+"                          - save transport-specific\n"
+"                            virtqueue fields\n"
+"             ------>                               save_device()\n"
+"                                                   - save device-specific\n"
+"                                                     fields\n"
+"- save subsections\n"
+"  - device endianness,\n"
+"    if changed from\n"
+"    default endianness\n"
+"  - 64 bit features, if\n"
+"    any high feature bit\n"
+"    is set\n"
+"  - virtio-1 virtqueue\n"
+"    fields, if VERSION_1\n"
+"    is set"
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:67
+msgid "Load state procedure"
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:71
+msgid ""
+"virtio core               virtio transport          virtio device\n"
+"-----------               ----------------          -------------\n"
+"\n"
+"                                                    load() function "
+"registered\n"
+"                                                    via VMState wrapper on\n"
+"                                                    device class\n"
+"virtio_load()                                       <----------\n"
+"             ------>      load_config()\n"
+"                          - load proxy device\n"
+"                          - load transport-specific\n"
+"                            device fields\n"
+"- load common device\n"
+"  fields\n"
+"- load common virtqueue\n"
+"  fields\n"
+"             ------>      load_queue()\n"
+"                          - load transport-specific\n"
+"                            virtqueue fields\n"
+"- notify guest\n"
+"             ------>                               load_device()\n"
+"                                                   - load device-specific\n"
+"                                                     fields\n"
+"- load subsections\n"
+"  - device endianness\n"
+"  - 64 bit features\n"
+"  - virtio-1 virtqueue\n"
+"    fields\n"
+"- sanitize endianness\n"
+"- sanitize features\n"
+"- virtqueue index sanity\n"
+"  check\n"
+"                                                   - feature-dependent setup"
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:105
+msgid "Implications of this setup"
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:107
+msgid ""
+"Devices need to be careful in their state processing during load: The "
+"load_device() procedure is invoked by the core before subsections have been "
+"loaded. Any code that depends on information transmitted in subsections "
+"therefore has to be invoked in the device's load() function _after_ "
+"virtio_load() returned (like e.g. code depending on features)."
+msgstr ""
+
+#: ../../../devel/migration/virtio.rst:113
+msgid ""
+"Any extension of the state being migrated should be done in subsections "
+"added to the core for compatibility reasons. If transport or device specific "
+"state is added, core needs to invoke a callback from the new subsection."
+msgstr ""

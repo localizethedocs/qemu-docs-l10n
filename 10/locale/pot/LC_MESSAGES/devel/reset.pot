@@ -1,0 +1,567 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/reset.rst:4
+msgid "Reset in QEMU: the Resettable interface"
+msgstr ""
+
+#: ../../../devel/reset.rst:6
+msgid ""
+"The reset of qemu objects is handled using the resettable interface declared "
+"in ``include/hw/resettable.h``."
+msgstr ""
+
+#: ../../../devel/reset.rst:9
+msgid ""
+"This interface allows objects to be grouped (on a tree basis); so that the "
+"whole group can be reset consistently. Each individual member object does "
+"not have to care about others; in particular, problems of order (which "
+"object is reset first) are addressed."
+msgstr ""
+
+#: ../../../devel/reset.rst:14
+msgid ""
+"The main object types which implement this interface are DeviceClass and "
+"BusClass."
+msgstr ""
+
+#: ../../../devel/reset.rst:18
+msgid "Triggering reset"
+msgstr ""
+
+#: ../../../devel/reset.rst:20
+msgid ""
+"This section documents the APIs which \"users\" of a resettable object "
+"should use to control it. All resettable control functions must be called "
+"while holding the BQL."
+msgstr ""
+
+#: ../../../devel/reset.rst:24
+msgid ""
+"You can apply a reset to an object using ``resettable_assert_reset()``. You "
+"need to call ``resettable_release_reset()`` to release the object from "
+"reset. To instantly reset an object, without keeping it in reset state, just "
+"call ``resettable_reset()``. These functions take two parameters: a pointer "
+"to the object to reset and a reset type."
+msgstr ""
+
+#: ../../../devel/reset.rst:30
+msgid ""
+"The Resettable interface handles reset types with an enum ``ResetType``:"
+msgstr ""
+
+#: ../../../devel/reset.rst:32
+msgid "``RESET_TYPE_COLD``"
+msgstr ""
+
+#: ../../../devel/reset.rst:33
+msgid ""
+"Cold reset is supported by every resettable object. In QEMU, it means we "
+"reset to the initial state corresponding to the start of QEMU; this might "
+"differ from what is a real hardware cold reset. It differs from other resets "
+"(like warm or bus resets) which may keep certain parts untouched."
+msgstr ""
+
+#: ../../../devel/reset.rst:38
+msgid "``RESET_TYPE_SNAPSHOT_LOAD``"
+msgstr ""
+
+#: ../../../devel/reset.rst:39
+msgid ""
+"This is called for a reset which is being done to put the system into a "
+"clean state prior to loading a snapshot. (This corresponds to a reset with "
+"``SHUTDOWN_CAUSE_SNAPSHOT_LOAD``.) Almost all devices should treat this the "
+"same as ``RESET_TYPE_COLD``. The main exception is devices which have some "
+"non-deterministic state they want to reinitialize to a different value on "
+"each cold reset, such as RNG seed information, and which they must not "
+"reinitialize on a snapshot-load reset."
+msgstr ""
+
+#: ../../../devel/reset.rst:47
+msgid "``RESET_TYPE_WAKEUP``"
+msgstr ""
+
+#: ../../../devel/reset.rst:48
+msgid ""
+"If the machine supports waking up from a suspended state and needs to reset "
+"its devices during wake-up (from the ``MachineClass::wakeup()`` method), "
+"this reset type should be used for such a request. Devices can utilize this "
+"reset type to differentiate the reset requested during machine wake-up from "
+"other reset requests. For example, RAM content must not be lost during wake-"
+"up, and memory devices like virtio-mem that provide additional RAM must not "
+"reset such state during wake-ups, but might do so during cold resets. "
+"However, this reset type should not be used for wake-up detection, as not "
+"every machine type issues a device reset request during wake-up."
+msgstr ""
+
+#: ../../../devel/reset.rst:58
+msgid "``RESET_TYPE_S390_CPU_NORMAL``"
+msgstr ""
+
+#: ../../../devel/reset.rst:59
+msgid ""
+"This is only used for S390 CPU objects; it clears interrupts, stops "
+"processing, and clears the TLB, but does not touch register contents."
+msgstr ""
+
+#: ../../../devel/reset.rst:62
+msgid "``RESET_TYPE_S390_CPU_INITIAL``"
+msgstr ""
+
+#: ../../../devel/reset.rst:63
+msgid ""
+"This is only used for S390 CPU objects; it does everything "
+"``RESET_TYPE_S390_CPU_NORMAL`` does and also clears the PSW, prefix, FPC, "
+"timer and control registers. It does not touch gprs, fprs or acrs."
+msgstr ""
+
+#: ../../../devel/reset.rst:67
+msgid ""
+"Devices which implement reset methods must treat any unknown ``ResetType`` "
+"as equivalent to ``RESET_TYPE_COLD``; this will reduce the amount of "
+"existing code we need to change if we add more types in future."
+msgstr ""
+
+#: ../../../devel/reset.rst:71
+msgid ""
+"Calling ``resettable_reset()`` is equivalent to calling "
+"``resettable_assert_reset()`` then ``resettable_release_reset()``. It is "
+"possible to interleave multiple calls to these three functions. There may be "
+"several reset sources/controllers of a given object. The interface handles "
+"everything and the different reset controllers do not need to know anything "
+"about each others. The object will leave reset state only when each other "
+"controllers end their reset operation. This point is handled internally by "
+"maintaining a count of in-progress resets; it is crucial to call "
+"``resettable_release_reset()`` one time and only one time per "
+"``resettable_assert_reset()`` call."
+msgstr ""
+
+#: ../../../devel/reset.rst:82
+msgid ""
+"For now migration of a device or bus in reset is not supported. Care must be "
+"taken not to delay ``resettable_release_reset()`` after its "
+"``resettable_assert_reset()`` counterpart."
+msgstr ""
+
+#: ../../../devel/reset.rst:86
+msgid ""
+"Note that, since resettable is an interface, the API takes a simple Object "
+"as parameter. Still, it is a programming error to call a resettable function "
+"on a non-resettable object and it will trigger a run time assert error. "
+"Since most calls to resettable interface are done through base class "
+"functions, such an error is not likely to happen."
+msgstr ""
+
+#: ../../../devel/reset.rst:92
+msgid "For Devices and Buses, the following helper functions exist:"
+msgstr ""
+
+#: ../../../devel/reset.rst:94
+msgid "``device_cold_reset()``"
+msgstr ""
+
+#: ../../../devel/reset.rst:95
+msgid "``bus_cold_reset()``"
+msgstr ""
+
+#: ../../../devel/reset.rst:97
+msgid ""
+"These are simple wrappers around resettable_reset() function; they only cast "
+"the Device or Bus into an Object and pass the cold reset type. When possible "
+"prefer to use these functions instead of ``resettable_reset()``."
+msgstr ""
+
+#: ../../../devel/reset.rst:101
+msgid ""
+"Device and bus functions co-exist because there can be semantic differences "
+"between resetting a bus and resetting the controller bridge which owns it. "
+"For example, consider a SCSI controller. Resetting the controller puts all "
+"its registers back to what reset state was as well as reset everything on "
+"the SCSI bus, whereas resetting just the SCSI bus only resets everything "
+"that's on it but not the controller."
+msgstr ""
+
+#: ../../../devel/reset.rst:110
+msgid "Multi-phase mechanism"
+msgstr ""
+
+#: ../../../devel/reset.rst:112
+msgid "This section documents the internals of the resettable interface."
+msgstr ""
+
+#: ../../../devel/reset.rst:114
+msgid ""
+"The resettable interface uses a multi-phase system to relieve objects and "
+"machines from reset ordering problems. To address this, the reset operation "
+"of an object is split into three well defined phases."
+msgstr ""
+
+#: ../../../devel/reset.rst:118
+msgid ""
+"When resetting several objects (for example the whole machine at simulation "
+"startup), all first phases of all objects are executed, then all second "
+"phases and then all third phases."
+msgstr ""
+
+#: ../../../devel/reset.rst:122
+msgid "The three phases are:"
+msgstr ""
+
+#: ../../../devel/reset.rst:124
+msgid ""
+"The **enter** phase is executed when the object enters reset. It resets only "
+"local state of the object; it must not do anything that has a side-effect on "
+"other objects, such as raising or lowering a qemu_irq line or reading or "
+"writing guest memory."
+msgstr ""
+
+#: ../../../devel/reset.rst:129
+msgid ""
+"The **hold** phase is executed for entry into reset, once every object in "
+"the group which is being reset has had its *enter* phase executed. At this "
+"point devices can do actions that affect other objects."
+msgstr ""
+
+#: ../../../devel/reset.rst:133
+msgid ""
+"The **exit** phase is executed when the object leaves the reset state. "
+"Actions affecting other objects are permitted."
+msgstr ""
+
+#: ../../../devel/reset.rst:136
+msgid ""
+"As said in previous section, the interface maintains a count of reset. This "
+"count is used to ensure phases are executed only when required. *enter* and "
+"*hold* phases are executed only when asserting reset for the first time (if "
+"an object is already in reset state when calling "
+"``resettable_assert_reset()`` or ``resettable_reset()``, they are not "
+"executed). The *exit* phase is executed only when the last reset operation "
+"ends. Therefore the object does not need to care how many of reset "
+"controllers it has and how many of them have started a reset."
+msgstr ""
+
+#: ../../../devel/reset.rst:146
+msgid ""
+"DMA capable devices are expected to cancel all outstanding DMA operations "
+"during either 'enter' or 'hold' phases. IOMMUs are expected to reset during "
+"the 'exit' phase and this sequencing makes sure no outstanding DMA request "
+"will fault."
+msgstr ""
+
+#: ../../../devel/reset.rst:153
+msgid "Handling reset in a resettable object"
+msgstr ""
+
+#: ../../../devel/reset.rst:155
+msgid ""
+"This section documents the APIs that an implementation of a resettable "
+"object must provide and what functions it has access to. It is intended for "
+"people who want to implement or convert a class which has the resettable "
+"interface; for example when specializing an existing device or bus."
+msgstr ""
+
+#: ../../../devel/reset.rst:161 ../../../devel/reset.rst:278
+msgid "Methods to implement"
+msgstr ""
+
+#: ../../../devel/reset.rst:163
+msgid ""
+"Three methods should be defined or left empty. Each method corresponds to a "
+"phase of the reset; they are name ``phases.enter()``, ``phases.hold()`` and "
+"``phases.exit()``. They all take the object as parameter. The *enter* method "
+"also take the reset type as second parameter."
+msgstr ""
+
+#: ../../../devel/reset.rst:168
+msgid ""
+"When extending an existing class, these methods may need to be extended too. "
+"The ``resettable_class_set_parent_phases()`` class function may be used to "
+"backup parent class methods."
+msgstr ""
+
+#: ../../../devel/reset.rst:172
+msgid ""
+"Here follows an example to implement reset for a Device which sets an IO "
+"while in reset."
+msgstr ""
+
+#: ../../../devel/reset.rst:177
+msgid ""
+"static void mydev_reset_enter(Object *obj, ResetType type)\n"
+"{\n"
+"    MyDevClass *myclass = MYDEV_GET_CLASS(obj);\n"
+"    MyDevState *mydev = MYDEV(obj);\n"
+"    /* call parent class enter phase */\n"
+"    if (myclass->parent_phases.enter) {\n"
+"        myclass->parent_phases.enter(obj, type);\n"
+"    }\n"
+"    /* initialize local state only */\n"
+"    mydev->var = 0;\n"
+"}\n"
+"\n"
+"static void mydev_reset_hold(Object *obj, ResetType type)\n"
+"{\n"
+"    MyDevClass *myclass = MYDEV_GET_CLASS(obj);\n"
+"    MyDevState *mydev = MYDEV(obj);\n"
+"    /* call parent class hold phase */\n"
+"    if (myclass->parent_phases.hold) {\n"
+"        myclass->parent_phases.hold(obj, type);\n"
+"    }\n"
+"    /* set an IO */\n"
+"    qemu_set_irq(mydev->irq, 1);\n"
+"}\n"
+"\n"
+"static void mydev_reset_exit(Object *obj, ResetType type)\n"
+"{\n"
+"    MyDevClass *myclass = MYDEV_GET_CLASS(obj);\n"
+"    MyDevState *mydev = MYDEV(obj);\n"
+"    /* call parent class exit phase */\n"
+"    if (myclass->parent_phases.exit) {\n"
+"        myclass->parent_phases.exit(obj, type);\n"
+"    }\n"
+"    /* clear an IO */\n"
+"    qemu_set_irq(mydev->irq, 0);\n"
+"}\n"
+"\n"
+"typedef struct MyDevClass {\n"
+"    MyParentClass parent_class;\n"
+"    /* to store eventual parent reset methods */\n"
+"    ResettablePhases parent_phases;\n"
+"} MyDevClass;\n"
+"\n"
+"static void mydev_class_init(ObjectClass *class, const void *data)\n"
+"{\n"
+"    MyDevClass *myclass = MYDEV_CLASS(class);\n"
+"    ResettableClass *rc = RESETTABLE_CLASS(class);\n"
+"    resettable_class_set_parent_phases(rc,\n"
+"                                       mydev_reset_enter,\n"
+"                                       mydev_reset_hold,\n"
+"                                       mydev_reset_exit,\n"
+"                                       &myclass->parent_phases);\n"
+"}"
+msgstr ""
+
+#: ../../../devel/reset.rst:230
+msgid ""
+"In the above example, we override all three phases. It is possible to "
+"override only some of them by passing NULL instead of a function pointer to "
+"``resettable_class_set_parent_phases()``. For example, the following will "
+"only override the *enter* phase and leave *hold* and *exit* untouched::"
+msgstr ""
+
+#: ../../../devel/reset.rst:235
+msgid ""
+"resettable_class_set_parent_phases(rc, mydev_reset_enter, NULL, NULL,\n"
+"                                   &myclass->parent_phases);"
+msgstr ""
+
+#: ../../../devel/reset.rst:238
+msgid ""
+"This is equivalent to providing a trivial implementation of the hold and "
+"exit phases which does nothing but call the parent class's implementation of "
+"the phase."
+msgstr ""
+
+#: ../../../devel/reset.rst:243
+msgid "Polling the reset state"
+msgstr ""
+
+#: ../../../devel/reset.rst:245
+msgid ""
+"Resettable interface provides the ``resettable_is_in_reset()`` function. "
+"This function returns true if the object parameter is currently under reset."
+msgstr ""
+
+#: ../../../devel/reset.rst:248
+msgid ""
+"An object is under reset from the beginning of the *enter* phase (before "
+"either its children or its own enter method is called) to the *exit* phase. "
+"During *enter* and *hold* phase only, the function will return that the "
+"object is in reset. The state is changed after the *exit* is propagated to "
+"its children and just before calling the object's own *exit* method."
+msgstr ""
+
+#: ../../../devel/reset.rst:254
+msgid ""
+"This function may be used if the object behavior has to be adapted while in "
+"reset state. For example if a device has an irq input, it will probably need "
+"to ignore it while in reset; then it can for example check the reset state "
+"at the beginning of the irq callback."
+msgstr ""
+
+#: ../../../devel/reset.rst:259
+msgid ""
+"Note that until migration of the reset state is supported, an object should "
+"not be left in reset. So apart from being currently executing one of the "
+"reset phases, the only cases when this function will return true is if an "
+"external interaction (like changing an io) is made during *hold* or *exit* "
+"phase of another object in the same reset group."
+msgstr ""
+
+#: ../../../devel/reset.rst:265
+msgid ""
+"Helpers ``device_is_in_reset()`` and ``bus_is_in_reset()`` are also provided "
+"for devices and buses and should be preferred."
+msgstr ""
+
+#: ../../../devel/reset.rst:270
+msgid "Base class handling of reset"
+msgstr ""
+
+#: ../../../devel/reset.rst:272
+msgid ""
+"This section documents parts of the reset mechanism that you only need to "
+"know about if you are extending it to work with a new base class other than "
+"DeviceClass or BusClass, or maintaining the existing code in those classes. "
+"Most people can ignore it."
+msgstr ""
+
+#: ../../../devel/reset.rst:280
+msgid ""
+"There are two other methods that need to exist in a class implementing the "
+"interface: ``get_state()`` and ``child_foreach()``."
+msgstr ""
+
+#: ../../../devel/reset.rst:283
+msgid ""
+"``get_state()`` is simple. *resettable* is an interface and, as a "
+"consequence, does not have any class state structure. But in order to "
+"factorize the code, we need one. This method must return a pointer to "
+"``ResettableState`` structure. The structure must be allocated by the base "
+"class; preferably it should be located inside the object instance structure."
+msgstr ""
+
+#: ../../../devel/reset.rst:289
+msgid ""
+"``child_foreach()`` is more complex. It should execute the given callback on "
+"every reset child of the given resettable object. All children must be "
+"resettable too. Additional parameters (a reset type and an opaque pointer) "
+"must be passed to the callback too."
+msgstr ""
+
+#: ../../../devel/reset.rst:294
+msgid ""
+"In ``DeviceClass`` and ``BusClass`` the ``ResettableState`` is located in "
+"the ``DeviceState`` and ``BusState`` structures. ``child_foreach()`` is "
+"implemented to follow the bus hierarchy; for a bus, it calls the function on "
+"every child device; for a device, it calls the function on every bus child. "
+"When we reset the main system bus, we reset the whole machine bus tree."
+msgstr ""
+
+#: ../../../devel/reset.rst:301
+msgid "Changing a resettable parent"
+msgstr ""
+
+#: ../../../devel/reset.rst:303
+msgid ""
+"One thing which should be taken care of by the base class is handling reset "
+"hierarchy changes."
+msgstr ""
+
+#: ../../../devel/reset.rst:306
+msgid ""
+"The reset hierarchy is supposed to be static and built during machine "
+"creation. But there are actually some exceptions. To cope with this, the "
+"resettable API provides ``resettable_change_parent()``. This function allows "
+"to set, update or remove the parent of a resettable object after machine "
+"creation is done. As parameters, it takes the object being moved, the old "
+"parent if any and the new parent if any."
+msgstr ""
+
+#: ../../../devel/reset.rst:313
+msgid ""
+"This function can be used at any time when not in a reset operation. During "
+"a reset operation it must be used only in *hold* phase. Using it in *enter* "
+"or *exit* phase is an error. Also it should not be used during machine "
+"creation, although it is harmless to do so: the function is a no-op as long "
+"as old and new parent are NULL or not in reset."
+msgstr ""
+
+#: ../../../devel/reset.rst:320
+msgid "There is currently 2 cases where this function is used:"
+msgstr ""
+
+#: ../../../devel/reset.rst:322
+msgid "*device hotplug*; it means a new device is introduced on a live bus."
+msgstr ""
+
+#: ../../../devel/reset.rst:324
+msgid ""
+"*hot bus change*; it means an existing live device is added, moved or "
+"removed in the bus hierarchy. At the moment, it occurs only in the raspi "
+"machines for changing the sdbus used by sd card."
+msgstr ""
+
+#: ../../../devel/reset.rst:329
+msgid "Reset of the complete system"
+msgstr ""
+
+#: ../../../devel/reset.rst:331
+msgid ""
+"Reset of the complete system is a little complicated. The typical flow is:"
+msgstr ""
+
+#: ../../../devel/reset.rst:334
+msgid ""
+"Code which wishes to reset the entire system does so by calling "
+"``qemu_system_reset_request()``. This schedules a reset, but the reset will "
+"happen asynchronously after the function returns. That makes this safe to "
+"call from, for example, device models."
+msgstr ""
+
+#: ../../../devel/reset.rst:339
+msgid ""
+"The function which is called to make the reset happen is "
+"``qemu_system_reset()``. Generally only core system code should call this "
+"directly."
+msgstr ""
+
+#: ../../../devel/reset.rst:343
+msgid ""
+"``qemu_system_reset()`` calls the ``MachineClass::reset`` method of the "
+"current machine, if it has one. That method must call "
+"``qemu_devices_reset()``. If the machine has no reset method, "
+"``qemu_system_reset()`` calls ``qemu_devices_reset()`` directly."
+msgstr ""
+
+#: ../../../devel/reset.rst:348
+msgid ""
+"``qemu_devices_reset()`` performs a reset of the system, using the three-"
+"phase mechanism listed above. It resets all objects that were registered "
+"with it using ``qemu_register_resettable()``. It also calls all the "
+"functions registered with it using ``qemu_register_reset()``. Those "
+"functions are called during the \"hold\" phase of this reset."
+msgstr ""
+
+#: ../../../devel/reset.rst:355
+msgid ""
+"The most important object that this reset resets is the 'sysbus' bus. The "
+"sysbus bus is the root of the qbus tree. This means that all devices on the "
+"sysbus are reset, and all their child buses, and all the devices on those "
+"child buses."
+msgstr ""
+
+#: ../../../devel/reset.rst:360
+msgid ""
+"Devices which are not on the qbus tree are *not* automatically reset! (The "
+"most obvious example of this is CPU objects, but anything that directly "
+"inherits from ``TYPE_OBJECT`` or ``TYPE_DEVICE`` rather than from "
+"``TYPE_SYS_BUS_DEVICE`` or some other plugs-into-a-bus type will be in this "
+"category.) You need to therefore arrange for these to be reset in some other "
+"way (e.g. using ``qemu_register_resettable()`` or ``qemu_register_reset()``)."
+msgstr ""
