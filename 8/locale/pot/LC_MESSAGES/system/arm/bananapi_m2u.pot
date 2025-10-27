@@ -1,0 +1,269 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/arm/bananapi_m2u.rst:2
+msgid "Banana Pi BPI-M2U (``bpim2u``)"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:4
+msgid ""
+"Banana Pi BPI-M2 Ultra is a quad-core mini single board computer built with "
+"Allwinner A40i/R40/V40 SoC. It features 2GB of RAM and 8GB eMMC. It also has "
+"onboard WiFi and BT. On the ports side, the BPI-M2 Ultra has 2 USB A 2.0 "
+"ports, 1 USB OTG port, 1 HDMI port, 1 audio jack, a DC power port, and last "
+"but not least, a SATA port."
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:11
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:13
+msgid "The Banana Pi M2U machine supports the following devices:"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:15
+msgid "SMP (Quad Core Cortex-A7)"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:16
+msgid "Generic Interrupt Controller configuration"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:17
+msgid "SRAM mappings"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:18
+msgid "SDRAM controller"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:19
+msgid "Timer device (re-used from Allwinner A10)"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:20
+msgid "UART"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:21
+msgid "SD/MMC storage controller"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:22
+msgid "EMAC ethernet"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:23
+msgid "GMAC ethernet"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:24
+msgid "Clock Control Unit"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:25
+msgid "TWI (I2C)"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:28
+msgid "Limitations"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:30
+msgid "Currently, Banana Pi M2U does *not* support the following features:"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:32
+msgid "Graphical output via HDMI, GPU and/or the Display Engine"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:33
+msgid "Audio output"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:34
+msgid "Hardware Watchdog"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:35
+msgid "Real Time Clock"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:36
+msgid "USB 2.0 interfaces"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:38
+msgid ""
+"Also see the 'unimplemented' array in the Allwinner R40 SoC module for a "
+"complete list of unimplemented I/O devices: ``./hw/arm/allwinner-r40.c``"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:42
+msgid "Boot options"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:44
+msgid ""
+"The Banana Pi M2U machine can start using the standard -kernel functionality "
+"for loading a Linux kernel or ELF executable. Additionally, the Banana Pi "
+"M2U machine can also emulate the BootROM which is present on an actual "
+"Allwinner R40 based SoC, which loads the bootloader from a SD card, "
+"specified via the -sd argument to qemu-system-arm."
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:51
+msgid "Running mainline Linux"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:53
+msgid ""
+"To build a Linux mainline kernel that can be booted by the Banana Pi M2U "
+"machine, simply configure the kernel using the sunxi_defconfig configuration:"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:56
+msgid ""
+"$ ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make mrproper\n"
+"$ ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make sunxi_defconfig"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:61
+msgid ""
+"To boot the newly build linux kernel in QEMU with the Banana Pi M2U machine, "
+"use:"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:63
+msgid ""
+"$ qemu-system-arm -M bpim2u -nographic \\\n"
+"    -kernel /path/to/linux/arch/arm/boot/zImage \\\n"
+"    -append 'console=ttyS0,115200' \\\n"
+"    -dtb /path/to/linux/arch/arm/boot/dts/sun8i-r40-bananapi-m2-ultra.dtb"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:71
+msgid "Banana Pi M2U images"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:73
+msgid ""
+"Note that the mainline kernel does not have a root filesystem. You can "
+"choose to build you own image with buildroot using the "
+"bananapi_m2_ultra_defconfig. Also see https://buildroot.org for more "
+"information."
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:77
+msgid ""
+"Another possibility is to run an OpenWrt image for Banana Pi M2U which can "
+"be downloaded from:"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:80
+msgid "https://downloads.openwrt.org/releases/22.03.3/targets/sunxi/cortexa7/"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:82
+msgid ""
+"When using an image as an SD card, it must be resized to a power of two. "
+"This can be done with the ``qemu-img`` command. It is recommended to only "
+"increase the image size instead of shrinking it to a power of two, to avoid "
+"loss of data. For example, to prepare a downloaded Armbian image, first "
+"extract it and then increase its size to one gigabyte as follows:"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:88
+msgid ""
+"$ qemu-img resize \\\n"
+"  openwrt-22.03.3-sunxi-cortexa7-sinovoip_bananapi-m2-ultra-ext4-sdcard.img "
+"\\\n"
+"  1G"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:94
+msgid ""
+"Instead of providing a custom Linux kernel via the -kernel command you may "
+"also choose to let the Banana Pi M2U machine load the bootloader from SD "
+"card, just like a real board would do using the BootROM. Simply pass the "
+"selected image via the -sd argument and remove the -kernel, -append, -dbt "
+"and -initrd arguments:"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:99
+msgid ""
+"$ qemu-system-arm -M bpim2u -nic user -nographic \\\n"
+"  -sd openwrt-22.03.3-sunxi-cortexa7-sinovoip_bananapi-m2-ultra-ext4-sdcard."
+"img"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:105
+msgid "Running U-Boot"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:107
+msgid ""
+"U-Boot mainline can be build and configured using the "
+"Bananapi_M2_Ultra_defconfig using similar commands as describe above for "
+"Linux. Note that it is recommended for development/testing to select the "
+"following configuration setting in U-Boot:"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:111
+msgid "Device Tree Control > Provider for DTB for DT Control > Embedded DTB"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:113
+msgid ""
+"The BootROM of allwinner R40 loading u-boot from the 8KiB offset of sdcard. "
+"Let's create an bootable disk image:"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:116
+msgid ""
+"$ dd if=/dev/zero of=sd.img bs=32M count=1\n"
+"$ dd if=u-boot-sunxi-with-spl.bin of=sd.img bs=1k seek=8 conv=notrunc"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:121
+msgid "And then boot it."
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:123
+msgid "$ qemu-system-arm -M bpim2u -nographic -sd sd.img"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:128
+msgid "Banana Pi M2U integration tests"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:130
+msgid ""
+"The Banana Pi M2U machine has several integration tests included. To run the "
+"whole set of tests, build QEMU from source and simply provide the following "
+"command:"
+msgstr ""
+
+#: ../../../system/arm/bananapi_m2u.rst:134
+msgid ""
+"$ cd qemu-build-dir\n"
+"$ AVOCADO_ALLOW_LARGE_STORAGE=yes tests/venv/bin/avocado \\\n"
+"  --verbose --show=app,console run -t machine:bpim2u \\\n"
+"  ../tests/avocado/boot_linux_console.py"
+msgstr ""
