@@ -1,0 +1,515 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/acpi_cpu_hotplug.rst:2
+msgid "QEMU<->ACPI BIOS CPU hotplug interface"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:4
+msgid ""
+"QEMU supports CPU hotplug via ACPI. This document describes the interface "
+"between QEMU and the ACPI BIOS."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:7
+msgid ""
+"ACPI BIOS GPE.2 handler is dedicated for notifying OS about CPU hot-add and "
+"hot-remove events."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:12
+msgid "Legacy ACPI CPU hotplug interface registers"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:14
+msgid "CPU present bitmap for:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:16
+msgid "ICH9-LPC (IO port 0x0cd8-0xcf7, 1-byte access)"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:17
+msgid "PIIX-PM  (IO port 0xaf00-0xaf1f, 1-byte access)"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:18
+msgid ""
+"One bit per CPU. Bit position reflects corresponding CPU APIC ID. Read-only."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:19
+msgid ""
+"The first DWORD in bitmap is used in write mode to switch from legacy to "
+"modern CPU hotplug interface, write 0 into it to do switch."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:22
+msgid ""
+"QEMU sets corresponding CPU bit on hot-add event and issues SCI with GPE.2 "
+"event set. CPU present map is read by ACPI BIOS GPE.2 handler to notify OS "
+"about CPU hot-add events. CPU hot-remove isn't supported."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:28
+msgid "Modern ACPI CPU hotplug interface registers"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:30
+msgid "Register block base address:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:32
+msgid "ICH9-LPC IO port 0x0cd8"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:33
+msgid "PIIX-PM  IO port 0xaf00"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:35
+msgid "Register block size:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:37
+msgid "ACPI_CPU_HOTPLUG_REG_LEN = 12"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:39
+msgid ""
+"All accesses to registers described below, imply little-endian byte order."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:41
+msgid "Reserved registers behavior:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:43
+msgid "write accesses are ignored"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:44
+msgid "read accesses return all bits set to 0."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:46
+msgid ""
+"The last stored value in 'CPU selector' must refer to a possible CPU, "
+"otherwise"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:48
+msgid "reads from any register return 0"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:49
+msgid ""
+"writes to any other register are ignored until valid value is stored into it"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:51
+msgid ""
+"On QEMU start, 'CPU selector' is initialized to a valid value, on reset it "
+"keeps the current value."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:55
+msgid "Read access behavior"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:57
+#: ../../../specs/acpi_cpu_hotplug.rst:110
+msgid "offset [0x0-0x3]"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:58
+msgid "Command data 2: (DWORD access)"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:60
+msgid "If value last stored in 'Command field' is:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:62
+#: ../../../specs/acpi_cpu_hotplug.rst:74
+#: ../../../specs/acpi_cpu_hotplug.rst:99
+#: ../../../specs/acpi_cpu_hotplug.rst:122
+#: ../../../specs/acpi_cpu_hotplug.rst:150
+msgid "0:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:63
+msgid "reads as 0x0"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:64
+#: ../../../specs/acpi_cpu_hotplug.rst:84
+#: ../../../specs/acpi_cpu_hotplug.rst:101
+#: ../../../specs/acpi_cpu_hotplug.rst:132
+#: ../../../specs/acpi_cpu_hotplug.rst:163
+msgid "3:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:65
+msgid "upper 32 bits of architecture specific CPU ID value"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:66
+#: ../../../specs/acpi_cpu_hotplug.rst:166
+#: ../../../specs/acpi_cpu_hotplug.rst:183
+msgid "other values:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:67
+#: ../../../specs/acpi_cpu_hotplug.rst:92
+#: ../../../specs/acpi_cpu_hotplug.rst:167
+#: ../../../specs/acpi_cpu_hotplug.rst:170
+#: ../../../specs/acpi_cpu_hotplug.rst:184
+msgid "reserved"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:69
+#: ../../../specs/acpi_cpu_hotplug.rst:117
+msgid "offset [0x4]"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:70
+msgid "CPU device status fields: (1 byte access)"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:72
+#: ../../../specs/acpi_cpu_hotplug.rst:120
+msgid "bits:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:75
+msgid "Device is enabled and may be used by guest"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:76
+#: ../../../specs/acpi_cpu_hotplug.rst:124
+#: ../../../specs/acpi_cpu_hotplug.rst:157
+#: ../../../specs/acpi_cpu_hotplug.rst:177
+msgid "1:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:77
+msgid ""
+"Device insert event, used to distinguish device for which no device check "
+"event to OSPM was issued. It's valid only when bit 0 is set."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:80
+#: ../../../specs/acpi_cpu_hotplug.rst:128
+#: ../../../specs/acpi_cpu_hotplug.rst:160
+#: ../../../specs/acpi_cpu_hotplug.rst:179
+msgid "2:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:81
+msgid ""
+"Device remove event, used to distinguish device for which no device eject "
+"request to OSPM was issued. Firmware must ignore this bit."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:85
+#: ../../../specs/acpi_cpu_hotplug.rst:89
+msgid "reserved and should be ignored by OSPM"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:86
+#: ../../../specs/acpi_cpu_hotplug.rst:137
+msgid "4:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:87
+msgid "if set to 1, OSPM requests firmware to perform device eject."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:88
+#: ../../../specs/acpi_cpu_hotplug.rst:142
+msgid "5-7:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:91
+msgid "offset [0x5-0x7]"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:94
+#: ../../../specs/acpi_cpu_hotplug.rst:172
+msgid "offset [0x8]"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:95
+#: ../../../specs/acpi_cpu_hotplug.rst:173
+msgid "Command data: (DWORD access)"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:97
+msgid "If value last stored in 'Command field' is one of:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:100
+msgid "contains 'CPU selector' value of a CPU with pending event[s]"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:102
+msgid ""
+"lower 32 bits of architecture specific CPU ID value (in x86 case: APIC ID)"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:104
+msgid "otherwise:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:105
+msgid "contains 0"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:108
+msgid "Write access behavior"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:111
+msgid "CPU selector: (DWORD access)"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:113
+msgid ""
+"Selects active CPU device. All following accesses to other registers will "
+"read/store data from/to selected CPU. Valid values: [0 .. max_cpus)"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:118
+msgid "CPU device control fields: (1 byte access)"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:123
+msgid "reserved, OSPM must clear it before writing to register."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:125
+msgid ""
+"if set to 1 clears device insert event, set by OSPM after it has emitted "
+"device check event for the selected CPU device"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:129
+msgid ""
+"if set to 1 clears device remove event, set by OSPM after it has emitted "
+"device eject request for the selected CPU device."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:133
+msgid ""
+"if set to 1 initiates device eject, set by OSPM when it triggers CPU device "
+"removal and calls _EJ0 method or by firmware when bit #4 is set. In case bit "
+"#4 were set, it's cleared as part of device eject."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:138
+msgid ""
+"if set to 1, OSPM hands over device eject to firmware. Firmware shall issue "
+"device eject request as described above (bit #3) and OSPM should not touch "
+"device eject bit (#3) in case it's asked firmware to perform CPU device "
+"eject."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:143
+msgid "reserved, OSPM must clear them before writing to register"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:145
+msgid "offset[0x5]"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:146
+msgid "Command field: (1 byte access)"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:148
+msgid "value:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:151
+msgid ""
+"selects a CPU device with inserting/removing events and following reads from "
+"'Command data' register return selected CPU ('CPU selector' value). If no "
+"CPU with events found, the current 'CPU selector' doesn't change and "
+"corresponding insert/remove event flags are not modified."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:158
+msgid ""
+"following writes to 'Command data' register set OST event register in QEMU"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:161
+msgid ""
+"following writes to 'Command data' register set OST status register in QEMU"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:164
+msgid ""
+"following reads from 'Command data' and 'Command data 2' return architecture "
+"specific CPU ID value for currently selected CPU."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:169
+msgid "offset [0x6-0x7]"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:175
+msgid "If last stored 'Command field' value is:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:178
+msgid "stores value into OST event register"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:180
+msgid ""
+"stores value into OST status register, triggers ACPI_DEVICE_OST QMP event "
+"from QEMU to external applications with current values of OST event and "
+"status registers."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:187
+msgid "Typical usecases"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:190
+msgid "(x86) Detecting and enabling modern CPU hotplug interface"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:192
+msgid ""
+"QEMU starts with legacy CPU hotplug interface enabled. Detecting and "
+"switching to modern interface is based on the 2 legacy CPU hotplug features:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:195
+msgid "Writes into CPU bitmap are ignored."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:196
+msgid "CPU bitmap always has bit #0 set, corresponding to boot CPU."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:198
+msgid "Use following steps to detect and enable modern CPU hotplug interface:"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:200
+msgid ""
+"Store 0x0 to the 'CPU selector' register, attempting to switch to modern mode"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:201
+msgid ""
+"Store 0x0 to the 'CPU selector' register, to ensure valid selector value"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:202
+msgid "Store 0x0 to the 'Command field' register"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:203
+msgid ""
+"Read the 'Command data 2' register. If read value is 0x0, the modern "
+"interface is enabled. Otherwise legacy or no CPU hotplug interface available"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:208
+msgid "Get a cpu with pending event"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:210
+msgid "Store 0x0 to the 'CPU selector' register."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:211
+msgid "Store 0x0 to the 'Command field' register."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:212
+#: ../../../specs/acpi_cpu_hotplug.rst:227
+msgid "Read the 'CPU device status fields' register."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:213
+msgid ""
+"If both bit #1 and bit #2 are clear in the value read, there is no CPU with "
+"a pending event and selected CPU remains unchanged."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:215
+msgid ""
+"Otherwise, read the 'Command data' register. The value read is the selector "
+"of the CPU with the pending event (which is already selected)."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:219
+msgid "Enumerate CPUs present/non present CPUs"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:221
+msgid "Set the present CPU count to 0."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:222
+msgid "Set the iterator to 0."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:223
+msgid ""
+"Store 0x0 to the 'CPU selector' register, to ensure that it's in a valid "
+"state and that access to other registers won't be ignored."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:225
+msgid ""
+"Store 0x0 to the 'Command field' register to make 'Command data' register "
+"return 'CPU selector' value of selected CPU"
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:228
+msgid "If bit #0 is set, increment the present CPU count."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:229
+msgid "Increment the iterator."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:230
+msgid "Store the iterator to the 'CPU selector' register."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:231
+msgid "Read the 'Command data' register."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:232
+msgid "If the value read is not zero, goto 05."
+msgstr ""
+
+#: ../../../specs/acpi_cpu_hotplug.rst:233
+msgid ""
+"Otherwise store 0x0 to the 'CPU selector' register, to put it into a valid "
+"state and exit. The iterator at this point equals \"max_cpus\"."
+msgstr ""
