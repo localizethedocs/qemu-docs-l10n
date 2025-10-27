@@ -1,0 +1,348 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/testing/blkdebug.rst:2
+msgid "Block I/O error injection using ``blkdebug``"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:10
+msgid ""
+"The ``blkdebug`` block driver is a rule-based error injection engine.  It "
+"can be used to exercise error code paths in block drivers including "
+"``ENOSPC`` (out of space) and ``EIO``."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:14
+msgid ""
+"This document gives an overview of the features available in ``blkdebug``."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:17
+msgid "Background"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:18
+msgid ""
+"Block drivers have many error code paths that handle I/O errors.  Image "
+"formats are especially complex since metadata I/O errors during cluster "
+"allocation or while updating tables happen halfway through request "
+"processing and require discipline to keep image files consistent."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:23
+msgid ""
+"Error injection allows test cases to trigger I/O errors at specific points. "
+"This way, all error paths can be tested to make sure they are correct."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:27
+msgid "Rules"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:28
+msgid ""
+"The ``blkdebug`` block driver takes a list of \"rules\" that tell the error "
+"injection engine when to fail an I/O request."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:31
+msgid ""
+"Each I/O request is evaluated against the rules.  If a rule matches the "
+"request then its \"action\" is executed."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:34
+msgid ""
+"Rules can be placed in a configuration file; the configuration file follows "
+"the same .ini-like format used by QEMU's ``-readconfig`` option, and each "
+"section of the file represents a rule."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:38
+msgid "The following configuration file defines a single rule::"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:40
+msgid ""
+"$ cat blkdebug.conf\n"
+"[inject-error]\n"
+"event = \"read_aio\"\n"
+"errno = \"28\""
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:45
+msgid ""
+"This rule fails all aio read requests with ``ENOSPC`` (28).  Note that the "
+"errno value depends on the host.  On Linux, see ``/usr/include/asm-generic/"
+"errno-base.h`` for errno values."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:49
+msgid "Invoke QEMU as follows::"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:51
+msgid ""
+"$ qemu-system-x86_64\n"
+"      -drive if=none,cache=none,file=blkdebug:blkdebug.conf:test.img,"
+"id=drive0 \\\n"
+"      -device virtio-blk-pci,drive=drive0,id=virtio-blk-pci0"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:55
+msgid "Rules support the following attributes:"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:57
+#: ../../../devel/testing/blkdebug.rst:153
+msgid "``event``"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:58
+msgid ""
+"which type of operation to match (e.g. ``read_aio``, ``write_aio``, "
+"``flush_to_os``, ``flush_to_disk``).  See `Events`_ for information on "
+"events."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:62
+#: ../../../devel/testing/blkdebug.rst:158
+msgid "``state``"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:63
+msgid ""
+"(optional) the engine must be in this state number in order for this rule to "
+"match.  See `State transitions`_ for information on states."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:67
+msgid "``errno``"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:68
+msgid ""
+"the numeric errno value to return when a request matches this rule. The "
+"errno values depend on the host since the numeric values are not "
+"standardized in the POSIX specification."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:72
+msgid "``sector``"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:73
+msgid ""
+"(optional) a sector number that the request must overlap in order to match "
+"this rule"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:76
+msgid "``once``"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:77
+msgid ""
+"(optional, default ``off``) only execute this action on the first matching "
+"request"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:80
+msgid "``immediately``"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:81
+msgid ""
+"(optional, default ``off``) return a NULL ``BlockAIOCB`` pointer and fail "
+"without an errno instead.  This exercises the code path where ``BlockAIOCB`` "
+"fails and the caller's ``BlockCompletionFunc`` is not invoked."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:87
+msgid "Events"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:88
+msgid ""
+"Block drivers provide information about the type of I/O request they are "
+"about to make so rules can match specific types of requests.  For example, "
+"the ``qcow2`` block driver tells ``blkdebug`` when it accesses the L1 table "
+"so rules can match only L1 table accesses and not other metadata or guest "
+"data requests."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:93
+msgid "The core events are:"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:95
+msgid "``read_aio``"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:96
+msgid "guest data read"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:98
+msgid "``write_aio``"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:99
+msgid "guest data write"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:101
+msgid "``flush_to_os``"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:102
+msgid "write out unwritten block driver state (e.g. cached metadata)"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:104
+msgid "``flush_to_disk``"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:105
+msgid "flush the host block device's disk cache"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:107
+msgid ""
+"See ``qapi/block-core.json:BlkdebugEvent`` for the full list of events. You "
+"may need to grep block driver source code to understand the meaning of "
+"specific events."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:112
+msgid "State transitions"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:113
+msgid ""
+"There are cases where more power is needed to match a particular I/O request "
+"in a longer sequence of requests.  For example::"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:116
+msgid ""
+"write_aio\n"
+"flush_to_disk\n"
+"write_aio"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:120
+msgid ""
+"How do we match the 2nd ``write_aio`` but not the first?  This is where "
+"state transitions come in."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:123
+msgid ""
+"The error injection engine has an integer called the \"state\" that always "
+"starts initialized to 1.  The state integer is internal to ``blkdebug`` and "
+"cannot be observed from outside but rules can interact with it for powerful "
+"matching behavior."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:128
+msgid ""
+"Rules can be conditional on the current state and they can transition to a "
+"new state."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:131
+msgid ""
+"When a rule's \"state\" attribute is non-zero then the current state must "
+"equal the attribute in order for the rule to match."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:134
+msgid "For example, to match the 2nd write_aio::"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:136
+msgid ""
+"[set-state]\n"
+"event = \"write_aio\"\n"
+"state = \"1\"\n"
+"new_state = \"2\"\n"
+"\n"
+"[inject-error]\n"
+"event = \"write_aio\"\n"
+"state = \"2\"\n"
+"errno = \"5\""
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:146
+msgid ""
+"The first ``write_aio`` request matches the ``set-state`` rule and "
+"transitions from state 1 to state 2.  Once state 2 has been entered, the "
+"``set-state`` rule no longer matches since it requires state 1.  But the "
+"``inject-error`` rule now matches the next ``write_aio`` request and injects "
+"``EIO`` (5)."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:151
+msgid "State transition rules support the following attributes:"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:154
+msgid ""
+"which type of operation to match (e.g. ``read_aio``, ``write_aio``, "
+"``flush_to_os`, ``flush_to_disk``).  See `Events`_ for information on events."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:159
+msgid ""
+"(optional) the engine must be in this state number in order for this rule to "
+"match"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:162
+msgid "``new_state``"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:163
+msgid "transition to this state number"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:166
+msgid "Suspend and resume"
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:167
+msgid ""
+"Exercising code paths in block drivers may require specific ordering amongst "
+"concurrent requests.  The \"breakpoint\" feature allows requests to be "
+"halted on a ``blkdebug`` event and resumed later.  This makes it possible to "
+"achieve deterministic ordering when multiple requests are in flight."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:172
+msgid ""
+"Breakpoints on ``blkdebug`` events are associated with a user-defined "
+"``tag`` string. This tag serves as an identifier by which the request can be "
+"resumed at a later point."
+msgstr ""
+
+#: ../../../devel/testing/blkdebug.rst:176
+msgid ""
+"See the ``qemu-io(1)`` ``break``, ``resume``, ``remove_break``, and "
+"``wait_break`` commands for details."
+msgstr ""

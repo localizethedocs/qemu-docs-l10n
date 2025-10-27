@@ -1,0 +1,264 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/vfio-iommufd.rst:3
+msgid "IOMMUFD BACKEND usage with VFIO"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:5
+msgid "(Same meaning for backend/container/BE)"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:7
+msgid ""
+"With the introduction of iommufd, the Linux kernel provides a generic "
+"interface for user space drivers to propagate their DMA mappings to kernel "
+"for assigned devices. While the legacy kernel interface is group-centric, "
+"the new iommufd interface is device-centric, relying on device fd and "
+"iommufd."
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:12
+msgid ""
+"To support both interfaces in the QEMU VFIO device, introduce a base "
+"container to abstract the common part of VFIO legacy and iommufd container. "
+"So that the generic VFIO code can use either container."
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:16
+msgid ""
+"The base container implements generic functions such as memory_listener and "
+"address space management whereas the derived container implements callbacks "
+"specific to either legacy or iommufd. Each container has its own way to "
+"setup secure context and dma management interface. The below diagram shows "
+"how it looks like with both containers."
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:24
+msgid ""
+"                    VFIO                           AddressSpace/Memory\n"
+"    +-------+  +----------+  +-----+  +-----+\n"
+"    |  pci  |  | platform |  |  ap |  | ccw |\n"
+"    +---+---+  +----+-----+  +--+--+  +--+--+     +----------------------+\n"
+"        |           |           |        |        |   AddressSpace       |\n"
+"        |           |           |        |        +------------+---------+\n"
+"    +---V-----------V-----------V--------V----+               /\n"
+"    |           VFIOAddressSpace              | <------------+\n"
+"    |                  |                      |  MemoryListener\n"
+"    |        VFIOContainerBase list           |\n"
+"    +-------+----------------------------+----+\n"
+"            |                            |\n"
+"            |                            |\n"
+"    +-------V------+            +--------V----------+\n"
+"    |   iommufd    |            |    vfio legacy    |\n"
+"    |  container   |            |     container     |\n"
+"    +-------+------+            +--------+----------+\n"
+"            |                            |\n"
+"            | /dev/iommu                 | /dev/vfio/vfio\n"
+"            | /dev/vfio/devices/vfioX    | /dev/vfio/$group_id\n"
+"Userspace   |                            |\n"
+"============+============================+===========================\n"
+"Kernel      |  device fd                 |\n"
+"            +---------------+            | group/container fd\n"
+"            | (BIND_IOMMUFD |            | (SET_CONTAINER/SET_IOMMU)\n"
+"            |  ATTACH_IOAS) |            | device fd\n"
+"            |               |            |\n"
+"            |       +-------V------------V-----------------+\n"
+"    iommufd |       |                vfio                  |\n"
+"(map/unmap  |       +---------+--------------------+-------+\n"
+"ioas_copy)  |                 |                    | map/unmap\n"
+"            |                 |                    |\n"
+"     +------V------+    +-----V------+      +------V--------+\n"
+"     | iommfd core |    |  device    |      |  vfio iommu   |\n"
+"     +-------------+    +------------+      +---------------+"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:60
+msgid "Secure Context setup"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:62
+msgid ""
+"iommufd BE: uses device fd and iommufd to setup secure context "
+"(bind_iommufd, attach_ioas)"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:64
+msgid ""
+"vfio legacy BE: uses group fd and container fd to setup secure context "
+"(set_container, set_iommu)"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:67
+msgid "Device access"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:69
+msgid "iommufd BE: device fd is opened through ``/dev/vfio/devices/vfioX``"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:70
+msgid "vfio legacy BE: device fd is retrieved from group fd ioctl"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:72
+msgid "DMA Mapping flow"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:74
+msgid "VFIOAddressSpace receives MemoryRegion add/del via MemoryListener"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:75
+msgid ""
+"VFIO populates DMA map/unmap via the container BEs * iommufd BE: uses "
+"iommufd * vfio legacy BE: uses container fd"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:80
+msgid "Example configuration"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:83
+msgid "Step 1: configure the host device"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:85
+msgid "It's exactly same as the VFIO device with legacy VFIO container."
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:88
+msgid "Step 2: configure QEMU"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:90
+msgid ""
+"Interactions with the ``/dev/iommu`` are abstracted by a new iommufd object "
+"(compiled in with the ``CONFIG_IOMMUFD`` option)."
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:93
+msgid ""
+"Any QEMU device (e.g. VFIO device) wishing to use ``/dev/iommu`` must be "
+"linked with an iommufd object. It gets a new optional property named iommufd "
+"which allows to pass an iommufd object. Take ``vfio-pci`` device for example:"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:98
+msgid ""
+"-object iommufd,id=iommufd0\n"
+"-device vfio-pci,host=0000:02:00.0,iommufd=iommufd0"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:103
+msgid ""
+"Note the ``/dev/iommu`` and VFIO cdev can be externally opened by a "
+"management layer. In such a case the fd is passed, the fd supports a string "
+"naming the fd or a number, for example:"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:107
+msgid ""
+"-object iommufd,id=iommufd0,fd=22\n"
+"-device vfio-pci,iommufd=iommufd0,fd=23"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:112
+msgid "If the ``fd`` property is not passed, the fd is opened by QEMU."
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:114
+msgid ""
+"If no ``iommufd`` object is passed to the ``vfio-pci`` device, iommufd is "
+"not used and the user gets the behavior based on the legacy VFIO container:"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:118
+msgid "-device vfio-pci,host=0000:02:00.0"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:123
+msgid "Supported platform"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:125
+msgid "Supports x86, ARM and s390x currently."
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:128
+msgid "Caveats"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:131
+msgid "Dirty page sync"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:133
+msgid ""
+"Dirty page sync with iommufd backend is unsupported yet, live migration is "
+"disabled by default. But it can be force enabled like below, low efficient "
+"though."
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:137
+msgid ""
+"-object iommufd,id=iommufd0\n"
+"-device vfio-pci,host=0000:02:00.0,iommufd=iommufd0,enable-migration=on"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:143
+msgid "P2P DMA"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:145
+msgid ""
+"PCI p2p DMA is unsupported as IOMMUFD doesn't support mapping hardware PCI "
+"BAR region yet. Below warning shows for assigned PCI device, it's not a bug."
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:148
+msgid ""
+"qemu-system-x86_64: warning: IOMMU_IOAS_MAP failed: Bad address, PCI BAR?\n"
+"qemu-system-x86_64: vfio_container_dma_map(0x560cb6cb1620, 0xe000000021000, "
+"0x3000, 0x7f32ed55c000) = -14 (Bad address)"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:154
+msgid "FD passing with mdev"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:156
+msgid ""
+"``vfio-pci`` device checks sysfsdev property to decide if backend is a mdev. "
+"If FD passing is used, there is no way to know that and the mdev is treated "
+"like a real PCI device. There is an error as below if user wants to enable "
+"RAM discarding for mdev."
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:161
+msgid ""
+"qemu-system-x86_64: -device vfio-pci,iommufd=iommufd0,x-balloon-allowed=on,"
+"fd=9: vfio VFIO_FD9: x-balloon-allowed only potentially compatible with mdev "
+"devices"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:165
+msgid ""
+"``vfio-ap`` and ``vfio-ccw`` devices don't have same issue as their backend "
+"devices are always mdev and RAM discarding is force enabled."
+msgstr ""

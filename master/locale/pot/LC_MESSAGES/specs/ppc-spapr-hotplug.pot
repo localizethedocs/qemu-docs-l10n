@@ -1,0 +1,849 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/ppc-spapr-hotplug.rst:3
+msgid "sPAPR Dynamic Reconfiguration"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:5
+msgid ""
+"sPAPR or pSeries guests make use of a facility called dynamic "
+"reconfiguration to handle hot plugging of dynamic \"physical\" resources "
+"like PCI cards, or \"logical\"/para-virtual resources like memory, CPUs, and "
+"\"physical\" host-bridges, which are generally managed by the host/"
+"hypervisor and provided to guests as virtualized resources. The specifics of "
+"dynamic reconfiguration are documented extensively in section 13 of the "
+"Linux on Power Architecture Reference document ([LoPAR]_). This document "
+"provides a summary of that information as it applies to the implementation "
+"within QEMU."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:15
+msgid "Dynamic-reconfiguration Connectors"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:17
+msgid ""
+"To manage hot plug/unplug of these resources, a firmware abstraction known "
+"as a Dynamic Resource Connector (DRC) is used to assign a particular dynamic "
+"resource to the guest, and provide an interface for the guest to manage "
+"configuration/removal of the resource associated with it."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:23
+msgid "Device tree description of DRCs"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:25
+msgid ""
+"A set of four Open Firmware device tree array properties are used to "
+"describe the name/index/power-domain/type of each DRC allocated to a guest "
+"at boot time. There may be multiple sets of these arrays, rooted at "
+"different paths in the device tree depending on the type of resource the "
+"DRCs manage."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:30
+msgid ""
+"In some cases, the DRCs themselves may be provided by a dynamic resource, "
+"such as the DRCs managing PCI slots on a hot plugged PHB. In this case the "
+"arrays would be fetched as part of the device tree retrieval interfaces for "
+"hot plugged resources described under :ref:`guest-host-interface`."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:35
+msgid ""
+"The array properties are described below. Each entry/element in an array "
+"describes the DRC identified by the element in the corresponding position of "
+"``ibm,drc-indexes``:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:40
+msgid "``ibm,drc-names``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:42
+msgid ""
+"First 4-bytes: big-endian (BE) encoded integer denoting the number of "
+"entries."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:44
+msgid ""
+"Each entry: a NULL-terminated ``<name>`` string encoded as a byte array."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:46
+msgid ""
+"``<name>`` values for logical/virtual resources are defined in the Linux on "
+"Power Architecture Reference ([LoPAR]_) section 13.5.2.4, and basically "
+"consist of the type of the resource followed by a space and a numerical "
+"value that's unique across resources of that type."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:51
+msgid ""
+"``<name>`` values for \"physical\" resources such as PCI or VIO devices are "
+"defined as being \"location codes\", which are the \"location labels\" of "
+"each encapsulating device, starting from the chassis down to the individual "
+"slot for the device, concatenated by a hyphen. This provides a mapping of "
+"resources to a physical location in a chassis for debugging purposes. For "
+"QEMU, this mapping is less important, so we assign a location code that "
+"conforms to naming specifications, but is simply a location label for the "
+"slot by itself to simplify the implementation. The naming convention for "
+"location labels is documented in detail in the [LoPAR]_ section 12.3.1.5, "
+"and in our case amounts to using ``C<n>`` for PCI/VIO device slots, where "
+"``<n>`` is unique across all PCI/VIO device slots."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:64
+msgid "``ibm,drc-indexes``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:66
+#: ../../../specs/ppc-spapr-hotplug.rst:93
+#: ../../../specs/ppc-spapr-hotplug.rst:105
+msgid "First 4-bytes: BE-encoded integer denoting the number of entries."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:68
+msgid ""
+"Each 4-byte entry: BE-encoded ``<index>`` integer that is unique across all "
+"DRCs in the machine."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:71
+msgid ""
+"``<index>`` is arbitrary, but in the case of QEMU we try to maintain the "
+"convention used to assign them to pSeries guests on pHyp (the hypervisor "
+"portion of PowerVM):"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:75
+msgid "``bit[31:28]``: integer encoding of ``<type>``, where ``<type>`` is:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:77
+msgid "``1`` for CPU resource."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:79
+msgid "``2`` for PHB resource."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:81
+msgid "``3`` for VIO resource."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:83
+msgid "``4`` for PCI resource."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:85
+msgid "``8`` for memory resource."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:87
+msgid ""
+"``bit[27:0]``: integer encoding of ``<id>``, where ``<id>`` is unique across "
+"all resources of specified type."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:91
+msgid "``ibm,drc-power-domains``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:95
+msgid ""
+"Each 4-byte entry: 32-bit, BE-encoded ``<index>`` integer that specifies the "
+"power domain the resource will be assigned to. In the case of QEMU we "
+"associated all resources with a \"live insertion\" domain, where the power "
+"is assumed to be managed automatically. The integer value for this domain is "
+"a special value of ``-1``."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:103
+msgid "``ibm,drc-types``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:107
+msgid ""
+"Each entry: a NULL-terminated ``<type>`` string encoded as a byte array. "
+"``<type>`` is assigned as follows:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:110
+msgid "\"CPU\" for a CPU."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:112
+msgid "\"PHB\" for a physical host-bridge."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:114
+msgid "\"SLOT\" for a VIO slot."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:116
+msgid "\"28\" for a PCI slot."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:118
+msgid "\"MEM\" for memory resource."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:123
+msgid "Guest->Host interface to manage dynamic resources"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:125
+msgid ""
+"Each DRC is given a globally unique DRC index, and resources associated with "
+"a particular DRC are configured/managed by the guest via a number of RTAS "
+"calls which reference individual DRCs based on the DRC index. This can be "
+"considered the guest->host interface."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:131
+msgid "``rtas-set-power-level``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:133
+msgid "Set the power level for a specified power domain."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:135
+#: ../../../specs/ppc-spapr-hotplug.rst:148
+msgid "``arg[0]``: integer identifying power domain."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:137
+msgid "``arg[1]``: new power level for the domain, ``0-100``."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:139
+#: ../../../specs/ppc-spapr-hotplug.rst:150
+#: ../../../specs/ppc-spapr-hotplug.rst:166
+msgid "``output[0]``: status, ``0`` on success."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:141
+msgid "``output[1]``: power level after command."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:144
+msgid "``rtas-get-power-level``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:146
+msgid "Get the power level for a specified power domain."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:152
+msgid "``output[1]``: current power level."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:155
+msgid "``rtas-set-indicator``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:157
+msgid "Set the state of an indicator or sensor."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:159
+#: ../../../specs/ppc-spapr-hotplug.rst:213
+msgid "``arg[0]``: integer identifying sensor/indicator type."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:161
+msgid ""
+"``arg[1]``: index of sensor, for DR-related sensors this is generally the "
+"DRC index."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:164
+msgid "``arg[2]``: desired sensor value."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:168
+msgid ""
+"For the purpose of this document we focus on the indicator/sensor types "
+"associated with a DRC. The types are:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:171
+msgid ""
+"``9001``: ``isolation-state``, controls/indicates whether a device has been "
+"made accessible to a guest. Supported sensor values:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:174
+msgid "``0``: ``isolate``, device is made inaccessible by guest OS."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:176
+msgid "``1``: ``unisolate``, device is made available to guest OS."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:178
+msgid ""
+"``9002``: ``dr-indicator``, controls \"visual\" indicator associated with "
+"device. Supported sensor values:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:181
+msgid "``0``: ``inactive``, resource may be safely removed."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:183
+msgid "``1``: ``active``, resource is in use and cannot be safely removed."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:185
+msgid ""
+"``2``: ``identify``, used to visually identify slot for interactive hot plug."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:187
+msgid "``3``: ``action``, in most cases, used in the same manner as identify."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:189
+msgid ""
+"``9003``: ``allocation-state``, generally only used for \"logical\" DR "
+"resources to request the allocation/deallocation of a resource prior to "
+"acquiring it via ``isolation-state->unisolate``, or after releasing it via "
+"``isolation-state->isolate``, respectively. For \"physical\" DR (like PCI "
+"hot plug/unplug) the pre-allocation of the resource is implied and this "
+"sensor is unused. Supported sensor values:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:196
+msgid ""
+"``0``: ``unusable``, tell firmware/system the resource can be unallocated/"
+"reclaimed and added back to the system resource pool."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:199
+msgid ""
+"``1``: ``usable``, request the resource be allocated/reserved for use by "
+"guest OS."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:202
+msgid ""
+"``2``: ``exchange``, used to allocate a spare resource to use for fail-over "
+"in certain situations. Unused in QEMU."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:205
+msgid ""
+"``3``: ``recover``, used to reclaim a previously allocated resource that's "
+"not currently allocated to the guest OS. Unused in QEMU."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:209
+msgid "``rtas-get-sensor-state:``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:211
+msgid "Used to read an indicator or sensor value."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:215
+msgid ""
+"``arg[1]``: index of sensor, for DR-related sensors this is generally the "
+"DRC index"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:218
+msgid "``output[0]``: status, 0 on success"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:220
+msgid ""
+"For DR-related operations, the only noteworthy sensor is ``dr-entity-"
+"sense``, which has a type value of ``9003``, as ``allocation-state`` does in "
+"the case of ``rtas-set-indicator``. The semantics/encodings of the sensor "
+"values are distinct however."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:225
+msgid "Supported sensor values for ``dr-entity-sense`` (``9003``) sensor:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:227
+msgid "``0``: empty."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:229
+msgid "For physical resources: DRC/slot is empty."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:231
+msgid "For logical resources: unused."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:233
+msgid "``1``: present."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:235
+msgid "For physical resources: DRC/slot is populated with a device/resource."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:237
+msgid "For logical resources: resource has been allocated to the DRC."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:239
+msgid "``2``: unusable."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:241
+#: ../../../specs/ppc-spapr-hotplug.rst:247
+#: ../../../specs/ppc-spapr-hotplug.rst:254
+msgid "For physical resources: unused."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:243
+msgid "For logical resources: DRC has no resource allocated to it."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:245
+msgid "``3``: exchange."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:249
+msgid ""
+"For logical resources: resource available for exchange (see ``allocation-"
+"state`` sensor semantics above)."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:252
+msgid "``4``: recovery."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:256
+msgid ""
+"For logical resources: resource available for recovery (see ``allocation-"
+"state`` sensor semantics above)."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:260
+msgid "``rtas-ibm-configure-connector``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:262
+msgid ""
+"Used to fetch an OpenFirmware device tree description of the resource "
+"associated with a particular DRC."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:265
+msgid "``arg[0]``: guest physical address of 4096-byte work area buffer."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:267
+msgid ""
+"``arg[1]``: 0, or address of additional 4096-byte work area buffer; only non-"
+"zero if a prior RTAS response indicated a need for additional memory."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:270
+msgid "``output[0]``: status:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:272
+msgid "``0``: completed transmittal of device tree node."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:274
+msgid "``1``: instruct guest to prepare for next device tree sibling node."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:276
+msgid "``2``: instruct guest to prepare for next device tree child node."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:278
+msgid "``3``: instruct guest to prepare for next device tree property."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:280
+msgid "``4``: instruct guest to ascend to parent device tree node."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:282
+msgid ""
+"``5``: instruct guest to provide additional work-area buffer via ``arg[1]``."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:284
+msgid ""
+"``990x``: instruct guest that operation took too long and to try again later."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:287
+msgid ""
+"The DRC index is encoded in the first 4-bytes of the first work area buffer. "
+"Work area (``wa``) layout, using 4-byte offsets:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:290
+msgid "``wa[0]``: DRC index of the DRC to fetch device tree nodes from."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:292
+msgid "``wa[1]``: ``0`` (hard-coded)."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:294
+msgid "``wa[2]``:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:296
+msgid "For next-sibling/next-child response:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:298
+msgid "``wa`` offset of null-terminated string denoting the new node's name."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:300
+msgid "For next-property response:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:302
+msgid "``wa`` offset of null-terminated string denoting new property's name."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:304
+msgid "``wa[3]``: for next-property response (unused otherwise):"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:306
+msgid "Byte-length of new property's value."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:308
+msgid "``wa[4]``: for next-property response (unused otherwise):"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:310
+msgid "New property's value, encoded as an OFDT-compatible byte array."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:313
+msgid "Hot plug/unplug events"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:315
+msgid ""
+"For most DR operations, the hypervisor will issue host->guest add/remove "
+"events using the EPOW/check-exception notification framework, where the host "
+"issues a check-exception interrupt, then provides an RTAS event log via an "
+"rtas-check-exception call issued by the guest in response. This framework is "
+"documented by PAPR+ v2.7, and already use in by QEMU for generating "
+"powerdown requests via EPOW events."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:322
+msgid ""
+"For DR, this framework has been extended to include hotplug events, which "
+"were previously unneeded due to direct manipulation of DR-related guest "
+"userspace tools by host-level management such as an HMC. This level of "
+"management is not applicable to KVM on Power, hence the reason for extending "
+"the notification framework to support hotplug events."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:328
+msgid ""
+"The format for these EPOW-signalled events is described below under :ref:"
+"`hot-plug-unplug-event-structure`. Note that these events are not formally "
+"part of the PAPR+ specification, and have been superseded by a newer format, "
+"also described below under :ref:`hot-plug-unplug-event-structure`, and so "
+"are now deemed a \"legacy\" format. The formats are similar, but the "
+"\"modern\" format contains additional fields/flags, which are denoted for "
+"the purposes of this documentation with ``#ifdef GUEST_SUPPORTS_MODERN`` "
+"guards."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:336
+msgid ""
+"QEMU should assume support only for \"legacy\" fields/flags unless the guest "
+"advertises support for the \"modern\" format via ``ibm,client-architecture-"
+"support`` hcall by setting byte 5, bit 6 of it's ``ibm,architecture-vec-5`` "
+"option vector structure (as described by [LoPAR]_, section B.5.2.3). As with "
+"\"legacy\" format events, \"modern\" format events are surfaced to the guest "
+"via check-exception RTAS calls, but use a dedicated event source to signal "
+"the guest. This event source is advertised to the guest by the addition of a "
+"``hot-plug-events`` node under ``/event-sources`` node of the guest's device "
+"tree using the standard format described in [LoPAR]_, section B.5.12.2."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:350
+msgid "Hot plug/unplug event structure"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:352
+msgid ""
+"The hot plug specific payload in QEMU is implemented as follows (with all "
+"values encoded in big-endian format):"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:355
+msgid ""
+"struct rtas_event_log_v6_hp {\n"
+"#define SECTION_ID_HOTPLUG              0x4850 /* HP */\n"
+"    struct section_header {\n"
+"        uint16_t section_id;            /* set to SECTION_ID_HOTPLUG */\n"
+"        uint16_t section_length;        /* sizeof(rtas_event_log_v6_hp),\n"
+"                                         * plus the length of the DRC name\n"
+"                                         * if a DRC name identifier is\n"
+"                                         * specified for hotplug_identifier\n"
+"                                         */\n"
+"        uint8_t section_version;        /* version 1 */\n"
+"        uint8_t section_subtype;        /* unused */\n"
+"        uint16_t creator_component_id;  /* unused */\n"
+"    } hdr;\n"
+"#define RTAS_LOG_V6_HP_TYPE_CPU         1\n"
+"#define RTAS_LOG_V6_HP_TYPE_MEMORY      2\n"
+"#define RTAS_LOG_V6_HP_TYPE_SLOT        3\n"
+"#define RTAS_LOG_V6_HP_TYPE_PHB         4\n"
+"#define RTAS_LOG_V6_HP_TYPE_PCI         5\n"
+"    uint8_t hotplug_type;               /* type of resource/device */\n"
+"#define RTAS_LOG_V6_HP_ACTION_ADD       1\n"
+"#define RTAS_LOG_V6_HP_ACTION_REMOVE    2\n"
+"    uint8_t hotplug_action;             /* action (add/remove) */\n"
+"#define RTAS_LOG_V6_HP_ID_DRC_NAME          1\n"
+"#define RTAS_LOG_V6_HP_ID_DRC_INDEX         2\n"
+"#define RTAS_LOG_V6_HP_ID_DRC_COUNT         3\n"
+"#ifdef GUEST_SUPPORTS_MODERN\n"
+"#define RTAS_LOG_V6_HP_ID_DRC_COUNT_INDEXED 4\n"
+"#endif\n"
+"    uint8_t hotplug_identifier;         /* type of the resource identifier,\n"
+"                                         * which serves as the "
+"discriminator\n"
+"                                         * for the 'drc' union field below\n"
+"                                         */\n"
+"#ifdef GUEST_SUPPORTS_MODERN\n"
+"    uint8_t capabilities;               /* capability flags, currently "
+"unused\n"
+"                                         * by QEMU\n"
+"                                         */\n"
+"#else\n"
+"    uint8_t reserved;\n"
+"#endif\n"
+"    union {\n"
+"        uint32_t index;                 /* DRC index of resource to take "
+"action\n"
+"                                         * on\n"
+"                                         */\n"
+"        uint32_t count;                 /* number of DR resources to take\n"
+"                                         * action on (guest chooses which)\n"
+"                                         */\n"
+"#ifdef GUEST_SUPPORTS_MODERN\n"
+"        struct {\n"
+"            uint32_t count;             /* number of DR resources to take\n"
+"                                         * action on\n"
+"                                         */\n"
+"            uint32_t index;             /* DRC index of first resource to "
+"take\n"
+"                                         * action on. guest will take "
+"action\n"
+"                                         * on DRC index <index> through\n"
+"                                         * DRC index <index + count - 1> in\n"
+"                                         * sequential order\n"
+"                                         */\n"
+"        } count_indexed;\n"
+"#endif\n"
+"        char name[1];                   /* string representing the name of "
+"the\n"
+"                                         * DRC to take action on\n"
+"                                         */\n"
+"    } drc;\n"
+"} QEMU_PACKED;"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:423
+msgid "``ibm,lrdr-capacity``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:425
+msgid ""
+"``ibm,lrdr-capacity`` is a property in the /rtas device tree node that "
+"identifies the dynamic reconfiguration capabilities of the guest. It "
+"consists of a triple consisting of ``<phys>``, ``<size>`` and ``<maxcpus>``."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:429
+msgid ""
+"``<phys>``, encoded in BE format represents the maximum address in bytes and "
+"hence the maximum memory that can be allocated to the guest."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:432
+msgid ""
+"``<size>``, encoded in BE format represents the size increments in which "
+"memory can be hot-plugged to the guest."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:435
+msgid ""
+"``<maxcpus>``, a BE-encoded integer, represents the maximum number of "
+"processors that the guest can have."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:438
+msgid ""
+"``pseries`` guests use this property to note the maximum allowed CPUs for "
+"the guest."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:442
+msgid "``ibm,dynamic-reconfiguration-memory``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:444
+msgid ""
+"``ibm,dynamic-reconfiguration-memory`` is a device tree node that represents "
+"dynamically reconfigurable logical memory blocks (LMB). This node is "
+"generated only when the guest advertises the support for it via ``ibm,client-"
+"architecture-support`` call. Memory that is not dynamically reconfigurable "
+"is represented by ``/memory`` nodes. The properties of this node that are of "
+"interest to the sPAPR memory hotplug implementation in QEMU are described "
+"here."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:453
+msgid "``ibm,lmb-size``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:455
+msgid ""
+"This 64-bit integer defines the size of each dynamically reconfigurable LMB."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:458
+msgid "``ibm,associativity-lookup-arrays``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:460
+msgid ""
+"This property defines a lookup array in which the NUMA associativity "
+"information for each LMB can be found. It is a property encoded array that "
+"begins with an integer M, the number of associativity lists followed by an "
+"integer N, the number of entries per associativity list and terminated by M "
+"associativity lists each of length N integers."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:466
+msgid ""
+"This property provides the same information as given by ``ibm,"
+"associativity`` property in a ``/memory`` node. Each assigned LMB has an "
+"index value between 0 and M-1 which is used as an index into this table to "
+"select which associativity list to use for the LMB. This index value for "
+"each LMB is defined in ``ibm,dynamic-memory`` property."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:473
+msgid "``ibm,dynamic-memory``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:475
+msgid ""
+"This property describes the dynamically reconfigurable memory. It is a "
+"property encoded array that has an integer N, the number of LMBs followed by "
+"N LMB list entries."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:479
+msgid "Each LMB list entry consists of the following elements:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:481
+msgid ""
+"Logical address of the start of the LMB encoded as a 64-bit integer. This "
+"corresponds to ``reg`` property in ``/memory`` node."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:483
+msgid ""
+"DRC index of the LMB that corresponds to ``ibm,my-drc-index`` property in a "
+"``/memory`` node."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:485
+msgid "Four bytes reserved for expansion."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:486
+msgid ""
+"Associativity list index for the LMB that is used as an index into ``ibm,"
+"associativity-lookup-arrays`` property described earlier. This is used to "
+"retrieve the right associativity list to be used for this LMB."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:489
+msgid ""
+"A 32-bit flags word. The bit at bit position ``0x00000008`` defines whether "
+"the LMB is assigned to the partition as of boot time."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:493
+msgid "``ibm,dynamic-memory-v2``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:495
+msgid ""
+"This property describes the dynamically reconfigurable memory. This is an "
+"alternate and newer way to describe dynamically reconfigurable memory. It is "
+"a property encoded array that has an integer N (the number of LMB set "
+"entries) followed by N LMB set entries. There is an LMB set entry for each "
+"sequential group of LMBs that share common attributes."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:501
+msgid "Each LMB set entry consists of the following elements:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:503
+msgid "Number of sequential LMBs in the entry represented by a 32-bit integer."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:504
+msgid ""
+"Logical address of the first LMB in the set encoded as a 64-bit integer."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:505
+msgid "DRC index of the first LMB in the set."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:506
+msgid ""
+"Associativity list index that is used as an index into ``ibm,associativity-"
+"lookup-arrays`` property described earlier. This is used to retrieve the "
+"right associativity list to be used for all the LMBs in this set."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hotplug.rst:510
+msgid "A 32-bit flags word that applies to all the LMBs in the set."
+msgstr ""
