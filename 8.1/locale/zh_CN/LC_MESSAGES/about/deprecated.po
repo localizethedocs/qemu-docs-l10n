@@ -1,0 +1,699 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../about/deprecated.rst:4
+msgid "Deprecated features"
+msgstr ""
+
+#: ../../../about/deprecated.rst:6
+msgid ""
+"In general features are intended to be supported indefinitely once "
+"introduced into QEMU. In the event that a feature needs to be removed, it "
+"will be listed in this section. The feature will remain functional for the "
+"release in which it was deprecated and one further release. After these two "
+"releases, the feature is liable to be removed. Deprecated features may also "
+"generate warnings on the console when QEMU starts up, or if activated via a "
+"monitor command, however, this is not a mandatory requirement."
+msgstr ""
+
+#: ../../../about/deprecated.rst:14
+msgid ""
+"Prior to the 2.10.0 release there was no official policy on how long "
+"features would be deprecated prior to their removal, nor any documented list "
+"of which features were deprecated. Thus any features deprecated prior to "
+"2.10.0 will be treated as if they were first deprecated in the 2.10.0 "
+"release."
+msgstr ""
+
+#: ../../../about/deprecated.rst:20
+msgid "What follows is a list of all features currently marked as deprecated."
+msgstr ""
+
+#: ../../../about/deprecated.rst:24
+msgid "Build options"
+msgstr ""
+
+#: ../../../about/deprecated.rst:27
+msgid "``gprof`` builds (since 8.0)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:29
+msgid ""
+"The ``--enable-gprof`` configure setting relies on compiler instrumentation "
+"to gather its data which can distort the generated profile. As other non-"
+"instrumenting tools are available that give a more holistic view of the "
+"system with non-instrumented binaries we are deprecating the build option "
+"and no longer defend it in CI. The ``--enable-gcov`` build option remains "
+"for analysis test case coverage."
+msgstr ""
+
+#: ../../../about/deprecated.rst:38
+msgid "System emulator command line arguments"
+msgstr ""
+
+#: ../../../about/deprecated.rst:41
+msgid "``QEMU_AUDIO_`` environment variables and ``-audio-help`` (since 4.0)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:43
+msgid ""
+"The ``-audiodev`` argument is now the preferred way to specify audio backend "
+"settings instead of environment variables.  To ease migration to the new "
+"format, the ``-audiodev-help`` option can be used to convert the current "
+"values of the environment variables to ``-audiodev`` options."
+msgstr ""
+
+#: ../../../about/deprecated.rst:49
+msgid ""
+"Creating sound card devices and vnc without ``audiodev=`` property (since "
+"4.2)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:51
+msgid ""
+"When not using the deprecated legacy audio config, each sound card should "
+"specify an ``audiodev=`` property.  Additionally, when using vnc, you should "
+"specify an ``audiodev=`` property if you plan to transmit audio through the "
+"VNC protocol."
+msgstr ""
+
+#: ../../../about/deprecated.rst:57
+msgid "Short-form boolean options (since 6.0)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:59
+msgid ""
+"Boolean options such as ``share=on``/``share=off`` could be written in short "
+"form as ``share`` and ``noshare``.  This is now deprecated and will cause a "
+"warning."
+msgstr ""
+
+#: ../../../about/deprecated.rst:64
+msgid "``delay`` option for socket character devices (since 6.0)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:66
+msgid ""
+"The replacement for the ``nodelay`` short-form boolean option is "
+"``nodelay=on`` rather than ``delay=off``."
+msgstr ""
+
+#: ../../../about/deprecated.rst:70
+msgid "``-smp`` (\"parameter=0\" SMP configurations) (since 6.2)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:72
+msgid "Specified CPU topology parameters must be greater than zero."
+msgstr ""
+
+#: ../../../about/deprecated.rst:74
+msgid ""
+"In the SMP configuration, users should either provide a CPU topology "
+"parameter with a reasonable value (greater than zero) or just omit it and "
+"QEMU will compute the missing value."
+msgstr ""
+
+#: ../../../about/deprecated.rst:78
+msgid ""
+"However, historically it was implicitly allowed for users to provide a "
+"parameter with zero value, which is meaningless and could also possibly "
+"cause unexpected results in the -smp parsing. So support for this kind of "
+"configurations (e.g. -smp 8,sockets=0) is deprecated since 6.2 and will be "
+"removed in the near future, users have to ensure that all the topology "
+"members described with -smp are greater than zero."
+msgstr ""
+
+#: ../../../about/deprecated.rst:86
+msgid "Plugin argument passing through ``arg=<string>`` (since 6.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:88
+msgid ""
+"Passing TCG plugins arguments through ``arg=`` is redundant is makes the "
+"command-line less readable, especially when the argument itself consist of a "
+"name and a value, e.g. ``-plugin plugin_name,arg=\"arg_name=arg_value\"``. "
+"Therefore, the usage of ``arg`` is redundant. Single-word arguments are "
+"treated as short-form boolean values, and passed to plugins as "
+"``arg_name=on``. However, short-form booleans are deprecated and full "
+"explicit ``arg_name=on`` form is preferred."
+msgstr ""
+
+#: ../../../about/deprecated.rst:97
+msgid "``-no-hpet`` (since 8.0)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:99
+msgid ""
+"The HPET setting has been turned into a machine property. Use ``-machine "
+"hpet=off`` instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:103
+msgid "``-no-acpi`` (since 8.0)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:105
+msgid ""
+"The ``-no-acpi`` setting has been turned into a machine property. Use ``-"
+"machine acpi=off`` instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:109
+msgid "``-accel hax`` (since 8.0)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:111
+msgid ""
+"The HAXM project has been retired (see https://github.com/intel/"
+"haxm#status). Use \"whpx\" (on Windows) or \"hvf\" (on macOS) instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:115
+msgid "``-async-teardown`` (since 8.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:117
+msgid "Use ``-run-with async-teardown=on`` instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:120
+msgid "``-chroot`` (since 8.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:122
+msgid "Use ``-run-with chroot=dir`` instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:125 ../../../about/deprecated.rst:135
+msgid "``-singlestep`` (since 8.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:127
+msgid ""
+"The ``-singlestep`` option has been turned into an accelerator property, and "
+"given a name that better reflects what it actually does. Use ``-accel tcg,"
+"one-insn-per-tb=on`` instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:132
+msgid "User-mode emulator command line arguments"
+msgstr ""
+
+#: ../../../about/deprecated.rst:137
+msgid ""
+"The ``-singlestep`` option has been given a name that better reflects what "
+"it actually does. For both linux-user and bsd-user, use the new ``-one-insn-"
+"per-tb`` option instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:142
+msgid "QEMU Machine Protocol (QMP) commands"
+msgstr ""
+
+#: ../../../about/deprecated.rst:145
+msgid ""
+"``blockdev-open-tray``, ``blockdev-close-tray`` argument ``device`` (since "
+"2.8)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:147 ../../../about/deprecated.rst:152
+#: ../../../about/deprecated.rst:157 ../../../about/deprecated.rst:162
+msgid "Use argument ``id`` instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:150
+msgid "``eject`` argument ``device`` (since 2.8)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:155
+msgid "``blockdev-change-medium`` argument ``device`` (since 2.8)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:160
+msgid "``block_set_io_throttle`` argument ``device`` (since 2.8)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:165
+msgid "``blockdev-add`` empty string argument ``backing`` (since 2.10)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:167
+msgid "Use argument value ``null`` instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:170
+msgid "``block-commit`` arguments ``base`` and ``top`` (since 3.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:172
+msgid "Use arguments ``base-node`` and ``top-node`` instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:175
+msgid "``nbd-server-add`` and ``nbd-server-remove`` (since 5.2)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:177
+msgid ""
+"Use the more generic commands ``block-export-add`` and ``block-export-del`` "
+"instead.  As part of this deprecation, where ``nbd-server-add`` used a "
+"single ``bitmap``, the new ``block-export-add`` uses a list of ``bitmaps``."
+msgstr ""
+
+#: ../../../about/deprecated.rst:182
+msgid "``query-qmp-schema`` return value member ``values`` (since 6.2)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:184
+msgid ""
+"Member ``values`` in return value elements with meta-type ``enum`` is "
+"deprecated.  Use ``members`` instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:188
+msgid "``drive-backup`` (since 6.2)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:190
+msgid ""
+"Use ``blockdev-backup`` in combination with ``blockdev-add`` instead. This "
+"change primarily separates the creation/opening process of the backup target "
+"with explicit, separate steps. ``blockdev-backup`` uses mostly the same "
+"arguments as ``drive-backup``, except the ``format`` and ``mode`` options "
+"are removed in favor of using explicit ``blockdev-create`` and ``blockdev-"
+"add`` calls. See :doc:`/interop/live-block-operations` for details."
+msgstr ""
+
+#: ../../../about/deprecated.rst:199
+msgid "Incorrectly typed ``device_add`` arguments (since 6.2)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:201
+msgid ""
+"Due to shortcomings in the internal implementation of ``device_add``, QEMU "
+"incorrectly accepts certain invalid arguments: Any object or list arguments "
+"are silently ignored. Other argument types are not checked, but an implicit "
+"conversion happens, so that e.g. string values can be assigned to integer "
+"device properties or vice versa."
+msgstr ""
+
+#: ../../../about/deprecated.rst:207
+msgid ""
+"This is a bug in QEMU that will be fixed in the future so that previously "
+"accepted incorrect commands will return an error. Users should make sure "
+"that all arguments passed to ``device_add`` are consistent with the "
+"documented property types."
+msgstr ""
+
+#: ../../../about/deprecated.rst:213
+msgid "``StatusInfo`` member ``singlestep`` (since 8.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:215
+msgid ""
+"The ``singlestep`` member of the ``StatusInfo`` returned from the ``query-"
+"status`` command is deprecated. This member has a confusing name and it "
+"never did what the documentation claimed or what its name suggests. We do "
+"not believe that anybody is actually using the information provided in this "
+"member."
+msgstr ""
+
+#: ../../../about/deprecated.rst:221
+msgid ""
+"The information it reports is whether the TCG JIT is in \"one instruction "
+"per translated block\" mode (which can be set on the command line or via the "
+"HMP, but not via QMP). The information remains available via the HMP 'info "
+"jit' command."
+msgstr ""
+
+#: ../../../about/deprecated.rst:227
+msgid "QEMU Machine Protocol (QMP) events"
+msgstr ""
+
+#: ../../../about/deprecated.rst:230
+msgid "``MEM_UNPLUG_ERROR`` (since 6.2)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:232
+msgid "Use the more generic event ``DEVICE_UNPLUG_GUEST_ERROR`` instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:235
+msgid "``vcpu`` trace events (since 8.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:237
+msgid ""
+"The ability to instrument QEMU helper functions with vCPU-aware trace points "
+"was removed in 7.0. However QMP still exposed the vcpu parameter. This "
+"argument has now been deprecated and the remaining remaining trace points "
+"that used it are selected just by name."
+msgstr ""
+
+#: ../../../about/deprecated.rst:243
+msgid "Human Monitor Protocol (HMP) commands"
+msgstr ""
+
+#: ../../../about/deprecated.rst:246
+msgid "``singlestep`` (since 8.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:248
+msgid ""
+"The ``singlestep`` command has been replaced by the ``one-insn-per-tb`` "
+"command, which has the same behaviour but a less misleading name."
+msgstr ""
+
+#: ../../../about/deprecated.rst:252
+msgid "Host Architectures"
+msgstr ""
+
+#: ../../../about/deprecated.rst:255
+msgid "BE MIPS (since 7.2)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:257
+msgid ""
+"As Debian 10 (\"Buster\") moved into LTS the big endian 32 bit version of "
+"MIPS moved out of support making it hard to maintain our cross-compilation "
+"CI tests of the architecture. As we no longer have CI coverage support may "
+"bitrot away before the deprecation process completes. The little endian "
+"variants of MIPS (both 32 and 64 bit) are still a supported host "
+"architecture."
+msgstr ""
+
+#: ../../../about/deprecated.rst:265
+msgid "System emulation on 32-bit x86 hosts (since 8.0)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:267
+msgid ""
+"Support for 32-bit x86 host deployments is increasingly uncommon in "
+"mainstream OS distributions given the widespread availability of 64-bit x86 "
+"hardware. The QEMU project no longer considers 32-bit x86 support for system "
+"emulation to be an effective use of its limited resources, and thus intends "
+"to discontinue it. Since all recent x86 hardware from the past >10 years is "
+"capable of the 64-bit x86 extensions, a corresponding 64-bit OS should be "
+"used instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:276
+msgid "System emulator machines"
+msgstr ""
+
+#: ../../../about/deprecated.rst:279
+msgid "Arm ``virt`` machine ``dtb-kaslr-seed`` property (since 7.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:281
+msgid ""
+"The ``dtb-kaslr-seed`` property on the ``virt`` board has been deprecated; "
+"use the new name ``dtb-randomness`` instead. The new name better reflects "
+"the way this property affects all random data within the device tree blob, "
+"not just the ``kaslr-seed`` node."
+msgstr ""
+
+#: ../../../about/deprecated.rst:287
+msgid "``pc-i440fx-1.4`` up to ``pc-i440fx-1.7`` (since 7.0)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:289
+msgid ""
+"These old machine types are quite neglected nowadays and thus might have "
+"various pitfalls with regards to live migration. Use a newer machine type "
+"instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:295
+msgid "Backend options"
+msgstr ""
+
+#: ../../../about/deprecated.rst:298
+msgid "Using non-persistent backing file with pmem=on (since 6.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:300
+msgid ""
+"This option is used when ``memory-backend-file`` is consumed by emulated "
+"NVDIMM device. However enabling ``memory-backend-file.pmem`` option, when "
+"backing file is (a) not DAX capable or (b) not on a filesystem that support "
+"direct mapping of persistent memory, is not safe and may lead to data loss "
+"or corruption in case of host crash. Options are:"
+msgstr ""
+
+#: ../../../about/deprecated.rst:307
+msgid ""
+"modify VM configuration to set ``pmem=off`` to continue using fake NVDIMM "
+"(without persistence guaranties) with backing file on non DAX storage"
+msgstr ""
+
+#: ../../../about/deprecated.rst:309
+msgid ""
+"move backing file to NVDIMM storage and keep ``pmem=on`` (to have NVDIMM "
+"with persistence guaranties)."
+msgstr ""
+
+#: ../../../about/deprecated.rst:313
+msgid "Device options"
+msgstr ""
+
+#: ../../../about/deprecated.rst:316
+msgid "Emulated device options"
+msgstr ""
+
+#: ../../../about/deprecated.rst:319
+msgid "``-device virtio-blk,scsi=on|off`` (since 5.0)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:321
+msgid ""
+"The virtio-blk SCSI passthrough feature is a legacy VIRTIO feature.  VIRTIO "
+"1.0 and later do not support it because the virtio-scsi device was "
+"introduced for full SCSI support.  Use virtio-scsi instead when SCSI "
+"passthrough is required."
+msgstr ""
+
+#: ../../../about/deprecated.rst:325
+msgid ""
+"Note this also applies to ``-device virtio-blk-pci,scsi=on|off``, which is "
+"an alias."
+msgstr ""
+
+#: ../../../about/deprecated.rst:329
+msgid "``-device nvme-ns,eui64-default=on|off`` (since 7.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:331
+msgid ""
+"In QEMU versions 6.1, 6.2 and 7.0, the ``nvme-ns`` generates an EUI-64 "
+"identifier that is not globally unique. If an EUI-64 identifier is required, "
+"the user must set it explicitly using the ``nvme-ns`` device parameter "
+"``eui64``."
+msgstr ""
+
+#: ../../../about/deprecated.rst:336
+msgid "``-device nvme,use-intel-id=on|off`` (since 7.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:338
+msgid ""
+"The ``nvme`` device originally used a PCI Vendor/Device Identifier "
+"combination from Intel that was not properly allocated. Since version 5.2, "
+"the controller has used a properly allocated identifier. Deprecate the ``use-"
+"intel-id`` machine compatibility parameter."
+msgstr ""
+
+#: ../../../about/deprecated.rst:344
+msgid "``-device cxl-type3,memdev=xxxx`` (since 8.0)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:346
+msgid ""
+"The ``cxl-type3`` device initially only used a single memory backend.  With "
+"the addition of volatile memory support, it is now necessary to distinguish "
+"between persistent and volatile memory backends.  As such, memdev is "
+"deprecated in favor of persistent-memdev."
+msgstr ""
+
+#: ../../../about/deprecated.rst:352
+msgid "``-fsdev proxy`` and ``-virtfs proxy`` (since 8.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:354
+msgid ""
+"The 9p ``proxy`` filesystem backend driver has been deprecated and will be "
+"removed (along with its proxy helper daemon) in a future version of QEMU. "
+"Please use ``-fsdev local`` or ``-virtfs local`` for using the 9p ``local`` "
+"filesystem backend, or alternatively consider deploying virtiofsd instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:359
+msgid ""
+"The 9p ``proxy`` backend was originally developed as an alternative to the "
+"9p ``local`` backend. The idea was to enhance security by dispatching actual "
+"low level filesystem operations from 9p server (QEMU process) over to a "
+"separate process (the virtfs-proxy-helper binary). However this alternative "
+"never gained momentum. The proxy backend is much slower than the local "
+"backend, hasn't seen any development in years, and showed to be less secure, "
+"especially due to the fact that its helper daemon must be run as root, "
+"whereas with the local backend QEMU is typically run as unprivileged user "
+"and allows to tighten behaviour by mapping permissions et al by using its "
+"'mapped' security model option."
+msgstr ""
+
+#: ../../../about/deprecated.rst:369
+msgid ""
+"Nowadays it would make sense to reimplement the ``proxy`` backend by using "
+"QEMU's ``vhost`` feature, which would eliminate the high latency costs under "
+"which the 9p ``proxy`` backend currently suffers. However as of to date "
+"nobody has indicated plans for such kind of reimplementation unfortunately."
+msgstr ""
+
+#: ../../../about/deprecated.rst:376
+msgid "Block device options"
+msgstr ""
+
+#: ../../../about/deprecated.rst:379
+msgid "``\"backing\": \"\"`` (since 2.12)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:381
+msgid ""
+"In order to prevent QEMU from automatically opening an image's backing "
+"chain, use ``\"backing\": null`` instead."
+msgstr ""
+
+#: ../../../about/deprecated.rst:385
+msgid "``rbd`` keyvalue pair encoded filenames: ``\"\"`` (since 3.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:387
+msgid ""
+"Options for ``rbd`` should be specified according to its runtime options, "
+"like other block drivers.  Legacy parsing of keyvalue pair encoded filenames "
+"is useful to open images with the old format for backing files; These image "
+"files should be updated to use the current format."
+msgstr ""
+
+#: ../../../about/deprecated.rst:392
+msgid "Example of legacy encoding::"
+msgstr ""
+
+#: ../../../about/deprecated.rst:394
+msgid "json:{\"file.driver\":\"rbd\", \"file.filename\":\"rbd:rbd/name\"}"
+msgstr ""
+
+#: ../../../about/deprecated.rst:396
+msgid "The above, converted to the current supported format::"
+msgstr ""
+
+#: ../../../about/deprecated.rst:398
+msgid ""
+"json:{\"file.driver\":\"rbd\", \"file.pool\":\"rbd\", \"file.image\":"
+"\"name\"}"
+msgstr ""
+
+#: ../../../about/deprecated.rst:401
+msgid "``iscsi,password=xxx`` (since 8.0)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:403
+msgid ""
+"Specifying the iSCSI password in plain text on the command line using the "
+"``password`` option is insecure. The ``password-secret`` option should be "
+"used instead, to refer to a ``--object secret...`` instance that provides a "
+"password via a file, or encrypted."
+msgstr ""
+
+#: ../../../about/deprecated.rst:409
+msgid "Backwards compatibility"
+msgstr ""
+
+#: ../../../about/deprecated.rst:412
+msgid "Runnability guarantee of CPU models (since 4.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:414
+msgid ""
+"Previous versions of QEMU never changed existing CPU models in ways that "
+"introduced additional host software or hardware requirements to the VM.  "
+"This allowed management software to safely change the machine type of an "
+"existing VM without introducing new requirements (\"runnability "
+"guarantee\").  This prevented CPU models from being updated to include CPU "
+"vulnerability mitigations, leaving guests vulnerable in the default "
+"configuration."
+msgstr ""
+
+#: ../../../about/deprecated.rst:423
+msgid ""
+"The CPU model runnability guarantee won't apply anymore to existing CPU "
+"models.  Management software that needs runnability guarantees must resolve "
+"the CPU model aliases using the ``alias-of`` field returned by the ``query-"
+"cpu-definitions`` QMP command."
+msgstr ""
+
+#: ../../../about/deprecated.rst:429
+msgid ""
+"While those guarantees are kept, the return value of ``query-cpu-"
+"definitions`` will have existing CPU model aliases point to a version that "
+"doesn't break runnability guarantees (specifically, version 1 of those CPU "
+"models).  In future QEMU versions, aliases will point to newer CPU model "
+"versions depending on the machine type, so management software must resolve "
+"CPU model aliases before starting a virtual machine."
+msgstr ""
+
+#: ../../../about/deprecated.rst:438
+msgid "QEMU guest agent"
+msgstr ""
+
+#: ../../../about/deprecated.rst:441
+msgid "``--blacklist`` command line option (since 7.2)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:443
+msgid ""
+"``--blacklist`` has been replaced by ``--block-rpcs`` (which is a better "
+"wording for what this option does). The short form ``-b`` still stays the "
+"same and thus is the preferred way for scripts that should run with both, "
+"older and future versions of QEMU."
+msgstr ""
+
+#: ../../../about/deprecated.rst:449
+msgid "``blacklist`` config file option (since 7.2)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:451
+msgid ""
+"The ``blacklist`` config file option has been renamed to ``block-rpcs`` (to "
+"be in sync with the renaming of the corresponding command line option)."
+msgstr ""
+
+#: ../../../about/deprecated.rst:456
+msgid "Migration"
+msgstr ""
+
+#: ../../../about/deprecated.rst:459
+msgid "``skipped`` MigrationStats field (since 8.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:461
+msgid ""
+"``skipped`` field in Migration stats has been deprecated.  It hasn't been "
+"used for more than 10 years."
+msgstr ""
