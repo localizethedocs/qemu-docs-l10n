@@ -47,7 +47,7 @@ msgstr ""
 
 #: ../../../system/riscv/shakti-c.rst:17
 msgid "Supported devices"
-msgstr ""
+msgstr "支援的裝置"
 
 #: ../../../system/riscv/shakti-c.rst:19
 msgid "The ``shakti_c`` machine supports the following devices:"
@@ -71,7 +71,7 @@ msgstr ""
 
 #: ../../../system/riscv/shakti-c.rst:27
 msgid "Boot options"
-msgstr ""
+msgstr "開機選項"
 
 #: ../../../system/riscv/shakti-c.rst:29
 msgid ""
@@ -98,6 +98,9 @@ msgid ""
 "$ cd shakti-sdk\n"
 "$ make software PROGRAM=loopback TARGET=artix7_100t"
 msgstr ""
+"$ git clone https://gitlab.com/behindbytes/shakti-sdk.git\n"
+"$ cd shakti-sdk\n"
+"$ make software PROGRAM=loopback TARGET=artix7_100t"
 
 #: ../../../system/riscv/shakti-c.rst:45
 msgid "Binary would be generated in:"
@@ -119,6 +122,9 @@ msgid ""
 "shakti_sdk_qemu.zip\n"
 "$ unzip shakti_sdk_qemu.zip"
 msgstr ""
+"$ wget -c https://gitlab.com/behindbytes/shakti-binaries/-/raw/master/sdk/"
+"shakti_sdk_qemu.zip\n"
+"$ unzip shakti_sdk_qemu.zip"
 
 #: ../../../system/riscv/shakti-c.rst:56
 msgid "Then we can run the UART example using:"
@@ -129,6 +135,8 @@ msgid ""
 "$ qemu-system-riscv64 -M shakti_c -nographic \\\n"
 "   -bios path/to/shakti_sdk_qemu/loopback.shakti"
 msgstr ""
+"$ qemu-system-riscv64 -M shakti_c -nographic \\\n"
+"   -bios path/to/shakti_sdk_qemu/loopback.shakti"
 
 #: ../../../system/riscv/shakti-c.rst:64
 msgid "OpenSBI"
@@ -148,6 +156,13 @@ msgid ""
 "$ export FW_FDT_PATH=./shakti.dtb\n"
 "$ make PLATFORM=generic"
 msgstr ""
+"$ git clone https://github.com/riscv/opensbi.git -b v0.9\n"
+"$ cd opensbi\n"
+"$ wget -c https://gitlab.com/behindbytes/shakti-binaries/-/raw/master/dts/"
+"shakti.dtb\n"
+"$ export CROSS_COMPILE=riscv64-unknown-elf-\n"
+"$ export FW_FDT_PATH=./shakti.dtb\n"
+"$ make PLATFORM=generic"
 
 #: ../../../system/riscv/shakti-c.rst:76
 msgid ""
@@ -160,3 +175,5 @@ msgid ""
 "$ qemu-system-riscv64 -M shakti_c -nographic \\\n"
 "   -bios path/to/fw_payload.elf"
 msgstr ""
+"$ qemu-system-riscv64 -M shakti_c -nographic \\\n"
+"   -bios path/to/fw_payload.elf"
