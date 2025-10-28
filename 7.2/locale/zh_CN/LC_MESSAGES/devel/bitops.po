@@ -1,0 +1,673 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 7.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/bitops.rst:3
+msgid "Bitwise operations"
+msgstr ""
+
+#: ../../../devel/bitops.rst:5
+msgid ""
+"The header ``qemu/bitops.h`` provides utility functions for performing "
+"bitwise operations."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:1
+msgid "**Functions operating on arrays of bits**"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:32
+msgid ""
+"We provide a set of functions which work on arbitrary-length arrays of bits. "
+"These come in several flavours which vary in what the type of the underlying "
+"storage for the bits is:"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:36
+msgid "Bits stored in an array of 'unsigned long': set_bit(), clear_bit(), etc"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:37
+msgid "Bits stored in an array of 'uint32_t': set_bit32(), clear_bit32(), etc"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:39
+msgid ""
+"Because the 'unsigned long' type has a size which varies between host "
+"systems, the versions using 'uint32_t' are often preferable. This is "
+"particularly the case in a device model where there may be some guest-"
+"visible register view of the bit array."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:44
+msgid ""
+"We do not currently implement uint32_t versions of find_last_bit(), "
+"find_next_bit(), find_next_zero_bit(), find_first_bit() or "
+"find_first_zero_bit(), because we haven't yet needed them. If you need them "
+"you should implement them similarly to the 'unsigned long' versions."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:50
+msgid ""
+"You can declare a bitmap to be used with these functions via the "
+"DECLARE_BITMAP and DECLARE_BITMAP32 macros in bitmap.h."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:53
+msgid "**'unsigned long' bit array APIs**"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:63 ../../../../include/qemu/bitops.h:253
+msgid "Set a bit in memory"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:65 ../../../../include/qemu/bitops.h:78
+#: ../../../../include/qemu/bitops.h:91 ../../../../include/qemu/bitops.h:104
+#: ../../../../include/qemu/bitops.h:117 ../../../../include/qemu/bitops.h:132
+#: ../../../../include/qemu/bitops.h:147 ../../../../include/qemu/bitops.h:162
+#: ../../../../include/qemu/bitops.h:172 ../../../../include/qemu/bitops.h:183
+#: ../../../../include/qemu/bitops.h:196 ../../../../include/qemu/bitops.h:210
+#: ../../../../include/qemu/bitops.h:234 ../../../../include/qemu/bitops.h:255
+#: ../../../../include/qemu/bitops.h:268 ../../../../include/qemu/bitops.h:281
+#: ../../../../include/qemu/bitops.h:294 ../../../../include/qemu/bitops.h:307
+#: ../../../../include/qemu/bitops.h:320 ../../../../include/qemu/bitops.h:335
+#: ../../../../include/qemu/bitops.h:350 ../../../../include/qemu/bitops.h:365
+#: ../../../../include/qemu/bitops.h:383 ../../../../include/qemu/bitops.h:393
+#: ../../../../include/qemu/bitops.h:403 ../../../../include/qemu/bitops.h:413
+#: ../../../../include/qemu/bitops.h:423 ../../../../include/qemu/bitops.h:433
+#: ../../../../include/qemu/bitops.h:443 ../../../../include/qemu/bitops.h:453
+#: ../../../../include/qemu/bitops.h:463 ../../../../include/qemu/bitops.h:472
+#: ../../../../include/qemu/bitops.h:483 ../../../../include/qemu/bitops.h:491
+#: ../../../../include/qemu/bitops.h:510 ../../../../include/qemu/bitops.h:529
+#: ../../../../include/qemu/bitops.h:548 ../../../../include/qemu/bitops.h:567
+#: ../../../../include/qemu/bitops.h:592 ../../../../include/qemu/bitops.h:617
+#: ../../../../include/qemu/bitops.h:643 ../../../../include/qemu/bitops.h:669
+#: ../../../../include/qemu/bitops.h:698 ../../../../include/qemu/bitops.h:728
+#: ../../../../include/qemu/bitops.h:758
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:67 ../../../../include/qemu/bitops.h:80
+#: ../../../../include/qemu/bitops.h:93 ../../../../include/qemu/bitops.h:106
+#: ../../../../include/qemu/bitops.h:119 ../../../../include/qemu/bitops.h:134
+#: ../../../../include/qemu/bitops.h:149 ../../../../include/qemu/bitops.h:164
+#: ../../../../include/qemu/bitops.h:257 ../../../../include/qemu/bitops.h:270
+#: ../../../../include/qemu/bitops.h:283 ../../../../include/qemu/bitops.h:296
+#: ../../../../include/qemu/bitops.h:309 ../../../../include/qemu/bitops.h:322
+#: ../../../../include/qemu/bitops.h:337 ../../../../include/qemu/bitops.h:352
+#: ../../../../include/qemu/bitops.h:367
+msgid "``long nr``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:64 ../../../../include/qemu/bitops.h:77
+#: ../../../../include/qemu/bitops.h:254 ../../../../include/qemu/bitops.h:267
+msgid "the bit to set"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:66 ../../../../include/qemu/bitops.h:79
+#: ../../../../include/qemu/bitops.h:92 ../../../../include/qemu/bitops.h:105
+#: ../../../../include/qemu/bitops.h:118 ../../../../include/qemu/bitops.h:133
+#: ../../../../include/qemu/bitops.h:148
+msgid "``unsigned long *addr``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:65 ../../../../include/qemu/bitops.h:78
+#: ../../../../include/qemu/bitops.h:255 ../../../../include/qemu/bitops.h:268
+msgid "the address to start counting from"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:76 ../../../../include/qemu/bitops.h:266
+msgid "Set a bit in memory atomically"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:89 ../../../../include/qemu/bitops.h:279
+msgid "Clears a bit in memory"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:90 ../../../../include/qemu/bitops.h:131
+#: ../../../../include/qemu/bitops.h:280 ../../../../include/qemu/bitops.h:293
+#: ../../../../include/qemu/bitops.h:334
+msgid "Bit to clear"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:91 ../../../../include/qemu/bitops.h:104
+#: ../../../../include/qemu/bitops.h:162 ../../../../include/qemu/bitops.h:281
+#: ../../../../include/qemu/bitops.h:294 ../../../../include/qemu/bitops.h:307
+#: ../../../../include/qemu/bitops.h:365
+msgid "Address to start counting from"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:102 ../../../../include/qemu/bitops.h:305
+msgid "Toggle a bit in memory"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:103 ../../../../include/qemu/bitops.h:146
+#: ../../../../include/qemu/bitops.h:306 ../../../../include/qemu/bitops.h:349
+msgid "Bit to change"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:115 ../../../../include/qemu/bitops.h:318
+msgid "Set a bit and return its old value"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:116 ../../../../include/qemu/bitops.h:319
+msgid "Bit to set"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:117 ../../../../include/qemu/bitops.h:132
+#: ../../../../include/qemu/bitops.h:147 ../../../../include/qemu/bitops.h:320
+#: ../../../../include/qemu/bitops.h:335 ../../../../include/qemu/bitops.h:350
+msgid "Address to count from"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:130 ../../../../include/qemu/bitops.h:333
+msgid "Clear a bit and return its old value"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:145 ../../../../include/qemu/bitops.h:348
+msgid "Change a bit and return its old value"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:160 ../../../../include/qemu/bitops.h:363
+msgid "Determine whether a bit is set"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:161 ../../../../include/qemu/bitops.h:364
+msgid "bit number to test"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:163 ../../../../include/qemu/bitops.h:174
+#: ../../../../include/qemu/bitops.h:185 ../../../../include/qemu/bitops.h:198
+#: ../../../../include/qemu/bitops.h:212 ../../../../include/qemu/bitops.h:236
+msgid "``const unsigned long *addr``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:170
+msgid "find the last set bit in a memory region"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:171 ../../../../include/qemu/bitops.h:209
+#: ../../../../include/qemu/bitops.h:233
+msgid "The address to start the search at"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:173 ../../../../include/qemu/bitops.h:184
+#: ../../../../include/qemu/bitops.h:197 ../../../../include/qemu/bitops.h:211
+#: ../../../../include/qemu/bitops.h:235
+msgid "``unsigned long size``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:172 ../../../../include/qemu/bitops.h:210
+#: ../../../../include/qemu/bitops.h:234
+msgid "The maximum size to search"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:174 ../../../../include/qemu/bitops.h:185
+#: ../../../../include/qemu/bitops.h:198 ../../../../include/qemu/bitops.h:212
+#: ../../../../include/qemu/bitops.h:236 ../../../../include/qemu/bitops.h:495
+#: ../../../../include/qemu/bitops.h:514 ../../../../include/qemu/bitops.h:533
+#: ../../../../include/qemu/bitops.h:552 ../../../../include/qemu/bitops.h:571
+#: ../../../../include/qemu/bitops.h:596 ../../../../include/qemu/bitops.h:622
+#: ../../../../include/qemu/bitops.h:648 ../../../../include/qemu/bitops.h:671
+#: ../../../../include/qemu/bitops.h:700 ../../../../include/qemu/bitops.h:730
+#: ../../../../include/qemu/bitops.h:760
+msgid "**Description**"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:174
+msgid ""
+"Returns the bit number of the last set bit, or **size** if there is no set "
+"bit in the bitmap."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:181
+msgid "find the next set bit in a memory region"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:182 ../../../../include/qemu/bitops.h:195
+msgid "The address to base the search on"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:184 ../../../../include/qemu/bitops.h:197
+msgid "The bitmap size in bits"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:186 ../../../../include/qemu/bitops.h:199
+msgid "``unsigned long offset``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:183 ../../../../include/qemu/bitops.h:196
+msgid "The bitnumber to start searching at"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:186
+msgid ""
+"Returns the bit number of the next set bit, or **size** if there are no "
+"further set bits in the bitmap."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:194
+msgid "find the next cleared bit in a memory region"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:199
+msgid ""
+"Returns the bit number of the next cleared bit, or **size** if there are no "
+"further clear bits in the bitmap."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:208
+msgid "find the first set bit in a memory region"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:212
+msgid ""
+"Returns the bit number of the first set bit, or **size** if there is no set "
+"bit in the bitmap."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:232
+msgid "find the first cleared bit in a memory region"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:236
+msgid ""
+"Returns the bit number of the first cleared bit, or **size** if there is no "
+"clear bit in the bitmap."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:240
+msgid "**'uint32_t' bit array APIs**"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:256 ../../../../include/qemu/bitops.h:269
+#: ../../../../include/qemu/bitops.h:282 ../../../../include/qemu/bitops.h:295
+#: ../../../../include/qemu/bitops.h:308 ../../../../include/qemu/bitops.h:321
+#: ../../../../include/qemu/bitops.h:336 ../../../../include/qemu/bitops.h:351
+msgid "``uint32_t *addr``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:292
+msgid "Clears a bit in memory atomically"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:366
+msgid "``const uint32_t *addr``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:368
+msgid "**Miscellaneous bit operations on single values**"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:374
+msgid ""
+"These functions are a collection of useful operations (rotations, bit "
+"extract, bit deposit, etc) on single integer values."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:381
+msgid "rotate an 8-bit value left"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:385 ../../../../include/qemu/bitops.h:395
+msgid "``uint8_t word``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:382 ../../../../include/qemu/bitops.h:392
+#: ../../../../include/qemu/bitops.h:402 ../../../../include/qemu/bitops.h:412
+#: ../../../../include/qemu/bitops.h:422 ../../../../include/qemu/bitops.h:432
+#: ../../../../include/qemu/bitops.h:442 ../../../../include/qemu/bitops.h:452
+msgid "value to rotate"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:384 ../../../../include/qemu/bitops.h:394
+#: ../../../../include/qemu/bitops.h:404 ../../../../include/qemu/bitops.h:414
+#: ../../../../include/qemu/bitops.h:424 ../../../../include/qemu/bitops.h:434
+#: ../../../../include/qemu/bitops.h:444 ../../../../include/qemu/bitops.h:454
+msgid "``unsigned int shift``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:383 ../../../../include/qemu/bitops.h:393
+#: ../../../../include/qemu/bitops.h:403 ../../../../include/qemu/bitops.h:413
+#: ../../../../include/qemu/bitops.h:423 ../../../../include/qemu/bitops.h:433
+#: ../../../../include/qemu/bitops.h:443 ../../../../include/qemu/bitops.h:453
+msgid "bits to roll"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:391
+msgid "rotate an 8-bit value right"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:401
+msgid "rotate a 16-bit value left"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:405 ../../../../include/qemu/bitops.h:415
+msgid "``uint16_t word``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:411
+msgid "rotate a 16-bit value right"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:421
+msgid "rotate a 32-bit value left"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:425 ../../../../include/qemu/bitops.h:435
+msgid "``uint32_t word``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:431
+msgid "rotate a 32-bit value right"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:441
+msgid "rotate a 64-bit value left"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:445 ../../../../include/qemu/bitops.h:455
+msgid "``uint64_t word``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:451
+msgid "rotate a 64-bit value right"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:461
+msgid "swap 16-bit halfwords within a 32-bit value"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:465
+msgid "``uint32_t h``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:462 ../../../../include/qemu/bitops.h:471
+#: ../../../../include/qemu/bitops.h:482
+msgid "value to swap"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:470
+msgid "swap 16-bit halfwords within a 64-bit value"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:474 ../../../../include/qemu/bitops.h:485
+msgid "``uint64_t h``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:481
+msgid "swap 32-bit words within a 64-bit value"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:493 ../../../../include/qemu/bitops.h:569
+#: ../../../../include/qemu/bitops.h:619
+msgid "``uint32_t value``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:491 ../../../../include/qemu/bitops.h:510
+#: ../../../../include/qemu/bitops.h:529 ../../../../include/qemu/bitops.h:548
+#: ../../../../include/qemu/bitops.h:567 ../../../../include/qemu/bitops.h:592
+msgid "the value to extract the bit field from"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:493 ../../../../include/qemu/bitops.h:512
+#: ../../../../include/qemu/bitops.h:531 ../../../../include/qemu/bitops.h:550
+#: ../../../../include/qemu/bitops.h:569 ../../../../include/qemu/bitops.h:594
+#: ../../../../include/qemu/bitops.h:619 ../../../../include/qemu/bitops.h:645
+msgid "``int start``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:492 ../../../../include/qemu/bitops.h:511
+#: ../../../../include/qemu/bitops.h:530 ../../../../include/qemu/bitops.h:549
+#: ../../../../include/qemu/bitops.h:568 ../../../../include/qemu/bitops.h:593
+#: ../../../../include/qemu/bitops.h:618 ../../../../include/qemu/bitops.h:644
+msgid "the lowest bit in the bit field (numbered from 0)"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:494 ../../../../include/qemu/bitops.h:513
+#: ../../../../include/qemu/bitops.h:532 ../../../../include/qemu/bitops.h:551
+#: ../../../../include/qemu/bitops.h:570 ../../../../include/qemu/bitops.h:595
+#: ../../../../include/qemu/bitops.h:620 ../../../../include/qemu/bitops.h:646
+msgid "``int length``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:493 ../../../../include/qemu/bitops.h:512
+#: ../../../../include/qemu/bitops.h:531 ../../../../include/qemu/bitops.h:550
+#: ../../../../include/qemu/bitops.h:569 ../../../../include/qemu/bitops.h:594
+#: ../../../../include/qemu/bitops.h:619 ../../../../include/qemu/bitops.h:645
+msgid "the length of the bit field"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:495
+msgid ""
+"Extract from the 32 bit input **value** the bit field specified by the "
+"**start** and **length** parameters, and return it. The bit field must lie "
+"entirely within the 32 bit word. It is valid to request that all 32 bits are "
+"returned (ie **length** 32 and **start** 0)."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:500 ../../../../include/qemu/bitops.h:519
+#: ../../../../include/qemu/bitops.h:538 ../../../../include/qemu/bitops.h:557
+#: ../../../../include/qemu/bitops.h:578 ../../../../include/qemu/bitops.h:603
+#: ../../../../include/qemu/bitops.h:630 ../../../../include/qemu/bitops.h:656
+#: ../../../../include/qemu/bitops.h:682 ../../../../include/qemu/bitops.h:711
+#: ../../../../include/qemu/bitops.h:741 ../../../../include/qemu/bitops.h:771
+msgid "**Return**"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:500 ../../../../include/qemu/bitops.h:519
+#: ../../../../include/qemu/bitops.h:538 ../../../../include/qemu/bitops.h:557
+msgid "the value of the bit field extracted from the input value."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:512
+msgid "``uint8_t value``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:514
+msgid ""
+"Extract from the 8 bit input **value** the bit field specified by the "
+"**start** and **length** parameters, and return it. The bit field must lie "
+"entirely within the 8 bit word. It is valid to request that all 8 bits are "
+"returned (ie **length** 8 and **start** 0)."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:531
+msgid "``uint16_t value``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:533
+msgid ""
+"Extract from the 16 bit input **value** the bit field specified by the "
+"**start** and **length** parameters, and return it. The bit field must lie "
+"entirely within the 16 bit word. It is valid to request that all 16 bits are "
+"returned (ie **length** 16 and **start** 0)."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:550 ../../../../include/qemu/bitops.h:594
+#: ../../../../include/qemu/bitops.h:645
+msgid "``uint64_t value``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:552
+msgid ""
+"Extract from the 64 bit input **value** the bit field specified by the "
+"**start** and **length** parameters, and return it. The bit field must lie "
+"entirely within the 64 bit word. It is valid to request that all 64 bits are "
+"returned (ie **length** 64 and **start** 0)."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:571
+msgid ""
+"Extract from the 32 bit input **value** the bit field specified by the "
+"**start** and **length** parameters, and return it, sign extended to an "
+"int32_t (ie with the most significant bit of the field propagated to all the "
+"upper bits of the return value). The bit field must lie entirely within the "
+"32 bit word. It is valid to request that all 32 bits are returned (ie "
+"**length** 32 and **start** 0)."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:578 ../../../../include/qemu/bitops.h:603
+msgid ""
+"the sign extended value of the bit field extracted from the input value."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:596
+msgid ""
+"Extract from the 64 bit input **value** the bit field specified by the "
+"**start** and **length** parameters, and return it, sign extended to an "
+"int64_t (ie with the most significant bit of the field propagated to all the "
+"upper bits of the return value). The bit field must lie entirely within the "
+"64 bit word. It is valid to request that all 64 bits are returned (ie "
+"**length** 64 and **start** 0)."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:617 ../../../../include/qemu/bitops.h:643
+msgid "initial value to insert bit field into"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:621
+msgid "``uint32_t fieldval``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:620 ../../../../include/qemu/bitops.h:646
+msgid "the value to insert into the bit field"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:622
+msgid ""
+"Deposit **fieldval** into the 32 bit **value** at the bit field specified by "
+"the **start** and **length** parameters, and return the modified **value**. "
+"Bits of **value** outside the bit field are not modified. Bits of "
+"**fieldval** above the least significant **length** bits are ignored. The "
+"bit field must lie entirely within the 32 bit word. It is valid to request "
+"that all 32 bits are modified (ie **length** 32 and **start** 0)."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:630 ../../../../include/qemu/bitops.h:656
+msgid "the modified **value**."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:647
+msgid "``uint64_t fieldval``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:648
+msgid ""
+"Deposit **fieldval** into the 64 bit **value** at the bit field specified by "
+"the **start** and **length** parameters, and return the modified **value**. "
+"Bits of **value** outside the bit field are not modified. Bits of "
+"**fieldval** above the least significant **length** bits are ignored. The "
+"bit field must lie entirely within the 64 bit word. It is valid to request "
+"that all 64 bits are modified (ie **length** 64 and **start** 0)."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:671 ../../../../include/qemu/bitops.h:730
+msgid "``uint32_t x``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:669
+msgid "32-bit value (of which only the bottom 16 bits are of interest)"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:671 ../../../../include/qemu/bitops.h:700
+#: ../../../../include/qemu/bitops.h:730 ../../../../include/qemu/bitops.h:760
+msgid "Given an input value::"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:673
+msgid "xxxx xxxx xxxx xxxx ABCD EFGH IJKL MNOP"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:675
+msgid ""
+"return the value where the bottom 16 bits are spread out into the odd bits "
+"in the word, and the even bits are zeroed::"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:678
+msgid "0A0B 0C0D 0E0F 0G0H 0I0J 0K0L 0M0N 0O0P"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:680 ../../../../include/qemu/bitops.h:709
+msgid "Any bits set in the top half of the input are ignored."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:682 ../../../../include/qemu/bitops.h:711
+msgid "the shuffled bits."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:700 ../../../../include/qemu/bitops.h:760
+msgid "``uint64_t x``"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:698
+msgid "64-bit value (of which only the bottom 32 bits are of interest)"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:702
+msgid "xxxx xxxx xxxx .... xxxx xxxx ABCD EFGH IJKL MNOP QRST UVWX YZab cdef"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:704
+msgid ""
+"return the value where the bottom 32 bits are spread out into the odd bits "
+"in the word, and the even bits are zeroed::"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:707
+msgid "0A0B 0C0D 0E0F 0G0H 0I0J 0K0L 0M0N .... 0U0V 0W0X 0Y0Z 0a0b 0c0d 0e0f"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:728
+msgid "32-bit value (of which only the odd bits are of interest)"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:732
+msgid "xAxB xCxD xExF xGxH xIxJ xKxL xMxN xOxP"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:734 ../../../../include/qemu/bitops.h:764
+msgid ""
+"return the value where all the odd bits are compressed down into the low "
+"half of the word, and the high half is zeroed::"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:737
+msgid "0000 0000 0000 0000 ABCD EFGH IJKL MNOP"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:739 ../../../../include/qemu/bitops.h:769
+msgid "Any even bits set in the input are ignored."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:741 ../../../../include/qemu/bitops.h:771
+msgid "the unshuffled bits."
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:758
+msgid "64-bit value (of which only the odd bits are of interest)"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:762
+msgid "xAxB xCxD xExF xGxH xIxJ xKxL xMxN .... xUxV xWxX xYxZ xaxb xcxd xexf"
+msgstr ""
+
+#: ../../../../include/qemu/bitops.h:767
+msgid "0000 0000 0000 .... 0000 0000 ABCD EFGH IJKL MNOP QRST UVWX YZab cdef"
+msgstr ""
