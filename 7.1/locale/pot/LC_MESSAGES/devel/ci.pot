@@ -1,0 +1,748 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 7.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/ci.rst:5
+msgid "CI"
+msgstr ""
+
+#: ../../../devel/ci.rst:7
+msgid ""
+"Most of QEMU's CI is run on GitLab's infrastructure although a number of "
+"other CI services are used for specialised purposes. The most up to date "
+"information about them and their status can be found on the `project wiki "
+"testing page <https://wiki.qemu.org/Testing/CI>`_."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:2
+msgid "Definition of terms"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:4
+msgid ""
+"This section defines the terms used in this document and correlates them "
+"with what is currently used on QEMU."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:8
+msgid "Automated tests"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:10
+msgid ""
+"An automated test is written on a test framework using its generic test "
+"functions/classes. The test framework can run the tests and report their "
+"success or failure [1]_."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:14
+msgid "An automated test has essentially three parts:"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:16
+msgid ""
+"The test initialization of the parameters, where the expected parameters, "
+"like inputs and expected results, are set up;"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:18
+msgid "The call to the code that should be tested;"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:19
+msgid ""
+"An assertion, comparing the result from the previous call with the expected "
+"result set during the initialization of the parameters. If the result "
+"matches the expected result, the test has been successful; otherwise, it has "
+"failed."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:25
+msgid "Unit testing"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:27
+msgid ""
+"A unit test is responsible for exercising individual software components as "
+"a unit, like interfaces, data structures, and functionality, uncovering "
+"errors within the boundaries of a component. The verification effort is in "
+"the smallest software unit and focuses on the internal processing logic and "
+"data structures. A test case of unit tests should be designed to uncover "
+"errors due to erroneous computations, incorrect comparisons, or improper "
+"control flow [2]_."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:34
+msgid ""
+"On QEMU, unit testing is represented by the 'check-unit' target from 'make'."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:37
+msgid "Functional testing"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:39
+msgid ""
+"A functional test focuses on the functional requirement of the software. "
+"Deriving sets of input conditions, the functional tests should fully "
+"exercise all the functional requirements for a program. Functional testing "
+"is complementary to other testing techniques, attempting to find errors like "
+"incorrect or missing functions, interface errors, behavior errors, and "
+"initialization and termination errors [3]_."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:46
+msgid ""
+"On QEMU, functional testing is represented by the 'check-qtest' target from "
+"'make'."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:50
+msgid "System testing"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:52
+msgid ""
+"System tests ensure all application elements mesh properly while the overall "
+"functionality and performance are achieved [4]_. Some or all system "
+"components are integrated to create a complete system to be tested as a "
+"whole. System testing ensures that components are compatible, interact "
+"correctly, and transfer the right data at the right time across their "
+"interfaces. As system testing focuses on interactions, use case-based "
+"testing is a practical approach to system testing [5]_. Note that, in some "
+"cases, system testing may require interaction with third-party software, "
+"like operating system images, databases, networks, and so on."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:62
+msgid ""
+"On QEMU, system testing is represented by the 'check-avocado' target from "
+"'make'."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:66
+msgid "Flaky tests"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:68
+msgid ""
+"A flaky test is defined as a test that exhibits both a passing and a failing "
+"result with the same code on different runs. Some usual reasons for an "
+"intermittent/flaky test are async wait, concurrency, and test order "
+"dependency [6]_."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:74
+msgid "Gating"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:76
+msgid ""
+"A gate restricts the move of code from one stage to another on a test/"
+"deployment pipeline. The step move is granted with approval. The approval "
+"can be a manual intervention or a set of tests succeeding [7]_."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:80
+msgid ""
+"On QEMU, the gating process happens during the pull request. The approval is "
+"done by the project leader running its own set of tests. The pull request "
+"gets merged when the tests succeed."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:85
+msgid "Continuous Integration (CI)"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:87
+msgid ""
+"Continuous integration (CI) requires the builds of the entire application "
+"and the execution of a comprehensive set of automated tests every time there "
+"is a need to commit any set of changes [8]_. The automated tests can be "
+"composed of the unit, functional, system, and other tests."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:92
+msgid "Keynotes about continuous integration (CI) [9]_:"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:94
+msgid ""
+"System tests may depend on external software (operating system images, "
+"firmware, database, network)."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:96
+msgid ""
+"It may take a long time to build and test. It may be impractical to build "
+"the system being developed several times per day."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:98
+msgid ""
+"If the development platform is different from the target platform, it may "
+"not be possible to run system tests in the developer’s private workspace. "
+"There may be differences in hardware, operating system, or installed "
+"software. Therefore, more time is required for testing the system."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:104
+msgid "References"
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:106
+msgid "Sommerville, Ian (2016). Software Engineering. p. 233."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:107
+msgid ""
+"Pressman, Roger S. & Maxim, Bruce R. (2020). Software Engineering, A "
+"Practitioner’s Approach. p. 48, 376, 378, 381."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:109
+msgid ""
+"Pressman, Roger S. & Maxim, Bruce R. (2020). Software Engineering, A "
+"Practitioner’s Approach. p. 388."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:111
+msgid ""
+"Pressman, Roger S. & Maxim, Bruce R. (2020). Software Engineering, A "
+"Practitioner’s Approach. Software Engineering, p. 377."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:113
+msgid "Sommerville, Ian (2016). Software Engineering. p. 59, 232, 240."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:114
+msgid ""
+"Luo, Qingzhou, et al. An empirical analysis of flaky tests. Proceedings of "
+"the 22nd ACM SIGSOFT International Symposium on Foundations of Software "
+"Engineering. 2014."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:117
+msgid ""
+"Humble, Jez & Farley, David (2010). Continuous Delivery: Reliable Software "
+"Releases Through Build, Test, and Deployment, p. 122."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:119
+msgid ""
+"Humble, Jez & Farley, David (2010). Continuous Delivery: Reliable Software "
+"Releases Through Build, Test, and Deployment, p. 55."
+msgstr ""
+
+#: ../../../devel/ci-definitions.rst.inc:121
+msgid "Sommerville, Ian (2016). Software Engineering. p. 743."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:4
+msgid "Custom CI/CD variables"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:6
+msgid ""
+"QEMU CI pipelines can be tuned by setting some CI environment variables."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:9
+msgid "Set variable globally in the user's CI namespace"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:11
+msgid "Variables can be set globally in the user's CI namespace setting."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:13 ../../../devel/ci-jobs.rst.inc:29
+msgid ""
+"For further information about how to set these variables, please refer to::"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:15
+msgid ""
+"https://docs.gitlab.com/ee/ci/variables/#add-a-cicd-variable-to-a-project"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:18
+msgid ""
+"Set variable manually when pushing a branch or tag to the user's repository"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:20
+msgid ""
+"Variables can be set manually when pushing a branch or tag, using git-push "
+"command line arguments."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:23
+msgid "Example setting the QEMU_CI_EXAMPLE_VAR variable:"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:25
+msgid "git push -o ci.variable=\"QEMU_CI_EXAMPLE_VAR=value\" myrepo mybranch"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:31
+msgid ""
+"https://docs.gitlab.com/ee/user/project/push_options.html#push-options-for-"
+"gitlab-cicd"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:34
+msgid "Setting aliases in your git config"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:36
+msgid ""
+"You can use aliases to make it easier to push branches with different CI "
+"configurations. For example define an alias for triggering CI:"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:39
+msgid ""
+"git config --local alias.push-ci \"push -o ci.variable=QEMU_CI=1\"\n"
+"git config --local alias.push-ci-now \"push -o ci.variable=QEMU_CI=2\""
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:44
+msgid "Which lets you run:"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:46
+msgid "git push-ci"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:50
+msgid "to create the pipeline, or:"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:52
+msgid "git push-ci-now"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:56
+msgid "to create and run the pipeline"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:60
+msgid "Variable naming and grouping"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:62
+msgid ""
+"The variables used by QEMU's CI configuration are grouped together in a "
+"handful of namespaces"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:65
+msgid ""
+"QEMU_JOB_nnnn - variables to be defined in individual jobs or templates, to "
+"influence the shared rules defined in the .base_job_template."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:69
+msgid ""
+"QEMU_CI_nnn - variables to be set by contributors in their repository CI "
+"settings, or as git push variables, to influence which jobs get run in a "
+"pipeline"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:73
+msgid ""
+"nnn - other misc variables not falling into the above categories, or using "
+"different names for historical reasons and not yet converted."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:78
+msgid "Maintainer controlled job variables"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:80
+msgid ""
+"The following variables may be set when defining a job in the CI "
+"configuration file."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:84
+msgid "QEMU_JOB_CIRRUS"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:86
+msgid ""
+"The job makes use of Cirrus CI infrastructure, requiring the configuration "
+"setup for cirrus-run to be present in the repository"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:90
+msgid "QEMU_JOB_OPTIONAL"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:92
+msgid ""
+"The job is expected to be successful in general, but is not run by default "
+"due to need to conserve limited CI resources. It is available to be started "
+"manually by the contributor in the CI pipelines UI."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:98
+msgid "QEMU_JOB_ONLY_FORKS"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:100
+msgid ""
+"The job results are only of interest to contributors prior to submitting "
+"code. They are not required as part of the gating CI pipeline."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:105
+msgid "QEMU_JOB_SKIPPED"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:107
+msgid ""
+"The job is not reliably successsful in general, so is not currently suitable "
+"to be run by default. Ideally this should be a temporary marker until the "
+"problems can be addressed, or the job permanently removed."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:113
+msgid "QEMU_JOB_PUBLISH"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:115
+msgid ""
+"The job is for publishing content after a branch has been merged into the "
+"upstream default branch."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:119
+msgid "QEMU_JOB_AVOCADO"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:121
+msgid "The job runs the Avocado integration test suite"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:124
+msgid "Contributor controlled runtime variables"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:126
+msgid ""
+"The following variables may be set by contributors to control job execution"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:130
+msgid "QEMU_CI"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:132
+msgid ""
+"By default, no pipelines will be created on contributor forks in order to "
+"preserve CI credits"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:135
+msgid ""
+"Set this variable to 1 to create the pipelines, but leave all the jobs to be "
+"manually started from the UI"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:138
+msgid ""
+"Set this variable to 2 to create the pipelines and run all the jobs "
+"immediately, as was historicaly behaviour"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:142
+msgid "QEMU_CI_AVOCADO_TESTING"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:143
+msgid ""
+"By default, tests using the Avocado framework are not run automatically in "
+"the pipelines (because multiple artifacts have to be downloaded, and if "
+"these artifacts are not already cached, downloading them make the jobs reach "
+"the timeout limit). Set this variable to have the tests using the Avocado "
+"framework run automatically."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:150
+msgid "Other misc variables"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:152
+msgid ""
+"These variables are primarily to control execution of jobs on private runners"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:156
+msgid "AARCH64_RUNNER_AVAILABLE"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:157
+msgid ""
+"If you've got access to an aarch64 host that can be used as a gitlab-CI "
+"runner, you can set this variable to enable the tests that require this kind "
+"of host. The runner should be tagged with \"aarch64\"."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:162
+msgid "AARCH32_RUNNER_AVAILABLE"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:163
+msgid ""
+"If you've got access to an armhf host or an arch64 host that can run aarch32 "
+"EL0 code to be used as a gitlab-CI runner, you can set this variable to "
+"enable the tests that require this kind of host. The runner should be tagged "
+"with \"aarch32\"."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:169
+msgid "S390X_RUNNER_AVAILABLE"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:170
+msgid ""
+"If you've got access to an IBM Z host that can be used as a gitlab-CI "
+"runner, you can set this variable to enable the tests that require this kind "
+"of host. The runner should be tagged with \"s390x\"."
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:175
+msgid "CENTOS_STREAM_8_x86_64_RUNNER_AVAILABLE"
+msgstr ""
+
+#: ../../../devel/ci-jobs.rst.inc:176
+msgid ""
+"If you've got access to a CentOS Stream 8 x86_64 host that can be used as a "
+"gitlab-CI runner, you can set this variable to enable the tests that require "
+"this kind of host. The runner should be tagged with both \"centos_stream_8\" "
+"and \"x86_64\"."
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:2
+msgid "Jobs on Custom Runners"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:4
+msgid ""
+"Besides the jobs run under the various CI systems listed before, there are a "
+"number additional jobs that will run before an actual merge. These use the "
+"same GitLab CI's service/framework already used for all other GitLab based "
+"CI jobs, but rely on additional systems, not the ones provided by GitLab as "
+"\"shared runners\"."
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:10
+msgid ""
+"The architecture of GitLab's CI service allows different machines to be set "
+"up with GitLab's \"agent\", called gitlab-runner, which will take care of "
+"running jobs created by events such as a push to a branch. Here, the "
+"combination of a machine, properly configured with GitLab's gitlab-runner, "
+"is called a \"custom runner\"."
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:16
+msgid ""
+"The GitLab CI jobs definition for the custom runners are located under::"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:18
+msgid ".gitlab-ci.d/custom-runners.yml"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:20
+msgid ""
+"Custom runners entail custom machines.  To see a list of the machines "
+"currently deployed in the QEMU GitLab CI and their maintainers, please refer "
+"to the QEMU `wiki <https://wiki.qemu.org/AdminContacts>`__."
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:25
+msgid "Machine Setup Howto"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:27
+msgid ""
+"For all Linux based systems, the setup can be mostly automated by the "
+"execution of two Ansible playbooks.  Create an ``inventory`` file under "
+"``scripts/ci/setup``, such as this::"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:31
+msgid ""
+"fully.qualified.domain\n"
+"other.machine.hostname"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:34
+msgid ""
+"You may need to set some variables in the inventory file itself.  One very "
+"common need is to tell Ansible to use a Python 3 interpreter on those "
+"hosts.  This would look like::"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:38
+msgid ""
+"fully.qualified.domain ansible_python_interpreter=/usr/bin/python3\n"
+"other.machine.hostname ansible_python_interpreter=/usr/bin/python3"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:42
+msgid "Build environment"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:44
+msgid ""
+"The ``scripts/ci/setup/build-environment.yml`` Ansible playbook will set up "
+"machines with the environment needed to perform builds and run QEMU tests.  "
+"This playbook consists on the installation of various required packages (and "
+"a general package update while at it).  It currently covers a number of "
+"different Linux distributions, but it can be expanded to cover other systems."
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:51
+msgid ""
+"The minimum required version of Ansible successfully tested in this playbook "
+"is 2.8.0 (a version check is embedded within the playbook itself).  To run "
+"the playbook, execute::"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:55
+msgid ""
+"cd scripts/ci/setup\n"
+"ansible-playbook -i inventory build-environment.yml"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:58
+msgid ""
+"Please note that most of the tasks in the playbook require superuser "
+"privileges, such as those from the ``root`` account or those obtained by "
+"``sudo``.  If necessary, please refer to ``ansible-playbook`` options such "
+"as ``--become``, ``--become-method``, ``--become-user`` and ``--ask-become-"
+"pass``."
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:65
+msgid "gitlab-runner setup and registration"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:67
+msgid ""
+"The gitlab-runner agent needs to be installed on each machine that will run "
+"jobs.  The association between a machine and a GitLab project happens with a "
+"registration token.  To find the registration token for your repository/"
+"project, navigate on GitLab's web UI to:"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:72
+msgid ""
+"Settings (the gears-like icon at the bottom of the left hand side vertical "
+"toolbar), then"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:74 ../../../devel/ci-runners.rst.inc:93
+msgid "CI/CD, then"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:75 ../../../devel/ci-runners.rst.inc:94
+msgid "Runners, and click on the \"Expand\" button, then"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:76
+msgid ""
+"Under \"Set up a specific Runner manually\", look for the value under \"And "
+"this registration token:\""
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:79
+msgid ""
+"Copy the ``scripts/ci/setup/vars.yml.template`` file to ``scripts/ci/setup/"
+"vars.yml``.  Then, set the ``gitlab_runner_registration_token`` variable to "
+"the value obtained earlier."
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:84
+msgid "To run the playbook, execute::"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:86
+msgid ""
+"cd scripts/ci/setup\n"
+"ansible-playbook -i inventory gitlab-runner.yml"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:89
+msgid ""
+"Following the registration, it's necessary to configure the runner tags, and "
+"optionally other configurations on the GitLab UI.  Navigate to:"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:92
+msgid "Settings (the gears like icon), then"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:95
+msgid "\"Runners activated for this project\", then"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:96
+msgid "Click on the \"Edit\" icon (next to the \"Lock\" Icon)"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:98
+msgid ""
+"Tags are very important as they are used to route specific jobs to specific "
+"types of runners, so it's a good idea to double check that the automatically "
+"created tags are consistent with the OS and architecture.  For instance, an "
+"Ubuntu 20.04 aarch64 system should have tags set as::"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:104
+msgid "ubuntu_20.04,aarch64"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:106
+msgid ""
+"Because the job definition at ``.gitlab-ci.d/custom-runners.yml`` would "
+"contain::"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:109
+msgid ""
+"ubuntu-20.04-aarch64-all:\n"
+" tags:\n"
+" - ubuntu_20.04\n"
+" - aarch64"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:114
+msgid "It's also recommended to:"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:116
+msgid "increase the \"Maximum job timeout\" to something like ``2h``"
+msgstr ""
+
+#: ../../../devel/ci-runners.rst.inc:117
+msgid "give it a better Description"
+msgstr ""
