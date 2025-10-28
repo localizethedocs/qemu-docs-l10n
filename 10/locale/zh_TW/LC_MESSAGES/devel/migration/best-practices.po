@@ -47,6 +47,15 @@ msgid ""
 "          \"pc.ram\": \"0x0000000008000000\",\n"
 "..."
 msgstr ""
+"$ qemu-system-x86_64 -display none -monitor stdio\n"
+"(qemu) migrate \"exec:cat > mig\"\n"
+"(qemu) q\n"
+"$ ./scripts/analyze-migration.py -f mig\n"
+"{\n"
+"  \"ram (3)\": {\n"
+"      \"section sizes\": {\n"
+"          \"pc.ram\": \"0x0000000008000000\",\n"
+"..."
 
 #: ../../../devel/migration/best-practices.rst:24
 msgid "See also ``analyze-migration.py -h`` help for more options."
@@ -54,7 +63,7 @@ msgstr ""
 
 #: ../../../devel/migration/best-practices.rst:27
 msgid "Firmware"
-msgstr ""
+msgstr "韌體"
 
 #: ../../../devel/migration/best-practices.rst:29
 msgid ""
