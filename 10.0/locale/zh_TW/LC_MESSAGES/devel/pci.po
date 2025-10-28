@@ -1,0 +1,169 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/pci.rst:3
+msgid "PCI subsystem"
+msgstr ""
+
+#: ../../../devel/pci.rst:6
+msgid "API Reference"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:380
+msgid "callbacks structure for specific IOMMU handlers of a PCIBus"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:382
+msgid "**Definition**"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:386
+msgid ""
+"struct PCIIOMMUOps {\n"
+"  AddressSpace * (*get_address_space)(PCIBus *bus, void *opaque, int "
+"devfn);\n"
+"  bool (*set_iommu_device)(PCIBus *bus, void *opaque, int devfn, "
+"HostIOMMUDevice *dev, Error **errp);\n"
+"  void (*unset_iommu_device)(PCIBus *bus, void *opaque, int devfn);\n"
+"};"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:392
+msgid "**Members**"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:388
+msgid "``get_address_space``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:389
+msgid "get the address space for a set of devices on a PCI bus."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:392
+msgid ""
+"Mandatory callback which returns a pointer to an :c:type:`AddressSpace "
+"<AddressSpace>`"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:394
+msgid "**bus**: the :c:type:`PCIBus <PCIBus>` being accessed."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:396 ../../../../include/hw/pci/pci.h:409
+#: ../../../../include/hw/pci/pci.h:428
+msgid "**opaque**: the data passed to pci_setup_iommu()."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:398
+msgid "**devfn**: device and function number"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:401
+msgid "``set_iommu_device``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:402
+msgid "attach a HostIOMMUDevice to a vIOMMU"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:404
+msgid ""
+"Optional callback, if not implemented in vIOMMU, then vIOMMU can't retrieve "
+"host information from the associated HostIOMMUDevice."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:407 ../../../../include/hw/pci/pci.h:426
+msgid "**bus**: the :c:type:`PCIBus <PCIBus>` of the PCI device."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:411 ../../../../include/hw/pci/pci.h:430
+msgid "**devfn**: device and function number of the PCI device."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:413
+msgid "**dev**: the :c:type:`HostIOMMUDevice <HostIOMMUDevice>` to attach."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:415
+msgid "**errp**: pass an Error out only when return false"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:417
+msgid ""
+"Returns: true if HostIOMMUDevice is attached or else false with errp set."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:421
+msgid "``unset_iommu_device``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:422
+msgid "detach a HostIOMMUDevice from a vIOMMU"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:424
+msgid "Optional callback."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:433 ../../../../include/hw/pci/pci.h:448
+msgid "**Description**"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:382
+msgid ""
+"Allows to modify the behavior of some IOMMU operations of the PCI framework "
+"for a set of devices on a PCI bus."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:440
+msgid "Initialize specific IOMMU handlers for a PCIBus"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:442
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:444
+msgid "``PCIBus *bus``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:444
+msgid "the :c:type:`PCIBus <PCIBus>` being updated."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:446
+msgid "``const PCIIOMMUOps *ops``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:445
+msgid "the :c:type:`PCIIOMMUOps <PCIIOMMUOps>`"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:447
+msgid "``void *opaque``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:446
+msgid "passed to callbacks of the **ops** structure."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:442
+msgid "Let PCI host bridges define specific operations."
+msgstr ""

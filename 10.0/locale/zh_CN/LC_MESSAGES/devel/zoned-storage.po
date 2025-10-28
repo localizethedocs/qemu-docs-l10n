@@ -1,0 +1,124 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/zoned-storage.rst:3
+msgid "zoned-storage"
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:5
+msgid ""
+"Zoned Block Devices (ZBDs) divide the LBA space into block regions called "
+"zones that are larger than the LBA size. They can only allow sequential "
+"writes, which can reduce write amplification in SSDs, and potentially lead "
+"to higher throughput and increased capacity. More details about ZBDs can be "
+"found at:"
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:10
+msgid "https://zonedstorage.io/docs/introduction/zoned-storage"
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:13
+msgid "1. Block layer APIs for zoned storage"
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:14
+msgid ""
+"QEMU block layer supports three zoned storage models: - BLK_Z_HM: The host-"
+"managed zoned model only allows sequential writes access to zones. It "
+"supports ZBD-specific I/O commands that can be used by a host to manage the "
+"zones of a device. - BLK_Z_HA: The host-aware zoned model allows random "
+"write operations in zones, making it backward compatible with regular block "
+"devices. - BLK_Z_NONE: The non-zoned model has no zones support. It includes "
+"both regular and drive-managed ZBD devices. ZBD-specific I/O commands are "
+"not supported."
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:24
+msgid ""
+"The block device information resides inside BlockDriverState. QEMU uses "
+"BlockLimits struct(BlockDriverState::bl) that is continuously accessed by "
+"the block layer while processing I/O requests. A BlockBackend has a root "
+"pointer to a BlockDriverState graph(for example, raw format on top of file-"
+"posix). The zoned storage information can be propagated from the leaf "
+"BlockDriverState all the way up to the BlockBackend. If the zoned storage "
+"model in file-posix is set to BLK_Z_HM, then block drivers will declare "
+"support for zoned host device."
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:32
+msgid ""
+"The block layer APIs support commands needed for zoned storage devices, "
+"including report zones, four zone operations, and zone append."
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:36
+msgid "2. Emulating zoned storage controllers"
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:37
+msgid ""
+"When the BlockBackend's BlockLimits model reports a zoned storage device, "
+"users like the virtio-blk emulation or the qemu-io-cmds.c utility can use "
+"block layer APIs for zoned storage emulation or testing."
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:41
+msgid ""
+"For example, to test zone_report on a null_blk device using qemu-io is::"
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:43
+msgid ""
+"$ path/to/qemu-io --image-opts -n driver=host_device,filename=/dev/nullb0 -c "
+"\"zrp offset nr_zones\""
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:45
+msgid ""
+"To expose the host's zoned block device through virtio-blk, the command line "
+"can be (includes the -device parameter)::"
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:48
+msgid ""
+"-blockdev node-name=drive0,driver=host_device,filename=/dev/nullb0,cache."
+"direct=on \\\n"
+"-device virtio-blk-pci,drive=drive0"
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:51
+msgid "Or only use the -drive parameter::"
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:53
+msgid "-driver driver=host_device,file=/dev/nullb0,if=virtio,cache.direct=on"
+msgstr ""
+
+#: ../../../devel/zoned-storage.rst:55
+msgid ""
+"Additionally, QEMU has several ways of supporting zoned storage, including: "
+"(1) Using virtio-scsi: --device scsi-block allows for the passing through of "
+"SCSI ZBC devices, enabling the attachment of ZBC or ZAC HDDs to QEMU. (2) "
+"PCI device pass-through: While NVMe ZNS emulation is available for testing "
+"purposes, it cannot yet pass through a zoned device from the host. To pass "
+"on the NVMe ZNS device to the guest, use VFIO PCI pass the entire NVMe PCI "
+"adapter through to the guest. Likewise, an HDD HBA can be passed on to QEMU "
+"all HDDs attached to the HBA."
+msgstr ""
