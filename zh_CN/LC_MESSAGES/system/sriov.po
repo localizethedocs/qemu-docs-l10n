@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/sriov.rst:4
+msgid "Compsable SR-IOV device"
+msgstr ""
+
+#: ../../../system/sriov.rst:6
+msgid ""
+"SR-IOV (Single Root I/O Virtualization) is an optional extended capability "
+"of a PCI Express device. It allows a single physical function (PF) to appear "
+"as multiple virtual functions (VFs) for the main purpose of eliminating "
+"software overhead in I/O from virtual machines."
+msgstr ""
+
+#: ../../../system/sriov.rst:11
+msgid ""
+"There are devices with predefined SR-IOV configurations, but it is also "
+"possible to compose an SR-IOV device yourself. Composing an SR-IOV device is "
+"currently only supported by virtio-net-pci."
+msgstr ""
+
+#: ../../../system/sriov.rst:15
+msgid ""
+"Users can configure an SR-IOV-capable virtio-net device by adding virtio-net-"
+"pci functions to a bus. Below is a command line example:"
+msgstr ""
+
+#: ../../../system/sriov.rst:18
+msgid ""
+"-netdev user,id=n -netdev user,id=o\n"
+"-netdev user,id=p -netdev user,id=q\n"
+"-device pcie-root-port,id=b\n"
+"-device virtio-net-pci,bus=b,addr=0x0.0x3,netdev=q,sriov-pf=f\n"
+"-device virtio-net-pci,bus=b,addr=0x0.0x2,netdev=p,sriov-pf=f\n"
+"-device virtio-net-pci,bus=b,addr=0x0.0x1,netdev=o,sriov-pf=f\n"
+"-device virtio-net-pci,bus=b,addr=0x0.0x0,netdev=n,id=f"
+msgstr ""
+
+#: ../../../system/sriov.rst:28
+msgid ""
+"The VFs specify the paired PF with ``sriov-pf`` property. The PF must be "
+"added after all VFs. It is the user's responsibility to ensure that VFs have "
+"function numbers larger than one of the PF, and that the function numbers "
+"have a consistent stride. Both the PF and VFs are ARI-capable so you can "
+"have 255 VFs at maximum."
+msgstr ""
+
+#: ../../../system/sriov.rst:34
+msgid ""
+"You may also need to perform additional steps to activate the SR-IOV feature "
+"on your guest. For Linux, refer to [1]_."
+msgstr ""
+
+#: ../../../system/sriov.rst:37
+msgid "https://docs.kernel.org/PCI/pci-iov-howto.html"
+msgstr ""

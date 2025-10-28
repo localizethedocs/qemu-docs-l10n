@@ -1,0 +1,144 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/arm/imx8mp-evk.rst:2
+msgid "NXP i.MX 8M Plus Evaluation Kit (``imx8mp-evk``)"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:4
+msgid ""
+"The ``imx8mp-evk`` machine models the i.MX 8M Plus Evaluation Kit, based on "
+"an i.MX 8M Plus SoC."
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:8
+msgid "Supported devices"
+msgstr "支援的裝置"
+
+#: ../../../system/arm/imx8mp-evk.rst:10
+msgid "The ``imx8mp-evk`` machine implements the following devices:"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:12
+msgid "Up to 4 Cortex-A53 cores"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:13
+msgid "Generic Interrupt Controller (GICv3)"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:14
+msgid "4 UARTs"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:15
+msgid "3 USDHC Storage Controllers"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:16
+msgid "1 Designware PCI Express Controller"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:17
+msgid "1 Ethernet Controller"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:18
+msgid "2 Designware USB 3 Controllers"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:19
+msgid "5 GPIO Controllers"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:20
+msgid "6 I2C Controllers"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:21
+msgid "3 SPI Controllers"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:22
+msgid "3 Watchdogs"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:23
+msgid "6 General Purpose Timers"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:24
+msgid "Secure Non-Volatile Storage (SNVS) including an RTC"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:25
+msgid "Clock Tree"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:28
+msgid "Boot options"
+msgstr "開機選項"
+
+#: ../../../system/arm/imx8mp-evk.rst:30
+msgid ""
+"The ``imx8mp-evk`` machine can start a Linux kernel directly using the "
+"standard ``-kernel`` functionality."
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:34
+msgid "Direct Linux Kernel Boot"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:36
+msgid ""
+"Probably the easiest way to get started with a whole Linux system on the "
+"machine is to generate an image with Buildroot. Version 2024.11.1 is tested "
+"at the time of writing and involves two steps. First run the following "
+"commands in the toplevel directory of the Buildroot source tree:"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:41
+msgid ""
+"$ make freescale_imx8mpevk_defconfig\n"
+"$ make"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:46
+msgid ""
+"Once finished successfully there is an ``output/image`` subfolder. Navigate "
+"into it and resize the SD card image to a power of two:"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:49
+msgid "$ qemu-img resize sdcard.img 256M"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:53
+msgid "Now that everything is prepared the machine can be started as follows:"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:55
+msgid ""
+"$ qemu-system-aarch64 -M imx8mp-evk -smp 4 -m 3G \\\n"
+"    -display none -serial null -serial stdio \\\n"
+"    -kernel Image \\\n"
+"    -dtb imx8mp-evk.dtb \\\n"
+"    -append \"root=/dev/mmcblk2p2\" \\\n"
+"    -drive file=sdcard.img,if=sd,bus=2,format=raw,id=mmcblk2"
+msgstr ""

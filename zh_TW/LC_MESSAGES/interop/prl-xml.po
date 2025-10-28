@@ -1,0 +1,343 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../interop/prl-xml.rst:2
+msgid "Parallels Disk Format"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:15
+msgid ""
+"This specification contains minimal information about Parallels Disk Format, "
+"which is enough to properly work with QEMU. Nevertheless, Parallels Cloud "
+"Server and Parallels Desktop are able to add some unspecified nodes to the "
+"xml and use them, but they are for internal work and don't affect "
+"functionality. Also it uses auxiliary xml ``Snapshot.xml``, which allows "
+"storage of optional snapshot information, but this doesn't influence open/"
+"read/write functionality. QEMU and other software should not use fields not "
+"covered in this document or the ``Snapshot.xml`` file, and must leave them "
+"as is."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:24
+msgid ""
+"A Parallels disk consists of two parts: the set of snapshots and the disk "
+"descriptor file, which stores information about all files and snapshots."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:28
+msgid "Definitions"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:30
+msgid "Snapshot"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:31
+msgid ""
+"a record of the contents captured at a particular time, capable of storing "
+"current state. A snapshot has a UUID and a parent UUID."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:34
+msgid "Snapshot image"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:35
+msgid ""
+"an overlay representing the difference between this snapshot and some "
+"earlier snapshot."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:38
+msgid "Overlay"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:39
+msgid "an image storing the different sectors between two captured states."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:41
+msgid "Root image"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:42
+msgid "a snapshot image with no parent, the root of the snapshot tree."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:44
+msgid "Storage"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:45
+msgid ""
+"the backing storage for a subset of the virtual disk. When there is more "
+"than one storage in a Parallels disk then that is referred to as a split "
+"image. In this case every storage covers a specific address space area of "
+"the disk and has its particular root image. Split images are not considered "
+"here and are not supported. Each storage consists of disk parameters and a "
+"list of images. The list of images always contains a root image and may also "
+"contain overlays. The root image can be an expandable Parallels image file "
+"or plain. Overlays must be expandable."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:56 ../../../interop/prl-xml.rst:69
+msgid "Description file"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:57
+msgid ""
+"``DiskDescriptor.xml`` stores information about disk parameters, snapshots, "
+"and storages."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:60
+msgid "Top Snapshot"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:61
+msgid ""
+"The overlay between actual state and some previous snapshot. It is not a "
+"snapshot in the classical sense because it serves as the active image that "
+"the guest writes to."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:65
+msgid "Sector"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:66
+msgid "a 512-byte data chunk."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:71
+msgid ""
+"All information is placed in a single XML element ``Parallels_disk_image``. "
+"The element has only one attribute, ``Version``, which must be ``1.0``."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:75
+msgid "The schema of ``DiskDescriptor.xml``::"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:77
+msgid ""
+"<Parallels_disk_image Version=\"1.0\">\n"
+"   <Disk_Parameters>\n"
+"       ...\n"
+"   </Disk_Parameters>\n"
+"   <StorageData>\n"
+"       ...\n"
+"   </StorageData>\n"
+"   <Snapshots>\n"
+"       ...\n"
+"   </Snapshots>\n"
+"</Parallels_disk_image>"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:90
+msgid "``Disk_Parameters`` element"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:92
+msgid ""
+"The ``Disk_Parameters`` element describes the physical layout of the virtual "
+"disk and some general settings."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:95
+msgid ""
+"The ``Disk_Parameters`` element MUST contain the following child elements:"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:97
+msgid ""
+"``Disk_size`` - number of sectors in the disk, desired size of the disk."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:99
+msgid "``Cylinders`` - number of the disk cylinders."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:100
+msgid "``Heads``     - number of the disk heads."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:101
+msgid ""
+"``Sectors``   - number of the disk sectors per cylinder (sector size is 512 "
+"bytes) Limitation: The product of the ``Heads``, ``Sectors`` and "
+"``Cylinders`` values MUST be equal to the value of the Disk_size parameter."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:105
+msgid ""
+"``Padding``   - must be 0. Parallels Cloud Server and Parallels Desktop may "
+"use padding set to 1; however this case is not covered by this "
+"specification. QEMU and other software should not open such disks and should "
+"not create them."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:111
+msgid "``StorageData`` element"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:113
+msgid ""
+"This element of the file describes the root image and all snapshot images."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:115
+msgid ""
+"The ``StorageData`` element consists of the ``Storage`` child element, as "
+"shown below::"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:118
+msgid ""
+"<StorageData>\n"
+"   <Storage>\n"
+"       ...\n"
+"   </Storage>\n"
+"</StorageData>"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:124
+msgid "A ``Storage`` element has the following child elements:"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:126
+msgid ""
+"``Start``     - start sector of the storage, in case of non split storage "
+"equals to 0."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:128
+msgid ""
+"``End``       - number of sector following the last sector, in case of non "
+"split storage equals to ``Disk_size``."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:130
+msgid ""
+"``Blocksize`` - storage cluster size, number of sectors per one cluster. The "
+"cluster size for each \"Compressed\" (see below) image in a parallels disk "
+"must be equal to this field. Note: the cluster size for a Parallels "
+"Expandable Image is in the ``tracks`` field of its header (see :doc:"
+"`parallels`)."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:135
+msgid "Several ``Image`` child elements."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:137
+msgid "Each ``Image`` element has the following child elements:"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:139
+msgid ""
+"``GUID`` - image identifier, UUID in curly brackets. For instance, "
+"``{12345678-9abc-def1-2345-6789abcdef12}.`` The GUID is used by the "
+"Snapshots element to reference images (see below)"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:143
+msgid "``Type`` - image type of the element. It can be:"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:145
+msgid "``Plain`` for raw files."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:146
+msgid "``Compressed`` for expanding disks."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:148
+msgid ""
+"``File`` - path to image file. The path can be relative to ``DiskDescriptor."
+"xml`` or absolute."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:152
+msgid "``Snapshots`` element"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:154
+msgid ""
+"The ``Snapshots`` element describes the snapshot relations with the snapshot "
+"tree."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:156
+msgid ""
+"The element contains the set of ``Shot`` child elements, as shown below::"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:158
+msgid ""
+"<Snapshots>\n"
+"   <TopGUID> ... </TopGUID> /* Optional child element */\n"
+"   <Shot>\n"
+"       ...\n"
+"   </Shot>\n"
+"   <Shot>\n"
+"       ...\n"
+"   </Shot>\n"
+"   ...\n"
+"</Snapshots>"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:169
+msgid "Each ``Shot`` element contains the following child elements:"
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:171
+msgid "``GUID``       - an image GUID."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:172
+msgid "``ParentGUID`` - GUID of the image of the parent snapshot."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:174
+msgid ""
+"The software may traverse snapshots from child to parent using the "
+"``<ParentGUID>`` field as reference. The ``ParentGUID`` of the root snapshot "
+"is ``{00000000-0000-0000-0000-000000000000}``. There should be only one root "
+"snapshot."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:179
+msgid ""
+"The Top snapshot could be described via two ways: via the ``TopGUID`` child "
+"element of the ``Snapshots`` element, or via the predefined GUID "
+"``{5fbaabe3-6958-40ff-92a7-860e329aab41}``. If ``TopGUID`` is defined, the "
+"predefined GUID is interpreted as a normal GUID. All snapshot images (except "
+"the Top Snapshot) should be opened read-only."
+msgstr ""
+
+#: ../../../interop/prl-xml.rst:187
+msgid ""
+"There is another predefined GUID, ``BackupID = {704718e1-2314-44c8-9087-"
+"d78ed36b0f4e}``, which is used by original and some third-party software for "
+"backup. QEMU and other software may operate with images with ``GUID = "
+"BackupID`` as usual. However, it is not recommended to use this GUID for new "
+"disks. The Top snapshot cannot have this GUID."
+msgstr ""

@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/devices/virtio-snd.rst:2
+msgid "virtio sound"
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:4
+msgid ""
+"This document explains the setup and usage of the Virtio sound device. The "
+"Virtio sound device is a paravirtualized sound card device."
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:8
+msgid "Linux kernel support"
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:10
+msgid ""
+"Virtio sound requires a guest Linux kernel built with the "
+"``CONFIG_SND_VIRTIO`` option."
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:14
+msgid "Description"
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:16
+msgid ""
+"Virtio sound implements capture and playback from inside a guest using the "
+"configured audio backend of the host machine."
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:20
+msgid "Device properties"
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:22
+msgid ""
+"The Virtio sound device can be configured with the following properties:"
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:24
+msgid "``jacks`` number of physical jacks (Unimplemented)."
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:25
+msgid ""
+"``streams`` number of PCM streams. At the moment, no stream configuration is "
+"supported: the first one will always be a playback stream, an optional "
+"second will always be a capture stream. Adding more will cycle stream "
+"directions from playback to capture."
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:26
+msgid "``chmaps`` number of channel maps (Unimplemented)."
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:28
+msgid ""
+"All streams are stereo and have the default channel positions ``Front left, "
+"right``."
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:31
+msgid "Examples"
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:33
+msgid ""
+"Add an audio device and an audio backend at once with ``-audio`` and "
+"``model=virtio``:"
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:35
+msgid ""
+"pulseaudio: ``-audio driver=pa,model=virtio`` or ``-audio driver=pa,"
+"model=virtio,server=/run/user/1000/pulse/native``"
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:37
+msgid "sdl: ``-audio driver=sdl,model=virtio``"
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:38
+msgid "coreaudio: ``-audio driver=coreaudio,model=virtio``"
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:40
+msgid "etc."
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:42
+msgid ""
+"To specifically add virtualized sound devices, you have to specify a PCI "
+"device and an audio backend listed with ``-audio driver=help`` that works on "
+"your host machine, e.g.:"
+msgstr ""
+
+#: ../../../system/devices/virtio-snd.rst:48
+msgid ""
+"-device virtio-sound-pci,audiodev=my_audiodev \\\n"
+"-audiodev alsa,id=my_audiodev"
+msgstr ""
