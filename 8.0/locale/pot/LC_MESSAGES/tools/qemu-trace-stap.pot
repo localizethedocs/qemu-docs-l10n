@@ -1,0 +1,174 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tools/qemu-trace-stap.rst:3
+msgid "QEMU SystemTap trace tool"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:6
+msgid "Synopsis"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:8
+msgid ""
+"**qemu-trace-stap** [*GLOBAL-OPTIONS*] *COMMAND* [*COMMAND-OPTIONS*] "
+"*ARGS*..."
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:11
+msgid "Description"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:13
+msgid ""
+"The ``qemu-trace-stap`` program facilitates tracing of the execution of QEMU "
+"emulators using SystemTap."
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:16
+msgid ""
+"It is required to have the SystemTap runtime environment installed to use "
+"this program, since it is a wrapper around execution of the ``stap`` program."
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:21
+msgid "Options"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:25
+msgid ""
+"The following global options may be used regardless of which command is "
+"executed:"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:30
+msgid "Display verbose information about command execution."
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:32
+msgid "The following commands are valid:"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:36
+msgid "List all the probe names provided by *BINARY* that match *PATTERN*."
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:39 ../../../tools/qemu-trace-stap.rst:68
+msgid ""
+"If *BINARY* is not an absolute path, it will be located by searching the "
+"directories listed in the ``$PATH`` environment variable."
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:42
+msgid ""
+"*PATTERN* is a plain string that is used to filter the results of this "
+"command. It may optionally contain a ``*`` wildcard to facilitate matching "
+"multiple probes without listing each one explicitly. Multiple *PATTERN* "
+"arguments may be given, causing listing of probes that match any of the "
+"listed names. If no *PATTERN* is given, the all possible probes will be "
+"listed."
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:49
+msgid "For example, to list all probes available in the |qemu_system| binary:"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:54
+msgid "$ qemu-trace-stap list |qemu_system|"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:56
+msgid ""
+"To filter the list to only cover probes related to QEMU's cryptographic "
+"subsystem, in a binary outside ``$PATH``"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:61
+msgid "$ qemu-trace-stap list /opt/qemu/|version|/bin/|qemu_system| 'qcrypto*'"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:65
+msgid ""
+"Run a trace session, printing formatted output any time a process that is "
+"executing *BINARY* triggers a probe matching *PATTERN*."
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:71
+msgid ""
+"*PATTERN* is a plain string that matches a probe name shown by the *LIST* "
+"command. It may optionally contain a ``*`` wildcard to facilitate matching "
+"multiple probes without listing each one explicitly. Multiple *PATTERN* "
+"arguments may be given, causing all matching probes to be monitored. At "
+"least one *PATTERN* is required, since stap is not capable of tracing all "
+"known QEMU probes concurrently without overflowing its trace buffer."
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:79
+msgid ""
+"Invocation of this command does not need to be synchronized with invocation "
+"of the QEMU process(es). It will match probes on all existing running "
+"processes and all future launched processes, unless told to only monitor a "
+"specific process."
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:84
+msgid "Valid command specific options are:"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:90
+msgid ""
+"Restrict the tracing session so that it only triggers for the process "
+"identified by *PID*."
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:93
+msgid ""
+"For example, to monitor all processes executing |qemu_system| as found on "
+"``$PATH``, displaying all I/O related probes:"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:98
+msgid "$ qemu-trace-stap run |qemu_system| 'qio*'"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:100
+msgid "To monitor only the QEMU process with PID 1732"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:104
+msgid "$ qemu-trace-stap run --pid=1732 |qemu_system| 'qio*'"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:106
+msgid ""
+"To monitor QEMU processes running an alternative binary outside of "
+"``$PATH``, displaying verbose information about setup of the tracing "
+"environment:"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:112
+msgid "$ qemu-trace-stap -v run /opt/qemu/|version|/bin/|qemu_system| 'qio*'"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:115
+msgid "See also"
+msgstr ""
+
+#: ../../../tools/qemu-trace-stap.rst:117
+msgid ":manpage:`qemu(1)`, :manpage:`stap(1)`"
+msgstr ""

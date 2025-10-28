@@ -1,0 +1,251 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/control-flow-integrity.rst:3
+msgid "Control-Flow Integrity (CFI)"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:5
+msgid ""
+"This document describes the current control-flow integrity (CFI) mechanism "
+"in QEMU. How it can be enabled, its benefits and deficiencies, and how it "
+"affects new and existing code in QEMU"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:10
+msgid "Basics"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:12
+msgid ""
+"CFI is a hardening technique that focusing on guaranteeing that indirect "
+"function calls have not been altered by an attacker. The type used in QEMU "
+"is a forward-edge control-flow integrity that ensures function calls "
+"performed through function pointers, always call a \"compatible\" function. "
+"A compatible function is a function with the same signature of the function "
+"pointer declared in the source code."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:19
+msgid ""
+"This type of CFI is entirely compiler-based and relies on the compiler "
+"knowing the signature of every function and every function pointer used in "
+"the code. As of now, the only compiler that provides support for CFI is "
+"Clang."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:23
+msgid ""
+"CFI is best used on production binaries, to protect against unknown attack "
+"vectors."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:26
+msgid ""
+"In case of a CFI violation (i.e. call to a non-compatible function) QEMU "
+"will terminate abruptly, to stop the possible attack."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:30
+msgid "Building with CFI"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:32
+msgid ""
+"NOTE: CFI requires the use of link-time optimization. Therefore, when CFI is "
+"selected, LTO will be automatically enabled."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:35
+msgid ""
+"To build with CFI, the minimum requirement is Clang 6+. If you are planning "
+"to also enable fuzzing, then Clang 11+ is needed (more on this later)."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:39
+msgid ""
+"Given the use of LTO, a version of AR that supports LLVM IR is required. The "
+"easies way of doing this is by selecting the AR provided by LLVM::"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:42
+msgid "AR=llvm-ar-9 CC=clang-9 CXX=clang++-9 /path/to/configure --enable-cfi"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:44
+msgid "CFI is enabled on every binary produced."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:46
+msgid ""
+"If desired, an additional flag to increase the verbosity of the output in "
+"case of a CFI violation is offered (``--enable-debug-cfi``)."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:50
+msgid "Using QEMU built with CFI"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:52
+msgid ""
+"A binary with CFI will work exactly like a standard binary. In case of a CFI "
+"violation, the binary will terminate with an illegal instruction signal."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:56
+msgid "Incompatible code with CFI"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:58
+msgid ""
+"As mentioned above, CFI is entirely compiler-based and therefore relies on "
+"compile-time knowledge of the code. This means that, while generally "
+"supported for most code, some specific use pattern can break CFI "
+"compatibility, and create false-positives. The two main patterns that can "
+"cause issues are:"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:63
+msgid ""
+"Just-in-time compiled code: since such code is created at runtime, the jump "
+"to the buffer containing JIT code will fail."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:66
+msgid ""
+"Libraries loaded dynamically, e.g. with dlopen/dlsym, since the library was "
+"not known at compile time."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:69
+msgid "Current areas of QEMU that are not entirely compatible with CFI are:"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:71
+msgid ""
+"TCG, since the idea of TCG is to pre-compile groups of instructions at "
+"runtime to speed-up interpretation, quite similarly to a JIT compiler"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:74
+msgid ""
+"TCI, where the interpreter has to interpret the generic *call* operation"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:76
+msgid "Plugins, since a plugin is implemented as an external library"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:78
+msgid "Modules, since they are implemented as an external library"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:80
+msgid ""
+"Directly calling signal handlers from the QEMU source code, since the signal "
+"handler may have been provided by an external library or even plugged at "
+"runtime."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:85
+msgid "Disabling CFI for a specific function"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:87
+msgid ""
+"If you are working on function that is performing a call using an "
+"incompatible way, as described before, you can selectively disable CFI "
+"checks for such function by using the decorator ``QEMU_DISABLE_CFI`` at "
+"function definition, and add an explanation on why the function is not "
+"compatible with CFI. An example of the use of ``QEMU_DISABLE_CFI`` is "
+"provided here::"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:93
+msgid ""
+"/*\n"
+" * Disable CFI checks.\n"
+" * TCG creates binary blobs at runtime, with the transformed code.\n"
+" * A TB is a blob of binary code, created at runtime and called with an\n"
+" * indirect function call. Since such function did not exist at compile "
+"time,\n"
+" * the CFI runtime has no way to verify its signature and would fail.\n"
+" * TCG is not considered a security-sensitive part of QEMU so this does not\n"
+" * affect the impact of CFI in environment with high security requirements\n"
+" */\n"
+"QEMU_DISABLE_CFI\n"
+"static inline tcg_target_ulong cpu_tb_exec(CPUState *cpu, TranslationBlock "
+"*itb)"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:105
+msgid ""
+"NOTE: CFI needs to be disabled at the **caller** function, (i.e. a "
+"compatible cfi function that calls a non-compatible one), since the check is "
+"performed when the function call is performed."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:110
+msgid "CFI and fuzzing"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:112
+msgid ""
+"There is generally no advantage of using CFI and fuzzing together, because "
+"they target different environments (production for CFI, debug for fuzzing)."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:115
+msgid ""
+"CFI could be used in conjunction with fuzzing to identify a broader set of "
+"bugs that may not end immediately in a segmentation fault or triggering an "
+"assertion. However, other sanitizers such as address and ub sanitizers can "
+"identify such bugs in a more precise way than CFI."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:120
+msgid ""
+"There is, however, an interesting use case in using CFI in conjunction with "
+"fuzzing, that is to make sure that CFI is not triggering any false positive "
+"in remote-but-possible parts of the code."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:124
+msgid ""
+"CFI can be enabled with fuzzing, but with some caveats: 1. Fuzzing relies on "
+"the linker performing function wrapping at link-time. The standard BFD "
+"linker does not support function wrapping when LTO is also enabled. The "
+"workaround is to use LLVM's lld linker. 2. Fuzzing also relies on a custom "
+"linker script, which is only supported by lld with version 11+."
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:131
+msgid ""
+"In other words, to compile with fuzzing and CFI, clang 11+ is required, and "
+"lld needs to be used as a linker::"
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:134
+msgid ""
+"AR=llvm-ar-11 CC=clang-11 CXX=clang++-11 /path/to/configure --enable-cfi \\\n"
+"                          -enable-fuzzing --extra-ldflags=\"-fuse-ld=lld\""
+msgstr ""
+
+#: ../../../devel/control-flow-integrity.rst:137
+msgid "and then, compile the fuzzers as usual."
+msgstr ""
