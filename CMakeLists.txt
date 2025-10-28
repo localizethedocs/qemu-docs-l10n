@@ -172,19 +172,20 @@ get_members_of_json_object(
 # - For "master":
 #   - Set VERSION_TYPE    to "branch"
 #   - Set BRANCH_NAME     to "master"
-# - For "[MAJOR]":
+# - For "[MAJOR].[MINOR]":
 #   - Set VERSION_TYPE    to "tag"
-#   - Set TAG_PATTERN     to "^v([MAJOR])\\.([0-9]+)\\.([0-9]+)(rc[1-9][0-9]*)?$"
+#   - Set TAG_PATTERN     to "^v([MAJOR])\\.([MINOR])\\.([0-9]+)(rc[1-9][0-9]*)?$"
 #   - Set TAG_SUFFIX      to "rc"
 #]============================================================]
 
 if     (VERSION MATCHES "^(master)$")
     set(VERSION_TYPE    "branch")
     set(BRANCH_NAME     "master")
-elseif (VERSION MATCHES "^([0-9]+)$")
+elseif (VERSION MATCHES "^([0-9]+)\\.([0-9]+)$")
     set(MAJOR           "${CMAKE_MATCH_1}")
+    set(MINOR           "${CMAKE_MATCH_2}")
     set(VERSION_TYPE    "tag")
-    set(TAG_PATTERN     "^v(${MAJOR})\\.([0-9]+)\\.([0-9]+)(rc[1-9][0-9]*)?$")
+    set(TAG_PATTERN     "^v(${MAJOR})\\.(${MINOR})\\.([0-9]+)(rc[1-9][0-9]*)?$")
     set(TAG_SUFFIX      "rc")
 else()
     message(FATAL_ERROR "Invalid VERSION value. (${VERSION})")
@@ -260,9 +261,9 @@ endif()
 
 if     (VERSION MATCHES "^(master)$")
     set(VERSION_OF_PYTHON   "3.12")
-elseif (VERSION MATCHES "^([0-9]+)$")
-    if     (VERSION VERSION_LESS_EQUAL    "10" AND
-            VERSION VERSION_GREATER_EQUAL "4")
+elseif (VERSION MATCHES "^([0-9]+)\\.([0-9]+)$")
+    if     (VERSION VERSION_LESS_EQUAL    "10.1" AND
+            VERSION VERSION_GREATER_EQUAL "4.0")
         set(VERSION_OF_PYTHON   "3.12")
     else()
         message(FATAL_ERROR "Invalid VERSION value. (${VERSION})")
