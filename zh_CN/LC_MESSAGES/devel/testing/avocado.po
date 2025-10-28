@@ -1,0 +1,873 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/testing/avocado.rst:5
+msgid "Integration testing with Avocado"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:7
+msgid ""
+"The ``tests/avocado`` directory hosts integration tests. They're usually "
+"higher level tests, and may interact with external resources and with "
+"various guest operating systems."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:11
+msgid ""
+"These tests are written using the Avocado Testing Framework (which must be "
+"installed separately) in conjunction with a the ``avocado_qemu."
+"QemuSystemTest`` class, implemented at ``tests/avocado/avocado_qemu``."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:15
+msgid "Tests based on ``avocado_qemu.QemuSystemTest`` can easily:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:17
+msgid ""
+"Customize the command line arguments given to the convenience ``self.vm`` "
+"attribute (a QEMUMachine instance)"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:20
+msgid ""
+"Interact with the QEMU monitor, send QMP commands and check their results"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:23
+msgid ""
+"Interact with the guest OS, using the convenience console device (which may "
+"be useful to assert the effectiveness and correctness of command line "
+"arguments or QMP commands)"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:27
+msgid ""
+"Interact with external data files that accompany the test itself (see ``self."
+"get_data()``)"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:30
+msgid ""
+"Download (and cache) remote data files, such as firmware and kernel images"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:33
+msgid ""
+"Have access to a library of guest OS images (by means of the ``avocado.utils."
+"vmimage`` library)"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:36
+msgid ""
+"Make use of various other test related utilities available at the test class "
+"itself and at the utility library:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:39
+msgid ""
+"http://avocado-framework.readthedocs.io/en/latest/api/test/avocado."
+"html#avocado.Test"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:40
+msgid ""
+"http://avocado-framework.readthedocs.io/en/latest/api/utils/avocado.utils."
+"html"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:43
+msgid "Running tests"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:45
+msgid "You can run the avocado tests simply by executing:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:47
+msgid "make check-avocado"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:51
+msgid ""
+"This involves the automatic installation, from PyPI, of all the necessary "
+"avocado-framework dependencies into the QEMU venv within the build tree (at "
+"``./pyvenv``). Test results are also saved within the build tree (at ``tests/"
+"results``)."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:56
+msgid ""
+"Note: the build environment must be using a Python 3 stack, and have the "
+"``venv`` and ``pip`` packages installed.  If necessary, make sure "
+"``configure`` is called with ``--python=`` and that those modules are "
+"available.  On Debian and Ubuntu based systems, depending on the specific "
+"version, they may be on packages named ``python3-venv`` and ``python3-pip``."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:63
+msgid ""
+"It is also possible to run tests based on tags using the ``make check-"
+"avocado`` command and the ``AVOCADO_TAGS`` environment variable:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:67
+msgid "make check-avocado AVOCADO_TAGS=quick"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:71
+msgid ""
+"Note that tags separated with commas have an AND behavior, while tags "
+"separated by spaces have an OR behavior. For more information on Avocado "
+"tags, see:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:75
+msgid ""
+"https://avocado-framework.readthedocs.io/en/latest/guides/user/chapters/tags."
+"html"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:77
+msgid ""
+"To run a single test file, a couple of them, or a test within a file using "
+"the ``make check-avocado`` command, set the ``AVOCADO_TESTS`` environment "
+"variable with the test files or test names. To run all tests from a single "
+"file, use:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:82
+msgid "make check-avocado AVOCADO_TESTS=$FILEPATH"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:86
+msgid "The same is valid to run tests from multiple test files:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:88
+msgid "make check-avocado AVOCADO_TESTS='$FILEPATH1 $FILEPATH2'"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:92
+msgid "To run a single test within a file, use:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:94
+msgid "make check-avocado AVOCADO_TESTS=$FILEPATH:$TESTCLASS.$TESTNAME"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:98
+msgid "The same is valid to run single tests from multiple test files:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:100
+msgid ""
+"make check-avocado AVOCADO_TESTS='$FILEPATH1:$TESTCLASS1.$TESTNAME1 "
+"$FILEPATH2:$TESTCLASS2.$TESTNAME2'"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:104
+msgid ""
+"The scripts installed inside the virtual environment may be used without an "
+"\"activation\".  For instance, the Avocado test runner may be invoked by "
+"running:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:108
+msgid "pyvenv/bin/avocado run $OPTION1 $OPTION2 tests/avocado/"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:112
+msgid ""
+"Note that if ``make check-avocado`` was not executed before, it is possible "
+"to create the Python virtual environment with the dependencies needed "
+"running:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:116
+msgid "make check-venv"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:120
+msgid ""
+"It is also possible to run tests from a single file or a single test within "
+"a test file. To run tests from a single file within the build tree, use:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:123
+msgid "pyvenv/bin/avocado run tests/avocado/$TESTFILE"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:127
+msgid "To run a single test within a test file, use:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:129
+msgid "pyvenv/bin/avocado run tests/avocado/$TESTFILE:$TESTCLASS.$TESTNAME"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:133
+msgid ""
+"Valid test names are visible in the output from any previous execution of "
+"Avocado or ``make check-avocado``, and can also be queried using:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:136
+msgid "pyvenv/bin/avocado list tests/avocado"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:141
+msgid "Manual Installation"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:143
+msgid "To manually install Avocado and its dependencies, run:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:145
+msgid "pip install --user avocado-framework"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:149
+msgid "Alternatively, follow the instructions on this link:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:151
+msgid ""
+"https://avocado-framework.readthedocs.io/en/latest/guides/user/chapters/"
+"installing.html"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:154
+msgid "Overview"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:156
+msgid ""
+"The ``tests/avocado/avocado_qemu`` directory provides the ``avocado_qemu`` "
+"Python module, containing the ``avocado_qemu.QemuSystemTest`` class.  Here's "
+"a simple usage example:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:160
+msgid ""
+"from avocado_qemu import QemuSystemTest\n"
+"\n"
+"\n"
+"class Version(QemuSystemTest):\n"
+"    \"\"\"\n"
+"    :avocado: tags=quick\n"
+"    \"\"\"\n"
+"    def test_qmp_human_info_version(self):\n"
+"        self.vm.launch()\n"
+"        res = self.vm.cmd('human-monitor-command',\n"
+"                          command_line='info version')\n"
+"        self.assertRegex(res, r'^(\\d+\\.\\d+\\.\\d)')"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:175
+msgid "To execute your test, run:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:177
+msgid "avocado run version.py"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:181
+msgid ""
+"Tests may be classified according to a convention by using docstring "
+"directives such as ``:avocado: tags=TAG1,TAG2``.  To run all tests in the "
+"current directory, tagged as \"quick\", run:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:185
+msgid "avocado run -t quick ."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:190
+msgid "The ``avocado_qemu.QemuSystemTest`` base test class"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:192
+msgid ""
+"The ``avocado_qemu.QemuSystemTest`` class has a number of characteristics "
+"that are worth being mentioned right away."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:195
+msgid ""
+"First of all, it attempts to give each test a ready to use QEMUMachine "
+"instance, available at ``self.vm``.  Because many tests will tweak the QEMU "
+"command line, launching the QEMUMachine (by using ``self.vm.launch()``) is "
+"left to the test writer."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:200
+msgid ""
+"The base test class has also support for tests with more than one "
+"QEMUMachine. The way to get machines is through the ``self.get_vm()`` method "
+"which will return a QEMUMachine instance. The ``self.get_vm()`` method "
+"accepts arguments that will be passed to the QEMUMachine creation and also "
+"an optional ``name`` attribute so you can identify a specific machine and "
+"get it more than once through the tests methods. A simple and hypothetical "
+"example follows:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:208
+msgid ""
+"from avocado_qemu import QemuSystemTest\n"
+"\n"
+"\n"
+"class MultipleMachines(QemuSystemTest):\n"
+"    def test_multiple_machines(self):\n"
+"        first_machine = self.get_vm()\n"
+"        second_machine = self.get_vm()\n"
+"        self.get_vm(name='third_machine').launch()\n"
+"\n"
+"        first_machine.launch()\n"
+"        second_machine.launch()\n"
+"\n"
+"        first_res = first_machine.cmd(\n"
+"            'human-monitor-command',\n"
+"            command_line='info version')\n"
+"\n"
+"        second_res = second_machine.cmd(\n"
+"            'human-monitor-command',\n"
+"            command_line='info version')\n"
+"\n"
+"        third_res = self.get_vm(name='third_machine').cmd(\n"
+"            'human-monitor-command',\n"
+"            command_line='info version')\n"
+"\n"
+"        self.assertEqual(first_res, second_res, third_res)"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:236
+msgid ""
+"At test \"tear down\", ``avocado_qemu.QemuSystemTest`` handles all the "
+"QEMUMachines shutdown."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:240
+msgid "The ``avocado_qemu.LinuxTest`` base test class"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:242
+msgid ""
+"The ``avocado_qemu.LinuxTest`` is further specialization of the "
+"``avocado_qemu.QemuSystemTest`` class, so it contains all the "
+"characteristics of the later plus some extra features."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:246
+msgid ""
+"First of all, this base class is intended for tests that need to interact "
+"with a fully booted and operational Linux guest.  At this time, it uses a "
+"Fedora 31 guest image.  The most basic example looks like this:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:251
+msgid ""
+"from avocado_qemu import LinuxTest\n"
+"\n"
+"\n"
+"class SomeTest(LinuxTest):\n"
+"\n"
+"    def test(self):\n"
+"        self.launch_and_wait()\n"
+"        self.ssh_command('some_command_to_be_run_in_the_guest')"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:262
+msgid ""
+"Please refer to tests that use ``avocado_qemu.LinuxTest`` under ``tests/"
+"avocado`` for more examples."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:266
+msgid "QEMUMachine"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:268
+msgid ""
+"The QEMUMachine API is already widely used in the Python iotests, device-"
+"crash-test and other Python scripts.  It's a wrapper around the execution of "
+"a QEMU binary, giving its users:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:272
+msgid ""
+"the ability to set command line arguments to be given to the QEMU binary"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:275
+msgid ""
+"a ready to use QMP connection and interface, which can be used to send "
+"commands and inspect its results, as well as asynchronous events"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:279
+msgid ""
+"convenience methods to set commonly used command line arguments in a more "
+"succinct and intuitive way"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:283
+msgid "QEMU binary selection"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:285
+msgid ""
+"The QEMU binary used for the ``self.vm`` QEMUMachine instance will primarily "
+"depend on the value of the ``qemu_bin`` parameter.  If it's not explicitly "
+"set, its default value will be the result of a dynamic probe in the same "
+"source tree.  A suitable binary will be one that targets the architecture "
+"matching host machine."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:291
+msgid ""
+"Based on this description, test writers will usually rely on one of the "
+"following approaches:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:294
+msgid "Set ``qemu_bin``, and use the given binary"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:296
+msgid ""
+"Do not set ``qemu_bin``, and use a QEMU binary named like \"qemu-system-"
+"${arch}\", either in the current working directory, or in the current source "
+"tree."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:300
+msgid ""
+"The resulting ``qemu_bin`` value will be preserved in the ``avocado_qemu."
+"QemuSystemTest`` as an attribute with the same name."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:304
+msgid "Attribute reference"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:307
+#: ../../../devel/testing/avocado.rst:414
+msgid "Test"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:309
+msgid ""
+"Besides the attributes and methods that are part of the base ``avocado."
+"Test`` class, the following attributes are available on any ``avocado_qemu."
+"QemuSystemTest`` instance."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:314
+msgid "vm"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:316
+msgid ""
+"A QEMUMachine instance, initially configured according to the given "
+"``qemu_bin`` parameter."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:320
+#: ../../../devel/testing/avocado.rst:417
+msgid "arch"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:322
+msgid ""
+"The architecture can be used on different levels of the stack, e.g. by the "
+"framework or by the test itself.  At the framework level, it will currently "
+"influence the selection of a QEMU binary (when one is not explicitly given)."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:327
+msgid ""
+"Tests are also free to use this attribute value, for their own needs. A test "
+"may, for instance, use the same value when selecting the architecture of a "
+"kernel or disk image to boot a VM with."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:331
+msgid ""
+"The ``arch`` attribute will be set to the test parameter of the same name.  "
+"If one is not given explicitly, it will either be set to ``None``, or, if "
+"the test is tagged with one (and only one) ``:avocado: tags=arch:VALUE`` "
+"tag, it will be set to ``VALUE``."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:337
+#: ../../../devel/testing/avocado.rst:430
+msgid "cpu"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:339
+#: ../../../devel/testing/avocado.rst:432
+msgid ""
+"The cpu model that will be set to all QEMUMachine instances created by the "
+"test."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:342
+msgid ""
+"The ``cpu`` attribute will be set to the test parameter of the same name. If "
+"one is not given explicitly, it will either be set to ``None ``, or, if the "
+"test is tagged with one (and only one) ``:avocado: tags=cpu:VALUE`` tag, it "
+"will be set to ``VALUE``."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:348
+#: ../../../devel/testing/avocado.rst:436
+msgid "machine"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:350
+#: ../../../devel/testing/avocado.rst:438
+msgid ""
+"The machine type that will be set to all QEMUMachine instances created by "
+"the test."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:353
+msgid ""
+"The ``machine`` attribute will be set to the test parameter of the same "
+"name.  If one is not given explicitly, it will either be set to ``None``, "
+"or, if the test is tagged with one (and only one) ``:avocado: tags=machine:"
+"VALUE`` tag, it will be set to ``VALUE``."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:359
+#: ../../../devel/testing/avocado.rst:442
+msgid "qemu_bin"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:361
+msgid ""
+"The preserved value of the ``qemu_bin`` parameter or the result of the "
+"dynamic probe for a QEMU binary in the current working directory or source "
+"tree."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:366
+#: ../../../devel/testing/avocado.rst:447
+msgid "LinuxTest"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:368
+msgid ""
+"Besides the attributes present on the ``avocado_qemu.QemuSystemTest`` base "
+"class, the ``avocado_qemu.LinuxTest`` adds the following attributes:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:372
+#: ../../../devel/testing/avocado.rst:453
+msgid "distro"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:374
+#: ../../../devel/testing/avocado.rst:455
+msgid ""
+"The name of the Linux distribution used as the guest image for the test.  "
+"The name should match the **Provider** column on the list of images "
+"supported by the avocado.utils.vmimage library:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:378
+#: ../../../devel/testing/avocado.rst:387
+#: ../../../devel/testing/avocado.rst:459
+#: ../../../devel/testing/avocado.rst:468
+msgid ""
+"https://avocado-framework.readthedocs.io/en/latest/guides/writer/libs/"
+"vmimage.html#supported-images"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:381
+#: ../../../devel/testing/avocado.rst:462
+msgid "distro_version"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:383
+#: ../../../devel/testing/avocado.rst:464
+msgid ""
+"The version of the Linux distribution as the guest image for the test.  The "
+"name should match the **Version** column on the list of images supported by "
+"the avocado.utils.vmimage library:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:390
+#: ../../../devel/testing/avocado.rst:471
+msgid "distro_checksum"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:392
+#: ../../../devel/testing/avocado.rst:473
+msgid "The sha256 hash of the guest image file used for the test."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:394
+msgid ""
+"If this value is not set in the code or by a test parameter (with the same "
+"name), no validation on the integrity of the image will be performed."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:399
+msgid "Parameter reference"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:401
+msgid ""
+"To understand how Avocado parameters are accessed by tests, and how they can "
+"be passed to tests, please refer to::"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:404
+msgid ""
+"https://avocado-framework.readthedocs.io/en/latest/guides/writer/chapters/"
+"writing.html#accessing-test-parameters"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:406
+msgid ""
+"Parameter values can be easily seen in the log files, and will look like the "
+"following:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:409
+msgid ""
+"PARAMS (key=qemu_bin, path=*, default=./qemu-system-x86_64) => './qemu-"
+"system-x86_64"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:419
+msgid ""
+"The architecture that will influence the selection of a QEMU binary (when "
+"one is not explicitly given)."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:422
+msgid ""
+"Tests are also free to use this parameter value, for their own needs. A test "
+"may, for instance, use the same value when selecting the architecture of a "
+"kernel or disk image to boot a VM with."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:426
+msgid ""
+"This parameter has a direct relation with the ``arch`` attribute.  If not "
+"given, it will default to None."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:444
+msgid "The exact QEMU binary to be used on QEMUMachine."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:449
+msgid ""
+"Besides the parameters present on the ``avocado_qemu.QemuSystemTest`` base "
+"class, the ``avocado_qemu.LinuxTest`` adds the following parameters:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:475
+msgid ""
+"If this value is not set in the code or by this parameter no validation on "
+"the integrity of the image will be performed."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:479
+msgid "Skipping tests"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:481
+msgid ""
+"The Avocado framework provides Python decorators which allow for easily skip "
+"tests running under certain conditions. For example, on the lack of a binary "
+"on the test system or when the running environment is a CI system. For "
+"further information about those decorators, please refer to::"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:486
+msgid ""
+"https://avocado-framework.readthedocs.io/en/latest/guides/writer/chapters/"
+"writing.html#skipping-tests"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:488
+msgid ""
+"While the conditions for skipping tests are often specifics of each one, "
+"there are recurring scenarios identified by the QEMU developers and the use "
+"of environment variables became a kind of standard way to enable/disable "
+"tests."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:492
+msgid "Here is a list of the most used variables:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:495
+msgid "AVOCADO_ALLOW_LARGE_STORAGE"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:496
+msgid ""
+"Tests which are going to fetch or produce assets considered *large* are not "
+"going to run unless that ``AVOCADO_ALLOW_LARGE_STORAGE=1`` is exported on "
+"the environment."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:500
+msgid ""
+"The definition of *large* is a bit arbitrary here, but it usually means an "
+"asset which occupies at least 1GB of size on disk when uncompressed."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:504
+msgid "SPEED"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:505
+msgid ""
+"Tests which have a long runtime will not be run unless ``SPEED=slow`` is "
+"exported on the environment."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:508
+msgid ""
+"The definition of *long* is a bit arbitrary here, and it depends on the "
+"usefulness of the test too. A unique test is worth spending more time on, "
+"small variations on existing tests perhaps less so. As a rough guide, a test "
+"or set of similar tests which take more than 100 seconds to complete."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:515
+msgid "AVOCADO_ALLOW_UNTRUSTED_CODE"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:516
+msgid ""
+"There are tests which will boot a kernel image or firmware that can be "
+"considered not safe to run on the developer's workstation, thus they are "
+"skipped by default. The definition of *not safe* is also arbitrary but "
+"usually it means a blob which either its source or build process aren't "
+"public available."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:522
+msgid ""
+"You should export ``AVOCADO_ALLOW_UNTRUSTED_CODE=1`` on the environment in "
+"order to allow tests which make use of those kind of assets."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:526
+msgid "AVOCADO_TIMEOUT_EXPECTED"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:527
+msgid ""
+"The Avocado framework has a timeout mechanism which interrupts tests to "
+"avoid the test suite of getting stuck. The timeout value can be set via test "
+"parameter or property defined in the test class, for further details::"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:531
+msgid ""
+"https://avocado-framework.readthedocs.io/en/latest/guides/writer/chapters/"
+"writing.html#setting-a-test-timeout"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:533
+msgid ""
+"Even though the timeout can be set by the test developer, there are some "
+"tests that may not have a well-defined limit of time to finish under certain "
+"conditions. For example, tests that take longer to execute when QEMU is "
+"compiled with debug flags. Therefore, the ``AVOCADO_TIMEOUT_EXPECTED`` "
+"variable has been used to determine whether those tests should run or not."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:540
+msgid "QEMU_TEST_FLAKY_TESTS"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:541
+msgid ""
+"Some tests are not working reliably and thus are disabled by default. This "
+"includes tests that don't run reliably on GitLab's CI which usually expose "
+"real issues that are rarely seen on developer machines due to the "
+"constraints of the CI environment. If you encounter a similar situation then "
+"raise a bug and then mark the test as shown on the code snippet below:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:548
+msgid ""
+"# See https://gitlab.com/qemu-project/qemu/-/issues/nnnn\n"
+"@skipUnless(os.getenv('QEMU_TEST_FLAKY_TESTS'), 'Test is unstable on "
+"GitLab')\n"
+"def test(self):\n"
+"    do_something()"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:555
+msgid ""
+"You can also add ``:avocado: tags=flaky`` to the test meta-data so only the "
+"flaky tests can be run as a group:"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:558
+msgid ""
+"env QEMU_TEST_FLAKY_TESTS=1 ./pyvenv/bin/avocado \\\n"
+"   run tests/avocado -filter-by-tags=flaky"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:563
+msgid ""
+"Tests should not live in this state forever and should either be fixed or "
+"eventually removed."
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:568
+msgid "Uninstalling Avocado"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:570
+msgid ""
+"If you've followed the manual installation instructions above, you can "
+"easily uninstall Avocado.  Start by listing the packages you have installed::"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:574
+msgid "pip list --user"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:576
+msgid "And remove any package you want with::"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:578
+msgid "pip uninstall <package_name>"
+msgstr ""
+
+#: ../../../devel/testing/avocado.rst:580
+msgid ""
+"If you've used ``make check-avocado``, the Python virtual environment where "
+"Avocado is installed will be cleaned up as part of ``make check-clean``."
+msgstr ""
