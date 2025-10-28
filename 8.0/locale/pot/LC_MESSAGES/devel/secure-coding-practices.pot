@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/secure-coding-practices.rst:3
+msgid "Secure Coding Practices"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:4
+msgid ""
+"This document covers topics that both developers and security researchers "
+"must be aware of so that they can develop safe code and audit existing code "
+"properly."
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:9
+msgid "Reporting Security Bugs"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:10
+msgid ""
+"For details on how to report security bugs or ask questions about potential "
+"security bugs, see the `Security Process wiki page <https://wiki.qemu.org/"
+"SecurityProcess>`_."
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:15
+msgid "General Secure C Coding Practices"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:16
+msgid ""
+"Most CVEs (security bugs) reported against QEMU are not specific to "
+"virtualization or emulation.  They are simply C programming bugs.  Therefore "
+"it's critical to be aware of common classes of security bugs."
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:20
+msgid ""
+"There is a wide selection of resources available covering secure C coding.  "
+"For example, the `CERT C Coding Standard <https://wiki.sei.cmu.edu/"
+"confluence/display/c/SEI+CERT+C+Coding+Standard>`_ covers the most important "
+"classes of security bugs."
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:25
+msgid ""
+"Instead of describing them in detail here, only the names of the most "
+"important classes of security bugs are mentioned:"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:28
+msgid "Buffer overflows"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:29
+msgid "Use-after-free and double-free"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:30
+msgid "Integer overflows"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:31
+msgid "Format string vulnerabilities"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:33
+msgid ""
+"Some of these classes of bugs can be detected by analyzers.  Static analysis "
+"is performed regularly by Coverity and the most obvious of these bugs are "
+"even reported by compilers.  Dynamic analysis is possible with valgrind, "
+"tsan, and asan."
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:39
+msgid "Input Validation"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:40
+msgid ""
+"Inputs from the guest or external sources (e.g. network, files) cannot be "
+"trusted and may be invalid.  Inputs must be checked before using them in a "
+"way that could crash the program, expose host memory to the guest, or "
+"otherwise be exploitable by an attacker."
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:45
+msgid ""
+"The most sensitive attack surface is device emulation.  All hardware "
+"register accesses and data read from guest memory must be validated.  A "
+"typical example is a device that contains multiple units that are selectable "
+"by the guest via an index register::"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:50
+msgid ""
+"typedef struct {\n"
+"    ProcessingUnit unit[2];\n"
+"    ...\n"
+"} MyDeviceState;\n"
+"\n"
+"static void mydev_writel(void *opaque, uint32_t addr, uint32_t val)\n"
+"{\n"
+"    MyDeviceState *mydev = opaque;\n"
+"    ProcessingUnit *unit;\n"
+"\n"
+"    switch (addr) {\n"
+"    case MYDEV_SELECT_UNIT:\n"
+"        unit = &mydev->unit[val];   <-- this input wasn't validated!\n"
+"        ...\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:67
+msgid ""
+"If ``val`` is not in range [0, 1] then an out-of-bounds memory access will "
+"take place when ``unit`` is dereferenced.  The code must check that ``val`` "
+"is 0 or 1 and handle the case where it is invalid."
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:72
+msgid "Unexpected Device Accesses"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:73
+msgid ""
+"The guest may access device registers in unusual orders or at unexpected "
+"moments.  Device emulation code must not assume that the guest follows the "
+"typical \"theory of operation\" presented in driver writer manuals.  The "
+"guest may make nonsense accesses to device registers such as starting "
+"operations before the device has been fully initialized."
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:79
+msgid ""
+"A related issue is that device emulation code must be prepared for "
+"unexpected device register accesses while asynchronous operations are in "
+"progress.  A well-behaved guest might wait for a completion interrupt before "
+"accessing certain device registers.  Device emulation code must handle the "
+"case where the guest overwrites registers or submits further requests before "
+"an ongoing request completes.  Unexpected accesses must not cause memory "
+"corruption or leaks in QEMU."
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:87
+msgid ""
+"Invalid device register accesses can be reported with "
+"``qemu_log_mask(LOG_GUEST_ERROR, ...)``.  The ``-d guest_errors`` command-"
+"line option enables these log messages."
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:92
+msgid "Live Migration"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:93
+msgid ""
+"Device state can be saved to disk image files and shared with other users. "
+"Live migration code must validate inputs when loading device state so an "
+"attacker cannot gain control by crafting invalid device states.  Device "
+"state is therefore considered untrusted even though it is typically "
+"generated by QEMU itself."
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:100
+msgid "Guest Memory Access Races"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:101
+msgid ""
+"Guests with multiple vCPUs may modify guest RAM while device emulation code "
+"is running.  Device emulation code must copy in descriptors and other guest "
+"RAM structures and only process the local copy.  This prevents time-of-check-"
+"to-time-of-use (TOCTOU) race conditions that could cause QEMU to crash when "
+"a vCPU thread modifies guest RAM while device emulation is processing it."
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:109
+msgid "Use of null-co block drivers"
+msgstr ""
+
+#: ../../../devel/secure-coding-practices.rst:111
+msgid ""
+"The ``null-co`` block driver is designed for performance: its read accesses "
+"are not initialized by default. In case this driver has to be used for "
+"security research, it must be used with the ``read-zeroes=on`` option which "
+"fills read buffers with zeroes. Security issues reported with the default "
+"(``read-zeroes=off``) will be discarded."
+msgstr ""

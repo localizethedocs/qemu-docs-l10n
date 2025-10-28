@@ -1,0 +1,161 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/riscv/shakti-c.rst:2
+msgid "Shakti C Reference Platform (``shakti_c``)"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:4
+msgid ""
+"Shakti C Reference Platform is a reference platform based on arty a7 100t "
+"for the Shakti SoC."
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:7
+msgid ""
+"Shakti SoC is a SoC based on the Shakti C-class processor core. Shakti C is "
+"a 64bit RV64GCSUN processor core."
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:10
+msgid ""
+"For more details on Shakti SoC, please see: https://gitlab.com/shaktiproject/"
+"cores/shakti-soc/-/blob/master/fpga/boards/artya7-100t/c-class/README.rst"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:13
+msgid ""
+"For more info on the Shakti C-class core, please see: https://c-class."
+"readthedocs.io/en/latest/"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:17
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:19
+msgid "The ``shakti_c`` machine supports the following devices:"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:21
+msgid "1 C-class core"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:22
+msgid "Core Level Interruptor (CLINT)"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:23
+msgid "Platform-Level Interrupt Controller (PLIC)"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:24
+msgid "1 UART"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:27
+msgid "Boot options"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:29
+msgid ""
+"The ``shakti_c`` machine can start using the standard -bios functionality "
+"for loading the baremetal application or opensbi."
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:33
+msgid "Boot the machine"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:36
+msgid "Shakti SDK"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:37
+msgid ""
+"Shakti SDK can be used to generate the baremetal example UART applications."
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:39
+msgid ""
+"$ git clone https://gitlab.com/behindbytes/shakti-sdk.git\n"
+"$ cd shakti-sdk\n"
+"$ make software PROGRAM=loopback TARGET=artix7_100t"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:45
+msgid "Binary would be generated in:"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:46
+msgid "software/examples/uart_applns/loopback/output/loopback.shakti"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:48
+msgid ""
+"You could also download the precompiled example applications using below "
+"commands."
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:51
+msgid ""
+"$ wget -c https://gitlab.com/behindbytes/shakti-binaries/-/raw/master/sdk/"
+"shakti_sdk_qemu.zip\n"
+"$ unzip shakti_sdk_qemu.zip"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:56
+msgid "Then we can run the UART example using:"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:58
+msgid ""
+"$ qemu-system-riscv64 -M shakti_c -nographic \\\n"
+"   -bios path/to/shakti_sdk_qemu/loopback.shakti"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:64
+msgid "OpenSBI"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:65
+msgid "We can also run OpenSBI with Test Payload."
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:67
+msgid ""
+"$ git clone https://github.com/riscv/opensbi.git -b v0.9\n"
+"$ cd opensbi\n"
+"$ wget -c https://gitlab.com/behindbytes/shakti-binaries/-/raw/master/dts/"
+"shakti.dtb\n"
+"$ export CROSS_COMPILE=riscv64-unknown-elf-\n"
+"$ export FW_FDT_PATH=./shakti.dtb\n"
+"$ make PLATFORM=generic"
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:76
+msgid ""
+"fw_payload.elf would be generated in build/platform/generic/firmware/"
+"fw_payload.elf. Boot it using the below qemu command."
+msgstr ""
+
+#: ../../../system/riscv/shakti-c.rst:79
+msgid ""
+"$ qemu-system-riscv64 -M shakti_c -nographic \\\n"
+"   -bios path/to/fw_payload.elf"
+msgstr ""
