@@ -1,0 +1,295 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/i386/tdx.rst:2
+msgid "Intel Trusted Domain eXtension (TDX)"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:4
+msgid ""
+"Intel Trusted Domain eXtensions (TDX) refers to an Intel technology that "
+"extends Virtual Machine Extensions (VMX) and Multi-Key Total Memory "
+"Encryption (MKTME) with a new kind of virtual machine guest called a Trust "
+"Domain (TD). A TD runs in a CPU mode that is designed to protect the "
+"confidentiality of its memory contents and its CPU state from any other "
+"software, including the hosting Virtual Machine Monitor (VMM), unless "
+"explicitly shared by the TD itself."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:12
+msgid "Prerequisites"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:14
+msgid ""
+"To run TD, the physical machine needs to have TDX module loaded and "
+"initialized while KVM hypervisor has TDX support and has TDX enabled. If "
+"those requirements are met, the ``KVM_CAP_VM_TYPES`` will report the support "
+"of ``KVM_X86_TDX_VM``."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:19
+msgid "Trust Domain Virtual Firmware (TDVF)"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:21
+msgid ""
+"Trust Domain Virtual Firmware (TDVF) is required to provide TD services to "
+"boot TD Guest OS. TDVF needs to be copied to guest private memory and "
+"measured before the TD boots."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:25
+msgid ""
+"KVM vcpu ioctl ``KVM_TDX_INIT_MEM_REGION`` can be used to populate the TDVF "
+"content into its private memory."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:28
+msgid ""
+"Since TDX doesn't support readonly memslot, TDVF cannot be mapped as pflash "
+"device and it actually works as RAM. \"-bios\" option is chosen to load TDVF."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:31
+msgid ""
+"OVMF is the opensource firmware that implements the TDVF support. Thus the "
+"command line to specify and load TDVF is ``-bios OVMF.fd``"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:35
+msgid "Feature Configuration"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:37
+msgid ""
+"Unlike non-TDX VM, the CPU features (enumerated by CPU or MSR) of a TD are "
+"not under full control of VMM. VMM can only configure part of features of a "
+"TD on ``KVM_TDX_INIT_VM`` command of VM scope ``MEMORY_ENCRYPT_OP`` ioctl."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:41
+msgid "The configurable features have three types:"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:43
+msgid ""
+"Attributes: - PKS (bit 30) controls whether Supervisor Protection Keys is "
+"exposed to TD, which determines related CPUID bit and CR4 bit; - PERFMON "
+"(bit 63) controls whether PMU is exposed to TD."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:48
+msgid ""
+"XSAVE related features (XFAM): XFAM is a 64b mask, which has the same format "
+"as XCR0 or IA32_XSS MSR. It determines the set of extended features "
+"available for use by the guest TD."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:52
+msgid ""
+"CPUID features: Only some bits of some CPUID leaves are directly "
+"configurable by VMM."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:55
+msgid "What features can be configured is reported via TDX capabilities."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:58
+msgid "TDX capabilities"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:60
+msgid ""
+"The VM scope ``MEMORY_ENCRYPT_OP`` ioctl provides command "
+"``KVM_TDX_CAPABILITIES`` to get the TDX capabilities from KVM. It returns a "
+"data structure of ``struct kvm_tdx_capabilities``, which tells the supported "
+"configuration of attributes, XFAM and CPUIDs."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:66
+msgid "TD attributes"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:68
+msgid ""
+"QEMU supports configuring raw 64-bit TD attributes directly via "
+"\"attributes\" property of \"tdx-guest\" object. Note, it's users' "
+"responsibility to provide a valid value because some bits may not supported "
+"by current QEMU or KVM yet."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:72
+msgid ""
+"QEMU also supports the configuration of individual attribute bits that are "
+"supported by it, via properties of \"tdx-guest\" object. E.g., \"sept-ve-"
+"disable\" (bit 28)."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:77
+msgid "MSR based features"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:79
+msgid ""
+"Current KVM doesn't support MSR based feature (e.g., "
+"MSR_IA32_ARCH_CAPABILITIES) configuration for TDX, and it's a future work to "
+"enable it in QEMU when KVM adds support of it."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:84
+msgid "Feature check"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:86
+msgid ""
+"QEMU checks if the final (CPU) features, determined by given cpu model and "
+"explicit feature adjustment of \"+featureA/-featureB\", can be supported or "
+"not. It can produce feature not supported warning like"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:90
+msgid ""
+"\"warning: host doesn't support requested feature: CPUID.07H:EBX.intel-pt "
+"[bit 25]\""
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:92
+msgid "It can also produce warning like"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:94
+msgid ""
+"\"warning: TDX forcibly sets the feature: CPUID.80000007H:EDX.invtsc [bit "
+"8]\""
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:96
+msgid ""
+"if the fixed-1 feature is requested to be disabled explicitly. This is newly "
+"added to QEMU for TDX because TDX has fixed-1 features that are forcibly "
+"enabled by TDX module and VMM cannot disable them."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:101
+msgid "Launching a TD (TDX VM)"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:103
+msgid ""
+"To launch a TD, the necessary command line options are tdx-guest object and "
+"split kernel-irqchip, as below:"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:108
+msgid ""
+"|qemu_system_x86| \\\\\n"
+"    -accel kvm \\\\\n"
+"    -cpu host \\\\\n"
+"    -object tdx-guest,id=tdx0 \\\\\n"
+"    -machine ...,confidential-guest-support=tdx0 \\\\\n"
+"    -bios OVMF.fd \\\\"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:116
+msgid "Restrictions"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:118
+msgid "kernel-irqchip must be split;"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:120
+msgid ""
+"This is set by default for TDX guest if kernel-irqchip is left on its "
+"default 'auto' setting."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:123
+msgid "No readonly support for private memory;"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:125
+msgid ""
+"No SMM support: SMM support requires manipulating the guest register states "
+"which is not allowed;"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:129
+msgid "Debugging"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:131
+msgid ""
+"Bit 0 of TD attributes, is DEBUG bit, which decides if the TD runs in off-TD "
+"debug mode. When in off-TD debug mode, TD's VCPU state and private memory "
+"are accessible via given SEAMCALLs. This requires KVM to expose APIs to "
+"invoke those SEAMCALLs and corresonponding QEMU change."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:136
+msgid "It's targeted as future work."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:139
+msgid "TD attestation"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:141
+msgid ""
+"In TD guest, the attestation process is used to verify the TDX guest "
+"trustworthiness to other entities before provisioning secrets to the guest."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:144
+msgid ""
+"TD attestation is initiated first by calling TDG.MR.REPORT inside TD to get "
+"the REPORT. Then the REPORT data needs to be converted into a remotely "
+"verifiable Quote by SGX Quoting Enclave (QE)."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:148
+msgid ""
+"It's a future work in QEMU to add support of TD attestation since it lacks "
+"support in current KVM."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:152
+msgid "Live Migration"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:154
+msgid "Future work."
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:157
+msgid "References"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:159
+msgid ""
+"`TDX Homepage <https://www.intel.com/content/www/us/en/developer/articles/"
+"technical/intel-trust-domain-extensions.html>`__"
+msgstr ""
+
+#: ../../../system/i386/tdx.rst:161
+msgid ""
+"`SGX QE <https://github.com/intel/SGXDataCenterAttestationPrimitives/tree/"
+"master/QuoteGeneration>`__"
+msgstr ""
