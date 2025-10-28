@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/target-avr.rst:4
+msgid "AVR System emulator"
+msgstr ""
+
+#: ../../../system/target-avr.rst:6
+msgid ""
+"Use the executable ``qemu-system-avr`` to emulate a AVR 8 bit based machine. "
+"These can have one of the following cores: avr1, avr2, avr25, avr3, avr31, "
+"avr35, avr4, avr5, avr51, avr6, avrtiny, xmega2, xmega3, xmega4, xmega5, "
+"xmega6 and xmega7."
+msgstr ""
+
+#: ../../../system/target-avr.rst:11
+msgid ""
+"As for now it supports few Arduino boards for educational and testing "
+"purposes. These boards use a ATmega controller, which model is limited to "
+"USART & 16-bit timer devices, enough to run FreeRTOS based applications "
+"(like https://github.com/seharris/qemu-avr-tests/blob/master/free-rtos/Demo/"
+"AVR_ATMega2560_GCC/demo.elf )."
+msgstr ""
+
+#: ../../../system/target-avr.rst:17
+msgid ""
+"Following are examples of possible usages, assuming demo.elf is compiled for "
+"AVR cpu"
+msgstr ""
+
+#: ../../../system/target-avr.rst:20
+msgid "Continuous non interrupted execution::"
+msgstr ""
+
+#: ../../../system/target-avr.rst:22
+msgid "qemu-system-avr -machine mega2560 -bios demo.elf"
+msgstr ""
+
+#: ../../../system/target-avr.rst:24
+msgid ""
+"Continuous non interrupted execution with serial output into telnet window::"
+msgstr ""
+
+#: ../../../system/target-avr.rst:26
+msgid ""
+"qemu-system-avr -M mega2560 -bios demo.elf -nographic \\\n"
+"                -serial tcp::5678,server=on,wait=off"
+msgstr ""
+
+#: ../../../system/target-avr.rst:29 ../../../system/target-avr.rst:37
+msgid "and then in another shell::"
+msgstr ""
+
+#: ../../../system/target-avr.rst:31
+msgid "telnet localhost 5678"
+msgstr ""
+
+#: ../../../system/target-avr.rst:33
+msgid "Debugging with GDB debugger::"
+msgstr ""
+
+#: ../../../system/target-avr.rst:35
+msgid "qemu-system-avr -machine mega2560 -bios demo.elf -s -S"
+msgstr ""
+
+#: ../../../system/target-avr.rst:39
+msgid "avr-gdb demo.elf"
+msgstr ""
+
+#: ../../../system/target-avr.rst:41
+msgid "and then within GDB shell::"
+msgstr ""
+
+#: ../../../system/target-avr.rst:43
+msgid "target remote :1234"
+msgstr ""
+
+#: ../../../system/target-avr.rst:45
+msgid ""
+"Print out executed instructions (that have not been translated by the JIT "
+"compiler yet)::"
+msgstr ""
+
+#: ../../../system/target-avr.rst:48
+msgid "qemu-system-avr -machine mega2560 -bios demo.elf -d in_asm"
+msgstr ""

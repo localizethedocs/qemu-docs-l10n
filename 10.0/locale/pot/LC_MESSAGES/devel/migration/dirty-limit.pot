@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/migration/dirty-limit.rst:2
+msgid "Dirty limit"
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:4
+msgid ""
+"The dirty limit, short for dirty page rate upper limit, is a new capability "
+"introduced in the 8.1 QEMU release that uses a new algorithm based on the "
+"KVM dirty ring to throttle down the guest during live migration."
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:8
+msgid "The algorithm framework is as follows:"
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:12
+msgid ""
+"------------------------------------------------------------------------------\n"
+"main   --------------> throttle thread ------------> PREPARE(1) <--------\n"
+"thread  \\                                                |              |\n"
+"         \\                                               |              |\n"
+"          \\                                              V              |\n"
+"           -\\                                        CALCULATE(2)       |\n"
+"             \\                                           |              |\n"
+"              \\                                          |              |\n"
+"               \\                                         V              |\n"
+"                \\                                    SET PENALTY(3) -----\n"
+"                 -\\                                      |\n"
+"                   \\                                     |\n"
+"                    \\                                    V\n"
+"                     -> virtual CPU thread -------> ACCEPT PENALTY(4)\n"
+"------------------------------------------------------------------------------"
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:28
+msgid ""
+"When the qmp command qmp_set_vcpu_dirty_limit is called for the first time, "
+"the QEMU main thread starts the throttle thread. The throttle thread, once "
+"launched, executes the loop, which consists of three steps:"
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:32
+msgid "PREPARE (1)"
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:34
+msgid ""
+"The entire work of PREPARE (1) is preparation for the second stage, "
+"CALCULATE(2), as the name implies. It involves preparing the dirty page rate "
+"value and the corresponding upper limit of the VM: The dirty page rate is "
+"calculated via the KVM dirty ring mechanism, which tells QEMU how many dirty "
+"pages a virtual CPU has had since the last KVM_EXIT_DIRTY_RING_FULL "
+"exception; The dirty page rate upper limit is specified by caller, therefore "
+"fetch it directly."
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:42
+msgid "CALCULATE (2)"
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:44
+msgid ""
+"Calculate a suitable sleep period for each virtual CPU, which will be used "
+"to determine the penalty for the target virtual CPU. The computation must be "
+"done carefully in order to reduce the dirty page rate progressively down to "
+"the upper limit without oscillation. To achieve this, two strategies are "
+"provided: the first is to add or subtract sleep time based on the ratio of "
+"the current dirty page rate to the limit, which is used when the current "
+"dirty page rate is far from the limit; the second is to add or subtract a "
+"fixed time when the current dirty page rate is close to the limit."
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:54
+msgid "SET PENALTY (3)"
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:56
+msgid ""
+"Set the sleep time for each virtual CPU that should be penalized based on "
+"the results of the calculation supplied by step CALCULATE (2)."
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:59
+msgid ""
+"After completing the three above stages, the throttle thread loops back to "
+"step PREPARE (1) until the dirty limit is reached."
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:62
+msgid ""
+"On the other hand, each virtual CPU thread reads the sleep duration and "
+"sleeps in the path of the KVM_EXIT_DIRTY_RING_FULL exception handler, that "
+"is ACCEPT PENALTY (4). Virtual CPUs tied with writing processes will "
+"obviously exit to the path and get penalized, whereas virtual CPUs involved "
+"with read processes will not."
+msgstr ""
+
+#: ../../../devel/migration/dirty-limit.rst:68
+msgid ""
+"In summary, thanks to the KVM dirty ring technology, the dirty limit "
+"algorithm will restrict virtual CPUs as needed to keep their dirty page rate "
+"inside the limit. This leads to more steady reading performance during live "
+"migration and can aid in improving large guest responsiveness."
+msgstr ""
