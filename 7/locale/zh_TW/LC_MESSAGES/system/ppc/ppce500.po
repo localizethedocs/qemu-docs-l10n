@@ -29,7 +29,7 @@ msgstr ""
 
 #: ../../../system/ppc/ppce500.rst:8
 msgid "Supported devices"
-msgstr ""
+msgstr "支援的裝置"
 
 #: ../../../system/ppc/ppce500.rst:10
 msgid "The ``ppce500`` machine supports the following devices:"
@@ -143,11 +143,11 @@ msgstr ""
 
 #: ../../../system/ppc/ppce500.rst:54
 msgid "$ qemu-system-ppc64 -nographic -M ppce500 -cpu e6500"
-msgstr ""
+msgstr "$ qemu-system-ppc64 -nographic -M ppce500 -cpu e6500"
 
 #: ../../../system/ppc/ppce500.rst:59
 msgid "Boot options"
-msgstr ""
+msgstr "開機選項"
 
 #: ../../../system/ppc/ppce500.rst:61
 msgid ""
@@ -220,6 +220,10 @@ msgid ""
 "$ make corenet64_smp_defconfig\n"
 "$ make menuconfig"
 msgstr ""
+"$ export ARCH=powerpc\n"
+"$ export CROSS_COMPILE=powerpc-linux-\n"
+"$ make corenet64_smp_defconfig\n"
+"$ make menuconfig"
 
 #: ../../../system/ppc/ppce500.rst:94
 msgid "then manually select the following configuration:"
@@ -243,6 +247,11 @@ msgid ""
 "    -initrd /path/to/rootfs.cpio \\\n"
 "    -append \"root=/dev/ram\""
 msgstr ""
+"$ qemu-system-ppc64 -M ppce500 -cpu e5500 -smp 4 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel vmlinux \\\n"
+"    -initrd /path/to/rootfs.cpio \\\n"
+"    -append \"root=/dev/ram\""
 
 #: ../../../system/ppc/ppce500.rst:108
 msgid ""
@@ -263,6 +272,11 @@ msgid ""
 "    -initrd /path/to/rootfs.cpio \\\n"
 "    -append \"root=/dev/ram\""
 msgstr ""
+"$ qemu-system-ppc64 -M ppce500 -cpu e500mc -smp 4 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel vmlinux \\\n"
+"    -initrd /path/to/rootfs.cpio \\\n"
+"    -append \"root=/dev/ram\""
 
 #: ../../../system/ppc/ppce500.rst:123
 msgid "Running U-Boot"
@@ -281,6 +295,8 @@ msgid ""
 "$ export CROSS_COMPILE=powerpc-linux-\n"
 "$ make qemu-ppce500_defconfig"
 msgstr ""
+"$ export CROSS_COMPILE=powerpc-linux-\n"
+"$ make qemu-ppce500_defconfig"
 
 #: ../../../system/ppc/ppce500.rst:134
 msgid "You will get u-boot file in the build tree."
@@ -325,6 +341,10 @@ msgid ""
 "                    -bios u-boot \\\n"
 "                    -nic tap,ifname=tap0,script=no,downscript=no,model=e1000"
 msgstr ""
+"$ qemu-system-ppc64 -M ppce500 -smp 4 -m 2G \\\n"
+"                    -display none -serial stdio \\\n"
+"                    -bios u-boot \\\n"
+"                    -nic tap,ifname=tap0,script=no,downscript=no,model=e1000"
 
 #: ../../../system/ppc/ppce500.rst:162
 msgid ""
