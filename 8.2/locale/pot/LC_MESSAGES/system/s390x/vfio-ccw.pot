@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/s390x/vfio-ccw.rst:2
+msgid "Subchannel passthrough via vfio-ccw"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:4
+msgid ""
+"vfio-ccw (based upon the mediated vfio device infrastructure) allows to make "
+"certain I/O subchannels and their devices available to a guest. The host "
+"will not interact with those subchannels/devices any more."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:8
+msgid ""
+"Note that while vfio-ccw should work with most non-QDIO devices, only ECKD "
+"DASDs have really been tested."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:12
+msgid "Example configuration"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:15
+msgid "Step 1: configure the host device"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:17
+msgid ""
+"As every mdev is identified by a uuid, the first step is to obtain one::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:19
+msgid ""
+"[root@host ~]# uuidgen\n"
+"7e270a25-e163-4922-af60-757fc8ed48c6"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:22
+msgid ""
+"Note: it is recommended to use the ``mdevctl`` tool for actually configuring "
+"the host device."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:25
+msgid ""
+"To define the same device as configured below to be started automatically, "
+"use"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:30
+msgid ""
+"[root@host ~]# driverctl -b css set-override 0.0.0313 vfio_ccw\n"
+"[root@host ~]# mdevctl define -u 7e270a25-e163-4922-af60-757fc8ed48c6 \\\n"
+"               -p 0.0.0313 -t vfio_ccw-io -a"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:34
+msgid ""
+"If using ``mdevctl`` is not possible or wanted, follow the manual procedure "
+"below."
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:37
+msgid "Locate the subchannel for the device (in this example, ``0.0.2b09``)::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:39
+msgid ""
+"[root@host ~]# lscss | grep 0.0.2b09 | awk '{print $2}'\n"
+"0.0.0313"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:42
+msgid ""
+"Unbind the subchannel (in this example, ``0.0.0313``) from the standard I/O "
+"subchannel driver and bind it to the vfio-ccw driver::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:45
+msgid ""
+"[root@host ~]# echo 0.0.0313 > /sys/bus/css/devices/0.0.0313/driver/unbind\n"
+"[root@host ~]# echo 0.0.0313 > /sys/bus/css/drivers/vfio_ccw/bind"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:48
+msgid "Create the mediated device (identified by the uuid)::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:50
+msgid ""
+"[root@host ~]# echo \"7e270a25-e163-4922-af60-757fc8ed48c6\" > \\\n"
+"/sys/bus/css/devices/0.0.0313/mdev_supported_types/vfio_ccw-io/create"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:54
+msgid "Step 2: configure QEMU"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:56
+msgid ""
+"Reference the created mediated device and (optionally) pick a device id to "
+"be presented in the guest (here, ``fe.0.1234``, which will end up visible in "
+"the guest as ``0.0.1234``::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:60
+msgid ""
+"-device vfio-ccw,devno=fe.0.1234,sysfsdev=\\\n"
+"/sys/bus/mdev/devices/7e270a25-e163-4922-af60-757fc8ed48c6"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:63
+msgid "Start the guest. The device (here, ``0.0.1234``) should now be usable::"
+msgstr ""
+
+#: ../../../system/s390x/vfio-ccw.rst:65
+msgid ""
+"[root@guest ~]# lscss -d 0.0.1234\n"
+"Device   Subchan.  DevType CU Type Use  PIM PAM POM  CHPID\n"
+"----------------------------------------------------------------------\n"
+"0.0.1234 0.0.0007  3390/0e 3990/e9      f0  f0  ff   1a2a3a0a 00000000\n"
+"[root@guest ~]# chccwdev -e 0.0.1234\n"
+"Setting device 0.0.1234 online\n"
+"Done\n"
+"[root@guest ~]# dmesg -t\n"
+"(...)\n"
+"dasd-eckd 0.0.1234: A channel path to the device has become operational\n"
+"dasd-eckd 0.0.1234: New DASD 3390/0E (CU 3990/01) with 10017 cylinders, 15 "
+"heads, 224 sectors\n"
+"dasd-eckd 0.0.1234: DASD with 4 KB/block, 7212240 KB total size, 48 KB/"
+"track, compatible disk layout\n"
+"dasda:VOL1/  0X2B09: dasda1"
+msgstr ""

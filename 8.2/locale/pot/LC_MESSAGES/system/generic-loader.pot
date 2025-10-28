@@ -1,0 +1,218 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/generic-loader.rst:8
+msgid "Generic Loader"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:10
+msgid ""
+"The 'loader' device allows the user to load multiple images or values into "
+"QEMU at startup."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:14
+msgid "Loading Data into Memory Values"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:15
+msgid ""
+"The loader device allows memory values to be set from the command line. This "
+"can be done by following the syntax below::"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:18
+msgid ""
+"-device loader,addr=<addr>,data=<data>,data-len=<data-len> \\\n"
+"                [,data-be=<data-be>][,cpu-num=<cpu-num>]"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:21 ../../../system/generic-loader.rst:57
+#: ../../../system/generic-loader.rst:84
+msgid "``<addr>``"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:22
+msgid "The address to store the data in."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:24
+msgid "``<data>``"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:25
+msgid ""
+"The value to be written to the address. The maximum size of the data is 8 "
+"bytes."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:28
+msgid "``<data-len>``"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:29
+msgid ""
+"The length of the data in bytes. This argument must be included if the data "
+"argument is."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:32
+msgid "``<data-be>``"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:33
+msgid ""
+"Set to true if the data to be stored on the guest should be written as big "
+"endian data. The default is to write little endian data."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:36 ../../../system/generic-loader.rst:60
+#: ../../../system/generic-loader.rst:88
+msgid "``<cpu-num>``"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:37
+msgid ""
+"The number of the CPU's address space where the data should be loaded. If "
+"not specified the address space of the first CPU is used."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:40
+msgid ""
+"All values are parsed using the standard QemuOps parsing. This allows the "
+"user to specify any values in any format supported. By default the values "
+"will be parsed as decimal. To use hex values the user should prefix the "
+"number with a '0x'."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:45
+msgid "An example of loading value 0x8000000e to address 0xfd1a0104 is::"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:47
+msgid "-device loader,addr=0xfd1a0104,data=0x8000000e,data-len=4"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:50
+msgid "Setting a CPU's Program Counter"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:52
+msgid ""
+"The loader device allows the CPU's PC to be set from the command line. This "
+"can be done by following the syntax below::"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:55
+msgid "-device loader,addr=<addr>,cpu-num=<cpu-num>"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:58
+msgid "The value to use as the CPU's PC."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:61
+msgid "The number of the CPU whose PC should be set to the specified value."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:63 ../../../system/generic-loader.rst:102
+msgid ""
+"All values are parsed using the standard QemuOpts parsing. This allows the "
+"user to specify any values in any format supported. By default the values "
+"will be parsed as decimal. To use hex values the user should prefix the "
+"number with a '0x'."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:68
+msgid "An example of setting CPU 0's PC to 0x8000 is::"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:70
+msgid "-device loader,addr=0x8000,cpu-num=0"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:73
+msgid "Loading Files"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:75
+msgid ""
+"The loader device also allows files to be loaded into memory. It can load "
+"ELF, U-Boot, and Intel HEX executable formats as well as raw images.  The "
+"syntax is shown below:"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:79
+msgid ""
+"-device loader,file=<file>[,addr=<addr>][,cpu-num=<cpu-num>][,force-"
+"raw=<raw>]"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:81
+msgid "``<file>``"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:82
+msgid "A file to be loaded into memory"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:85
+msgid ""
+"The memory address where the file should be loaded. This is required for raw "
+"images and ignored for non-raw files."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:89
+msgid ""
+"This specifies the CPU that should be used. This is an optional argument and "
+"will cause the CPU's PC to be set to the memory address where the raw file "
+"is loaded or the entry point specified in the executable format header. This "
+"option should only be used for the boot image. This will also cause the "
+"image to be written to the specified CPU's address space. If not specified, "
+"the default is CPU 0."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:97
+msgid "``<force-raw>``"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:98
+msgid ""
+"Setting 'force-raw=on' forces the file to be treated as a raw image. This "
+"can be used to load supported executable formats as if they were raw."
+msgstr ""
+
+#: ../../../system/generic-loader.rst:107
+msgid "An example of loading an ELF file which CPU0 will boot is shown below::"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:109
+msgid "-device loader,file=./images/boot.elf,cpu-num=0"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:112
+msgid "Restrictions and ToDos"
+msgstr ""
+
+#: ../../../system/generic-loader.rst:114
+msgid ""
+"At the moment it is just assumed that if you specify a cpu-num then you want "
+"to set the PC as well. This might not always be the case. In future the "
+"internal state 'set_pc' (which exists in the generic loader now) should be "
+"exposed to the user so that they can choose if the PC is set or not."
+msgstr ""

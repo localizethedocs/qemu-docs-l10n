@@ -1,0 +1,201 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/devices/usb-u2f.rst:2
+msgid "Universal Second Factor (U2F) USB Key Device"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:4
+msgid ""
+"U2F is an open authentication standard that enables relying parties exposed "
+"to the internet to offer a strong second factor option for end user "
+"authentication."
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:8
+msgid ""
+"The second factor is provided by a device implementing the U2F protocol. In "
+"case of a USB U2F security key, it is a USB HID device that implements the "
+"U2F protocol."
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:12
+msgid ""
+"QEMU supports both pass-through of a host U2F key device to a VM, and "
+"software emulation of a U2F key."
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:16
+msgid "``u2f-passthru``"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:18
+msgid ""
+"The ``u2f-passthru`` device allows you to connect a real hardware U2F key on "
+"your host to a guest VM. All requests made from the guest are passed through "
+"to the physical security key connected to the host machine and vice versa."
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:23
+msgid ""
+"In addition, the dedicated pass-through allows you to share a single U2F "
+"security key with several guest VMs, which is not possible with a simple "
+"host device assignment pass-through."
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:27
+msgid ""
+"You can specify the host U2F key to use with the ``hidraw`` option, which "
+"takes the host path to a Linux ``/dev/hidrawN`` device:"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:31
+msgid "|qemu_system| -usb -device u2f-passthru,hidraw=/dev/hidraw0"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:33
+msgid ""
+"If you don't specify the device, the ``u2f-passthru`` device will autoscan "
+"to take the first U2F device it finds on the host (this requires a working "
+"libudev):"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:38
+msgid "|qemu_system| -usb -device u2f-passthru"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:41
+msgid "``u2f-emulated``"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:43
+msgid ""
+"``u2f-emulated`` is a completely software emulated U2F device. It uses "
+"`libu2f-emu <https://github.com/MattGorko/libu2f-emu>`__ for the U2F key "
+"emulation. libu2f-emu provides a complete implementation of the U2F protocol "
+"device part for all specified transports given by the FIDO Alliance."
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:49
+msgid "To work, an emulated U2F device must have four elements:"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:51
+msgid "ec x509 certificate"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:52
+msgid "ec private key"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:53
+msgid "counter (four bytes value)"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:54
+msgid "48 bytes of entropy (random bits)"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:56
+msgid ""
+"To use this type of device, these have to be configured, and these four "
+"elements must be passed one way or another."
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:59
+msgid ""
+"Assuming that you have a working libu2f-emu installed on the host, there are "
+"three possible ways to configure the ``u2f-emulated`` device:"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:62
+msgid "ephemeral"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:63
+msgid "setup directory"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:64
+msgid "manual"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:66
+msgid ""
+"Ephemeral is the simplest way to configure; it lets the device generate all "
+"the elements it needs for a single use of the lifetime of the device. It is "
+"the default if you do not pass any other options to the device."
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:71
+msgid "|qemu_system| -usb -device u2f-emulated"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:73
+msgid ""
+"You can pass the device the path of a setup directory on the host using the "
+"``dir`` option; the directory must contain these four files:"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:76
+msgid "``certificate.pem``: ec x509 certificate"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:77
+msgid "``private-key.pem``: ec private key"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:78
+msgid "``counter``: counter value"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:79
+msgid "``entropy``: 48 bytes of entropy"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:82
+msgid "|qemu_system| -usb -device u2f-emulated,dir=$dir"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:84
+msgid ""
+"You can also manually pass the device the paths to each of these files, if "
+"you don't want them all to be in the same directory, using the options"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:87
+msgid "``cert``"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:88
+msgid "``priv``"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:89
+msgid "``counter``"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:90
+msgid "``entropy``"
+msgstr ""
+
+#: ../../../system/devices/usb-u2f.rst:93
+msgid ""
+"|qemu_system| -usb -device u2f-emulated,cert=$DIR1/$FILE1,priv=$DIR2/$FILE2,"
+"counter=$DIR3/$FILE3,entropy=$DIR4/$FILE4"
+msgstr ""
