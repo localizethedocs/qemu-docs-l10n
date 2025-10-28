@@ -1,0 +1,573 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/ppc/pseries.rst:3
+msgid "pSeries family boards (``pseries``)"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:5
+msgid ""
+"The Power machine para-virtualized environment described by the Linux on "
+"Power Architecture Reference ([LoPAR]_) document is called pSeries. This "
+"environment is also known as sPAPR, System p guests, or simply Power Linux "
+"guests (although it is capable of running other operating systems, such as "
+"AIX)."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:10
+msgid ""
+"Even though pSeries is designed to behave as a guest environment, it is also "
+"capable of acting as a hypervisor OS, providing, on that role, nested "
+"virtualization capabilities."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:15
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:17
+msgid ""
+"Multi processor support for many Power processors generations: POWER7, "
+"POWER7+, POWER8, POWER8NVL, POWER9, and Power10. Support for POWER5+ exists, "
+"but its state is unknown."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:20
+msgid "Interrupt Controller, XICS (POWER8) and XIVE (POWER9 and Power10)"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:21
+msgid "vPHB PCIe Host bridge."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:22
+msgid ""
+"vscsi and vnet devices, compatible with the same devices available on a "
+"PowerVM hypervisor with VIOS managing LPARs."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:24
+msgid "Virtio based devices."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:25
+msgid "PCIe device pass through."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:28
+msgid "Missing devices"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:30
+msgid "SPICE support."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:33
+msgid "Firmware"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:35
+msgid "The pSeries platform in QEMU comes with 2 firmwares:"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:37
+msgid ""
+"`SLOF <https://github.com/aik/SLOF>`_ (Slimline Open Firmware) is an "
+"implementation of the `IEEE 1275-1994, Standard for Boot (Initialization "
+"Configuration) Firmware: Core Requirements and Practices <https://standards."
+"ieee.org/standard/1275-1994.html>`_."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:42
+msgid ""
+"SLOF performs bus scanning, PCI resource allocation, provides the client "
+"interface to boot from block devices and network."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:45
+msgid ""
+"QEMU includes a prebuilt image of SLOF which is updated when a more recent "
+"version is required."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:48
+msgid ""
+"VOF (Virtual Open Firmware) is a minimalistic firmware to work with ``-"
+"machine pseries,x-vof=on``. When enabled, the firmware acts as a slim shim "
+"and QEMU implements parts of the IEEE 1275 Open Firmware interface."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:52
+msgid ""
+"VOF does not have device drivers, does not do PCI resource allocation and "
+"relies on ``-kernel`` used with Linux kernels recent enough (v5.4+) to PCI "
+"resource assignment. It is ideal to use with petitboot."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:56
+msgid "Booting via ``-kernel`` supports the following:"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:59
+msgid "kernel"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:59
+msgid "pseries,x-vof=off"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:59
+msgid "pseries,x-vof=on"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:61
+msgid "vmlinux BE"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:61 ../../../system/ppc/pseries.rst:63
+#: ../../../system/ppc/pseries.rst:67
+msgid "✓"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:63
+msgid "vmlinux LE"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:65
+msgid "zImage.pseries BE"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:65
+msgid "✓¹"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:67
+msgid "zImage.pseries LE"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:70
+msgid "¹ must set kernel-addr=0"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:73
+msgid "Build directions"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:75
+msgid "./configure --target-list=ppc64-softmmu && make"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:80
+msgid "Running instructions"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:82
+msgid ""
+"Someone can select the pSeries machine type by running QEMU with the "
+"following options:"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:85
+msgid "qemu-system-ppc64 -M pseries <other QEMU arguments>"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:90
+msgid "sPAPR devices"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:92
+msgid ""
+"The sPAPR specification defines a set of para-virtualized devices, which are "
+"also supported by the pSeries machine in QEMU and can be instantiated with "
+"the ``-device`` option:"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:96
+msgid "``spapr-vlan`` : a virtual network interface."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:97
+msgid "``spapr-vscsi`` : a virtual SCSI disk interface."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:98
+msgid ""
+"``spapr-rng`` : a pseudo-device for passing random number generator data to "
+"the guest (see the `H_RANDOM hypercall feature <https://wiki.qemu.org/"
+"Features/HRandomHypercall>`_ for details)."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:101
+msgid "``spapr-vty``: a virtual teletype."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:102
+msgid "``spapr-pci-host-bridge``: a PCI host bridge."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:103
+msgid "``tpm-spapr``: a Trusted Platform Module (TPM)."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:104
+msgid "``spapr-tpm-proxy``: a TPM proxy."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:106
+msgid ""
+"These are compatible with the devices historically available for use when "
+"running the IBM PowerVM hypervisor with LPARs."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:109
+msgid ""
+"However, since these devices have originally been specified with another "
+"hypervisor and non-Linux guests in mind, you should use the virtio "
+"counterparts (virtio-net, virtio-blk/scsi and virtio-rng for instance) if "
+"possible instead, since they will most probably give you better performance "
+"with Linux guests in a QEMU environment."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:115
+msgid ""
+"The pSeries machine in QEMU is always instantiated with the following "
+"devices:"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:117
+msgid "A NVRAM device (``spapr-nvram``)."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:118
+msgid "A virtual teletype (``spapr-vty``)."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:119
+msgid "A PCI host bridge (``spapr-pci-host-bridge``)."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:121
+msgid ""
+"Hence, it is not needed to add them manually, unless you use the ``-"
+"nodefaults`` command line option in QEMU."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:124
+msgid ""
+"In the case of the default ``spapr-nvram`` device, if someone wants to make "
+"the contents of the NVRAM device persistent, they will need to specify a "
+"PFLASH device when starting QEMU, i.e. either use ``-drive if=pflash,"
+"file=<filename>,format=raw`` to set the default PFLASH device, or specify "
+"one with an ID (``-drive if=none,file=<filename>,format=raw,id=pfid``) and "
+"pass that ID to the NVRAM device with ``-global spapr-nvram.drive=pfid``."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:133
+msgid "sPAPR specification"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:135
+msgid ""
+"The main source of documentation on the sPAPR standard is the [LoPAR]_ "
+"document. However, documentation specific to QEMU's implementation of the "
+"specification can  also be found in QEMU documentation:"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:149
+msgid "Switching between the KVM-PR and KVM-HV kernel module"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:151
+msgid ""
+"Currently, there are two implementations of KVM on Power, ``kvm_hv.ko`` and "
+"``kvm_pr.ko``."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:155
+msgid ""
+"If a host supports both KVM modes, and both KVM kernel modules are loaded, "
+"it is possible to switch between the two modes with the ``kvm-type`` "
+"parameter:"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:158
+msgid ""
+"Use ``qemu-system-ppc64 -M pseries,accel=kvm,kvm-type=PR`` to use the "
+"``kvm_pr.ko`` kernel module."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:160
+msgid ""
+"Use ``qemu-system-ppc64 -M pseries,accel=kvm,kvm-type=HV`` to use ``kvm_hv."
+"ko`` instead."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:164 ../../../system/ppc/pseries.rst:221
+msgid "KVM-PR"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:166
+msgid ""
+"KVM-PR uses the so-called **PR**\\ oblem state of the PPC CPUs to run the "
+"guests, i.e. the virtual machine is run in user mode and all privileged "
+"instructions trap and have to be emulated by the host. That means you can "
+"run KVM-PR inside a pSeries guest (or a PowerVM LPAR for that matter), and "
+"that is where it has originated, as historically (prior to POWER7) it was "
+"not possible to run Linux on hypervisor mode on a Power processor (this "
+"function was restricted to PowerVM, the IBM proprietary hypervisor)."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:174
+msgid ""
+"Because all privileged instructions are trapped, guests that use a lot of "
+"privileged instructions run quite slow with KVM-PR. On the other hand, "
+"because of that, this kernel module can run on pretty much every PPC "
+"hardware, and is able to emulate a lot of guests CPUs. This module can even "
+"be used to run other PowerPC guests like an emulated PowerMac."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:180
+msgid ""
+"As KVM-PR can be run inside a pSeries guest, it can also provide nested "
+"virtualization capabilities (i.e. running a guest from within a guest)."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:183
+msgid ""
+"It is important to notice that, as KVM-HV provides a much better execution "
+"performance, maintenance work has been much more focused on it in the past "
+"years. Maintenance for KVM-PR has been minimal."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:187
+msgid ""
+"In order to run KVM-PR guests with POWER9 processors, someone will need to "
+"start QEMU with ``kernel_irqchip=off`` command line option."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:191 ../../../system/ppc/pseries.rst:221
+msgid "KVM-HV"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:193
+msgid ""
+"KVM-HV uses the hypervisor mode of more recent Power processors, that allow "
+"access to the bare metal hardware directly. Although POWER7 had this "
+"capability, it was only starting with POWER8 that this was officially "
+"supported by IBM."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:197
+msgid ""
+"Originally, KVM-HV was only available when running on a PowerNV platform (a."
+"k.a. Power bare metal). Although it runs on a PowerNV platform, it can only "
+"be used to start pSeries guests. As the pSeries guest doesn't have access to "
+"the hypervisor mode of the Power CPU, it wasn't possible to run KVM-HV on a "
+"guest. This limitation has been lifted, and now it is possible to run KVM-HV "
+"inside pSeries guests as well, making nested virtualization possible with "
+"KVM-HV."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:204
+msgid ""
+"As KVM-HV has access to privileged instructions, guests that use a lot of "
+"these can run much faster than with KVM-PR. On the other hand, the guest CPU "
+"has to be of the same type as the host CPU this way, e.g. it is not possible "
+"to specify an embedded PPC CPU for the guest with KVM-HV. However, there is "
+"at least the possibility to run the guest in a backward-compatibility mode "
+"of the previous CPUs generations, e.g. you can run a POWER7 guest on a "
+"POWER8 host by using ``-cpu POWER8,compat=power7`` as parameter to QEMU."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:213
+msgid "Modules support"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:215
+msgid ""
+"As noticed in the sections above, each module can run in a different "
+"environment. The following table shows with which environment each module "
+"can run. As long as you are in a supported environment, you can run KVM-PR "
+"or KVM-HV nested. Combinations not shown in the table are not available."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:221
+msgid "Platform"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:221
+msgid "Host type"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:221
+msgid "Bits"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:221
+msgid "Page table format"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:223 ../../../system/ppc/pseries.rst:231
+msgid "PowerNV"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:223
+msgid "bare metal"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:223 ../../../system/ppc/pseries.rst:231
+#: ../../../system/ppc/pseries.rst:239
+msgid "32"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:223 ../../../system/ppc/pseries.rst:227
+#: ../../../system/ppc/pseries.rst:231 ../../../system/ppc/pseries.rst:235
+#: ../../../system/ppc/pseries.rst:239 ../../../system/ppc/pseries.rst:243
+msgid "hash"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:223 ../../../system/ppc/pseries.rst:229
+#: ../../../system/ppc/pseries.rst:231 ../../../system/ppc/pseries.rst:235
+#: ../../../system/ppc/pseries.rst:237 ../../../system/ppc/pseries.rst:239
+#: ../../../system/ppc/pseries.rst:243 ../../../system/ppc/pseries.rst:245
+msgid "no"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:223 ../../../system/ppc/pseries.rst:227
+#: ../../../system/ppc/pseries.rst:229 ../../../system/ppc/pseries.rst:231
+#: ../../../system/ppc/pseries.rst:235 ../../../system/ppc/pseries.rst:239
+#: ../../../system/ppc/pseries.rst:243 ../../../system/ppc/pseries.rst:245
+msgid "yes"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:225 ../../../system/ppc/pseries.rst:229
+#: ../../../system/ppc/pseries.rst:233 ../../../system/ppc/pseries.rst:237
+#: ../../../system/ppc/pseries.rst:241
+msgid "radix"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:225 ../../../system/ppc/pseries.rst:233
+#: ../../../system/ppc/pseries.rst:241
+msgid "N/A"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:227 ../../../system/ppc/pseries.rst:235
+#: ../../../system/ppc/pseries.rst:243
+msgid "64"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:231
+msgid "pSeries [1]_"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:237
+msgid "yes [2]_"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:239
+msgid "PowerVM"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:245
+msgid "radix [3]_"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:248
+msgid ""
+"On POWER9 DD2.1 processors, the page table format on the host and guest must "
+"be the same."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:251
+msgid "KVM-HV cannot run nested on POWER8 machines."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:253
+msgid "Introduced on Power10 machines."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:259
+msgid "POWER (PAPR) Protected Execution Facility (PEF)"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:261
+msgid ""
+"Protected Execution Facility (PEF), also known as Secure Guest support is a "
+"feature found on IBM POWER9 and POWER10 processors."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:264
+msgid ""
+"If a suitable firmware including an Ultravisor is installed, it adds an "
+"extra memory protection mode to the CPU.  The ultravisor manages a pool of "
+"secure memory which cannot be accessed by the hypervisor."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:268
+msgid ""
+"When this feature is enabled in QEMU, a guest can use ultracalls to enter "
+"\"secure mode\".  This transfers most of its memory to secure memory, where "
+"it cannot be eavesdropped by a compromised hypervisor."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:273
+msgid "Launching"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:275
+msgid "To launch a guest which will be permitted to enter PEF secure mode::"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:277
+msgid ""
+"$ qemu-system-ppc64 \\\n"
+"    -object pef-guest,id=pef0 \\\n"
+"    -machine confidential-guest-support=pef0 \\\n"
+"    ..."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:283
+msgid "Live Migration"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:285
+msgid ""
+"Live migration is not yet implemented for PEF guests.  For consistency, QEMU "
+"currently prevents migration if the PEF feature is enabled, whether or not "
+"the guest has actually entered secure mode."
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:291
+msgid "Maintainer contact information"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:293
+msgid "Cédric Le Goater <clg@kaod.org>"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:295
+msgid "Daniel Henrique Barboza <danielhb413@gmail.com>"
+msgstr ""
+
+#: ../../../system/ppc/pseries.rst:297
+msgid ""
+"`Linux on Power Architecture Reference document (LoPAR) revision 2.9 "
+"<https://openpowerfoundation.org/wp-content/uploads/2020/07/LoPAR-20200812."
+"pdf>`_."
+msgstr ""
