@@ -1,0 +1,308 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/ci.rst:3
+msgid "CI"
+msgstr ""
+
+#: ../../../devel/ci.rst:5
+msgid ""
+"QEMU has configurations enabled for a number of different CI services. The "
+"most up to date information about them and their status can be found at::"
+msgstr ""
+
+#: ../../../devel/ci.rst:9
+msgid "https://wiki.qemu.org/Testing/CI"
+msgstr ""
+
+#: ../../../devel/ci.rst:12
+msgid "Custom CI/CD variables"
+msgstr ""
+
+#: ../../../devel/ci.rst:14
+msgid ""
+"QEMU CI pipelines can be tuned by setting some CI environment variables."
+msgstr ""
+
+#: ../../../devel/ci.rst:17
+msgid "Set variable globally in the user's CI namespace"
+msgstr ""
+
+#: ../../../devel/ci.rst:19
+msgid "Variables can be set globally in the user's CI namespace setting."
+msgstr ""
+
+#: ../../../devel/ci.rst:21 ../../../devel/ci.rst:37
+msgid ""
+"For further information about how to set these variables, please refer to::"
+msgstr ""
+
+#: ../../../devel/ci.rst:23
+msgid ""
+"https://docs.gitlab.com/ee/ci/variables/#add-a-cicd-variable-to-a-project"
+msgstr ""
+
+#: ../../../devel/ci.rst:26
+msgid ""
+"Set variable manually when pushing a branch or tag to the user's repository"
+msgstr ""
+
+#: ../../../devel/ci.rst:28
+msgid ""
+"Variables can be set manually when pushing a branch or tag, using git-push "
+"command line arguments."
+msgstr ""
+
+#: ../../../devel/ci.rst:31
+msgid "Example setting the QEMU_CI_EXAMPLE_VAR variable:"
+msgstr ""
+
+#: ../../../devel/ci.rst:33
+msgid "git push -o ci.variable=\"QEMU_CI_EXAMPLE_VAR=value\" myrepo mybranch"
+msgstr ""
+
+#: ../../../devel/ci.rst:39
+msgid ""
+"https://docs.gitlab.com/ee/user/project/push_options.html#push-options-for-"
+"gitlab-cicd"
+msgstr ""
+
+#: ../../../devel/ci.rst:41
+msgid "Here is a list of the most used variables:"
+msgstr ""
+
+#: ../../../devel/ci.rst:44
+msgid "QEMU_CI_AVOCADO_TESTING"
+msgstr ""
+
+#: ../../../devel/ci.rst:45
+msgid ""
+"By default, tests using the Avocado framework are not run automatically in "
+"the pipelines (because multiple artifacts have to be downloaded, and if "
+"these artifacts are not already cached, downloading them make the jobs reach "
+"the timeout limit). Set this variable to have the tests using the Avocado "
+"framework run automatically."
+msgstr ""
+
+#: ../../../devel/ci.rst:52
+msgid "Jobs on Custom Runners"
+msgstr ""
+
+#: ../../../devel/ci.rst:54
+msgid ""
+"Besides the jobs run under the various CI systems listed before, there are a "
+"number additional jobs that will run before an actual merge. These use the "
+"same GitLab CI's service/framework already used for all other GitLab based "
+"CI jobs, but rely on additional systems, not the ones provided by GitLab as "
+"\"shared runners\"."
+msgstr ""
+
+#: ../../../devel/ci.rst:60
+msgid ""
+"The architecture of GitLab's CI service allows different machines to be set "
+"up with GitLab's \"agent\", called gitlab-runner, which will take care of "
+"running jobs created by events such as a push to a branch. Here, the "
+"combination of a machine, properly configured with GitLab's gitlab-runner, "
+"is called a \"custom runner\"."
+msgstr ""
+
+#: ../../../devel/ci.rst:66
+msgid ""
+"The GitLab CI jobs definition for the custom runners are located under::"
+msgstr ""
+
+#: ../../../devel/ci.rst:68
+msgid ".gitlab-ci.d/custom-runners.yml"
+msgstr ""
+
+#: ../../../devel/ci.rst:70
+msgid ""
+"Custom runners entail custom machines.  To see a list of the machines "
+"currently deployed in the QEMU GitLab CI and their maintainers, please refer "
+"to the QEMU `wiki <https://wiki.qemu.org/AdminContacts>`__."
+msgstr ""
+
+#: ../../../devel/ci.rst:75
+msgid "Machine Setup Howto"
+msgstr ""
+
+#: ../../../devel/ci.rst:77
+msgid ""
+"For all Linux based systems, the setup can be mostly automated by the "
+"execution of two Ansible playbooks.  Create an ``inventory`` file under "
+"``scripts/ci/setup``, such as this::"
+msgstr ""
+
+#: ../../../devel/ci.rst:81
+msgid ""
+"fully.qualified.domain\n"
+"other.machine.hostname"
+msgstr ""
+
+#: ../../../devel/ci.rst:84
+msgid ""
+"You may need to set some variables in the inventory file itself.  One very "
+"common need is to tell Ansible to use a Python 3 interpreter on those "
+"hosts.  This would look like::"
+msgstr ""
+
+#: ../../../devel/ci.rst:88
+msgid ""
+"fully.qualified.domain ansible_python_interpreter=/usr/bin/python3\n"
+"other.machine.hostname ansible_python_interpreter=/usr/bin/python3"
+msgstr ""
+
+#: ../../../devel/ci.rst:92
+msgid "Build environment"
+msgstr ""
+
+#: ../../../devel/ci.rst:94
+msgid ""
+"The ``scripts/ci/setup/build-environment.yml`` Ansible playbook will set up "
+"machines with the environment needed to perform builds and run QEMU tests.  "
+"This playbook consists on the installation of various required packages (and "
+"a general package update while at it).  It currently covers a number of "
+"different Linux distributions, but it can be expanded to cover other systems."
+msgstr ""
+
+#: ../../../devel/ci.rst:101
+msgid ""
+"The minimum required version of Ansible successfully tested in this playbook "
+"is 2.8.0 (a version check is embedded within the playbook itself).  To run "
+"the playbook, execute::"
+msgstr ""
+
+#: ../../../devel/ci.rst:105
+msgid ""
+"cd scripts/ci/setup\n"
+"ansible-playbook -i inventory build-environment.yml"
+msgstr ""
+
+#: ../../../devel/ci.rst:108
+msgid ""
+"Please note that most of the tasks in the playbook require superuser "
+"privileges, such as those from the ``root`` account or those obtained by "
+"``sudo``.  If necessary, please refer to ``ansible-playbook`` options such "
+"as ``--become``, ``--become-method``, ``--become-user`` and ``--ask-become-"
+"pass``."
+msgstr ""
+
+#: ../../../devel/ci.rst:115
+msgid "gitlab-runner setup and registration"
+msgstr ""
+
+#: ../../../devel/ci.rst:117
+msgid ""
+"The gitlab-runner agent needs to be installed on each machine that will run "
+"jobs.  The association between a machine and a GitLab project happens with a "
+"registration token.  To find the registration token for your repository/"
+"project, navigate on GitLab's web UI to:"
+msgstr ""
+
+#: ../../../devel/ci.rst:122
+msgid ""
+"Settings (the gears-like icon at the bottom of the left hand side vertical "
+"toolbar), then"
+msgstr ""
+
+#: ../../../devel/ci.rst:124 ../../../devel/ci.rst:143
+msgid "CI/CD, then"
+msgstr ""
+
+#: ../../../devel/ci.rst:125 ../../../devel/ci.rst:144
+msgid "Runners, and click on the \"Expand\" button, then"
+msgstr ""
+
+#: ../../../devel/ci.rst:126
+msgid ""
+"Under \"Set up a specific Runner manually\", look for the value under \"And "
+"this registration token:\""
+msgstr ""
+
+#: ../../../devel/ci.rst:129
+msgid ""
+"Copy the ``scripts/ci/setup/vars.yml.template`` file to ``scripts/ci/setup/"
+"vars.yml``.  Then, set the ``gitlab_runner_registration_token`` variable to "
+"the value obtained earlier."
+msgstr ""
+
+#: ../../../devel/ci.rst:134
+msgid "To run the playbook, execute::"
+msgstr ""
+
+#: ../../../devel/ci.rst:136
+msgid ""
+"cd scripts/ci/setup\n"
+"ansible-playbook -i inventory gitlab-runner.yml"
+msgstr ""
+
+#: ../../../devel/ci.rst:139
+msgid ""
+"Following the registration, it's necessary to configure the runner tags, and "
+"optionally other configurations on the GitLab UI.  Navigate to:"
+msgstr ""
+
+#: ../../../devel/ci.rst:142
+msgid "Settings (the gears like icon), then"
+msgstr ""
+
+#: ../../../devel/ci.rst:145
+msgid "\"Runners activated for this project\", then"
+msgstr ""
+
+#: ../../../devel/ci.rst:146
+msgid "Click on the \"Edit\" icon (next to the \"Lock\" Icon)"
+msgstr ""
+
+#: ../../../devel/ci.rst:148
+msgid ""
+"Tags are very important as they are used to route specific jobs to specific "
+"types of runners, so it's a good idea to double check that the automatically "
+"created tags are consistent with the OS and architecture.  For instance, an "
+"Ubuntu 20.04 aarch64 system should have tags set as::"
+msgstr ""
+
+#: ../../../devel/ci.rst:154
+msgid "ubuntu_20.04,aarch64"
+msgstr ""
+
+#: ../../../devel/ci.rst:156
+msgid ""
+"Because the job definition at ``.gitlab-ci.d/custom-runners.yml`` would "
+"contain::"
+msgstr ""
+
+#: ../../../devel/ci.rst:159
+msgid ""
+"ubuntu-20.04-aarch64-all:\n"
+" tags:\n"
+" - ubuntu_20.04\n"
+" - aarch64"
+msgstr ""
+
+#: ../../../devel/ci.rst:164
+msgid "It's also recommended to:"
+msgstr ""
+
+#: ../../../devel/ci.rst:166
+msgid "increase the \"Maximum job timeout\" to something like ``2h``"
+msgstr ""
+
+#: ../../../devel/ci.rst:167
+msgid "give it a better Description"
+msgstr ""
