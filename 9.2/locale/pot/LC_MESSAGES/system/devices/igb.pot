@@ -1,0 +1,140 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/devices/igb.rst:5
+msgid "igb"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:7
+msgid ""
+"igb is a family of Intel's gigabit ethernet controllers. In QEMU, 82576 "
+"emulation is implemented in particular. Its datasheet is available at [1]_."
+msgstr ""
+
+#: ../../../system/devices/igb.rst:10
+msgid ""
+"This implementation is expected to be useful to test SR-IOV networking "
+"without requiring physical hardware."
+msgstr ""
+
+#: ../../../system/devices/igb.rst:14
+msgid "Limitations"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:16
+msgid ""
+"This igb implementation was tested with Linux Test Project [2]_ and Windows "
+"HLK [3]_ during the initial development. Later it was also tested with DPDK "
+"Test Suite [4]_. The command used when testing with LTP is:"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:20
+msgid "network.sh -6mta"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:24
+msgid ""
+"Be aware that this implementation lacks many functionalities available with "
+"the actual hardware, and you may experience various failures if you try to "
+"use it with a different operating system other than DPDK, Linux, and Windows "
+"or if you try functionalities not covered by the tests."
+msgstr ""
+
+#: ../../../system/devices/igb.rst:30
+msgid "Using igb"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:32
+msgid ""
+"Using igb should be nothing different from using another network device. "
+"See :ref:`Network_emulation` in general."
+msgstr ""
+
+#: ../../../system/devices/igb.rst:35
+msgid ""
+"However, you may also need to perform additional steps to activate SR-IOV "
+"feature on your guest. For Linux, refer to [5]_."
+msgstr ""
+
+#: ../../../system/devices/igb.rst:39
+msgid "Developing igb"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:41
+msgid ""
+"igb is the successor of e1000e, and e1000e is the successor of e1000 in "
+"turn. As these devices are very similar, if you make a change for igb and "
+"the same change can be applied to e1000e and e1000, please do so."
+msgstr ""
+
+#: ../../../system/devices/igb.rst:45
+msgid ""
+"Please do not forget to run tests before submitting a change. As tests "
+"included in QEMU is very minimal, run some application which is likely to be "
+"affected by the change to confirm it works in an integrated system."
+msgstr ""
+
+#: ../../../system/devices/igb.rst:50
+msgid "Testing igb"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:52
+msgid ""
+"A qtest of the basic functionality is available. Run the below at the build "
+"directory:"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:55
+msgid "meson test qtest-x86_64/qos-test"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:59
+msgid ""
+"ethtool can test register accesses, interrupts, etc. It is automated as an "
+"Avocado test and can be ran with the following command:"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:62
+msgid "make check-avocado AVOCADO_TESTS=tests/avocado/netdev-ethtool.py"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:67
+msgid "References"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:69
+msgid ""
+"https://www.intel.com/content/dam/www/public/us/en/documents/"
+"datasheets/82576eb-gigabit-ethernet-controller-datasheet.pdf"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:70
+msgid "https://github.com/linux-test-project/ltp"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:71
+msgid "https://learn.microsoft.com/en-us/windows-hardware/test/hlk/"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:72
+msgid "https://doc.dpdk.org/dts/gsg/"
+msgstr ""
+
+#: ../../../system/devices/igb.rst:73
+msgid "https://docs.kernel.org/PCI/pci-iov-howto.html"
+msgstr ""

@@ -1,0 +1,577 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/lockcnt.rst:2
+msgid "Locked Counters (aka ``QemuLockCnt``)"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:4
+msgid ""
+"QEMU often uses reference counts to track data structures that are being "
+"accessed and should not be freed.  For example, a loop that invoke callbacks "
+"like this is not safe::"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:8
+msgid ""
+"QLIST_FOREACH_SAFE(ioh, &io_handlers, next, pioh) {\n"
+"    if (ioh->revents & G_IO_OUT) {\n"
+"        ioh->fd_write(ioh->opaque);\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:14
+msgid ""
+"``QLIST_FOREACH_SAFE`` protects against deletion of the current node "
+"(``ioh``) by stashing away its ``next`` pointer.  However, ``ioh->fd_write`` "
+"could actually delete the next node from the list.  The simplest way to "
+"avoid this is to mark the node as deleted, and remove it from the list in "
+"the above loop::"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:20
+msgid ""
+"QLIST_FOREACH_SAFE(ioh, &io_handlers, next, pioh) {\n"
+"    if (ioh->deleted) {\n"
+"        QLIST_REMOVE(ioh, next);\n"
+"        g_free(ioh);\n"
+"    } else {\n"
+"        if (ioh->revents & G_IO_OUT) {\n"
+"            ioh->fd_write(ioh->opaque);\n"
+"        }\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:31
+msgid ""
+"If however this loop must also be reentrant, i.e. it is possible that ``ioh-"
+">fd_write`` invokes the loop again, some kind of counting is needed::"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:34
+msgid ""
+"walking_handlers++;\n"
+"QLIST_FOREACH_SAFE(ioh, &io_handlers, next, pioh) {\n"
+"    if (ioh->deleted) {\n"
+"        if (walking_handlers == 1) {\n"
+"            QLIST_REMOVE(ioh, next);\n"
+"            g_free(ioh);\n"
+"        }\n"
+"    } else {\n"
+"        if (ioh->revents & G_IO_OUT) {\n"
+"            ioh->fd_write(ioh->opaque);\n"
+"        }\n"
+"    }\n"
+"}\n"
+"walking_handlers--;"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:49
+msgid ""
+"One may think of using the RCU primitives, ``rcu_read_lock()`` and "
+"``rcu_read_unlock()``; effectively, the RCU nesting count would take the "
+"place of the walking_handlers global variable.  Indeed, reference counting "
+"and RCU have similar purposes, but their usage in general is complementary:"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:55
+msgid ""
+"reference counting is fine-grained and limited to a single data structure; "
+"RCU delays reclamation of *all* RCU-protected data structures;"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:59
+msgid ""
+"reference counting works even in the presence of code that keeps a reference "
+"for a long time; RCU critical sections in principle should be kept short;"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:63
+msgid ""
+"reference counting is often applied to code that is not thread-safe but is "
+"reentrant; in fact, usage of reference counting in QEMU predates the "
+"introduction of threads by many years.  RCU is generally used to protect "
+"readers from other threads freeing memory after concurrent modifications to "
+"a data structure."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:69
+msgid ""
+"reclaiming data can be done by a separate thread in the case of RCU; this "
+"can improve performance, but also delay reclamation undesirably. With "
+"reference counting, reclamation is deterministic."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:73
+msgid ""
+"This file documents ``QemuLockCnt``, an abstraction for using reference "
+"counting in code that has to be both thread-safe and reentrant."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:78
+msgid "``QemuLockCnt`` concepts"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:80
+msgid ""
+"A ``QemuLockCnt`` comprises both a counter and a mutex; it has primitives to "
+"increment and decrement the counter, and to take and release the mutex.  The "
+"counter notes how many visits to the data structures are taking place (the "
+"visits could be from different threads, or there could be multiple reentrant "
+"visits from the same thread).  The basic rules governing the counter/mutex "
+"pair then are the following:"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:87
+msgid ""
+"Data protected by the QemuLockCnt must not be freed unless the counter is "
+"zero and the mutex is taken."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:90
+msgid ""
+"A new visit cannot be started while the counter is zero and the mutex is "
+"taken."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:93
+msgid ""
+"Most of the time, the mutex protects all writes to the data structure, not "
+"just frees, though there could be cases where this is not necessary."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:96
+msgid ""
+"Reads, instead, can be done without taking the mutex, as long as the readers "
+"and writers use the same macros that are used for RCU, for example "
+"``qatomic_rcu_read``, ``qatomic_rcu_set``, ``QLIST_FOREACH_RCU``, etc.  This "
+"is because the reads are done outside a lock and a set or "
+"``QLIST_INSERT_HEAD`` can happen concurrently with the read.  The RCU API "
+"ensures that the processor and the compiler see all required memory barriers."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:104
+msgid ""
+"This could be implemented simply by protecting the counter with the mutex, "
+"for example::"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:107
+msgid ""
+"// (1)\n"
+"qemu_mutex_lock(&walking_handlers_mutex);\n"
+"walking_handlers++;\n"
+"qemu_mutex_unlock(&walking_handlers_mutex);\n"
+"\n"
+"...\n"
+"\n"
+"// (2)\n"
+"qemu_mutex_lock(&walking_handlers_mutex);\n"
+"if (--walking_handlers == 0) {\n"
+"    QLIST_FOREACH_SAFE(ioh, &io_handlers, next, pioh) {\n"
+"        if (ioh->deleted) {\n"
+"            QLIST_REMOVE(ioh, next);\n"
+"            g_free(ioh);\n"
+"        }\n"
+"    }\n"
+"}\n"
+"qemu_mutex_unlock(&walking_handlers_mutex);"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:126
+msgid ""
+"Here, no frees can happen in the code represented by the ellipsis. If "
+"another thread is executing critical section (2), that part of the code "
+"cannot be entered, because the thread will not be able to increment the "
+"``walking_handlers`` variable.  And of course during the visit any other "
+"thread will see a nonzero value for ``walking_handlers``, as in the single-"
+"threaded code."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:133
+msgid ""
+"Note that it is possible for multiple concurrent accesses to delay the "
+"cleanup arbitrarily; in other words, for the ``walking_handlers`` counter to "
+"never become zero.  For this reason, this technique is more easily "
+"applicable if concurrent access to the structure is rare."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:138
+msgid ""
+"However, critical sections are easy to forget since you have to do them for "
+"each modification of the counter.  ``QemuLockCnt`` ensures that all "
+"modifications of the counter take the lock appropriately, and it can also be "
+"more efficient in two ways:"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:143
+msgid ""
+"it avoids taking the lock for many operations (for example incrementing the "
+"counter while it is non-zero);"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:146
+msgid ""
+"on some platforms, one can implement ``QemuLockCnt`` to hold the lock and "
+"the mutex in a single word, making the fast path no more expensive than "
+"simply managing a counter using atomic operations (see :doc:`atomics`).  "
+"This can be very helpful if concurrent access to the data structure is "
+"expected to be rare."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:153
+msgid ""
+"Using the same mutex for frees and writes can still incur some small "
+"inefficiencies; for example, a visit can never start if the counter is zero "
+"and the mutex is taken -- even if the mutex is taken by a write, which in "
+"principle need not block a visit of the data structure. However, these are "
+"usually not a problem if any of the following assumptions are valid:"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:160
+msgid "concurrent access is possible but rare"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:162
+msgid "writes are rare"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:164
+msgid ""
+"writes are frequent, but this kind of write (e.g. appending to a list) has a "
+"very small critical section."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:167
+msgid ""
+"For example, QEMU uses ``QemuLockCnt`` to manage an ``AioContext``'s list of "
+"bottom halves and file descriptor handlers.  Modifications to the list of "
+"file descriptor handlers are rare.  Creation of a new bottom half is "
+"frequent and can happen on a fast path; however: 1) it is almost never "
+"concurrent with a visit to the list of bottom halves; 2) it only has three "
+"instructions in the critical path, two assignments and a ``smp_wmb()``."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:176
+msgid "``QemuLockCnt`` API"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:27
+msgid "initialize a QemuLockcnt"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:29 ../../../../include/qemu/lockcnt.h:38
+#: ../../../../include/qemu/lockcnt.h:46 ../../../../include/qemu/lockcnt.h:68
+#: ../../../../include/qemu/lockcnt.h:74 ../../../../include/qemu/lockcnt.h:84
+#: ../../../../include/qemu/lockcnt.h:94 ../../../../include/qemu/lockcnt.h:104
+#: ../../../../include/qemu/lockcnt.h:110
+#: ../../../../include/qemu/lockcnt.h:123
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:31 ../../../../include/qemu/lockcnt.h:40
+#: ../../../../include/qemu/lockcnt.h:48 ../../../../include/qemu/lockcnt.h:70
+#: ../../../../include/qemu/lockcnt.h:76 ../../../../include/qemu/lockcnt.h:86
+#: ../../../../include/qemu/lockcnt.h:96 ../../../../include/qemu/lockcnt.h:106
+#: ../../../../include/qemu/lockcnt.h:112
+#: ../../../../include/qemu/lockcnt.h:125
+msgid "``QemuLockCnt *lockcnt``"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:28
+msgid "the lockcnt to initialize"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:30 ../../../../include/qemu/lockcnt.h:39
+#: ../../../../include/qemu/lockcnt.h:47 ../../../../include/qemu/lockcnt.h:76
+#: ../../../../include/qemu/lockcnt.h:86 ../../../../include/qemu/lockcnt.h:95
+#: ../../../../include/qemu/lockcnt.h:111
+#: ../../../../include/qemu/lockcnt.h:124
+msgid "**Description**"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:30
+msgid "Initialize lockcnt's counter to zero and prepare its mutex for usage."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:36
+msgid "destroy a QemuLockcnt"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:37
+msgid "the lockcnt to destruct"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:39
+msgid "Destroy lockcnt's mutex."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:44
+msgid "increment a QemuLockCnt's counter"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:45 ../../../../include/qemu/lockcnt.h:67
+#: ../../../../include/qemu/lockcnt.h:74 ../../../../include/qemu/lockcnt.h:84
+#: ../../../../include/qemu/lockcnt.h:93
+msgid "the lockcnt to operate on"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:47
+msgid ""
+"If the lockcnt's count is zero, wait for critical sections to finish and "
+"increment lockcnt's count to 1.  If the count is not zero, just increment it."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:51
+msgid ""
+"Because this function can wait on the mutex, it must not be called while the "
+"lockcnt's mutex is held by the current thread. For the same reason, "
+"qemu_lockcnt_inc can also contribute to AB-BA deadlocks.  This is a sample "
+"deadlock scenario::"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:56
+msgid ""
+"thread 1                      thread 2\n"
+"-------------------------------------------------------\n"
+"qemu_lockcnt_lock(&lc1);\n"
+"                              qemu_lockcnt_lock(&lc2);\n"
+"qemu_lockcnt_inc(&lc2);\n"
+"                              qemu_lockcnt_inc(&lc1);"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:66
+msgid "decrement a QemuLockCnt's counter"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:72
+msgid "decrement a QemuLockCnt's counter and possibly lock it."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:76
+msgid ""
+"Decrement lockcnt's count.  If the new count is zero, lock the mutex and "
+"return true.  Otherwise, return false."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:82
+msgid "possibly decrement a QemuLockCnt's counter and lock it."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:86
+msgid ""
+"If the count is 1, decrement the count to zero, lock the mutex and return "
+"true.  Otherwise, return false."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:92
+msgid "lock a QemuLockCnt's mutex."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:95
+msgid ""
+"Remember that concurrent visits are not blocked unless the count is also "
+"zero.  You can use qemu_lockcnt_count to check for this inside a critical "
+"section."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:102
+msgid "release a QemuLockCnt's mutex."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:103
+#: ../../../../include/qemu/lockcnt.h:109
+msgid "the lockcnt to operate on."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:108
+msgid "combined unlock/increment on a QemuLockCnt."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:111
+msgid "This is the same as"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:113
+msgid "qemu_lockcnt_unlock(lockcnt); qemu_lockcnt_inc(lockcnt);"
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:116
+msgid "but more efficient."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:121
+msgid "query a LockCnt's count."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:122
+msgid "the lockcnt to query."
+msgstr ""
+
+#: ../../../../include/qemu/lockcnt.h:124
+msgid ""
+"Note that the count can change at any time.  Still, while the lockcnt is "
+"locked, one can usefully check whether the count is non-zero."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:182
+msgid "``QemuLockCnt`` usage"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:184
+msgid ""
+"This section explains the typical usage patterns for ``QemuLockCnt`` "
+"functions."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:186
+msgid ""
+"Setting a variable to a non-NULL value can be done between "
+"``qemu_lockcnt_lock`` and ``qemu_lockcnt_unlock``::"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:189
+msgid ""
+"qemu_lockcnt_lock(&xyz_lockcnt);\n"
+"if (!xyz) {\n"
+"    new_xyz = g_new(XYZ, 1);\n"
+"    ...\n"
+"    qatomic_rcu_set(&xyz, new_xyz);\n"
+"}\n"
+"qemu_lockcnt_unlock(&xyz_lockcnt);"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:197
+msgid ""
+"Accessing the value can be done between ``qemu_lockcnt_inc`` and "
+"``qemu_lockcnt_dec``::"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:200
+msgid ""
+"qemu_lockcnt_inc(&xyz_lockcnt);\n"
+"if (xyz) {\n"
+"    XYZ *p = qatomic_rcu_read(&xyz);\n"
+"    ...\n"
+"    /* Accesses can now be done through \"p\".  */\n"
+"}\n"
+"qemu_lockcnt_dec(&xyz_lockcnt);"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:208
+msgid ""
+"Freeing the object can similarly use ``qemu_lockcnt_lock`` and "
+"``qemu_lockcnt_unlock``, but you also need to ensure that the count is zero "
+"(i.e. there is no concurrent visit).  Because ``qemu_lockcnt_inc`` takes the "
+"``QemuLockCnt``'s lock, the count cannot become non-zero while the object is "
+"being freed.  Freeing an object looks like this::"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:214
+msgid ""
+"qemu_lockcnt_lock(&xyz_lockcnt);\n"
+"if (!qemu_lockcnt_count(&xyz_lockcnt)) {\n"
+"    g_free(xyz);\n"
+"    xyz = NULL;\n"
+"}\n"
+"qemu_lockcnt_unlock(&xyz_lockcnt);"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:221
+msgid ""
+"If an object has to be freed right after a visit, you can combine the "
+"decrement, the locking and the check on count as follows::"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:224
+msgid ""
+"qemu_lockcnt_inc(&xyz_lockcnt);\n"
+"if (xyz) {\n"
+"    XYZ *p = qatomic_rcu_read(&xyz);\n"
+"    ...\n"
+"    /* Accesses can now be done through \"p\".  */\n"
+"}\n"
+"if (qemu_lockcnt_dec_and_lock(&xyz_lockcnt)) {\n"
+"    g_free(xyz);\n"
+"    xyz = NULL;\n"
+"    qemu_lockcnt_unlock(&xyz_lockcnt);\n"
+"}"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:236
+msgid "``QemuLockCnt`` can also be used to access a list as follows::"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:238
+msgid ""
+"qemu_lockcnt_inc(&io_handlers_lockcnt);\n"
+"QLIST_FOREACH_RCU(ioh, &io_handlers, pioh) {\n"
+"    if (ioh->revents & G_IO_OUT) {\n"
+"        ioh->fd_write(ioh->opaque);\n"
+"    }\n"
+"}\n"
+"\n"
+"if (qemu_lockcnt_dec_and_lock(&io_handlers_lockcnt)) {\n"
+"    QLIST_FOREACH_SAFE(ioh, &io_handlers, next, pioh) {\n"
+"        if (ioh->deleted) {\n"
+"            QLIST_REMOVE(ioh, next);\n"
+"            g_free(ioh);\n"
+"        }\n"
+"    }\n"
+"    qemu_lockcnt_unlock(&io_handlers_lockcnt);\n"
+"}"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:255
+msgid ""
+"Again, the RCU primitives are used because new items can be added to the "
+"list during the walk.  ``QLIST_FOREACH_RCU`` ensures that the processor and "
+"the compiler see the appropriate memory barriers."
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:259
+msgid "An alternative pattern uses ``qemu_lockcnt_dec_if_lock``::"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:261
+msgid ""
+"qemu_lockcnt_inc(&io_handlers_lockcnt);\n"
+"QLIST_FOREACH_SAFE_RCU(ioh, &io_handlers, next, pioh) {\n"
+"    if (ioh->deleted) {\n"
+"        if (qemu_lockcnt_dec_if_lock(&io_handlers_lockcnt)) {\n"
+"            QLIST_REMOVE(ioh, next);\n"
+"            g_free(ioh);\n"
+"            qemu_lockcnt_inc_and_unlock(&io_handlers_lockcnt);\n"
+"        }\n"
+"    } else {\n"
+"        if (ioh->revents & G_IO_OUT) {\n"
+"            ioh->fd_write(ioh->opaque);\n"
+"        }\n"
+"    }\n"
+"}\n"
+"qemu_lockcnt_dec(&io_handlers_lockcnt);"
+msgstr ""
+
+#: ../../../devel/lockcnt.rst:277
+msgid ""
+"Here you can use ``qemu_lockcnt_dec`` instead of "
+"``qemu_lockcnt_dec_and_lock``, because there is no special task to do if the "
+"count goes from 1 to 0."
+msgstr ""

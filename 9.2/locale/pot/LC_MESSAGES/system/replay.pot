@@ -1,0 +1,394 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/replay.rst:11
+msgid "Record/replay"
+msgstr ""
+
+#: ../../../system/replay.rst:13
+msgid ""
+"Record/replay functions are used for the deterministic replay of qemu "
+"execution. Execution recording writes a non-deterministic events log, which "
+"can be later used for replaying the execution anywhere and for unlimited "
+"number of times. It also supports checkpointing for faster rewind to the "
+"specific replay moment. Execution replaying reads the log and replays all "
+"non-deterministic events including external input, hardware clocks, and "
+"interrupts."
+msgstr ""
+
+#: ../../../system/replay.rst:20
+msgid "Deterministic replay has the following features:"
+msgstr ""
+
+#: ../../../system/replay.rst:22
+msgid ""
+"Deterministically replays whole system execution and all contents of the "
+"memory, state of the hardware devices, clocks, and screen of the VM."
+msgstr ""
+
+#: ../../../system/replay.rst:24
+msgid ""
+"Writes execution log into the file for later replaying for multiple times on "
+"different machines."
+msgstr ""
+
+#: ../../../system/replay.rst:26
+msgid ""
+"Supports i386, x86_64, ARM, AArch64, Risc-V, MIPS, MIPS64, S390X, Alpha, "
+"PowerPC, PowerPC64, M68000, Microblaze, OpenRISC, SPARC, and Xtensa hardware "
+"platforms."
+msgstr ""
+
+#: ../../../system/replay.rst:29
+msgid ""
+"Performs deterministic replay of all operations with keyboard and mouse "
+"input devices, serial ports, and network."
+msgstr ""
+
+#: ../../../system/replay.rst:32
+msgid "Usage of the record/replay:"
+msgstr ""
+
+#: ../../../system/replay.rst:34
+msgid "First, record the execution with the following command line:"
+msgstr ""
+
+#: ../../../system/replay.rst:37
+msgid ""
+"|qemu_system| \\\\\n"
+"-icount shift=auto,rr=record,rrfile=replay.bin \\\\\n"
+"-drive file=disk.qcow2,if=none,snapshot,id=img-direct \\\\\n"
+"-drive driver=blkreplay,if=none,image=img-direct,id=img-blkreplay \\\\\n"
+"-device ide-hd,drive=img-blkreplay \\\\\n"
+"-netdev user,id=net1 -device rtl8139,netdev=net1 \\\\\n"
+"-object filter-replay,id=replay,netdev=net1"
+msgstr ""
+
+#: ../../../system/replay.rst:45
+msgid "After recording, you can replay it by using another command line:"
+msgstr ""
+
+#: ../../../system/replay.rst:48
+msgid ""
+"|qemu_system| \\\\\n"
+"-icount shift=auto,rr=replay,rrfile=replay.bin \\\\\n"
+"-drive file=disk.qcow2,if=none,snapshot,id=img-direct \\\\\n"
+"-drive driver=blkreplay,if=none,image=img-direct,id=img-blkreplay \\\\\n"
+"-device ide-hd,drive=img-blkreplay \\\\\n"
+"-netdev user,id=net1 -device rtl8139,netdev=net1 \\\\\n"
+"-object filter-replay,id=replay,netdev=net1"
+msgstr ""
+
+#: ../../../system/replay.rst:56
+msgid ""
+"The only difference with recording is changing the rr option from record to "
+"replay."
+msgstr ""
+
+#: ../../../system/replay.rst:58
+msgid ""
+"Block device images are not actually changed in the recording mode, because "
+"all of the changes are written to the temporary overlay file. This behavior "
+"is enabled by using blkreplay driver. It should be used for every enabled "
+"block device, as described in :ref:`block-label` section."
+msgstr ""
+
+#: ../../../system/replay.rst:62
+msgid ""
+"``-net none`` option should be specified when network is not used, because "
+"QEMU adds network card by default. When network is needed, it should be "
+"configured explicitly with replay filter, as described in :ref:`network-"
+"label` section."
+msgstr ""
+
+#: ../../../system/replay.rst:66
+msgid ""
+"Interaction with audio devices and serial ports are recorded and replayed "
+"automatically when such devices are enabled."
+msgstr ""
+
+#: ../../../system/replay.rst:70
+msgid "Core idea"
+msgstr ""
+
+#: ../../../system/replay.rst:72
+msgid ""
+"Record/replay system is based on saving and replaying non-deterministic "
+"events (e.g. keyboard input) and simulating deterministic ones (e.g. reading "
+"from HDD or memory of the VM). Saving only non-deterministic events makes "
+"log file smaller and simulation faster."
+msgstr ""
+
+#: ../../../system/replay.rst:77
+msgid ""
+"The following non-deterministic data from peripheral devices is saved into "
+"the log: mouse and keyboard input, network packets, audio controller input, "
+"serial port input, and hardware clocks (they are non-deterministic too, "
+"because their values are taken from the host machine). Inputs from simulated "
+"hardware, memory of VM, software interrupts, and execution of instructions "
+"are not saved into the log, because they are deterministic and can be "
+"replayed by simulating the behavior of virtual machine starting from initial "
+"state."
+msgstr ""
+
+#: ../../../system/replay.rst:87
+msgid "Instruction counting"
+msgstr ""
+
+#: ../../../system/replay.rst:89
+msgid ""
+"QEMU should work in icount mode to use record/replay feature. icount was "
+"designed to allow deterministic execution in absence of external inputs of "
+"the virtual machine. Record/replay feature is enabled through ``-icount`` "
+"command-line option, making possible deterministic execution of the machine, "
+"interacting with user or network."
+msgstr ""
+
+#: ../../../system/replay.rst:98
+msgid "Block devices"
+msgstr ""
+
+#: ../../../system/replay.rst:100
+msgid ""
+"Block devices record/replay module intercepts calls of bdrv coroutine "
+"functions at the top of block drivers stack. To record and replay block "
+"operations the drive must be configured as following:"
+msgstr ""
+
+#: ../../../system/replay.rst:106
+msgid ""
+"-drive file=disk.qcow2,if=none,snapshot,id=img-direct\n"
+"-drive driver=blkreplay,if=none,image=img-direct,id=img-blkreplay\n"
+"-device ide-hd,drive=img-blkreplay"
+msgstr ""
+
+#: ../../../system/replay.rst:110
+msgid ""
+"blkreplay driver should be inserted between disk image and virtual driver "
+"controller. Therefore all disk requests may be recorded and replayed."
+msgstr ""
+
+#: ../../../system/replay.rst:116
+msgid "Snapshotting"
+msgstr ""
+
+#: ../../../system/replay.rst:118
+msgid ""
+"New VM snapshots may be created in replay mode. They can be used later to "
+"recover the desired VM state. All VM states created in replay mode are "
+"associated with the moment of time in the replay scenario. After recovering "
+"the VM state replay will start from that position."
+msgstr ""
+
+#: ../../../system/replay.rst:123
+msgid ""
+"Default starting snapshot name may be specified with icount field rrsnapshot "
+"as follows:"
+msgstr ""
+
+#: ../../../system/replay.rst:127
+msgid "-icount shift=auto,rr=record,rrfile=replay.bin,rrsnapshot=snapshot_name"
+msgstr ""
+
+#: ../../../system/replay.rst:129
+msgid ""
+"This snapshot is created at start of recording and restored at start of "
+"replaying. It also can be loaded while replaying to roll back the execution."
+msgstr ""
+
+#: ../../../system/replay.rst:133
+msgid ""
+"``snapshot`` flag of the disk image must be removed to save the snapshots in "
+"the overlay (or original image) instead of using the temporary overlay."
+msgstr ""
+
+#: ../../../system/replay.rst:137
+msgid ""
+"-drive file=disk.ovl,if=none,id=img-direct\n"
+"-drive driver=blkreplay,if=none,image=img-direct,id=img-blkreplay\n"
+"-device ide-hd,drive=img-blkreplay"
+msgstr ""
+
+#: ../../../system/replay.rst:141
+msgid ""
+"Use QEMU monitor to create additional snapshots. ``savevm <name>`` command "
+"created the snapshot and ``loadvm <name>`` restores it. To prevent "
+"corruption of the original disk image, use overlay files linked to the "
+"original images. Therefore all new snapshots (including the starting one) "
+"will be saved in overlays and the original image remains unchanged."
+msgstr ""
+
+#: ../../../system/replay.rst:147
+msgid ""
+"When you need to use snapshots with diskless virtual machine, it must be "
+"started with \"orphan\" qcow2 image. This image will be used for storing VM "
+"snapshots. Here is the example of the command line for this:"
+msgstr ""
+
+#: ../../../system/replay.rst:152
+msgid ""
+"|qemu_system| \\\\\n"
+"  -icount shift=auto,rr=replay,rrfile=record.bin,rrsnapshot=init \\\\\n"
+"  -net none -drive file=empty.qcow2,if=none,id=rr"
+msgstr ""
+
+#: ../../../system/replay.rst:156
+msgid ""
+"``empty.qcow2`` drive does not connected to any virtual block device and "
+"used for VM snapshots only."
+msgstr ""
+
+#: ../../../system/replay.rst:162
+msgid "Network devices"
+msgstr ""
+
+#: ../../../system/replay.rst:164
+msgid ""
+"Record and replay for network interactions is performed with the network "
+"filter. Each backend must have its own instance of the replay filter as "
+"follows:"
+msgstr ""
+
+#: ../../../system/replay.rst:168
+msgid ""
+"-netdev user,id=net1 -device rtl8139,netdev=net1\n"
+"-object filter-replay,id=replay,netdev=net1"
+msgstr ""
+
+#: ../../../system/replay.rst:171
+msgid ""
+"Replay network filter is used to record and replay network packets. While "
+"recording the virtual machine this filter puts all packets coming from the "
+"outer world into the log. In replay mode packets from the log are injected "
+"into the network device. All interactions with network backend in replay "
+"mode are disabled."
+msgstr ""
+
+#: ../../../system/replay.rst:178
+msgid "Audio devices"
+msgstr ""
+
+#: ../../../system/replay.rst:180
+msgid ""
+"Audio data is recorded and replay automatically. The command line for "
+"recording and replaying must contain identical specifications of audio "
+"hardware, e.g.:"
+msgstr ""
+
+#: ../../../system/replay.rst:184
+msgid "-audio pa,model=ac97"
+msgstr ""
+
+#: ../../../system/replay.rst:187
+msgid "Serial ports"
+msgstr ""
+
+#: ../../../system/replay.rst:189
+msgid ""
+"Serial ports input is recorded and replay automatically. The command lines "
+"for recording and replaying must contain identical number of ports in record "
+"and replay modes, but their backends may differ. E.g., ``-serial stdio`` in "
+"record mode, and ``-serial null`` in replay mode."
+msgstr ""
+
+#: ../../../system/replay.rst:195
+msgid "Reverse debugging"
+msgstr ""
+
+#: ../../../system/replay.rst:197
+msgid ""
+"Reverse debugging allows \"executing\" the program in reverse direction. GDB "
+"remote protocol supports \"reverse step\" and \"reverse continue\" commands. "
+"The first one steps single instruction backwards in time, and the second one "
+"finds the last breakpoint in the past."
+msgstr ""
+
+#: ../../../system/replay.rst:202
+msgid ""
+"Recorded executions may be used to enable reverse debugging. QEMU can't "
+"execute the code in backwards direction, but can load a snapshot and replay "
+"forward to find the desired position or breakpoint."
+msgstr ""
+
+#: ../../../system/replay.rst:206
+msgid "The following GDB commands are supported:"
+msgstr ""
+
+#: ../../../system/replay.rst:208
+msgid "``reverse-stepi`` (or ``rsi``) - step one instruction backwards"
+msgstr ""
+
+#: ../../../system/replay.rst:209
+msgid "``reverse-continue`` (or ``rc``) - find last breakpoint in the past"
+msgstr ""
+
+#: ../../../system/replay.rst:211
+msgid ""
+"Reverse step loads the nearest snapshot and replays the execution until the "
+"required instruction is met."
+msgstr ""
+
+#: ../../../system/replay.rst:214
+msgid ""
+"Reverse continue may include several passes of examining the execution "
+"between the snapshots. Each of the passes include the following steps:"
+msgstr ""
+
+#: ../../../system/replay.rst:217
+msgid "loading the snapshot"
+msgstr ""
+
+#: ../../../system/replay.rst:218
+msgid "replaying to examine the breakpoints"
+msgstr ""
+
+#: ../../../system/replay.rst:219
+msgid "if breakpoint or watchpoint was met"
+msgstr ""
+
+#: ../../../system/replay.rst:221
+msgid "loading the snapshot again"
+msgstr ""
+
+#: ../../../system/replay.rst:222
+msgid "replaying to the required breakpoint"
+msgstr ""
+
+#: ../../../system/replay.rst:224
+msgid "else"
+msgstr ""
+
+#: ../../../system/replay.rst:226
+msgid "proceeding to the p.1 with the earlier snapshot"
+msgstr ""
+
+#: ../../../system/replay.rst:228
+msgid ""
+"Therefore usage of the reverse debugging requires at least one snapshot "
+"created. This can be done by omitting ``snapshot`` option for the block "
+"drives and adding ``rrsnapshot`` for both record and replay command lines. "
+"See the :ref:`snapshotting-label` section to learn more about running record/"
+"replay and creating the snapshot in these modes."
+msgstr ""
+
+#: ../../../system/replay.rst:235
+msgid ""
+"When ``rrsnapshot`` is not used, then snapshot named ``start_debugging`` "
+"created in temporary overlay. This allows using reverse debugging, but with "
+"temporary snapshots (existing within the session)."
+msgstr ""
