@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tools/virtfs-proxy-helper.rst:2
+msgid "QEMU 9p virtfs proxy filesystem helper"
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:5
+msgid "Synopsis"
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:7
+msgid "**virtfs-proxy-helper** [*OPTIONS*]"
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:10
+msgid "Description"
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:12
+msgid ""
+"Pass-through security model in QEMU 9p server needs root privilege to do few "
+"file operations (like chown, chmod to any mode/uid:gid).  There are two "
+"issues in pass-through security model:"
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:16
+msgid ""
+"TOCTTOU vulnerability: Following symbolic links in the server could provide "
+"access to files beyond 9p export path."
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:19
+msgid "Running QEMU with root privilege could be a security issue."
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:21
+msgid ""
+"To overcome above issues, following approach is used: A new filesystem type "
+"'proxy' is introduced. Proxy FS uses chroot + socket combination for "
+"securing the vulnerability known with following symbolic links. Intention of "
+"adding a new filesystem type is to allow qemu to run in non-root mode, but "
+"doing privileged operations using socket IO."
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:27
+msgid ""
+"Proxy helper (a stand alone binary part of qemu) is invoked with root "
+"privileges. Proxy helper chroots into 9p export path and creates a socket "
+"pair or a named socket based on the command line parameter. QEMU and proxy "
+"helper communicate using this socket. QEMU proxy fs driver sends filesystem "
+"request to proxy helper and receives the response from it."
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:34
+msgid ""
+"The proxy helper is designed so that it can drop root privileges except for "
+"the capabilities needed for doing filesystem operations."
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:38
+msgid "Options"
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:40
+msgid "The following options are supported:"
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:46
+msgid "Display help and exit"
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:50
+msgid "Path to export for proxy filesystem driver"
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:54
+msgid ""
+"Use given file descriptor as socket descriptor for communicating with qemu "
+"proxy fs drier. Usually a helper like libvirt will create socketpair and "
+"pass one of the fds as parameter to this option."
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:60
+msgid "Creates named socket file for communicating with qemu proxy fs driver"
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:64
+msgid "uid to give access to named socket file; used in combination with -g."
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:68
+msgid "gid to give access to named socket file; used in combination with -u."
+msgstr ""
+
+#: ../../../tools/virtfs-proxy-helper.rst:72
+msgid "Run as a normal program. By default program will run in daemon mode"
+msgstr ""

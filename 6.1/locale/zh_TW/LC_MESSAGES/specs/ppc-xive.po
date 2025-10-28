@@ -1,0 +1,301 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/ppc-xive.rst:3
+msgid "POWER9 XIVE interrupt controller"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:5
+msgid ""
+"The POWER9 processor comes with a new interrupt controller architecture, "
+"called XIVE as \"eXternal Interrupt Virtualization Engine\"."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:9
+msgid ""
+"Compared to the previous architecture, the main characteristics of XIVE are "
+"to support a larger number of interrupt sources and to deliver interrupts "
+"directly to virtual processors without hypervisor assistance. This removes "
+"the context switches required for the delivery process."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:17
+msgid "XIVE architecture"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:19
+msgid ""
+"The XIVE IC is composed of three sub-engines, each taking care of a "
+"processing layer of external interrupts:"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:22
+msgid ""
+"Interrupt Virtualization Source Engine (IVSE), or Source Controller (SC). "
+"These are found in PCI PHBs, in the Processor Service Interface (PSI) host "
+"bridge Controller, but also inside the main controller for the core IPIs and "
+"other sub-chips (NX, CAP, NPU) of the chip/processor. They are configured to "
+"feed the IVRE with events."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:28
+msgid ""
+"Interrupt Virtualization Routing Engine (IVRE) or Virtualization Controller "
+"(VC). It handles event coalescing and perform interrupt routing by matching "
+"an event source number with an Event Notification Descriptor (END)."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:32
+msgid ""
+"Interrupt Virtualization Presentation Engine (IVPE) or Presentation "
+"Controller (PC). It maintains the interrupt context state of each thread and "
+"handles the delivery of the external interrupt to the thread."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:39
+msgid ""
+"            XIVE Interrupt Controller\n"
+"            +------------------------------------+      IPIs\n"
+"            | +---------+ +---------+ +--------+ |    +-------+\n"
+"            | |IVRE     | |Common Q | |IVPE    |----> | CORES |\n"
+"            | |     esb | |         | |        |----> |       |\n"
+"            | |     eas | |  Bridge | |   tctx |----> |       |\n"
+"            | |SC   end | |         | |    nvt | |    |       |\n"
+"+------+    | +---------+ +----+----+ +--------+ |    +-+-+-+-+\n"
+"| RAM  |    +------------------|-----------------+      | | |\n"
+"|      |                       |                        | | |\n"
+"|      |                       |                        | | |\n"
+"|      |  +--------------------v------------------------v-v-v--+    other\n"
+"|      <--+                     Power Bus                      +--> chips\n"
+"|  esb |  +---------+-----------------------+------------------+\n"
+"|  eas |            |                       |\n"
+"|  end |         +--|------+                |\n"
+"|  nvt |       +----+----+ |           +----+----+\n"
+"+------+       |IVSE     | |           |IVSE     |\n"
+"               |         | |           |         |\n"
+"               | PQ-bits | |           | PQ-bits |\n"
+"               | local   |-+           |  in VC  |\n"
+"               +---------+             +---------+\n"
+"                  PCIe                 NX,NPU,CAPI\n"
+"\n"
+"\n"
+"PQ-bits: 2 bits source state machine (P:pending Q:queued)\n"
+"esb: Event State Buffer (Array of PQ bits in an IVSE)\n"
+"eas: Event Assignment Structure\n"
+"end: Event Notification Descriptor\n"
+"nvt: Notification Virtual Target\n"
+"tctx: Thread interrupt Context registers"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:74
+msgid "XIVE internal tables"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:76
+msgid ""
+"Each of the sub-engines uses a set of tables to redirect interrupts from "
+"event sources to CPU threads."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:81
+msgid ""
+"                                        +-------+\n"
+"User or O/S                             |  EQ   |\n"
+"    or                          +------>|entries|\n"
+"Hypervisor                      |       |  ..   |\n"
+"  Memory                        |       +-------+\n"
+"                                |           ^\n"
+"                                |           |\n"
+"           +-------------------------------------------------+\n"
+"                                |           |\n"
+"Hypervisor      +------+    +---+--+    +---+--+   +------+\n"
+"  Memory        | ESB  |    | EAT  |    | ENDT |   | NVTT |\n"
+" (skiboot)      +----+-+    +----+-+    +----+-+   +------+\n"
+"                  ^  |        ^  |        ^  |       ^\n"
+"                  |  |        |  |        |  |       |\n"
+"           +-------------------------------------------------+\n"
+"                  |  |        |  |        |  |       |\n"
+"                  |  |        |  |        |  |       |\n"
+"             +----|--|--------|--|--------|--|-+   +-|-----+    +------+\n"
+"             |    |  |        |  |        |  | |   | | tctx|    |Thread|\n"
+" IPI or   ---+    +  v        +  v        +  v |---| +  .. |----->     |\n"
+"HW events    |                                 |   |       |    |      |\n"
+"             |             IVRE                |   | IVPE  |    +------+\n"
+"             +---------------------------------+   +-------+"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:106
+msgid ""
+"The IVSE have a 2-bits state machine, P for pending and Q for queued, for "
+"each source that allows events to be triggered. They are stored in an Event "
+"State Buffer (ESB) array and can be controlled by MMIOs."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:110
+msgid ""
+"If the event is let through, the IVRE looks up in the Event Assignment "
+"Structure (EAS) table for an Event Notification Descriptor (END) configured "
+"for the source. Each Event Notification Descriptor defines a notification "
+"path to a CPU and an in-memory Event Queue, in which will be enqueued an EQ "
+"data for the O/S to pull."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:116
+msgid ""
+"The IVPE determines if a Notification Virtual Target (NVT) can handle the "
+"event by scanning the thread contexts of the VCPUs dispatched on the "
+"processor HW threads. It maintains the interrupt context state of each "
+"thread in a NVT table."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:122
+msgid "XIVE thread interrupt context"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:124
+msgid ""
+"The XIVE presenter can generate four different exceptions to its HW threads:"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:127
+msgid "hypervisor exception"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:128
+msgid "O/S exception"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:129
+msgid "Event-Based Branch (user level)"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:130
+msgid "msgsnd (doorbell)"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:132
+msgid ""
+"Each exception has a state independent from the others called a Thread "
+"Interrupt Management context. This context is a set of registers which lets "
+"the thread handle priority management and interrupt acknowledgment among "
+"other things. The most important ones being :"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:137
+msgid "Interrupt Priority Register  (PIPR)"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:138
+msgid "Interrupt Pending Buffer     (IPB)"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:139
+msgid "Current Processor Priority   (CPPR)"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:140
+msgid "Notification Source Register (NSR)"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:143
+msgid "TIMA"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:145
+msgid ""
+"The Thread Interrupt Management registers are accessible through a specific "
+"MMIO region, called the Thread Interrupt Management Area (TIMA), four "
+"aligned pages, each exposing a different view of the registers. First page "
+"(page address ending in ``0b00``) gives access to the entire context and is "
+"reserved for the ring 0 view for the physical thread context. The second "
+"(page address ending in ``0b01``) is for the hypervisor, ring 1 view. The "
+"third (page address ending in ``0b10``) is for the operating system, ring 2 "
+"view. The fourth (page address ending in ``0b11``) is for user level, ring 3 "
+"view."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:156
+msgid "Interrupt flow from an O/S perspective"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:158
+msgid ""
+"After an event data has been enqueued in the O/S Event Queue, the IVPE "
+"raises the bit corresponding to the priority of the pending interrupt in the "
+"register IBP (Interrupt Pending Buffer) to indicate that an event is pending "
+"in one of the 8 priority queues. The Pending Interrupt Priority Register "
+"(PIPR) is also updated using the IPB. This register represent the priority "
+"of the most favored pending notification."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:166
+msgid ""
+"The PIPR is then compared to the Current Processor Priority Register (CPPR). "
+"If it is more favored (numerically less than), the CPU interrupt line is "
+"raised and the EO bit of the Notification Source Register (NSR) is updated "
+"to notify the presence of an exception for the O/S. The O/S acknowledges the "
+"interrupt with a special load in the Thread Interrupt Management Area."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:173
+msgid ""
+"The O/S handles the interrupt and when done, performs an EOI using a MMIO "
+"operation on the ESB management page of the associate source."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:177
+msgid "Overview of the QEMU models for XIVE"
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:179
+msgid ""
+"The XiveSource models the IVSE in general, internal and external. It handles "
+"the source ESBs and the MMIO interface to control them."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:182
+msgid ""
+"The XiveNotifier is a small helper interface interconnecting the XiveSource "
+"to the XiveRouter."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:185
+msgid ""
+"The XiveRouter is an abstract model acting as a combined IVRE and IVPE. It "
+"routes event notifications using the EAS and END tables to the IVPE sub-"
+"engine which does a CAM scan to find a CPU to deliver the exception. Storage "
+"should be provided by the inheriting classes."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:190
+msgid ""
+"XiveEnDSource is a special source object. It exposes the END ESB MMIOs of "
+"the Event Queues which are used for coalescing event notifications and for "
+"escalation. Not used on the field, only to sync the EQ cache in OPAL."
+msgstr ""
+
+#: ../../../specs/ppc-xive.rst:195
+msgid ""
+"Finally, the XiveTCTX contains the interrupt state context of a thread, four "
+"sets of registers, one for each exception that can be delivered to a CPU. "
+"These contexts are scanned by the IVPE to find a matching VP when a "
+"notification is triggered. It also models the Thread Interrupt Management "
+"Area (TIMA), which exposes the thread context registers to the CPU for "
+"interrupt management."
+msgstr ""
