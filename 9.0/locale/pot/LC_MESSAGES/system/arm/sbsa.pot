@@ -1,0 +1,216 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/arm/sbsa.rst:2
+msgid "Arm Server Base System Architecture Reference board (``sbsa-ref``)"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:4
+msgid ""
+"The ``sbsa-ref`` board intends to look like real hardware (while the "
+"``virt`` board is a generic board platform that doesn't match any real "
+"hardware)."
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:7
+msgid "The hardware part is defined by two specifications:"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:9
+msgid ""
+"`Base System Architecture <https://developer.arm.com/documentation/den0094/"
+">`__ (BSA)"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:10
+msgid ""
+"`Server Base System Architecture <https://developer.arm.com/documentation/"
+"den0029/>`__ (SBSA)"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:12
+msgid ""
+"The `Arm Base Boot Requirements <https://developer.arm.com/documentation/"
+"den0044/>`__ (BBR) specification defines how the firmware reports that to "
+"any operating system."
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:15
+msgid ""
+"It is intended to be a machine for developing firmware and testing standards "
+"compliance with operating systems."
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:19
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:21
+msgid "The ``sbsa-ref`` board supports:"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:23
+msgid "A configurable number of AArch64 CPUs"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:24
+msgid "GIC version 3"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:25
+msgid "System bus AHCI controller"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:26
+msgid "System bus XHCI controller"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:27
+msgid "CDROM and hard disc on AHCI bus"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:28
+msgid "E1000E ethernet card on PCIe bus"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:29
+msgid "Bochs display adapter on PCIe bus"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:30
+msgid "A generic SBSA watchdog device"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:34
+msgid "Board to firmware interface"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:36
+msgid ""
+"``sbsa-ref`` is a static system that reports a very minimal devicetree to "
+"the firmware for non-discoverable information about system components. This "
+"includes both internal hardware and parts affected by the qemu command line "
+"(i.e. CPUs and memory). As a result it must have a firmware specifically "
+"built to expect a certain hardware layout (as you would in a real machine)."
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:43
+msgid "Note"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:45
+msgid ""
+"QEMU provides the guest EL3 firmware with minimal information about hardware "
+"platform using minimalistic devicetree. This is not a Linux devicetree. It "
+"is not even a firmware devicetree."
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:49
+msgid ""
+"It is information passed from QEMU to describe the information a hardware "
+"platform would have other mechanisms to discover at runtime, that are "
+"affected by the QEMU command line."
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:53
+msgid ""
+"Ultimately this devicetree may be replaced by IPC calls to an emulated SCP."
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:56
+msgid "DeviceTree information"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:58
+msgid "The devicetree reports:"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:60
+msgid "CPUs"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:61
+msgid "memory"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:62
+msgid "platform version"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:63
+msgid "GIC addresses"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:64
+msgid "NUMA node id for CPUs and memory"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:67
+msgid "Platform version"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:69
+msgid ""
+"The platform version is only for informing platform firmware about what kind "
+"of ``sbsa-ref`` board it is running on. It is neither a QEMU versioned "
+"machine type nor a reflection of the level of the SBSA/SystemReady SR "
+"support provided."
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:74
+msgid ""
+"The ``machine-version-major`` value is updated when changes breaking fw "
+"compatibility are introduced. The ``machine-version-minor`` value is updated "
+"when features are added that don't break fw compatibility."
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:78
+msgid "Platform version changes:"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:80
+msgid "0.0"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:81
+msgid "Devicetree holds information about CPUs, memory and platform version."
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:83
+msgid "0.1"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:84
+msgid "GIC information is present in devicetree."
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:86
+msgid "0.2"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:87
+msgid "GIC ITS information is present in devicetree."
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:89
+msgid "0.3"
+msgstr ""
+
+#: ../../../system/arm/sbsa.rst:90
+msgid "The USB controller is an XHCI device, not EHCI."
+msgstr ""

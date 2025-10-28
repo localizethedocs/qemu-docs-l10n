@@ -1,0 +1,376 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/vmgenid.rst:2
+msgid "Virtual Machine Generation ID Device"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:11
+msgid ""
+"The VM generation ID (``vmgenid``) device is an emulated device which "
+"exposes a 128-bit, cryptographically random, integer value identifier, "
+"referred to as a Globally Unique Identifier, or GUID."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:15
+msgid ""
+"This allows management applications (e.g. libvirt) to notify the guest "
+"operating system when the virtual machine is executed with a different "
+"configuration (e.g. snapshot execution or creation from a template).  The "
+"guest operating system notices the change, and is then able to react as "
+"appropriate by marking its copies of distributed databases as dirty, re-"
+"initializing its random number generator etc."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:24
+msgid "Requirements"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:26
+msgid ""
+"These requirements are extracted from the \"How to implement virtual machine "
+"generation ID support in a virtualization platform\" section of `the "
+"Microsoft Virtual Machine Generation ID specification <http://go.microsoft."
+"com/fwlink/?LinkId=260709>`_ dated August 1, 2012."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:31
+msgid "**R1a** The generation ID shall live in an 8-byte aligned buffer."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:33
+msgid ""
+"**R1b** The buffer holding the generation ID shall be in guest RAM, ROM, or "
+"device MMIO range."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:36
+msgid ""
+"**R1c** The buffer holding the generation ID shall be kept separate from "
+"areas used by the operating system."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:39
+msgid ""
+"**R1d** The buffer shall not be covered by an AddressRangeMemory or "
+"AddressRangeACPI entry in the E820 or UEFI memory map."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:42
+msgid ""
+"**R1e** The generation ID shall not live in a page frame that could be "
+"mapped with caching disabled. (In other words, regardless of whether the "
+"generation ID lives in RAM, ROM or MMIO, it shall only be mapped as "
+"cacheable.)"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:47
+msgid ""
+"**R2** to **R5** [These AML requirements are isolated well enough in the "
+"Microsoft specification for us to simply refer to them here.]"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:50
+msgid ""
+"**R6** The hypervisor shall expose a _HID (hardware identifier) object in "
+"the VMGenId device's scope that is unique to the hypervisor vendor."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:55
+msgid "QEMU Implementation"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:57
+msgid ""
+"The above-mentioned specification does not dictate which ACPI descriptor "
+"table will contain the VM Generation ID device.  Other implementations "
+"(Hyper-V and Xen) put it in the main descriptor table (Differentiated System "
+"Description Table or DSDT).  For ease of debugging and implementation, we "
+"have decided to put it in its own Secondary System Description Table, or "
+"SSDT."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:63
+msgid "The following is a dump of the contents from a running system::"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:65
+msgid ""
+"# iasl -p ./SSDT -d /sys/firmware/acpi/tables/SSDT\n"
+"\n"
+"Intel ACPI Component Architecture\n"
+"ASL+ Optimizing Compiler version 20150717-64\n"
+"Copyright (c) 2000 - 2015 Intel Corporation\n"
+"\n"
+"Reading ACPI table from file /sys/firmware/acpi/tables/SSDT - Length\n"
+"00000198 (0x0000C6)\n"
+"ACPI: SSDT 0x0000000000000000 0000C6 (v01 BOCHS  VMGENID  00000001 BXPC "
+"00000001)\n"
+"Acpi table [SSDT] successfully installed and loaded\n"
+"Pass 1 parse of [SSDT]\n"
+"Pass 2 parse of [SSDT]\n"
+"Parsing Deferred Opcodes (Methods/Buffers/Packages/Regions)\n"
+"\n"
+"Parsing completed\n"
+"Disassembly completed\n"
+"ASL Output:    ./SSDT.dsl - 1631 bytes\n"
+"# cat SSDT.dsl\n"
+"/*\n"
+" * Intel ACPI Component Architecture\n"
+" * AML/ASL+ Disassembler version 20150717-64\n"
+" * Copyright (c) 2000 - 2015 Intel Corporation\n"
+" *\n"
+" * Disassembling to symbolic ASL+ operators\n"
+" *\n"
+" * Disassembly of /sys/firmware/acpi/tables/SSDT, Sun Feb  5 00:19:37 2017\n"
+" *\n"
+" * Original Table Header:\n"
+" *     Signature        \"SSDT\"\n"
+" *     Length           0x000000CA (202)\n"
+" *     Revision         0x01\n"
+" *     Checksum         0x4B\n"
+" *     OEM ID           \"BOCHS \"\n"
+" *     OEM Table ID     \"VMGENID\"\n"
+" *     OEM Revision     0x00000001 (1)\n"
+" *     Compiler ID      \"BXPC\"\n"
+" *     Compiler Version 0x00000001 (1)\n"
+" */\n"
+"DefinitionBlock (\"/sys/firmware/acpi/tables/SSDT.aml\", \"SSDT\", 1, "
+"\"BOCHS \", \"VMGENID\", 0x00000001)\n"
+"{\n"
+"    Name (VGIA, 0x07FFF000)\n"
+"    Scope (\\_SB)\n"
+"    {\n"
+"        Device (VGEN)\n"
+"        {\n"
+"            Name (_HID, \"QEMUVGID\")  // _HID: Hardware ID\n"
+"            Name (_CID, \"VM_Gen_Counter\")  // _CID: Compatible ID\n"
+"            Name (_DDN, \"VM_Gen_Counter\")  // _DDN: DOS Device Name\n"
+"            Method (_STA, 0, NotSerialized)  // _STA: Status\n"
+"            {\n"
+"                Local0 = 0x0F\n"
+"                If ((VGIA == Zero))\n"
+"                {\n"
+"                    Local0 = Zero\n"
+"                }\n"
+"\n"
+"                Return (Local0)\n"
+"            }\n"
+"\n"
+"            Method (ADDR, 0, NotSerialized)\n"
+"            {\n"
+"                Local0 = Package (0x02) {}\n"
+"                Index (Local0, Zero) = (VGIA + 0x28)\n"
+"                Index (Local0, One) = Zero\n"
+"                Return (Local0)\n"
+"            }\n"
+"        }\n"
+"    }\n"
+"\n"
+"    Method (\\_GPE._E05, 0, NotSerialized)  // _Exx: Edge-Triggered GPE\n"
+"    {\n"
+"        Notify (\\_SB.VGEN, 0x80) // Status Change\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:142
+msgid "Design Details:"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:144
+msgid ""
+"Requirements R1a through R1e dictate that the memory holding the VM "
+"Generation ID must be allocated and owned by the guest firmware, in this "
+"case BIOS or UEFI.  However, to be useful, QEMU must be able to change the "
+"contents of the memory at runtime, specifically when starting a backed-up or "
+"snapshotted image.  In order to do this, QEMU must know the address that has "
+"been allocated."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:151
+msgid ""
+"The mechanism chosen for this memory sharing is writable fw_cfg blobs. These "
+"are data object that are visible to both QEMU and guests, and are "
+"addressable as sequential files."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:155
+msgid "More information about fw_cfg can be found in :doc:`fw_cfg`."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:157
+msgid "Two fw_cfg blobs are used in this case:"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:159
+msgid "``/etc/vmgenid_guid``"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:161
+msgid "contains the actual VM Generation ID GUID"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:162
+msgid "read-only to the guest"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:164
+msgid "``/etc/vmgenid_addr``"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:166
+msgid "contains the address of the downloaded vmgenid blob"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:167
+msgid "writable by the guest"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:170
+msgid "QEMU sends the following commands to the guest at startup:"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:172
+msgid "Allocate memory for vmgenid_guid fw_cfg blob."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:173
+msgid ""
+"Write the address of vmgenid_guid into the SSDT (VGIA ACPI variable as shown "
+"above in the iasl dump).  Note that this change is not propagated back to "
+"QEMU."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:176
+msgid ""
+"Write the address of vmgenid_guid back to QEMU's copy of vmgenid_addr via "
+"the fw_cfg DMA interface."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:179
+msgid ""
+"After step 3, QEMU is able to update the contents of vmgenid_guid at will."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:181
+msgid ""
+"Since BIOS or UEFI does not necessarily run when we wish to change the GUID, "
+"the value of VGIA is persisted via the VMState mechanism."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:184
+msgid ""
+"As spelled out in the specification, any change to the GUID executes an ACPI "
+"notification.  The exact handler to use is not specified, so the vmgenid "
+"device uses the first unused one:  ``\\_GPE._E05``."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:190
+msgid "Endian-ness Considerations:"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:192
+msgid ""
+"Although not specified in Microsoft's document, it is assumed that the "
+"device is expected to use little-endian format."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:195
+msgid ""
+"All GUID passed in via command line or monitor are treated as big-endian. "
+"GUID values displayed via monitor are shown in big-endian format."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:200
+msgid "GUID Storage Format:"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:202
+msgid ""
+"In order to implement an OVMF \"SDT Header Probe Suppressor\", the contents "
+"of the vmgenid_guid fw_cfg blob are not simply a 128-bit GUID.  There is "
+"also significant padding in order to align and fill a memory page, as shown "
+"in the following diagram::"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:207
+msgid ""
+"+----------------------------------+\n"
+"| SSDT with OEM Table ID = VMGENID |\n"
+"+----------------------------------+\n"
+"| ...                              |       TOP OF PAGE\n"
+"| VGIA dword object ---------------|-----> +---------------------------+\n"
+"| ...                              |       | fw-allocated array for    |\n"
+"| _STA method referring to VGIA    |       | \"etc/vmgenid_guid\"        |\n"
+"| ...                              |       +---------------------------+\n"
+"| ADDR method referring to VGIA    |       |  0: OVMF SDT Header probe |\n"
+"| ...                              |       |     suppressor            |\n"
+"+----------------------------------+       | 36: padding for 8-byte    |\n"
+"                                           |     alignment             |\n"
+"                                           | 40: GUID                  |\n"
+"                                           | 56: padding to page size  |\n"
+"                                           +---------------------------+\n"
+"                                           END OF PAGE"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:226
+msgid "Device Usage:"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:228
+msgid ""
+"The device has one property, which may be only be set using the command line:"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:230
+msgid "``guid``"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:231
+msgid ""
+"sets the value of the GUID.  A special value ``auto`` instructs QEMU to "
+"generate a new random GUID."
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:234
+msgid "For example::"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:236
+msgid ""
+"QEMU  -device vmgenid,guid=\"324e6eaf-d1d1-4bf6-bf41-b9bb6c91fb87\"\n"
+"QEMU  -device vmgenid,guid=auto"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:239
+msgid "The property may be queried via QMP/HMP::"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:241
+msgid ""
+"(QEMU) query-vm-generation-id\n"
+"{\"return\": {\"guid\": \"324e6eaf-d1d1-4bf6-bf41-b9bb6c91fb87\"}}"
+msgstr ""
+
+#: ../../../specs/vmgenid.rst:244
+msgid ""
+"Setting of this parameter is intentionally left out from the QMP/HMP "
+"interfaces.  There are no known use cases for changing the GUID once QEMU is "
+"running, and adding this capability would greatly increase the complexity."
+msgstr ""
