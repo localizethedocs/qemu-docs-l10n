@@ -1,0 +1,1439 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:38+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/multi-process.rst:2
+msgid "Multi-process QEMU"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:6
+msgid ""
+"This is the design document for multi-process QEMU. It does not necessarily "
+"reflect the status of the current implementation, which may lack features or "
+"be considerably different from what is described in this document. This "
+"document is still useful as a description of the goals and general direction "
+"of this feature."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:12
+msgid ""
+"Please refer to the following wiki for latest details: https://wiki.qemu.org/"
+"Features/MultiProcessQEMU"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:15
+msgid ""
+"QEMU is often used as the hypervisor for virtual machines running in the "
+"Oracle cloud. Since one of the advantages of cloud computing is the ability "
+"to run many VMs from different tenants in the same cloud infrastructure, a "
+"guest that compromised its hypervisor could potentially use the hypervisor's "
+"access privileges to access data it is not authorized for."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:22
+msgid ""
+"QEMU can be susceptible to security attacks because it is a large, "
+"monolithic program that provides many features to the VMs it services. Many "
+"of these features can be configured out of QEMU, but even a reduced "
+"configuration QEMU has a large amount of code a guest can potentially "
+"attack. Separating QEMU reduces the attack surface by aiding to limit each "
+"component in the system to only access the resources that it needs to "
+"perform its job."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:31
+msgid "QEMU services"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:33
+msgid ""
+"QEMU can be broadly described as providing three main services. One is a VM "
+"control point, where VMs can be created, migrated, re-configured, and "
+"destroyed. A second is to emulate the CPU instructions within the VM, often "
+"accelerated by HW virtualization features such as Intel's VT extensions. "
+"Finally, it provides IO services to the VM by emulating HW IO devices, such "
+"as disk and network devices."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:41
+msgid "A multi-process QEMU"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:43
+msgid ""
+"A multi-process QEMU involves separating QEMU services into separate host "
+"processes. Each of these processes can be given only the privileges it needs "
+"to provide its service, e.g., a disk service could be given access only to "
+"the disk images it provides, and not be allowed to access other files, or "
+"any network devices. An attacker who compromised this service would not be "
+"able to use this exploit to access files or devices beyond what the disk "
+"service was given access to."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:51
+msgid ""
+"A QEMU control process would remain, but in multi-process mode, will have no "
+"direct interfaces to the VM. During VM execution, it would still provide the "
+"user interface to hot-plug devices or live migrate the VM."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:55
+msgid ""
+"A first step in creating a multi-process QEMU is to separate IO services "
+"from the main QEMU program, which would continue to provide CPU emulation. i."
+"e., the control process would also be the CPU emulation process. In a later "
+"phase, CPU emulation could be separated from the control process."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:62
+msgid "Separating IO services"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:64
+msgid ""
+"Separating IO services into individual host processes is a good place to "
+"begin for a couple of reasons. One is the sheer number of IO devices QEMU "
+"can emulate provides a large surface of interfaces which could potentially "
+"be exploited, and, indeed, have been a source of exploits in the past. "
+"Another is the modular nature of QEMU device emulation code provides "
+"interface points where the QEMU functions that perform device emulation can "
+"be separated from the QEMU functions that manage the emulation of guest CPU "
+"instructions. The devices emulated in the separate process are referred to "
+"as remote devices."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:75
+msgid "QEMU device emulation"
+msgstr "QEMU 裝置仿真"
+
+#: ../../../devel/multi-process.rst:77
+msgid ""
+"QEMU uses an object oriented SW architecture for device emulation code. "
+"Configured objects are all compiled into the QEMU binary, then objects are "
+"instantiated by name when used by the guest VM. For example, the code to "
+"emulate a device named \"foo\" is always present in QEMU, but its "
+"instantiation code is only run when the device is included in the target VM. "
+"(e.g., via the QEMU command line as *-device foo*)"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:84
+msgid ""
+"The object model is hierarchical, so device emulation code names its parent "
+"object (such as \"pci-device\" for a PCI device) and QEMU will instantiate a "
+"parent object before calling the device's instantiation code."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:90
+msgid "Current separation models"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:92
+msgid ""
+"In order to separate the device emulation code from the CPU emulation code, "
+"the device object code must run in a different process. There are a couple "
+"of existing QEMU features that can run emulation code separately from the "
+"main QEMU process. These are examined below."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:98
+msgid "vhost user model"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:100
+msgid ""
+"Virtio guest device drivers can be connected to vhost user applications in "
+"order to perform their IO operations. This model uses special virtio device "
+"drivers in the guest and vhost user device objects in QEMU, but once the "
+"QEMU vhost user code has configured the vhost user application, mission-mode "
+"IO is performed by the application. The vhost user application is a daemon "
+"process that can be contacted via a known UNIX domain socket."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:109
+msgid "vhost socket"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:111
+msgid ""
+"As mentioned above, one of the tasks of the vhost device object within QEMU "
+"is to contact the vhost application and send it configuration information "
+"about this device instance. As part of the configuration process, the "
+"application can also be sent other file descriptors over the socket, which "
+"then can be used by the vhost user application in various ways, some of "
+"which are described below."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:119
+msgid "vhost MMIO store acceleration"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:121
+msgid ""
+"VMs are often run using HW virtualization features via the KVM kernel "
+"driver. This driver allows QEMU to accelerate the emulation of guest CPU "
+"instructions by running the guest in a virtual HW mode. When the guest "
+"executes instructions that cannot be executed by virtual HW mode, execution "
+"returns to the KVM driver so it can inform QEMU to emulate the instructions "
+"in SW."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:128
+msgid ""
+"One of the events that can cause a return to QEMU is when a guest device "
+"driver accesses an IO location. QEMU then dispatches the memory operation to "
+"the corresponding QEMU device object. In the case of a vhost user device, "
+"the memory operation would need to be sent over a socket to the vhost "
+"application. This path is accelerated by the QEMU virtio code by setting up "
+"an eventfd file descriptor that the vhost application can directly receive "
+"MMIO store notifications from the KVM driver, instead of needing them to be "
+"sent to the QEMU process first."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:138
+msgid "vhost interrupt acceleration"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:140
+msgid ""
+"Another optimization used by the vhost application is the ability to "
+"directly inject interrupts into the VM via the KVM driver, again, bypassing "
+"the need to send the interrupt back to the QEMU process first. The QEMU "
+"virtio setup code configures the KVM driver with an eventfd that triggers "
+"the device interrupt in the guest when the eventfd is written. This irqfd "
+"file descriptor is then passed to the vhost user application program."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:149
+msgid "vhost access to guest memory"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:151
+msgid ""
+"The vhost application is also allowed to directly access guest memory, "
+"instead of needing to send the data as messages to QEMU. This is also done "
+"with file descriptors sent to the vhost user application by QEMU. These "
+"descriptors can be passed to ``mmap()`` by the vhost application to map the "
+"guest address space into the vhost application."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:157
+msgid ""
+"IOMMUs introduce another level of complexity, since the address given to the "
+"guest virtio device to DMA to or from is not a guest physical address. This "
+"case is handled by having vhost code within QEMU register as a listener for "
+"IOMMU mapping changes. The vhost application maintains a cache of IOMMMU "
+"translations: sending translation requests back to QEMU on cache misses, and "
+"in turn receiving flush requests from QEMU when mappings are purged."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:166
+msgid "applicability to device separation"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:168
+msgid ""
+"Much of the vhost model can be re-used by separated device emulation. In "
+"particular, the ideas of using a socket between QEMU and the device "
+"emulation application, using a file descriptor to inject interrupts into the "
+"VM via KVM, and allowing the application to ``mmap()`` the guest should be "
+"re used."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:174
+msgid ""
+"There are, however, some notable differences between how a vhost application "
+"works and the needs of separated device emulation. The most basic is that "
+"vhost uses custom virtio device drivers which always trigger IO with MMIO "
+"stores. A separated device emulation model must work with existing IO device "
+"models and guest device drivers. MMIO loads break vhost store acceleration "
+"since they are synchronous - guest progress cannot continue until the load "
+"has been emulated. By contrast, stores are asynchronous, the guest can "
+"continue after the store event has been sent to the vhost application."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:184
+msgid ""
+"Another difference is that in the vhost user model, a single daemon can "
+"support multiple QEMU instances. This is contrary to the security regime "
+"desired, in which the emulation application should only be allowed to access "
+"the files or devices the VM it's running on behalf of can access. #### qemu-"
+"io model"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:190
+msgid ""
+"``qemu-io`` is a test harness used to test changes to the QEMU block backend "
+"object code (e.g., the code that implements disk images for disk driver "
+"emulation). ``qemu-io`` is not a device emulation application per se, but it "
+"does compile the QEMU block objects into a separate binary from the main "
+"QEMU one. This could be useful for disk device emulation, since its "
+"emulation applications will need to include the QEMU block objects."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:198
+msgid "New separation model based on proxy objects"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:200
+msgid ""
+"A different model based on proxy objects in the QEMU program communicating "
+"with remote emulation programs could provide separation while minimizing the "
+"changes needed to the device emulation code. The rest of this section is a "
+"discussion of how a proxy object model would work."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:207
+msgid "Remote emulation processes"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:209
+msgid ""
+"The remote emulation process will run the QEMU object hierarchy without "
+"modification. The device emulation objects will be also be based on the QEMU "
+"code, because for anything but the simplest device, it would not be a "
+"tractable to re-implement both the object model and the many device backends "
+"that QEMU has."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:215
+msgid ""
+"The processes will communicate with the QEMU process over UNIX domain "
+"sockets. The processes can be executed either as standalone processes, or be "
+"executed by QEMU. In both cases, the host backends the emulation processes "
+"will provide are specified on its command line, as they would be for QEMU. "
+"For example:"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:223
+msgid ""
+"disk-proc -blockdev driver=file,node-name=file0,filename=disk-file0  \\\n"
+"-blockdev driver=qcow2,node-name=drive0,file=file0"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:226
+msgid ""
+"would indicate process *disk-proc* uses a qcow2 emulated disk named *file0* "
+"as its backend."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:229
+msgid ""
+"Emulation processes may emulate more than one guest controller. A common "
+"configuration might be to put all controllers of the same device class (e."
+"g., disk, network, etc.) in a single process, so that all backends of the "
+"same type can be managed by a single QMP monitor."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:235
+msgid "communication with QEMU"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:237
+msgid ""
+"The first argument to the remote emulation process will be a Unix domain "
+"socket that connects with the Proxy object. This is a required argument."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:242
+msgid "disk-proc <socket number> <backend list>"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:245
+msgid "remote process QMP monitor"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:247
+msgid ""
+"Remote emulation processes can be monitored via QMP, similar to QEMU itself. "
+"The QMP monitor socket is specified the same as for a QEMU process:"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:253
+msgid "disk-proc -qmp unix:/tmp/disk-mon,server"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:255
+msgid "can be monitored over the UNIX socket path */tmp/disk-mon*."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:258
+msgid "QEMU command line"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:260
+msgid ""
+"Each remote device emulated in a remote process on the host is represented "
+"as a *-device* of type *pci-proxy-dev*. A socket sub-option to this option "
+"specifies the Unix socket that connects to the remote process. An *id* sub-"
+"option is required, and it should be the same id as used in the remote "
+"process."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:268
+msgid "qemu-system-x86_64 ... -device pci-proxy-dev,id=lsi0,socket=3"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:270
+msgid "can be used to add a device emulated in a remote process"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:274
+msgid "QEMU management of remote processes"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:276
+msgid ""
+"QEMU is not aware of the type of type of the remote PCI device. It is a pass "
+"through device as far as QEMU is concerned."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:280
+msgid "communication with emulation process"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:283
+msgid "primary channel"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:285
+msgid ""
+"The primary channel (referred to as com in the code) is used to bootstrap "
+"the remote process. It is also used to pass on device-agnostic commands like "
+"reset."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:290
+msgid "per-device channels"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:292
+msgid ""
+"Each remote device communicates with QEMU using a dedicated communication "
+"channel. The proxy object sets up this channel using the primary channel "
+"during its initialization."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:297
+msgid "QEMU device proxy objects"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:299
+msgid ""
+"QEMU has an object model based on sub-classes inherited from the \"object\" "
+"super-class. The sub-classes that are of interest here are the \"device\" "
+"and \"bus\" sub-classes whose child sub-classes make up the device tree of a "
+"QEMU emulated system."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:304
+msgid ""
+"The proxy object model will use device proxy objects to replace the device "
+"emulation code within the QEMU process. These objects will live in the same "
+"place in the object and bus hierarchies as the objects they replace. i.e., "
+"the proxy object for an LSI SCSI controller will be a sub-class of the \"pci-"
+"device\" class, and will have the same PCI bus parent and the same SCSI bus "
+"child objects as the LSI controller object it replaces."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:312
+msgid ""
+"It is worth noting that the same proxy object is used to mediate with all "
+"types of remote PCI devices."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:316
+msgid "object initialization"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:318
+msgid ""
+"The Proxy device objects are initialized in the exact same manner in which "
+"any other QEMU device would be initialized."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:321
+msgid ""
+"In addition, the Proxy objects perform the following two tasks: - Parses the "
+"\"socket\" sub option and connects to the remote process using this channel "
+"- Uses the \"id\" sub-option to connect to the emulated device on the "
+"separate process"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:328
+msgid "class\\_init"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:330
+msgid ""
+"The ``class_init()`` method of a proxy object will, in general behave "
+"similarly to the object it replaces, including setting any static properties "
+"and methods needed by the proxy."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:335
+msgid "instance\\_init / realize"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:337
+msgid ""
+"The ``instance_init()`` and ``realize()`` functions would only need to "
+"perform tasks related to being a proxy, such are registering its own MMIO "
+"handlers, or creating a child bus that other proxy devices can be attached "
+"to later."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:342
+msgid ""
+"Other tasks will be device-specific. For example, PCI device objects will "
+"initialize the PCI config space in order to make a valid PCI device tree "
+"within the QEMU process."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:347
+msgid "address space registration"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:349
+msgid ""
+"Most devices are driven by guest device driver accesses to IO addresses or "
+"ports. The QEMU device emulation code uses QEMU's memory region function "
+"calls (such as ``memory_region_init_io()``) to add callback functions that "
+"QEMU will invoke when the guest accesses the device's areas of the IO "
+"address space. When a guest driver does access the device, the VM will exit "
+"HW virtualization mode and return to QEMU, which will then lookup and "
+"execute the corresponding callback function."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:357
+msgid ""
+"A proxy object would need to mirror the memory region calls the actual "
+"device emulator would perform in its initialization code, but with its own "
+"callbacks. When invoked by QEMU as a result of a guest IO operation, they "
+"will forward the operation to the device emulation process."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:363
+msgid "PCI config space"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:365
+msgid ""
+"PCI devices also have a configuration space that can be accessed by the "
+"guest driver. Guest accesses to this space is not handled by the device "
+"emulation object, but by its PCI parent object. Much of this space is read-"
+"only, but certain registers (especially BAR and MSI-related ones) need to be "
+"propagated to the emulation process."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:372
+msgid "PCI parent proxy"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:374
+msgid ""
+"One way to propagate guest PCI config accesses is to create a \"pci-device-"
+"proxy\" class that can serve as the parent of a PCI device proxy object. "
+"This class's parent would be \"pci-device\" and it would override the PCI "
+"parent's ``config_read()`` and ``config_write()`` methods with ones that "
+"forward these operations to the emulation program."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:382
+msgid "interrupt receipt"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:384
+msgid ""
+"A proxy for a device that generates interrupts will need to create a socket "
+"to receive interrupt indications from the emulation process. An incoming "
+"interrupt indication would then be sent up to its bus parent to be injected "
+"into the guest. For example, a PCI device object may use ``pci_set_irq()``."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:391 ../../../devel/multi-process.rst:440
+#: ../../../devel/multi-process.rst:570
+msgid "live migration"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:393
+msgid ""
+"The proxy will register to save and restore any *vmstate* it needs over a "
+"live migration event. The device proxy does not need to manage the remote "
+"device's *vmstate*; that will be handled by the remote process proxy (see "
+"below)."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:399
+msgid "QEMU remote device operation"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:401
+msgid ""
+"Generic device operations, such as DMA, will be performed by the remote "
+"process proxy by sending messages to the remote process."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:405 ../../../devel/multi-process.rst:538
+msgid "DMA operations"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:407
+msgid ""
+"DMA operations would be handled much like vhost applications do. One of the "
+"initial messages sent to the emulation process is a guest memory table. Each "
+"entry in this table consists of a file descriptor and size that the "
+"emulation process can ``mmap()`` to directly access guest memory, similar to "
+"``vhost_user_set_mem_table()``. Note guest memory must be backed by file "
+"descriptors, such as when QEMU is given the *-mem-path* command line option."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:416
+msgid "IOMMU operations"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:418
+msgid ""
+"When the emulated system includes an IOMMU, the remote process proxy in QEMU "
+"will need to create a socket for IOMMU requests from the emulation process. "
+"It will handle those requests with an ``address_space_get_iotlb_entry()`` "
+"call. In order to handle IOMMU unmaps, the remote process proxy will also "
+"register as a listener on the device's DMA address space. When an IOMMU "
+"memory region is created within the DMA address space, an IOMMU notifier for "
+"unmaps will be added to the memory region that will forward unmaps to the "
+"emulation process over the IOMMU socket."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:429
+msgid "device hot-plug via QMP"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:431
+msgid ""
+"An QMP \"device\\_add\" command can add a device emulated by a remote "
+"process. It will also have \"rid\" option to the command, just as the *-"
+"device* command line option does. The remote process may either be one "
+"started at QEMU startup, or be one added by the \"add-process\" QMP command "
+"described above. In either case, the remote process proxy will forward the "
+"new device's JSON description to the corresponding emulation process."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:442
+msgid ""
+"The remote process proxy will also register for live migration notifications "
+"with ``vmstate_register()``. When called to save state, the proxy will send "
+"the remote process a secondary socket file descriptor to save the remote "
+"process's device *vmstate* over. The incoming byte stream length and data "
+"will be saved as the proxy's *vmstate*. When the proxy is resumed on its new "
+"host, this *vmstate* will be extracted, and a secondary socket file "
+"descriptor will be sent to the new remote process through which it receives "
+"the *vmstate* in order to restore the devices there."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:453
+msgid "device emulation in remote process"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:455
+msgid ""
+"The parts of QEMU that the emulation program will need include the object "
+"model; the memory emulation objects; the device emulation objects of the "
+"targeted device, and any dependent devices; and, the device's backends. It "
+"will also need code to setup the machine environment, handle requests from "
+"the QEMU process, and route machine-level requests (such as interrupts or "
+"IOMMU mappings) back to the QEMU process."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:463
+msgid "initialization"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:465
+msgid ""
+"The process initialization sequence will follow the same sequence followed "
+"by QEMU. It will first initialize the backend objects, then device emulation "
+"objects. The JSON descriptions sent by the QEMU process will drive which "
+"objects need to be created."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:470
+msgid "address spaces"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:472
+msgid ""
+"Before the device objects are created, the initial address spaces and memory "
+"regions must be configured with ``memory_map_init()``. This creates a RAM "
+"memory region object (*system\\_memory*) and an IO memory region object "
+"(*system\\_io*)."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:477
+msgid "RAM"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:479
+msgid ""
+"RAM memory region creation will follow how ``pc_memory_init()`` creates "
+"them, but must use ``memory_region_init_ram_from_fd()`` instead of "
+"``memory_region_allocate_system_memory()``. The file descriptors needed will "
+"be supplied by the guest memory table from above. Those RAM regions would "
+"then be added to the *system\\_memory* memory region with "
+"``memory_region_add_subregion()``."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:486
+msgid "PCI"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:488
+msgid ""
+"IO initialization will be driven by the JSON descriptions sent from the QEMU "
+"process. For a PCI device, a PCI bus will need to be created with "
+"``pci_root_bus_new()``, and a PCI memory region will need to be created and "
+"added to the *system\\_memory* memory region with "
+"``memory_region_add_subregion_overlap()``. The overlap version is required "
+"for architectures where PCI memory overlaps with RAM memory."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:496
+msgid "MMIO handling"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:498
+msgid ""
+"The device emulation objects will use ``memory_region_init_io()`` to install "
+"their MMIO handlers, and ``pci_register_bar()`` to associate those handlers "
+"with a PCI BAR, as they do within QEMU currently."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:502
+msgid ""
+"In order to use ``address_space_rw()`` in the emulation process to handle "
+"MMIO requests from QEMU, the PCI physical addresses must be the same in the "
+"QEMU process and the device emulation process. In order to accomplish that, "
+"guest BAR programming must also be forwarded from QEMU to the emulation "
+"process."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:509
+msgid "interrupt injection"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:511
+msgid ""
+"When device emulation wants to inject an interrupt into the VM, the request "
+"climbs the device's bus object hierarchy until the point where a bus object "
+"knows how to signal the interrupt to the guest. The details depend on the "
+"type of interrupt being raised."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:516
+msgid "PCI pin interrupts"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:518
+msgid ""
+"On x86 systems, there is an emulated IOAPIC object attached to the root PCI "
+"bus object, and the root PCI object forwards interrupt requests to it. The "
+"IOAPIC object, in turn, calls the KVM driver to inject the corresponding "
+"interrupt into the VM. The simplest way to handle this in an emulation "
+"process would be to setup the root PCI bus driver (via ``pci_bus_irqs()``) "
+"to send a interrupt request back to the QEMU process, and have the device "
+"proxy object reflect it up the PCI tree there."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:527
+msgid "PCI MSI/X interrupts"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:529
+msgid ""
+"PCI MSI/X interrupts are implemented in HW as DMA writes to a CPU-specific "
+"PCI address. In QEMU on x86, a KVM APIC object receives these DMA writes, "
+"then calls into the KVM driver to inject the interrupt into the VM. A simple "
+"emulation process implementation would be to send the MSI DMA address from "
+"QEMU as a message at initialization, then install an address space handler "
+"at that address which forwards the MSI message back to QEMU."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:540
+msgid ""
+"When a emulation object wants to DMA into or out of guest memory, it first "
+"must use dma\\_memory\\_map() to convert the DMA address to a local virtual "
+"address. The emulation process memory region objects setup above will be "
+"used to translate the DMA address to a local virtual address the device "
+"emulation code can access."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:547
+msgid "IOMMU"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:549
+msgid ""
+"When an IOMMU is in use in QEMU, DMA translation uses IOMMU memory regions "
+"to translate the DMA address to a guest physical address before that "
+"physical address can be translated to a local virtual address. The emulation "
+"process will need similar functionality."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:554
+msgid "IOTLB cache"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:556
+msgid ""
+"The emulation process will maintain a cache of recent IOMMU translations "
+"(the IOTLB). When the translate() callback of an IOMMU memory region is "
+"invoked, the IOTLB cache will be searched for an entry that will map the DMA "
+"address to a guest PA. On a cache miss, a message will be sent back to QEMU "
+"requesting the corresponding translation entry, which be both be used to "
+"return a guest address and be added to the cache."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:563
+msgid "IOTLB purge"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:565
+msgid ""
+"The IOMMU emulation will also need to act on unmap requests from QEMU. These "
+"happen when the guest IOMMU driver purges an entry from the guest's "
+"translation table."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:572
+msgid ""
+"When a remote process receives a live migration indication from QEMU, it "
+"will set up a channel using the received file descriptor with "
+"``qio_channel_socket_new_fd()``. This channel will be used to create a "
+"*QEMUfile* that can be passed to ``qemu_save_device_state()`` to send the "
+"process's device state back to QEMU. This method will be reversed on restore "
+"- the channel will be passed to ``qemu_loadvm_state()`` to restore the "
+"device state."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:581
+msgid "Accelerating device emulation"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:583
+msgid ""
+"The messages that are required to be sent between QEMU and the emulation "
+"process can add considerable latency to IO operations. The optimizations "
+"described below attempt to ameliorate this effect by allowing the emulation "
+"process to communicate directly with the kernel KVM driver. The KVM file "
+"descriptors created would be passed to the emulation process via "
+"initialization messages, much like the guest memory table is done. #### MMIO "
+"acceleration"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:591
+msgid ""
+"Vhost user applications can receive guest virtio driver stores directly from "
+"KVM. The issue with the eventfd mechanism used by vhost user is that it does "
+"not pass any data with the event indication, so it cannot handle guest loads "
+"or guest stores that carry store data. This concept could, however, be "
+"expanded to cover more cases."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:597
+msgid ""
+"The expanded idea would require a new type of KVM device: "
+"*KVM\\_DEV\\_TYPE\\_USER*. This device has two file descriptors: a master "
+"descriptor that QEMU can use for configuration, and a slave descriptor that "
+"the emulation process can use to receive MMIO notifications. QEMU would "
+"create both descriptors using the KVM driver, and pass the slave descriptor "
+"to the emulation process via an initialization message."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:605
+msgid "data structures"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:607
+msgid "guest physical range"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:609
+msgid ""
+"The guest physical range structure describes the address range that a device "
+"will respond to. It includes the base and length of the range, as well as "
+"which bus the range resides on (e.g., on an x86machine, it can specify "
+"whether the range refers to memory or IO addresses)."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:614
+msgid ""
+"A device can have multiple physical address ranges it responds to (e.g., a "
+"PCI device can have multiple BARs), so the structure will also include an "
+"enumerated identifier to specify which of the device's ranges is being "
+"referred to."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:620 ../../../devel/multi-process.rst:640
+msgid "Name"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:620 ../../../devel/multi-process.rst:640
+msgid "Description"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:622
+msgid "addr"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:622
+msgid "range base address"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:624 ../../../devel/multi-process.rst:648
+msgid "len"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:624
+msgid "range length"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:626
+msgid "bus"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:626
+msgid "addr type (memory or IO)"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:628
+msgid "id"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:628
+msgid "range ID (e.g., PCI BAR)"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:631
+msgid "MMIO request structure"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:633
+msgid ""
+"This structure describes an MMIO operation. It includes which guest physical "
+"range the MMIO was within, the offset within that range, the MMIO type (e."
+"g., load or store), and its length and data. It also includes a sequence "
+"number that can be used to reply to the MMIO, and the CPU that issued the "
+"MMIO."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:642
+msgid "rid"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:642
+msgid "range MMIO is within"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:644
+msgid "offset"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:644
+msgid "offset within *rid*"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:646
+msgid "type"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:646
+msgid "e.g., load or store"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:648
+msgid "MMIO length"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:650
+msgid "data"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:650
+msgid "store data"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:652
+msgid "seq"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:652
+msgid "sequence ID"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:655
+msgid "MMIO request queues"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:657
+msgid ""
+"MMIO request queues are FIFO arrays of MMIO request structures. There are "
+"two queues: pending queue is for MMIOs that haven't been read by the "
+"emulation program, and the sent queue is for MMIOs that haven't been "
+"acknowledged. The main use of the second queue is to validate MMIO replies "
+"from the emulation program."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:663
+msgid "scoreboard"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:665
+msgid ""
+"Each CPU in the VM is emulated in QEMU by a separate thread, so multiple "
+"MMIOs may be waiting to be consumed by an emulation program and multiple "
+"threads may be waiting for MMIO replies. The scoreboard would contain a wait "
+"queue and sequence number for the per-CPU threads, allowing them to be "
+"individually woken when the MMIO reply is received from the emulation "
+"program. It also tracks the number of posted MMIO stores to the device that "
+"haven't been replied to, in order to satisfy the PCI constraint that a load "
+"to a device will not complete until all previous stores to that device have "
+"been completed."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:675
+msgid "device shadow memory"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:677
+msgid ""
+"Some MMIO loads do not have device side-effects. These MMIOs can be "
+"completed without sending a MMIO request to the emulation program if the "
+"emulation program shares a shadow image of the device's memory image with "
+"the KVM driver."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:682
+msgid ""
+"The emulation program will ask the KVM driver to allocate memory for the "
+"shadow image, and will then use ``mmap()`` to directly access it. The "
+"emulation program can control KVM access to the shadow image by sending KVM "
+"an access map telling it which areas of the image have no side-effects (and "
+"can be completed immediately), and which require a MMIO request to the "
+"emulation program. The access map can also inform the KVM drive which size "
+"accesses are allowed to the image."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:691
+msgid "master descriptor"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:693
+msgid ""
+"The master descriptor is used by QEMU to configure the new KVM device. The "
+"descriptor would be returned by the KVM driver when QEMU issues a "
+"*KVM\\_CREATE\\_DEVICE* ``ioctl()`` with a *KVM\\_DEV\\_TYPE\\_USER* type."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:697
+msgid "KVM\\_DEV\\_TYPE\\_USER device ops"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:700
+msgid ""
+"The *KVM\\_DEV\\_TYPE\\_USER* operations vector will be registered by a "
+"``kvm_register_device_ops()`` call when the KVM system in initialized by "
+"``kvm_init()``. These device ops are called by the KVM driver when QEMU "
+"executes certain ``ioctl()`` operations on its KVM file descriptor. They "
+"include:"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:706
+msgid "create"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:708
+msgid ""
+"This routine is called when QEMU issues a *KVM\\_CREATE\\_DEVICE* "
+"``ioctl()`` on its per-VM file descriptor. It will allocate and initialize a "
+"KVM user device specific data structure, and assign the *kvm\\_device* "
+"private field to it."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:713 ../../../devel/multi-process.rst:772
+msgid "ioctl"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:715
+msgid ""
+"This routine is invoked when QEMU issues an ``ioctl()`` on the master "
+"descriptor. The ``ioctl()`` commands supported are defined by the KVM device "
+"type. *KVM\\_DEV\\_TYPE\\_USER* ones will need several commands:"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:719
+msgid ""
+"*KVM\\_DEV\\_USER\\_SLAVE\\_FD* creates the slave file descriptor that will "
+"be passed to the device emulation program. Only one slave can be created by "
+"each master descriptor. The file operations performed by this descriptor are "
+"described below."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:724
+msgid ""
+"The *KVM\\_DEV\\_USER\\_PA\\_RANGE* command configures a guest physical "
+"address range that the slave descriptor will receive MMIO notifications for. "
+"The range is specified by a guest physical range structure argument. For "
+"buses that assign addresses to devices dynamically, this command can be "
+"executed while the guest is running, such as the case when a guest changes a "
+"device's PCI BAR registers."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:731
+msgid ""
+"*KVM\\_DEV\\_USER\\_PA\\_RANGE* will use ``kvm_io_bus_register_dev()`` to "
+"register *kvm\\_io\\_device\\_ops* callbacks to be invoked when the guest "
+"performs a MMIO operation within the range. When a range is changed, "
+"``kvm_io_bus_unregister_dev()`` is used to remove the previous instantiation."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:737
+msgid ""
+"*KVM\\_DEV\\_USER\\_TIMEOUT* will configure a timeout value that specifies "
+"how long KVM will wait for the emulation process to respond to a MMIO "
+"indication."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:741
+msgid "destroy"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:743
+msgid ""
+"This routine is called when the VM instance is destroyed. It will need to "
+"destroy the slave descriptor; and free any memory allocated by the driver, "
+"as well as the *kvm\\_device* structure itself."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:748
+msgid "slave descriptor"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:750
+msgid ""
+"The slave descriptor will have its own file operations vector, which "
+"responds to system calls on the descriptor performed by the device emulation "
+"program."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:754 ../../../devel/multi-process.rst:811
+msgid "read"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:756
+msgid ""
+"A read returns any pending MMIO requests from the KVM driver as MMIO request "
+"structures. Multiple structures can be returned if there are multiple MMIO "
+"operations pending. The MMIO requests are moved from the pending queue to "
+"the sent queue, and if there are threads waiting for space in the pending to "
+"add new MMIO operations, they will be woken here."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:763 ../../../devel/multi-process.rst:822
+msgid "write"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:765
+msgid ""
+"A write also consists of a set of MMIO requests. They are compared to the "
+"MMIO requests in the sent queue. Matches are removed from the sent queue, "
+"and any threads waiting for the reply are woken. If a store is removed, then "
+"the number of posted stores in the per-CPU scoreboard is decremented. When "
+"the number is zero, and a non side-effect load was waiting for posted stores "
+"to complete, the load is continued."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:774
+msgid ""
+"There are several ioctl()s that can be performed on the slave descriptor."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:777
+msgid ""
+"A *KVM\\_DEV\\_USER\\_SHADOW\\_SIZE* ``ioctl()`` causes the KVM driver to "
+"allocate memory for the shadow image. This memory can later be ``mmap()``\\ "
+"ed by the emulation process to share the emulation's view of device memory "
+"with the KVM driver."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:782
+msgid ""
+"A *KVM\\_DEV\\_USER\\_SHADOW\\_CTRL* ``ioctl()`` controls access to the "
+"shadow image. It will send the KVM driver a shadow control map, which "
+"specifies which areas of the image can complete guest loads without sending "
+"the load request to the emulation program. It will also specify the size of "
+"load operations that are allowed."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:788
+msgid "poll"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:790
+msgid ""
+"An emulation program will use the ``poll()`` call with a *POLLIN* flag to "
+"determine if there are MMIO requests waiting to be read. It will return if "
+"the pending MMIO request queue is not empty."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:794
+msgid "mmap"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:796
+msgid ""
+"This call allows the emulation program to directly access the shadow image "
+"allocated by the KVM driver. As device emulation updates device memory, "
+"changes with no side-effects will be reflected in the shadow, and the KVM "
+"driver can satisfy guest loads from the shadow image without needing to wait "
+"for the emulation program."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:803
+msgid "kvm\\_io\\_device ops"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:805
+msgid ""
+"Each KVM per-CPU thread can handle MMIO operation on behalf of the guest VM. "
+"KVM will use the MMIO's guest physical address to search for a matching "
+"*kvm\\_io\\_device* to see if the MMIO can be handled by the KVM driver "
+"instead of exiting back to QEMU. If a match is found, the corresponding "
+"callback will be invoked."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:813
+msgid ""
+"This callback is invoked when the guest performs a load to the device. Loads "
+"with side-effects must be handled synchronously, with the KVM driver putting "
+"the QEMU thread to sleep waiting for the emulation process reply before re-"
+"starting the guest. Loads that do not have side-effects may be optimized by "
+"satisfying them from the shadow image, if there are no outstanding stores to "
+"the device by this CPU. PCI memory ordering demands that a load cannot "
+"complete before all older stores to the same device have been completed."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:824
+msgid ""
+"Stores can be handled asynchronously unless the pending MMIO request queue "
+"is full. In this case, the QEMU thread must sleep waiting for space in the "
+"queue. Stores will increment the number of posted stores in the per-CPU "
+"scoreboard, in order to implement the PCI ordering constraint above."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:831
+msgid "interrupt acceleration"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:833
+msgid ""
+"This performance optimization would work much like a vhost user application "
+"does, where the QEMU process sets up *eventfds* that cause the device's "
+"corresponding interrupt to be triggered by the KVM driver. These irq file "
+"descriptors are sent to the emulation process at initialization, and are "
+"used when the emulation code raises a device interrupt."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:841
+msgid "intx acceleration"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:843
+msgid ""
+"Traditional PCI pin interrupts are level based, so, in addition to an irq "
+"file descriptor, a re-sampling file descriptor needs to be sent to the "
+"emulation program. This second file descriptor allows multiple devices "
+"sharing an irq to be notified when the interrupt has been acknowledged by "
+"the guest, so they can re-trigger the interrupt if their device has not de-"
+"asserted its interrupt."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:850
+msgid "intx irq descriptor"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:853
+msgid ""
+"The irq descriptors are created by the proxy object ``using "
+"event_notifier_init()`` to create the irq and re-sampling *eventds*, and "
+"``kvm_vm_ioctl(KVM_IRQFD)`` to bind them to an interrupt. The interrupt "
+"route can be found with ``pci_device_route_intx_to_irq()``."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:859
+msgid "intx routing changes"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:862
+msgid ""
+"Intx routing can be changed when the guest programs the APIC the device pin "
+"is connected to. The proxy object in QEMU will use "
+"``pci_device_set_intx_routing_notifier()`` to be informed of any guest "
+"changes to the route. This handler will broadly follow the VFIO interrupt "
+"logic to change the route: de-assigning the existing irq descriptor from its "
+"route, then assigning it the new route. (see ``vfio_intx_update()``)"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:871
+msgid "MSI/X acceleration"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:873
+msgid ""
+"MSI/X interrupts are sent as DMA transactions to the host. The interrupt "
+"data contains a vector that is programmed by the guest, A device may have "
+"multiple MSI interrupts associated with it, so multiple irq descriptors may "
+"need to be sent to the emulation program."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:878
+msgid "MSI/X irq descriptor"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:881
+msgid ""
+"This case will also follow the VFIO example. For each MSI/X interrupt, an "
+"*eventfd* is created, a virtual interrupt is allocated by "
+"``kvm_irqchip_add_msi_route()``, and the virtual interrupt is bound to the "
+"eventfd with ``kvm_irqchip_add_irqfd_notifier()``."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:886
+msgid "MSI/X config space changes"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:889
+msgid ""
+"The guest may dynamically update several MSI-related tables in the device's "
+"PCI config space. These include per-MSI interrupt enables and vector data. "
+"Additionally, MSIX tables exist in device memory space, not config space. "
+"Much like the BAR case above, the proxy object must look at guest config "
+"space programming to keep the MSI interrupt state consistent between QEMU "
+"and the emulation program."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:899
+msgid "Disaggregated CPU emulation"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:901
+msgid ""
+"After IO services have been disaggregated, a second phase would be to "
+"separate a process to handle CPU instruction emulation from the main QEMU "
+"control function. There are no object separation points for this code, so "
+"the first task would be to create one."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:907
+msgid "Host access controls"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:909
+msgid ""
+"Separating QEMU relies on the host OS's access restriction mechanisms to "
+"enforce that the differing processes can only access the objects they are "
+"entitled to. There are a couple types of mechanisms usually provided by "
+"general purpose OSs."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:915
+msgid "Discretionary access control"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:917
+msgid ""
+"Discretionary access control allows each user to control who can access "
+"their files. In Linux, this type of control is usually too coarse for QEMU "
+"separation, since it only provides three separate access controls: one for "
+"the same user ID, the second for users IDs with the same group ID, and the "
+"third for all other user IDs. Each device instance would need a separate "
+"user ID to provide access control, which is likely to be unwieldy for "
+"dynamically created VMs."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:926
+msgid "Mandatory access control"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:928
+msgid ""
+"Mandatory access control allows the OS to add an additional set of controls "
+"on top of discretionary access for the OS to control. It also adds other "
+"attributes to processes and files such as types, roles, and categories, and "
+"can establish rules for how processes and files can interact."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:935
+msgid "Type enforcement"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:937
+msgid ""
+"Type enforcement assigns a *type* attribute to processes and files, and "
+"allows rules to be written on what operations a process with a given type "
+"can perform on a file with a given type. QEMU separation could take "
+"advantage of type enforcement by running the emulation processes with "
+"different types, both from the main QEMU process, and from the emulation "
+"processes of different classes of devices."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:944
+msgid ""
+"For example, guest disk images and disk emulation processes could have types "
+"separate from the main QEMU process and non-disk emulation processes, and "
+"the type rules could prevent processes other than disk emulation ones from "
+"accessing guest disk images. Similarly, network emulation processes can have "
+"a type separate from the main QEMU process and non-network emulation "
+"process, and only that type can access the host tun/tap device used to "
+"provide guest networking."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:953
+msgid "Category enforcement"
+msgstr ""
+
+#: ../../../devel/multi-process.rst:955
+msgid ""
+"Category enforcement assigns a set of numbers within a given range to the "
+"process or file. The process is granted access to the file if the process's "
+"set is a superset of the file's set. This enforcement can be used to "
+"separate multiple instances of devices in the same class."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:960
+msgid ""
+"For example, if there are multiple disk devices provides to a guest, each "
+"device emulation process could be provisioned with a separate category. The "
+"different device emulation processes would not be able to access each "
+"other's backing disk images."
+msgstr ""
+
+#: ../../../devel/multi-process.rst:965
+msgid ""
+"Alternatively, categories could be used in lieu of the type enforcement "
+"scheme described above. In this scenario, different categories would be used "
+"to prevent device emulation processes in different classes from accessing "
+"resources assigned to other classes."
+msgstr ""
