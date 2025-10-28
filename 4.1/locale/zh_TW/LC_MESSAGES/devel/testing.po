@@ -1,0 +1,1302 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 4.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/testing.rst:3
+msgid "Testing in QEMU"
+msgstr ""
+
+#: ../../../devel/testing.rst:5
+msgid "This document describes the testing infrastructure in QEMU."
+msgstr ""
+
+#: ../../../devel/testing.rst:8
+msgid "Testing with \"make check\""
+msgstr ""
+
+#: ../../../devel/testing.rst:10
+msgid ""
+"The \"make check\" testing family includes most of the C based tests in "
+"QEMU. For a quick help, run ``make check-help`` from the source tree."
+msgstr ""
+
+#: ../../../devel/testing.rst:13
+msgid "The usual way to run these tests is:"
+msgstr ""
+
+#: ../../../devel/testing.rst:15
+msgid "make check"
+msgstr ""
+
+#: ../../../devel/testing.rst:19
+msgid ""
+"which includes QAPI schema tests, unit tests, and QTests. Different sub-"
+"types of \"make check\" tests will be explained below."
+msgstr ""
+
+#: ../../../devel/testing.rst:22
+msgid ""
+"Before running tests, it is best to build QEMU programs first. Some tests "
+"expect the executables to exist and will fail with obscure messages if they "
+"cannot find them."
+msgstr ""
+
+#: ../../../devel/testing.rst:27
+msgid "Unit tests"
+msgstr ""
+
+#: ../../../devel/testing.rst:29
+msgid ""
+"Unit tests, which can be invoked with ``make check-unit``, are simple C "
+"tests that typically link to individual QEMU object files and exercise them "
+"by calling exported functions."
+msgstr ""
+
+#: ../../../devel/testing.rst:33
+msgid ""
+"If you are writing new code in QEMU, consider adding a unit test, especially "
+"for utility modules that are relatively stateless or have few dependencies. "
+"To add a new unit test:"
+msgstr ""
+
+#: ../../../devel/testing.rst:37
+msgid "Create a new source file. For example, ``tests/foo-test.c``."
+msgstr ""
+
+#: ../../../devel/testing.rst:39
+msgid ""
+"Write the test. Normally you would include the header file which exports the "
+"module API, then verify the interface behaves as expected from your test. "
+"The test code should be organized with the glib testing framework. Copying "
+"and modifying an existing test is usually a good idea."
+msgstr ""
+
+#: ../../../devel/testing.rst:44
+msgid ""
+"Add the test to ``tests/Makefile.include``. First, name the unit test "
+"program and add it to ``$(check-unit-y)``; then add a rule to build the "
+"executable.  For example:"
+msgstr ""
+
+#: ../../../devel/testing.rst:48
+msgid ""
+"check-unit-y += tests/foo-test$(EXESUF)\n"
+"tests/foo-test$(EXESUF): tests/foo-test.o $(test-util-obj-y)\n"
+"..."
+msgstr ""
+
+#: ../../../devel/testing.rst:54
+msgid ""
+"Since unit tests don't require environment variables, the simplest way to "
+"debug a unit test failure is often directly invoking it or even running it "
+"under ``gdb``. However there can still be differences in behavior between "
+"``make`` invocations and your manual run, due to ``$MALLOC_PERTURB_`` "
+"environment variable (which affects memory reclamation and catches invalid "
+"pointers better) and gtester options. If necessary, you can run"
+msgstr ""
+
+#: ../../../devel/testing.rst:61
+msgid "make check-unit V=1"
+msgstr ""
+
+#: ../../../devel/testing.rst:65
+msgid ""
+"and copy the actual command line which executes the unit test, then run it "
+"from the command line."
+msgstr ""
+
+#: ../../../devel/testing.rst:69
+msgid "QTest"
+msgstr ""
+
+#: ../../../devel/testing.rst:71
+msgid ""
+"QTest is a device emulation testing framework.  It can be very useful to "
+"test device models; it could also control certain aspects of QEMU (such as "
+"virtual clock stepping), with a special purpose \"qtest\" protocol.  Refer "
+"to the documentation in ``qtest.c`` for more details of the protocol."
+msgstr ""
+
+#: ../../../devel/testing.rst:76
+msgid "QTest cases can be executed with"
+msgstr ""
+
+#: ../../../devel/testing.rst:78
+msgid "make check-qtest"
+msgstr ""
+
+#: ../../../devel/testing.rst:82
+msgid ""
+"The QTest library is implemented by ``tests/libqtest.c`` and the API is "
+"defined in ``tests/libqtest.h``."
+msgstr ""
+
+#: ../../../devel/testing.rst:85
+msgid ""
+"Consider adding a new QTest case when you are introducing a new virtual "
+"hardware, or extending one if you are adding functionalities to an existing "
+"virtual device."
+msgstr ""
+
+#: ../../../devel/testing.rst:89
+msgid ""
+"On top of libqtest, a higher level library, ``libqos``, was created to "
+"encapsulate common tasks of device drivers, such as memory management and "
+"communicating with system buses or devices. Many virtual device tests use "
+"libqos instead of directly calling into libqtest."
+msgstr ""
+
+#: ../../../devel/testing.rst:94
+msgid "Steps to add a new QTest case are:"
+msgstr ""
+
+#: ../../../devel/testing.rst:96
+msgid ""
+"Create a new source file for the test. (More than one file can be added as "
+"necessary.) For example, ``tests/test-foo-device.c``."
+msgstr ""
+
+#: ../../../devel/testing.rst:99
+msgid ""
+"Write the test code with the glib and libqtest/libqos API. See also existing "
+"tests and the library headers for reference."
+msgstr ""
+
+#: ../../../devel/testing.rst:102
+msgid ""
+"Register the new test in ``tests/Makefile.include``. Add the test executable "
+"name to an appropriate ``check-qtest-*-y`` variable. For example:"
+msgstr ""
+
+#: ../../../devel/testing.rst:105
+msgid "``check-qtest-generic-y = tests/test-foo-device$(EXESUF)``"
+msgstr ""
+
+#: ../../../devel/testing.rst:107
+msgid ""
+"Add object dependencies of the executable in the Makefile, including the "
+"test source file(s) and other interesting objects. For example:"
+msgstr ""
+
+#: ../../../devel/testing.rst:110
+msgid ""
+"``tests/test-foo-device$(EXESUF): tests/test-foo-device.o $(libqos-obj-y)``"
+msgstr ""
+
+#: ../../../devel/testing.rst:112
+msgid ""
+"Debugging a QTest failure is slightly harder than the unit test because the "
+"tests look up QEMU program names in the environment variables, such as "
+"``QTEST_QEMU_BINARY`` and ``QTEST_QEMU_IMG``, and also because it is not "
+"easy to attach gdb to the QEMU process spawned from the test. But manual "
+"invoking and using gdb on the test is still simple to do: find out the "
+"actual command from the output of"
+msgstr ""
+
+#: ../../../devel/testing.rst:119
+msgid "make check-qtest V=1"
+msgstr ""
+
+#: ../../../devel/testing.rst:123
+msgid "which you can run manually."
+msgstr ""
+
+#: ../../../devel/testing.rst:126
+msgid "QAPI schema tests"
+msgstr ""
+
+#: ../../../devel/testing.rst:128
+msgid ""
+"The QAPI schema tests validate the QAPI parser used by QMP, by feeding "
+"predefined input to the parser and comparing the result with the reference "
+"output."
+msgstr ""
+
+#: ../../../devel/testing.rst:132
+msgid ""
+"The input/output data is managed under the ``tests/qapi-schema`` directory. "
+"Each test case includes four files that have a common base name:"
+msgstr ""
+
+#: ../../../devel/testing.rst:135
+msgid ""
+"``${casename}.json`` - the file contains the JSON input for feeding the "
+"parser"
+msgstr ""
+
+#: ../../../devel/testing.rst:137
+msgid ""
+"``${casename}.out`` - the file contains the expected stdout from the parser"
+msgstr ""
+
+#: ../../../devel/testing.rst:138
+msgid ""
+"``${casename}.err`` - the file contains the expected stderr from the parser"
+msgstr ""
+
+#: ../../../devel/testing.rst:139
+msgid "``${casename}.exit`` - the expected error code"
+msgstr ""
+
+#: ../../../devel/testing.rst:141
+msgid ""
+"Consider adding a new QAPI schema test when you are making a change on the "
+"QAPI parser (either fixing a bug or extending/modifying the syntax). To do "
+"this:"
+msgstr ""
+
+#: ../../../devel/testing.rst:144
+msgid "Add four files for the new case as explained above. For example:"
+msgstr ""
+
+#: ../../../devel/testing.rst:146
+msgid "``$EDITOR tests/qapi-schema/foo.{json,out,err,exit}``."
+msgstr ""
+
+#: ../../../devel/testing.rst:148
+msgid "Add the new test in ``tests/Makefile.include``. For example:"
+msgstr ""
+
+#: ../../../devel/testing.rst:150
+msgid "``qapi-schema += foo.json``"
+msgstr ""
+
+#: ../../../devel/testing.rst:153
+msgid "check-block"
+msgstr ""
+
+#: ../../../devel/testing.rst:155
+msgid ""
+"``make check-block`` is a legacy command to invoke block layer iotests and "
+"is rarely used. See \"QEMU iotests\" section below for more information."
+msgstr ""
+
+#: ../../../devel/testing.rst:159
+msgid "GCC gcov support"
+msgstr ""
+
+#: ../../../devel/testing.rst:161
+msgid ""
+"``gcov`` is a GCC tool to analyze the testing coverage by instrumenting the "
+"tested code. To use it, configure QEMU with ``--enable-gcov`` option and "
+"build. Then run ``make check`` as usual."
+msgstr ""
+
+#: ../../../devel/testing.rst:165
+msgid ""
+"If you want to gather coverage information on a single test the ``make clean-"
+"coverage`` target can be used to delete any existing coverage information "
+"before running a single test."
+msgstr ""
+
+#: ../../../devel/testing.rst:169
+msgid ""
+"You can generate a HTML coverage report by executing ``make coverage-"
+"report`` which will create ./reports/coverage/coverage-report.html. If you "
+"want to create it elsewhere simply execute ``make /foo/bar/baz/coverage-"
+"report.html``."
+msgstr ""
+
+#: ../../../devel/testing.rst:174
+msgid ""
+"Further analysis can be conducted by running the ``gcov`` command directly "
+"on the various .gcda output files. Please read the ``gcov`` documentation "
+"for more information."
+msgstr ""
+
+#: ../../../devel/testing.rst:179
+msgid "QEMU iotests"
+msgstr ""
+
+#: ../../../devel/testing.rst:181
+msgid ""
+"QEMU iotests, under the directory ``tests/qemu-iotests``, is the testing "
+"framework widely used to test block layer related features. It is higher "
+"level than \"make check\" tests and 99% of the code is written in bash or "
+"Python scripts.  The testing success criteria is golden output comparison, "
+"and the test files are named with numbers."
+msgstr ""
+
+#: ../../../devel/testing.rst:187
+msgid ""
+"To run iotests, make sure QEMU is built successfully, then switch to the "
+"``tests/qemu-iotests`` directory under the build directory, and run ``./"
+"check`` with desired arguments from there."
+msgstr ""
+
+#: ../../../devel/testing.rst:191
+msgid ""
+"By default, \"raw\" format and \"file\" protocol is used; all tests will be "
+"executed, except the unsupported ones. You can override the format and "
+"protocol with arguments:"
+msgstr ""
+
+#: ../../../devel/testing.rst:195
+msgid ""
+"# test with qcow2 format\n"
+"./check -qcow2\n"
+"# or test a different protocol\n"
+"./check -nbd"
+msgstr ""
+
+#: ../../../devel/testing.rst:202
+msgid "It's also possible to list test numbers explicitly:"
+msgstr ""
+
+#: ../../../devel/testing.rst:204
+msgid ""
+"# run selected cases with qcow2 format\n"
+"./check -qcow2 001 030 153"
+msgstr ""
+
+#: ../../../devel/testing.rst:209
+msgid ""
+"Cache mode can be selected with the \"-c\" option, which may help reveal "
+"bugs that are specific to certain cache mode."
+msgstr ""
+
+#: ../../../devel/testing.rst:212
+msgid ""
+"More options are supported by the ``./check`` script, run ``./check -h`` for "
+"help."
+msgstr ""
+
+#: ../../../devel/testing.rst:216
+msgid "Writing a new test case"
+msgstr ""
+
+#: ../../../devel/testing.rst:218
+msgid ""
+"Consider writing a tests case when you are making any changes to the block "
+"layer. An iotest case is usually the choice for that. There are already many "
+"test cases, so it is possible that extending one of them may achieve the "
+"goal and save the boilerplate to create one.  (Unfortunately, there isn't a "
+"100% reliable way to find a related one out of hundreds of tests.  One "
+"approach is using ``git grep``.)"
+msgstr ""
+
+#: ../../../devel/testing.rst:225
+msgid ""
+"Usually an iotest case consists of two files. One is an executable that "
+"produces output to stdout and stderr, the other is the expected reference "
+"output. They are given the same number in file names. E.g. Test script "
+"``055`` and reference output ``055.out``."
+msgstr ""
+
+#: ../../../devel/testing.rst:230
+msgid ""
+"In rare cases, when outputs differ between cache mode ``none`` and others, a "
+"``.out.nocache`` file is added. In other cases, when outputs differ between "
+"image formats, more than one ``.out`` files are created ending with the "
+"respective format names, e.g. ``178.out.qcow2`` and ``178.out.raw``."
+msgstr ""
+
+#: ../../../devel/testing.rst:235
+msgid ""
+"There isn't a hard rule about how to write a test script, but a new test is "
+"usually a (copy and) modification of an existing case.  There are a few "
+"commonly used ways to create a test:"
+msgstr ""
+
+#: ../../../devel/testing.rst:239
+msgid ""
+"A Bash script. It will make use of several environmental variables related "
+"to the testing procedure, and could source a group of ``common.*`` libraries "
+"for some common helper routines."
+msgstr ""
+
+#: ../../../devel/testing.rst:243
+msgid ""
+"A Python unittest script. Import ``iotests`` and create a subclass of "
+"``iotests.QMPTestCase``, then call ``iotests.main`` method. The downside of "
+"this approach is that the output is too scarce, and the script is considered "
+"harder to debug."
+msgstr ""
+
+#: ../../../devel/testing.rst:248
+msgid ""
+"A simple Python script without using unittest module. This could also import "
+"``iotests`` for launching QEMU and utilities etc, but it doesn't inherit "
+"from ``iotests.QMPTestCase`` therefore doesn't use the Python unittest "
+"execution. This is a combination of 1 and 2."
+msgstr ""
+
+#: ../../../devel/testing.rst:253
+msgid ""
+"Pick the language per your preference since both Bash and Python have "
+"comparable library support for invoking and interacting with QEMU programs. "
+"If you opt for Python, it is strongly recommended to write Python 3 "
+"compatible code."
+msgstr ""
+
+#: ../../../devel/testing.rst:258
+msgid ""
+"Both Python and Bash frameworks in iotests provide helpers to manage test "
+"images. They can be used to create and clean up images under the test "
+"directory. If no I/O or any protocol specific feature is needed, it is often "
+"more convenient to use the pseudo block driver, ``null-co://``, as the test "
+"image, which doesn't require image creation or cleaning up. Avoid system-"
+"wide devices or files whenever possible, such as ``/dev/null`` or ``/dev/"
+"zero``. Otherwise, image locking implications have to be considered.  For "
+"example, another application on the host may have locked the file, possibly "
+"leading to a test failure.  If using such devices are explicitly desired, "
+"consider adding ``locking=off`` option to disable image locking."
+msgstr ""
+
+#: ../../../devel/testing.rst:270
+msgid "Docker based tests"
+msgstr ""
+
+#: ../../../devel/testing.rst:273
+msgid "Introduction"
+msgstr ""
+
+#: ../../../devel/testing.rst:275
+msgid ""
+"The Docker testing framework in QEMU utilizes public Docker images to build "
+"and test QEMU in predefined and widely accessible Linux environments.  This "
+"makes it possible to expand the test coverage across distros, toolchain "
+"flavors and library versions."
+msgstr ""
+
+#: ../../../devel/testing.rst:281
+msgid "Prerequisites"
+msgstr ""
+
+#: ../../../devel/testing.rst:283
+msgid ""
+"Install \"docker\" with the system package manager and start the Docker "
+"service on your development machine, then make sure you have the privilege "
+"to run Docker commands. Typically it means setting up passwordless ``sudo "
+"docker`` command or login as root. For example:"
+msgstr ""
+
+#: ../../../devel/testing.rst:288
+msgid ""
+"$ sudo yum install docker\n"
+"$ # or `apt-get install docker` for Ubuntu, etc.\n"
+"$ sudo systemctl start docker\n"
+"$ sudo docker ps"
+msgstr ""
+
+#: ../../../devel/testing.rst:295
+msgid ""
+"The last command should print an empty table, to verify the system is ready."
+msgstr ""
+
+#: ../../../devel/testing.rst:297
+msgid ""
+"An alternative method to set up permissions is by adding the current user to "
+"\"docker\" group and making the docker daemon socket file (by default ``/var/"
+"run/docker.sock``) accessible to the group:"
+msgstr ""
+
+#: ../../../devel/testing.rst:301
+msgid ""
+"$ sudo groupadd docker\n"
+"$ sudo usermod $USER -a -G docker\n"
+"$ sudo chown :docker /var/run/docker.sock"
+msgstr ""
+
+#: ../../../devel/testing.rst:307
+msgid ""
+"Note that any one of above configurations makes it possible for the user to "
+"exploit the whole host with Docker bind mounting or other privileged "
+"operations.  So only do it on development machines."
+msgstr ""
+
+#: ../../../devel/testing.rst:312 ../../../devel/testing.rst:405
+msgid "Quickstart"
+msgstr ""
+
+#: ../../../devel/testing.rst:314
+msgid ""
+"From source tree, type ``make docker`` to see the help. Testing can be "
+"started without configuring or building QEMU (``configure`` and ``make`` are "
+"done in the container, with parameters defined by the make target):"
+msgstr ""
+
+#: ../../../devel/testing.rst:318
+msgid "make docker-test-build@min-glib"
+msgstr ""
+
+#: ../../../devel/testing.rst:322
+msgid ""
+"This will create a container instance using the ``min-glib`` image (the "
+"image is downloaded and initialized automatically), in which the ``test-"
+"build`` job is executed."
+msgstr ""
+
+#: ../../../devel/testing.rst:327
+msgid "Images"
+msgstr ""
+
+#: ../../../devel/testing.rst:329
+msgid ""
+"Along with many other images, the ``min-glib`` image is defined in a "
+"Dockerfile in ``tests/docker/dockerfiles/``, called ``min-glib.docker``. "
+"``make docker`` command will list all the available images."
+msgstr ""
+
+#: ../../../devel/testing.rst:333
+msgid ""
+"To add a new image, simply create a new ``.docker`` file under the ``tests/"
+"docker/dockerfiles/`` directory."
+msgstr ""
+
+#: ../../../devel/testing.rst:336
+msgid ""
+"A ``.pre`` script can be added beside the ``.docker`` file, which will be "
+"executed before building the image under the build context directory. This "
+"is mainly used to do necessary host side setup. One such setup is "
+"``binfmt_misc``, for example, to make qemu-user powered cross build "
+"containers work."
+msgstr ""
+
+#: ../../../devel/testing.rst:342
+msgid "Tests"
+msgstr ""
+
+#: ../../../devel/testing.rst:344
+msgid ""
+"Different tests are added to cover various configurations to build and test "
+"QEMU.  Docker tests are the executables under ``tests/docker`` named ``test-"
+"*``. They are typically shell scripts and are built on top of a shell "
+"library, ``tests/docker/common.rc``, which provides helpers to find the QEMU "
+"source and build it."
+msgstr ""
+
+#: ../../../devel/testing.rst:350
+msgid "The full list of tests is printed in the ``make docker`` help."
+msgstr ""
+
+#: ../../../devel/testing.rst:353
+msgid "Tools"
+msgstr ""
+
+#: ../../../devel/testing.rst:355
+msgid ""
+"There are executables that are created to run in a specific Docker "
+"environment. This makes it easy to write scripts that have heavy or special "
+"dependencies, but are still very easy to use."
+msgstr ""
+
+#: ../../../devel/testing.rst:359
+msgid ""
+"Currently the only tool is ``travis``, which mimics the Travis-CI tests in a "
+"container. It runs in the ``travis`` image:"
+msgstr ""
+
+#: ../../../devel/testing.rst:362
+msgid "make docker-travis@travis"
+msgstr ""
+
+#: ../../../devel/testing.rst:367
+msgid "Debugging a Docker test failure"
+msgstr ""
+
+#: ../../../devel/testing.rst:369
+msgid ""
+"When CI tasks, maintainers or yourself report a Docker test failure, follow "
+"the below steps to debug it:"
+msgstr ""
+
+#: ../../../devel/testing.rst:372
+msgid ""
+"Locally reproduce the failure with the reported command line. E.g. run "
+"``make docker-test-mingw@fedora J=8``."
+msgstr ""
+
+#: ../../../devel/testing.rst:374
+msgid "Add \"V=1\" to the command line, try again, to see the verbose output."
+msgstr ""
+
+#: ../../../devel/testing.rst:375
+msgid ""
+"Further add \"DEBUG=1\" to the command line. This will pause in a shell "
+"prompt in the container right before testing starts. You could either "
+"manually build QEMU and run tests from there, or press Ctrl-D to let the "
+"Docker testing continue."
+msgstr ""
+
+#: ../../../devel/testing.rst:379
+msgid ""
+"If you press Ctrl-D, the same building and testing procedure will begin, and "
+"will hopefully run into the error again. After that, you will be dropped to "
+"the prompt for debug."
+msgstr ""
+
+#: ../../../devel/testing.rst:384
+msgid "Options"
+msgstr ""
+
+#: ../../../devel/testing.rst:386
+msgid ""
+"Various options can be used to affect how Docker tests are done. The full "
+"list is in the ``make docker`` help text. The frequently used ones are:"
+msgstr ""
+
+#: ../../../devel/testing.rst:389
+msgid ""
+"``V=1``: the same as in top level ``make``. It will be propagated to the "
+"container and enable verbose output."
+msgstr ""
+
+#: ../../../devel/testing.rst:391
+msgid ""
+"``J=$N``: the number of parallel tasks in make commands in the container, "
+"similar to the ``-j $N`` option in top level ``make``. (The ``-j`` option in "
+"top level ``make`` will not be propagated into the container.)"
+msgstr ""
+
+#: ../../../devel/testing.rst:394
+msgid ""
+"``DEBUG=1``: enables debug. See the previous \"Debugging a Docker test "
+"failure\" section."
+msgstr ""
+
+#: ../../../devel/testing.rst:398
+msgid "VM testing"
+msgstr ""
+
+#: ../../../devel/testing.rst:400
+msgid ""
+"This test suite contains scripts that bootstrap various guest images that "
+"have necessary packages to build QEMU. The basic usage is documented in "
+"``Makefile`` help which is displayed with ``make vm-help``."
+msgstr ""
+
+#: ../../../devel/testing.rst:407
+msgid ""
+"Run ``make vm-help`` to list available make targets. Invoke a specific make "
+"command to run build test in an image. For example, ``make vm-build-"
+"freebsd`` will build the source tree in the FreeBSD image. The command can "
+"be executed from either the source tree or the build dir; if the former, ``./"
+"configure`` is not needed. The command will then generate the test image in "
+"``./tests/vm/`` under the working directory."
+msgstr ""
+
+#: ../../../devel/testing.rst:414
+msgid ""
+"Note: images created by the scripts accept a well-known RSA key pair for SSH "
+"access, so they SHOULD NOT be exposed to external interfaces if you are "
+"concerned about attackers taking control of the guest and potentially "
+"exploiting a QEMU security bug to compromise the host."
+msgstr ""
+
+#: ../../../devel/testing.rst:420
+msgid "QEMU binary"
+msgstr ""
+
+#: ../../../devel/testing.rst:422
+msgid ""
+"By default, qemu-system-x86_64 is searched in $PATH to run the guest. If "
+"there isn't one, or if it is older than 2.10, the test won't work. In this "
+"case, provide the QEMU binary in env var: ``QEMU=/path/to/qemu-2.10+``."
+msgstr ""
+
+#: ../../../devel/testing.rst:427
+msgid "Make jobs"
+msgstr ""
+
+#: ../../../devel/testing.rst:429
+msgid ""
+"The ``-j$X`` option in the make command line is not propagated into the VM, "
+"specify ``J=$X`` to control the make jobs in the guest."
+msgstr ""
+
+#: ../../../devel/testing.rst:433
+msgid "Debugging"
+msgstr ""
+
+#: ../../../devel/testing.rst:435
+msgid ""
+"Add ``DEBUG=1`` and/or ``V=1`` to the make command to allow interactive "
+"debugging and verbose output. If this is not enough, see the next section. "
+"``V=1`` will be propagated down into the make jobs in the guest."
+msgstr ""
+
+#: ../../../devel/testing.rst:440
+msgid "Manual invocation"
+msgstr ""
+
+#: ../../../devel/testing.rst:442
+msgid ""
+"Each guest script is an executable script with the same command line "
+"options. For example to work with the netbsd guest, use ``$QEMU_SRC/tests/vm/"
+"netbsd``:"
+msgstr ""
+
+#: ../../../devel/testing.rst:445
+msgid ""
+"$ cd $QEMU_SRC/tests/vm\n"
+"\n"
+"# To bootstrap the image\n"
+"$ ./netbsd --build-image --image /var/tmp/netbsd.img\n"
+"<...>\n"
+"\n"
+"# To run an arbitrary command in guest (the output will not be echoed "
+"unless\n"
+"# --debug is added)\n"
+"$ ./netbsd --debug --image /var/tmp/netbsd.img uname -a\n"
+"\n"
+"# To build QEMU in guest\n"
+"$ ./netbsd --debug --image /var/tmp/netbsd.img --build-qemu $QEMU_SRC\n"
+"\n"
+"# To get to an interactive shell\n"
+"$ ./netbsd --interactive --image /var/tmp/netbsd.img sh"
+msgstr ""
+
+#: ../../../devel/testing.rst:464
+msgid "Adding new guests"
+msgstr ""
+
+#: ../../../devel/testing.rst:466
+msgid "Please look at existing guest scripts for how to add new guests."
+msgstr ""
+
+#: ../../../devel/testing.rst:468
+msgid ""
+"Most importantly, create a subclass of BaseVM and implement "
+"``build_image()`` method and define ``BUILD_SCRIPT``, then finally call "
+"``basevm.main()`` from the script's ``main()``."
+msgstr ""
+
+#: ../../../devel/testing.rst:472
+msgid ""
+"Usually in ``build_image()``, a template image is downloaded from a "
+"predefined URL. ``BaseVM._download_with_cache()`` takes care of the cache "
+"and the checksum, so consider using it."
+msgstr ""
+
+#: ../../../devel/testing.rst:476
+msgid ""
+"Once the image is downloaded, users, SSH server and QEMU build deps should "
+"be set up:"
+msgstr ""
+
+#: ../../../devel/testing.rst:479
+msgid "Root password set to ``BaseVM.ROOT_PASS``"
+msgstr ""
+
+#: ../../../devel/testing.rst:480
+msgid ""
+"User ``BaseVM.GUEST_USER`` is created, and password set to ``BaseVM."
+"GUEST_PASS``"
+msgstr ""
+
+#: ../../../devel/testing.rst:482
+msgid ""
+"SSH service is enabled and started on boot, ``$QEMU_SRC/tests/keys/id_rsa."
+"pub`` is added to ssh's ``authorized_keys`` file of both root and the normal "
+"user"
+msgstr ""
+
+#: ../../../devel/testing.rst:485
+msgid ""
+"DHCP client service is enabled and started on boot, so that it can "
+"automatically configure the virtio-net-pci NIC and communicate with QEMU "
+"user net (10.0.2.2)"
+msgstr ""
+
+#: ../../../devel/testing.rst:488
+msgid ""
+"Necessary packages are installed to untar the source tarball and build QEMU"
+msgstr ""
+
+#: ../../../devel/testing.rst:491
+msgid ""
+"Write a proper ``BUILD_SCRIPT`` template, which should be a shell script "
+"that untars a raw virtio-blk block device, which is the tarball data blob of "
+"the QEMU source tree, then configure/build it. Running \"make check\" is "
+"also recommended."
+msgstr ""
+
+#: ../../../devel/testing.rst:497
+msgid "Image fuzzer testing"
+msgstr ""
+
+#: ../../../devel/testing.rst:499
+msgid ""
+"An image fuzzer was added to exercise format drivers. Currently only qcow2 "
+"is supported. To start the fuzzer, run"
+msgstr ""
+
+#: ../../../devel/testing.rst:502
+msgid ""
+"tests/image-fuzzer/runner.py -c '[[\"qemu-img\", \"info\", \"$test_img\"]]' /"
+"tmp/test qcow2"
+msgstr ""
+
+#: ../../../devel/testing.rst:506
+msgid ""
+"Alternatively, some command different from \"qemu-img info\" can be tested, "
+"by changing the ``-c`` option."
+msgstr ""
+
+#: ../../../devel/testing.rst:510
+msgid "Acceptance tests using the Avocado Framework"
+msgstr ""
+
+#: ../../../devel/testing.rst:512
+msgid ""
+"The ``tests/acceptance`` directory hosts functional tests, also known as "
+"acceptance level tests.  They're usually higher level tests, and may "
+"interact with external resources and with various guest operating systems."
+msgstr ""
+
+#: ../../../devel/testing.rst:517
+msgid ""
+"These tests are written using the Avocado Testing Framework (which must be "
+"installed separately) in conjunction with a the ``avocado_qemu.Test`` class, "
+"implemented at ``tests/acceptance/avocado_qemu``."
+msgstr ""
+
+#: ../../../devel/testing.rst:521
+msgid "Tests based on ``avocado_qemu.Test`` can easily:"
+msgstr ""
+
+#: ../../../devel/testing.rst:523
+msgid ""
+"Customize the command line arguments given to the convenience ``self.vm`` "
+"attribute (a QEMUMachine instance)"
+msgstr ""
+
+#: ../../../devel/testing.rst:526
+msgid ""
+"Interact with the QEMU monitor, send QMP commands and check their results"
+msgstr ""
+
+#: ../../../devel/testing.rst:529
+msgid ""
+"Interact with the guest OS, using the convenience console device (which may "
+"be useful to assert the effectiveness and correctness of command line "
+"arguments or QMP commands)"
+msgstr ""
+
+#: ../../../devel/testing.rst:533
+msgid ""
+"Interact with external data files that accompany the test itself (see ``self."
+"get_data()``)"
+msgstr ""
+
+#: ../../../devel/testing.rst:536
+msgid ""
+"Download (and cache) remote data files, such as firmware and kernel images"
+msgstr ""
+
+#: ../../../devel/testing.rst:539
+msgid ""
+"Have access to a library of guest OS images (by means of the ``avocado.utils."
+"vmimage`` library)"
+msgstr ""
+
+#: ../../../devel/testing.rst:542
+msgid ""
+"Make use of various other test related utilities available at the test class "
+"itself and at the utility library:"
+msgstr ""
+
+#: ../../../devel/testing.rst:545
+msgid ""
+"http://avocado-framework.readthedocs.io/en/latest/api/test/avocado."
+"html#avocado.Test"
+msgstr ""
+
+#: ../../../devel/testing.rst:546
+msgid ""
+"http://avocado-framework.readthedocs.io/en/latest/api/utils/avocado.utils."
+"html"
+msgstr ""
+
+#: ../../../devel/testing.rst:549
+msgid "Running tests"
+msgstr ""
+
+#: ../../../devel/testing.rst:551
+msgid "You can run the acceptance tests simply by executing:"
+msgstr ""
+
+#: ../../../devel/testing.rst:553
+msgid "make check-acceptance"
+msgstr ""
+
+#: ../../../devel/testing.rst:557
+msgid ""
+"This involves the automatic creation of Python virtual environment within "
+"the build tree (at ``tests/venv``) which will have all the right "
+"dependencies, and will save tests results also within the build tree (at "
+"``tests/results``)."
+msgstr ""
+
+#: ../../../devel/testing.rst:562
+msgid ""
+"Note: the build environment must be using a Python 3 stack, and have the "
+"``venv`` and ``pip`` packages installed.  If necessary, make sure "
+"``configure`` is called with ``--python=`` and that those modules are "
+"available.  On Debian and Ubuntu based systems, depending on the specific "
+"version, they may be on packages named ``python3-venv`` and ``python3-pip``."
+msgstr ""
+
+#: ../../../devel/testing.rst:569
+msgid ""
+"The scripts installed inside the virtual environment may be used without an "
+"\"activation\".  For instance, the Avocado test runner may be invoked by "
+"running:"
+msgstr ""
+
+#: ../../../devel/testing.rst:573
+msgid "tests/venv/bin/avocado run $OPTION1 $OPTION2 tests/acceptance/"
+msgstr ""
+
+#: ../../../devel/testing.rst:578
+msgid "Manual Installation"
+msgstr ""
+
+#: ../../../devel/testing.rst:580
+msgid "To manually install Avocado and its dependencies, run:"
+msgstr ""
+
+#: ../../../devel/testing.rst:582
+msgid "pip install --user avocado-framework"
+msgstr ""
+
+#: ../../../devel/testing.rst:586
+msgid "Alternatively, follow the instructions on this link:"
+msgstr ""
+
+#: ../../../devel/testing.rst:588
+msgid ""
+"http://avocado-framework.readthedocs.io/en/latest/GetStartedGuide."
+"html#installing-avocado"
+msgstr ""
+
+#: ../../../devel/testing.rst:591
+msgid "Overview"
+msgstr ""
+
+#: ../../../devel/testing.rst:593
+msgid ""
+"The ``tests/acceptance/avocado_qemu`` directory provides the "
+"``avocado_qemu`` Python module, containing the ``avocado_qemu.Test`` class.  "
+"Here's a simple usage example:"
+msgstr ""
+
+#: ../../../devel/testing.rst:597
+msgid ""
+"from avocado_qemu import Test\n"
+"\n"
+"\n"
+"class Version(Test):\n"
+"    \"\"\"\n"
+"    :avocado: tags=quick\n"
+"    \"\"\"\n"
+"    def test_qmp_human_info_version(self):\n"
+"        self.vm.launch()\n"
+"        res = self.vm.command('human-monitor-command',\n"
+"                              command_line='info version')\n"
+"        self.assertRegexpMatches(res, r'^(\\d+\\.\\d+\\.\\d)')"
+msgstr ""
+
+#: ../../../devel/testing.rst:612
+msgid "To execute your test, run:"
+msgstr ""
+
+#: ../../../devel/testing.rst:614
+msgid "avocado run version.py"
+msgstr ""
+
+#: ../../../devel/testing.rst:618
+msgid ""
+"Tests may be classified according to a convention by using docstring "
+"directives such as ``:avocado: tags=TAG1,TAG2``.  To run all tests in the "
+"current directory, tagged as \"quick\", run:"
+msgstr ""
+
+#: ../../../devel/testing.rst:622
+msgid "avocado run -t quick ."
+msgstr ""
+
+#: ../../../devel/testing.rst:627
+msgid "The ``avocado_qemu.Test`` base test class"
+msgstr ""
+
+#: ../../../devel/testing.rst:629
+msgid ""
+"The ``avocado_qemu.Test`` class has a number of characteristics that are "
+"worth being mentioned right away."
+msgstr ""
+
+#: ../../../devel/testing.rst:632
+msgid ""
+"First of all, it attempts to give each test a ready to use QEMUMachine "
+"instance, available at ``self.vm``.  Because many tests will tweak the QEMU "
+"command line, launching the QEMUMachine (by using ``self.vm.launch()``) is "
+"left to the test writer."
+msgstr ""
+
+#: ../../../devel/testing.rst:637
+msgid ""
+"The base test class has also support for tests with more than one "
+"QEMUMachine. The way to get machines is through the ``self.get_vm()`` method "
+"which will return a QEMUMachine instance. The ``self.get_vm()`` method "
+"accepts arguments that will be passed to the QEMUMachine creation and also "
+"an optional `name` attribute so you can identify a specific machine and get "
+"it more than once through the tests methods. A simple and hypothetical "
+"example follows:"
+msgstr ""
+
+#: ../../../devel/testing.rst:645
+msgid ""
+"from avocado_qemu import Test\n"
+"\n"
+"\n"
+"class MultipleMachines(Test):\n"
+"    \"\"\"\n"
+"    :avocado: enable\n"
+"    \"\"\"\n"
+"    def test_multiple_machines(self):\n"
+"        first_machine = self.get_vm()\n"
+"        second_machine = self.get_vm()\n"
+"        self.get_vm(name='third_machine').launch()\n"
+"\n"
+"        first_machine.launch()\n"
+"        second_machine.launch()\n"
+"\n"
+"        first_res = first_machine.command(\n"
+"            'human-monitor-command',\n"
+"            command_line='info version')\n"
+"\n"
+"        second_res = second_machine.command(\n"
+"            'human-monitor-command',\n"
+"            command_line='info version')\n"
+"\n"
+"        third_res = self.get_vm(name='third_machine').command(\n"
+"            'human-monitor-command',\n"
+"            command_line='info version')\n"
+"\n"
+"        self.assertEquals(first_res, second_res, third_res)"
+msgstr ""
+
+#: ../../../devel/testing.rst:676
+msgid ""
+"At test \"tear down\", ``avocado_qemu.Test`` handles all the QEMUMachines "
+"shutdown."
+msgstr ""
+
+#: ../../../devel/testing.rst:680
+msgid "QEMUMachine"
+msgstr ""
+
+#: ../../../devel/testing.rst:682
+msgid ""
+"The QEMUMachine API is already widely used in the Python iotests, device-"
+"crash-test and other Python scripts.  It's a wrapper around the execution of "
+"a QEMU binary, giving its users:"
+msgstr ""
+
+#: ../../../devel/testing.rst:686
+msgid ""
+"the ability to set command line arguments to be given to the QEMU binary"
+msgstr ""
+
+#: ../../../devel/testing.rst:689
+msgid ""
+"a ready to use QMP connection and interface, which can be used to send "
+"commands and inspect its results, as well as asynchronous events"
+msgstr ""
+
+#: ../../../devel/testing.rst:693
+msgid ""
+"convenience methods to set commonly used command line arguments in a more "
+"succinct and intuitive way"
+msgstr ""
+
+#: ../../../devel/testing.rst:697
+msgid "QEMU binary selection"
+msgstr ""
+
+#: ../../../devel/testing.rst:699
+msgid ""
+"The QEMU binary used for the ``self.vm`` QEMUMachine instance will primarily "
+"depend on the value of the ``qemu_bin`` parameter.  If it's not explicitly "
+"set, its default value will be the result of a dynamic probe in the same "
+"source tree.  A suitable binary will be one that targets the architecture "
+"matching host machine."
+msgstr ""
+
+#: ../../../devel/testing.rst:705
+msgid ""
+"Based on this description, test writers will usually rely on one of the "
+"following approaches:"
+msgstr ""
+
+#: ../../../devel/testing.rst:708
+msgid "Set ``qemu_bin``, and use the given binary"
+msgstr ""
+
+#: ../../../devel/testing.rst:710
+msgid ""
+"Do not set ``qemu_bin``, and use a QEMU binary named like \"${arch}-softmmu/"
+"qemu-system-${arch}\", either in the current working directory, or in the "
+"current source tree."
+msgstr ""
+
+#: ../../../devel/testing.rst:714
+msgid ""
+"The resulting ``qemu_bin`` value will be preserved in the ``avocado_qemu."
+"Test`` as an attribute with the same name."
+msgstr ""
+
+#: ../../../devel/testing.rst:718
+msgid "Attribute reference"
+msgstr ""
+
+#: ../../../devel/testing.rst:720
+msgid ""
+"Besides the attributes and methods that are part of the base ``avocado."
+"Test`` class, the following attributes are available on any ``avocado_qemu."
+"Test`` instance."
+msgstr ""
+
+#: ../../../devel/testing.rst:725
+msgid "vm"
+msgstr ""
+
+#: ../../../devel/testing.rst:727
+msgid ""
+"A QEMUMachine instance, initially configured according to the given "
+"``qemu_bin`` parameter."
+msgstr ""
+
+#: ../../../devel/testing.rst:731 ../../../devel/testing.rst:770
+msgid "arch"
+msgstr ""
+
+#: ../../../devel/testing.rst:733
+msgid ""
+"The architecture can be used on different levels of the stack, e.g. by the "
+"framework or by the test itself.  At the framework level, it will currently "
+"influence the selection of a QEMU binary (when one is not explicitly given)."
+msgstr ""
+
+#: ../../../devel/testing.rst:738
+msgid ""
+"Tests are also free to use this attribute value, for their own needs. A test "
+"may, for instance, use the same value when selecting the architecture of a "
+"kernel or disk image to boot a VM with."
+msgstr ""
+
+#: ../../../devel/testing.rst:742
+msgid ""
+"The ``arch`` attribute will be set to the test parameter of the same name.  "
+"If one is not given explicitly, it will either be set to ``None``, or, if "
+"the test is tagged with one (and only one) ``:avocado: tags=arch:VALUE`` "
+"tag, it will be set to ``VALUE``."
+msgstr ""
+
+#: ../../../devel/testing.rst:748 ../../../devel/testing.rst:783
+msgid "qemu_bin"
+msgstr ""
+
+#: ../../../devel/testing.rst:750
+msgid ""
+"The preserved value of the ``qemu_bin`` parameter or the result of the "
+"dynamic probe for a QEMU binary in the current working directory or source "
+"tree."
+msgstr ""
+
+#: ../../../devel/testing.rst:755
+msgid "Parameter reference"
+msgstr ""
+
+#: ../../../devel/testing.rst:757
+msgid ""
+"To understand how Avocado parameters are accessed by tests, and how they can "
+"be passed to tests, please refer to::"
+msgstr ""
+
+#: ../../../devel/testing.rst:760
+msgid ""
+"http://avocado-framework.readthedocs.io/en/latest/WritingTests."
+"html#accessing-test-parameters"
+msgstr ""
+
+#: ../../../devel/testing.rst:762
+msgid ""
+"Parameter values can be easily seen in the log files, and will look like the "
+"following:"
+msgstr ""
+
+#: ../../../devel/testing.rst:765
+msgid ""
+"PARAMS (key=qemu_bin, path=*, default=x86_64-softmmu/qemu-system-x86_64) => "
+"'x86_64-softmmu/qemu-system-x86_64"
+msgstr ""
+
+#: ../../../devel/testing.rst:772
+msgid ""
+"The architecture that will influence the selection of a QEMU binary (when "
+"one is not explicitly given)."
+msgstr ""
+
+#: ../../../devel/testing.rst:775
+msgid ""
+"Tests are also free to use this parameter value, for their own needs. A test "
+"may, for instance, use the same value when selecting the architecture of a "
+"kernel or disk image to boot a VM with."
+msgstr ""
+
+#: ../../../devel/testing.rst:779
+msgid ""
+"This parameter has a direct relation with the ``arch`` attribute.  If not "
+"given, it will default to None."
+msgstr ""
+
+#: ../../../devel/testing.rst:785
+msgid "The exact QEMU binary to be used on QEMUMachine."
+msgstr ""
+
+#: ../../../devel/testing.rst:788
+msgid "Uninstalling Avocado"
+msgstr ""
+
+#: ../../../devel/testing.rst:790
+msgid ""
+"If you've followed the manual installation instructions above, you can "
+"easily uninstall Avocado.  Start by listing the packages you have installed::"
+msgstr ""
+
+#: ../../../devel/testing.rst:794
+msgid "pip list --user"
+msgstr ""
+
+#: ../../../devel/testing.rst:796
+msgid "And remove any package you want with::"
+msgstr ""
+
+#: ../../../devel/testing.rst:798
+msgid "pip uninstall <package_name>"
+msgstr ""
+
+#: ../../../devel/testing.rst:800
+msgid ""
+"If you've used ``make check-acceptance``, the Python virtual environment "
+"where Avocado is installed will be cleaned up as part of ``make check-"
+"clean``."
+msgstr ""
