@@ -1,0 +1,1823 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/tcg-plugins.rst:9
+msgid "QEMU TCG Plugins"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:13
+msgid "Writing plugins"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:16
+msgid "API versioning"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:18
+msgid ""
+"This is a new feature for QEMU and it does allow people to develop out-of-"
+"tree plugins that can be dynamically linked into a running QEMU process. "
+"However the project reserves the right to change or break the API should it "
+"need to do so. The best way to avoid this is to submit your plugin upstream "
+"so they can be updated if/when the API changes."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:24
+msgid ""
+"All plugins need to declare a symbol which exports the plugin API version "
+"they were built against. This can be done simply by::"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:27
+msgid "QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:29
+msgid ""
+"The core code will refuse to load a plugin that doesn't export a "
+"``qemu_plugin_version`` symbol or if plugin version is outside of QEMU's "
+"supported range of API versions."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:33
+msgid ""
+"Additionally the ``qemu_info_t`` structure which is passed to the "
+"``qemu_plugin_install`` method of a plugin will detail the minimum and "
+"current API versions supported by QEMU. The API version will be incremented "
+"if new APIs are added. The minimum API version will be incremented if "
+"existing APIs are changed or removed."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:40
+msgid "Lifetime of the query handle"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:42
+msgid ""
+"Each callback provides an opaque anonymous information handle which can "
+"usually be further queried to find out information about a translation, "
+"instruction or operation. The handles themselves are only valid during the "
+"lifetime of the callback so it is important that any information that is "
+"needed is extracted during the callback and saved by the plugin."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:50
+msgid "Plugin life cycle"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:52
+msgid ""
+"First the plugin is loaded and the public qemu_plugin_install function is "
+"called. The plugin will then register callbacks for various plugin events. "
+"Generally plugins will register a handler for the *atexit* if they want to "
+"dump a summary of collected information once the program/system has finished "
+"running."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:58
+msgid ""
+"When a registered event occurs the plugin callback is invoked. The callbacks "
+"may provide additional information. In the case of a translation event the "
+"plugin has an option to enumerate the instructions in a block of "
+"instructions and optionally register callbacks to some or all instructions "
+"when they are executed."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:64
+msgid ""
+"There is also a facility to add inline instructions doing various "
+"operations, like adding or storing an immediate value. It is also possible "
+"to execute a callback conditionally, with condition being evaluated inline. "
+"All those inline operations are associated to a ``scoreboard``, which is a "
+"thread-local storage automatically expanded when new cores/threads are "
+"created and that can be accessed/modified in a thread-safe way without any "
+"lock needed. Combining inline operations and conditional callbacks offer a "
+"more efficient way to instrument binaries, compared to classic callbacks."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:73
+msgid ""
+"Finally when QEMU exits all the registered *atexit* callbacks are invoked."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:77
+msgid "Exposure of QEMU internals"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:79
+msgid ""
+"The plugin architecture actively avoids leaking implementation details about "
+"how QEMU's translation works to the plugins. While there are conceptions "
+"such as translation time and translation blocks the details are opaque to "
+"plugins. The plugin is able to query select details of instructions and "
+"system configuration only through the exported *qemu_plugin* functions."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:86
+msgid "However the following assumptions can be made:"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:89
+msgid "Translation Blocks"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:91
+msgid ""
+"All code will go through a translation phase although not all translations "
+"will be necessarily be executed. You need to instrument actual executions to "
+"track what is happening."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:95
+msgid ""
+"It is quite normal to see the same address translated multiple times. If you "
+"want to track the code in system emulation you should examine the underlying "
+"physical address (``qemu_plugin_insn_haddr``) to take into account the "
+"effects of virtual memory although if the system does paging this will "
+"change too."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:101
+msgid ""
+"Not all instructions in a block will always execute so if its important to "
+"track individual instruction execution you need to instrument them directly. "
+"However asynchronous interrupts will not change control flow mid-block."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:107
+msgid "Instructions"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:109
+msgid ""
+"Instruction instrumentation runs before the instruction executes. You can be "
+"can be sure the instruction will be dispatched, but you can't be sure it "
+"will complete. Generally this will be because of a synchronous exception (e."
+"g. SIGILL) triggered by the instruction attempting to execute. If you want "
+"to be sure you will need to instrument the next instruction as well. See the "
+"``execlog.c`` plugin for examples of how to track this and finalise details "
+"after execution."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:118
+msgid "Memory Accesses"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:120
+msgid ""
+"Memory callbacks are called after a successful load or store. Unsuccessful "
+"operations (i.e. faults) will not be visible to memory instrumentation "
+"although the execution side effects can be observed (e.g. entering a "
+"exception handler)."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:126
+msgid "System Idle and Resume States"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:128
+msgid ""
+"The ``qemu_plugin_register_vcpu_idle_cb`` and "
+"``qemu_plugin_register_vcpu_resume_cb`` functions can be used to track when "
+"CPUs go into and return from sleep states when waiting for external I/O. Be "
+"aware though that these may occur less frequently than in real HW due to the "
+"inefficiencies of emulation giving less chance for the CPU to idle."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:136
+msgid "Internals"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:139
+msgid "Locking"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:141
+msgid ""
+"We have to ensure we cannot deadlock, particularly under MTTCG. For this we "
+"acquire a lock when called from plugin code. We also keep the list of "
+"callbacks under RCU so that we do not have to hold the lock when calling the "
+"callbacks. This is also for performance, since some callbacks (e.g. memory "
+"access callbacks) might be called very frequently."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:148
+msgid ""
+"A consequence of this is that we keep our own list of CPUs, so that we do "
+"not have to worry about locking order wrt cpu_list_lock."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:150
+msgid ""
+"Use a recursive lock, since we can get registration calls from callbacks."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:153
+msgid ""
+"As a result registering/unregistering callbacks is \"slow\", since it takes "
+"a lock. But this is very infrequent; we want performance when calling (or "
+"not calling) callbacks, not when registering them. Using RCU is great for "
+"this."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:158
+msgid ""
+"We support the uninstallation of a plugin at any time (e.g. from plugin "
+"callbacks). This allows plugins to remove themselves if they no longer want "
+"to instrument the code. This operation is asynchronous which means callbacks "
+"may still occur after the uninstall operation is requested. The plugin isn't "
+"completely uninstalled until the safe work has executed while all vCPUs are "
+"quiescent."
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:166
+msgid "Plugin API"
+msgstr ""
+
+#: ../../../devel/tcg-plugins.rst:168
+msgid ""
+"The following API is generated from the inline documentation in ``include/"
+"qemu/qemu-plugin.h``. Please ensure any updates to the API include the full "
+"kernel-doc annotations."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:41
+msgid "Unique plugin ID"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:75
+msgid "system information for plugins"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:77
+msgid "**Definition**"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:81
+msgid ""
+"struct qemu_info_t {\n"
+"  const char *target_name;\n"
+"  struct {\n"
+"    int min;\n"
+"    int cur;\n"
+"  } version;\n"
+"  bool system_emulation;\n"
+"  union {\n"
+"    struct {\n"
+"      int smp_vcpus;\n"
+"      int max_vcpus;\n"
+"    } system;\n"
+"  };\n"
+"};"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:96
+msgid "**Members**"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:82
+msgid "``target_name``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:83
+msgid "string describing architecture"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:0
+msgid "``version``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:1
+msgid "minimum and current plugin API level"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:0
+msgid "``system_emulation``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:1
+msgid "is this a full system emulation?"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:3
+msgid "``{unnamed_union}``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:4
+msgid "anonymous"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:0
+msgid "``system``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:1
+msgid "information relevant to system emulation"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:4
+#: ../../../../include/qemu/qemu-plugin.h:110
+#: ../../../../include/qemu/qemu-plugin.h:128
+#: ../../../../include/qemu/qemu-plugin.h:162
+#: ../../../../include/qemu/qemu-plugin.h:176
+#: ../../../../include/qemu/qemu-plugin.h:190
+#: ../../../../include/qemu/qemu-plugin.h:203
+#: ../../../../include/qemu/qemu-plugin.h:216
+#: ../../../../include/qemu/qemu-plugin.h:227
+#: ../../../../include/qemu/qemu-plugin.h:243
+#: ../../../../include/qemu/qemu-plugin.h:332
+#: ../../../../include/qemu/qemu-plugin.h:350
+#: ../../../../include/qemu/qemu-plugin.h:368
+#: ../../../../include/qemu/qemu-plugin.h:403
+#: ../../../../include/qemu/qemu-plugin.h:419
+#: ../../../../include/qemu/qemu-plugin.h:437
+#: ../../../../include/qemu/qemu-plugin.h:461
+#: ../../../../include/qemu/qemu-plugin.h:493
+#: ../../../../include/qemu/qemu-plugin.h:509
+#: ../../../../include/qemu/qemu-plugin.h:545
+#: ../../../../include/qemu/qemu-plugin.h:599
+#: ../../../../include/qemu/qemu-plugin.h:621
+#: ../../../../include/qemu/qemu-plugin.h:631
+#: ../../../../include/qemu/qemu-plugin.h:666
+#: ../../../../include/qemu/qemu-plugin.h:693
+#: ../../../../include/qemu/qemu-plugin.h:712
+#: ../../../../include/qemu/qemu-plugin.h:721
+#: ../../../../include/qemu/qemu-plugin.h:755
+#: ../../../../include/qemu/qemu-plugin.h:765
+#: ../../../../include/qemu/qemu-plugin.h:776
+#: ../../../../include/qemu/qemu-plugin.h:794
+#: ../../../../include/qemu/qemu-plugin.h:824
+#: ../../../../include/qemu/qemu-plugin.h:838
+#: ../../../../include/qemu/qemu-plugin.h:849
+#: ../../../../include/qemu/qemu-plugin.h:858
+#: ../../../../include/qemu/qemu-plugin.h:867
+#: ../../../../include/qemu/qemu-plugin.h:892
+#: ../../../../include/qemu/qemu-plugin.h:903
+#: ../../../../include/qemu/qemu-plugin.h:924
+#: ../../../../include/qemu/qemu-plugin.h:939
+#: ../../../../include/qemu/qemu-plugin.h:957
+msgid "**Description**"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:77
+msgid ""
+"This structure provides for some limited information about the system to "
+"allow the plugin to make decisions on how to proceed. For example it might "
+"only be suitable for running on some guest architectures or when under full "
+"system emulation."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:104
+msgid "Install a plugin"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:106
+#: ../../../../include/qemu/qemu-plugin.h:132
+#: ../../../../include/qemu/qemu-plugin.h:140
+#: ../../../../include/qemu/qemu-plugin.h:148
+#: ../../../../include/qemu/qemu-plugin.h:156
+#: ../../../../include/qemu/qemu-plugin.h:160
+#: ../../../../include/qemu/qemu-plugin.h:174
+#: ../../../../include/qemu/qemu-plugin.h:188
+#: ../../../../include/qemu/qemu-plugin.h:201
+#: ../../../../include/qemu/qemu-plugin.h:214
+#: ../../../../include/qemu/qemu-plugin.h:225
+#: ../../../../include/qemu/qemu-plugin.h:327
+#: ../../../../include/qemu/qemu-plugin.h:330
+#: ../../../../include/qemu/qemu-plugin.h:346
+#: ../../../../include/qemu/qemu-plugin.h:361
+#: ../../../../include/qemu/qemu-plugin.h:399
+#: ../../../../include/qemu/qemu-plugin.h:415
+#: ../../../../include/qemu/qemu-plugin.h:430
+#: ../../../../include/qemu/qemu-plugin.h:457
+#: ../../../../include/qemu/qemu-plugin.h:473
+#: ../../../../include/qemu/qemu-plugin.h:482
+#: ../../../../include/qemu/qemu-plugin.h:491
+#: ../../../../include/qemu/qemu-plugin.h:506
+#: ../../../../include/qemu/qemu-plugin.h:518
+#: ../../../../include/qemu/qemu-plugin.h:527
+#: ../../../../include/qemu/qemu-plugin.h:536
+#: ../../../../include/qemu/qemu-plugin.h:555
+#: ../../../../include/qemu/qemu-plugin.h:563
+#: ../../../../include/qemu/qemu-plugin.h:571
+#: ../../../../include/qemu/qemu-plugin.h:579
+#: ../../../../include/qemu/qemu-plugin.h:588
+#: ../../../../include/qemu/qemu-plugin.h:597
+#: ../../../../include/qemu/qemu-plugin.h:620
+#: ../../../../include/qemu/qemu-plugin.h:630
+#: ../../../../include/qemu/qemu-plugin.h:654
+#: ../../../../include/qemu/qemu-plugin.h:661
+#: ../../../../include/qemu/qemu-plugin.h:688
+#: ../../../../include/qemu/qemu-plugin.h:707
+#: ../../../../include/qemu/qemu-plugin.h:719
+#: ../../../../include/qemu/qemu-plugin.h:754
+#: ../../../../include/qemu/qemu-plugin.h:764
+#: ../../../../include/qemu/qemu-plugin.h:774
+#: ../../../../include/qemu/qemu-plugin.h:791
+#: ../../../../include/qemu/qemu-plugin.h:812
+#: ../../../../include/qemu/qemu-plugin.h:819
+#: ../../../../include/qemu/qemu-plugin.h:833
+#: ../../../../include/qemu/qemu-plugin.h:844
+#: ../../../../include/qemu/qemu-plugin.h:853
+#: ../../../../include/qemu/qemu-plugin.h:862
+#: ../../../../include/qemu/qemu-plugin.h:887
+#: ../../../../include/qemu/qemu-plugin.h:899
+#: ../../../../include/qemu/qemu-plugin.h:921
+#: ../../../../include/qemu/qemu-plugin.h:937
+#: ../../../../include/qemu/qemu-plugin.h:948
+#: ../../../../include/qemu/qemu-plugin.h:955
+#: ../../../../include/qemu/qemu-plugin.h:973
+#: ../../../../include/qemu/qemu-plugin.h:983
+#: ../../../../include/qemu/qemu-plugin.h:991
+#: ../../../../include/qemu/qemu-plugin.h:1001
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:108
+#: ../../../../include/qemu/qemu-plugin.h:134
+#: ../../../../include/qemu/qemu-plugin.h:142
+#: ../../../../include/qemu/qemu-plugin.h:150
+#: ../../../../include/qemu/qemu-plugin.h:162
+#: ../../../../include/qemu/qemu-plugin.h:176
+#: ../../../../include/qemu/qemu-plugin.h:190
+#: ../../../../include/qemu/qemu-plugin.h:203
+#: ../../../../include/qemu/qemu-plugin.h:216
+#: ../../../../include/qemu/qemu-plugin.h:227
+#: ../../../../include/qemu/qemu-plugin.h:329
+#: ../../../../include/qemu/qemu-plugin.h:332
+#: ../../../../include/qemu/qemu-plugin.h:776
+#: ../../../../include/qemu/qemu-plugin.h:793
+msgid "``qemu_plugin_id_t id``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:105
+#: ../../../../include/qemu/qemu-plugin.h:159
+#: ../../../../include/qemu/qemu-plugin.h:173
+msgid "this plugin's opaque ID"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:107
+msgid "``const qemu_info_t *info``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:106
+msgid "a block describing some details about the guest"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:108
+msgid "``int argc``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:107
+msgid "number of arguments"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:109
+msgid "``char **argv``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:108
+msgid "array of arguments (**argc** elements)"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:110
+msgid ""
+"All plugins must export this symbol which is called when the plugin is first "
+"loaded. Calling qemu_plugin_uninstall() from this function is a bug."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:114
+#: ../../../../include/qemu/qemu-plugin.h:166
+#: ../../../../include/qemu/qemu-plugin.h:265
+msgid "**Note**"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:114
+msgid ""
+"**info** is only live during the call. Copy any information we want to keep. "
+"**argv** remains valid throughout the lifetime of the loaded plugin."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:118
+#: ../../../../include/qemu/qemu-plugin.h:474
+#: ../../../../include/qemu/qemu-plugin.h:483
+#: ../../../../include/qemu/qemu-plugin.h:497
+#: ../../../../include/qemu/qemu-plugin.h:519
+#: ../../../../include/qemu/qemu-plugin.h:528
+#: ../../../../include/qemu/qemu-plugin.h:537
+#: ../../../../include/qemu/qemu-plugin.h:556
+#: ../../../../include/qemu/qemu-plugin.h:564
+#: ../../../../include/qemu/qemu-plugin.h:572
+#: ../../../../include/qemu/qemu-plugin.h:580
+#: ../../../../include/qemu/qemu-plugin.h:589
+msgid "**Return**"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:118
+msgid "0 on successful loading, !0 for an error."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:125
+msgid "**Typedef**: simple callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:128
+#: ../../../../include/qemu/qemu-plugin.h:136
+#: ../../../../include/qemu/qemu-plugin.h:144
+#: ../../../../include/qemu/qemu-plugin.h:152
+#: ../../../../include/qemu/qemu-plugin.h:323
+#: ../../../../include/qemu/qemu-plugin.h:650
+msgid "**Syntax**"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:130
+msgid "``void qemu_plugin_simple_cb_t (qemu_plugin_id_t id)``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:126
+#: ../../../../include/qemu/qemu-plugin.h:134
+#: ../../../../include/qemu/qemu-plugin.h:142
+msgid "the unique qemu_plugin_id_t"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:128
+msgid "This callback passes no information aside from the unique **id**."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:133
+msgid "**Typedef**: callback with user data"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:138
+msgid "``void qemu_plugin_udata_cb_t (qemu_plugin_id_t id, void *userdata)``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:136
+#: ../../../../include/qemu/qemu-plugin.h:152
+#: ../../../../include/qemu/qemu-plugin.h:349
+#: ../../../../include/qemu/qemu-plugin.h:366
+#: ../../../../include/qemu/qemu-plugin.h:418
+#: ../../../../include/qemu/qemu-plugin.h:436
+#: ../../../../include/qemu/qemu-plugin.h:652
+#: ../../../../include/qemu/qemu-plugin.h:665
+#: ../../../../include/qemu/qemu-plugin.h:793
+msgid "``void *userdata``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:135
+#: ../../../../include/qemu/qemu-plugin.h:151
+msgid "a pointer to some user data supplied when the callback was registered."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:141
+#: ../../../../include/qemu/qemu-plugin.h:149
+msgid "**Typedef**: vcpu callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:146
+msgid ""
+"``void qemu_plugin_vcpu_simple_cb_t (qemu_plugin_id_t id, unsigned int "
+"vcpu_index)``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:144
+#: ../../../../include/qemu/qemu-plugin.h:158
+#: ../../../../include/qemu/qemu-plugin.h:656
+#: ../../../../include/qemu/qemu-plugin.h:956
+#: ../../../../include/qemu/qemu-plugin.h:974
+#: ../../../../include/qemu/qemu-plugin.h:984
+#: ../../../../include/qemu/qemu-plugin.h:992
+msgid "``unsigned int vcpu_index``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:143
+#: ../../../../include/qemu/qemu-plugin.h:150
+msgid "the current vcpu context"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:154
+msgid ""
+"``void qemu_plugin_vcpu_udata_cb_t (unsigned int vcpu_index, void "
+"*userdata)``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:158
+msgid "Uninstall a plugin"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:161
+#: ../../../../include/qemu/qemu-plugin.h:175
+msgid "``qemu_plugin_simple_cb_t cb``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:160
+msgid "callback to be called once the plugin has been removed"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:162
+msgid ""
+"Do NOT assume that the plugin has been uninstalled once this function "
+"returns. Plugins are uninstalled asynchronously, and therefore the given "
+"plugin receives callbacks until **cb** is called."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:166
+msgid "Calling this function from qemu_plugin_install() is a bug."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:172
+msgid "Reset a plugin"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:174
+msgid "callback to be called once the plugin has been reset"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:176
+msgid "Unregisters all callbacks for the plugin given by **id**."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:178
+msgid ""
+"Do NOT assume that the plugin has been reset once this function returns. "
+"Plugins are reset asynchronously, and therefore the given plugin receives "
+"callbacks until **cb** is called."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:186
+msgid "register a vCPU initialization callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:187
+#: ../../../../include/qemu/qemu-plugin.h:200
+#: ../../../../include/qemu/qemu-plugin.h:213
+#: ../../../../include/qemu/qemu-plugin.h:224
+#: ../../../../include/qemu/qemu-plugin.h:329
+#: ../../../../include/qemu/qemu-plugin.h:773
+#: ../../../../include/qemu/qemu-plugin.h:790
+msgid "plugin ID"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:189
+#: ../../../../include/qemu/qemu-plugin.h:202
+#: ../../../../include/qemu/qemu-plugin.h:215
+#: ../../../../include/qemu/qemu-plugin.h:226
+#: ../../../../include/qemu/qemu-plugin.h:775
+msgid "``qemu_plugin_vcpu_simple_cb_t cb``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:188
+#: ../../../../include/qemu/qemu-plugin.h:201
+#: ../../../../include/qemu/qemu-plugin.h:214
+#: ../../../../include/qemu/qemu-plugin.h:225
+#: ../../../../include/qemu/qemu-plugin.h:330
+#: ../../../../include/qemu/qemu-plugin.h:346
+#: ../../../../include/qemu/qemu-plugin.h:361
+#: ../../../../include/qemu/qemu-plugin.h:415
+#: ../../../../include/qemu/qemu-plugin.h:430
+#: ../../../../include/qemu/qemu-plugin.h:774
+msgid "callback function"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:190
+msgid "The **cb** function is called every time a vCPU is initialized."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:192
+msgid "See also: qemu_plugin_register_vcpu_exit_cb()"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:199
+msgid "register a vCPU exit callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:203
+msgid "The **cb** function is called every time a vCPU exits."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:205
+#: ../../../../include/qemu/qemu-plugin.h:778
+msgid "See also: qemu_plugin_register_vcpu_init_cb()"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:212
+msgid "register a vCPU idle callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:216
+msgid "The **cb** function is called every time a vCPU idles."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:223
+msgid "register a vCPU resume callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:227
+msgid "The **cb** function is called every time a vCPU resumes execution."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:241
+msgid "uint64_t member of an entry in a scoreboard"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:243
+msgid ""
+"This field allows to access a specific uint64_t member in one given entry, "
+"located at a specified offset. Inline operations expect this as entry."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:252
+msgid "type of callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:254
+#: ../../../../include/qemu/qemu-plugin.h:299
+#: ../../../../include/qemu/qemu-plugin.h:387
+msgid "**Constants**"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:256
+msgid "``QEMU_PLUGIN_CB_NO_REGS``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:257
+msgid "callback does not access the CPU's regs"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:259
+msgid "``QEMU_PLUGIN_CB_R_REGS``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:260
+msgid "callback reads the CPU's regs"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:262
+msgid "``QEMU_PLUGIN_CB_RW_REGS``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:263
+msgid "callback reads and writes the CPU's regs"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:258
+msgid ""
+"currently QEMU_PLUGIN_CB_RW_REGS is unused, plugins cannot change system "
+"register state."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:297
+#: ../../../../include/qemu/qemu-plugin.h:362
+#: ../../../../include/qemu/qemu-plugin.h:432
+msgid "condition to enable callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:301
+msgid "``QEMU_PLUGIN_COND_NEVER``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:302
+msgid "false"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:304
+msgid "``QEMU_PLUGIN_COND_ALWAYS``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:305
+msgid "true"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:307
+msgid "``QEMU_PLUGIN_COND_EQ``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:308
+msgid "is equal?"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:310
+msgid "``QEMU_PLUGIN_COND_NE``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:311
+msgid "is not equal?"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:313
+msgid "``QEMU_PLUGIN_COND_LT``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:314
+msgid "is less than?"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:316
+msgid "``QEMU_PLUGIN_COND_LE``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:317
+msgid "is less than or equal?"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:319
+msgid "``QEMU_PLUGIN_COND_GT``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:320
+msgid "is greater than?"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:322
+msgid "``QEMU_PLUGIN_COND_GE``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:323
+msgid "is greater than or equal?"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:320
+msgid "**Typedef**: translation callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:325
+msgid ""
+"``void qemu_plugin_vcpu_tb_trans_cb_t (qemu_plugin_id_t id, struct "
+"qemu_plugin_tb *tb)``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:321
+msgid "unique plugin id"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:323
+#: ../../../../include/qemu/qemu-plugin.h:348
+#: ../../../../include/qemu/qemu-plugin.h:363
+#: ../../../../include/qemu/qemu-plugin.h:401
+msgid "``struct qemu_plugin_tb *tb``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:322
+msgid "opaque handle used for querying and instrumenting a block."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:328
+msgid "register a translate cb"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:331
+msgid "``qemu_plugin_vcpu_tb_trans_cb_t cb``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:332
+msgid ""
+"The **cb** function is called every time a translation occurs. The **cb** "
+"function is passed an opaque qemu_plugin_type which it can query for "
+"additional information including the list of translated instructions. At "
+"this point the plugin can register further callbacks to be triggered when "
+"the block or individual instruction executes."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:344
+msgid "register execution callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:345
+#: ../../../../include/qemu/qemu-plugin.h:360
+#: ../../../../include/qemu/qemu-plugin.h:398
+msgid "the opaque qemu_plugin_tb handle for the translation"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:347
+#: ../../../../include/qemu/qemu-plugin.h:362
+#: ../../../../include/qemu/qemu-plugin.h:416
+#: ../../../../include/qemu/qemu-plugin.h:431
+msgid "``qemu_plugin_vcpu_udata_cb_t cb``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:348
+#: ../../../../include/qemu/qemu-plugin.h:363
+#: ../../../../include/qemu/qemu-plugin.h:417
+#: ../../../../include/qemu/qemu-plugin.h:432
+#: ../../../../include/qemu/qemu-plugin.h:663
+msgid "``enum qemu_plugin_cb_flags flags``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:347
+#: ../../../../include/qemu/qemu-plugin.h:365
+#: ../../../../include/qemu/qemu-plugin.h:416
+#: ../../../../include/qemu/qemu-plugin.h:431
+msgid "does the plugin read or write the CPU's registers?"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:348
+#: ../../../../include/qemu/qemu-plugin.h:366
+#: ../../../../include/qemu/qemu-plugin.h:417
+#: ../../../../include/qemu/qemu-plugin.h:435
+msgid "any plugin data to pass to the **cb**?"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:350
+msgid "The **cb** function is called every time a translated unit executes."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:359
+msgid "register conditional callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:367
+#: ../../../../include/qemu/qemu-plugin.h:433
+msgid "``enum qemu_plugin_cond cond``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:364
+#: ../../../../include/qemu/qemu-plugin.h:401
+#: ../../../../include/qemu/qemu-plugin.h:434
+#: ../../../../include/qemu/qemu-plugin.h:459
+#: ../../../../include/qemu/qemu-plugin.h:691
+#: ../../../../include/qemu/qemu-plugin.h:975
+#: ../../../../include/qemu/qemu-plugin.h:985
+#: ../../../../include/qemu/qemu-plugin.h:993
+#: ../../../../include/qemu/qemu-plugin.h:1003
+msgid "``qemu_plugin_u64 entry``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:363
+#: ../../../../include/qemu/qemu-plugin.h:433
+msgid "first operand for condition"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:365
+#: ../../../../include/qemu/qemu-plugin.h:402
+#: ../../../../include/qemu/qemu-plugin.h:435
+#: ../../../../include/qemu/qemu-plugin.h:460
+#: ../../../../include/qemu/qemu-plugin.h:692
+msgid "``uint64_t imm``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:364
+#: ../../../../include/qemu/qemu-plugin.h:434
+msgid "second operand for condition"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:368
+msgid ""
+"The **cb** function is called when a translated unit executes if entry "
+"**cond** imm is true. If condition is QEMU_PLUGIN_COND_ALWAYS, condition is "
+"never interpreted and this function is equivalent to "
+"qemu_plugin_register_vcpu_tb_exec_cb. If condition QEMU_PLUGIN_COND_NEVER, "
+"condition is never interpreted and callback is never installed."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:385
+msgid "describes an inline op"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:389
+msgid "``QEMU_PLUGIN_INLINE_ADD_U64``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:390
+msgid "add an immediate value uint64_t"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:392
+msgid "``QEMU_PLUGIN_INLINE_STORE_U64``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:393
+msgid "store an immediate value uint64_t"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:397
+msgid "execution inline op"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:400
+#: ../../../../include/qemu/qemu-plugin.h:458
+#: ../../../../include/qemu/qemu-plugin.h:690
+msgid "``enum qemu_plugin_op op``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:399
+#: ../../../../include/qemu/qemu-plugin.h:457
+msgid "the type of qemu_plugin_op (e.g. ADD_U64)"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:400
+#: ../../../../include/qemu/qemu-plugin.h:458
+#: ../../../../include/qemu/qemu-plugin.h:690
+msgid "entry to run op"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:401
+#: ../../../../include/qemu/qemu-plugin.h:459
+msgid "the op data (e.g. 1)"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:403
+msgid "Insert an inline op on a given scoreboard entry."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:413
+msgid "register insn execution cb"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:417
+#: ../../../../include/qemu/qemu-plugin.h:432
+#: ../../../../include/qemu/qemu-plugin.h:459
+#: ../../../../include/qemu/qemu-plugin.h:663
+#: ../../../../include/qemu/qemu-plugin.h:690
+msgid "``struct qemu_plugin_insn *insn``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:414
+#: ../../../../include/qemu/qemu-plugin.h:429
+#: ../../../../include/qemu/qemu-plugin.h:456
+msgid "the opaque qemu_plugin_insn handle for an instruction"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:419
+msgid "The **cb** function is called every time an instruction is executed"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:428
+msgid "conditional insn execution cb"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:437
+msgid ""
+"The **cb** function is called when an instruction executes if entry **cond** "
+"imm is true. If condition is QEMU_PLUGIN_COND_ALWAYS, condition is never "
+"interpreted and this function is equivalent to "
+"qemu_plugin_register_vcpu_insn_exec_cb. If condition QEMU_PLUGIN_COND_NEVER, "
+"condition is never interpreted and callback is never installed."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:455
+msgid "insn exec inline op"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:461
+msgid "Insert an inline op to every time an instruction executes."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:471
+msgid "query helper for number of insns in TB"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:475
+#: ../../../../include/qemu/qemu-plugin.h:484
+#: ../../../../include/qemu/qemu-plugin.h:493
+msgid "``const struct qemu_plugin_tb *tb``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:472
+#: ../../../../include/qemu/qemu-plugin.h:481
+#: ../../../../include/qemu/qemu-plugin.h:490
+msgid "opaque handle to TB passed to callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:474
+msgid "number of instructions in this block"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:480
+msgid "query helper for vaddr of TB start"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:483
+msgid "virtual address of block start"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:489
+msgid "retrieve handle for instruction"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:492
+msgid "``size_t idx``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:491
+msgid "instruction number, 0 indexed"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:493
+msgid ""
+"The returned handle can be used in follow up helper queries as well as when "
+"instrumenting an instruction. It is only valid for the lifetime of the "
+"callback."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:497
+msgid "opaque handle to instruction"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:504
+msgid "copy instruction data"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:508
+#: ../../../../include/qemu/qemu-plugin.h:520
+#: ../../../../include/qemu/qemu-plugin.h:529
+#: ../../../../include/qemu/qemu-plugin.h:538
+#: ../../../../include/qemu/qemu-plugin.h:756
+#: ../../../../include/qemu/qemu-plugin.h:766
+msgid "``const struct qemu_plugin_insn *insn``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:505
+#: ../../../../include/qemu/qemu-plugin.h:517
+#: ../../../../include/qemu/qemu-plugin.h:526
+#: ../../../../include/qemu/qemu-plugin.h:535
+msgid "opaque instruction handle from qemu_plugin_tb_get_insn()"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:507
+msgid "``void *dest``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:506
+msgid "destination into which data is copied"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:508
+#: ../../../../include/qemu/qemu-plugin.h:902
+msgid "``size_t len``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:507
+msgid "length of dest"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:509
+msgid "Returns the number of bytes copied, minimum of **len** and insn size."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:516
+msgid "return size of instruction"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:519
+msgid "size of instruction in bytes"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:525
+msgid "return vaddr of instruction"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:528
+msgid "virtual address of instruction"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:534
+msgid "return hardware addr of instruction"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:537
+msgid "hardware (physical) target address of instruction"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:543
+#: ../../../../include/qemu/qemu-plugin.h:554
+#: ../../../../include/qemu/qemu-plugin.h:562
+#: ../../../../include/qemu/qemu-plugin.h:570
+#: ../../../../include/qemu/qemu-plugin.h:578
+#: ../../../../include/qemu/qemu-plugin.h:587
+msgid "opaque memory transaction handle"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:545
+msgid ""
+"This can be further queried using the qemu_plugin_mem_* query functions."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:553
+msgid "get size of access"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:557
+#: ../../../../include/qemu/qemu-plugin.h:565
+#: ../../../../include/qemu/qemu-plugin.h:573
+#: ../../../../include/qemu/qemu-plugin.h:581
+#: ../../../../include/qemu/qemu-plugin.h:590
+#: ../../../../include/qemu/qemu-plugin.h:599
+#: ../../../../include/qemu/qemu-plugin.h:650
+msgid "``qemu_plugin_meminfo_t info``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:556
+msgid "size of access in ^2 (0=byte, 1=16bit, 2=32bit etc...)"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:561
+msgid "was the access sign extended"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:564
+#: ../../../../include/qemu/qemu-plugin.h:572
+#: ../../../../include/qemu/qemu-plugin.h:580
+msgid "true if it was, otherwise false"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:569
+msgid "was the access big endian"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:577
+msgid "was the access a store"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:586
+msgid "return last value loaded/stored"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:589
+msgid "memory value"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:595
+msgid "return handle for memory operation"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:596
+msgid "opaque memory info structure"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:598
+#: ../../../../include/qemu/qemu-plugin.h:651
+msgid "``uint64_t vaddr``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:597
+msgid "the virtual address of the memory operation"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:599
+msgid ""
+"For system emulation returns a qemu_plugin_hwaddr handle to query details "
+"about the actual physical address backing the virtual address. For linux-"
+"user guests it just returns NULL."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:603
+msgid ""
+"This handle is *only* valid for the duration of the callback. Any "
+"information about the handle should be recovered before the callback returns."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:618
+msgid "query whether memory operation is IO"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:622
+#: ../../../../include/qemu/qemu-plugin.h:632
+msgid "``const struct qemu_plugin_hwaddr *haddr``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:619
+#: ../../../../include/qemu/qemu-plugin.h:629
+msgid "address handle from qemu_plugin_get_hwaddr()"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:621
+msgid ""
+"Returns true if the handle's memory operation is to memory-mapped IO, or "
+"false if it is to RAM"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:628
+msgid "query physical address for memory operation"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:631
+msgid "Returns the physical address associated with the memory operation"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:633
+msgid ""
+"Note that the returned physical address may not be unique if you are dealing "
+"with multiple address spaces."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:647
+msgid "**Typedef**: memory callback function type"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:652
+msgid ""
+"``void qemu_plugin_vcpu_mem_cb_t (unsigned int vcpu_index, "
+"qemu_plugin_meminfo_t info, uint64_t vaddr, void *userdata)``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:648
+msgid "the executing vCPU"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:649
+msgid "an opaque handle for further queries about the memory"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:650
+msgid "the virtual address of the transaction"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:651
+msgid "any user data attached to the callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:659
+msgid "register memory access callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:660
+#: ../../../../include/qemu/qemu-plugin.h:687
+msgid "handle for instruction to instrument"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:662
+msgid "``qemu_plugin_vcpu_mem_cb_t cb``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:661
+msgid "callback of type qemu_plugin_vcpu_mem_cb_t"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:662
+msgid "(currently unused) callback flags"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:664
+#: ../../../../include/qemu/qemu-plugin.h:689
+msgid "``enum qemu_plugin_mem_rw rw``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:663
+msgid "monitor reads, writes or both"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:664
+msgid "opaque pointer for userdata"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:666
+msgid ""
+"This registers a full callback for every memory access generated by an "
+"instruction. If the instruction doesn't access memory no callback will be "
+"made."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:670
+msgid ""
+"The callback reports the vCPU the access took place on, the virtual address "
+"of the access and a handle for further queries. The user can attach some "
+"userdata to the callback for additional purposes."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:674
+msgid ""
+"Other execution threads will continue to execute during the callback so the "
+"plugin is responsible for ensuring it doesn't get confused by making "
+"appropriate use of locking if required."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:686
+msgid "inline op for mem access"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:688
+msgid "apply to reads, writes or both"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:689
+msgid "the op, of type qemu_plugin_op"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:691
+msgid "immediate data for **op**"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:693
+msgid ""
+"This registers a inline op every memory access generated by the instruction."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:705
+msgid "request the ability to control time"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:709
+#: ../../../../include/qemu/qemu-plugin.h:835
+#: ../../../../include/qemu/qemu-plugin.h:846
+#: ../../../../include/qemu/qemu-plugin.h:855
+#: ../../../../include/qemu/qemu-plugin.h:864
+#: ../../../../include/qemu/qemu-plugin.h:889
+msgid "``void``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:710
+#: ../../../../include/qemu/qemu-plugin.h:836
+#: ../../../../include/qemu/qemu-plugin.h:847
+#: ../../../../include/qemu/qemu-plugin.h:856
+#: ../../../../include/qemu/qemu-plugin.h:865
+#: ../../../../include/qemu/qemu-plugin.h:890
+msgid "no arguments"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:707
+msgid ""
+"This grants the plugin the ability to control system time. Only one plugin "
+"can control time so if multiple plugins request the ability all but the "
+"first will fail."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:711
+msgid "Returns an opaque handle or NULL if fails"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:717
+msgid "update system emulation time"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:721
+msgid "``const void *handle``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:718
+msgid "opaque handle returned by qemu_plugin_request_time_control()"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:720
+msgid "``int64_t time``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:719
+msgid "time in nanoseconds"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:721
+msgid ""
+"This allows an appropriately authorised plugin (i.e. holding the time "
+"control handle) to move system time forward to **time**. For user-mode "
+"emulation the time is not changed by this as all reported time comes from "
+"the host kernel."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:726
+msgid "Start time is 0."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:752
+msgid "return disassembly string for instruction"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:753
+#: ../../../../include/qemu/qemu-plugin.h:763
+msgid "instruction reference"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:755
+msgid "Returns an allocated string containing the disassembly"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:762
+msgid "best effort symbol lookup"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:765
+msgid ""
+"Return a static string referring to the symbol. This is dependent on the "
+"binary QEMU is running having provided a symbol table."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:772
+msgid "iterate over the existing vCPU"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:776
+msgid "The **cb** function is called once for each existing vCPU."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:789
+msgid "register exit callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:792
+msgid "``qemu_plugin_udata_cb_t cb``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:791
+msgid "callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:792
+msgid "user data for callback"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:794
+msgid ""
+"The **cb** function is called once execution has finished. Plugins should be "
+"able to free all their resources at this point much like after a reset/"
+"uninstall callback is called."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:798
+msgid ""
+"In user-mode it is possible a few un-instrumented instructions from child "
+"threads may run before the host kernel reaps the threads."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:810
+msgid "output string via QEMU's logging system"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:814
+msgid "``const char *string``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:811
+msgid "a string"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:817
+msgid ""
+"parses a boolean argument in the form of \"<argname>=[on|yes|true|off|no|"
+"false]\""
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:821
+msgid "``const char *name``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:820
+msgid "argument name, the part before the equals sign"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:822
+msgid "``const char *val``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:821
+msgid "argument value, what's after the equals sign"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:823
+msgid "``bool *ret``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:822
+msgid "output return value"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:824
+msgid ""
+"returns true if the combination **name**=**val** parses correctly to a "
+"boolean argument, and false otherwise"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:831
+msgid "path to binary file being executed"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:833
+msgid ""
+"Return a string representing the path to the binary. For user-mode this is "
+"the main executable. For system emulation we currently return NULL. The user "
+"should g_free() the string once no longer needed."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:842
+msgid "returns start of text segment"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:844
+msgid ""
+"Returns the nominal start address of the main text segment in user-mode. "
+"Currently returns 0 for system emulation."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:851
+msgid "returns end of text segment"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:853
+msgid ""
+"Returns the nominal end address of the main text segment in user-mode. "
+"Currently returns 0 for system emulation."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:860
+msgid "returns start address for module"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:862
+msgid ""
+"Returns the nominal entry address of the main text segment in user-mode. "
+"Currently returns 0 for system emulation."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:872
+msgid "register descriptions"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:885
+msgid "return register list for current vCPU"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:887
+msgid ""
+"Returns a potentially empty GArray of qemu_plugin_reg_descriptor. Caller "
+"frees the array (but not the const strings)."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:890
+msgid ""
+"Should be used from a qemu_plugin_register_vcpu_init_cb() callback after the "
+"vCPU is initialised, i.e. in the vCPU context."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:897
+msgid "read from memory using a virtual address"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:901
+msgid "``uint64_t addr``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:899
+msgid "A virtual address to read from"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:901
+msgid "``GByteArray *data``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:900
+msgid "A byte array to store data into"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:901
+msgid "The number of bytes to read, starting from **addr**"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:903
+msgid ""
+"**len** bytes of data is read starting at **addr** and stored into **data**. "
+"If **data** is not large enough to hold **len** bytes, it will be expanded "
+"to the necessary size, reallocating if necessary. **len** must be greater "
+"than 0."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:907
+msgid ""
+"This function does not ensure writes are flushed prior to reading, so "
+"callers should take care when calling this function in plugin callbacks to "
+"avoid attempting to read data which may not yet be written and should use "
+"the memory callback API instead."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:912
+msgid "Returns true on success and false on failure."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:919
+msgid "read register for current vCPU"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:923
+msgid "``struct qemu_plugin_register *handle``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:921
+msgid "a **qemu_plugin_reg_handle** handle"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:923
+msgid "``GByteArray *buf``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:922
+msgid "A GByteArray for the data owned by the plugin"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:924
+msgid ""
+"This function is only available in a context that register read access is "
+"explicitly requested via the QEMU_PLUGIN_CB_R_REGS flag."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:927
+msgid ""
+"Returns the size of the read register. The content of **buf** is in target "
+"byte order. On failure returns -1."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:935
+msgid "alloc a new scoreboard"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:939
+msgid "``size_t element_size``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:937
+msgid "size (in bytes) for one entry"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:939
+msgid ""
+"Returns a pointer to a new scoreboard. It must be freed using "
+"qemu_plugin_scoreboard_free."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:946
+msgid "free a scoreboard"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:950
+#: ../../../../include/qemu/qemu-plugin.h:957
+msgid "``struct qemu_plugin_scoreboard *score``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:947
+msgid "scoreboard to free"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:953
+msgid "get pointer to an entry of a scoreboard"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:954
+msgid "scoreboard to query"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:955
+#: ../../../../include/qemu/qemu-plugin.h:973
+#: ../../../../include/qemu/qemu-plugin.h:983
+#: ../../../../include/qemu/qemu-plugin.h:991
+msgid "entry index"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:957
+msgid ""
+"Returns address of entry of a scoreboard matching a given vcpu_index. This "
+"address can be modified later if scoreboard is resized."
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:971
+msgid "add a value to a qemu_plugin_u64 for a given vcpu"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:972
+#: ../../../../include/qemu/qemu-plugin.h:982
+#: ../../../../include/qemu/qemu-plugin.h:990
+msgid "entry to query"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:975
+msgid "``uint64_t added``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:974
+msgid "value to add"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:981
+msgid "get value of a qemu_plugin_u64 for a given vcpu"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:989
+msgid "set value of a qemu_plugin_u64 for a given vcpu"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:993
+msgid "``uint64_t val``"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:992
+msgid "new value"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:999
+msgid "return sum of all vcpu entries in a scoreboard"
+msgstr ""
+
+#: ../../../../include/qemu/qemu-plugin.h:1000
+msgid "entry to sum"
+msgstr ""
