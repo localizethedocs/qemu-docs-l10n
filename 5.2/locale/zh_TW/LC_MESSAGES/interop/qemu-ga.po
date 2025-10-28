@@ -1,0 +1,241 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 5.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../interop/qemu-ga.rst:2
+msgid "QEMU Guest Agent"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:5
+msgid "Synopsis"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:7
+msgid "**qemu-ga** [*OPTIONS*]"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:10
+msgid "Description"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:12
+msgid ""
+"The QEMU Guest Agent is a daemon intended to be run within virtual machines. "
+"It allows the hypervisor host to perform various operations in the guest, "
+"such as:"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:16
+msgid "get information from the guest"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:17
+msgid "set the guest's system time"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:18
+msgid "read/write a file"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:19
+msgid "sync and freeze the filesystems"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:20
+msgid "suspend the guest"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:21
+msgid "reconfigure guest local processors"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:22
+msgid "set user's password"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:23
+msgid "..."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:25
+msgid ""
+"qemu-ga will read a system configuration file on startup (located at |"
+"CONFDIR|\\ ``/qemu-ga.conf`` by default), then parse remaining configuration "
+"options on the command line. For the same key, the last option wins, but the "
+"lists accumulate (see below for configuration file format)."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:32
+msgid "Options"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:38
+msgid ""
+"Transport method: one of ``unix-listen``, ``virtio-serial``, or ``isa-"
+"serial``, or ``vsock-listen`` (``virtio-serial`` is the default)."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:43
+msgid ""
+"Device/socket path (the default for virtio-serial is ``/dev/virtio-ports/org."
+"qemu.guest_agent.0``, the default for isa-serial is ``/dev/ttyS0``). Socket "
+"addresses for vsock-listen are written as ``<cid>:<port>``."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:50
+msgid "Set log file path (default is stderr)."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:54
+msgid "Specify pid file (default is ``/var/run/qemu-ga.pid``)."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:58
+msgid ""
+"Enable fsfreeze hook. Accepts an optional argument that specifies script to "
+"run on freeze/thaw. Script will be called with 'freeze'/'thaw' arguments "
+"accordingly (default is |CONFDIR|\\ ``/fsfreeze-hook``). If using -F with an "
+"argument, do not follow -F with a space (for example: ``-F/var/run/"
+"fsfreezehook.sh``)."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:67
+msgid ""
+"Specify the directory to store state information (absolute paths only, "
+"default is ``/var/run``)."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:72
+msgid "Log extra debugging information."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:76
+msgid "Print version information and exit."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:80
+msgid "Daemonize after startup (detach from terminal)."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:84
+msgid ""
+"Comma-separated list of RPCs to disable (no spaces, ``?`` to list available "
+"RPCs)."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:89
+msgid ""
+"Dump the configuration in a format compatible with ``qemu-ga.conf`` and exit."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:94
+msgid "Display this help and exit."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:97
+msgid "Files"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:100
+msgid ""
+"The syntax of the ``qemu-ga.conf`` configuration file follows the Desktop "
+"Entry Specification, here is a quick summary: it consists of groups of key-"
+"value pairs, interspersed with comments."
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:106
+msgid ""
+"# qemu-ga configuration sample\n"
+"[general]\n"
+"daemonize = 0\n"
+"pidfile = /var/run/qemu-ga.pid\n"
+"verbose = 0\n"
+"method = virtio-serial\n"
+"path = /dev/virtio-ports/org.qemu.guest_agent.0\n"
+"statedir = /var/run"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:115
+msgid "The list of keys follows the command line options:"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:118
+msgid "Key"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:118
+msgid "Key type"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:120
+msgid "daemon"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:120 ../../../interop/qemu-ga.rst:127
+msgid "boolean"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:121
+msgid "method"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:121 ../../../interop/qemu-ga.rst:122
+#: ../../../interop/qemu-ga.rst:123 ../../../interop/qemu-ga.rst:124
+#: ../../../interop/qemu-ga.rst:125 ../../../interop/qemu-ga.rst:126
+msgid "string"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:122
+msgid "path"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:123
+msgid "logfile"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:124
+msgid "pidfile"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:125
+msgid "fsfreeze-hook"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:126
+msgid "statedir"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:127
+msgid "verbose"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:128
+msgid "blacklist"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:128
+msgid "string list"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:132
+msgid "See also"
+msgstr ""
+
+#: ../../../interop/qemu-ga.rst:134
+msgid ":manpage:`qemu(1)`"
+msgstr ""
