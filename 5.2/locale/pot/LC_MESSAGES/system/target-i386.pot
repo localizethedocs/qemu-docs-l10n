@@ -1,0 +1,750 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 5.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/target-i386.rst:4
+msgid "x86 System emulator"
+msgstr ""
+
+#: ../../../system/target-i386.rst:9
+msgid "Board-specific documentation"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:2
+msgid "Recommendations for KVM CPU model configuration on x86 hosts"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:4
+msgid ""
+"The information that follows provides recommendations for configuring CPU "
+"models on x86 hosts. The goals are to maximise performance, while protecting "
+"guest OS against various CPU hardware flaws, and optionally enabling live "
+"migration between hosts with heterogeneous CPU models."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:11
+msgid "Two ways to configure CPU models with QEMU / KVM"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:13
+msgid "**Host passthrough**"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:15
+msgid ""
+"This passes the host CPU model features, model, stepping, exactly to the "
+"guest. Note that KVM may filter out some host CPU model features if they "
+"cannot be supported with virtualization. Live migration is unsafe when this "
+"mode is used as libvirt / QEMU cannot guarantee a stable CPU is exposed to "
+"the guest across hosts. This is the recommended CPU to use, provided live "
+"migration is not required."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:22
+msgid "**Named model**"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:24
+msgid ""
+"QEMU comes with a number of predefined named CPU models, that typically "
+"refer to specific generations of hardware released by Intel and AMD.  These "
+"allow the guest VMs to have a degree of isolation from the host CPU, "
+"allowing greater flexibility in live migrating between hosts with differing "
+"hardware.  @end table"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:30
+msgid ""
+"In both cases, it is possible to optionally add or remove individual CPU "
+"features, to alter what is presented to the guest by default."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:33
+msgid ""
+"Libvirt supports a third way to configure CPU models known as \"Host "
+"model\".  This uses the QEMU \"Named model\" feature, automatically picking "
+"a CPU model that is similar the host CPU, and then adding extra features to "
+"approximate the host model as closely as possible. This does not guarantee "
+"the CPU family, stepping, etc will precisely match the host CPU, as they "
+"would with \"Host passthrough\", but gives much of the benefit of "
+"passthrough, while making live migration safe."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:43
+msgid "Preferred CPU models for Intel x86 hosts"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:45
+#: ../../../system/cpu-models-x86.rst.inc:208
+msgid ""
+"The following CPU models are preferred for use on Intel hosts. "
+"Administrators / applications are recommended to use the CPU model that "
+"matches the generation of the host CPUs in use. In a deployment with a "
+"mixture of host CPU models between machines, if live migration compatibility "
+"is required, use the newest CPU model that is compatible across all desired "
+"hosts."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:52
+msgid "``Cascadelake-Server``, ``Cascadelake-Server-noTSX``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:53
+msgid ""
+"Intel Xeon Processor (Cascade Lake, 2019), with \"stepping\" levels 6 or 7 "
+"only.  (The Cascade Lake Xeon processor with *stepping 5 is vulnerable to "
+"MDS variants*.)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:57
+msgid ""
+"``Skylake-Server``, ``Skylake-Server-IBRS``, ``Skylake-Server-IBRS-noTSX``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:58
+msgid "Intel Xeon Processor (Skylake, 2016)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:60
+msgid ""
+"``Skylake-Client``, ``Skylake-Client-IBRS``, ``Skylake-Client-noTSX-IBRS}``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:61
+msgid "Intel Core Processor (Skylake, 2015)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:63
+msgid ""
+"``Broadwell``, ``Broadwell-IBRS``, ``Broadwell-noTSX``, ``Broadwell-noTSX-"
+"IBRS``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:64
+msgid "Intel Core Processor (Broadwell, 2014)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:66
+msgid ""
+"``Haswell``, ``Haswell-IBRS``, ``Haswell-noTSX``, ``Haswell-noTSX-IBRS``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:67
+msgid "Intel Core Processor (Haswell, 2013)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:69
+msgid "``IvyBridge``, ``IvyBridge-IBR``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:70
+msgid "Intel Xeon E3-12xx v2 (Ivy Bridge, 2012)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:72
+msgid "``SandyBridge``, ``SandyBridge-IBRS``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:73
+msgid "Intel Xeon E312xx (Sandy Bridge, 2011)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:75
+msgid "``Westmere``, ``Westmere-IBRS``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:76
+msgid "Westmere E56xx/L56xx/X56xx (Nehalem-C, 2010)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:78
+msgid "``Nehalem``, ``Nehalem-IBRS``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:79
+msgid "Intel Core i7 9xx (Nehalem Class Core i7, 2008)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:81
+msgid "``Penryn``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:82
+msgid "Intel Core 2 Duo P9xxx (Penryn Class Core 2, 2007)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:84
+msgid "``Conroe``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:85
+msgid "Intel Celeron_4x0 (Conroe/Merom Class Core 2, 2006)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:89
+msgid "Important CPU features for Intel x86 hosts"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:91
+msgid ""
+"The following are important CPU features that should be used on Intel x86 "
+"hosts, when available in the host CPU. Some of them require explicit "
+"configuration to enable, as they are not included by default in some, or "
+"all, of the named CPU models listed above. In general all of these features "
+"are included if using \"Host passthrough\" or \"Host model\"."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:97
+msgid "``pcid``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:98
+msgid "Recommended to mitigate the cost of the Meltdown (CVE-2017-5754) fix."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:100
+msgid "Included by default in Haswell, Broadwell & Skylake Intel CPU models."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:102
+msgid ""
+"Should be explicitly turned on for Westmere, SandyBridge, and IvyBridge "
+"Intel CPU models. Note that some desktop/mobile Westmere CPUs cannot support "
+"this feature."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:106
+msgid "``spec-ctrl``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:107
+#: ../../../system/cpu-models-x86.rst.inc:244
+msgid "Required to enable the Spectre v2 (CVE-2017-5715) fix."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:109
+msgid "Included by default in Intel CPU models with -IBRS suffix."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:111
+msgid "Must be explicitly turned on for Intel CPU models without -IBRS suffix."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:114
+#: ../../../system/cpu-models-x86.rst.inc:123
+#: ../../../system/cpu-models-x86.rst.inc:133
+#: ../../../system/cpu-models-x86.rst.inc:153
+#: ../../../system/cpu-models-x86.rst.inc:250
+#: ../../../system/cpu-models-x86.rst.inc:259
+msgid ""
+"Requires the host CPU microcode to support this feature before it can be "
+"used for guest CPUs."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:117
+#: ../../../system/cpu-models-x86.rst.inc:253
+msgid "``stibp``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:118
+#: ../../../system/cpu-models-x86.rst.inc:254
+msgid ""
+"Required to enable stronger Spectre v2 (CVE-2017-5715) fixes in some "
+"operating systems."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:121
+#: ../../../system/cpu-models-x86.rst.inc:131
+#: ../../../system/cpu-models-x86.rst.inc:151
+msgid "Must be explicitly turned on for all Intel CPU models."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:126
+msgid "``ssbd``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:127
+msgid "Required to enable the CVE-2018-3639 fix."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:129
+#: ../../../system/cpu-models-x86.rst.inc:139
+#: ../../../system/cpu-models-x86.rst.inc:149
+msgid "Not included by default in any Intel CPU model."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:136
+#: ../../../system/cpu-models-x86.rst.inc:298
+msgid "``pdpe1gb``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:137
+msgid "Recommended to allow guest OS to use 1GB size pages."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:141
+msgid "Should be explicitly turned on for all Intel CPU models."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:143
+#: ../../../system/cpu-models-x86.rst.inc:305
+msgid "Note that not all CPU hardware will support this feature."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:145
+msgid "``md-clear``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:146
+msgid ""
+"Required to confirm the MDS (CVE-2018-12126, CVE-2018-12127, CVE-2018-12130, "
+"CVE-2019-11091) fixes."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:156
+msgid "``mds-no``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:157
+msgid ""
+"Recommended to inform the guest OS that the host is *not* vulnerable to any "
+"of the MDS variants ([MFBDS] CVE-2018-12130, [MLPDS] CVE-2018-12127, [MSBDS] "
+"CVE-2018-12126)."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:161
+msgid ""
+"This is an MSR (Model-Specific Register) feature rather than a CPUID "
+"feature, so it will not appear in the Linux ``/proc/cpuinfo`` in the host or "
+"guest.  Instead, the host kernel uses it to populate the MDS vulnerability "
+"file in ``sysfs``."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:166
+msgid ""
+"So it should only be enabled for VMs if the host reports @code{Not affected} "
+"in the ``/sys/devices/system/cpu/vulnerabilities/mds`` file."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:169
+msgid "``taa-no``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:170
+msgid ""
+"Recommended to inform that the guest that the host is ``not`` vulnerable to "
+"CVE-2019-11135, TSX Asynchronous Abort (TAA)."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:173
+msgid ""
+"This too is an MSR feature, so it does not show up in the Linux ``/proc/"
+"cpuinfo`` in the host or guest."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:176
+msgid ""
+"It should only be enabled for VMs if the host reports ``Not affected`` in "
+"the ``/sys/devices/system/cpu/vulnerabilities/tsx_async_abort`` file."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:180
+msgid "``tsx-ctrl``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:181
+msgid ""
+"Recommended to inform the guest that it can disable the Intel TSX "
+"(Transactional Synchronization Extensions) feature; or, if the processor is "
+"vulnerable, use the Intel VERW instruction (a processor-level instruction "
+"that performs checks on memory access) as a mitigation for the TAA "
+"vulnerability.  (For details, refer to Intel's `deep dive into MDS <https://"
+"software.intel.com/security-software-guidance/insights/deep-dive-intel-"
+"analysis-microarchitectural-data-sampling>`_.)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:189
+msgid ""
+"Expose this to the guest OS if and only if: (a) the host has TSX enabled; "
+"*and* (b) the guest has ``rtm`` CPU flag enabled."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:192
+msgid ""
+"By disabling TSX, KVM-based guests can avoid paying the price of mitigating "
+"TSX-based attacks."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:195
+msgid ""
+"Note that ``tsx-ctrl`` too is an MSR feature, so it does not show up in the "
+"Linux ``/proc/cpuinfo`` in the host or guest."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:198
+msgid ""
+"To validate that Intel TSX is indeed disabled for the guest, there are two "
+"ways: (a) check for the *absence* of ``rtm`` in the guest's ``/proc/"
+"cpuinfo``; or (b) the ``/sys/devices/system/cpu/vulnerabilities/"
+"tsx_async_abort`` file in the guest should report ``Mitigation: TSX "
+"disabled``."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:206
+msgid "Preferred CPU models for AMD x86 hosts"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:215
+msgid "``EPYC``, ``EPYC-IBPB``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:216
+msgid "AMD EPYC Processor (2017)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:218
+msgid "``Opteron_G5``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:219
+msgid "AMD Opteron 63xx class CPU (2012)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:221
+msgid "``Opteron_G4``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:222
+msgid "AMD Opteron 62xx class CPU (2011)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:224
+msgid "``Opteron_G3``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:225
+msgid "AMD Opteron 23xx (Gen 3 Class Opteron, 2009)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:227
+msgid "``Opteron_G2``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:228
+msgid "AMD Opteron 22xx (Gen 2 Class Opteron, 2006)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:230
+msgid "``Opteron_G1``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:231
+msgid "AMD Opteron 240 (Gen 1 Class Opteron, 2004)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:235
+msgid "Important CPU features for AMD x86 hosts"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:237
+msgid ""
+"The following are important CPU features that should be used on AMD x86 "
+"hosts, when available in the host CPU. Some of them require explicit "
+"configuration to enable, as they are not included by default in some, or "
+"all, of the named CPU models listed above. In general all of these features "
+"are included if using \"Host passthrough\" or \"Host model\"."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:243
+msgid "``ibpb``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:246
+msgid "Included by default in AMD CPU models with -IBPB suffix."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:248
+msgid "Must be explicitly turned on for AMD CPU models without -IBPB suffix."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:257
+#: ../../../system/cpu-models-x86.rst.inc:267
+#: ../../../system/cpu-models-x86.rst.inc:281
+msgid "Must be explicitly turned on for all AMD CPU models."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:262
+msgid "``virt-ssbd``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:263
+#: ../../../system/cpu-models-x86.rst.inc:277
+msgid "Required to enable the CVE-2018-3639 fix"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:265
+#: ../../../system/cpu-models-x86.rst.inc:279
+#: ../../../system/cpu-models-x86.rst.inc:291
+#: ../../../system/cpu-models-x86.rst.inc:301
+msgid "Not included by default in any AMD CPU model."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:269
+msgid ""
+"This should be provided to guests, even if amd-ssbd is also provided, for "
+"maximum guest compatibility."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:272
+msgid ""
+"Note for some QEMU / libvirt versions, this must be force enabled when when "
+"using \"Host model\", because this is a virtual feature that doesn't exist "
+"in the physical host CPUs."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:276
+msgid "``amd-ssbd``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:283
+msgid ""
+"This provides higher performance than ``virt-ssbd`` so should be exposed to "
+"guests whenever available in the host. ``virt-ssbd`` should none the less "
+"also be exposed for maximum guest compatibility as some kernels only know "
+"about ``virt-ssbd``."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:288
+msgid "``amd-no-ssb``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:289
+msgid "Recommended to indicate the host is not vulnerable CVE-2018-3639"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:293
+msgid ""
+"Future hardware generations of CPU will not be vulnerable to CVE-2018-3639, "
+"and thus the guest should be told not to enable its mitigations, by exposing "
+"amd-no-ssb. This is mutually exclusive with virt-ssbd and amd-ssbd."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:299
+msgid "Recommended to allow guest OS to use 1GB size pages"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:303
+msgid "Should be explicitly turned on for all AMD CPU models."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:309
+msgid "Default x86 CPU models"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:311
+msgid ""
+"The default QEMU CPU models are designed such that they can run on all "
+"hosts.  If an application does not wish to do perform any host compatibility "
+"checks before launching guests, the default is guaranteed to work."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:316
+msgid ""
+"The default CPU models will, however, leave the guest OS vulnerable to "
+"various CPU hardware flaws, so their use is strongly discouraged. "
+"Applications should follow the earlier guidance to setup a better CPU "
+"configuration, with host passthrough recommended if live migration is not "
+"needed."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:322
+msgid "``qemu32``, ``qemu64``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:323
+msgid "QEMU Virtual CPU version 2.5+ (32 & 64 bit variants)"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:325
+msgid ""
+"``qemu64`` is used for x86_64 guests and ``qemu32`` is used for i686 guests, "
+"when no ``-cpu`` argument is given to QEMU, or no ``<cpu>`` is provided in "
+"libvirt XML."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:330
+msgid "Other non-recommended x86 CPUs"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:332
+msgid ""
+"The following CPUs models are compatible with most AMD and Intel x86 hosts, "
+"but their usage is discouraged, as they expose a very limited featureset, "
+"which prevents guests having optimal performance."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:336
+msgid "``kvm32``, ``kvm64``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:337
+msgid "Common KVM processor (32 & 64 bit variants)."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:339
+msgid ""
+"Legacy models just for historical compatibility with ancient QEMU versions."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:342
+msgid ""
+"``486``, ``athlon``, ``phenom``, ``coreduo``, ``core2duo``, ``n270``, "
+"``pentium``, ``pentium2``, ``pentium3``"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:343
+msgid ""
+"Various very old x86 CPU models, mostly predating the introduction of "
+"hardware assisted virtualization, that should thus not be required for "
+"running virtual machines."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:349
+msgid "Syntax for configuring CPU models"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:351
+msgid ""
+"The examples below illustrate the approach to configuring the various CPU "
+"models / features in QEMU and libvirt."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:355
+msgid "QEMU command line"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:357
+msgid "Host passthrough:"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:385
+msgid "|qemu_system| -cpu host"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:363
+msgid "Host passthrough with feature customization:"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:391
+msgid "|qemu_system| -cpu host,-vmx,..."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:369
+msgid "Named CPU models:"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:397
+msgid "|qemu_system| -cpu Westmere"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:375
+msgid "Named CPU models with feature customization:"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:403
+msgid "|qemu_system| -cpu Westmere,+pcid,..."
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:382
+msgid "Libvirt guest XML"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:384
+msgid "Host passthrough::"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:386
+msgid "<cpu mode='host-passthrough'/>"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:388
+msgid "Host passthrough with feature customization::"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:390
+msgid ""
+"<cpu mode='host-passthrough'>\n"
+"    <feature name=\"vmx\" policy=\"disable\"/>\n"
+"    ...\n"
+"</cpu>"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:395
+msgid "Host model::"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:397
+msgid "<cpu mode='host-model'/>"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:399
+msgid "Host model with feature customization::"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:401
+msgid ""
+"<cpu mode='host-model'>\n"
+"    <feature name=\"vmx\" policy=\"disable\"/>\n"
+"    ...\n"
+"</cpu>"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:406
+msgid "Named model::"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:408
+msgid ""
+"<cpu mode='custom'>\n"
+"    <model name=\"Westmere\"/>\n"
+"</cpu>"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:412
+msgid "Named model with feature customization::"
+msgstr ""
+
+#: ../../../system/cpu-models-x86.rst.inc:414
+msgid ""
+"<cpu mode='custom'>\n"
+"    <model name=\"Westmere\"/>\n"
+"    <feature name=\"pcid\" policy=\"require\"/>\n"
+"    ...\n"
+"</cpu>"
+msgstr ""
+
+#: ../../../system/target-i386.rst:27
+msgid "OS requirements"
+msgstr ""
+
+#: ../../../system/target-i386.rst:29
+msgid ""
+"On x86_64 hosts, the default set of CPU features enabled by the KVM "
+"accelerator require the host to be running Linux v4.5 or newer. Red Hat "
+"Enterprise Linux 7 is also supported, since the required functionality was "
+"backported."
+msgstr ""
