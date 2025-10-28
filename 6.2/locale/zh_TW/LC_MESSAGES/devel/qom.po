@@ -1,0 +1,3002 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 6.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/qom.rst:3
+msgid "The QEMU Object Model (QOM)"
+msgstr ""
+
+#: ../../../devel/qom.rst:7
+msgid ""
+"The QEMU Object Model provides a framework for registering user creatable "
+"types and instantiating objects from those types.  QOM provides the "
+"following features:"
+msgstr ""
+
+#: ../../../devel/qom.rst:11
+msgid "System for dynamically registering types"
+msgstr ""
+
+#: ../../../devel/qom.rst:12
+msgid "Support for single-inheritance of types"
+msgstr ""
+
+#: ../../../devel/qom.rst:13
+msgid "Multiple inheritance of stateless interfaces"
+msgstr ""
+
+#: ../../../devel/qom.rst:15
+msgid "Creating a minimal type"
+msgstr ""
+
+#: ../../../devel/qom.rst:15
+msgid ""
+"#include \"qdev.h\"\n"
+"\n"
+"#define TYPE_MY_DEVICE \"my-device\"\n"
+"\n"
+"// No new virtual functions: we can reuse the typedef for the\n"
+"// superclass.\n"
+"typedef DeviceClass MyDeviceClass;\n"
+"typedef struct MyDevice\n"
+"{\n"
+"    DeviceState parent;\n"
+"\n"
+"    int reg0, reg1, reg2;\n"
+"} MyDevice;\n"
+"\n"
+"static const TypeInfo my_device_info = {\n"
+"    .name = TYPE_MY_DEVICE,\n"
+"    .parent = TYPE_DEVICE,\n"
+"    .instance_size = sizeof(MyDevice),\n"
+"};\n"
+"\n"
+"static void my_device_register_types(void)\n"
+"{\n"
+"    type_register_static(&my_device_info);\n"
+"}\n"
+"\n"
+"type_init(my_device_register_types)"
+msgstr ""
+
+#: ../../../devel/qom.rst:45
+msgid ""
+"In the above example, we create a simple type that is described by "
+"#TypeInfo. #TypeInfo describes information about the type including what it "
+"inherits from, the instance and class size, and constructor/destructor hooks."
+msgstr ""
+
+#: ../../../devel/qom.rst:49
+msgid ""
+"Alternatively several static types could be registered using helper macro "
+"DEFINE_TYPES()"
+msgstr ""
+
+#: ../../../devel/qom.rst:52
+msgid ""
+"static const TypeInfo device_types_info[] = {\n"
+"    {\n"
+"        .name = TYPE_MY_DEVICE_A,\n"
+"        .parent = TYPE_DEVICE,\n"
+"        .instance_size = sizeof(MyDeviceA),\n"
+"    },\n"
+"    {\n"
+"        .name = TYPE_MY_DEVICE_B,\n"
+"        .parent = TYPE_DEVICE,\n"
+"        .instance_size = sizeof(MyDeviceB),\n"
+"    },\n"
+"};\n"
+"\n"
+"DEFINE_TYPES(device_types_info)"
+msgstr ""
+
+#: ../../../devel/qom.rst:69
+msgid ""
+"Every type has an #ObjectClass associated with it.  #ObjectClass derivatives "
+"are instantiated dynamically but there is only ever one instance for any "
+"given type.  The #ObjectClass typically holds a table of function pointers "
+"for the virtual methods implemented by this type."
+msgstr ""
+
+#: ../../../devel/qom.rst:74
+msgid ""
+"Using object_new(), a new #Object derivative will be instantiated.  You can "
+"cast an #Object to a subclass (or base-class) type using "
+"object_dynamic_cast().  You typically want to define macro wrappers around "
+"OBJECT_CHECK() and OBJECT_CLASS_CHECK() to make it easier to convert to a "
+"specific type:"
+msgstr ""
+
+#: ../../../devel/qom.rst:80
+msgid "Typecasting macros"
+msgstr ""
+
+#: ../../../devel/qom.rst:80
+msgid ""
+"#define MY_DEVICE_GET_CLASS(obj) \\\n"
+"   OBJECT_GET_CLASS(MyDeviceClass, obj, TYPE_MY_DEVICE)\n"
+"#define MY_DEVICE_CLASS(klass) \\\n"
+"   OBJECT_CLASS_CHECK(MyDeviceClass, klass, TYPE_MY_DEVICE)\n"
+"#define MY_DEVICE(obj) \\\n"
+"   OBJECT_CHECK(MyDevice, obj, TYPE_MY_DEVICE)"
+msgstr ""
+
+#: ../../../devel/qom.rst:90
+msgid ""
+"In case the ObjectClass implementation can be built as module a module_obj() "
+"line must be added to make sure qemu loads the module when the object is "
+"needed."
+msgstr ""
+
+#: ../../../devel/qom.rst:94
+msgid "module_obj(TYPE_MY_DEVICE);"
+msgstr ""
+
+#: ../../../devel/qom.rst:99
+msgid "Class Initialization"
+msgstr ""
+
+#: ../../../devel/qom.rst:101
+msgid ""
+"Before an object is initialized, the class for the object must be "
+"initialized.  There is only one class object for all instance objects that "
+"is created lazily."
+msgstr ""
+
+#: ../../../devel/qom.rst:105
+msgid ""
+"Classes are initialized by first initializing any parent classes (if "
+"necessary).  After the parent class object has initialized, it will be "
+"copied into the current class object and any additional storage in the class "
+"object is zero filled."
+msgstr ""
+
+#: ../../../devel/qom.rst:110
+msgid ""
+"The effect of this is that classes automatically inherit any virtual "
+"function pointers that the parent class has already initialized.  All other "
+"fields will be zero filled."
+msgstr ""
+
+#: ../../../devel/qom.rst:114
+msgid ""
+"Once all of the parent classes have been initialized, #TypeInfo::class_init "
+"is called to let the class being instantiated provide default initialize for "
+"its virtual functions.  Here is how the above example might be modified to "
+"introduce an overridden virtual function:"
+msgstr ""
+
+#: ../../../devel/qom.rst:119
+msgid "Overriding a virtual function"
+msgstr ""
+
+#: ../../../devel/qom.rst:119
+msgid ""
+"#include \"qdev.h\"\n"
+"\n"
+"void my_device_class_init(ObjectClass *klass, void *class_data)\n"
+"{\n"
+"    DeviceClass *dc = DEVICE_CLASS(klass);\n"
+"    dc->reset = my_device_reset;\n"
+"}\n"
+"\n"
+"static const TypeInfo my_device_info = {\n"
+"    .name = TYPE_MY_DEVICE,\n"
+"    .parent = TYPE_DEVICE,\n"
+"    .instance_size = sizeof(MyDevice),\n"
+"    .class_init = my_device_class_init,\n"
+"};"
+msgstr ""
+
+#: ../../../devel/qom.rst:137
+msgid ""
+"Introducing new virtual methods requires a class to define its own struct "
+"and to add a .class_size member to the #TypeInfo.  Each method will also "
+"have a wrapper function to call it easily:"
+msgstr ""
+
+#: ../../../devel/qom.rst:141
+msgid "Defining an abstract class"
+msgstr ""
+
+#: ../../../devel/qom.rst:141
+msgid ""
+"#include \"qdev.h\"\n"
+"\n"
+"typedef struct MyDeviceClass\n"
+"{\n"
+"    DeviceClass parent;\n"
+"\n"
+"    void (*frobnicate) (MyDevice *obj);\n"
+"} MyDeviceClass;\n"
+"\n"
+"static const TypeInfo my_device_info = {\n"
+"    .name = TYPE_MY_DEVICE,\n"
+"    .parent = TYPE_DEVICE,\n"
+"    .instance_size = sizeof(MyDevice),\n"
+"    .abstract = true, // or set a default in my_device_class_init\n"
+"    .class_size = sizeof(MyDeviceClass),\n"
+"};\n"
+"\n"
+"void my_device_frobnicate(MyDevice *obj)\n"
+"{\n"
+"    MyDeviceClass *klass = MY_DEVICE_GET_CLASS(obj);\n"
+"\n"
+"    klass->frobnicate(obj);\n"
+"}"
+msgstr ""
+
+#: ../../../devel/qom.rst:169
+msgid "Interfaces"
+msgstr ""
+
+#: ../../../devel/qom.rst:171
+msgid ""
+"Interfaces allow a limited form of multiple inheritance.  Instances are "
+"similar to normal types except for the fact that are only defined by their "
+"classes and never carry any state.  As a consequence, a pointer to an "
+"interface instance should always be of incomplete type in order to be sure "
+"it cannot be dereferenced.  That is, you should define the 'typedef struct "
+"SomethingIf SomethingIf' so that you can pass around ``SomethingIf *si`` "
+"arguments, but not define a ``struct SomethingIf { ... }``. The only things "
+"you can validly do with a ``SomethingIf *`` are to pass it as an argument to "
+"a method on its corresponding SomethingIfClass, or to dynamically cast it to "
+"an object that implements the interface."
+msgstr ""
+
+#: ../../../devel/qom.rst:183
+msgid "Methods"
+msgstr ""
+
+#: ../../../devel/qom.rst:185
+msgid ""
+"A *method* is a function within the namespace scope of a class. It usually "
+"operates on the object instance by passing it as a strongly-typed first "
+"argument. If it does not operate on an object instance, it is dubbed *class "
+"method*."
+msgstr ""
+
+#: ../../../devel/qom.rst:191
+msgid ""
+"Methods cannot be overloaded. That is, the #ObjectClass and method name "
+"uniquely identity the function to be called; the signature does not vary "
+"except for trailing varargs."
+msgstr ""
+
+#: ../../../devel/qom.rst:195
+msgid ""
+"Methods are always *virtual*. Overriding a method in #TypeInfo.class_init of "
+"a subclass leads to any user of the class obtained via OBJECT_GET_CLASS() "
+"accessing the overridden function. The original function is not "
+"automatically invoked. It is the responsibility of the overriding class to "
+"determine whether and when to invoke the method being overridden."
+msgstr ""
+
+#: ../../../devel/qom.rst:202
+msgid ""
+"To invoke the method being overridden, the preferred solution is to store "
+"the original value in the overriding class before overriding the method. "
+"This corresponds to ``{super,base}.method(...)`` in Java and C# "
+"respectively; this frees the overriding class from hardcoding its parent "
+"class, which someone might choose to change at some point."
+msgstr ""
+
+#: ../../../devel/qom.rst:208
+msgid "Overriding a virtual method"
+msgstr ""
+
+#: ../../../devel/qom.rst:208
+msgid ""
+"typedef struct MyState MyState;\n"
+"\n"
+"typedef void (*MyDoSomething)(MyState *obj);\n"
+"\n"
+"typedef struct MyClass {\n"
+"    ObjectClass parent_class;\n"
+"\n"
+"    MyDoSomething do_something;\n"
+"} MyClass;\n"
+"\n"
+"static void my_do_something(MyState *obj)\n"
+"{\n"
+"    // do something\n"
+"}\n"
+"\n"
+"static void my_class_init(ObjectClass *oc, void *data)\n"
+"{\n"
+"    MyClass *mc = MY_CLASS(oc);\n"
+"\n"
+"    mc->do_something = my_do_something;\n"
+"}\n"
+"\n"
+"static const TypeInfo my_type_info = {\n"
+"    .name = TYPE_MY,\n"
+"    .parent = TYPE_OBJECT,\n"
+"    .instance_size = sizeof(MyState),\n"
+"    .class_size = sizeof(MyClass),\n"
+"    .class_init = my_class_init,\n"
+"};\n"
+"\n"
+"typedef struct DerivedClass {\n"
+"    MyClass parent_class;\n"
+"\n"
+"    MyDoSomething parent_do_something;\n"
+"} DerivedClass;\n"
+"\n"
+"static void derived_do_something(MyState *obj)\n"
+"{\n"
+"    DerivedClass *dc = DERIVED_GET_CLASS(obj);\n"
+"\n"
+"    // do something here\n"
+"    dc->parent_do_something(obj);\n"
+"    // do something else here\n"
+"}\n"
+"\n"
+"static void derived_class_init(ObjectClass *oc, void *data)\n"
+"{\n"
+"    MyClass *mc = MY_CLASS(oc);\n"
+"    DerivedClass *dc = DERIVED_CLASS(oc);\n"
+"\n"
+"    dc->parent_do_something = mc->do_something;\n"
+"    mc->do_something = derived_do_something;\n"
+"}\n"
+"\n"
+"static const TypeInfo derived_type_info = {\n"
+"    .name = TYPE_DERIVED,\n"
+"    .parent = TYPE_MY,\n"
+"    .class_size = sizeof(DerivedClass),\n"
+"    .class_init = derived_class_init,\n"
+"};"
+msgstr ""
+
+#: ../../../devel/qom.rst:272
+msgid ""
+"Alternatively, object_class_by_name() can be used to obtain the class and "
+"its non-overridden methods for a specific type. This would correspond to "
+"``MyClass::method(...)`` in C++."
+msgstr ""
+
+#: ../../../devel/qom.rst:276
+msgid ""
+"The first example of such a QOM method was #CPUClass.reset, another example "
+"is #DeviceClass.realize."
+msgstr ""
+
+#: ../../../devel/qom.rst:280
+msgid "Standard type declaration and definition macros"
+msgstr ""
+
+#: ../../../devel/qom.rst:282
+msgid ""
+"A lot of the code outlined above follows a standard pattern and naming "
+"convention. To reduce the amount of boilerplate code that needs to be "
+"written for a new type there are two sets of macros to generate the common "
+"parts in a standard format."
+msgstr ""
+
+#: ../../../devel/qom.rst:287
+msgid ""
+"A type is declared using the OBJECT_DECLARE macro family. In types which do "
+"not require any virtual functions in the class, the "
+"OBJECT_DECLARE_SIMPLE_TYPE macro is suitable, and is commonly placed in the "
+"header file:"
+msgstr ""
+
+#: ../../../devel/qom.rst:292
+msgid "Declaring a simple type"
+msgstr ""
+
+#: ../../../devel/qom.rst:292
+msgid ""
+"OBJECT_DECLARE_SIMPLE_TYPE(MyDevice, my_device,\n"
+"                           MY_DEVICE, DEVICE)"
+msgstr ""
+
+#: ../../../devel/qom.rst:298 ../../../devel/qom.rst:333
+msgid "This is equivalent to the following:"
+msgstr ""
+
+#: ../../../devel/qom.rst:300
+msgid "Expansion from declaring a simple type"
+msgstr ""
+
+#: ../../../devel/qom.rst:300
+msgid ""
+"typedef struct MyDevice MyDevice;\n"
+"typedef struct MyDeviceClass MyDeviceClass;\n"
+"\n"
+"G_DEFINE_AUTOPTR_CLEANUP_FUNC(MyDeviceClass, object_unref)\n"
+"\n"
+"#define MY_DEVICE_GET_CLASS(void *obj) \\\n"
+"        OBJECT_GET_CLASS(MyDeviceClass, obj, TYPE_MY_DEVICE)\n"
+"#define MY_DEVICE_CLASS(void *klass) \\\n"
+"        OBJECT_CLASS_CHECK(MyDeviceClass, klass, TYPE_MY_DEVICE)\n"
+"#define MY_DEVICE(void *obj)\n"
+"        OBJECT_CHECK(MyDevice, obj, TYPE_MY_DEVICE)\n"
+"\n"
+"struct MyDeviceClass {\n"
+"    DeviceClass parent_class;\n"
+"};"
+msgstr ""
+
+#: ../../../devel/qom.rst:319
+msgid ""
+"The 'struct MyDevice' needs to be declared separately. If the type requires "
+"virtual functions to be declared in the class struct, then the alternative "
+"OBJECT_DECLARE_TYPE() macro can be used. This does the same as "
+"OBJECT_DECLARE_SIMPLE_TYPE(), but without the 'struct MyDeviceClass' "
+"definition."
+msgstr ""
+
+#: ../../../devel/qom.rst:325
+msgid ""
+"To implement the type, the OBJECT_DEFINE macro family is available. In the "
+"simple case the OBJECT_DEFINE_TYPE macro is suitable:"
+msgstr ""
+
+#: ../../../devel/qom.rst:328
+msgid "Defining a simple type"
+msgstr ""
+
+#: ../../../devel/qom.rst:328
+msgid "OBJECT_DEFINE_TYPE(MyDevice, my_device, MY_DEVICE, DEVICE)"
+msgstr ""
+
+#: ../../../devel/qom.rst:335
+msgid "Expansion from defining a simple type"
+msgstr ""
+
+#: ../../../devel/qom.rst:335
+msgid ""
+"static void my_device_finalize(Object *obj);\n"
+"static void my_device_class_init(ObjectClass *oc, void *data);\n"
+"static void my_device_init(Object *obj);\n"
+"\n"
+"static const TypeInfo my_device_info = {\n"
+"    .parent = TYPE_DEVICE,\n"
+"    .name = TYPE_MY_DEVICE,\n"
+"    .instance_size = sizeof(MyDevice),\n"
+"    .instance_init = my_device_init,\n"
+"    .instance_finalize = my_device_finalize,\n"
+"    .class_size = sizeof(MyDeviceClass),\n"
+"    .class_init = my_device_class_init,\n"
+"};\n"
+"\n"
+"static void\n"
+"my_device_register_types(void)\n"
+"{\n"
+"    type_register_static(&my_device_info);\n"
+"}\n"
+"type_init(my_device_register_types);"
+msgstr ""
+
+#: ../../../devel/qom.rst:359
+msgid ""
+"This is sufficient to get the type registered with the type system, and the "
+"three standard methods now need to be implemented along with any other logic "
+"required for the type."
+msgstr ""
+
+#: ../../../devel/qom.rst:363
+msgid ""
+"If the type needs to implement one or more interfaces, then the "
+"OBJECT_DEFINE_TYPE_WITH_INTERFACES() macro can be used instead. This accepts "
+"an array of interface type names."
+msgstr ""
+
+#: ../../../devel/qom.rst:367
+msgid "Defining a simple type implementing interfaces"
+msgstr ""
+
+#: ../../../devel/qom.rst:367
+msgid ""
+"OBJECT_DEFINE_TYPE_WITH_INTERFACES(MyDevice, my_device,\n"
+"                                   MY_DEVICE, DEVICE,\n"
+"                                   { TYPE_USER_CREATABLE },\n"
+"                                   { NULL })"
+msgstr ""
+
+#: ../../../devel/qom.rst:375
+msgid ""
+"If the type is not intended to be instantiated, then then the "
+"OBJECT_DEFINE_ABSTRACT_TYPE() macro can be used instead:"
+msgstr ""
+
+#: ../../../devel/qom.rst:378
+msgid "Defining a simple abstract type"
+msgstr ""
+
+#: ../../../devel/qom.rst:378
+msgid ""
+"OBJECT_DEFINE_ABSTRACT_TYPE(MyDevice, my_device,\n"
+"                            MY_DEVICE, DEVICE)"
+msgstr ""
+
+#: ../../../devel/qom.rst:387
+msgid "API Reference"
+msgstr ""
+
+#: ../../../../include/qom/object.h:34 ../../../../include/qom/object.h:50
+#: ../../../../include/qom/object.h:69 ../../../../include/qom/object.h:81
+#: ../../../../include/qom/object.h:104 ../../../../include/qom/object.h:113
+msgid "**Typedef**:"
+msgstr ""
+
+#: ../../../../include/qom/object.h:36 ../../../../include/qom/object.h:52
+#: ../../../../include/qom/object.h:71 ../../../../include/qom/object.h:83
+#: ../../../../include/qom/object.h:106 ../../../../include/qom/object.h:115
+msgid "**Syntax**"
+msgstr ""
+
+#: ../../../../include/qom/object.h:38
+msgid ""
+"``void ObjectPropertyAccessor (Object *obj, Visitor *v, const char *name, "
+"void *opaque, Error **errp)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:40 ../../../../include/qom/object.h:56
+#: ../../../../include/qom/object.h:75 ../../../../include/qom/object.h:87
+#: ../../../../include/qom/object.h:110 ../../../../include/qom/object.h:119
+#: ../../../../include/qom/object.h:166 ../../../../include/qom/object.h:183
+#: ../../../../include/qom/object.h:204 ../../../../include/qom/object.h:222
+#: ../../../../include/qom/object.h:245 ../../../../include/qom/object.h:264
+#: ../../../../include/qom/object.h:317 ../../../../include/qom/object.h:334
+#: ../../../../include/qom/object.h:357 ../../../../include/qom/object.h:436
+#: ../../../../include/qom/object.h:446 ../../../../include/qom/object.h:456
+#: ../../../../include/qom/object.h:473 ../../../../include/qom/object.h:487
+#: ../../../../include/qom/object.h:527 ../../../../include/qom/object.h:535
+#: ../../../../include/qom/object.h:547 ../../../../include/qom/object.h:559
+#: ../../../../include/qom/object.h:571 ../../../../include/qom/object.h:623
+#: ../../../../include/qom/object.h:647 ../../../../include/qom/object.h:683
+#: ../../../../include/qom/object.h:695 ../../../../include/qom/object.h:707
+#: ../../../../include/qom/object.h:735 ../../../../include/qom/object.h:754
+#: ../../../../include/qom/object.h:775 ../../../../include/qom/object.h:787
+#: ../../../../include/qom/object.h:804 ../../../../include/qom/object.h:812
+#: ../../../../include/qom/object.h:820 ../../../../include/qom/object.h:831
+#: ../../../../include/qom/object.h:842 ../../../../include/qom/object.h:852
+#: ../../../../include/qom/object.h:866 ../../../../include/qom/object.h:875
+#: ../../../../include/qom/object.h:889 ../../../../include/qom/object.h:908
+#: ../../../../include/qom/object.h:925 ../../../../include/qom/object.h:933
+#: ../../../../include/qom/object.h:941 ../../../../include/qom/object.h:949
+#: ../../../../include/qom/object.h:957 ../../../../include/qom/object.h:973
+#: ../../../../include/qom/object.h:983 ../../../../include/qom/object.h:994
+#: ../../../../include/qom/object.h:1004 ../../../../include/qom/object.h:1013
+#: ../../../../include/qom/object.h:1044 ../../../../include/qom/object.h:1081
+#: ../../../../include/qom/object.h:1090 ../../../../include/qom/object.h:1099
+#: ../../../../include/qom/object.h:1108 ../../../../include/qom/object.h:1117
+#: ../../../../include/qom/object.h:1128 ../../../../include/qom/object.h:1142
+#: ../../../../include/qom/object.h:1154 ../../../../include/qom/object.h:1173
+#: ../../../../include/qom/object.h:1200 ../../../../include/qom/object.h:1217
+#: ../../../../include/qom/object.h:1233 ../../../../include/qom/object.h:1248
+#: ../../../../include/qom/object.h:1262 ../../../../include/qom/object.h:1275
+#: ../../../../include/qom/object.h:1293 ../../../../include/qom/object.h:1306
+#: ../../../../include/qom/object.h:1320 ../../../../include/qom/object.h:1332
+#: ../../../../include/qom/object.h:1346 ../../../../include/qom/object.h:1358
+#: ../../../../include/qom/object.h:1372 ../../../../include/qom/object.h:1384
+#: ../../../../include/qom/object.h:1398 ../../../../include/qom/object.h:1414
+#: ../../../../include/qom/object.h:1428 ../../../../include/qom/object.h:1441
+#: ../../../../include/qom/object.h:1452 ../../../../include/qom/object.h:1460
+#: ../../../../include/qom/object.h:1471 ../../../../include/qom/object.h:1482
+#: ../../../../include/qom/object.h:1492 ../../../../include/qom/object.h:1502
+#: ../../../../include/qom/object.h:1527 ../../../../include/qom/object.h:1548
+#: ../../../../include/qom/object.h:1560 ../../../../include/qom/object.h:1572
+#: ../../../../include/qom/object.h:1594 ../../../../include/qom/object.h:1615
+#: ../../../../include/qom/object.h:1629 ../../../../include/qom/object.h:1672
+#: ../../../../include/qom/object.h:1695 ../../../../include/qom/object.h:1716
+#: ../../../../include/qom/object.h:1743 ../../../../include/qom/object.h:1770
+#: ../../../../include/qom/object.h:1791 ../../../../include/qom/object.h:1812
+#: ../../../../include/qom/object.h:1833 ../../../../include/qom/object.h:1854
+#: ../../../../include/qom/object.h:1874 ../../../../include/qom/object.h:1893
+#: ../../../../include/qom/object.h:1908 ../../../../include/qom/object.h:1925
+#: ../../../../include/qom/object.h:1943 ../../../../include/qom/object.h:1955
+#: ../../../../include/qom/object.h:1963
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../../../include/qom/object.h:42 ../../../../include/qom/object.h:58
+#: ../../../../include/qom/object.h:77 ../../../../include/qom/object.h:89
+#: ../../../../include/qom/object.h:112 ../../../../include/qom/object.h:649
+#: ../../../../include/qom/object.h:685 ../../../../include/qom/object.h:777
+#: ../../../../include/qom/object.h:789 ../../../../include/qom/object.h:806
+#: ../../../../include/qom/object.h:877 ../../../../include/qom/object.h:1015
+#: ../../../../include/qom/object.h:1046 ../../../../include/qom/object.h:1119
+#: ../../../../include/qom/object.h:1130 ../../../../include/qom/object.h:1175
+#: ../../../../include/qom/object.h:1235 ../../../../include/qom/object.h:1250
+#: ../../../../include/qom/object.h:1264 ../../../../include/qom/object.h:1277
+#: ../../../../include/qom/object.h:1295 ../../../../include/qom/object.h:1308
+#: ../../../../include/qom/object.h:1322 ../../../../include/qom/object.h:1334
+#: ../../../../include/qom/object.h:1348 ../../../../include/qom/object.h:1360
+#: ../../../../include/qom/object.h:1374 ../../../../include/qom/object.h:1386
+#: ../../../../include/qom/object.h:1400 ../../../../include/qom/object.h:1416
+#: ../../../../include/qom/object.h:1430 ../../../../include/qom/object.h:1443
+#: ../../../../include/qom/object.h:1574 ../../../../include/qom/object.h:1596
+#: ../../../../include/qom/object.h:1631 ../../../../include/qom/object.h:1674
+#: ../../../../include/qom/object.h:1697 ../../../../include/qom/object.h:1718
+#: ../../../../include/qom/object.h:1745 ../../../../include/qom/object.h:1772
+#: ../../../../include/qom/object.h:1793 ../../../../include/qom/object.h:1814
+#: ../../../../include/qom/object.h:1835 ../../../../include/qom/object.h:1856
+#: ../../../../include/qom/object.h:1876 ../../../../include/qom/object.h:1895
+#: ../../../../include/qom/object.h:1910 ../../../../include/qom/object.h:1927
+msgid "``Object *obj``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:35 ../../../../include/qom/object.h:51
+#: ../../../../include/qom/object.h:70 ../../../../include/qom/object.h:82
+msgid "the object that owns the property"
+msgstr ""
+
+#: ../../../../include/qom/object.h:37 ../../../../include/qom/object.h:1236
+#: ../../../../include/qom/object.h:1401
+msgid "``Visitor *v``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:36
+msgid "the visitor that contains the property data"
+msgstr ""
+
+#: ../../../../include/qom/object.h:38 ../../../../include/qom/object.h:72
+#: ../../../../include/qom/object.h:1015 ../../../../include/qom/object.h:1048
+#: ../../../../include/qom/object.h:1119 ../../../../include/qom/object.h:1130
+#: ../../../../include/qom/object.h:1144 ../../../../include/qom/object.h:1156
+#: ../../../../include/qom/object.h:1235 ../../../../include/qom/object.h:1250
+#: ../../../../include/qom/object.h:1264 ../../../../include/qom/object.h:1277
+#: ../../../../include/qom/object.h:1295 ../../../../include/qom/object.h:1308
+#: ../../../../include/qom/object.h:1322 ../../../../include/qom/object.h:1334
+#: ../../../../include/qom/object.h:1348 ../../../../include/qom/object.h:1360
+#: ../../../../include/qom/object.h:1374 ../../../../include/qom/object.h:1386
+#: ../../../../include/qom/object.h:1400 ../../../../include/qom/object.h:1416
+#: ../../../../include/qom/object.h:1430 ../../../../include/qom/object.h:1443
+#: ../../../../include/qom/object.h:1574 ../../../../include/qom/object.h:1596
+#: ../../../../include/qom/object.h:1617 ../../../../include/qom/object.h:1631
+#: ../../../../include/qom/object.h:1674 ../../../../include/qom/object.h:1697
+#: ../../../../include/qom/object.h:1718 ../../../../include/qom/object.h:1745
+#: ../../../../include/qom/object.h:1772 ../../../../include/qom/object.h:1793
+#: ../../../../include/qom/object.h:1814 ../../../../include/qom/object.h:1835
+#: ../../../../include/qom/object.h:1856 ../../../../include/qom/object.h:1876
+#: ../../../../include/qom/object.h:1895 ../../../../include/qom/object.h:1965
+msgid "``const char *name``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:37 ../../../../include/qom/object.h:53
+#: ../../../../include/qom/object.h:71 ../../../../include/qom/object.h:1118
+#: ../../../../include/qom/object.h:1129 ../../../../include/qom/object.h:1143
+#: ../../../../include/qom/object.h:1155 ../../../../include/qom/object.h:1234
+#: ../../../../include/qom/object.h:1249 ../../../../include/qom/object.h:1263
+#: ../../../../include/qom/object.h:1276 ../../../../include/qom/object.h:1294
+#: ../../../../include/qom/object.h:1307 ../../../../include/qom/object.h:1321
+#: ../../../../include/qom/object.h:1333 ../../../../include/qom/object.h:1347
+#: ../../../../include/qom/object.h:1359 ../../../../include/qom/object.h:1373
+#: ../../../../include/qom/object.h:1385 ../../../../include/qom/object.h:1399
+#: ../../../../include/qom/object.h:1415 ../../../../include/qom/object.h:1429
+#: ../../../../include/qom/object.h:1442 ../../../../include/qom/object.h:1573
+#: ../../../../include/qom/object.h:1595 ../../../../include/qom/object.h:1616
+#: ../../../../include/qom/object.h:1630 ../../../../include/qom/object.h:1673
+#: ../../../../include/qom/object.h:1696 ../../../../include/qom/object.h:1717
+#: ../../../../include/qom/object.h:1744 ../../../../include/qom/object.h:1771
+#: ../../../../include/qom/object.h:1792 ../../../../include/qom/object.h:1813
+#: ../../../../include/qom/object.h:1834 ../../../../include/qom/object.h:1855
+#: ../../../../include/qom/object.h:1875 ../../../../include/qom/object.h:1894
+#: ../../../../include/qom/object.h:1963
+msgid "the name of the property"
+msgstr ""
+
+#: ../../../../include/qom/object.h:39 ../../../../include/qom/object.h:53
+#: ../../../../include/qom/object.h:73 ../../../../include/qom/object.h:1029
+#: ../../../../include/qom/object.h:1062 ../../../../include/qom/object.h:1911
+#: ../../../../include/qom/object.h:1928
+msgid "``void *opaque``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:38
+msgid "the object property opaque"
+msgstr ""
+
+#: ../../../../include/qom/object.h:40 ../../../../include/qom/object.h:575
+#: ../../../../include/qom/object.h:627 ../../../../include/qom/object.h:649
+#: ../../../../include/qom/object.h:685 ../../../../include/qom/object.h:713
+#: ../../../../include/qom/object.h:741 ../../../../include/qom/object.h:880
+#: ../../../../include/qom/object.h:1030 ../../../../include/qom/object.h:1131
+#: ../../../../include/qom/object.h:1157 ../../../../include/qom/object.h:1238
+#: ../../../../include/qom/object.h:1252 ../../../../include/qom/object.h:1265
+#: ../../../../include/qom/object.h:1279 ../../../../include/qom/object.h:1296
+#: ../../../../include/qom/object.h:1310 ../../../../include/qom/object.h:1323
+#: ../../../../include/qom/object.h:1336 ../../../../include/qom/object.h:1349
+#: ../../../../include/qom/object.h:1362 ../../../../include/qom/object.h:1375
+#: ../../../../include/qom/object.h:1388 ../../../../include/qom/object.h:1404
+#: ../../../../include/qom/object.h:1418 ../../../../include/qom/object.h:1432
+#: ../../../../include/qom/object.h:1444 ../../../../include/qom/object.h:1576
+#: ../../../../include/qom/object.h:1619
+msgid "``Error **errp``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:39
+msgid "a pointer to an Error that is filled if getting/setting fails."
+msgstr ""
+
+#: ../../../../include/qom/object.h:41 ../../../../include/qom/object.h:55
+#: ../../../../include/qom/object.h:74 ../../../../include/qom/object.h:85
+#: ../../../../include/qom/object.h:107 ../../../../include/qom/object.h:116
+#: ../../../../include/qom/object.h:134 ../../../../include/qom/object.h:154
+#: ../../../../include/qom/object.h:170 ../../../../include/qom/object.h:187
+#: ../../../../include/qom/object.h:209 ../../../../include/qom/object.h:226
+#: ../../../../include/qom/object.h:248 ../../../../include/qom/object.h:272
+#: ../../../../include/qom/object.h:323 ../../../../include/qom/object.h:341
+#: ../../../../include/qom/object.h:363 ../../../../include/qom/object.h:438
+#: ../../../../include/qom/object.h:448 ../../../../include/qom/object.h:460
+#: ../../../../include/qom/object.h:477 ../../../../include/qom/object.h:491
+#: ../../../../include/qom/object.h:504 ../../../../include/qom/object.h:514
+#: ../../../../include/qom/object.h:549 ../../../../include/qom/object.h:561
+#: ../../../../include/qom/object.h:577 ../../../../include/qom/object.h:629
+#: ../../../../include/qom/object.h:651 ../../../../include/qom/object.h:687
+#: ../../../../include/qom/object.h:699 ../../../../include/qom/object.h:715
+#: ../../../../include/qom/object.h:743 ../../../../include/qom/object.h:760
+#: ../../../../include/qom/object.h:778 ../../../../include/qom/object.h:793
+#: ../../../../include/qom/object.h:822 ../../../../include/qom/object.h:833
+#: ../../../../include/qom/object.h:845 ../../../../include/qom/object.h:854
+#: ../../../../include/qom/object.h:868 ../../../../include/qom/object.h:881
+#: ../../../../include/qom/object.h:895 ../../../../include/qom/object.h:914
+#: ../../../../include/qom/object.h:959 ../../../../include/qom/object.h:996
+#: ../../../../include/qom/object.h:1006 ../../../../include/qom/object.h:1084
+#: ../../../../include/qom/object.h:1093 ../../../../include/qom/object.h:1102
+#: ../../../../include/qom/object.h:1111 ../../../../include/qom/object.h:1120
+#: ../../../../include/qom/object.h:1132 ../../../../include/qom/object.h:1145
+#: ../../../../include/qom/object.h:1158 ../../../../include/qom/object.h:1176
+#: ../../../../include/qom/object.h:1203 ../../../../include/qom/object.h:1219
+#: ../../../../include/qom/object.h:1239 ../../../../include/qom/object.h:1253
+#: ../../../../include/qom/object.h:1280 ../../../../include/qom/object.h:1311
+#: ../../../../include/qom/object.h:1337 ../../../../include/qom/object.h:1363
+#: ../../../../include/qom/object.h:1405 ../../../../include/qom/object.h:1419
+#: ../../../../include/qom/object.h:1433 ../../../../include/qom/object.h:1465
+#: ../../../../include/qom/object.h:1476 ../../../../include/qom/object.h:1506
+#: ../../../../include/qom/object.h:1532 ../../../../include/qom/object.h:1551
+#: ../../../../include/qom/object.h:1563 ../../../../include/qom/object.h:1577
+#: ../../../../include/qom/object.h:1598 ../../../../include/qom/object.h:1620
+#: ../../../../include/qom/object.h:1636 ../../../../include/qom/object.h:1678
+#: ../../../../include/qom/object.h:1700 ../../../../include/qom/object.h:1723
+#: ../../../../include/qom/object.h:1747 ../../../../include/qom/object.h:1775
+#: ../../../../include/qom/object.h:1796 ../../../../include/qom/object.h:1817
+#: ../../../../include/qom/object.h:1838 ../../../../include/qom/object.h:1859
+#: ../../../../include/qom/object.h:1878 ../../../../include/qom/object.h:1897
+#: ../../../../include/qom/object.h:1912 ../../../../include/qom/object.h:1929
+#: ../../../../include/qom/object.h:1946 ../../../../include/qom/object.h:1957
+msgid "**Description**"
+msgstr ""
+
+#: ../../../../include/qom/object.h:41
+msgid "Called when trying to get/set a property."
+msgstr ""
+
+#: ../../../../include/qom/object.h:54
+msgid ""
+"``Object * ObjectPropertyResolve (Object *obj, void *opaque, const char "
+"*part)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:52 ../../../../include/qom/object.h:72
+msgid "the opaque registered with the property"
+msgstr ""
+
+#: ../../../../include/qom/object.h:54 ../../../../include/qom/object.h:1562
+msgid "``const char *part``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:55
+msgid ""
+"Resolves the :c:type:`Object <Object>` corresponding to property **part**."
+msgstr ""
+
+#: ../../../../include/qom/object.h:57
+msgid ""
+"The returned object can also be used as a starting point to resolve a "
+"relative path starting with \"**part**\"."
+msgstr ""
+
+#: ../../../../include/qom/object.h:60 ../../../../include/qom/object.h:529
+#: ../../../../include/qom/object.h:539 ../../../../include/qom/object.h:553
+#: ../../../../include/qom/object.h:565 ../../../../include/qom/object.h:613
+#: ../../../../include/qom/object.h:677 ../../../../include/qom/object.h:689
+#: ../../../../include/qom/object.h:726 ../../../../include/qom/object.h:745
+#: ../../../../include/qom/object.h:781 ../../../../include/qom/object.h:806
+#: ../../../../include/qom/object.h:814 ../../../../include/qom/object.h:825
+#: ../../../../include/qom/object.h:836 ../../../../include/qom/object.h:911
+#: ../../../../include/qom/object.h:927 ../../../../include/qom/object.h:935
+#: ../../../../include/qom/object.h:943 ../../../../include/qom/object.h:951
+#: ../../../../include/qom/object.h:963 ../../../../include/qom/object.h:976
+#: ../../../../include/qom/object.h:986 ../../../../include/qom/object.h:999
+#: ../../../../include/qom/object.h:1031 ../../../../include/qom/object.h:1224
+#: ../../../../include/qom/object.h:1241 ../../../../include/qom/object.h:1255
+#: ../../../../include/qom/object.h:1266 ../../../../include/qom/object.h:1286
+#: ../../../../include/qom/object.h:1297 ../../../../include/qom/object.h:1313
+#: ../../../../include/qom/object.h:1324 ../../../../include/qom/object.h:1339
+#: ../../../../include/qom/object.h:1350 ../../../../include/qom/object.h:1365
+#: ../../../../include/qom/object.h:1376 ../../../../include/qom/object.h:1389
+#: ../../../../include/qom/object.h:1407 ../../../../include/qom/object.h:1421
+#: ../../../../include/qom/object.h:1445 ../../../../include/qom/object.h:1457
+#: ../../../../include/qom/object.h:1465 ../../../../include/qom/object.h:1476
+#: ../../../../include/qom/object.h:1484 ../../../../include/qom/object.h:1494
+#: ../../../../include/qom/object.h:1521 ../../../../include/qom/object.h:1541
+#: ../../../../include/qom/object.h:1554 ../../../../include/qom/object.h:1566
+#: ../../../../include/qom/object.h:1587 ../../../../include/qom/object.h:1655
+#: ../../../../include/qom/object.h:1681 ../../../../include/qom/object.h:1703
+#: ../../../../include/qom/object.h:1726 ../../../../include/qom/object.h:1750
+#: ../../../../include/qom/object.h:1778 ../../../../include/qom/object.h:1799
+#: ../../../../include/qom/object.h:1820 ../../../../include/qom/object.h:1841
+#: ../../../../include/qom/object.h:1867 ../../../../include/qom/object.h:1886
+#: ../../../../include/qom/object.h:1899 ../../../../include/qom/object.h:1918
+#: ../../../../include/qom/object.h:1936 ../../../../include/qom/object.h:1949
+#: ../../../../include/qom/object.h:1968
+msgid "**Return**"
+msgstr ""
+
+#: ../../../../include/qom/object.h:60
+msgid ""
+"If **path** is the path that led to **obj**, the function returns the :c:"
+"type:`Object <Object>` corresponding to \"**path**/**part**\". If \"**path**/"
+"**part**\" is not a valid object path, it returns :c:type:`NULL <NULL>`."
+msgstr ""
+
+#: ../../../../include/qom/object.h:73
+msgid ""
+"``void ObjectPropertyRelease (Object *obj, const char *name, void *opaque)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:74
+msgid "Called when a property is removed from a object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:85
+msgid "``void ObjectPropertyInit (Object *obj, ObjectProperty *prop)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:84 ../../../../include/qom/object.h:1083
+#: ../../../../include/qom/object.h:1092 ../../../../include/qom/object.h:1101
+#: ../../../../include/qom/object.h:1110
+msgid "``ObjectProperty *prop``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:83 ../../../../include/qom/object.h:1081
+#: ../../../../include/qom/object.h:1090 ../../../../include/qom/object.h:1099
+#: ../../../../include/qom/object.h:1108
+msgid "the property to set"
+msgstr ""
+
+#: ../../../../include/qom/object.h:85
+msgid "Called when a property is initialized."
+msgstr ""
+
+#: ../../../../include/qom/object.h:108
+msgid "``void ObjectUnparent (Object *obj)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:105
+msgid "the object that is being removed from the composition tree"
+msgstr ""
+
+#: ../../../../include/qom/object.h:107
+msgid ""
+"Called when an object is being removed from the QOM composition tree. The "
+"function should remove any backlinks from children objects to **obj**."
+msgstr ""
+
+#: ../../../../include/qom/object.h:117
+msgid "``void ObjectFree (void *obj)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:121 ../../../../include/qom/object.h:697
+#: ../../../../include/qom/object.h:996 ../../../../include/qom/object.h:1006
+msgid "``void *obj``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:114
+msgid "the object being freed"
+msgstr ""
+
+#: ../../../../include/qom/object.h:116
+msgid "Called when an object's last reference is removed."
+msgstr ""
+
+#: ../../../../include/qom/object.h:124 ../../../../include/qom/object.h:144
+#: ../../../../include/qom/object.h:374 ../../../../include/qom/object.h:500
+#: ../../../../include/qom/object.h:510
+msgid "**Definition**"
+msgstr ""
+
+#: ../../../../include/qom/object.h:128
+msgid ""
+"struct ObjectClass {\n"
+"};"
+msgstr ""
+
+#: ../../../../include/qom/object.h:131 ../../../../include/qom/object.h:151
+#: ../../../../include/qom/object.h:394 ../../../../include/qom/object.h:508
+#: ../../../../include/qom/object.h:518
+msgid "**Members**"
+msgstr ""
+
+#: ../../../../include/qom/object.h:125
+msgid ""
+"The base for all classes.  The only thing that :c:type:`ObjectClass "
+"<ObjectClass>` contains is an integer type handle."
+msgstr ""
+
+#: ../../../../include/qom/object.h:148
+msgid ""
+"struct Object {\n"
+"};"
+msgstr ""
+
+#: ../../../../include/qom/object.h:145
+msgid ""
+"The base for all objects.  The first member of this object is a pointer to "
+"a :c:type:`ObjectClass <ObjectClass>`.  Since C guarantees that the first "
+"member of a structure always begins at byte 0 of that structure, as long as "
+"any sub-object places its parent as the first member, we can cast directly "
+"to a :c:type:`Object <Object>`."
+msgstr ""
+
+#: ../../../../include/qom/object.h:150
+msgid ""
+"As a result, :c:type:`Object <Object>` contains a reference to the objects "
+"type as its first member.  This allows identification of the real type of "
+"the object at run time."
+msgstr ""
+
+#: ../../../../include/qom/object.h:178
+msgid "``DECLARE_INSTANCE_CHECKER (InstanceType, OBJ_NAME, TYPENAME)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:168 ../../../../include/qom/object.h:206
+#: ../../../../include/qom/object.h:224 ../../../../include/qom/object.h:247
+msgid "``InstanceType``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:166 ../../../../include/qom/object.h:204
+#: ../../../../include/qom/object.h:222 ../../../../include/qom/object.h:245
+msgid "instance struct name"
+msgstr ""
+
+#: ../../../../include/qom/object.h:168 ../../../../include/qom/object.h:185
+#: ../../../../include/qom/object.h:207
+msgid "``OBJ_NAME``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:167 ../../../../include/qom/object.h:184
+#: ../../../../include/qom/object.h:206 ../../../../include/qom/object.h:224
+#: ../../../../include/qom/object.h:246 ../../../../include/qom/object.h:266
+#: ../../../../include/qom/object.h:319 ../../../../include/qom/object.h:336
+#: ../../../../include/qom/object.h:359
+msgid "the object name in uppercase with underscore separators"
+msgstr ""
+
+#: ../../../../include/qom/object.h:169 ../../../../include/qom/object.h:186
+#: ../../../../include/qom/object.h:208
+msgid "``TYPENAME``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:168 ../../../../include/qom/object.h:185
+#: ../../../../include/qom/object.h:207
+msgid "type name"
+msgstr ""
+
+#: ../../../../include/qom/object.h:170 ../../../../include/qom/object.h:187
+#: ../../../../include/qom/object.h:209
+msgid ""
+"Direct usage of this macro should be avoided, and the complete "
+"OBJECT_DECLARE_TYPE macro is recommended instead."
+msgstr ""
+
+#: ../../../../include/qom/object.h:173
+msgid ""
+"This macro will provide the instance type cast functions for a QOM type."
+msgstr ""
+
+#: ../../../../include/qom/object.h:195
+msgid "``DECLARE_CLASS_CHECKERS (ClassType, OBJ_NAME, TYPENAME)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:185 ../../../../include/qom/object.h:206
+#: ../../../../include/qom/object.h:224
+msgid "``ClassType``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:183 ../../../../include/qom/object.h:205
+#: ../../../../include/qom/object.h:223
+msgid "class struct name"
+msgstr ""
+
+#: ../../../../include/qom/object.h:190
+msgid "This macro will provide the class type cast functions for a QOM type."
+msgstr ""
+
+#: ../../../../include/qom/object.h:217
+msgid "``DECLARE_OBJ_CHECKERS (InstanceType, ClassType, OBJ_NAME, TYPENAME)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:212
+msgid ""
+"This macro will provide the three standard type cast functions for a QOM "
+"type."
+msgstr ""
+
+#: ../../../../include/qom/object.h:236
+msgid "``OBJECT_DECLARE_TYPE (InstanceType, ClassType, MODULE_OBJ_NAME)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:225 ../../../../include/qom/object.h:247
+#: ../../../../include/qom/object.h:267 ../../../../include/qom/object.h:320
+#: ../../../../include/qom/object.h:337 ../../../../include/qom/object.h:360
+msgid "``MODULE_OBJ_NAME``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:226
+msgid "This macro is typically used in a header file, and will:"
+msgstr ""
+
+#: ../../../../include/qom/object.h:228
+msgid "create the typedefs for the object and class structs"
+msgstr ""
+
+#: ../../../../include/qom/object.h:229
+msgid "register the type for use with g_autoptr"
+msgstr ""
+
+#: ../../../../include/qom/object.h:230
+msgid "provide three standard type cast functions"
+msgstr ""
+
+#: ../../../../include/qom/object.h:232
+msgid "The object struct and class struct need to be declared manually."
+msgstr ""
+
+#: ../../../../include/qom/object.h:256
+msgid "``OBJECT_DECLARE_SIMPLE_TYPE (InstanceType, MODULE_OBJ_NAME)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:248
+msgid ""
+"This does the same as OBJECT_DECLARE_TYPE(), but with no class struct "
+"declared."
+msgstr ""
+
+#: ../../../../include/qom/object.h:251
+msgid ""
+"This macro should be used unless the class struct needs to have virtual "
+"methods declared."
+msgstr ""
+
+#: ../../../../include/qom/object.h:287
+msgid ""
+"``OBJECT_DEFINE_TYPE_EXTENDED (ModuleObjName, module_obj_name, "
+"MODULE_OBJ_NAME, PARENT_MODULE_OBJ_NAME, ABSTRACT, ...)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:266 ../../../../include/qom/object.h:319
+#: ../../../../include/qom/object.h:336 ../../../../include/qom/object.h:359
+msgid "``ModuleObjName``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:264 ../../../../include/qom/object.h:317
+#: ../../../../include/qom/object.h:334 ../../../../include/qom/object.h:357
+msgid "the object name with initial caps"
+msgstr ""
+
+#: ../../../../include/qom/object.h:266 ../../../../include/qom/object.h:319
+#: ../../../../include/qom/object.h:336 ../../../../include/qom/object.h:359
+msgid "``module_obj_name``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:265 ../../../../include/qom/object.h:318
+#: ../../../../include/qom/object.h:335 ../../../../include/qom/object.h:358
+msgid "the object name in lowercase with underscore separators"
+msgstr ""
+
+#: ../../../../include/qom/object.h:268 ../../../../include/qom/object.h:321
+#: ../../../../include/qom/object.h:338 ../../../../include/qom/object.h:361
+msgid "``PARENT_MODULE_OBJ_NAME``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:267 ../../../../include/qom/object.h:320
+#: ../../../../include/qom/object.h:337 ../../../../include/qom/object.h:360
+msgid "the parent object name in uppercase with underscore separators"
+msgstr ""
+
+#: ../../../../include/qom/object.h:270
+msgid "``ABSTRACT``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:269
+msgid "boolean flag to indicate whether the object can be instantiated"
+msgstr ""
+
+#: ../../../../include/qom/object.h:271 ../../../../include/qom/object.h:340
+#: ../../../../include/qom/object.h:576 ../../../../include/qom/object.h:650
+#: ../../../../include/qom/object.h:714
+msgid "``...``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:270 ../../../../include/qom/object.h:339
+msgid ""
+"list of initializers for \"InterfaceInfo\" to declare implemented interfaces"
+msgstr ""
+
+#: ../../../../include/qom/object.h:272
+msgid "This macro is typically used in a source file, and will:"
+msgstr ""
+
+#: ../../../../include/qom/object.h:274
+msgid "declare prototypes for _finalize, _class_init and _init methods"
+msgstr ""
+
+#: ../../../../include/qom/object.h:275
+msgid "declare the TypeInfo struct instance"
+msgstr ""
+
+#: ../../../../include/qom/object.h:276
+msgid "provide the constructor to register the type"
+msgstr ""
+
+#: ../../../../include/qom/object.h:278
+msgid ""
+"After using this macro, implementations of the _finalize, _class_init, and "
+"_init methods need to be written. Any of these can be zero-line no-op impls "
+"if no special logic is required for a given type."
+msgstr ""
+
+#: ../../../../include/qom/object.h:282
+msgid ""
+"This macro should rarely be used, instead one of the more specialized macros "
+"is usually a better choice."
+msgstr ""
+
+#: ../../../../include/qom/object.h:328
+msgid ""
+"``OBJECT_DEFINE_TYPE (ModuleObjName, module_obj_name, MODULE_OBJ_NAME, "
+"PARENT_MODULE_OBJ_NAME)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:323
+msgid ""
+"This is a specialization of OBJECT_DEFINE_TYPE_EXTENDED, which is suitable "
+"for the common case of a non-abstract type, without any interfaces."
+msgstr ""
+
+#: ../../../../include/qom/object.h:350
+msgid ""
+"``OBJECT_DEFINE_TYPE_WITH_INTERFACES (ModuleObjName, module_obj_name, "
+"MODULE_OBJ_NAME, PARENT_MODULE_OBJ_NAME, ...)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:341
+msgid ""
+"This is a specialization of OBJECT_DEFINE_TYPE_EXTENDED, which is suitable "
+"for the common case of a non-abstract type, with one or more implemented "
+"interfaces."
+msgstr ""
+
+#: ../../../../include/qom/object.h:345
+msgid ""
+"Note when passing the list of interfaces, be sure to include the final NULL "
+"entry, e.g.  { TYPE_USER_CREATABLE }, { NULL }"
+msgstr ""
+
+#: ../../../../include/qom/object.h:368
+msgid ""
+"``OBJECT_DEFINE_ABSTRACT_TYPE (ModuleObjName, module_obj_name, "
+"MODULE_OBJ_NAME, PARENT_MODULE_OBJ_NAME)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:363
+msgid ""
+"This is a specialization of OBJECT_DEFINE_TYPE_EXTENDED, which is suitable "
+"for defining an abstract type, without any interfaces."
+msgstr ""
+
+#: ../../../../include/qom/object.h:378
+msgid ""
+"struct TypeInfo {\n"
+"  const char *name;\n"
+"  const char *parent;\n"
+"  size_t instance_size;\n"
+"  size_t instance_align;\n"
+"  void (*instance_init)(Object *obj);\n"
+"  void (*instance_post_init)(Object *obj);\n"
+"  void (*instance_finalize)(Object *obj);\n"
+"  bool abstract;\n"
+"  size_t class_size;\n"
+"  void (*class_init)(ObjectClass *klass, void *data);\n"
+"  void (*class_base_init)(ObjectClass *klass, void *data);\n"
+"  void *class_data;\n"
+"  InterfaceInfo *interfaces;\n"
+"};"
+msgstr ""
+
+#: ../../../../include/qom/object.h:374 ../../../../include/qom/object.h:459
+#: ../../../../include/qom/object.h:476 ../../../../include/qom/object.h:490
+#: ../../../../include/qom/object.h:538
+msgid "``name``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:375
+msgid "The name of the type."
+msgstr ""
+
+#: ../../../../include/qom/object.h:375 ../../../../include/qom/object.h:756
+msgid "``parent``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:376
+msgid "The name of the parent type."
+msgstr ""
+
+#: ../../../../include/qom/object.h:376
+msgid "``instance_size``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:377
+msgid ""
+"The size of the object (derivative of :c:type:`Object <Object>`).  If "
+"**instance_size** is 0, then the size of the object will be the size of the "
+"parent object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:379
+msgid "``instance_align``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:380
+msgid ""
+"The required alignment of the object.  If **instance_align** is 0, then "
+"normal malloc alignment is sufficient; if non-zero, then we must use "
+"qemu_memalign for allocation."
+msgstr ""
+
+#: ../../../../include/qom/object.h:382
+msgid "``instance_init``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:383
+msgid ""
+"This function is called to initialize an object.  The parent class will have "
+"already been initialized so the type is only responsible for initializing "
+"its own members."
+msgstr ""
+
+#: ../../../../include/qom/object.h:385
+msgid "``instance_post_init``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:386
+msgid ""
+"This function is called to finish initialization of an object, after all "
+"**instance_init** functions were called."
+msgstr ""
+
+#: ../../../../include/qom/object.h:387
+msgid "``instance_finalize``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:388
+msgid ""
+"This function is called during object destruction.  This is called before "
+"the parent **instance_finalize** function has been called. An object should "
+"only free the members that are unique to its type in this function."
+msgstr ""
+
+#: ../../../../include/qom/object.h:391
+msgid "``abstract``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:392
+msgid ""
+"If this field is true, then the class is considered abstract and cannot be "
+"directly instantiated."
+msgstr ""
+
+#: ../../../../include/qom/object.h:393
+msgid "``class_size``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:394
+msgid ""
+"The size of the class object (derivative of :c:type:`ObjectClass "
+"<ObjectClass>`) for this object.  If **class_size** is 0, then the size of "
+"the class will be assumed to be the size of the parent class.  This allows a "
+"type to avoid implementing an explicit class type if they are not adding "
+"additional virtual functions."
+msgstr ""
+
+#: ../../../../include/qom/object.h:398
+msgid "``class_init``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:399
+msgid ""
+"This function is called after all parent class initialization has occurred "
+"to allow a class to set its default virtual method pointers. This is also "
+"the function to use to override virtual methods from a parent class."
+msgstr ""
+
+#: ../../../../include/qom/object.h:402
+msgid "``class_base_init``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:403
+msgid ""
+"This function is called for all base classes after all parent class "
+"initialization has occurred, but before the class itself is initialized.  "
+"This is the function to use to undo the effects of memcpy from the parent "
+"class to the descendants."
+msgstr ""
+
+#: ../../../../include/qom/object.h:406
+msgid "``class_data``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:407
+msgid ""
+"Data to pass to the **class_init**, **class_base_init**. This can be useful "
+"when building dynamic classes."
+msgstr ""
+
+#: ../../../../include/qom/object.h:409
+msgid "``interfaces``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:410
+msgid ""
+"The list of interfaces associated with this type.  This should point to a "
+"static array that's terminated with a zero filled element."
+msgstr ""
+
+#: ../../../../include/qom/object.h:443
+msgid "``OBJECT (obj)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:438 ../../../../include/qom/object.h:458
+#: ../../../../include/qom/object.h:489 ../../../../include/qom/object.h:537
+msgid "``obj``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:436 ../../../../include/qom/object.h:804
+msgid "A derivative of :c:type:`Object <Object>`"
+msgstr ""
+
+#: ../../../../include/qom/object.h:438
+msgid ""
+"Converts an object to a :c:type:`Object <Object>`.  Since all objects are :c:"
+"type:`Objects <Objects>`, this function will always succeed."
+msgstr ""
+
+#: ../../../../include/qom/object.h:453
+msgid "``OBJECT_CLASS (class)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:448 ../../../../include/qom/object.h:475
+#: ../../../../include/qom/object.h:489
+msgid "``class``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:446
+msgid "A derivative of :c:type:`ObjectClass <ObjectClass>`."
+msgstr ""
+
+#: ../../../../include/qom/object.h:448
+msgid ""
+"Converts a class to an :c:type:`ObjectClass <ObjectClass>`.  Since all "
+"objects are :c:type:`Objects <Objects>`, this function will always succeed."
+msgstr ""
+
+#: ../../../../include/qom/object.h:469
+msgid "``OBJECT_CHECK (type, obj, name)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:458 ../../../../include/qom/object.h:500
+#: ../../../../include/qom/object.h:759
+msgid "``type``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:456 ../../../../include/qom/object.h:473
+#: ../../../../include/qom/object.h:487
+msgid "The C type to use for the return value."
+msgstr ""
+
+#: ../../../../include/qom/object.h:457
+msgid "A derivative of **type** to cast."
+msgstr ""
+
+#: ../../../../include/qom/object.h:458
+msgid "The QOM typename of **type**"
+msgstr ""
+
+#: ../../../../include/qom/object.h:460
+msgid ""
+"A type safe version of **object_dynamic_cast_assert**.  Typically each class "
+"will define a macro based on this type to perform type safe dynamic_casts to "
+"this object type."
+msgstr ""
+
+#: ../../../../include/qom/object.h:464
+msgid ""
+"If an invalid object is passed to this function, a run time assert will be "
+"generated."
+msgstr ""
+
+#: ../../../../include/qom/object.h:483
+msgid "``OBJECT_CLASS_CHECK (class_type, class, name)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:475
+msgid "``class_type``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:474
+msgid "A derivative class of **class_type** to cast."
+msgstr ""
+
+#: ../../../../include/qom/object.h:475
+msgid "the QOM typename of **class_type**."
+msgstr ""
+
+#: ../../../../include/qom/object.h:477
+msgid ""
+"A type safe version of **object_class_dynamic_cast_assert**.  This macro is "
+"typically wrapped by each type to perform type safe casts of a class to a "
+"specific class type."
+msgstr ""
+
+#: ../../../../include/qom/object.h:497
+msgid "``OBJECT_GET_CLASS (class, obj, name)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:488
+msgid "The object to obtain the class for."
+msgstr ""
+
+#: ../../../../include/qom/object.h:489 ../../../../include/qom/object.h:814
+msgid "The QOM typename of **obj**."
+msgstr ""
+
+#: ../../../../include/qom/object.h:491
+msgid ""
+"This function will return a specific class for a given object.  Its "
+"generally used by each type to provide a type safe macro to get a specific "
+"class type from an object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:504
+msgid ""
+"struct InterfaceInfo {\n"
+"  const char *type;\n"
+"};"
+msgstr ""
+
+#: ../../../../include/qom/object.h:501
+msgid "The name of the interface."
+msgstr ""
+
+#: ../../../../include/qom/object.h:502
+msgid "The information associated with an interface."
+msgstr ""
+
+#: ../../../../include/qom/object.h:514
+msgid ""
+"struct InterfaceClass {\n"
+"  ObjectClass parent_class;\n"
+"};"
+msgstr ""
+
+#: ../../../../include/qom/object.h:510
+msgid "``parent_class``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:511
+msgid "the base class"
+msgstr ""
+
+#: ../../../../include/qom/object.h:512
+msgid ""
+"The class for all interfaces.  Subclasses of this class should only add "
+"virtual methods."
+msgstr ""
+
+#: ../../../../include/qom/object.h:532
+msgid "``INTERFACE_CLASS (klass)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:529
+msgid "``klass``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:527
+msgid "class to cast from"
+msgstr ""
+
+#: ../../../../include/qom/object.h:528
+msgid ""
+"An :c:type:`InterfaceClass <InterfaceClass>` or raise an error if cast is "
+"invalid"
+msgstr ""
+
+#: ../../../../include/qom/object.h:543
+msgid "``INTERFACE_CHECK (interface, obj, name)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:537
+msgid "``interface``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:535
+msgid "the type to return"
+msgstr ""
+
+#: ../../../../include/qom/object.h:536
+msgid "the object to convert to an interface"
+msgstr ""
+
+#: ../../../../include/qom/object.h:537
+msgid "the interface type name"
+msgstr ""
+
+#: ../../../../include/qom/object.h:539
+msgid ""
+"**obj** casted to **interface** if cast is valid, otherwise raise error."
+msgstr ""
+
+#: ../../../../include/qom/object.h:549 ../../../../include/qom/object.h:891
+#: ../../../../include/qom/object.h:910 ../../../../include/qom/object.h:927
+#: ../../../../include/qom/object.h:935 ../../../../include/qom/object.h:943
+#: ../../../../include/qom/object.h:1144 ../../../../include/qom/object.h:1156
+#: ../../../../include/qom/object.h:1202
+msgid "``ObjectClass *klass``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:547
+msgid "The class to instantiate."
+msgstr ""
+
+#: ../../../../include/qom/object.h:549 ../../../../include/qom/object.h:561
+#: ../../../../include/qom/object.h:577
+msgid ""
+"This function will initialize a new object using heap allocated memory. The "
+"returned object has a reference count of 1, and will be freed when the last "
+"reference is dropped."
+msgstr ""
+
+#: ../../../../include/qom/object.h:553 ../../../../include/qom/object.h:565
+msgid "The newly allocated and instantiated object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:561 ../../../../include/qom/object.h:573
+#: ../../../../include/qom/object.h:625 ../../../../include/qom/object.h:698
+#: ../../../../include/qom/object.h:777 ../../../../include/qom/object.h:789
+#: ../../../../include/qom/object.h:891 ../../../../include/qom/object.h:910
+#: ../../../../include/qom/object.h:951 ../../../../include/qom/object.h:959
+#: ../../../../include/qom/object.h:1387 ../../../../include/qom/object.h:1529
+#: ../../../../include/qom/object.h:1719 ../../../../include/qom/object.h:1957
+msgid "``const char *typename``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:559 ../../../../include/qom/object.h:571
+#: ../../../../include/qom/object.h:623 ../../../../include/qom/object.h:697
+#: ../../../../include/qom/object.h:711 ../../../../include/qom/object.h:739
+#: ../../../../include/qom/object.h:758
+msgid "The name of the type of the object to instantiate."
+msgstr ""
+
+#: ../../../../include/qom/object.h:573 ../../../../include/qom/object.h:625
+#: ../../../../include/qom/object.h:1550 ../../../../include/qom/object.h:1562
+msgid "``Object *parent``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:572 ../../../../include/qom/object.h:624
+msgid "the parent object"
+msgstr ""
+
+#: ../../../../include/qom/object.h:574 ../../../../include/qom/object.h:626
+msgid "``const char *id``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:573 ../../../../include/qom/object.h:625
+msgid "The unique ID of the object"
+msgstr ""
+
+#: ../../../../include/qom/object.h:574 ../../../../include/qom/object.h:626
+#: ../../../../include/qom/object.h:648 ../../../../include/qom/object.h:684
+#: ../../../../include/qom/object.h:879 ../../../../include/qom/object.h:1029
+#: ../../../../include/qom/object.h:1575 ../../../../include/qom/object.h:1618
+msgid "pointer to error object"
+msgstr ""
+
+#: ../../../../include/qom/object.h:575 ../../../../include/qom/object.h:627
+#: ../../../../include/qom/object.h:649 ../../../../include/qom/object.h:685
+#: ../../../../include/qom/object.h:713 ../../../../include/qom/object.h:741
+msgid "list of property names and values"
+msgstr ""
+
+#: ../../../../include/qom/object.h:581
+msgid ""
+"The **id** parameter will be used when registering the object as a child of "
+"**parent** in the composition tree."
+msgstr ""
+
+#: ../../../../include/qom/object.h:584 ../../../../include/qom/object.h:721
+msgid ""
+"The variadic parameters are a list of pairs of (propname, propvalue) "
+"strings. The propname of ``NULL`` indicates the end of the property list. If "
+"the object implements the user creatable interface, the object will be "
+"marked complete once all the properties have been processed."
+msgstr ""
+
+#: ../../../../include/qom/object.h:590
+msgid "Creating an object with properties"
+msgstr ""
+
+#: ../../../../include/qom/object.h:590
+msgid ""
+"  Error *err = NULL;\n"
+"  Object *obj;\n"
+"\n"
+"  obj = object_new_with_props(TYPE_MEMORY_BACKEND_FILE,\n"
+"                              object_get_objects_root(),\n"
+"                              \"hostmem0\",\n"
+"                              &err,\n"
+"                              \"share\", \"yes\",\n"
+"                              \"mem-path\", \"/dev/shm/somefile\",\n"
+"                              \"prealloc\", \"yes\",\n"
+"                              \"size\", \"1048576\",\n"
+"                              NULL);\n"
+"\n"
+"  if (!obj) {\n"
+"    error_reportf_err(err, \"Cannot create memory backend: \");\n"
+"  }"
+msgstr ""
+
+#: ../../../../include/qom/object.h:610 ../../../../include/qom/object.h:674
+msgid ""
+"The returned object will have one stable reference maintained for as long as "
+"it is present in the object hierarchy."
+msgstr ""
+
+#: ../../../../include/qom/object.h:613
+msgid "The newly allocated, instantiated & initialized object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:628 ../../../../include/qom/object.h:686
+#: ../../../../include/qom/object.h:742
+msgid "``va_list vargs``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:629
+msgid "See object_new_with_props() for documentation."
+msgstr ""
+
+#: ../../../../include/qom/object.h:647 ../../../../include/qom/object.h:683
+msgid "the object instance to set properties on"
+msgstr ""
+
+#: ../../../../include/qom/object.h:651
+msgid ""
+"This function will set a list of properties on an existing object instance."
+msgstr ""
+
+#: ../../../../include/qom/object.h:654
+msgid ""
+"The variadic parameters are a list of pairs of (propname, propvalue) "
+"strings. The propname of ``NULL`` indicates the end of the property list."
+msgstr ""
+
+#: ../../../../include/qom/object.h:658
+msgid "Update an object's properties"
+msgstr ""
+
+#: ../../../../include/qom/object.h:658
+msgid ""
+"  Error *err = NULL;\n"
+"  Object *obj = ...get / create object...;\n"
+"\n"
+"  if (!object_set_props(obj,\n"
+"                        &err,\n"
+"                        \"share\", \"yes\",\n"
+"                        \"mem-path\", \"/dev/shm/somefile\",\n"
+"                        \"prealloc\", \"yes\",\n"
+"                        \"size\", \"1048576\",\n"
+"                        NULL)) {\n"
+"    error_reportf_err(err, \"Cannot set properties: \");\n"
+"  }"
+msgstr ""
+
+#: ../../../../include/qom/object.h:677 ../../../../include/qom/object.h:689
+msgid "``true`` on success, ``false`` on error."
+msgstr ""
+
+#: ../../../../include/qom/object.h:687
+msgid "See object_set_props() for documentation."
+msgstr ""
+
+#: ../../../../include/qom/object.h:695 ../../../../include/qom/object.h:709
+#: ../../../../include/qom/object.h:737
+msgid "A pointer to the memory to be used for the object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:697 ../../../../include/qom/object.h:711
+#: ../../../../include/qom/object.h:739
+msgid "``size_t size``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:696
+msgid "The maximum size available at **obj** for the object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:699
+msgid ""
+"This function will initialize an object.  The memory for the object should "
+"have already been allocated.  The returned object has a reference count of "
+"1, and will be finalized when the last reference is dropped."
+msgstr ""
+
+#: ../../../../include/qom/object.h:709 ../../../../include/qom/object.h:737
+msgid "``Object *parentobj``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:707 ../../../../include/qom/object.h:735
+#: ../../../../include/qom/object.h:754
+msgid "The parent object to add a property to"
+msgstr ""
+
+#: ../../../../include/qom/object.h:709 ../../../../include/qom/object.h:737
+msgid "``const char *propname``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:708 ../../../../include/qom/object.h:736
+#: ../../../../include/qom/object.h:755
+msgid "The name of the property"
+msgstr ""
+
+#: ../../../../include/qom/object.h:710 ../../../../include/qom/object.h:738
+msgid "``void *childobj``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:710 ../../../../include/qom/object.h:738
+msgid "The maximum size available at **childobj** for the object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:712 ../../../../include/qom/object.h:740
+#: ../../../../include/qom/object.h:868 ../../../../include/qom/object.h:1018
+#: ../../../../include/qom/object.h:1051 ../../../../include/qom/object.h:1632
+#: ../../../../include/qom/object.h:1965
+msgid "``const char *type``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:712 ../../../../include/qom/object.h:740
+msgid "If an error occurs, a pointer to an area to store the error"
+msgstr ""
+
+#: ../../../../include/qom/object.h:715
+msgid ""
+"This function will initialize an object. The memory for the object should "
+"have already been allocated. The object will then be added as child property "
+"to a parent with object_property_add_child() function. The returned object "
+"has a reference count of 1 (for the \"child<...>\" property from the "
+"parent), so the object will be finalized automatically when the parent gets "
+"removed."
+msgstr ""
+
+#: ../../../../include/qom/object.h:726 ../../../../include/qom/object.h:745
+#: ../../../../include/qom/object.h:1241 ../../../../include/qom/object.h:1255
+#: ../../../../include/qom/object.h:1286 ../../../../include/qom/object.h:1313
+#: ../../../../include/qom/object.h:1339 ../../../../include/qom/object.h:1365
+#: ../../../../include/qom/object.h:1407 ../../../../include/qom/object.h:1421
+#: ../../../../include/qom/object.h:1899
+msgid "``true`` on success, ``false`` on failure."
+msgstr ""
+
+#: ../../../../include/qom/object.h:743
+msgid "See object_initialize_child() for documentation."
+msgstr ""
+
+#: ../../../../include/qom/object.h:768
+msgid "``object_initialize_child (parent, propname, child, type)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:756
+msgid "``propname``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:757
+msgid "``child``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:756
+msgid "A precisely typed pointer to the memory to be used for the object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:760
+msgid "This is like::"
+msgstr ""
+
+#: ../../../../include/qom/object.h:762
+msgid ""
+"object_initialize_child_with_props(parent, propname,\n"
+"                                   child, sizeof(*child), type,\n"
+"                                   &error_abort, NULL)"
+msgstr ""
+
+#: ../../../../include/qom/object.h:775 ../../../../include/qom/object.h:787
+msgid "The object to cast."
+msgstr ""
+
+#: ../../../../include/qom/object.h:776 ../../../../include/qom/object.h:788
+msgid "The **typename** to cast to."
+msgstr ""
+
+#: ../../../../include/qom/object.h:778
+msgid ""
+"This function will determine if **obj** is-a **typename**.  **obj** can "
+"refer to an object or an interface associated with an object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:781
+msgid ""
+"This function returns **obj** on success or :c:type:`NULL <NULL>` on failure."
+msgstr ""
+
+#: ../../../../include/qom/object.h:790 ../../../../include/qom/object.h:892
+msgid "``const char *file``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:789 ../../../../include/qom/object.h:891
+msgid "Source code file where function was called"
+msgstr ""
+
+#: ../../../../include/qom/object.h:791 ../../../../include/qom/object.h:893
+msgid "``int line``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:790 ../../../../include/qom/object.h:892
+msgid "Source code line where function was called"
+msgstr ""
+
+#: ../../../../include/qom/object.h:792 ../../../../include/qom/object.h:894
+msgid "``const char *func``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:791 ../../../../include/qom/object.h:893
+msgid "Name of function where this function was called"
+msgstr ""
+
+#: ../../../../include/qom/object.h:793
+msgid ""
+"See object_dynamic_cast() for a description of the parameters of this "
+"function.  The only difference in behavior is that this function asserts "
+"instead of returning :c:type:`NULL <NULL>` on failure if QOM cast debugging "
+"is enabled. This function is not meant to be called directly, but only "
+"through the wrapper macro OBJECT_CHECK."
+msgstr ""
+
+#: ../../../../include/qom/object.h:806
+msgid ""
+"The :c:type:`ObjectClass <ObjectClass>` of the type associated with **obj**."
+msgstr ""
+
+#: ../../../../include/qom/object.h:814 ../../../../include/qom/object.h:1484
+#: ../../../../include/qom/object.h:1494 ../../../../include/qom/object.h:1617
+msgid "``const Object *obj``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:812
+msgid "A derivative of :c:type:`Object <Object>`."
+msgstr ""
+
+#: ../../../../include/qom/object.h:822 ../../../../include/qom/object.h:833
+msgid "``const TypeInfo *info``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:820
+msgid "The :c:type:`TypeInfo <TypeInfo>` of the new type."
+msgstr ""
+
+#: ../../../../include/qom/object.h:822
+msgid ""
+"**info** and all of the strings it points to should exist for the life time "
+"that the type is registered."
+msgstr ""
+
+#: ../../../../include/qom/object.h:825 ../../../../include/qom/object.h:836
+msgid "the new :c:type:`Type <Type>`."
+msgstr ""
+
+#: ../../../../include/qom/object.h:831
+msgid "The :c:type:`TypeInfo <TypeInfo>` of the new type"
+msgstr ""
+
+#: ../../../../include/qom/object.h:833
+msgid ""
+"Unlike type_register_static(), this call does not require **info** or its "
+"string members to continue to exist after the call returns."
+msgstr ""
+
+#: ../../../../include/qom/object.h:844
+msgid "``const TypeInfo *infos``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:842
+msgid "The array of the new type :c:type:`TypeInfo <TypeInfo>` structures."
+msgstr ""
+
+#: ../../../../include/qom/object.h:844
+msgid "``int nr_infos``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:843
+msgid "number of entries in **infos**"
+msgstr ""
+
+#: ../../../../include/qom/object.h:845
+msgid ""
+"**infos** and all of the strings it points to should exist for the life time "
+"that the type is registered."
+msgstr ""
+
+#: ../../../../include/qom/object.h:859
+msgid "``DEFINE_TYPES (type_array)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:854
+msgid "``type_array``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:852
+msgid ""
+"The array containing :c:type:`TypeInfo <TypeInfo>` structures to register"
+msgstr ""
+
+#: ../../../../include/qom/object.h:854
+msgid ""
+"**type_array** should be static constant that exists for the life time that "
+"the type is registered."
+msgstr ""
+
+#: ../../../../include/qom/object.h:866
+msgid "a QOM class name"
+msgstr ""
+
+#: ../../../../include/qom/object.h:868
+msgid ""
+"Print the object's class properties to stdout or the monitor. Return whether "
+"an object was found."
+msgstr ""
+
+#: ../../../../include/qom/object.h:875
+msgid "a QOM object"
+msgstr ""
+
+#: ../../../../include/qom/object.h:877
+msgid "``const QDict *qdict``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:876
+msgid "a dictionary with the properties to be set"
+msgstr ""
+
+#: ../../../../include/qom/object.h:878
+msgid "``bool from_json``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:877
+msgid "true if leaf values of **qdict** are typed, false if they are strings"
+msgstr ""
+
+#: ../../../../include/qom/object.h:881
+msgid ""
+"For each key in the dictionary, parse the value string if needed, then set "
+"the corresponding property in **obj**."
+msgstr ""
+
+#: ../../../../include/qom/object.h:889 ../../../../include/qom/object.h:908
+msgid "The :c:type:`ObjectClass <ObjectClass>` to attempt to cast."
+msgstr ""
+
+#: ../../../../include/qom/object.h:890 ../../../../include/qom/object.h:909
+msgid "The QOM typename of the class to cast to."
+msgstr ""
+
+#: ../../../../include/qom/object.h:895
+msgid ""
+"See object_class_dynamic_cast() for a description of the parameters of this "
+"function.  The only difference in behavior is that this function asserts "
+"instead of returning :c:type:`NULL <NULL>` on failure if QOM cast debugging "
+"is enabled.  This function is not meant to be called directly, but only "
+"through the wrapper macro OBJECT_CLASS_CHECK."
+msgstr ""
+
+#: ../../../../include/qom/object.h:911
+msgid ""
+"If **typename** is a class, this function returns **klass** if **typename** "
+"is a subtype of **klass**, else returns :c:type:`NULL <NULL>`."
+msgstr ""
+
+#: ../../../../include/qom/object.h:914
+msgid ""
+"If **typename** is an interface, this function returns the interface "
+"definition for **klass** if **klass** implements it unambiguously; :c:type:"
+"`NULL <NULL>` is returned if **klass** does not implement the interface or "
+"if multiple classes or interfaces on the hierarchy leading to **klass** "
+"implement it.  (FIXME: perhaps this can be detected at type definition time?)"
+msgstr ""
+
+#: ../../../../include/qom/object.h:925
+msgid "The class to obtain the parent for."
+msgstr ""
+
+#: ../../../../include/qom/object.h:927
+msgid "The parent for **klass** or ``NULL`` if none."
+msgstr ""
+
+#: ../../../../include/qom/object.h:933
+msgid "The class to obtain the QOM typename for."
+msgstr ""
+
+#: ../../../../include/qom/object.h:935
+msgid "The QOM typename for **klass**."
+msgstr ""
+
+#: ../../../../include/qom/object.h:941
+msgid "The class to obtain the abstractness for."
+msgstr ""
+
+#: ../../../../include/qom/object.h:943
+msgid "``true`` if **klass** is abstract, ``false`` otherwise."
+msgstr ""
+
+#: ../../../../include/qom/object.h:949 ../../../../include/qom/object.h:957
+msgid "The QOM typename to obtain the class for."
+msgstr ""
+
+#: ../../../../include/qom/object.h:951 ../../../../include/qom/object.h:963
+msgid "The class for **typename** or ``NULL`` if not found."
+msgstr ""
+
+#: ../../../../include/qom/object.h:959
+msgid ""
+"For objects which might be provided by a module.  Behaves like "
+"object_class_by_name, but additionally tries to load the module needed in "
+"case the class is not available."
+msgstr ""
+
+#: ../../../../include/qom/object.h:975 ../../../../include/qom/object.h:985
+msgid "``const char *implements_type``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:973 ../../../../include/qom/object.h:983
+msgid "The type to filter for, including its derivatives."
+msgstr ""
+
+#: ../../../../include/qom/object.h:975 ../../../../include/qom/object.h:985
+msgid "``bool include_abstract``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:974 ../../../../include/qom/object.h:984
+msgid "Whether to include abstract classes."
+msgstr ""
+
+#: ../../../../include/qom/object.h:976
+msgid "A singly-linked list of the classes in reverse hashtable order."
+msgstr ""
+
+#: ../../../../include/qom/object.h:986
+msgid ""
+"A singly-linked list of the classes in alphabetical case-insensitive order."
+msgstr ""
+
+#: ../../../../include/qom/object.h:994 ../../../../include/qom/object.h:1004
+#: ../../../../include/qom/object.h:1117 ../../../../include/qom/object.h:1128
+#: ../../../../include/qom/object.h:1174 ../../../../include/qom/object.h:1233
+#: ../../../../include/qom/object.h:1248 ../../../../include/qom/object.h:1262
+#: ../../../../include/qom/object.h:1275 ../../../../include/qom/object.h:1293
+#: ../../../../include/qom/object.h:1306 ../../../../include/qom/object.h:1320
+#: ../../../../include/qom/object.h:1332 ../../../../include/qom/object.h:1346
+#: ../../../../include/qom/object.h:1358 ../../../../include/qom/object.h:1372
+#: ../../../../include/qom/object.h:1384 ../../../../include/qom/object.h:1398
+#: ../../../../include/qom/object.h:1414 ../../../../include/qom/object.h:1428
+#: ../../../../include/qom/object.h:1441 ../../../../include/qom/object.h:1482
+#: ../../../../include/qom/object.h:1492
+msgid "the object"
+msgstr ""
+
+#: ../../../../include/qom/object.h:996
+msgid ""
+"Increase the reference count of a object.  A object cannot be freed as long "
+"as its reference count is greater than zero."
+msgstr ""
+
+#: ../../../../include/qom/object.h:998
+msgid "**obj**"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1006
+msgid ""
+"Decrease the reference count of a object.  A object cannot be freed as long "
+"as its reference count is greater than zero."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1013 ../../../../include/qom/object.h:1046
+#: ../../../../include/qom/object.h:1572 ../../../../include/qom/object.h:1594
+#: ../../../../include/qom/object.h:1615 ../../../../include/qom/object.h:1629
+#: ../../../../include/qom/object.h:1672 ../../../../include/qom/object.h:1695
+#: ../../../../include/qom/object.h:1716 ../../../../include/qom/object.h:1743
+#: ../../../../include/qom/object.h:1770 ../../../../include/qom/object.h:1791
+#: ../../../../include/qom/object.h:1812 ../../../../include/qom/object.h:1833
+#: ../../../../include/qom/object.h:1854 ../../../../include/qom/object.h:1874
+msgid "the object to add a property to"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1014 ../../../../include/qom/object.h:1047
+msgid ""
+"the name of the property.  This can contain any character except for a "
+"forward slash.  In general, you should use hyphens '-' instead of "
+"underscores '_' when naming properties."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1017 ../../../../include/qom/object.h:1050
+msgid ""
+"the type name of the property.  This namespace is pretty loosely defined.  "
+"Sub namespaces are constructed by using a prefix and then to angle "
+"brackets.  For instance, the type 'virtio-net-pci' in the 'link' namespace "
+"would be 'link<virtio-net-pci>'."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1022 ../../../../include/qom/object.h:1055
+msgid "``ObjectPropertyAccessor *get``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1021 ../../../../include/qom/object.h:1054
+msgid ""
+"The getter to be called to read a property.  If this is NULL, then the "
+"property cannot be read."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1024 ../../../../include/qom/object.h:1057
+msgid "``ObjectPropertyAccessor *set``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1023 ../../../../include/qom/object.h:1056
+msgid ""
+"the setter to be called to write a property.  If this is NULL, then the "
+"property cannot be written."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1026 ../../../../include/qom/object.h:1059
+msgid "``ObjectPropertyRelease *release``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1025 ../../../../include/qom/object.h:1058
+msgid ""
+"called when the property is removed from the object.  This is meant to allow "
+"a property to free its opaque upon object destruction.  This may be NULL."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1028 ../../../../include/qom/object.h:1061
+msgid "an opaque pointer to pass to the callbacks for the property"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1031
+msgid ""
+"The :c:type:`ObjectProperty <ObjectProperty>`; this can be used to set the "
+"**resolve** callback for child and link properties."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1042
+msgid ""
+"Same as object_property_try_add() with **errp** hardcoded to &error_abort."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1083 ../../../../include/qom/object.h:1309
+msgid "``bool value``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1082 ../../../../include/qom/object.h:1091
+#: ../../../../include/qom/object.h:1100 ../../../../include/qom/object.h:1109
+#: ../../../../include/qom/object.h:1250 ../../../../include/qom/object.h:1277
+#: ../../../../include/qom/object.h:1308 ../../../../include/qom/object.h:1334
+#: ../../../../include/qom/object.h:1360
+msgid "the value to be written to the property"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1084 ../../../../include/qom/object.h:1093
+#: ../../../../include/qom/object.h:1102 ../../../../include/qom/object.h:1111
+msgid "Set the property default value."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1092 ../../../../include/qom/object.h:1251
+msgid "``const char *value``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1101 ../../../../include/qom/object.h:1335
+msgid "``int64_t value``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1110 ../../../../include/qom/object.h:1361
+msgid "``uint64_t value``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1120 ../../../../include/qom/object.h:1132
+msgid "Look up a property for an object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1122 ../../../../include/qom/object.h:1134
+#: ../../../../include/qom/object.h:1147 ../../../../include/qom/object.h:1160
+msgid "Return its :c:type:`ObjectProperty <ObjectProperty>` if found, or NULL."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1130 ../../../../include/qom/object.h:1156
+#: ../../../../include/qom/object.h:1237 ../../../../include/qom/object.h:1251
+#: ../../../../include/qom/object.h:1264 ../../../../include/qom/object.h:1278
+#: ../../../../include/qom/object.h:1295 ../../../../include/qom/object.h:1309
+#: ../../../../include/qom/object.h:1322 ../../../../include/qom/object.h:1335
+#: ../../../../include/qom/object.h:1348 ../../../../include/qom/object.h:1361
+#: ../../../../include/qom/object.h:1374 ../../../../include/qom/object.h:1387
+#: ../../../../include/qom/object.h:1403 ../../../../include/qom/object.h:1417
+#: ../../../../include/qom/object.h:1431 ../../../../include/qom/object.h:1443
+msgid "returns an error if this function fails"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1142 ../../../../include/qom/object.h:1154
+msgid "the object class"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1145 ../../../../include/qom/object.h:1158
+msgid "Look up a property for an object class."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1175 ../../../../include/qom/object.h:1202
+#: ../../../../include/qom/object.h:1219
+msgid "``ObjectPropertyIterator *iter``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1173 ../../../../include/qom/object.h:1200
+#: ../../../../include/qom/object.h:1217
+msgid "the iterator instance"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1176
+msgid ""
+"Initializes an iterator for traversing all properties registered against an "
+"object instance, its class and all parent classes."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1179 ../../../../include/qom/object.h:1206
+msgid ""
+"It is forbidden to modify the property list while iterating, whether "
+"removing or adding properties."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1182
+msgid "Typical usage pattern would be"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1184
+msgid "Using object property iterators"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1184
+msgid ""
+"  ObjectProperty *prop;\n"
+"  ObjectPropertyIterator iter;\n"
+"\n"
+"  object_property_iter_init(&iter, obj);\n"
+"  while ((prop = object_property_iter_next(&iter))) {\n"
+"    ... do something with prop ...\n"
+"  }"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1201
+msgid "the class"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1203
+msgid ""
+"Initializes an iterator for traversing all properties registered against an "
+"object class and all parent classes."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1209
+msgid ""
+"This can be used on abstract classes as it does not create a temporary "
+"instance."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1219
+msgid ""
+"Return the next available property. If no further properties are available, "
+"a ``NULL`` value will be returned and the **iter** pointer should not be "
+"used again after this point without re-initializing it."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1224
+msgid "the next property, or ``NULL`` when all properties have been traversed."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1235
+msgid ""
+"the visitor that will receive the property value.  This should be an Output "
+"visitor and the data will be written with **name** as the name."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1239
+msgid "Reads a property from a object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1253
+msgid "Writes a string value to a property."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1266
+msgid ""
+"the value of the property, converted to a C string, or NULL if an error "
+"occurs (including when the property value is not a string). The caller "
+"should free the string."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1278
+msgid "``Object *value``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1280
+msgid "Writes an object's canonical path to a property."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1282
+msgid ""
+"If the link property was created with ``OBJ_PROP_LINK_STRONG`` bit, the old "
+"target object is unreferenced, and a reference is added to the new target "
+"object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1297
+msgid ""
+"the value of the property, resolved from a path to an Object, or NULL if an "
+"error occurs (including when the property value is not a string or not a "
+"valid object path)."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1311
+msgid "Writes a bool value to a property."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1324
+msgid ""
+"the value of the property, converted to a boolean, or false if an error "
+"occurs (including when the property value is not a bool)."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1337
+msgid "Writes an integer value to a property."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1350
+msgid ""
+"the value of the property, converted to an integer, or -1 if an error occurs "
+"(including when the property value is not an integer)."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1363
+msgid "Writes an unsigned integer value to a property."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1376
+msgid ""
+"the value of the property, converted to an unsigned integer, or 0 an error "
+"occurs (including when the property value is not an integer)."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1386 ../../../../include/qom/object.h:1718
+msgid "the name of the enum data type"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1389
+msgid ""
+"the value of the property, converted to an integer (which can't be "
+"negative), or -1 on error (including when the property value is not an enum)."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1400
+msgid ""
+"the visitor that will be used to write the property value.  This should be "
+"an Input visitor and the data will be first read with **name** as the name "
+"and then written as the property value."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1405
+msgid "Writes a property to a object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1417
+msgid "``const char *string``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1416
+msgid "the string that will be used to parse the property value."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1419
+msgid "Parses a string and writes the result into a property of an object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1431
+msgid "``bool human``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1430
+msgid "if true, print for human consumption"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1433
+msgid ""
+"Returns a string representation of the value of the property.  The caller "
+"shall free the string."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1445
+msgid "The type name of the property."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1454 ../../../../include/qom/object.h:1462
+#: ../../../../include/qom/object.h:1473
+msgid "``void``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1455 ../../../../include/qom/object.h:1463
+#: ../../../../include/qom/object.h:1474
+msgid "no arguments"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1453
+msgid "the root object of the composition tree"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1461
+msgid ""
+"Get the container object that holds user created object instances. This is "
+"the object at path \"/objects\""
+msgstr ""
+
+#: ../../../../include/qom/object.h:1465
+msgid "the user object container"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1472
+msgid ""
+"Get the container object that holds internally used object instances.  Any "
+"object which is put into this container must not be user visible, and it "
+"will not be exposed in the QOM tree."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1476
+msgid "the internal object container"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1484
+msgid ""
+"The final component in the object's canonical path.  The canonical path is "
+"the path within the composition tree starting from the root. ``NULL`` if the "
+"object doesn't have a parent (and thus a canonical path)."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1494
+msgid ""
+"The canonical path for a object, newly allocated.  This is the path within "
+"the composition tree starting from the root.  Use g_free() to free it."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1504 ../../../../include/qom/object.h:1529
+#: ../../../../include/qom/object.h:1550 ../../../../include/qom/object.h:1945
+msgid "``const char *path``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1502 ../../../../include/qom/object.h:1527
+#: ../../../../include/qom/object.h:1549
+msgid "the path to resolve"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1504 ../../../../include/qom/object.h:1530
+msgid "``bool *ambiguous``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1503 ../../../../include/qom/object.h:1529
+msgid ""
+"returns true if the path resolution failed because of an ambiguous match"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1506
+msgid ""
+"There are two types of supported paths--absolute paths and partial paths."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1508
+msgid ""
+"Absolute paths are derived from the root object and can follow child<> or "
+"link<> properties.  Since they can follow link<> properties, they can be "
+"arbitrarily long.  Absolute paths look like absolute filenames and are "
+"prefixed with a leading slash."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1513
+msgid ""
+"Partial paths look like relative filenames.  They do not begin with a "
+"prefix.  The matching rules for partial paths are subtle but designed to "
+"make specifying objects easy.  At each level of the composition tree, the "
+"partial path is matched as an absolute path.  The first match is not "
+"returned.  At least two matches are searched for.  A successful result is "
+"only returned if only one match is found.  If more than one match is found, "
+"a flag is returned to indicate that the match was ambiguous."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1521 ../../../../include/qom/object.h:1541
+msgid "The matched object or NULL on path lookup failure."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1528
+msgid "the type to look for."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1532
+msgid ""
+"This is similar to object_resolve_path.  However, when looking for a partial "
+"path only matches that implement the given type are considered. This "
+"restricts the search and avoids spuriously flagging matches as ambiguous."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1537
+msgid ""
+"For both partial and absolute paths, the return value goes through a dynamic "
+"cast to **typename**.  This is important if either the link, or the typename "
+"itself are of interface types."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1548 ../../../../include/qom/object.h:1560
+msgid "the object in which to resolve the path"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1551
+msgid ""
+"This is like object_resolve_path(), except paths not starting with a slash "
+"are relative to **parent**."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1554 ../../../../include/qom/object.h:1566
+msgid "The resolved object or NULL on path lookup failure."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1561
+msgid "the component to resolve."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1563
+msgid ""
+"This is similar to object_resolve_path with an absolute path, but it only "
+"resolves one element (**part**) and takes the others from **parent**."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1575 ../../../../include/qom/object.h:1597
+#: ../../../../include/qom/object.h:1618
+msgid "``Object *child``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1574 ../../../../include/qom/object.h:1596
+#: ../../../../include/qom/object.h:1617
+msgid "the child object"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1577
+msgid ""
+"Child properties form the composition tree.  All objects need to be a child "
+"of another object.  Objects can only be a child of one object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1580
+msgid ""
+"There is no way for a child to determine what its parent is.  It is not a "
+"bidirectional relationship.  This is by design."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1583
+msgid ""
+"The value of a child property as a C string will be the child object's "
+"canonical path. It can be retrieved using object_property_get_str(). The "
+"child object itself can be retrieved using object_property_get_link()."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1587 ../../../../include/qom/object.h:1655
+#: ../../../../include/qom/object.h:1681 ../../../../include/qom/object.h:1703
+#: ../../../../include/qom/object.h:1726 ../../../../include/qom/object.h:1750
+#: ../../../../include/qom/object.h:1778 ../../../../include/qom/object.h:1799
+#: ../../../../include/qom/object.h:1820 ../../../../include/qom/object.h:1841
+#: ../../../../include/qom/object.h:1867 ../../../../include/qom/object.h:1886
+msgid "The newly added property on success, or ``NULL`` on failure."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1598
+msgid ""
+"Same as object_property_try_add_child() with **errp** hardcoded to "
+"&error_abort"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1620
+msgid ""
+"The default implementation of the object_property_add_link() check() "
+"callback function.  It allows the link property to be set and never returns "
+"an error."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1631
+msgid "the qobj type of the link"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1633
+msgid "``Object **targetp``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1632
+msgid "a pointer to where the link object reference is stored"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1634
+msgid ""
+"``void (*check)(const Object *obj, const char *name, Object *val, Error "
+"**errp)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1633
+msgid "callback to veto setting or NULL if the property is read-only"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1635
+msgid "``ObjectPropertyLinkFlags flags``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1634
+msgid "additional options for the link"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1636
+msgid ""
+"Links establish relationships between objects.  Links are unidirectional "
+"although two links can be combined to form a bidirectional relationship "
+"between objects."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1640
+msgid "Links form the graph in the object model."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1642
+msgid ""
+"The **check\\(\\)** callback is invoked when object_property_set_link() is "
+"called and can raise an error to prevent the link being set.  If **check** "
+"is NULL, the property is read-only and cannot be set."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1647
+msgid ""
+"Ownership of the pointer that **child** points to is transferred to the link "
+"property.  The reference count for ***child** is managed by the property "
+"from after the function returns till the property is deleted with "
+"object_property_del().  If the **flags** ``OBJ_PROP_LINK_STRONG`` bit is "
+"set, the reference count is decremented when the property is deleted or "
+"modified."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1675
+msgid "``char *(*get)(Object *, Error **)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1674
+msgid ""
+"the getter or NULL if the property is write-only.  This function must return "
+"a string to be freed by g_free()."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1677
+msgid "``void (*set)(Object *, const char *, Error **)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1676 ../../../../include/qom/object.h:1698
+msgid "the setter or NULL if the property is read-only"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1678
+msgid ""
+"Add a string property using getters/setters.  This function will add a "
+"property of type 'string'."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1698
+msgid "``bool (*get)(Object *, Error **)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1697 ../../../../include/qom/object.h:1745
+msgid "the getter or NULL if the property is write-only."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1699
+msgid "``void (*set)(Object *, bool, Error **)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1700
+msgid ""
+"Add a bool property using getters/setters.  This function will add a "
+"property of type 'bool'."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1720
+msgid "``const QEnumLookup *lookup``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1719
+msgid "enum value namelookup table"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1721
+msgid "``int (*get)(Object *, Error **)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1720
+msgid "the getter or ``NULL`` if the property is write-only."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1722
+msgid "``void (*set)(Object *, int, Error **)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1721
+msgid "the setter or ``NULL`` if the property is read-only"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1723
+msgid ""
+"Add an enum property using getters/setters.  This function will add a "
+"property of type '**typename**'."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1746
+msgid "``void (*get)(Object *, struct tm *, Error **)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1747
+msgid ""
+"Add a read-only struct tm valued property using a getter function. This "
+"function will add a property of type 'struct tm'."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1773
+msgid "``const uint8_t *v``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1772 ../../../../include/qom/object.h:1793
+#: ../../../../include/qom/object.h:1814 ../../../../include/qom/object.h:1835
+msgid "pointer to value"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1774 ../../../../include/qom/object.h:1795
+#: ../../../../include/qom/object.h:1816 ../../../../include/qom/object.h:1837
+msgid "``ObjectPropertyFlags flags``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1773 ../../../../include/qom/object.h:1794
+#: ../../../../include/qom/object.h:1815 ../../../../include/qom/object.h:1836
+msgid "bitwise-or'd ObjectPropertyFlags"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1775
+msgid ""
+"Add an integer property in memory.  This function will add a property of "
+"type 'uint8'."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1794
+msgid "``const uint16_t *v``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1796
+msgid ""
+"Add an integer property in memory.  This function will add a property of "
+"type 'uint16'."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1815
+msgid "``const uint32_t *v``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1817
+msgid ""
+"Add an integer property in memory.  This function will add a property of "
+"type 'uint32'."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1836
+msgid "``const uint64_t *v``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1838
+msgid ""
+"Add an integer property in memory.  This function will add a property of "
+"type 'uint64'."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1857
+msgid "``Object *target_obj``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1856
+msgid "the object to forward property access to"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1858
+msgid "``const char *target_name``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1857
+msgid "the name of the property on the forwarded object"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1859
+msgid ""
+"Add an alias for a property on an object.  This function will add a property "
+"of the same type as the forwarded property."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1862
+msgid ""
+"The caller must ensure that **target_obj** stays alive as long as this "
+"property exists.  In the case of a child object or an alias on the same "
+"object this will be the case.  For aliases to other objects the caller is "
+"responsible for taking a reference."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1877
+msgid "``Object *target``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1876
+msgid "the object to be referred by the link"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1878
+msgid ""
+"Add an unmodifiable link for a property on an object.  This function will "
+"add a property of type link<TYPE> where TYPE is the type of **target**."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1881
+msgid ""
+"The caller must ensure that **target** stays alive as long as this property "
+"exists.  In the case **target** is a child of **obj**, this will be the "
+"case.  Otherwise, the caller is responsible for taking a reference."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1893
+msgid "the object owning the property"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1896 ../../../../include/qom/object.h:1967
+msgid "``const char *description``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1895
+msgid "the description of the property on the object"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1897
+msgid "Set an object property's description."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1908 ../../../../include/qom/object.h:1925
+msgid "the object whose children will be navigated"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1910 ../../../../include/qom/object.h:1927
+msgid "``int (*fn)(Object *child, void *opaque)``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1909 ../../../../include/qom/object.h:1926
+msgid "the iterator function to be called"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1910 ../../../../include/qom/object.h:1927
+msgid "an opaque value that will be passed to the iterator"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1912
+msgid ""
+"Call **fn** passing each child of **obj** and **opaque** to it, until **fn** "
+"returns non-zero."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1915
+msgid ""
+"It is forbidden to add or remove children from **obj** from the **fn** "
+"callback."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1918 ../../../../include/qom/object.h:1936
+msgid "The last value returned by **fn**, or 0 if there is no child."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1929
+msgid ""
+"Call **fn** passing each child of **obj** and **opaque** to it, until **fn** "
+"returns non-zero. Calls recursively, all child nodes of **obj** will also be "
+"passed all the way down to the leaf nodes of the tree. Depth first ordering."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1933
+msgid ""
+"It is forbidden to add or remove children from **obj** (or its child nodes) "
+"from the **fn** callback."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1945
+msgid "``Object *root``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1943
+msgid "root of the #path, e.g., object_get_root()"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1944
+msgid "path to the container"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1946
+msgid ""
+"Return a container object whose path is **path**.  Create more containers "
+"along the path if necessary."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1949
+msgid "the container object."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1955
+msgid "Name of the Type whose instance_size is required"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1957
+msgid "Returns the instance_size of the given **typename**."
+msgstr ""
+
+#: ../../../../include/qom/object.h:1964
+msgid "the type of the property"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1966
+msgid "``QObject *defval``"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1965
+msgid "the default value"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1966
+msgid "description of the property"
+msgstr ""
+
+#: ../../../../include/qom/object.h:1968
+msgid ""
+"a user-friendly formatted string describing the property for help purposes."
+msgstr ""
