@@ -1,0 +1,245 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/i386/microvm.rst:2
+msgid "'microvm' virtual platform (``microvm``)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:4
+msgid ""
+"``microvm`` is a machine type inspired by ``Firecracker`` and constructed "
+"after its machine model."
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:7
+msgid ""
+"It's a minimalist machine type without ``PCI`` nor ``ACPI`` support, "
+"designed for short-lived guests. microvm also establishes a baseline for "
+"benchmarking and optimizing both QEMU and guest operating systems, since it "
+"is optimized for both boot time and footprint."
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:14
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:16
+msgid "The microvm machine type supports the following devices:"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:18
+msgid "ISA bus"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:19
+msgid "i8259 PIC (optional)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:20
+msgid "i8254 PIT (optional)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:21
+msgid "MC146818 RTC (optional)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:22
+msgid "One ISA serial port (optional)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:23
+msgid "LAPIC"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:24
+msgid "IOAPIC (with kernel-irqchip=split by default)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:25
+msgid "kvmclock (if using KVM)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:26
+msgid "fw_cfg"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:27
+msgid "Up to eight virtio-mmio devices (configured by the user)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:31
+msgid "Limitations"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:33
+msgid "Currently, microvm does *not* support the following features:"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:35
+msgid "PCI-only devices."
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:36
+msgid "Hotplug of any kind."
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:37
+msgid "Live migration across QEMU versions."
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:41
+msgid "Using the microvm machine type"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:44
+msgid "Machine-specific options"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:46
+msgid "It supports the following machine-specific options:"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:48
+msgid "microvm.x-option-roms=bool (Set off to disable loading option ROMs)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:49
+msgid "microvm.pit=OnOffAuto (Enable i8254 PIT)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:50
+msgid ""
+"microvm.isa-serial=bool (Set off to disable the instantiation an ISA serial "
+"port)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:51
+msgid "microvm.pic=OnOffAuto (Enable i8259 PIC)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:52
+msgid "microvm.rtc=OnOffAuto (Enable MC146818 RTC)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:53
+msgid ""
+"microvm.auto-kernel-cmdline=bool (Set off to disable adding virtio-mmio "
+"devices to the kernel cmdline)"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:57
+msgid "Boot options"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:59
+msgid ""
+"By default, microvm uses ``qboot`` as its BIOS, to obtain better boot times, "
+"but it's also compatible with ``SeaBIOS``."
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:62
+msgid ""
+"As no current FW is able to boot from a block device using ``virtio-mmio`` "
+"as its transport, a microvm-based VM needs to be run using a host-side "
+"kernel and, optionally, an initrd image."
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:68
+msgid "Running a microvm-based VM"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:70
+msgid ""
+"By default, microvm aims for maximum compatibility, enabling both legacy and "
+"non-legacy devices. In this example, a VM is created without passing any "
+"additional machine-specific option, using the legacy ``ISA serial`` device "
+"as console::"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:75
+msgid ""
+"$ qemu-system-x86_64 -M microvm \\\n"
+"   -enable-kvm -cpu host -m 512m -smp 2 \\\n"
+"   -kernel vmlinux -append \"earlyprintk=ttyS0 console=ttyS0 root=/dev/vda\" "
+"\\\n"
+"   -nodefaults -no-user-config -nographic \\\n"
+"   -serial stdio \\\n"
+"   -drive id=test,file=test.img,format=raw,if=none \\\n"
+"   -device virtio-blk-device,drive=test \\\n"
+"   -netdev tap,id=tap0,script=no,downscript=no \\\n"
+"   -device virtio-net-device,netdev=tap0"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:85
+msgid ""
+"While the example above works, you might be interested in reducing the "
+"footprint further by disabling some legacy devices. If you're using ``KVM``, "
+"you can disable the ``RTC``, making the Guest rely on ``kvmclock`` "
+"exclusively. Additionally, if your host's CPUs have the ``TSC_DEADLINE`` "
+"feature, you can also disable both the i8259 PIC and the i8254 PIT (make "
+"sure you're also emulating a CPU with such feature in the guest)."
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:93
+msgid "This is an example of a VM with all optional legacy features disabled::"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:96
+msgid ""
+"$ qemu-system-x86_64 \\\n"
+"   -M microvm,x-option-roms=off,pit=off,pic=off,isa-serial=off,rtc=off \\\n"
+"   -enable-kvm -cpu host -m 512m -smp 2 \\\n"
+"   -kernel vmlinux -append \"console=hvc0 root=/dev/vda\" \\\n"
+"   -nodefaults -no-user-config -nographic \\\n"
+"   -chardev stdio,id=virtiocon0 \\\n"
+"   -device virtio-serial-device \\\n"
+"   -device virtconsole,chardev=virtiocon0 \\\n"
+"   -drive id=test,file=test.img,format=raw,if=none \\\n"
+"   -device virtio-blk-device,drive=test \\\n"
+"   -netdev tap,id=tap0,script=no,downscript=no \\\n"
+"   -device virtio-net-device,netdev=tap0"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:111
+msgid "Triggering a guest-initiated shut down"
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:113
+msgid ""
+"As the microvm machine type includes just a small set of system devices, "
+"some x86 mechanisms for rebooting or shutting down the system, like sending "
+"a key sequence to the keyboard or writing to an ACPI register, doesn't have "
+"any effect in the VM."
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:118
+msgid ""
+"The recommended way to trigger a guest-initiated shut down is by generating "
+"a ``triple-fault``, which will cause the VM to initiate a reboot. "
+"Additionally, if the ``-no-reboot`` argument is present in the command line, "
+"QEMU will detect this event and terminate its own execution gracefully."
+msgstr ""
+
+#: ../../../system/i386/microvm.rst:124
+msgid ""
+"Linux does support this mechanism, but by default will only be used after "
+"other options have been tried and failed, causing the reboot to be delayed "
+"by a small number of seconds. It's possible to instruct it to try the triple-"
+"fault mechanism first, by adding ``reboot=t`` to the kernel's command line."
+msgstr ""

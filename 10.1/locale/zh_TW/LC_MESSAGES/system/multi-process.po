@@ -1,0 +1,134 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/multi-process.rst:4
+msgid "Multi-process QEMU"
+msgstr ""
+
+#: ../../../system/multi-process.rst:6
+msgid ""
+"This document describes how to configure and use multi-process qemu. For the "
+"design document refer to docs/devel/multi-process.rst."
+msgstr ""
+
+#: ../../../system/multi-process.rst:10
+msgid "1) Configuration"
+msgstr ""
+
+#: ../../../system/multi-process.rst:12
+msgid "multi-process is enabled by default for targets that enable KVM"
+msgstr ""
+
+#: ../../../system/multi-process.rst:16
+msgid "2) Usage"
+msgstr ""
+
+#: ../../../system/multi-process.rst:18
+msgid "Multi-process QEMU requires an orchestrator to launch."
+msgstr ""
+
+#: ../../../system/multi-process.rst:20
+msgid "Following is a description of command-line used to launch mpqemu."
+msgstr ""
+
+#: ../../../system/multi-process.rst:22
+msgid "Orchestrator:"
+msgstr ""
+
+#: ../../../system/multi-process.rst:24
+msgid "The Orchestrator creates a unix socketpair"
+msgstr ""
+
+#: ../../../system/multi-process.rst:26
+msgid ""
+"It launches the remote process and passes one of the sockets to it via "
+"command-line."
+msgstr ""
+
+#: ../../../system/multi-process.rst:29
+msgid ""
+"It then launches QEMU and specifies the other socket as an option to the "
+"Proxy device object"
+msgstr ""
+
+#: ../../../system/multi-process.rst:32
+msgid "Remote Process:"
+msgstr ""
+
+#: ../../../system/multi-process.rst:34
+msgid ""
+"QEMU can enter remote process mode by using the \"remote\" machine option."
+msgstr ""
+
+#: ../../../system/multi-process.rst:37
+msgid ""
+"The orchestrator creates a \"remote-object\" with details about the device "
+"and the file descriptor for the device"
+msgstr ""
+
+#: ../../../system/multi-process.rst:40
+msgid ""
+"The remaining options are no different from how one launches QEMU with "
+"devices."
+msgstr ""
+
+#: ../../../system/multi-process.rst:43
+msgid "Example command-line for the remote process is as follows:"
+msgstr ""
+
+#: ../../../system/multi-process.rst:45
+msgid ""
+"/usr/bin/qemu-system-x86_64                                        \\ -"
+"machine x-remote                                                  \\ -device "
+"lsi53c895a,id=lsi0                                         \\ -drive "
+"id=drive_image2,file=/build/ol7-nvme-test-1.qcow2           \\ -device scsi-"
+"hd,id=drive2,drive=drive_image2,bus=lsi0.0,scsi-id=0  \\ -object x-remote-"
+"object,id=robj1,devid=lsi0,fd=4,"
+msgstr ""
+
+#: ../../../system/multi-process.rst:52
+msgid "QEMU:"
+msgstr ""
+
+#: ../../../system/multi-process.rst:54
+msgid ""
+"Since parts of the RAM are shared between QEMU & remote process, a memory-"
+"backend-memfd is required to facilitate this, as follows:"
+msgstr ""
+
+#: ../../../system/multi-process.rst:57
+msgid "-object memory-backend-memfd,id=mem,size=2G"
+msgstr ""
+
+#: ../../../system/multi-process.rst:59
+msgid ""
+"A \"x-pci-proxy-dev\" device is created for each of the PCI devices emulated "
+"in the remote process. A \"socket\" sub-option specifies the other end of "
+"unix channel created by orchestrator. The \"id\" sub-option must be "
+"specified and should be the same as the \"id\" specified for the remote PCI "
+"device"
+msgstr ""
+
+#: ../../../system/multi-process.rst:64
+msgid "Example commandline for QEMU is as follows:"
+msgstr ""
+
+#: ../../../system/multi-process.rst:66
+msgid "-device x-pci-proxy-dev,id=lsi0,socket=3"
+msgstr ""

@@ -1,0 +1,305 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/i386/sgx.rst:2
+msgid "Software Guard eXtensions (SGX)"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:5
+msgid "Overview"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:7
+msgid ""
+"Intel Software Guard eXtensions (SGX) is a set of instructions and "
+"mechanisms for memory accesses in order to provide security accesses for "
+"sensitive applications and data. SGX allows an application to use its "
+"particular address space as an *enclave*, which is a protected area provides "
+"confidentiality and integrity even in the presence of privileged malware. "
+"Accesses to the enclave memory area from any software not resident in the "
+"enclave are prevented, including those from privileged software."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:16
+msgid "Virtual SGX"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:18
+msgid ""
+"SGX feature is exposed to guest via SGX CPUID. Looking at SGX CPUID, we can "
+"report the same CPUID info to guest as on host for most of SGX CPUID. With "
+"reporting the same CPUID guest is able to use full capacity of SGX, and KVM "
+"doesn't need to emulate those info."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:23
+msgid ""
+"The guest's EPC base and size are determined by QEMU, and KVM needs QEMU to "
+"notify such info to it before it can initialize SGX for guest."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:27
+msgid "Virtual EPC"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:29
+msgid ""
+"By default, QEMU does not assign EPC to a VM, i.e. fully enabling SGX in a "
+"VM requires explicit allocation of EPC to the VM. Similar to other "
+"specialized memory types, e.g. hugetlbfs, EPC is exposed as a memory backend."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:33
+msgid ""
+"SGX EPC is enumerated through CPUID, i.e. EPC \"devices\" need to be "
+"realized prior to realizing the vCPUs themselves, which occurs long before "
+"generic devices are parsed and realized.  This limitation means that EPC "
+"does not require -maxmem as EPC is not treated as {cold,hot}plugged memory."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:38
+msgid ""
+"QEMU does not artificially restrict the number of EPC sections exposed to a "
+"guest, e.g. QEMU will happily allow you to create 64 1M EPC sections. Be "
+"aware that some kernels may not recognize all EPC sections, e.g. the Linux "
+"SGX driver is hardwired to support only 8 EPC sections."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:43
+msgid ""
+"The following QEMU snippet creates two EPC sections, with 64M pre-allocated "
+"to the VM and an additional 28M mapped but not allocated::"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:46
+msgid ""
+"-object memory-backend-epc,id=mem1,size=64M,prealloc=on \\\n"
+"-object memory-backend-epc,id=mem2,size=28M \\\n"
+"-M sgx-epc.0.memdev=mem1,sgx-epc.1.memdev=mem2"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:50
+msgid "Note:"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:52
+msgid ""
+"The size and location of the virtual EPC are far less restricted compared to "
+"physical EPC. Because physical EPC is protected via range registers, the "
+"size of the physical EPC must be a power of two (though software sees a "
+"subset of the full EPC, e.g. 92M or 128M) and the EPC must be naturally "
+"aligned.  KVM SGX's virtual EPC is purely a software construct and only "
+"requires the size and location to be page aligned. QEMU enforces the EPC "
+"size is a multiple of 4k and will ensure the base of the EPC is 4k aligned. "
+"To simplify the implementation, EPC is always located above 4g in the guest "
+"physical address space."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:63
+msgid "Migration"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:65
+msgid ""
+"QEMU/KVM doesn't prevent live migrating SGX VMs, although from hardware's "
+"perspective, SGX doesn't support live migration, since both EPC and the SGX "
+"key hierarchy are bound to the physical platform. However live migration can "
+"be supported in the sense if guest software stack can support recreating "
+"enclaves when it suffers sudden lose of EPC; and if guest enclaves can "
+"detect SGX keys being changed, and handle gracefully. For instance, when "
+"ERESUME fails with #PF.SGX, guest software can gracefully detect it and "
+"recreate enclaves; and when enclave fails to unseal sensitive information "
+"from outside, it can detect such error and sensitive information can be "
+"provisioned to it again."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:76
+msgid "CPUID"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:78
+msgid ""
+"Due to its myriad dependencies, SGX is currently not listed as supported in "
+"any of QEMU's built-in CPU configuration. To expose SGX (and SGX Launch "
+"Control) to a guest, you must either use ``-cpu host`` to pass-through the "
+"host CPU model, or explicitly enable SGX when using a built-in CPU model, e."
+"g. via ``-cpu <model>,+sgx`` or ``-cpu <model>,+sgx,+sgxlc``."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:84
+msgid ""
+"All SGX sub-features enumerated through CPUID, e.g. SGX2, MISCSELECT, "
+"ATTRIBUTES, etc... can be restricted via CPUID flags. Be aware that "
+"enforcing restriction of MISCSELECT, ATTRIBUTES and XFRM requires "
+"intercepting ECREATE, i.e. may marginally reduce SGX performance in the "
+"guest. All SGX sub-features controlled via -cpu are prefixed with \"sgx\", e."
+"g.::"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:90
+msgid ""
+"$ qemu-system-x86_64 -cpu help | xargs printf \"%s\\n\" | grep sgx\n"
+"sgx\n"
+"sgx-debug\n"
+"sgx-encls-c\n"
+"sgx-enclv\n"
+"sgx-exinfo\n"
+"sgx-kss\n"
+"sgx-mode64\n"
+"sgx-provisionkey\n"
+"sgx-tokenkey\n"
+"sgx1\n"
+"sgx2\n"
+"sgxlc"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:104
+msgid ""
+"The following QEMU snippet passes through the host CPU but restricts access "
+"to the provision and EINIT token keys::"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:107
+msgid "-cpu host,-sgx-provisionkey,-sgx-tokenkey"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:109
+msgid ""
+"SGX sub-features cannot be emulated, i.e. sub-features that are not present "
+"in hardware cannot be forced on via '-cpu'."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:113
+msgid "Virtualize SGX Launch Control"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:115
+msgid ""
+"QEMU SGX support for Launch Control (LC) is passive, in the sense that it "
+"does not actively change the LC configuration.  QEMU SGX provides the user "
+"the ability to set/clear the CPUID flag (and by extension the associated "
+"IA32_FEATURE_CONTROL MSR bit in fw_cfg) and saves/restores the LE Hash MSRs "
+"when getting/putting guest state, but QEMU does not add new controls to "
+"directly modify the LC configuration.  Similar to hardware behavior, locking "
+"the LC configuration to a non-Intel value is left to guest firmware.  Unlike "
+"host bios setting for SGX launch control(LC), there is no special bios "
+"setting for SGX guest by our design. If host is in locked mode, we can still "
+"allow creating VM with SGX."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:127
+msgid "Feature Control"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:129
+msgid ""
+"QEMU SGX updates the ``etc/msr_feature_control`` fw_cfg entry to set the SGX "
+"(bit 18) and SGX LC (bit 17) flags based on their respective CPUID support, "
+"i.e. existing guest firmware will automatically set SGX and SGX LC "
+"accordingly, assuming said firmware supports fw_cfg.msr_feature_control."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:135
+msgid "Launching a guest"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:137
+msgid "To launch a SGX guest:"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:141
+msgid ""
+"|qemu_system_x86| \\\\\n"
+" -cpu host,+sgx-provisionkey \\\\\n"
+" -object memory-backend-epc,id=mem1,size=64M,prealloc=on \\\\\n"
+" -M sgx-epc.0.memdev=mem1,sgx-epc.0.node=0"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:146
+msgid ""
+"Utilizing SGX in the guest requires a kernel/OS with SGX support. The "
+"support can be determined in guest by::"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:149
+msgid "$ grep sgx /proc/cpuinfo"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:151
+msgid "and SGX epc info by::"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:153
+msgid ""
+"$ dmesg | grep sgx\n"
+"[    0.182807] sgx: EPC section 0x140000000-0x143ffffff\n"
+"[    0.183695] sgx: [Firmware Bug]: Unable to map EPC section to online "
+"node. Fallback to the NUMA node 0."
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:157
+msgid "To launch a SGX numa guest:"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:161
+msgid ""
+"|qemu_system_x86| \\\\\n"
+" -cpu host,+sgx-provisionkey \\\\\n"
+" -object memory-backend-ram,size=2G,host-nodes=0,policy=bind,id=node0 \\\\\n"
+" -object memory-backend-epc,id=mem0,size=64M,prealloc=on,host-nodes=0,"
+"policy=bind \\\\\n"
+" -numa node,nodeid=0,cpus=0-1,memdev=node0 \\\\\n"
+" -object memory-backend-ram,size=2G,host-nodes=1,policy=bind,id=node1 \\\\\n"
+" -object memory-backend-epc,id=mem1,size=28M,prealloc=on,host-nodes=1,"
+"policy=bind \\\\\n"
+" -numa node,nodeid=1,cpus=2-3,memdev=node1 \\\\\n"
+" -M sgx-epc.0.memdev=mem0,sgx-epc.0.node=0,sgx-epc.1.memdev=mem1,sgx-epc.1."
+"node=1"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:171
+msgid "and SGX epc numa info by::"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:173
+msgid ""
+"$ dmesg | grep sgx\n"
+"[    0.369937] sgx: EPC section 0x180000000-0x183ffffff\n"
+"[    0.370259] sgx: EPC section 0x184000000-0x185bfffff\n"
+"\n"
+"$ dmesg | grep SRAT\n"
+"[    0.009981] ACPI: SRAT: Node 0 PXM 0 [mem 0x180000000-0x183ffffff]\n"
+"[    0.009982] ACPI: SRAT: Node 1 PXM 1 [mem 0x184000000-0x185bfffff]"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:182
+msgid "References"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:184
+msgid "`SGX Homepage <https://software.intel.com/sgx>`__"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:186
+msgid "`SGX SDK <https://github.com/intel/linux-sgx.git>`__"
+msgstr ""
+
+#: ../../../system/i386/sgx.rst:188
+msgid "SGX specification: Intel SDM Volume 3"
+msgstr ""

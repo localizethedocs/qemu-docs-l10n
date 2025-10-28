@@ -1,0 +1,379 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/ppc/ppce500.rst:2
+msgid "ppce500 generic platform (``ppce500``)"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:4
+msgid ""
+"QEMU for PPC supports a special ``ppce500`` machine designed for emulation "
+"and virtualization purposes."
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:8
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:10
+msgid "The ``ppce500`` machine supports the following devices:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:12
+msgid "PowerPC e500 series core (e500v2/e500mc/e5500/e6500)"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:13
+msgid "Configuration, Control, and Status Register (CCSR)"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:14
+msgid "Multicore Programmable Interrupt Controller (MPIC) with MSI support"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:15
+msgid "1 16550A UART device"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:16
+msgid "1 Freescale MPC8xxx I2C controller"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:17
+msgid "1 Pericom pt7c4338 RTC via I2C"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:18
+msgid "1 Freescale MPC8xxx GPIO controller"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:19
+msgid "Power-off functionality via one GPIO pin"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:20
+msgid "1 Freescale MPC8xxx PCI host controller"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:21
+msgid "VirtIO devices via PCI bus"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:22
+msgid "1 Freescale Enhanced Secure Digital Host controller (eSDHC)"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:23
+msgid "1 Freescale Enhanced Triple Speed Ethernet controller (eTSEC)"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:26
+msgid "Hardware configuration information"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:28
+msgid ""
+"The ``ppce500`` machine automatically generates a device tree blob (\"dtb\") "
+"which it passes to the guest, if there is no ``-dtb`` option. This provides "
+"information about the addresses, interrupt lines and other configuration of "
+"the various devices in the system."
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:33
+msgid ""
+"If users want to provide their own DTB, they can use the ``-dtb`` option. "
+"These DTBs should have the following requirements:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:36
+msgid ""
+"The number of subnodes under /cpus node should match QEMU's ``-smp`` option"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:37
+msgid "The /memory reg size should match QEMU’s selected ram_size via ``-m``"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:39
+msgid ""
+"Both ``qemu-system-ppc`` and ``qemu-system-ppc64`` provide emulation for the "
+"following 32-bit PowerPC CPUs:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:42
+msgid "e500v2"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:43
+msgid "e500mc"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:45
+msgid ""
+"Additionally ``qemu-system-ppc64`` provides support for the following 64-bit "
+"PowerPC CPUs:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:48
+msgid "e5500"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:49
+msgid "e6500"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:51
+msgid ""
+"The CPU type can be specified via the ``-cpu`` command line. If not "
+"specified, it creates a machine with e500v2 core. The following example "
+"shows an e6500 based machine creation:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:55
+msgid "$ qemu-system-ppc64 -nographic -M ppce500 -cpu e6500"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:60
+msgid "Boot options"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:62
+msgid ""
+"The ``ppce500`` machine can start using the standard -kernel functionality "
+"for loading a payload like an OS kernel (e.g.: Linux), or U-Boot firmware."
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:65
+msgid ""
+"When -bios is omitted, the default pc-bios/u-boot.e500 firmware image is "
+"used as the BIOS. QEMU follows below truth table to select which payload to "
+"execute:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:69
+msgid "-bios"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:69
+msgid "-kernel"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:69
+msgid "payload"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:71 ../../../system/ppc/ppce500.rst:72
+msgid "N"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:71 ../../../system/ppc/ppce500.rst:73
+msgid "u-boot"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:72 ../../../system/ppc/ppce500.rst:73
+msgid "Y"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:72
+msgid "kernel"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:73
+msgid "don't care"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:76
+msgid ""
+"When both -bios and -kernel are present, QEMU loads U-Boot and U-Boot in "
+"turns automatically loads the kernel image specified by the -kernel "
+"parameter via U-Boot's built-in \"bootm\" command, hence a legacy uImage "
+"format is required in such scenario."
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:82
+msgid "Running Linux kernel"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:84
+msgid ""
+"Linux mainline v5.11 release is tested at the time of writing. To build a "
+"Linux mainline kernel that can be booted by the ``ppce500`` machine in 64-"
+"bit mode, simply configure the kernel using the defconfig configuration:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:88
+msgid ""
+"$ export ARCH=powerpc\n"
+"$ export CROSS_COMPILE=powerpc-linux-\n"
+"$ make corenet64_smp_defconfig\n"
+"$ make menuconfig"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:95
+msgid "then manually select the following configuration:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:97
+msgid ""
+"Platform support > Freescale Book-E Machine Type > QEMU generic e500 platform"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:99
+msgid ""
+"To boot the newly built Linux kernel in QEMU with the ``ppce500`` machine:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:101
+msgid ""
+"$ qemu-system-ppc64 -M ppce500 -cpu e5500 -smp 4 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel vmlinux \\\n"
+"    -initrd /path/to/rootfs.cpio \\\n"
+"    -append \"root=/dev/ram\""
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:109
+msgid ""
+"To build a Linux mainline kernel that can be booted by the ``ppce500`` "
+"machine in 32-bit mode, use the same 64-bit configuration steps except the "
+"defconfig file should use corenet32_smp_defconfig."
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:113
+msgid "To boot the 32-bit Linux kernel:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:115
+msgid ""
+"$ qemu-system-ppc64 -M ppce500 -cpu e500mc -smp 4 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel vmlinux \\\n"
+"    -initrd /path/to/rootfs.cpio \\\n"
+"    -append \"root=/dev/ram\""
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:124
+msgid "Running U-Boot"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:126
+msgid ""
+"U-Boot mainline v2021.07 release is tested at the time of writing. To build "
+"a U-Boot mainline bootloader that can be booted by the ``ppce500`` machine, "
+"use the qemu-ppce500_defconfig with similar commands as described above for "
+"Linux:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:130
+msgid ""
+"$ export CROSS_COMPILE=powerpc-linux-\n"
+"$ make qemu-ppce500_defconfig"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:135
+msgid "You will get u-boot file in the build tree."
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:137
+msgid ""
+"When U-Boot boots, you will notice the following if using with ``-cpu "
+"e6500``:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:139
+msgid ""
+"CPU:   Unknown, Version: 0.0, (0x00000000)\n"
+"Core:  e6500, Version: 2.0, (0x80400020)"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:144
+msgid ""
+"This is because we only specified a core name to QEMU and it does not have a "
+"meaningful SVR value which represents an actual SoC that integrates such "
+"core. You can specify a real world SoC device that QEMU has built-in support "
+"but all these SoCs are e500v2 based MPC85xx series, hence you cannot test "
+"anything built for P4080 (e500mc), P5020 (e5500) and T2080 (e6500)."
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:151
+msgid "Networking"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:153
+msgid ""
+"By default a VirtIO standard PCI networking device is connected as an "
+"ethernet interface at PCI address 0.1.0, but we can switch that to an e1000 "
+"NIC by:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:156
+msgid ""
+"$ qemu-system-ppc64 -M ppce500 -smp 4 -m 2G \\\n"
+"                    -display none -serial stdio \\\n"
+"                    -bios u-boot \\\n"
+"                    -nic tap,ifname=tap0,script=no,downscript=no,model=e1000"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:163
+msgid ""
+"The QEMU ``ppce500`` machine can also dynamically instantiate an eTSEC "
+"device if “-device eTSEC” is given to QEMU:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:166
+msgid ""
+"-netdev tap,ifname=tap0,script=no,downscript=no,id=net0 -device eTSEC,"
+"netdev=net0"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:171
+msgid "Root file system on flash drive"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:173
+msgid ""
+"Rather than using a root file system on ram disk, it is possible to have it "
+"on CFI flash. Given an ext2 image whose size must be a power of two, it can "
+"be used as follows:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:177
+msgid ""
+"$ qemu-system-ppc64 -M ppce500 -cpu e500mc -smp 4 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel vmlinux \\\n"
+"    -drive if=pflash,file=/path/to/rootfs.ext2,format=raw \\\n"
+"    -append \"rootwait root=/dev/mtdblock0\""
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:185
+msgid ""
+"Alternatively, the root file system can also reside on an emulated SD card "
+"whose size must again be a power of two:"
+msgstr ""
+
+#: ../../../system/ppc/ppce500.rst:188
+msgid ""
+"$ qemu-system-ppc64 -M ppce500 -cpu e500mc -smp 4 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel vmlinux \\\n"
+"    -device sd-card,drive=mydrive \\\n"
+"    -drive id=mydrive,if=none,file=/path/to/rootfs.ext2,format=raw \\\n"
+"    -append \"rootwait root=/dev/mmcblk0\""
+msgstr ""
