@@ -1,0 +1,268 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/acpi_mem_hotplug.rst:2
+msgid "QEMU<->ACPI BIOS memory hotplug interface"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:4
+msgid ""
+"ACPI BIOS GPE.3 handler is dedicated for notifying OS about memory hot-add "
+"and hot-remove events."
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:8
+msgid "Memory hot-plug interface (IO port 0xa00-0xa17, 1-4 byte access)"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:11
+msgid "Read access behavior"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:13
+#: ../../../specs/acpi_mem_hotplug.rst:47
+msgid "[0x0-0x3]"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:14
+msgid "Lo part of memory device phys address"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:15
+#: ../../../specs/acpi_mem_hotplug.rst:51
+msgid "[0x4-0x7]"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:16
+msgid "Hi part of memory device phys address"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:17
+#: ../../../specs/acpi_mem_hotplug.rst:53
+msgid "[0x8-0xb]"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:18
+msgid "Lo part of memory device size in bytes"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:19
+msgid "[0xc-0xf]"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:20
+msgid "Hi part of memory device size in bytes"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:21
+msgid "[0x10-0x13]"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:22
+msgid "Memory device proximity domain"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:23
+#: ../../../specs/acpi_mem_hotplug.rst:57
+msgid "[0x14]"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:24
+msgid "Memory device status fields"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:26
+#: ../../../specs/acpi_mem_hotplug.rst:60
+msgid "bits:"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:28
+#: ../../../specs/acpi_mem_hotplug.rst:62
+msgid "0:"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:29
+msgid "Device is enabled and may be used by guest"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:30
+#: ../../../specs/acpi_mem_hotplug.rst:67
+msgid "1:"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:31
+msgid ""
+"Device insert event, used to distinguish device for which no device check "
+"event to OSPM was issued. It's valid only when bit 1 is set."
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:34
+#: ../../../specs/acpi_mem_hotplug.rst:71
+msgid "2:"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:35
+msgid ""
+"Device remove event, used to distinguish device for which no device eject "
+"request to OSPM was issued."
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:37
+msgid "3-7:"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:38
+msgid "reserved and should be ignored by OSPM"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:40
+msgid "[0x15-0x17]"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:41
+msgid "reserved"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:44
+msgid "Write access behavior"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:48
+msgid ""
+"Memory device slot selector, selects active memory device. All following "
+"accesses to other registers in 0xa00-0xa17 region will read/store data from/"
+"to selected memory device."
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:52
+msgid "OST event code reported by OSPM"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:54
+msgid "OST status code reported by OSPM"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:55
+msgid "[0xc-0x13]"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:56
+msgid "reserved, writes into it are ignored"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:58
+msgid "Memory device control fields"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:63
+msgid ""
+"reserved, OSPM must clear it before writing to register. Due to BUG in "
+"versions prior 2.4 that field isn't cleared when other fields are written. "
+"Keep it reserved and don't try to reuse it."
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:68
+msgid ""
+"if set to 1 clears device insert event, set by OSPM after it has emitted "
+"device check event for the selected memory device"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:72
+msgid ""
+"if set to 1 clears device remove event, set by OSPM after it has emitted "
+"device eject request for the selected memory device"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:75
+msgid "3:"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:76
+msgid ""
+"if set to 1 initiates device eject, set by OSPM when it triggers memory "
+"device removal and calls _EJ0 method"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:78
+msgid "4-7:"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:79
+msgid "reserved, OSPM must clear them before writing to register"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:81
+msgid ""
+"Selecting memory device slot beyond present range has no effect on platform:"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:83
+msgid ""
+"write accesses to memory hot-plug registers not documented above are ignored"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:84
+msgid ""
+"read accesses to memory hot-plug registers not documented above return all "
+"bits set to 1."
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:88
+msgid "Memory hot remove process diagram"
+msgstr ""
+
+#: ../../../specs/acpi_mem_hotplug.rst:92
+msgid ""
+"+-------------+     +-----------------------+      +------------------+\n"
+"|  1. QEMU    |     | 2. QEMU               |      |3. QEMU           |\n"
+"|  device_del +---->+ device unplug request +----->+Send SCI to guest,|\n"
+"|             |     |         cb            |      |return control to |\n"
+"|             |     |                       |      |management        |\n"
+"+-------------+     +-----------------------+      +------------------+\n"
+"\n"
+"+---------------------------------------------------------------------+\n"
+"\n"
+"+---------------------+              +-------------------------+\n"
+"| OSPM:               | remove event | OSPM:                   |\n"
+"| send Eject Request, |              | Scan memory devices     |\n"
+"| clear remove event  +<-------------+ for event flags         |\n"
+"|                     |              |                         |\n"
+"+---------------------+              +-------------------------+\n"
+"          |\n"
+"          |\n"
+"+---------v--------+            +-----------------------+\n"
+"| Guest OS:        |  success   | OSPM:                 |\n"
+"| process Ejection +----------->+ Execute _EJ0 method,  |\n"
+"| request          |            | set eject bit in flags|\n"
+"+------------------+            +-----------------------+\n"
+"          |failure                         |\n"
+"          v                                v\n"
+"+------------------------+      +-----------------------+\n"
+"| OSPM:                  |      | QEMU:                 |\n"
+"| set OST event & status |      | call device unplug cb |\n"
+"| fields                 |      |                       |\n"
+"+------------------------+      +-----------------------+\n"
+"         |                                  |\n"
+"         v                                  v\n"
+"+------------------+              +-------------------+\n"
+"|QEMU:             |              |QEMU:              |\n"
+"|Send OST QMP event|              |Send device deleted|\n"
+"|                  |              |QMP event          |\n"
+"+------------------+              |                   |\n"
+"                                  +-------------------+"
+msgstr ""
