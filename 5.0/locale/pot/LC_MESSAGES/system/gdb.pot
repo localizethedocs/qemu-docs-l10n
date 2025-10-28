@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/gdb.rst:4
+msgid "GDB usage"
+msgstr ""
+
+#: ../../../system/gdb.rst:6
+msgid ""
+"QEMU supports working with gdb via gdb's remote-connection facility (the "
+"\"gdbstub\"). This allows you to debug guest code in the same way that you "
+"might with a low-level debug facility like JTAG on real hardware. You can "
+"stop and start the virtual machine, examine state like registers and memory, "
+"and set breakpoints and watchpoints."
+msgstr ""
+
+#: ../../../system/gdb.rst:13
+msgid ""
+"In order to use gdb, launch QEMU with the ``-s`` and ``-S`` options. The ``-"
+"s`` option will make QEMU listen for an incoming connection from gdb on TCP "
+"port 1234, and ``-S`` will make QEMU not start the guest until you tell it "
+"to from gdb. (If you want to specify which TCP port to use or to use "
+"something other than TCP for the gdbstub connection, use the ``-gdb dev`` "
+"option instead of ``-s``.)"
+msgstr ""
+
+#: ../../../system/gdb.rst:22
+msgid ""
+"|qemu_system| -s -S -kernel bzImage -hda rootdisk.img -append \"root=/dev/"
+"hda\""
+msgstr ""
+
+#: ../../../system/gdb.rst:24
+msgid "QEMU will launch but will silently wait for gdb to connect."
+msgstr ""
+
+#: ../../../system/gdb.rst:26
+msgid "Then launch gdb on the 'vmlinux' executable::"
+msgstr ""
+
+#: ../../../system/gdb.rst:28
+msgid "> gdb vmlinux"
+msgstr ""
+
+#: ../../../system/gdb.rst:30
+msgid "In gdb, connect to QEMU::"
+msgstr ""
+
+#: ../../../system/gdb.rst:32
+msgid "(gdb) target remote localhost:1234"
+msgstr ""
+
+#: ../../../system/gdb.rst:34
+msgid ""
+"Then you can use gdb normally. For example, type 'c' to launch the kernel::"
+msgstr ""
+
+#: ../../../system/gdb.rst:37
+msgid "(gdb) c"
+msgstr ""
+
+#: ../../../system/gdb.rst:39
+msgid "Here are some useful tips in order to use gdb on system code:"
+msgstr ""
+
+#: ../../../system/gdb.rst:41
+msgid "Use ``info reg`` to display all the CPU registers."
+msgstr ""
+
+#: ../../../system/gdb.rst:43
+msgid "Use ``x/10i $eip`` to display the code at the PC position."
+msgstr ""
+
+#: ../../../system/gdb.rst:45
+msgid ""
+"Use ``set architecture i8086`` to dump 16 bit code. Then use ``x/10i $cs*16+"
+"$eip`` to dump the code at the PC position."
+msgstr ""
+
+#: ../../../system/gdb.rst:48
+msgid "Advanced debugging options:"
+msgstr ""
+
+#: ../../../system/gdb.rst:50
+msgid ""
+"The default single stepping behavior is step with the IRQs and timer service "
+"routines off. It is set this way because when gdb executes a single step it "
+"expects to advance beyond the current instruction. With the IRQs and timer "
+"service routines on, a single step might jump into the one of the interrupt "
+"or exception vectors instead of executing the current instruction. This "
+"means you may hit the same breakpoint a number of times before executing the "
+"instruction gdb wants to have executed. Because there are rare circumstances "
+"where you want to single step into an interrupt vector the behavior can be "
+"controlled from GDB. There are three commands you can query and set the "
+"single step behavior:"
+msgstr ""
+
+#: ../../../system/gdb.rst:61
+msgid "``maintenance packet qqemu.sstepbits``"
+msgstr ""
+
+#: ../../../system/gdb.rst:62
+msgid "This will display the MASK bits used to control the single stepping IE:"
+msgstr ""
+
+#: ../../../system/gdb.rst:67
+msgid ""
+"(gdb) maintenance packet qqemu.sstepbits\n"
+"sending: \"qqemu.sstepbits\"\n"
+"received: \"ENABLE=1,NOIRQ=2,NOTIMER=4\""
+msgstr ""
+
+#: ../../../system/gdb.rst:71
+msgid "``maintenance packet qqemu.sstep``"
+msgstr ""
+
+#: ../../../system/gdb.rst:72
+msgid ""
+"This will display the current value of the mask used when single stepping IE:"
+msgstr ""
+
+#: ../../../system/gdb.rst:77
+msgid ""
+"(gdb) maintenance packet qqemu.sstep\n"
+"sending: \"qqemu.sstep\"\n"
+"received: \"0x7\""
+msgstr ""
+
+#: ../../../system/gdb.rst:81
+msgid "``maintenance packet Qqemu.sstep=HEX_VALUE``"
+msgstr ""
+
+#: ../../../system/gdb.rst:82
+msgid ""
+"This will change the single step mask, so if wanted to enable IRQs on the "
+"single step, but not timers, you would use:"
+msgstr ""
+
+#: ../../../system/gdb.rst:87
+msgid ""
+"(gdb) maintenance packet Qqemu.sstep=0x5\n"
+"sending: \"qemu.sstep=0x5\"\n"
+"received: \"OK\""
+msgstr ""
