@@ -1,0 +1,278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/virtio-backends.rst:6
+msgid "Writing VirtIO backends for QEMU"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:8
+msgid ""
+"This document attempts to outline the information a developer needs to know "
+"to write device emulations in QEMU. It is specifically focused on "
+"implementing VirtIO devices. For VirtIO the frontend is the driver running "
+"on the guest. The backend is the everything that QEMU needs to do to handle "
+"the emulation of the VirtIO device. This can be done entirely in QEMU, "
+"divided between QEMU and the kernel (vhost) or handled by a separate process "
+"which is configured by QEMU (vhost-user)."
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:18
+msgid "VirtIO Transports"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:20
+msgid ""
+"VirtIO supports a number of different transports. While the details of the "
+"configuration and operation of the device will generally be the same QEMU "
+"represents them as different devices depending on the transport they use. "
+"For example -device virtio-foo represents the foo device using mmio and -"
+"device virtio-foo-pci is the same class of device using the PCI transport."
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:28
+msgid "Using the QEMU Object Model (QOM)"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:30
+msgid ""
+"Generally all devices in QEMU are super classes of ``TYPE_DEVICE`` however "
+"VirtIO devices should be based on ``TYPE_VIRTIO_DEVICE`` which itself is "
+"derived from the base class. For example:"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:34
+msgid ""
+"static const TypeInfo virtio_blk_info = {\n"
+"    .name = TYPE_VIRTIO_BLK,\n"
+"    .parent = TYPE_VIRTIO_DEVICE,\n"
+"    .instance_size = sizeof(VirtIOBlock),\n"
+"    .instance_init = virtio_blk_instance_init,\n"
+"    .class_init = virtio_blk_class_init,\n"
+"};"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:44
+msgid ""
+"The author may decide to have a more expansive class hierarchy to support "
+"multiple device types. For example the Virtio GPU device:"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:47
+msgid ""
+"static const TypeInfo virtio_gpu_base_info = {\n"
+"    .name = TYPE_VIRTIO_GPU_BASE,\n"
+"    .parent = TYPE_VIRTIO_DEVICE,\n"
+"    .instance_size = sizeof(VirtIOGPUBase),\n"
+"    .class_size = sizeof(VirtIOGPUBaseClass),\n"
+"    .class_init = virtio_gpu_base_class_init,\n"
+"    .abstract = true\n"
+"};\n"
+"\n"
+"static const TypeInfo vhost_user_gpu_info = {\n"
+"    .name = TYPE_VHOST_USER_GPU,\n"
+"    .parent = TYPE_VIRTIO_GPU_BASE,\n"
+"    .instance_size = sizeof(VhostUserGPU),\n"
+"    .instance_init = vhost_user_gpu_instance_init,\n"
+"    .instance_finalize = vhost_user_gpu_instance_finalize,\n"
+"    .class_init = vhost_user_gpu_class_init,\n"
+"};\n"
+"\n"
+"static const TypeInfo virtio_gpu_info = {\n"
+"    .name = TYPE_VIRTIO_GPU,\n"
+"    .parent = TYPE_VIRTIO_GPU_BASE,\n"
+"    .instance_size = sizeof(VirtIOGPU),\n"
+"    .class_size = sizeof(VirtIOGPUClass),\n"
+"    .class_init = virtio_gpu_class_init,\n"
+"};"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:75
+msgid ""
+"defines a base class for the VirtIO GPU and then specialises two versions, "
+"one for the internal implementation and the other for the vhost-user version."
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:80
+msgid "VirtIOPCIProxy"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:82
+msgid "[AJB: the following is supposition and welcomes more informed opinions]"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:85
+msgid ""
+"Probably due to legacy from the pre-QOM days PCI VirtIO devices don't follow "
+"the normal hierarchy. Instead the a standalone object is based on the "
+"VirtIOPCIProxy class and the specific VirtIO instance is manually "
+"instantiated:"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:90
+msgid ""
+"/*\n"
+" * virtio-blk-pci: This extends VirtioPCIProxy.\n"
+" */\n"
+"#define TYPE_VIRTIO_BLK_PCI \"virtio-blk-pci-base\"\n"
+"DECLARE_INSTANCE_CHECKER(VirtIOBlkPCI, VIRTIO_BLK_PCI,\n"
+"                         TYPE_VIRTIO_BLK_PCI)\n"
+"\n"
+"struct VirtIOBlkPCI {\n"
+"    VirtIOPCIProxy parent_obj;\n"
+"    VirtIOBlock vdev;\n"
+"};\n"
+"\n"
+"static Property virtio_blk_pci_properties[] = {\n"
+"    DEFINE_PROP_UINT32(\"class\", VirtIOPCIProxy, class_code, 0),\n"
+"    DEFINE_PROP_BIT(\"ioeventfd\", VirtIOPCIProxy, flags,\n"
+"                    VIRTIO_PCI_FLAG_USE_IOEVENTFD_BIT, true),\n"
+"    DEFINE_PROP_UINT32(\"vectors\", VirtIOPCIProxy, nvectors,\n"
+"                       DEV_NVECTORS_UNSPECIFIED),\n"
+"    DEFINE_PROP_END_OF_LIST(),\n"
+"};\n"
+"\n"
+"static void virtio_blk_pci_realize(VirtIOPCIProxy *vpci_dev, Error **errp)\n"
+"{\n"
+"    VirtIOBlkPCI *dev = VIRTIO_BLK_PCI(vpci_dev);\n"
+"    DeviceState *vdev = DEVICE(&dev->vdev);\n"
+"\n"
+"    ...\n"
+"\n"
+"    qdev_realize(vdev, BUS(&vpci_dev->bus), errp);\n"
+"}\n"
+"\n"
+"static void virtio_blk_pci_class_init(ObjectClass *klass, void *data)\n"
+"{\n"
+"    DeviceClass *dc = DEVICE_CLASS(klass);\n"
+"    VirtioPCIClass *k = VIRTIO_PCI_CLASS(klass);\n"
+"    PCIDeviceClass *pcidev_k = PCI_DEVICE_CLASS(klass);\n"
+"\n"
+"    set_bit(DEVICE_CATEGORY_STORAGE, dc->categories);\n"
+"    device_class_set_props(dc, virtio_blk_pci_properties);\n"
+"    k->realize = virtio_blk_pci_realize;\n"
+"    pcidev_k->vendor_id = PCI_VENDOR_ID_REDHAT_QUMRANET;\n"
+"    pcidev_k->device_id = PCI_DEVICE_ID_VIRTIO_BLOCK;\n"
+"    pcidev_k->revision = VIRTIO_PCI_ABI_VERSION;\n"
+"    pcidev_k->class_id = PCI_CLASS_STORAGE_SCSI;\n"
+"}\n"
+"\n"
+"static void virtio_blk_pci_instance_init(Object *obj)\n"
+"{\n"
+"    VirtIOBlkPCI *dev = VIRTIO_BLK_PCI(obj);\n"
+"\n"
+"    virtio_instance_init_common(obj, &dev->vdev, sizeof(dev->vdev),\n"
+"                                TYPE_VIRTIO_BLK);\n"
+"    object_property_add_alias(obj, \"bootindex\", OBJECT(&dev->vdev),\n"
+"                              \"bootindex\");\n"
+"}\n"
+"\n"
+"static const VirtioPCIDeviceTypeInfo virtio_blk_pci_info = {\n"
+"    .base_name              = TYPE_VIRTIO_BLK_PCI,\n"
+"    .generic_name           = \"virtio-blk-pci\",\n"
+"    .transitional_name      = \"virtio-blk-pci-transitional\",\n"
+"    .non_transitional_name  = \"virtio-blk-pci-non-transitional\",\n"
+"    .instance_size = sizeof(VirtIOBlkPCI),\n"
+"    .instance_init = virtio_blk_pci_instance_init,\n"
+"    .class_init    = virtio_blk_pci_class_init,\n"
+"};"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:158
+msgid ""
+"Here you can see the instance_init has to manually instantiate the "
+"underlying ``TYPE_VIRTIO_BLOCK`` object and link an alias for one of it's "
+"properties to the PCI device."
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:164
+msgid "Back End Implementations"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:166
+msgid ""
+"There are a number of places where the implementation of the backend can be "
+"done:"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:169
+msgid "in QEMU itself"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:170
+msgid "in the host kernel (a.k.a vhost)"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:171
+msgid "in a separate process (a.k.a. vhost-user)"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:174
+msgid "vhost_ops vs TYPE_VHOST_USER_BACKEND"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:176
+msgid ""
+"There are two choices to how to implement vhost code. Most of the code which "
+"has to work with either vhost or vhost-user uses ``vhost_dev_init()`` to "
+"instantiate the appropriate backend. This means including a ``struct "
+"vhost_dev`` in the main object structure."
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:181
+msgid ""
+"For vhost-user devices you also need to add code to track the initialisation "
+"of the ``chardev`` device used for the control socket between QEMU and the "
+"external vhost-user process."
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:185
+msgid ""
+"If you only need to implement a vhost-user backed the other option is a use "
+"a QOM-ified version of vhost-user."
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:188
+msgid ""
+"static void\n"
+"vhost_user_gpu_instance_init(Object *obj)\n"
+"{\n"
+"    VhostUserGPU *g = VHOST_USER_GPU(obj);\n"
+"\n"
+"    g->vhost = VHOST_USER_BACKEND(object_new(TYPE_VHOST_USER_BACKEND));\n"
+"    object_property_add_alias(obj, \"chardev\",\n"
+"                              OBJECT(g->vhost), \"chardev\");\n"
+"}\n"
+"\n"
+"static const TypeInfo vhost_user_gpu_info = {\n"
+"    .name = TYPE_VHOST_USER_GPU,\n"
+"    .parent = TYPE_VIRTIO_GPU_BASE,\n"
+"    .instance_size = sizeof(VhostUserGPU),\n"
+"    .instance_init = vhost_user_gpu_instance_init,\n"
+"    .instance_finalize = vhost_user_gpu_instance_finalize,\n"
+"    .class_init = vhost_user_gpu_class_init,\n"
+"};"
+msgstr ""
+
+#: ../../../devel/virtio-backends.rst:209
+msgid ""
+"Using it this way entails adding a ``struct VhostUserBackend`` to your core "
+"object structure and manually instantiating the backend. This sub-structure "
+"tracks both the ``vhost_dev`` and ``CharDev`` types needed for the "
+"connection. Instead of calling ``vhost_dev_init`` you would call "
+"``vhost_user_backend_dev_init`` which does what is needed on your behalf."
+msgstr ""
