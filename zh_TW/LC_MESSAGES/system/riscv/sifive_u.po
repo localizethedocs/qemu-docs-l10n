@@ -1,0 +1,641 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-27 05:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/riscv/sifive_u.rst:2
+msgid "SiFive HiFive Unleashed (``sifive_u``)"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:4
+msgid ""
+"SiFive HiFive Unleashed Development Board is the ultimate RISC-V development "
+"board featuring the Freedom U540 multi-core RISC-V processor."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:8
+msgid "Supported devices"
+msgstr "支援的裝置"
+
+#: ../../../system/riscv/sifive_u.rst:10
+msgid "The ``sifive_u`` machine supports the following devices:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:12
+msgid "1 E51 / E31 core"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:13
+msgid "Up to 4 U54 / U34 cores"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:14
+msgid "Core Local Interruptor (CLINT)"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:15
+msgid "Platform-Level Interrupt Controller (PLIC)"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:16
+msgid "Power, Reset, Clock, Interrupt (PRCI)"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:17
+msgid "L2 Loosely Integrated Memory (L2-LIM)"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:18
+msgid "DDR memory controller"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:19
+msgid "2 UARTs"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:20
+msgid "1 GEM Ethernet controller"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:21
+msgid "1 GPIO controller"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:22
+msgid "1 One-Time Programmable (OTP) memory with stored serial number"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:23
+msgid "1 DMA controller"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:24
+msgid "2 QSPI controllers"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:25
+msgid "1 ISSI 25WP256 flash"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:26
+msgid "1 SD card in SPI mode"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:27
+msgid "PWM0 and PWM1"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:29
+msgid ""
+"Please note the real world HiFive Unleashed board has a fixed configuration "
+"of 1 E51 core and 4 U54 core combination and the RISC-V core boots in 64-bit "
+"mode. With QEMU, one can create a machine with 1 E51 core and up to 4 U54 "
+"cores. It is also possible to create a 32-bit variant with the same "
+"peripherals except that the RISC-V cores are replaced by the 32-bit ones "
+"(E31 and U34), to help testing of 32-bit guest software."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:37
+msgid "Hardware configuration information"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:39
+msgid ""
+"The ``sifive_u`` machine automatically generates a device tree blob "
+"(\"dtb\") which it passes to the guest, if there is no ``-dtb`` option. This "
+"provides information about the addresses, interrupt lines and other "
+"configuration of the various devices in the system. Guest software should "
+"discover the devices that are present in the generated DTB instead of using "
+"a DTB for the real hardware, as some of the devices are not modeled by QEMU "
+"and trying to access these devices may cause unexpected behavior."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:47
+msgid ""
+"If users want to provide their own DTB, they can use the ``-dtb`` option. "
+"These DTBs should have the following requirements:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:50
+msgid ""
+"The /cpus node should contain at least one subnode for E51 and the number of "
+"subnodes should match QEMU's ``-smp`` option"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:52
+msgid "The /memory reg size should match QEMU’s selected ram_size via ``-m``"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:53
+msgid ""
+"Should contain a node for the CLINT device with a compatible string \"riscv,"
+"clint0\" if using with OpenSBI BIOS images"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:57
+msgid "Boot options"
+msgstr "開機選項"
+
+#: ../../../system/riscv/sifive_u.rst:59
+msgid ""
+"The ``sifive_u`` machine can start using the standard -kernel functionality "
+"for loading a Linux kernel, a VxWorks kernel, a modified U-Boot bootloader "
+"(S-mode) or ELF executable with the default OpenSBI firmware image as the -"
+"bios. It also supports booting the unmodified U-Boot bootloader using the "
+"standard -bios functionality."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:66
+msgid "Machine-specific options"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:68
+msgid "The following machine-specific options are supported:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:70
+msgid "serial=nnn"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:72
+msgid ""
+"The board serial number. When not given, the default serial number 1 is used."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:74
+msgid ""
+"SiFive reserves the first 1 KiB of the 16 KiB OTP memory for internal use. "
+"The current usage is only used to store the serial number of the board at "
+"offset 0xfc. U-Boot reads the serial number from the OTP memory, and uses it "
+"to generate a unique MAC address to be programmed to the on-chip GEM "
+"Ethernet controller. When multiple QEMU ``sifive_u`` machines are created "
+"and connected to the same subnet, they all have the same MAC address hence "
+"it creates an unusable network. In such scenario, user should give different "
+"values to serial= when creating different ``sifive_u`` machines."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:83
+msgid "start-in-flash"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:85
+msgid ""
+"When given, QEMU's ROM codes jump to QSPI memory-mapped flash directly. "
+"Otherwise QEMU will jump to DRAM or L2LIM depending on the msel= value. When "
+"not given, it defaults to direct DRAM booting."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:89
+msgid "msel=[6|11]"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:91
+msgid "Mode Select (MSEL[3:0]) pins value, used to control where to boot from."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:93
+msgid ""
+"The FU540 SoC supports booting from several sources, which are controlled "
+"using the Mode Select pins on the chip. Typically, the boot process runs "
+"through several stages before it begins execution of user-provided programs. "
+"These stages typically include the following:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:98
+msgid ""
+"Zeroth Stage Boot Loader (ZSBL), which is contained in an on-chip mask ROM "
+"and provided by QEMU. Note QEMU implemented ROM codes are not the same as "
+"what is programmed in the hardware. The QEMU one is a simplified version, "
+"but it provides the same functionality as the hardware."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:102
+msgid ""
+"First Stage Boot Loader (FSBL), which brings up PLLs and DDR memory. This is "
+"U-Boot SPL."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:104
+msgid ""
+"Second Stage Boot Loader (SSBL), which further initializes additional "
+"peripherals as needed. This is U-Boot proper combined with an OpenSBI "
+"fw_dynamic firmware image."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:108
+msgid ""
+"msel=6 means FSBL and SSBL are both on the QSPI flash. msel=11 means FSBL "
+"and SSBL are both on the SD card."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:112
+msgid "Running Linux kernel"
+msgstr "執行 Linux 內核"
+
+#: ../../../system/riscv/sifive_u.rst:114
+msgid ""
+"Linux mainline v5.10 release is tested at the time of writing. To build a "
+"Linux mainline kernel that can be booted by the ``sifive_u`` machine in 64-"
+"bit mode, simply configure the kernel using the defconfig configuration:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:118
+msgid ""
+"$ export ARCH=riscv\n"
+"$ export CROSS_COMPILE=riscv64-linux-\n"
+"$ make defconfig\n"
+"$ make"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:125
+msgid ""
+"To boot the newly built Linux kernel in QEMU with the ``sifive_u`` machine:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:127
+msgid ""
+"$ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel arch/riscv/boot/Image \\\n"
+"    -initrd /path/to/rootfs.ext4 \\\n"
+"    -append \"root=/dev/ram\""
+msgstr ""
+"$ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel arch/riscv/boot/Image \\\n"
+"    -initrd /path/to/rootfs.ext4 \\\n"
+"    -append \"root=/dev/ram\""
+
+#: ../../../system/riscv/sifive_u.rst:135
+msgid ""
+"Alternatively, we can use a custom DTB to boot the machine by inserting a "
+"CLINT node in fu540-c000.dtsi in the Linux kernel,"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:138
+msgid ""
+"clint: clint@2000000 {\n"
+"    compatible = \"riscv,clint0\";\n"
+"    interrupts-extended = <&cpu0_intc 3 &cpu0_intc 7\n"
+"                           &cpu1_intc 3 &cpu1_intc 7\n"
+"                           &cpu2_intc 3 &cpu2_intc 7\n"
+"                           &cpu3_intc 3 &cpu3_intc 7\n"
+"                           &cpu4_intc 3 &cpu4_intc 7>;\n"
+"    reg = <0x00 0x2000000 0x00 0x10000>;\n"
+"};"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:150
+msgid "with the following command line options:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:152
+msgid ""
+"$ qemu-system-riscv64 -M sifive_u -smp 5 -m 8G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel arch/riscv/boot/Image \\\n"
+"    -dtb arch/riscv/boot/dts/sifive/hifive-unleashed-a00.dtb \\\n"
+"    -initrd /path/to/rootfs.ext4 \\\n"
+"    -append \"root=/dev/ram\""
+msgstr ""
+"$ qemu-system-riscv64 -M sifive_u -smp 5 -m 8G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel arch/riscv/boot/Image \\\n"
+"    -dtb arch/riscv/boot/dts/sifive/hifive-unleashed-a00.dtb \\\n"
+"    -initrd /path/to/rootfs.ext4 \\\n"
+"    -append \"root=/dev/ram\""
+
+#: ../../../system/riscv/sifive_u.rst:161
+msgid ""
+"To build a Linux mainline kernel that can be booted by the ``sifive_u`` "
+"machine in 32-bit mode, use the rv32_defconfig configuration. A patch is "
+"required to fix the 32-bit boot issue for Linux kernel v5.10."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:165
+msgid ""
+"$ export ARCH=riscv\n"
+"$ export CROSS_COMPILE=riscv64-linux-\n"
+"$ curl https://patchwork.kernel.org/project/linux-riscv/"
+"patch/20201219001356.2887782-1-atish.patra@wdc.com/mbox/ > riscv.patch\n"
+"$ git am riscv.patch\n"
+"$ make rv32_defconfig\n"
+"$ make"
+msgstr ""
+"$ export ARCH=riscv\n"
+"$ export CROSS_COMPILE=riscv64-linux-\n"
+"$ curl https://patchwork.kernel.org/project/linux-riscv/"
+"patch/20201219001356.2887782-1-atish.patra@wdc.com/mbox/ > riscv.patch\n"
+"$ git am riscv.patch\n"
+"$ make rv32_defconfig\n"
+"$ make"
+
+#: ../../../system/riscv/sifive_u.rst:174
+msgid ""
+"Replace ``qemu-system-riscv64`` with ``qemu-system-riscv32`` in the command "
+"line above to boot the 32-bit Linux kernel. A rootfs image containing 32-bit "
+"applications shall be used in order for kernel to boot to user space."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:179
+msgid "Running VxWorks kernel"
+msgstr "執行 VxWorks 內核"
+
+#: ../../../system/riscv/sifive_u.rst:181
+msgid ""
+"VxWorks 7 SR0650 release is tested at the time of writing. To build a 64-bit "
+"VxWorks mainline kernel that can be booted by the ``sifive_u`` machine, "
+"simply create a VxWorks source build project based on the sifive_generic "
+"BSP, and a VxWorks image project to generate the bootable VxWorks image, by "
+"following the BSP documentation instructions."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:187
+msgid ""
+"A pre-built 64-bit VxWorks 7 image for HiFive Unleashed board is available "
+"as part of the VxWorks SDK for testing as well. Instructions to download the "
+"SDK:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:190
+msgid ""
+"$ wget https://labs.windriver.com/downloads/wrsdk-vxworks7-sifive-"
+"hifive-1.01.tar.bz2\n"
+"$ tar xvf wrsdk-vxworks7-sifive-hifive-1.01.tar.bz2\n"
+"$ ls bsps/sifive_generic_1_0_0_0/uboot/uVxWorks"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:196
+msgid "To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:198
+msgid ""
+"$ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -nic tap,ifname=tap0,script=no,downscript=no \\\n"
+"    -kernel /path/to/vxWorks \\\n"
+"    -append \"gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 "
+"u=target pw=vxTarget f=0x01\""
+msgstr ""
+"$ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -nic tap,ifname=tap0,script=no,downscript=no \\\n"
+"    -kernel /path/to/vxWorks \\\n"
+"    -append \"gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 "
+"u=target pw=vxTarget f=0x01\""
+
+#: ../../../system/riscv/sifive_u.rst:206
+msgid ""
+"It is also possible to test 32-bit VxWorks on the ``sifive_u`` machine. "
+"Create a 32-bit project to build the 32-bit VxWorks image, and use exact the "
+"same command line options with ``qemu-system-riscv32``."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:211
+msgid "Running U-Boot"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:213
+msgid ""
+"U-Boot mainline v2021.07 release is tested at the time of writing. To build "
+"a U-Boot mainline bootloader that can be booted by the ``sifive_u`` machine, "
+"use the sifive_unleashed_defconfig with similar commands as described above "
+"for Linux:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:218
+msgid ""
+"$ export CROSS_COMPILE=riscv64-linux-\n"
+"$ export OPENSBI=/path/to/opensbi-riscv64-generic-fw_dynamic.bin\n"
+"$ make sifive_unleashed_defconfig"
+msgstr ""
+"$ export CROSS_COMPILE=riscv64-linux-\n"
+"$ export OPENSBI=/path/to/opensbi-riscv64-generic-fw_dynamic.bin\n"
+"$ make sifive_unleashed_defconfig"
+
+#: ../../../system/riscv/sifive_u.rst:224
+msgid "You will get spl/u-boot-spl.bin and u-boot.itb file in the build tree."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:226
+msgid ""
+"To start U-Boot using the ``sifive_u`` machine, prepare an SPI flash image, "
+"or SD card image that is properly partitioned and populated with correct "
+"contents. genimage_ can be used to generate these images."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:230
+msgid "A sample configuration file for a 128 MiB SD card image is:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:232
+msgid ""
+"$ cat genimage_sdcard.cfg\n"
+"image sdcard.img {\n"
+"        size = 128M\n"
+"\n"
+"        hdimage {\n"
+"                gpt = true\n"
+"        }\n"
+"\n"
+"        partition u-boot-spl {\n"
+"                image = \"u-boot-spl.bin\"\n"
+"                offset = 17K\n"
+"                partition-type-uuid = 5B193300-FC78-40CD-8002-E86C45580B47\n"
+"        }\n"
+"\n"
+"        partition u-boot {\n"
+"                image = \"u-boot.itb\"\n"
+"                offset = 1041K\n"
+"                partition-type-uuid = 2E54B353-1271-4842-806F-E436D6AF6985\n"
+"        }\n"
+"}"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:255
+msgid ""
+"SPI flash image has slightly different partition offsets, and the size has "
+"to be 32 MiB to match the ISSI 25WP256 flash on the real board:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:258
+msgid ""
+"$ cat genimage_spi-nor.cfg\n"
+"image spi-nor.img {\n"
+"        size = 32M\n"
+"\n"
+"        hdimage {\n"
+"                gpt = true\n"
+"        }\n"
+"\n"
+"        partition u-boot-spl {\n"
+"                image = \"u-boot-spl.bin\"\n"
+"                offset = 20K\n"
+"                partition-type-uuid = 5B193300-FC78-40CD-8002-E86C45580B47\n"
+"        }\n"
+"\n"
+"        partition u-boot {\n"
+"                image = \"u-boot.itb\"\n"
+"                offset = 1044K\n"
+"                partition-type-uuid = 2E54B353-1271-4842-806F-E436D6AF6985\n"
+"        }\n"
+"}"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:281
+msgid ""
+"Assume U-Boot binaries are put in the same directory as the config file, we "
+"can generate the image by:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:284
+msgid "$ genimage --config genimage_<boot_src>.cfg --inputpath ."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:288
+msgid ""
+"Boot U-Boot from SD card, by specifying msel=11 and pass the SD card image "
+"to QEMU ``sifive_u`` machine:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:291
+msgid ""
+"$ qemu-system-riscv64 -M sifive_u,msel=11 -smp 5 -m 8G \\\n"
+"    -display none -serial stdio \\\n"
+"    -bios /path/to/u-boot-spl.bin \\\n"
+"    -drive file=/path/to/sdcard.img,if=sd"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:298
+msgid "Changing msel= value to 6, allows booting U-Boot from the SPI flash:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:300
+msgid ""
+"$ qemu-system-riscv64 -M sifive_u,msel=6 -smp 5 -m 8G \\\n"
+"    -display none -serial stdio \\\n"
+"    -bios /path/to/u-boot-spl.bin \\\n"
+"    -drive file=/path/to/spi-nor.img,if=mtd"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:307
+msgid ""
+"Note when testing U-Boot, QEMU automatically generated device tree blob is "
+"not used because U-Boot itself embeds device tree blobs for U-Boot SPL and U-"
+"Boot proper. Hence the number of cores and size of memory have to match the "
+"real hardware, ie: 5 cores (-smp 5) and 8 GiB memory (-m 8G)."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:312
+msgid ""
+"Above use case is to run upstream U-Boot for the SiFive HiFive Unleashed "
+"board on QEMU ``sifive_u`` machine out of the box. This allows users to "
+"develop and test the recommended RISC-V boot flow with a real world use "
+"case: ZSBL (in QEMU) loads U-Boot SPL from SD card or SPI flash to L2LIM, "
+"then U-Boot SPL loads the combined payload image of OpenSBI fw_dynamic "
+"firmware and U-Boot proper."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:319
+msgid ""
+"However sometimes we want to have a quick test of booting U-Boot on QEMU "
+"without the needs of preparing the SPI flash or SD card images, an alternate "
+"way can be used, which is to create a U-Boot S-mode image by modifying the "
+"configuration of U-Boot:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:324
+#: ../../../system/riscv/sifive_u.rst:351
+msgid ""
+"$ export CROSS_COMPILE=riscv64-linux-\n"
+"$ make sifive_unleashed_defconfig\n"
+"$ make menuconfig"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:330
+msgid "then manually select the following configuration:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:332
+#: ../../../system/riscv/sifive_u.rst:359
+msgid ""
+"Device Tree Control ---> Provider of DTB for DT Control ---> Prior Stage "
+"bootloader DTB"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:334
+#: ../../../system/riscv/sifive_u.rst:363
+msgid "and unselect the following configuration:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:336
+#: ../../../system/riscv/sifive_u.rst:365
+msgid ""
+"Library routines ---> Allow access to binman information in the device tree"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:338
+msgid ""
+"This changes U-Boot to use the QEMU generated device tree blob, and bypass "
+"running the U-Boot SPL stage."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:341
+msgid "Boot the 64-bit U-Boot S-mode image directly:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:343
+msgid ""
+"$ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel /path/to/u-boot.bin"
+msgstr ""
+"$ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel /path/to/u-boot.bin"
+
+#: ../../../system/riscv/sifive_u.rst:349
+msgid "It's possible to create a 32-bit U-Boot S-mode image as well."
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:357
+msgid "then manually update the following configuration in U-Boot:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:360
+msgid "RISC-V architecture ---> Base ISA ---> RV32I"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:361
+msgid "Boot options ---> Boot images ---> Text Base ---> 0x80400000"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:367
+msgid ""
+"Use the same command line options to boot the 32-bit U-Boot S-mode image:"
+msgstr ""
+
+#: ../../../system/riscv/sifive_u.rst:369
+msgid ""
+"$ qemu-system-riscv32 -M sifive_u -smp 5 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel /path/to/u-boot.bin"
+msgstr ""
+"$ qemu-system-riscv32 -M sifive_u -smp 5 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel /path/to/u-boot.bin"
