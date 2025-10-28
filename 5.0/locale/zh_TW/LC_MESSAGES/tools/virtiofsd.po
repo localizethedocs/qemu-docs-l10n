@@ -1,0 +1,182 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tools/virtiofsd.rst:2
+msgid "QEMU virtio-fs shared file system daemon"
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:5
+msgid "Synopsis"
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:7
+msgid "**virtiofsd** [*OPTIONS*]"
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:10
+msgid "Description"
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:12
+msgid ""
+"Share a host directory tree with a guest through a virtio-fs device.  This "
+"program is a vhost-user backend that implements the virtio-fs device.  Each "
+"virtio-fs device instance requires its own virtiofsd process."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:16
+msgid ""
+"This program is designed to work with QEMU's ``--device vhost-user-fs-pci`` "
+"but should work with any virtual machine monitor (VMM) that supports vhost-"
+"user.  See the Examples section below."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:20
+msgid ""
+"This program must be run as the root user.  Upon startup the program will "
+"switch into a new file system namespace with the shared directory tree as "
+"its root.  This prevents \"file system escapes\" due to symlinks and other "
+"file system objects that might lead to files outside the shared directory.  "
+"The program also sandboxes itself using seccomp(2) to prevent ptrace(2) and "
+"other vectors that could allow an attacker to compromise the system after "
+"gaining control of the virtiofsd process."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:29
+msgid "Options"
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:35
+msgid "Print help."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:39
+msgid "Print version."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:43
+msgid "Enable debug output."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:47
+msgid "Print log messages to syslog instead of stderr."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:51
+msgid "debug - Enable debug output."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:54
+msgid "flock|no_flock - Enable/disable flock.  The default is ``no_flock``."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:57
+msgid ""
+"log_level=LEVEL - Print only log messages matching LEVEL or more severe.  "
+"LEVEL is one of ``err``, ``warn``, ``info``, or ``debug``.  The default is "
+"``info``."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:61
+msgid "norace - Disable racy fallback.  The default is false."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:64
+msgid ""
+"posix_lock|no_posix_lock - Enable/disable remote POSIX locks.  The default "
+"is ``posix_lock``."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:67
+msgid ""
+"readdirplus|no_readdirplus - Enable/disable readdirplus.  The default is "
+"``readdirplus``."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:70
+msgid ""
+"source=PATH - Share host directory tree located at PATH.  This option is "
+"required."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:73
+msgid ""
+"timeout=TIMEOUT - I/O timeout in seconds.  The default depends on cache= "
+"option."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:76
+msgid ""
+"writeback|no_writeback - Enable/disable writeback cache. The cache alows the "
+"FUSE client to buffer and merge write requests.  The default is "
+"``no_writeback``."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:80
+msgid ""
+"xattr|no_xattr - Enable/disable extended attributes (xattr) on files and "
+"directories.  The default is ``no_xattr``."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:86
+msgid "Listen on vhost-user UNIX domain socket at PATH."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:90
+msgid ""
+"Accept connections from vhost-user UNIX domain socket file descriptor FDNUM. "
+"The file descriptor must already be listening for connections."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:95
+msgid ""
+"Restrict the number of worker threads per request queue to NUM.  The default "
+"is 64."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:100
+msgid ""
+"Select the desired trade-off between coherency and performance.  ``none`` "
+"forbids the FUSE client from caching to achieve best coherency at the cost "
+"of performance.  ``auto`` acts similar to NFS with a 1 second metadata cache "
+"timeout.  ``always`` sets a long cache lifetime at the expense of coherency."
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:106
+msgid "Examples"
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:108
+msgid ""
+"Export ``/var/lib/fs/vm001/`` on vhost-user UNIX domain socket ``/var/run/"
+"vm001-vhost-fs.sock``:"
+msgstr ""
+
+#: ../../../tools/virtiofsd.rst:113
+msgid ""
+"host# virtiofsd --socket-path=/var/run/vm001-vhost-fs.sock -o source=/var/"
+"lib/fs/vm001\n"
+"host# qemu-system-x86_64 \\\n"
+"    -chardev socket,id=char0,path=/var/run/vm001-vhost-fs.sock \\\n"
+"    -device vhost-user-fs-pci,chardev=char0,tag=myfs \\\n"
+"    -object memory-backend-memfd,id=mem,size=4G,share=on \\\n"
+"    -numa node,memdev=mem \\\n"
+"    ...\n"
+"guest# mount -t virtiofs myfs /mnt"
+msgstr ""
