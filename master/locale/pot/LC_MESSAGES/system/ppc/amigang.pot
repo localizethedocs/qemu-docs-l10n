@@ -8,16 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-27 05:37+0000\n"
+"POT-Creation-Date: 2025-11-03 08:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../../../system/ppc/amigang.rst:3
-msgid "AmigaNG boards (``amigaone``, ``pegasos2``, ``sam460ex``)"
+msgid "AmigaNG boards (``amigaone``, ``pegasos1``, ``pegasos2``, ``sam460ex``)"
 msgstr ""
 
 #: ../../../system/ppc/amigang.rst:5
@@ -38,8 +39,8 @@ msgid ""
 "support AmigaOS 4."
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:17 ../../../system/ppc/amigang.rst:75
-#: ../../../system/ppc/amigang.rst:139
+#: ../../../system/ppc/amigang.rst:17 ../../../system/ppc/amigang.rst:79
+#: ../../../system/ppc/amigang.rst:144
 msgid "Emulated devices"
 msgstr ""
 
@@ -55,11 +56,11 @@ msgstr ""
 msgid "VIA VT82C686B south bridge"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:22 ../../../system/ppc/amigang.rst:80
+#: ../../../system/ppc/amigang.rst:22 ../../../system/ppc/amigang.rst:85
 msgid "PCI VGA compatible card (guests may need other card instead)"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:23 ../../../system/ppc/amigang.rst:81
+#: ../../../system/ppc/amigang.rst:23 ../../../system/ppc/amigang.rst:86
 msgid "PS/2 keyboard and mouse"
 msgstr ""
 
@@ -69,8 +70,8 @@ msgid ""
 "contents persistent)"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:27 ../../../system/ppc/amigang.rst:84
-#: ../../../system/ppc/amigang.rst:132
+#: ../../../system/ppc/amigang.rst:27 ../../../system/ppc/amigang.rst:89
+#: ../../../system/ppc/amigang.rst:137
 msgid "Firmware"
 msgstr ""
 
@@ -94,8 +95,8 @@ msgid ""
 "from http://www.nongnu.org/vgabios."
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:45 ../../../system/ppc/amigang.rst:98
-#: ../../../system/ppc/amigang.rst:148
+#: ../../../system/ppc/amigang.rst:45 ../../../system/ppc/amigang.rst:103
+#: ../../../system/ppc/amigang.rst:153
 msgid "Running Linux"
 msgstr ""
 
@@ -126,125 +127,138 @@ msgid ""
 msgstr ""
 
 #: ../../../system/ppc/amigang.rst:68
-msgid "Genesi/bPlan Pegasos II (``pegasos2``)"
+msgid "Genesi/bPlan Pegasos (``pegasos1``, ``pegasos2``)"
 msgstr ""
 
 #: ../../../system/ppc/amigang.rst:70
 msgid ""
-"The ``pegasos2`` machine emulates the Pegasos II sold by Genesi and designed "
-"by bPlan. Its schematics are available at https://www.powerdeveloper.org/"
-"platforms/pegasos/schematics."
+"The ``pegasos1`` machine emulates the original Pegasos (later marked I) sold "
+"by Genesi and designed by bPlan. It uses the same Articia S north bridge as "
+"the ``amigaone`` machine, otherwise it is mostly the same as the later "
+"Pegasos II."
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:77
+#: ../../../system/ppc/amigang.rst:74
+msgid ""
+"The ``pegasos2`` machine emulates the Pegasos II which is a redesigned "
+"version of Pegasos I to fix problems with its north bridge. Its schematics "
+"are available at https://www.powerdeveloper.org/platforms/pegasos/schematics."
+msgstr ""
+
+#: ../../../system/ppc/amigang.rst:81
 msgid "PowerPC 7457 CPU (can also use ``-cpu g3`` or ``750cxe``)"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:78
-msgid "Marvell MV64361 Discovery II north bridge"
+#: ../../../system/ppc/amigang.rst:82
+msgid "Articia S north bridge (for ``pegasos1``)"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:79
+#: ../../../system/ppc/amigang.rst:83
+msgid "Marvell MV64361 Discovery II north bridge (for ``pegasos2``)"
+msgstr ""
+
+#: ../../../system/ppc/amigang.rst:84
 msgid "VIA VT8231 south bridge"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:86
+#: ../../../system/ppc/amigang.rst:91
 msgid ""
-"The Pegasos II board has an Open Firmware compliant ROM based on "
+"The Pegasos boards have an Open Firmware compliant ROM based on "
 "SmartFirmware with some changes that are not open-sourced therefore the ROM "
-"binary cannot be included in QEMU. An updater was available from bPlan, it "
-"can be found in the `Internet Archive <http://web.archive.org/"
+"binary cannot be included in QEMU. A Pegasos II updater was available from "
+"bPlan, it can be found in the `Internet Archive <http://web.archive.org/"
 "web/20071021223056/http://www.bplan-gmbh.de/up050404/up050404>`_. The ROM "
 "image can be extracted from it with the following command:"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:93
+#: ../../../system/ppc/amigang.rst:98
 msgid "$ tail -c +85581 up050404 | head -c 524288 > pegasos2.rom"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:100
+#: ../../../system/ppc/amigang.rst:105
 msgid ""
 "The PowerPC version of Debian 8.11 supported Pegasos II. The BIOS emulator "
 "in the firmware binary is unable to run QEMU‘s standard vgabios so it needs "
 "to be disabled. To boot the system run:"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:104
+#: ../../../system/ppc/amigang.rst:109
 msgid ""
 "$ qemu-system-ppc -machine pegasos2 -bios pegasos2.rom \\\n"
 "                  -cdrom debian-8.11.0-powerpc-netinst.iso \\\n"
 "                  -device VGA,romfile=\"\" -serial stdio"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:110
+#: ../../../system/ppc/amigang.rst:115
 msgid "At the firmware ``ok`` prompt enter ``boot cd install/pegasos``."
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:112
+#: ../../../system/ppc/amigang.rst:117
 msgid ""
 "Alternatively, it is possible to boot the kernel directly without firmware "
 "ROM using the QEMU built-in minimal Virtual Open Firmware (VOF) emulation "
-"which is also supported on ``pegasos2``. For this, extract the kernel "
-"``install/powerpc/vmlinuz-chrp.initrd`` from the CD image, then run:"
+"which is also supported on ``pegasos1`` and ``pegasos2``. For this, extract "
+"the kernel ``install/powerpc/vmlinuz-chrp.initrd`` from the CD image, then "
+"run:"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:118
+#: ../../../system/ppc/amigang.rst:123
 msgid ""
 "$ qemu-system-ppc -machine pegasos2 -serial stdio \\\n"
 "                  -kernel vmlinuz-chrp.initrd -append \"---\" \\\n"
 "                  -cdrom debian-8.11.0-powerpc-netinst.iso"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:125
+#: ../../../system/ppc/amigang.rst:130
 msgid "aCube Sam460ex (``sam460ex``)"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:127
+#: ../../../system/ppc/amigang.rst:132
 msgid ""
 "The ``sam460ex`` machine emulates the Sam460ex board by aCube which is based "
 "on the AMCC PowerPC 460EX SoC (that despite its name has a PPC440 CPU core)."
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:134
+#: ../../../system/ppc/amigang.rst:139
 msgid ""
 "The board has a firmware based on an older U-Boot version with modifications "
 "to support booting AmigaOS 4. The firmware ROM is included with QEMU."
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:141
+#: ../../../system/ppc/amigang.rst:146
 msgid "PowerPC 460EX SoC"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:142
+#: ../../../system/ppc/amigang.rst:147
 msgid "M41T80 serial RTC chip"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:143
+#: ../../../system/ppc/amigang.rst:148
 msgid "Silicon Motion SM501 display parts (identical to SM502 on real board)"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:144
+#: ../../../system/ppc/amigang.rst:149
 msgid "Silicon Image SiI3112 2 port SATA controller"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:145
+#: ../../../system/ppc/amigang.rst:150
 msgid "USB keyboard and mouse"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:150
+#: ../../../system/ppc/amigang.rst:155
 msgid ""
 "The only Linux distro that supported Sam460ex out of box was CruxPPC 2.x. It "
 "can be booted by running:"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:153
+#: ../../../system/ppc/amigang.rst:158
 msgid ""
 "$ qemu-system-ppc -machine sam460ex -serial stdio \\\n"
 "                  -drive if=none,id=cd,format=raw,file=crux-ppc-2.7a.iso \\\n"
 "                  -device ide-cd,drive=cd,bus=ide.1"
 msgstr ""
 
-#: ../../../system/ppc/amigang.rst:159
+#: ../../../system/ppc/amigang.rst:164
 msgid ""
 "There are some other kernels and instructions for booting other distros on "
 "aCube's product page at https://www.acube-systems.biz/index.php?"
