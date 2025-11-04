@@ -29,7 +29,7 @@ msgstr ""
 
 #: ../../../system/riscv/sifive_u.rst:8
 msgid "Supported devices"
-msgstr ""
+msgstr "支援的裝置"
 
 #: ../../../system/riscv/sifive_u.rst:10
 msgid "The ``sifive_u`` machine supports the following devices:"
@@ -122,7 +122,7 @@ msgstr ""
 
 #: ../../../system/riscv/sifive_u.rst:47
 msgid "Boot options"
-msgstr ""
+msgstr "開機選項"
 
 #: ../../../system/riscv/sifive_u.rst:49
 msgid ""
@@ -218,7 +218,7 @@ msgstr ""
 
 #: ../../../system/riscv/sifive_u.rst:102
 msgid "Running Linux kernel"
-msgstr ""
+msgstr "執行 Linux 內核"
 
 #: ../../../system/riscv/sifive_u.rst:104
 msgid ""
@@ -248,6 +248,11 @@ msgid ""
 "    -initrd /path/to/rootfs.ext4 \\\n"
 "    -append \"root=/dev/ram\""
 msgstr ""
+"$ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel arch/riscv/boot/Image \\\n"
+"    -initrd /path/to/rootfs.ext4 \\\n"
+"    -append \"root=/dev/ram\""
 
 #: ../../../system/riscv/sifive_u.rst:125
 msgid ""
@@ -266,6 +271,13 @@ msgid ""
 "$ make rv32_defconfig\n"
 "$ make"
 msgstr ""
+"$ export ARCH=riscv\n"
+"$ export CROSS_COMPILE=riscv64-linux-\n"
+"$ curl https://patchwork.kernel.org/project/linux-riscv/"
+"patch/20201219001356.2887782-1-atish.patra@wdc.com/mbox/ > riscv.patch\n"
+"$ git am riscv.patch\n"
+"$ make rv32_defconfig\n"
+"$ make"
 
 #: ../../../system/riscv/sifive_u.rst:138
 msgid ""
@@ -276,7 +288,7 @@ msgstr ""
 
 #: ../../../system/riscv/sifive_u.rst:143
 msgid "Running VxWorks kernel"
-msgstr ""
+msgstr "執行 VxWorks 內核"
 
 #: ../../../system/riscv/sifive_u.rst:145
 msgid ""
@@ -315,6 +327,12 @@ msgid ""
 "    -append \"gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 "
 "u=target pw=vxTarget f=0x01\""
 msgstr ""
+"$ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -nic tap,ifname=tap0,script=no,downscript=no \\\n"
+"    -kernel /path/to/vxWorks \\\n"
+"    -append \"gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 "
+"u=target pw=vxTarget f=0x01\""
 
 #: ../../../system/riscv/sifive_u.rst:170
 msgid ""
@@ -513,6 +531,9 @@ msgid ""
 "    -display none -serial stdio \\\n"
 "    -kernel /path/to/u-boot.bin"
 msgstr ""
+"$ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel /path/to/u-boot.bin"
 
 #: ../../../system/riscv/sifive_u.rst:314
 msgid "It's possible to create a 32-bit U-Boot S-mode image as well."
@@ -547,3 +568,6 @@ msgid ""
 "    -display none -serial stdio \\\n"
 "    -kernel /path/to/u-boot.bin"
 msgstr ""
+"$ qemu-system-riscv32 -M sifive_u -smp 5 -m 2G \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel /path/to/u-boot.bin"
