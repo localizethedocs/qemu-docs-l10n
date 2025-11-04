@@ -129,6 +129,15 @@ msgid ""
 "          \"pc.ram\": \"0x0000000008000000\",\n"
 "..."
 msgstr ""
+"$ qemu-system-x86_64 -display none -monitor stdio\n"
+"(qemu) migrate \"exec:cat > mig\"\n"
+"(qemu) q\n"
+"$ ./scripts/analyze-migration.py -f mig\n"
+"{\n"
+"  \"ram (3)\": {\n"
+"      \"section sizes\": {\n"
+"          \"pc.ram\": \"0x0000000008000000\",\n"
+"..."
 
 #: ../../../devel/migration.rst:72
 msgid "See also ``analyze-migration.py -h`` help for more options."
@@ -720,31 +729,31 @@ msgstr ""
 
 #: ../../../devel/migration.rst:454
 msgid "memory_region_add_subregion()"
-msgstr ""
+msgstr "memory_region_add_subregion()"
 
 #: ../../../devel/migration.rst:455
 msgid "memory_region_del_subregion()"
-msgstr ""
+msgstr "memory_region_del_subregion()"
 
 #: ../../../devel/migration.rst:456
 msgid "memory_region_set_readonly()"
-msgstr ""
+msgstr "memory_region_set_readonly()"
 
 #: ../../../devel/migration.rst:457
 msgid "memory_region_set_nonvolatile()"
-msgstr ""
+msgstr "memory_region_set_readonly()"
 
 #: ../../../devel/migration.rst:458
 msgid "memory_region_set_enabled()"
-msgstr ""
+msgstr "memory_region_set_enabled()"
 
 #: ../../../devel/migration.rst:459
 msgid "memory_region_set_address()"
-msgstr ""
+msgstr "memory_region_set_address()"
 
 #: ../../../devel/migration.rst:460
 msgid "memory_region_set_alias_offset()"
-msgstr ""
+msgstr "memory_region_set_alias_offset()"
 
 #: ../../../devel/migration.rst:463
 msgid "Iterative device migration"
@@ -1418,7 +1427,7 @@ msgstr ""
 
 #: ../../../devel/migration.rst:855
 msgid "Firmware"
-msgstr ""
+msgstr "韌體"
 
 #: ../../../devel/migration.rst:857
 msgid ""
