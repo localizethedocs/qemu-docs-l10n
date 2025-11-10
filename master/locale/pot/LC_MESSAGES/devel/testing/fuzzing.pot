@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2025-11-10 09:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -495,33 +495,51 @@ msgstr ""
 msgid "Report the bug and send a patch with the C reproducer upstream"
 msgstr ""
 
-#: ../../../devel/testing/fuzzing.rst:267
-msgid "Implementation Details / Fuzzer Lifecycle"
+#: ../../../devel/testing/fuzzing.rst:266
+msgid ""
+"QEMU can also read the reproducer directly from a file rather than from "
+"standard input::"
 msgstr ""
 
 #: ../../../devel/testing/fuzzing.rst:269
+msgid ""
+"$QEMU_PATH $QEMU_ARGS -qtest chardev:repro \\\n"
+"  -chardev file,id=repro,path=/dev/null,input-path=/tmp/reproducer"
+msgstr ""
+
+#: ../../../devel/testing/fuzzing.rst:272
+msgid ""
+"This is useful if you want to run QEMU under a debugger to investigate the "
+"failure."
+msgstr ""
+
+#: ../../../devel/testing/fuzzing.rst:276
+msgid "Implementation Details / Fuzzer Lifecycle"
+msgstr ""
+
+#: ../../../devel/testing/fuzzing.rst:278
 msgid ""
 "The fuzzer has two entrypoints that libfuzzer calls. libfuzzer provides it's "
 "own ``main()``, which performs some setup, and calls the entrypoints:"
 msgstr ""
 
-#: ../../../devel/testing/fuzzing.rst:272
+#: ../../../devel/testing/fuzzing.rst:281
 msgid ""
 "``LLVMFuzzerInitialize``: called prior to fuzzing. Used to initialize all of "
 "the necessary state"
 msgstr ""
 
-#: ../../../devel/testing/fuzzing.rst:275
+#: ../../../devel/testing/fuzzing.rst:284
 msgid ""
 "``LLVMFuzzerTestOneInput``: called for each fuzzing run. Processes the input "
 "and resets the state at the end of each run."
 msgstr ""
 
-#: ../../../devel/testing/fuzzing.rst:278
+#: ../../../devel/testing/fuzzing.rst:287
 msgid "In more detail:"
 msgstr ""
 
-#: ../../../devel/testing/fuzzing.rst:280
+#: ../../../devel/testing/fuzzing.rst:289
 msgid ""
 "``LLVMFuzzerInitialize`` parses the arguments to the fuzzer (must start with "
 "two dashes, so they are ignored by libfuzzer ``main()``). Currently, the "
@@ -531,14 +549,14 @@ msgid ""
 "and saved."
 msgstr ""
 
-#: ../../../devel/testing/fuzzing.rst:286
+#: ../../../devel/testing/fuzzing.rst:295
 msgid ""
 "After this, the ``vl.c:main`` is called to set up the guest. There are "
 "target-specific hooks that can be called before and after main, for "
 "additional setup(e.g. PCI setup, or VM snapshotting)."
 msgstr ""
 
-#: ../../../devel/testing/fuzzing.rst:290
+#: ../../../devel/testing/fuzzing.rst:299
 msgid ""
 "``LLVMFuzzerTestOneInput``: Uses qtest/qos functions to act based on the "
 "fuzz input. It is also responsible for manually calling ``main_loop_wait`` "
@@ -546,18 +564,18 @@ msgid ""
 "the next input."
 msgstr ""
 
-#: ../../../devel/testing/fuzzing.rst:294
+#: ../../../devel/testing/fuzzing.rst:303
 msgid ""
 "Since the same process is reused for many fuzzing runs, QEMU state needs to "
 "be reset at the end of each run. For example, this can be done by rebooting "
 "the VM, after each run."
 msgstr ""
 
-#: ../../../devel/testing/fuzzing.rst:298
+#: ../../../devel/testing/fuzzing.rst:307
 msgid "*Pros*: Straightforward and fast for simple fuzz targets."
 msgstr ""
 
-#: ../../../devel/testing/fuzzing.rst:300
+#: ../../../devel/testing/fuzzing.rst:309
 msgid ""
 "*Cons*: Depending on the device, does not reset all device state. If the "
 "device requires some initialization prior to being ready for fuzzing (common "
@@ -565,6 +583,6 @@ msgid ""
 "reboot."
 msgstr ""
 
-#: ../../../devel/testing/fuzzing.rst:305
+#: ../../../devel/testing/fuzzing.rst:314
 msgid "*Example target*: ``i440fx-qtest-reboot-fuzz``"
 msgstr ""
