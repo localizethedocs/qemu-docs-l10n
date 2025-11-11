@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2025-11-10 09:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -508,7 +508,7 @@ msgstr ""
 #: ../../../devel/qapi-code-gen.rst:417 ../../../devel/qapi-code-gen.rst:704
 #: ../../../devel/qapi-code-gen.rst:955 ../../../devel/qapi-code-gen.rst:1532
 #: ../../../devel/qapi-code-gen.rst:1636 ../../../devel/qapi-code-gen.rst:1788
-#: ../../../devel/qapi-code-gen.rst:1926 ../../../devel/qapi-code-gen.rst:2006
+#: ../../../devel/qapi-code-gen.rst:1919 ../../../devel/qapi-code-gen.rst:1999
 msgid "Example::"
 msgstr ""
 
@@ -2480,8 +2480,8 @@ msgstr ""
 msgid "Code generated for QAPI types"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1519 ../../../devel/qapi-code-gen.rst:1912
-#: ../../../devel/qapi-code-gen.rst:1998
+#: ../../../devel/qapi-code-gen.rst:1519 ../../../devel/qapi-code-gen.rst:1905
+#: ../../../devel/qapi-code-gen.rst:1991
 msgid "The following files are created:"
 msgstr ""
 
@@ -2581,7 +2581,7 @@ msgid ""
 msgstr ""
 
 #: ../../../devel/qapi-code-gen.rst:1602 ../../../devel/qapi-code-gen.rst:1747
-#: ../../../devel/qapi-code-gen.rst:1988
+#: ../../../devel/qapi-code-gen.rst:1981
 msgid ""
 "For a modular QAPI schema (see section `Include directives`_), code for each "
 "sub-module SUBDIR/SUBMODULE.json is actually generated into ::"
@@ -2860,27 +2860,13 @@ msgid ""
 "$ cat qapi-generated/example-qapi-commands.c\n"
 "[Uninteresting stuff omitted...]\n"
 "\n"
-"static void qmp_marshal_output_UserDefOne(UserDefOne *ret_in,\n"
-"                                QObject **ret_out, Error **errp)\n"
-"{\n"
-"    Visitor *v;\n"
-"\n"
-"    v = qobject_output_visitor_new_qmp(ret_out);\n"
-"    if (visit_type_UserDefOne(v, \"unused\", &ret_in, errp)) {\n"
-"        visit_complete(v, ret_out);\n"
-"    }\n"
-"    visit_free(v);\n"
-"    v = qapi_dealloc_visitor_new();\n"
-"    visit_type_UserDefOne(v, \"unused\", &ret_in, NULL);\n"
-"    visit_free(v);\n"
-"}\n"
-"\n"
 "void qmp_marshal_my_command(QDict *args, QObject **ret, Error **errp)\n"
 "{\n"
 "    Error *err = NULL;\n"
 "    bool ok = false;\n"
 "    Visitor *v;\n"
 "    UserDefOne *retval;\n"
+"    Visitor *ov;\n"
 "    q_obj_my_command_arg arg = {0};\n"
 "\n"
 "    v = qobject_input_visitor_new_qmp(QOBJECT(args));\n"
@@ -2908,7 +2894,14 @@ msgid ""
 "        goto out;\n"
 "    }\n"
 "\n"
-"    qmp_marshal_output_UserDefOne(retval, ret, errp);\n"
+"    ov = qobject_output_visitor_new_qmp(ret);\n"
+"    if (visit_type_UserDefOne(ov, \"unused\", &retval, errp)) {\n"
+"        visit_complete(ov, ret);\n"
+"    }\n"
+"    visit_free(ov);\n"
+"    ov = qapi_dealloc_visitor_new();\n"
+"    visit_type_UserDefOne(ov, \"unused\", &retval, NULL);\n"
+"    visit_free(ov);\n"
 "\n"
 "    if (trace_event_get_state_backends(TRACE_QMP_EXIT_MY_COMMAND)) {\n"
 "        g_autoptr(GString) ret_json = qobject_to_json(*ret);\n"
@@ -2948,61 +2941,61 @@ msgid ""
 "[Uninteresting stuff omitted...]"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1899
+#: ../../../devel/qapi-code-gen.rst:1892
 msgid ""
 "For a modular QAPI schema (see section `Include directives`_), code for each "
 "sub-module SUBDIR/SUBMODULE.json is actually generated into::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1902
+#: ../../../devel/qapi-code-gen.rst:1895
 msgid ""
 "SUBDIR/$(prefix)qapi-commands-SUBMODULE.h\n"
 "SUBDIR/$(prefix)qapi-commands-SUBMODULE.c"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1907
+#: ../../../devel/qapi-code-gen.rst:1900
 msgid "Code generated for events"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1909
+#: ../../../devel/qapi-code-gen.rst:1902
 msgid ""
 "This is the code related to events defined in the schema, providing "
 "qapi_event_send_EVENT()."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1914
+#: ../../../devel/qapi-code-gen.rst:1907
 msgid "``$(prefix)qapi-events.h``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1915
+#: ../../../devel/qapi-code-gen.rst:1908
 msgid "Function prototypes for each event type"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1917
+#: ../../../devel/qapi-code-gen.rst:1910
 msgid "``$(prefix)qapi-events.c``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1918
+#: ../../../devel/qapi-code-gen.rst:1911
 msgid "Implementation of functions to send an event"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1920
+#: ../../../devel/qapi-code-gen.rst:1913
 msgid "``$(prefix)qapi-emit-events.h``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1921
+#: ../../../devel/qapi-code-gen.rst:1914
 msgid "Enumeration of all event names, and common event code declarations"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1923
+#: ../../../devel/qapi-code-gen.rst:1916
 msgid "``$(prefix)qapi-emit-events.c``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1924
+#: ../../../devel/qapi-code-gen.rst:1917
 msgid "Common event code definitions"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1928
+#: ../../../devel/qapi-code-gen.rst:1921
 msgid ""
 "$ cat qapi-generated/example-qapi-events.h\n"
 "[Uninteresting stuff omitted...]\n"
@@ -3065,33 +3058,33 @@ msgid ""
 "[Uninteresting stuff omitted...]"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1991
+#: ../../../devel/qapi-code-gen.rst:1984
 msgid ""
 "SUBDIR/$(prefix)qapi-events-SUBMODULE.h\n"
 "SUBDIR/$(prefix)qapi-events-SUBMODULE.c"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1996
+#: ../../../devel/qapi-code-gen.rst:1989
 msgid "Code generated for introspection"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:2000
+#: ../../../devel/qapi-code-gen.rst:1993
 msgid "``$(prefix)qapi-introspect.c``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:2001
+#: ../../../devel/qapi-code-gen.rst:1994
 msgid "Defines a string holding a JSON description of the schema"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:2003
+#: ../../../devel/qapi-code-gen.rst:1996
 msgid "``$(prefix)qapi-introspect.h``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:2004
+#: ../../../devel/qapi-code-gen.rst:1997
 msgid "Declares the above string"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:2008
+#: ../../../devel/qapi-code-gen.rst:2001
 msgid ""
 "$ cat qapi-generated/example-qapi-introspect.h\n"
 "[Uninteresting stuff omitted...]\n"

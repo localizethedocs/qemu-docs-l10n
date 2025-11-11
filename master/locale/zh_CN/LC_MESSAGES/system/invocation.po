@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2025-11-10 09:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -628,7 +628,7 @@ msgstr ""
 #: ../../../../qemu-options.hx:1661 ../../../../qemu-options.hx:1850
 #: ../../../../qemu-options.hx:1950 ../../../../qemu-options.hx:4276
 #: ../../../../qemu-options.hx:4893 ../../../../qemu-options.hx:5259
-#: ../../../../qemu-options.hx:6078
+#: ../../../../qemu-options.hx:6087
 msgid "\\"
 msgstr ""
 
@@ -7924,16 +7924,17 @@ msgstr ""
 msgid "Argument passed to the plugin. (Can be given multiple times.)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5478
+#: ../../../../qemu-options.hx:5481
 msgid ""
-"``-run-with [async-teardown=on|off][,chroot=dir][user=username|uid:gid]``"
+"``-run-with [async-teardown=on|off][,chroot=dir][,exit-with-parent=on|off][,"
+"user=username|uid:gid]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5479
+#: ../../../../qemu-options.hx:5482
 msgid "Set QEMU process lifecycle options."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5481
+#: ../../../../qemu-options.hx:5484
 msgid ""
 "``async-teardown=on`` enables asynchronous teardown. A new process called "
 "\"cleanup/<QEMU_PID>\" will be created at startup sharing the address space "
@@ -7946,14 +7947,23 @@ msgid ""
 "with SIGKILL before the main QEMU process has terminated completely."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5492
+#: ../../../../qemu-options.hx:5495
 msgid ""
 "``chroot=dir`` can be used for doing a chroot to the specified directory "
 "immediately before starting the guest execution. This is especially useful "
 "in combination with ``user=...``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5496
+#: ../../../../qemu-options.hx:5499
+msgid ""
+"``exit-with-parent=on`` causes QEMU to exit if the parent process of QEMU "
+"exits.  This can be used when QEMU runs a captive appliance, where the "
+"lifetime of the appliance is scoped to the parent process. In case the "
+"parent process crashes, QEMU is still cleaned up. This only works on Linux, "
+"FreeBSD and macOS platforms."
+msgstr ""
+
+#: ../../../../qemu-options.hx:5505
 msgid ""
 "``user=username`` or ``user=uid:gid`` can be used to drop root privileges "
 "before starting guest execution. QEMU will use the ``setuid`` and ``setgid`` "
@@ -7963,82 +7973,82 @@ msgid ""
 "group."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5513
+#: ../../../../qemu-options.hx:5522
 msgid "``-msg [timestamp[=on|off]][,guest-name[=on|off]]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5514
+#: ../../../../qemu-options.hx:5523
 msgid "Control error message format."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5516
+#: ../../../../qemu-options.hx:5525
 msgid "``timestamp=on|off``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5517
+#: ../../../../qemu-options.hx:5526
 msgid "Prefix messages with a timestamp. Default is off."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5519
+#: ../../../../qemu-options.hx:5528
 msgid "``guest-name=on|off``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5520
+#: ../../../../qemu-options.hx:5529
 msgid ""
 "Prefix messages with guest name but only if -name guest option is set "
 "otherwise the option is ignored. Default is off."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5532
+#: ../../../../qemu-options.hx:5541
 msgid "``-dump-vmstate file``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5533
+#: ../../../../qemu-options.hx:5542
 msgid ""
 "Dump json-encoded vmstate information for current machine type to file in "
 "file"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5542
+#: ../../../../qemu-options.hx:5551
 msgid "``-enable-sync-profile``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5543
+#: ../../../../qemu-options.hx:5552
 msgid "Enable synchronization profiling."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5551
+#: ../../../../qemu-options.hx:5560
 msgid "``-perfmap``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5552
+#: ../../../../qemu-options.hx:5561
 msgid ""
 "Generate a map file for Linux perf tools that will allow basic profiling "
 "information to be broken down into basic blocks."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5560
+#: ../../../../qemu-options.hx:5569
 msgid "``-jitdump``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5561
+#: ../../../../qemu-options.hx:5570
 msgid ""
 "Generate a dump file for Linux perf tools that maps basic blocks to symbol "
 "names, line numbers and JITted code."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5578
+#: ../../../../qemu-options.hx:5587
 msgid "``-object typename[,prop1=value1,...]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5579
+#: ../../../../qemu-options.hx:5588
 msgid ""
 "Create a new object of type typename setting properties in the order they "
 "are specified. Note that the 'id' property must be set. These objects are "
 "placed in the '/objects' path."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5583
+#: ../../../../qemu-options.hx:5592
 msgid ""
 "``-object memory-backend-file,id=id,size=size,mem-path=dir,share=on|off,"
 "discard-data=on|off,merge=on|off,dump=on|off,prealloc=on|off,host-nodes=host-"
@@ -8046,38 +8056,38 @@ msgid ""
 "readonly=on|off,rom=on|off|auto``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5584
+#: ../../../../qemu-options.hx:5593
 msgid ""
 "Creates a memory file backend object, which can be used to back the guest "
 "RAM with huge pages."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5587
+#: ../../../../qemu-options.hx:5596
 msgid ""
 "The ``id`` parameter is a unique ID that will be used to reference this "
 "memory region in other parameters, e.g. ``-numa``, ``-device nvdimm``, etc."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5591
+#: ../../../../qemu-options.hx:5600
 msgid ""
 "The ``size`` option provides the size of the memory region, and accepts "
 "common suffixes, e.g. ``500M``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5594
+#: ../../../../qemu-options.hx:5603
 msgid ""
 "The ``mem-path`` provides the path to either a shared memory or huge page "
 "filesystem mount."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5597
+#: ../../../../qemu-options.hx:5606
 msgid ""
 "The ``share`` boolean option determines whether the memory region is marked "
 "as private to QEMU, or shared. The latter allows a co-operating external "
 "process to access the QEMU memory region."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5602
+#: ../../../../qemu-options.hx:5611
 msgid ""
 "Setting share=on might affect the ability to configure NUMA bindings for the "
 "memory backend under some circumstances, see Documentation/vm/"
@@ -8085,7 +8095,7 @@ msgid ""
 "details."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5607
+#: ../../../../qemu-options.hx:5616
 msgid ""
 "Setting the ``discard-data`` boolean option to on indicates that file "
 "contents can be destroyed when QEMU exits, to avoid unnecessarily flushing "
@@ -8094,67 +8104,67 @@ msgid ""
 "unexpectedly or is terminated using SIGKILL."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5614
+#: ../../../../qemu-options.hx:5623
 msgid ""
 "The ``merge`` boolean option enables memory merge, also known as "
 "MADV\\_MERGEABLE, so that Kernel Samepage Merging will consider the pages "
 "for memory deduplication."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5618
+#: ../../../../qemu-options.hx:5627
 msgid ""
 "Setting the ``dump`` boolean option to off excludes the memory from core "
 "dumps. This feature is also known as MADV\\_DONTDUMP."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5621
+#: ../../../../qemu-options.hx:5630
 msgid "The ``prealloc`` boolean option enables memory preallocation."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5623
+#: ../../../../qemu-options.hx:5632
 msgid ""
 "The ``host-nodes`` option binds the memory range to a list of NUMA host "
 "nodes."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5626
+#: ../../../../qemu-options.hx:5635
 msgid ""
 "The ``policy`` option sets the NUMA policy to one of the following values:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5629
+#: ../../../../qemu-options.hx:5638
 msgid "``default``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5630
+#: ../../../../qemu-options.hx:5639
 msgid "default host policy"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5632
+#: ../../../../qemu-options.hx:5641
 msgid "``preferred``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5633
+#: ../../../../qemu-options.hx:5642
 msgid "prefer the given host node list for allocation"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5635
+#: ../../../../qemu-options.hx:5644
 msgid "``bind``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5636
+#: ../../../../qemu-options.hx:5645
 msgid "restrict memory allocation to the given host node list"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5638
+#: ../../../../qemu-options.hx:5647
 msgid "``interleave``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5639
+#: ../../../../qemu-options.hx:5648
 msgid "interleave memory allocations across the given host node list"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5642
+#: ../../../../qemu-options.hx:5651
 msgid ""
 "The ``align`` option specifies the base address alignment when QEMU mmap(2) "
 "``mem-path``, and accepts common suffixes, eg ``2M``. Some backend store "
@@ -8164,14 +8174,14 @@ msgid ""
 "option."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5650
+#: ../../../../qemu-options.hx:5659
 msgid ""
 "The ``offset`` option specifies the offset into the target file that the "
 "region starts at. You can use this parameter to back multiple regions with a "
 "single file."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5654
+#: ../../../../qemu-options.hx:5663
 msgid ""
 "The ``pmem`` option specifies whether the backing file specified by ``mem-"
 "path`` is in host persistent memory that can be accessed using the SNIA NVM "
@@ -8184,13 +8194,13 @@ msgid ""
 "kernel 4.15) and the filesystem of ``mem-path`` mounted with DAX option."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5667
+#: ../../../../qemu-options.hx:5676
 msgid ""
 "The ``readonly`` option specifies whether the backing file is opened read-"
 "only or read-write (default)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5670
+#: ../../../../qemu-options.hx:5679
 msgid ""
 "The ``rom`` option specifies whether to create Read Only Memory (ROM) that "
 "cannot be modified by the VM. Any write attempts to such ROM will be denied. "
@@ -8205,14 +8215,14 @@ msgid ""
 "ROM, and want to also set ``rom=off``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5684
+#: ../../../../qemu-options.hx:5693
 msgid ""
 "``-object memory-backend-ram,id=id,merge=on|off,dump=on|off,share=on|off,"
 "prealloc=on|off,size=size,host-nodes=host-nodes,policy=default|preferred|"
 "bind|interleave``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5685
+#: ../../../../qemu-options.hx:5694
 msgid ""
 "Creates a memory backend object, which can be used to back the guest RAM. "
 "Memory backend objects offer more control than the ``-m`` option that is "
@@ -8220,27 +8230,27 @@ msgid ""
 "file`` for a description of the options."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5691
+#: ../../../../qemu-options.hx:5700
 msgid ""
 "``-object memory-backend-memfd,id=id,merge=on|off,dump=on|off,share=on|off,"
 "prealloc=on|off,size=size,host-nodes=host-nodes,policy=default|preferred|"
 "bind|interleave,seal=on|off,hugetlb=on|off,hugetlbsize=size``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5692
+#: ../../../../qemu-options.hx:5701
 msgid ""
 "Creates an anonymous memory file backend object, which allows QEMU to share "
 "the memory with an external process (e.g. when using vhost-user). The memory "
 "is allocated with memfd and optional sealing. (Linux only)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5697
+#: ../../../../qemu-options.hx:5706
 msgid ""
 "The ``seal`` option creates a sealed-file, that will block further resizing "
 "the memory ('on' by default)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5700
+#: ../../../../qemu-options.hx:5709
 msgid ""
 "The ``hugetlb`` option specify the file to be created resides in the "
 "hugetlbfs filesystem (since Linux 4.14). Used in conjunction with the "
@@ -8249,82 +8259,82 @@ msgid ""
 "value supported by the system)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5707
+#: ../../../../qemu-options.hx:5716
 msgid ""
 "In some versions of Linux, the ``hugetlb`` option is incompatible with the "
 "``seal`` option (requires at least Linux 4.16)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5711
+#: ../../../../qemu-options.hx:5720
 msgid ""
 "Please refer to ``memory-backend-file`` for a description of the other "
 "options."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5714
+#: ../../../../qemu-options.hx:5723
 msgid "The ``share`` boolean option is on by default with memfd."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5716
+#: ../../../../qemu-options.hx:5725
 msgid ""
 "``-object memory-backend-shm,id=id,merge=on|off,dump=on|off,share=on|off,"
 "prealloc=on|off,size=size,host-nodes=host-nodes,policy=default|preferred|"
 "bind|interleave``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5717
+#: ../../../../qemu-options.hx:5726
 msgid ""
 "Creates a POSIX shared memory backend object, which allows QEMU to share the "
 "memory with an external process (e.g. when using vhost-user)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5721
+#: ../../../../qemu-options.hx:5730
 msgid ""
 "``memory-backend-shm`` is a more portable and less featureful version of "
 "``memory-backend-memfd``. It can then be used in any POSIX system, "
 "especially when memfd is not supported."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5725
+#: ../../../../qemu-options.hx:5734
 msgid ""
 "Please refer to ``memory-backend-file`` for a description of the options."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5728
+#: ../../../../qemu-options.hx:5737
 msgid ""
 "The ``share`` boolean option is on by default with shm. Setting it to off "
 "will cause a failure during allocation because it is not supported by this "
 "backend."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5732
+#: ../../../../qemu-options.hx:5741
 msgid "``-object iommufd,id=id[,fd=fd]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5733
+#: ../../../../qemu-options.hx:5742
 msgid ""
 "Creates an iommufd backend which allows control of DMA mapping through the "
 "``/dev/iommu`` device."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5736
+#: ../../../../qemu-options.hx:5745
 msgid ""
 "The ``id`` parameter is a unique ID which frontends (such as vfio-pci of "
 "vdpa) will use to connect with the iommufd backend."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5739
+#: ../../../../qemu-options.hx:5748
 msgid ""
 "The ``fd`` parameter is an optional pre-opened file descriptor resulting "
 "from ``/dev/iommu`` opening. Usually the iommufd is shared across all "
 "subsystems, bringing the benefit of centralized reference counting."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5744
+#: ../../../../qemu-options.hx:5753
 msgid "``-object rng-builtin,id=id``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5745
+#: ../../../../qemu-options.hx:5754
 msgid ""
 "Creates a random number generator backend which obtains entropy from QEMU "
 "builtin functions. The ``id`` parameter is a unique ID that will be used to "
@@ -8332,11 +8342,11 @@ msgid ""
 "the ``virtio-rng`` device uses this RNG backend."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5751
+#: ../../../../qemu-options.hx:5760
 msgid "``-object rng-random,id=id,filename=/dev/random``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5752
+#: ../../../../qemu-options.hx:5761
 msgid ""
 "Creates a random number generator backend which obtains entropy from a "
 "device on the host. The ``id`` parameter is a unique ID that will be used to "
@@ -8345,11 +8355,11 @@ msgid ""
 "omitted defaults to ``/dev/urandom``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5759
+#: ../../../../qemu-options.hx:5768
 msgid "``-object rng-egd,id=id,chardev=chardevid``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5760
+#: ../../../../qemu-options.hx:5769
 msgid ""
 "Creates a random number generator backend which obtains entropy from an "
 "external daemon running on the host. The ``id`` parameter is a unique ID "
@@ -8358,13 +8368,13 @@ msgid ""
 "backend that provides the connection to the RNG daemon."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5767
+#: ../../../../qemu-options.hx:5776
 msgid ""
 "``-object tls-creds-anon,id=id,endpoint=endpoint,dir=/path/to/cred/dir,"
 "verify-peer=on|off``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5768
+#: ../../../../qemu-options.hx:5777
 msgid ""
 "Creates a TLS anonymous credentials object, which can be used to provide TLS "
 "support on network backends. The ``id`` parameter is a unique ID which "
@@ -8376,7 +8386,7 @@ msgid ""
 "anonymous credentials."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5778 ../../../../qemu-options.hx:5822
+#: ../../../../qemu-options.hx:5787 ../../../../qemu-options.hx:5831
 msgid ""
 "The dir parameter tells QEMU where to find the credential files. For server "
 "endpoints, this directory may contain a file dh-params.pem providing diffie-"
@@ -8386,13 +8396,13 @@ msgid ""
 "that a persistent set of parameters be generated upfront and saved."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5787
+#: ../../../../qemu-options.hx:5796
 msgid ""
 "``-object tls-creds-psk,id=id,endpoint=endpoint,dir=/path/to/keys/dir[,"
 "username=username]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5788
+#: ../../../../qemu-options.hx:5797
 msgid ""
 "Creates a TLS Pre-Shared Keys (PSK) credentials object, which can be used to "
 "provide TLS support on network backends. The ``id`` parameter is a unique ID "
@@ -8403,14 +8413,14 @@ msgid ""
 "server. If omitted it defaults to \"qemu\"."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5797
+#: ../../../../qemu-options.hx:5806
 msgid ""
 "The dir parameter tells QEMU where to find the keys file. It is called \"dir/"
 "keys.psk\" and contains \"username:key\" pairs. This file can most easily be "
 "created using the GnuTLS ``psktool`` program."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5802
+#: ../../../../qemu-options.hx:5811
 msgid ""
 "For server endpoints, dir may also contain a file dh-params.pem providing "
 "diffie-hellman parameters to use for the TLS server. If the file is missing, "
@@ -8420,13 +8430,13 @@ msgid ""
 "saved."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5810
+#: ../../../../qemu-options.hx:5819
 msgid ""
 "``-object tls-creds-x509,id=id,endpoint=endpoint,dir=/path/to/cred/dir,"
 "priority=priority,verify-peer=on|off,passwordid=id``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5811
+#: ../../../../qemu-options.hx:5820
 msgid ""
 "Creates a TLS anonymous credentials object, which can be used to provide TLS "
 "support on network backends. The ``id`` parameter is a unique ID which "
@@ -8439,7 +8449,7 @@ msgid ""
 "certificates too."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5831
+#: ../../../../qemu-options.hx:5840
 msgid ""
 "For x509 certificate credentials the directory will contain further files "
 "providing the x509 certificates. The certificates must be stored in PEM "
@@ -8448,7 +8458,7 @@ msgid ""
 "clients), and client-key.pem (only clients)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5838
+#: ../../../../qemu-options.hx:5847
 msgid ""
 "For the server-key.pem and client-key.pem files which contain sensitive "
 "private keys, it is possible to use an encrypted version by providing the "
@@ -8456,7 +8466,7 @@ msgid ""
 "``secret`` object containing the password for decryption."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5844
+#: ../../../../qemu-options.hx:5853
 msgid ""
 "The priority parameter allows to override the global default priority used "
 "by gnutls. This can be useful if the system administrator needs to use a "
@@ -8467,23 +8477,23 @@ msgid ""
 "https://gnutls.org/manual/html_node/Priority-Strings.html."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5854
+#: ../../../../qemu-options.hx:5863
 msgid "``-object tls-cipher-suites,id=id,priority=priority``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5855
+#: ../../../../qemu-options.hx:5864
 msgid ""
 "Creates a TLS cipher suites object, which can be used to control the TLS "
 "cipher/protocol algorithms that applications are permitted to use."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5859
+#: ../../../../qemu-options.hx:5868
 msgid ""
 "The ``id`` parameter is a unique ID which frontends will use to access the "
 "ordered list of permitted TLS cipher suites from the host."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5863
+#: ../../../../qemu-options.hx:5872
 msgid ""
 "The ``priority`` parameter allows to override the global default priority "
 "used by gnutls. This can be useful if the system administrator needs to use "
@@ -8494,7 +8504,7 @@ msgid ""
 "https://gnutls.org/manual/html_node/Priority-Strings.html."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5873
+#: ../../../../qemu-options.hx:5882
 msgid ""
 "An example of use of this object is to control UEFI HTTPS Boot. The tls-"
 "cipher-suites object exposes the ordered list of permitted TLS cipher suites "
@@ -8503,7 +8513,7 @@ msgid ""
 "IANA_TLS_CIPHER array for configuring guest-side TLS."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5880
+#: ../../../../qemu-options.hx:5889
 msgid ""
 "In the following example, the priority at which the host-side policy is "
 "retrieved is given by the ``priority`` property. Given that QEMU uses "
@@ -8518,13 +8528,13 @@ msgid ""
 "    -fw_cfg name=etc/edk2/https/ciphers,gen_id=mysuite0"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5891
+#: ../../../../qemu-options.hx:5900
 msgid ""
 "``-object filter-buffer,id=id,netdev=netdevid,interval=t[,queue=all|rx|tx][,"
 "status=on|off][,position=head|tail|id=<id>][,insert=behind|before]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5892
+#: ../../../../qemu-options.hx:5901
 msgid ""
 "Interval t can't be 0, this filter batches the packet delivery: all packets "
 "arriving in a given interval on netdev netdevid are delayed until the end of "
@@ -8533,88 +8543,88 @@ msgid ""
 "default status for netfilter will be 'on'."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5899
+#: ../../../../qemu-options.hx:5908
 msgid "queue all\\|rx\\|tx is an option that can be applied to any netfilter."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5902
+#: ../../../../qemu-options.hx:5911
 msgid ""
 "``all``: the filter is attached both to the receive and the transmit queue "
 "of the netdev (default)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5905
+#: ../../../../qemu-options.hx:5914
 msgid ""
 "``rx``: the filter is attached to the receive queue of the netdev, where it "
 "will receive packets sent to the netdev."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5908
+#: ../../../../qemu-options.hx:5917
 msgid ""
 "``tx``: the filter is attached to the transmit queue of the netdev, where it "
 "will receive packets sent by the netdev."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5911
+#: ../../../../qemu-options.hx:5920
 msgid ""
 "position head\\|tail\\|id=<id> is an option to specify where the filter "
 "should be inserted in the filter list. It can be applied to any netfilter."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5915
+#: ../../../../qemu-options.hx:5924
 msgid ""
 "``head``: the filter is inserted at the head of the filter list, before any "
 "existing filters."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5918
+#: ../../../../qemu-options.hx:5927
 msgid ""
 "``tail``: the filter is inserted at the tail of the filter list, behind any "
 "existing filters (default)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5921
+#: ../../../../qemu-options.hx:5930
 msgid ""
 "``id=<id>``: the filter is inserted before or behind the filter specified by "
 "<id>, see the insert option below."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5924
+#: ../../../../qemu-options.hx:5933
 msgid ""
 "insert behind\\|before is an option to specify where to insert the new "
 "filter relative to the one specified with position=id=<id>. It can be "
 "applied to any netfilter."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5928
+#: ../../../../qemu-options.hx:5937
 msgid "``before``: insert before the specified filter."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5930
+#: ../../../../qemu-options.hx:5939
 msgid "``behind``: insert behind the specified filter (default)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5932
+#: ../../../../qemu-options.hx:5941
 msgid ""
 "``-object filter-mirror,id=id,netdev=netdevid,outdev=chardevid,queue=all|rx|"
 "tx[,vnet_hdr_support][,position=head|tail|id=<id>][,insert=behind|before]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5933
+#: ../../../../qemu-options.hx:5942
 msgid ""
 "filter-mirror on netdev netdevid,mirror net packet to chardevchardevid, if "
 "it has the vnet\\_hdr\\_support flag, filter-mirror will mirror packet with "
 "vnet\\_hdr\\_len."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5937
+#: ../../../../qemu-options.hx:5946
 msgid ""
 "``-object filter-redirector,id=id,netdev=netdevid,indev=chardevid,"
 "outdev=chardevid,queue=all|rx|tx[,vnet_hdr_support][,position=head|tail|"
 "id=<id>][,insert=behind|before]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5938
+#: ../../../../qemu-options.hx:5947
 msgid ""
 "filter-redirector on netdev netdevid,redirect filter's net packet to chardev "
 "chardevid,and redirect indev's packet to filter.if it has the "
@@ -8624,13 +8634,13 @@ msgid ""
 "at least one of indev or outdev need to be specified."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5946
+#: ../../../../qemu-options.hx:5955
 msgid ""
 "``-object filter-rewriter,id=id,netdev=netdevid,queue=all|rx|tx,"
 "[vnet_hdr_support][,position=head|tail|id=<id>][,insert=behind|before]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5947
+#: ../../../../qemu-options.hx:5956
 msgid ""
 "Filter-rewriter is a part of COLO project.It will rewrite tcp packet to "
 "secondary from primary to keep secondary tcp connection,and rewrite tcp "
@@ -8638,27 +8648,27 @@ msgid ""
 "it has the vnet\\_hdr\\_support flag, we can parse packet with vnet header."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5953
+#: ../../../../qemu-options.hx:5962
 msgid ""
 "usage: colo secondary: -object filter-redirector,id=f1,netdev=hn0,queue=tx,"
 "indev=red0 -object filter-redirector,id=f2,netdev=hn0,queue=rx,outdev=red1 -"
 "object filter-rewriter,id=rew0,netdev=hn0,queue=all"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5958
+#: ../../../../qemu-options.hx:5967
 msgid ""
 "``-object filter-dump,id=id,netdev=dev[,file=filename][,maxlen=len][,"
 "position=head|tail|id=<id>][,insert=behind|before]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5959
+#: ../../../../qemu-options.hx:5968
 msgid ""
 "Dump the network traffic on netdev dev to the file specified by filename. At "
 "most len bytes (64k by default) per packet are stored. The file format is "
 "libpcap, so it can be analyzed with tools such as tcpdump or Wireshark."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5964
+#: ../../../../qemu-options.hx:5973
 msgid ""
 "``-object colo-compare,id=id,primary_in=chardevid,secondary_in=chardevid,"
 "outdev=chardevid,iothread=id[,vnet_hdr_support][,notify_dev=id][,"
@@ -8666,7 +8676,7 @@ msgid ""
 "max_queue_size=@var{size}]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5965
+#: ../../../../qemu-options.hx:5974
 msgid ""
 "Colo-compare gets packet from primary\\_in chardevid and secondary\\_in, "
 "then compare whether the payload of primary packet and secondary packet are "
@@ -8683,13 +8693,13 @@ msgid ""
 "checkpoint."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5981
+#: ../../../../qemu-options.hx:5990
 msgid ""
 "COLO-compare must be used with the help of filter-mirror, filter-redirector "
 "and filter-rewriter."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5986
+#: ../../../../qemu-options.hx:5995
 msgid ""
 "KVM COLO\n"
 "\n"
@@ -8746,17 +8756,17 @@ msgid ""
 "-object filter-redirector,id=f2,netdev=hn0,queue=rx,outdev=red1"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6038
+#: ../../../../qemu-options.hx:6047
 msgid ""
 "If you want to know the detail of above command line, you can read the colo-"
 "compare git log."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6041
+#: ../../../../qemu-options.hx:6050
 msgid "``-object cryptodev-backend-builtin,id=id[,queues=queues]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6042
+#: ../../../../qemu-options.hx:6051
 msgid ""
 "Creates a cryptodev backend which executes crypto operations from the QEMU "
 "cipher APIs. The id parameter is a unique ID that will be used to reference "
@@ -8774,12 +8784,12 @@ msgid ""
 "  [...]"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6057
+#: ../../../../qemu-options.hx:6066
 msgid ""
 "``-object cryptodev-vhost-user,id=id,chardev=chardevid[,queues=queues]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6058
+#: ../../../../qemu-options.hx:6067
 msgid ""
 "Creates a vhost-user cryptodev backend, backed by a chardev chardevid. The "
 "id parameter is a unique ID that will be used to reference this cryptodev "
@@ -8801,19 +8811,19 @@ msgid ""
 "  [...]"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6077
+#: ../../../../qemu-options.hx:6086
 msgid ""
 "``-object secret,id=id,data=string,format=raw|base64[,keyid=secretid,"
 "iv=string]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6079
+#: ../../../../qemu-options.hx:6088
 msgid ""
 "``-object secret,id=id,file=filename,format=raw|base64[,keyid=secretid,"
 "iv=string]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6080
+#: ../../../../qemu-options.hx:6089
 msgid ""
 "Defines a secret to store a password, encryption key, or some other "
 "sensitive data. The sensitive data can either be passed directly via the "
@@ -8821,7 +8831,7 @@ msgid ""
 "parameter is insecure unless the sensitive data is encrypted."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6086
+#: ../../../../qemu-options.hx:6095
 msgid ""
 "The sensitive data can be provided in raw format (the default), or base64. "
 "When encoded as JSON, the raw format only supports valid UTF-8 characters, "
@@ -8831,7 +8841,7 @@ msgid ""
 "encoded when passed onto the RBD sever."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6094
+#: ../../../../qemu-options.hx:6103
 msgid ""
 "For added protection, it is possible to encrypt the data associated with a "
 "secret using the AES-256-CBC cipher. Use of encryption is indicated by "
@@ -8842,7 +8852,7 @@ msgid ""
 "particular secret and should be a base64 encrypted string of the 16-byte IV."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6104
+#: ../../../../qemu-options.hx:6113
 msgid "The simplest (insecure) usage is to provide the secret inline"
 msgstr ""
 
@@ -8850,17 +8860,17 @@ msgstr ""
 msgid "# |qemu_system| -object secret,id=sec0,data=letmein,format=raw"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6110
+#: ../../../../qemu-options.hx:6119
 msgid "The simplest secure usage is to provide the secret via a file"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6112
+#: ../../../../qemu-options.hx:6121
 msgid ""
 "# printf \"letmein\" > mypasswd.txt # QEMU\\_SYSTEM\\_MACRO -object secret,"
 "id=sec0,file=mypasswd.txt,format=raw"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6115
+#: ../../../../qemu-options.hx:6124
 msgid ""
 "For greater security, AES-256-CBC should be used. To illustrate usage, "
 "consider the openssl command line tool which can encrypt the data. Note that "
@@ -8868,42 +8878,42 @@ msgid ""
 "bytes) using the standard PKCS#5/6 compatible padding algorithm."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6121
+#: ../../../../qemu-options.hx:6130
 msgid "First a master key needs to be created in base64 encoding:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6125
+#: ../../../../qemu-options.hx:6134
 msgid ""
 "# openssl rand -base64 32 > key.b64\n"
 "# KEY=$(base64 -d key.b64 | hexdump  -v -e '/1 \"%02X\"')"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6128
+#: ../../../../qemu-options.hx:6137
 msgid ""
 "Each secret to be encrypted needs to have a random initialization vector "
 "generated. These do not need to be kept secret"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6134
+#: ../../../../qemu-options.hx:6143
 msgid ""
 "# openssl rand -base64 16 > iv.b64\n"
 "# IV=$(base64 -d iv.b64 | hexdump  -v -e '/1 \"%02X\"')"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6137
+#: ../../../../qemu-options.hx:6146
 msgid ""
 "The secret to be defined can now be encrypted, in this case we're telling "
 "openssl to base64 encode the result, but it could be left as raw bytes if "
 "desired."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6143
+#: ../../../../qemu-options.hx:6152
 msgid ""
 "# SECRET=$(printf \"letmein\" |\n"
 "           openssl enc -aes-256-cbc -a -K $KEY -iv $IV)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6146
+#: ../../../../qemu-options.hx:6155
 msgid ""
 "When launching QEMU, create a master secret pointing to ``key.b64`` and "
 "specify that to be used to decrypt the user password. Pass the contents of "
@@ -8918,20 +8928,20 @@ msgid ""
 "        data=$SECRET,iv=$(<iv.b64)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6157
+#: ../../../../qemu-options.hx:6166
 msgid ""
 "``-object sev-guest,id=id,cbitpos=cbitpos,reduced-phys-bits=val,[sev-"
 "device=string,policy=policy,handle=handle,dh-cert-file=file,session-"
 "file=file,kernel-hashes=on|off]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6158
+#: ../../../../qemu-options.hx:6167
 msgid ""
 "Create a Secure Encrypted Virtualization (SEV) guest object, which can be "
 "used to provide the guest memory encryption support on AMD processors."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6162
+#: ../../../../qemu-options.hx:6171
 msgid ""
 "When memory encryption is enabled, one of the physical address bit (aka the "
 "C-bit) is utilized to mark if a memory page is protected. The ``cbitpos`` is "
@@ -8940,7 +8950,7 @@ msgid ""
 "47."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6168
+#: ../../../../qemu-options.hx:6177
 msgid ""
 "When memory encryption is enabled, we loose certain bits in physical address "
 "space. The ``reduced-phys-bits`` is used to provide the number of bits we "
@@ -8949,7 +8959,7 @@ msgid ""
 "should be 1."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6174
+#: ../../../../qemu-options.hx:6183
 msgid ""
 "The ``sev-device`` provides the device file to use for communicating with "
 "the SEV firmware running inside AMD Secure Processor. The default device is "
@@ -8957,7 +8967,7 @@ msgid ""
 "created by CCP driver."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6180
+#: ../../../../qemu-options.hx:6189
 msgid ""
 "The ``policy`` provides the guest policy to be enforced by the SEV firmware "
 "and restrict what configuration and operational commands can be performed on "
@@ -8966,14 +8976,14 @@ msgid ""
 "lifetime of the guest. The default is 0."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6187
+#: ../../../../qemu-options.hx:6196
 msgid ""
 "If guest ``policy`` allows sharing the key with another SEV guest then "
 "``handle`` can be use to provide handle of the guest from which to share the "
 "key."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6191
+#: ../../../../qemu-options.hx:6200
 msgid ""
 "The ``dh-cert-file`` and ``session-file`` provides the guest owner's Public "
 "Diffie-Hillman key defined in SEV spec. The PDH and session parameters are "
@@ -8981,14 +8991,14 @@ msgid ""
 "negotiate keys used for attestation. The file must be encoded in base64."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6197
+#: ../../../../qemu-options.hx:6206
 msgid ""
 "The ``kernel-hashes`` adds the hashes of given kernel/initrd/ cmdline to a "
 "designated guest firmware page for measured Linux boot with -kernel. The "
 "default is off. (Since 6.2)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6201
+#: ../../../../qemu-options.hx:6210
 msgid "e.g to launch a SEV guest"
 msgstr ""
 
@@ -9001,23 +9011,23 @@ msgid ""
 "    ....."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6211
+#: ../../../../qemu-options.hx:6220
 msgid "``-object igvm-cfg,file=file``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6212
+#: ../../../../qemu-options.hx:6221
 msgid ""
 "Create an IGVM configuration object that defines the initial state of the "
 "guest using a file in that conforms to the Independent Guest Virtual Machine "
 "(IGVM) file format."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6216
+#: ../../../../qemu-options.hx:6225
 msgid ""
 "This is currently only supported by ``-machine q35`` and ``-machine pc``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6219
+#: ../../../../qemu-options.hx:6228
 msgid ""
 "The ``file`` parameter is used to specify the IGVM file to load. When "
 "provided, the IGVM file is used to populate the initial memory of the "
@@ -9025,14 +9035,14 @@ msgid ""
 "processor state, memory map and parameters."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6224
+#: ../../../../qemu-options.hx:6233
 msgid ""
 "The IGVM file is expected to contain the firmware for the virtual machine, "
 "therefore an ``igvm-cfg`` object cannot be provided along with other ways of "
 "specifying firmware, such as the ``-bios`` parameter on x86 machines."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6229
+#: ../../../../qemu-options.hx:6238
 msgid "e.g to launch a machine providing the firmware in an IGVM file"
 msgstr ""
 
@@ -9045,17 +9055,17 @@ msgid ""
 "    ....."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6239
+#: ../../../../qemu-options.hx:6248
 msgid "``-object authz-simple,id=id,identity=string``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6240 ../../../../qemu-options.hx:6263
-#: ../../../../qemu-options.hx:6311
+#: ../../../../qemu-options.hx:6249 ../../../../qemu-options.hx:6272
+#: ../../../../qemu-options.hx:6320
 msgid ""
 "Create an authorization object that will control access to network services."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6243
+#: ../../../../qemu-options.hx:6252
 msgid ""
 "The ``identity`` parameter is identifies the user and its format depends on "
 "the network service that authorization object is associated with. For "
@@ -9064,7 +9074,7 @@ msgid ""
 "distinguished name."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6249
+#: ../../../../qemu-options.hx:6258
 msgid ""
 "An example authorization object to validate a x509 distinguished name would "
 "look like:"
@@ -9079,28 +9089,28 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6259
+#: ../../../../qemu-options.hx:6268
 msgid ""
 "Note the use of quotes due to the x509 distinguished name containing "
 "whitespace, and escaping of ','."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6262
+#: ../../../../qemu-options.hx:6271
 msgid "``-object authz-listfile,id=id,filename=path,refresh=on|off``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6266
+#: ../../../../qemu-options.hx:6275
 msgid ""
 "The ``filename`` parameter is the fully qualified path to a file containing "
 "the access control list rules in JSON format."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6269
+#: ../../../../qemu-options.hx:6278
 msgid ""
 "An example set of rules that match against SASL usernames might look like:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6274
+#: ../../../../qemu-options.hx:6283
 msgid ""
 "{\n"
 "  \"rules\": [\n"
@@ -9113,33 +9123,33 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6284
+#: ../../../../qemu-options.hx:6293
 msgid ""
 "When checking access the object will iterate over all the rules and the "
 "first rule to match will have its ``policy`` value returned as the result. "
 "If no rules match, then the default ``policy`` value is returned."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6289
+#: ../../../../qemu-options.hx:6298
 msgid ""
 "The rules can either be an exact string match, or they can use the simple "
 "UNIX glob pattern matching to allow wildcards to be used."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6293
+#: ../../../../qemu-options.hx:6302
 msgid ""
 "If ``refresh`` is set to true the file will be monitored and automatically "
 "reloaded whenever its content changes."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6296
+#: ../../../../qemu-options.hx:6305
 msgid ""
 "As with the ``authz-simple`` object, the format of the identity strings "
 "being matched depends on the network service, but is usually a TLS x509 "
 "distinguished name, or a SASL username."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6300
+#: ../../../../qemu-options.hx:6309
 msgid ""
 "An example authorization object to validate a SASL username would look like:"
 msgstr ""
@@ -9153,18 +9163,18 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6310
+#: ../../../../qemu-options.hx:6319
 msgid "``-object authz-pam,id=id,service=string``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6314
+#: ../../../../qemu-options.hx:6323
 msgid ""
 "The ``service`` parameter provides the name of a PAM service to use for "
 "authorization. It requires that a file ``/etc/pam.d/service`` exist to "
 "provide the configuration for the ``account`` subsystem."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6319
+#: ../../../../qemu-options.hx:6328
 msgid ""
 "An example authorization object to validate a TLS x509 distinguished name "
 "would look like:"
@@ -9178,35 +9188,35 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6329
+#: ../../../../qemu-options.hx:6338
 msgid ""
 "There would then be a corresponding config file for PAM at ``/etc/pam.d/qemu-"
 "vnc`` that contains:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6334
+#: ../../../../qemu-options.hx:6343
 msgid ""
 "account requisite  pam_listfile.so item=user sense=allow \\\n"
 "           file=/etc/qemu/vnc.allow"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6337
+#: ../../../../qemu-options.hx:6346
 msgid ""
 "Finally the ``/etc/qemu/vnc.allow`` file would contain the list of x509 "
 "distinguished names that are permitted access"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6342
+#: ../../../../qemu-options.hx:6351
 msgid "CN=laptop.example.com,O=Example Home,L=London,ST=London,C=GB"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6344
+#: ../../../../qemu-options.hx:6353
 msgid ""
 "``-object iothread,id=id,poll-max-ns=poll-max-ns,poll-grow=poll-grow,poll-"
 "shrink=poll-shrink,aio-max-batch=aio-max-batch``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6345
+#: ../../../../qemu-options.hx:6354
 msgid ""
 "Creates a dedicated event loop thread that devices can be assigned to. This "
 "is known as an IOThread. By default device emulation happens in vCPU threads "
@@ -9214,20 +9224,20 @@ msgid ""
 "IOThreads allow device emulation and I/O to run on other host CPUs."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6351
+#: ../../../../qemu-options.hx:6360
 msgid ""
 "The ``id`` parameter is a unique ID that will be used to reference this "
 "IOThread from ``-device ...,iothread=id``. Multiple devices can be assigned "
 "to an IOThread. Note that not all devices support an ``iothread`` parameter."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6356
+#: ../../../../qemu-options.hx:6365
 msgid ""
 "The ``query-iothreads`` QMP command lists IOThreads and reports their thread "
 "IDs so that the user can configure host CPU pinning/affinity."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6360
+#: ../../../../qemu-options.hx:6369
 msgid ""
 "IOThreads use an adaptive polling algorithm to reduce event loop latency. "
 "Instead of entering a blocking system call to monitor file descriptors and "
@@ -9237,39 +9247,39 @@ msgid ""
 "knowledge of the workload and/or host device latency."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6368
+#: ../../../../qemu-options.hx:6377
 msgid ""
 "The ``poll-max-ns`` parameter is the maximum number of nanoseconds to busy "
 "wait for events. Polling can be disabled by setting this value to 0."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6372
+#: ../../../../qemu-options.hx:6381
 msgid ""
 "The ``poll-grow`` parameter is the multiplier used to increase the polling "
 "time when the algorithm detects it is missing events due to not polling long "
 "enough."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6376
+#: ../../../../qemu-options.hx:6385
 msgid ""
 "The ``poll-shrink`` parameter is the divisor used to decrease the polling "
 "time when the algorithm detects it is spending too long polling without "
 "encountering events."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6380
+#: ../../../../qemu-options.hx:6389
 msgid ""
 "The ``aio-max-batch`` parameter is the maximum number of requests in a batch "
 "for the AIO engine, 0 means that the engine will use its default."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6384
+#: ../../../../qemu-options.hx:6393
 msgid ""
 "The IOThread parameters can be modified at run-time using the ``qom-set`` "
 "command (where ``iothread1`` is the IOThread's ``id``):"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6390
+#: ../../../../qemu-options.hx:6399
 msgid "(qemu) qom-set /objects/iothread1 poll-max-ns 100000"
 msgstr ""
 

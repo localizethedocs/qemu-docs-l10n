@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2025-11-10 09:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -166,9 +166,9 @@ msgstr ""
 msgid ""
 "This command tries to set guest's System Time to the given value, then sets "
 "the Hardware Clock (RTC) to the current System Time.  This will make it "
-"easier for a guest to resynchronize without waiting for NTP. If no ``time`` "
-"is specified, then the time to set is read from RTC. However, this may not "
-"be supported on all platforms (i.e. Windows). If that's the case users are "
+"easier for a guest to resynchronize without waiting for NTP.  If no ``time`` "
+"is specified, then the time to set is read from RTC.  However, this may not "
+"be supported on all platforms (i.e. Windows).  If that's the case users are "
 "advised to always pass a value."
 msgstr ""
 
@@ -208,21 +208,21 @@ msgstr ""
 msgid "Information about guest agent commands"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:203
+#: ../../../../qga/qapi-schema.json:204
 msgid "Get some information about the guest agent."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:213
+#: ../../../../qga/qapi-schema.json:214
 msgid ""
 "Initiate guest-activated shutdown.  Note: this is an asynchronous shutdown "
 "request, with no guarantee of successful shutdown."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:216
+#: ../../../../qga/qapi-schema.json:217
 msgid "\"halt\", \"powerdown\" (default), or \"reboot\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:218
+#: ../../../../qga/qapi-schema.json:219
 msgid ""
 "This command does NOT return a response on success.  Success condition is "
 "indicated by the VM exiting with a zero exit status or, when running with --"
@@ -230,83 +230,83 @@ msgid ""
 "status is \"shutdown\"."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:231
+#: ../../../../qga/qapi-schema.json:232
 msgid "Open a file in the guest and retrieve a file handle for it"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:233
+#: ../../../../qga/qapi-schema.json:234
 msgid "Full path to the file in the guest to open."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:235
+#: ../../../../qga/qapi-schema.json:236
 msgid "open mode, as per fopen(), \"r\" is the default."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:237
+#: ../../../../qga/qapi-schema.json:238
 msgid "Guest file handle"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:248
+#: ../../../../qga/qapi-schema.json:249
 msgid "Close an open file in the guest"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:250 ../../../../qga/qapi-schema.json:281
-#: ../../../../qga/qapi-schema.json:312 ../../../../qga/qapi-schema.json:378
+#: ../../../../qga/qapi-schema.json:251 ../../../../qga/qapi-schema.json:282
+#: ../../../../qga/qapi-schema.json:313 ../../../../qga/qapi-schema.json:378
 #: ../../../../qga/qapi-schema.json:396
 msgid "filehandle returned by `guest-file-open`"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:260
+#: ../../../../qga/qapi-schema.json:261
 msgid "Result of guest agent file-read operation"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:262
+#: ../../../../qga/qapi-schema.json:263
 msgid ""
 "number of bytes read (note: count is *before* base64-encoding is applied)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:265
+#: ../../../../qga/qapi-schema.json:266
 msgid "base64-encoded bytes read"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:267
+#: ../../../../qga/qapi-schema.json:268
 msgid "whether EOF was encountered during read operation."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:277
+#: ../../../../qga/qapi-schema.json:278
 msgid ""
 "Read from an open file in the guest.  Data will be base64-encoded. As this "
 "command is just for limited, ad-hoc debugging, such as log file access, the "
 "number of bytes to read is limited to 48 MB."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:283
+#: ../../../../qga/qapi-schema.json:284
 msgid "maximum number of bytes to read (default is 4KB, maximum is 48MB)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:295
+#: ../../../../qga/qapi-schema.json:296
 msgid "Result of guest agent file-write operation"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:297
+#: ../../../../qga/qapi-schema.json:298
 msgid ""
 "number of bytes written (note: count is actual bytes written, after base64-"
 "decoding of provided buffer)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:300
+#: ../../../../qga/qapi-schema.json:301
 msgid "whether EOF was encountered during write operation."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:310
+#: ../../../../qga/qapi-schema.json:311
 msgid "Write to an open file in the guest."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:314
+#: ../../../../qga/qapi-schema.json:315
 msgid "base64-encoded string representing data to be written"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:316
+#: ../../../../qga/qapi-schema.json:317
 msgid ""
 "bytes to write (actual bytes, after base64-decode), default is all content "
 "in buf-b64 buffer after base64 decoding"
@@ -479,11 +479,11 @@ msgstr ""
 msgid "list of `GuestFilesystemTrimResult` per path that was trimmed"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:527
+#: ../../../../qga/qapi-schema.json:528
 msgid "Discard (or \"trim\") blocks which are not in use by the filesystem."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:529
+#: ../../../../qga/qapi-schema.json:530
 msgid ""
 "Minimum contiguous free range to discard, in bytes.  Free ranges smaller "
 "than this may be ignored (this is a hint and the guest may not respect it).  "
@@ -493,38 +493,38 @@ msgid ""
 "block\"."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:537
+#: ../../../../qga/qapi-schema.json:538
 msgid "status of all trimmed paths.  (since 2.4)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:549
+#: ../../../../qga/qapi-schema.json:550
 msgid "Suspend guest to disk."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:551 ../../../../qga/qapi-schema.json:581
+#: ../../../../qga/qapi-schema.json:552 ../../../../qga/qapi-schema.json:582
 msgid ""
 "This command attempts to suspend the guest using three strategies, in this "
 "order:"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:554 ../../../../qga/qapi-schema.json:584
+#: ../../../../qga/qapi-schema.json:555 ../../../../qga/qapi-schema.json:585
 msgid "systemd hibernate"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:555 ../../../../qga/qapi-schema.json:585
+#: ../../../../qga/qapi-schema.json:556 ../../../../qga/qapi-schema.json:586
 msgid "pm-utils (via pm-hibernate)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:556 ../../../../qga/qapi-schema.json:586
+#: ../../../../qga/qapi-schema.json:557 ../../../../qga/qapi-schema.json:587
 msgid "manual write into sysfs"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:558
+#: ../../../../qga/qapi-schema.json:559
 msgid ""
 "This command does NOT return a response on success.  There is a high chance "
 "the command succeeded if the VM exits with a zero exit status or, when "
 "running with --no-shutdown, by issuing the `query-status` QMP command to to "
-"confirm the VM status is \"shutdown\". However, the VM could also exit (or "
+"confirm the VM status is \"shutdown\".  However, the VM could also exit (or "
 "set its status to \"shutdown\") due to other reasons."
 msgstr ""
 
@@ -532,203 +532,203 @@ msgstr ""
 msgid "Errors"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:565
+#: ../../../../qga/qapi-schema.json:566
 msgid "- If suspend to disk is not supported, Unsupported"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:566
+#: ../../../../qga/qapi-schema.json:567
 msgid "If suspend to disk is not supported, Unsupported"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:568 ../../../../qga/qapi-schema.json:605
-#: ../../../../qga/qapi-schema.json:641
+#: ../../../../qga/qapi-schema.json:569 ../../../../qga/qapi-schema.json:606
+#: ../../../../qga/qapi-schema.json:642
 msgid ""
 "It's strongly recommended to issue the `guest-sync` command before sending "
 "commands when the guest resumes."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:579
+#: ../../../../qga/qapi-schema.json:580
 msgid "Suspend guest to ram."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:588
+#: ../../../../qga/qapi-schema.json:589
 msgid ""
-"IMPORTANT: `guest-suspend-ram` requires working wakeup support in QEMU. You "
+"IMPORTANT: `guest-suspend-ram` requires working wakeup support in QEMU.  You "
 "should check QMP command `query-current-machine` returns wakeup-suspend-"
 "support: true before issuing this command.  Failure in doing so can result "
 "in a suspended guest that QEMU will not be able to awaken, forcing the user "
 "to power cycle the guest to bring it back."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:595 ../../../../qga/qapi-schema.json:631
+#: ../../../../qga/qapi-schema.json:596 ../../../../qga/qapi-schema.json:632
 msgid ""
 "This command does NOT return a response on success.  There are two options "
 "to check for success:"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:598 ../../../../qga/qapi-schema.json:634
+#: ../../../../qga/qapi-schema.json:599 ../../../../qga/qapi-schema.json:635
 msgid "Wait for the `SUSPEND` QMP event from QEMU"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:599 ../../../../qga/qapi-schema.json:635
+#: ../../../../qga/qapi-schema.json:600 ../../../../qga/qapi-schema.json:636
 msgid ""
 "Issue the `query-status` QMP command to confirm the VM status is "
 "\"suspended\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:602
+#: ../../../../qga/qapi-schema.json:603
 msgid "- If suspend to ram is not supported, Unsupported"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:603
+#: ../../../../qga/qapi-schema.json:604
 msgid "If suspend to ram is not supported, Unsupported"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:616
+#: ../../../../qga/qapi-schema.json:617
 msgid "Save guest state to disk and suspend to ram."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:618
+#: ../../../../qga/qapi-schema.json:619
 msgid "This command attempts to suspend the guest by executing, in this order:"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:621
+#: ../../../../qga/qapi-schema.json:622
 msgid "systemd hybrid-sleep"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:622
+#: ../../../../qga/qapi-schema.json:623
 msgid "pm-utils (via pm-suspend-hybrid)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:624
+#: ../../../../qga/qapi-schema.json:625
 msgid ""
-"IMPORTANT: `guest-suspend-hybrid` requires working wakeup support in QEMU. "
+"IMPORTANT: `guest-suspend-hybrid` requires working wakeup support in QEMU.  "
 "You should check QMP command `query-current-machine` returns wakeup-suspend-"
 "support: true before issuing this command.  Failure in doing so can result "
 "in a suspended guest that QEMU will not be able to awaken, forcing the user "
 "to power cycle the guest to bring it back."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:638
+#: ../../../../qga/qapi-schema.json:639
 msgid "- If hybrid suspend is not supported, Unsupported"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:639
+#: ../../../../qga/qapi-schema.json:640
 msgid "If hybrid suspend is not supported, Unsupported"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:652
+#: ../../../../qga/qapi-schema.json:653
 msgid "An enumeration of supported IP address types"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:654
+#: ../../../../qga/qapi-schema.json:655
 msgid "IP version 4"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:656
+#: ../../../../qga/qapi-schema.json:657
 msgid "IP version 6"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:667
+#: ../../../../qga/qapi-schema.json:668
 msgid "IP address"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:669
+#: ../../../../qga/qapi-schema.json:670
 msgid "Type of ``ip-address`` (e.g. ipv4, ipv6)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:671
+#: ../../../../qga/qapi-schema.json:672
 msgid "Network prefix length of ``ip-address``"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:684
+#: ../../../../qga/qapi-schema.json:685
 msgid "total bytes received"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:686
+#: ../../../../qga/qapi-schema.json:687
 msgid "total packets received"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:688
+#: ../../../../qga/qapi-schema.json:689
 msgid "bad packets received"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:690
+#: ../../../../qga/qapi-schema.json:691
 msgid "receiver dropped packets"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:692
+#: ../../../../qga/qapi-schema.json:693
 msgid "total bytes transmitted"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:694
+#: ../../../../qga/qapi-schema.json:695
 msgid "total packets transmitted"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:696
+#: ../../../../qga/qapi-schema.json:697
 msgid "packet transmit problems"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:698
+#: ../../../../qga/qapi-schema.json:699
 msgid "dropped packets transmitted"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:717
+#: ../../../../qga/qapi-schema.json:718
 msgid "The name of interface for which info are being delivered"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:719
+#: ../../../../qga/qapi-schema.json:720
 msgid "Hardware address of ``name``"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:721
+#: ../../../../qga/qapi-schema.json:722
 msgid "List of addresses assigned to ``name``"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:723
+#: ../../../../qga/qapi-schema.json:724
 msgid "various statistic counters related to ``name`` (since 2.11)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:738
+#: ../../../../qga/qapi-schema.json:739
 msgid "Get list of guest IP addresses, MAC addresses and netmasks."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:749
+#: ../../../../qga/qapi-schema.json:750
 msgid "Arbitrary guest-specific unique identifier of the VCPU."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:751
+#: ../../../../qga/qapi-schema.json:752
 msgid "Whether the VCPU is enabled."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:753
+#: ../../../../qga/qapi-schema.json:754
 msgid ""
 "Whether offlining the VCPU is possible.  This member is always filled in by "
 "the guest agent when the structure is returned, and always ignored on input "
 "(hence it can be omitted then)."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:769
+#: ../../../../qga/qapi-schema.json:770
 msgid "Retrieve the list of the guest's logical processors."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:771 ../../../../qga/qapi-schema.json:1135
+#: ../../../../qga/qapi-schema.json:772 ../../../../qga/qapi-schema.json:1136
 msgid "This is a read-only operation."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:773
+#: ../../../../qga/qapi-schema.json:774
 msgid ""
 "The list of all VCPUs the guest knows about.  Each VCPU is put on the list "
 "exactly once, but their order is unspecified."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:785
+#: ../../../../qga/qapi-schema.json:786
 msgid ""
 "Attempt to reconfigure (currently: enable/disable) logical processors inside "
 "the guest."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:788
+#: ../../../../qga/qapi-schema.json:789
 msgid ""
 "The logical processors to be reconfigured.  This list is processed node by "
 "node in order.  In each node ``logical-id`` is used to look up the guest "
@@ -740,7 +740,7 @@ msgid ""
 "vcpus`' return value."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:798
+#: ../../../../qga/qapi-schema.json:799
 msgid ""
 "The length of the initial sublist that has been successfully processed.  The "
 "guest agent maximizes this value. Possible cases:  - 0:   if the ``vcpus`` "
@@ -752,19 +752,19 @@ msgid ""
 "length(``vcpus``):   call successful."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:798
+#: ../../../../qga/qapi-schema.json:799
 msgid ""
 "The length of the initial sublist that has been successfully processed.  The "
 "guest agent maximizes this value. Possible cases:"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:802
+#: ../../../../qga/qapi-schema.json:803
 msgid ""
 "0: if the ``vcpus`` list was empty on input.  Guest state has not been "
 "changed.  Otherwise,"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:805
+#: ../../../../qga/qapi-schema.json:806
 msgid ""
 "< length(``vcpus``): more than zero initial nodes have been processed, but "
 "not the entire ``vcpus`` list.  Guest state has changed accordingly.  To "
@@ -772,103 +772,103 @@ msgid ""
 "successfully processed initial sublist removed. Otherwise,"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:811
+#: ../../../../qga/qapi-schema.json:812
 msgid "length(``vcpus``): call successful."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:814
+#: ../../../../qga/qapi-schema.json:815
 msgid ""
 "- If the reconfiguration of the first node in ``vcpus`` failed.   Guest "
 "state has not been changed."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:815
+#: ../../../../qga/qapi-schema.json:816
 msgid ""
 "If the reconfiguration of the first node in ``vcpus`` failed. Guest state "
 "has not been changed."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:828
+#: ../../../../qga/qapi-schema.json:829
 msgid "An enumeration of bus type of disks"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:830
+#: ../../../../qga/qapi-schema.json:831
 msgid "IDE disks"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:832
+#: ../../../../qga/qapi-schema.json:833
 msgid "floppy disks"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:834
+#: ../../../../qga/qapi-schema.json:835
 msgid "SCSI disks"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:836
+#: ../../../../qga/qapi-schema.json:837
 msgid "virtio disks"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:838
+#: ../../../../qga/qapi-schema.json:839
 msgid "Xen disks"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:840
+#: ../../../../qga/qapi-schema.json:841
 msgid "USB disks"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:842
+#: ../../../../qga/qapi-schema.json:843
 msgid "UML disks"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:844
+#: ../../../../qga/qapi-schema.json:845
 msgid "SATA disks"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:846
+#: ../../../../qga/qapi-schema.json:847
 msgid "SD cards"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:848
+#: ../../../../qga/qapi-schema.json:849
 msgid "Unknown bus type"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:850
+#: ../../../../qga/qapi-schema.json:851
 msgid "Win IEEE 1394 bus type"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:852
+#: ../../../../qga/qapi-schema.json:853
 msgid "Win SSA bus type"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:854
+#: ../../../../qga/qapi-schema.json:855
 msgid "Win fiber channel bus type"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:856
+#: ../../../../qga/qapi-schema.json:857
 msgid "Win RAID bus type"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:858
+#: ../../../../qga/qapi-schema.json:859
 msgid "Win iScsi bus type"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:860
+#: ../../../../qga/qapi-schema.json:861
 msgid "Win serial-attaches SCSI bus type"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:862
+#: ../../../../qga/qapi-schema.json:863
 msgid "Win multimedia card (MMC) bus type"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:864
+#: ../../../../qga/qapi-schema.json:865
 msgid "Win virtual bus type"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:866
+#: ../../../../qga/qapi-schema.json:867
 msgid "Win file-backed bus type"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:868
+#: ../../../../qga/qapi-schema.json:869
 msgid "NVMe disks (since 7.1)"
 msgstr ""
 
@@ -990,7 +990,7 @@ msgid ""
 "e.g. removable devices, loop devices, NBD, etc."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1043 ../../../../qga/qapi-schema.json:1720
+#: ../../../../qga/qapi-schema.json:1043 ../../../../qga/qapi-schema.json:1722
 msgid "disk name"
 msgstr ""
 
@@ -1010,36 +1010,36 @@ msgstr ""
 msgid "filesystem capacity in bytes for unprivileged users (since 3.0)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1053
+#: ../../../../qga/qapi-schema.json:1054
 msgid "filesystem capacity in bytes for privileged users (since 9.1)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1056
+#: ../../../../qga/qapi-schema.json:1057
 msgid ""
 "an array of disk hardware information that the volume lies on, which may be "
 "empty if the disk type is not supported"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1070
+#: ../../../../qga/qapi-schema.json:1071
 msgid ""
 "The list of filesystems information mounted in the guest. The returned "
 "mountpoints may be specified to `guest-fsfreeze-freeze-list`.  Network "
 "filesystems (such as CIFS and NFS) are not listed."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1084
+#: ../../../../qga/qapi-schema.json:1085
 msgid "the user account whose password to change"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1086
+#: ../../../../qga/qapi-schema.json:1087
 msgid "the new password entry string, base64 encoded"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1088
+#: ../../../../qga/qapi-schema.json:1089
 msgid "true if password is already crypt()d, false if raw"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1090
+#: ../../../../qga/qapi-schema.json:1091
 msgid ""
 "If the ``crypted`` flag is true, it is the caller's responsibility to ensure "
 "the correct crypt() encryption scheme is used.  This command does not "
@@ -1048,89 +1048,89 @@ msgid ""
 "supported."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1096
+#: ../../../../qga/qapi-schema.json:1097
 msgid ""
 "Not all guest operating systems will support use of the ``crypted`` flag, as "
 "they may require the clear-text password"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1099
+#: ../../../../qga/qapi-schema.json:1100
 msgid ""
 "The ``password`` parameter must always be base64 encoded before "
 "transmission, even if already crypt()d, to ensure it is 8-bit safe when "
 "passed as JSON."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1112
+#: ../../../../qga/qapi-schema.json:1113
 msgid "Arbitrary guest-specific unique identifier of the MEMORY BLOCK."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1115
+#: ../../../../qga/qapi-schema.json:1116
 msgid "Whether the MEMORY BLOCK is enabled in guest."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1117
+#: ../../../../qga/qapi-schema.json:1118
 msgid ""
 "Whether offlining the MEMORY BLOCK is possible.  This member is always "
 "filled in by the guest agent when the structure is returned, and always "
 "ignored on input (hence it can be omitted then)."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1133
+#: ../../../../qga/qapi-schema.json:1134
 msgid "Retrieve the list of the guest's memory blocks."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1137
+#: ../../../../qga/qapi-schema.json:1138
 msgid ""
 "The list of all memory blocks the guest knows about.  Each memory block is "
 "put on the list exactly once, but their order is unspecified."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1150
+#: ../../../../qga/qapi-schema.json:1151
 msgid "An enumeration of memory block operation result."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1152
+#: ../../../../qga/qapi-schema.json:1153
 msgid "the operation of online/offline memory block is successful."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1155
+#: ../../../../qga/qapi-schema.json:1156
 msgid "can't find the corresponding memoryXXX directory in sysfs."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1158
+#: ../../../../qga/qapi-schema.json:1159
 msgid ""
 "for some old kernels, it does not support online or offline memory block."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1161
+#: ../../../../qga/qapi-schema.json:1162
 msgid ""
 "the operation of online/offline memory block fails, because of some errors "
 "happen."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1174
+#: ../../../../qga/qapi-schema.json:1175
 msgid "same with the 'phys-index' member of `GuestMemoryBlock`."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1176
+#: ../../../../qga/qapi-schema.json:1178
 msgid "the result of memory block operation."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1178
+#: ../../../../qga/qapi-schema.json:1180
 msgid ""
 "the error number.  When memory block operation fails, we assign the value of "
 "'errno' to this member, it indicates what goes wrong.  When the operation "
 "succeeds, it will be omitted."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1193
+#: ../../../../qga/qapi-schema.json:1195
 msgid ""
 "Attempt to reconfigure (currently: enable/disable) state of memory blocks "
 "inside the guest."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1196
+#: ../../../../qga/qapi-schema.json:1198
 msgid ""
 "The memory blocks to be reconfigured.  This list is processed node by node "
 "in order.  In each node ``phys-index`` is used to look up the guest MEMORY "
@@ -1142,7 +1142,7 @@ msgid ""
 "`guest-get-memory-blocks`' return value."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1207
+#: ../../../../qga/qapi-schema.json:1209
 msgid ""
 "The operation results, it is a list of `GuestMemoryBlockResponse`, which is "
 "corresponding to the input list.  Note: it will return an empty list if the "
@@ -1150,582 +1150,582 @@ msgid ""
 "case, guest state will not be changed."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1207
+#: ../../../../qga/qapi-schema.json:1209
 msgid ""
 "The operation results, it is a list of `GuestMemoryBlockResponse`, which is "
 "corresponding to the input list."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1211
+#: ../../../../qga/qapi-schema.json:1213
 msgid ""
 "Note: it will return an empty list if the ``mem-blks`` list was empty on "
 "input, or there is an error, and in this case, guest state will not be "
 "changed."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1225
+#: ../../../../qga/qapi-schema.json:1227
 msgid ""
 "the size (in bytes) of the guest memory blocks, which are the minimal units "
 "of memory block online/offline operations (also called Logical Memory "
 "Hotplug)."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1238
+#: ../../../../qga/qapi-schema.json:1240
 msgid "Get information relating to guest memory blocks."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1249
+#: ../../../../qga/qapi-schema.json:1251
 msgid "true if process has already terminated."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1251
+#: ../../../../qga/qapi-schema.json:1253
 msgid "process exit code if it was normally terminated."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1253
+#: ../../../../qga/qapi-schema.json:1255
 msgid ""
 "signal number (linux) or unhandled exception code (windows) if the process "
 "was abnormally terminated."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1256
+#: ../../../../qga/qapi-schema.json:1258
 msgid ""
 "base64-encoded stdout of the process.  This field will only be populated "
 "after the process exits."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1259
+#: ../../../../qga/qapi-schema.json:1261
 msgid ""
 "base64-encoded stderr of the process.  Note: ``out-data`` and ``err-data`` "
 "are present only if 'capture-output' was specified for `guest-exec`.  This "
 "field will only be populated after the process exits."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1264
+#: ../../../../qga/qapi-schema.json:1266
 msgid "true if stdout was not fully captured due to size limitation."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1267
+#: ../../../../qga/qapi-schema.json:1269
 msgid "true if stderr was not fully captured due to size limitation."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1279
+#: ../../../../qga/qapi-schema.json:1282
 msgid ""
 "Check status of process associated with PID retrieved via `guest-exec`.  "
 "Reap the process and associated metadata if it has exited."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1283
+#: ../../../../qga/qapi-schema.json:1286
 msgid "pid returned from `guest-exec`"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1294
+#: ../../../../qga/qapi-schema.json:1297
 msgid "pid of child process in guest OS"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1304
+#: ../../../../qga/qapi-schema.json:1307
 msgid "An enumeration of `guest-exec` capture modes."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1306
+#: ../../../../qga/qapi-schema.json:1309
 msgid "do not capture any output"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1308
+#: ../../../../qga/qapi-schema.json:1311
 msgid "only capture stdout"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1310
+#: ../../../../qga/qapi-schema.json:1313
 msgid "only capture stderr"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1312
+#: ../../../../qga/qapi-schema.json:1315
 msgid ""
 "capture both stdout and stderr, but separated into `GuestExecStatus` out-"
 "data and err-data, respectively"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1315
+#: ../../../../qga/qapi-schema.json:1318
 msgid ""
 "capture both stdout and stderr, but merge together into out-data.  Not "
 "effective on windows guests."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1327
+#: ../../../../qga/qapi-schema.json:1330
 msgid "Controls what `guest-exec` output gets captures."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1329
+#: ../../../../qga/qapi-schema.json:1332
 msgid ""
 "captures both stdout and stderr if true.  Equivalent to "
 "`GuestExecCaptureOutputMode`::all.  (since 2.5)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1332
+#: ../../../../qga/qapi-schema.json:1335
 msgid "capture mode; preferred interface"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1343
+#: ../../../../qga/qapi-schema.json:1346
 msgid "Execute a command in the guest"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1345
+#: ../../../../qga/qapi-schema.json:1348
 msgid "path or executable name to execute"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1347
+#: ../../../../qga/qapi-schema.json:1350
 msgid "argument list to pass to executable"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1349
+#: ../../../../qga/qapi-schema.json:1352
 msgid "environment variables to pass to executable"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1351
+#: ../../../../qga/qapi-schema.json:1354
 msgid "data to be passed to process stdin (base64 encoded)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1353
+#: ../../../../qga/qapi-schema.json:1356
 msgid ""
 "bool flag to enable capture of stdout/stderr of running process.  Defaults "
 "to false."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1356
+#: ../../../../qga/qapi-schema.json:1359
 msgid "PID"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1369
+#: ../../../../qga/qapi-schema.json:1371
 msgid "Fully qualified domain name of the guest OS"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1379
+#: ../../../../qga/qapi-schema.json:1381
 msgid "Return a name for the machine."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1381
+#: ../../../../qga/qapi-schema.json:1383
 msgid ""
 "The returned name is not necessarily a fully-qualified domain name, or even "
 "present in DNS or some other name service at all.  It need not even be "
 "unique on your local network or site, but usually it is."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1385
+#: ../../../../qga/qapi-schema.json:1387
 msgid "the host name of the machine"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1396
+#: ../../../../qga/qapi-schema.json:1397
 msgid "Username"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1398
+#: ../../../../qga/qapi-schema.json:1399
 msgid "Logon domain (windows only)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1400
+#: ../../../../qga/qapi-schema.json:1401
 msgid ""
 "Time of login of this user on the computer.  If multiple instances of the "
 "user are logged in, the earliest login time is reported.  The value is in "
 "fractional seconds since epoch time."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1414
+#: ../../../../qga/qapi-schema.json:1415
 msgid "Retrieves a list of currently active users on the VM."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1416
+#: ../../../../qga/qapi-schema.json:1417
 msgid "A unique list of users."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1427
+#: ../../../../qga/qapi-schema.json:1428
 msgid ""
 "Timezone name.  These values may differ depending on guest/OS and should "
 "only be used for informational purposes."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1430
+#: ../../../../qga/qapi-schema.json:1431
 msgid ""
 "Offset to UTC in seconds, negative numbers for time zones west of GMT, "
 "positive numbers for east"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1441
+#: ../../../../qga/qapi-schema.json:1442
 msgid "Retrieves the timezone information from the guest."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1451
+#: ../../../../qga/qapi-schema.json:1452
 msgid ""
 "* POSIX: release field returned by uname(2) * Windows: build number of the OS"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1451
+#: ../../../../qga/qapi-schema.json:1452
 msgid "POSIX: release field returned by uname(2)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1452
+#: ../../../../qga/qapi-schema.json:1453
 msgid "Windows: build number of the OS"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1455
+#: ../../../../qga/qapi-schema.json:1456
 msgid ""
 "* POSIX: version field returned by uname(2) * Windows: version number of the "
 "OS"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1455
+#: ../../../../qga/qapi-schema.json:1456
 msgid "POSIX: version field returned by uname(2)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1456
+#: ../../../../qga/qapi-schema.json:1457
 msgid "Windows: version number of the OS"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1459
+#: ../../../../qga/qapi-schema.json:1460
 msgid ""
 "* POSIX: machine field returned by uname(2) * Windows: one of x86, x86_64, "
 "arm, ia64"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1459
+#: ../../../../qga/qapi-schema.json:1460
 msgid "POSIX: machine field returned by uname(2)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1460
+#: ../../../../qga/qapi-schema.json:1461
 msgid "Windows: one of x86, x86_64, arm, ia64"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1463
+#: ../../../../qga/qapi-schema.json:1464
 msgid ""
 "* POSIX: as defined by os-release(5) * Windows: contains string \"mswindows\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1463 ../../../../qga/qapi-schema.json:1467
-#: ../../../../qga/qapi-schema.json:1471 ../../../../qga/qapi-schema.json:1475
-#: ../../../../qga/qapi-schema.json:1480 ../../../../qga/qapi-schema.json:1484
-#: ../../../../qga/qapi-schema.json:1488
+#: ../../../../qga/qapi-schema.json:1464 ../../../../qga/qapi-schema.json:1468
+#: ../../../../qga/qapi-schema.json:1472 ../../../../qga/qapi-schema.json:1476
+#: ../../../../qga/qapi-schema.json:1481 ../../../../qga/qapi-schema.json:1485
+#: ../../../../qga/qapi-schema.json:1489
 msgid "POSIX: as defined by os-release(5)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1464
+#: ../../../../qga/qapi-schema.json:1465
 msgid "Windows: contains string \"mswindows\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1467
+#: ../../../../qga/qapi-schema.json:1468
 msgid ""
 "* POSIX: as defined by os-release(5) * Windows: contains string \"Microsoft "
 "Windows\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1468
+#: ../../../../qga/qapi-schema.json:1469
 msgid "Windows: contains string \"Microsoft Windows\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1471
+#: ../../../../qga/qapi-schema.json:1472
 msgid ""
 "* POSIX: as defined by os-release(5) * Windows: product name, e.g. "
 "\"Microsoft Windows 10 Enterprise\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1472
+#: ../../../../qga/qapi-schema.json:1473
 msgid "Windows: product name, e.g. \"Microsoft Windows 10 Enterprise\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1475
+#: ../../../../qga/qapi-schema.json:1476
 msgid ""
 "* POSIX: as defined by os-release(5) * Windows: long version string, e.g. "
 "\"Microsoft Windows Server   2008\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1476
+#: ../../../../qga/qapi-schema.json:1477
 msgid "Windows: long version string, e.g. \"Microsoft Windows Server 2008\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1480
+#: ../../../../qga/qapi-schema.json:1481
 msgid ""
 "* POSIX: as defined by os-release(5) * Windows: short version identifier, e."
 "g. \"7\" or \"20012r2\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1481
+#: ../../../../qga/qapi-schema.json:1482
 msgid "Windows: short version identifier, e.g. \"7\" or \"20012r2\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1484 ../../../../qga/qapi-schema.json:1488
+#: ../../../../qga/qapi-schema.json:1485 ../../../../qga/qapi-schema.json:1489
 msgid ""
 "* POSIX: as defined by os-release(5) * Windows: contains string \"server\" "
 "or \"client\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1485 ../../../../qga/qapi-schema.json:1489
+#: ../../../../qga/qapi-schema.json:1486 ../../../../qga/qapi-schema.json:1490
 msgid "Windows: contains string \"server\" or \"client\""
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1492
+#: ../../../../qga/qapi-schema.json:1493
 msgid ""
 "On POSIX systems the fields ``id``, ``name``, ``pretty-name``, ``version``, "
 "``version-id``, ``variant`` and ``variant-id`` follow the definition "
-"specified in os-release(5). Refer to the manual page for exact description "
+"specified in os-release(5).  Refer to the manual page for exact description "
 "of the fields.  Their values are taken from the os-release file.  If the "
 "file is not present in the system, or the values are not present in the "
 "file, the fields are not included."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1499
+#: ../../../../qga/qapi-schema.json:1501
 msgid ""
 "On Windows the values are filled from information gathered from the system."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1514
+#: ../../../../qga/qapi-schema.json:1516
 msgid "Retrieve guest operating system information"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1524
+#: ../../../../qga/qapi-schema.json:1526
 msgid "PCI device"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1533
+#: ../../../../qga/qapi-schema.json:1535
 msgid "vendor ID"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1535 ../../../../qga/qapi-schema.json:1567
+#: ../../../../qga/qapi-schema.json:1537 ../../../../qga/qapi-schema.json:1569
 msgid "device ID"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1546
+#: ../../../../qga/qapi-schema.json:1548
 msgid "Id of the device"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1548
+#: ../../../../qga/qapi-schema.json:1550
 msgid "device type"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1552
+#: ../../../../qga/qapi-schema.json:1554
 msgid "When ``type`` is ``pci``: The members of :qapi:type:`GuestDeviceIdPCI`."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1561
+#: ../../../../qga/qapi-schema.json:1563
 msgid "name of the associated driver"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1563
+#: ../../../../qga/qapi-schema.json:1565
 msgid "driver release date, in nanoseconds since the epoch"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1565
+#: ../../../../qga/qapi-schema.json:1567
 msgid "driver version"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1583
+#: ../../../../qga/qapi-schema.json:1585
 msgid "Retrieve information about device drivers in Windows guest"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1594
+#: ../../../../qga/qapi-schema.json:1596
 msgid "public keys (in OpenSSH/sshd(8) authorized_keys format)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1607
+#: ../../../../qga/qapi-schema.json:1609
 msgid ""
 "Return the public keys from user .ssh/authorized_keys on Unix systems (not "
 "implemented for other systems)."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1610 ../../../../qga/qapi-schema.json:1625
+#: ../../../../qga/qapi-schema.json:1612 ../../../../qga/qapi-schema.json:1627
 msgid "the user account to add the authorized keys"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1622
+#: ../../../../qga/qapi-schema.json:1624
 msgid ""
 "Append public keys to user .ssh/authorized_keys on Unix systems (not "
 "implemented for other systems)."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1627
+#: ../../../../qga/qapi-schema.json:1629
 msgid "the public keys to add (in OpenSSH/sshd(8) authorized_keys format)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1630
+#: ../../../../qga/qapi-schema.json:1632
 msgid "ignore the existing content, set it with the given keys only"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1641
+#: ../../../../qga/qapi-schema.json:1643
 msgid ""
 "Remove public keys from the user .ssh/authorized_keys on Unix systems (not "
-"implemented for other systems). It's not an error if the key is already "
+"implemented for other systems).  It's not an error if the key is already "
 "missing."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1645
+#: ../../../../qga/qapi-schema.json:1647
 msgid "the user account to remove the authorized keys"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1647
+#: ../../../../qga/qapi-schema.json:1649
 msgid "the public keys to remove (in OpenSSH/sshd(8) authorized_keys format)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1659
+#: ../../../../qga/qapi-schema.json:1661
 msgid "sectors read"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1661
+#: ../../../../qga/qapi-schema.json:1663
 msgid "reads completed successfully"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1663
+#: ../../../../qga/qapi-schema.json:1665
 msgid "read requests merged"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1665
+#: ../../../../qga/qapi-schema.json:1667
 msgid "sectors written"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1667
+#: ../../../../qga/qapi-schema.json:1669
 msgid "writes completed"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1669
+#: ../../../../qga/qapi-schema.json:1671
 msgid "write requests merged"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1671
+#: ../../../../qga/qapi-schema.json:1673
 msgid "sectors discarded"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1673
+#: ../../../../qga/qapi-schema.json:1675
 msgid "discards completed successfully"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1675
+#: ../../../../qga/qapi-schema.json:1677
 msgid "discard requests merged"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1677
+#: ../../../../qga/qapi-schema.json:1679
 msgid "flush requests completed successfully"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1679
+#: ../../../../qga/qapi-schema.json:1681
 msgid "time spent reading(ms)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1681
+#: ../../../../qga/qapi-schema.json:1683
 msgid "time spent writing(ms)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1683
+#: ../../../../qga/qapi-schema.json:1685
 msgid "time spent discarding(ms)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1685
+#: ../../../../qga/qapi-schema.json:1687
 msgid "time spent flushing(ms)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1687
+#: ../../../../qga/qapi-schema.json:1689
 msgid "number of I/Os currently in flight"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1689
+#: ../../../../qga/qapi-schema.json:1691
 msgid "time spent doing I/Os (ms)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1691
+#: ../../../../qga/qapi-schema.json:1693
 msgid "weighted time spent doing I/Os since the last update of this field(ms)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1722
+#: ../../../../qga/qapi-schema.json:1724
 msgid "major device number of disk"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1724
+#: ../../../../qga/qapi-schema.json:1726
 msgid "minor device number of disk"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1726
+#: ../../../../qga/qapi-schema.json:1728
 msgid "I/O statistics"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1738
+#: ../../../../qga/qapi-schema.json:1740
 msgid "Retrieve information about disk stats."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1740
+#: ../../../../qga/qapi-schema.json:1742
 msgid "List of disk stats of guest."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1752
+#: ../../../../qga/qapi-schema.json:1754
 msgid "Guest operating systems supporting CPU statistics"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1754
+#: ../../../../qga/qapi-schema.json:1756
 msgid "Linux"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1766
+#: ../../../../qga/qapi-schema.json:1767
 msgid "CPU statistics of Linux"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1768
+#: ../../../../qga/qapi-schema.json:1769
 msgid "CPU index in guest OS"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1770
+#: ../../../../qga/qapi-schema.json:1771
 msgid "Time spent in user mode"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1772
+#: ../../../../qga/qapi-schema.json:1773
 msgid "Time spent in user mode with low priority (nice)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1774
+#: ../../../../qga/qapi-schema.json:1775
 msgid "Time spent in system mode"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1776
+#: ../../../../qga/qapi-schema.json:1777
 msgid "Time spent in the idle task"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1778
+#: ../../../../qga/qapi-schema.json:1779
 msgid "Time waiting for I/O to complete (since Linux 2.5.41)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1780
+#: ../../../../qga/qapi-schema.json:1781
 msgid "Time servicing interrupts (since Linux 2.6.0-test4)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1782
+#: ../../../../qga/qapi-schema.json:1783
 msgid "Time servicing softirqs (since Linux 2.6.0-test4)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1784
+#: ../../../../qga/qapi-schema.json:1785
 msgid "Stolen time by host (since Linux 2.6.11)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1786
+#: ../../../../qga/qapi-schema.json:1787
 msgid ""
 "ime spent running a virtual CPU for guest operating systems under the  "
 "control of the Linux kernel (since Linux 2.6.24)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1789
+#: ../../../../qga/qapi-schema.json:1790
 msgid "Time spent running a niced guest (since Linux 2.6.33)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1811
+#: ../../../../qga/qapi-schema.json:1812
 msgid "Get statistics of each CPU in millisecond."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1813
+#: ../../../../qga/qapi-schema.json:1814
 msgid "guest operating system"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1817
+#: ../../../../qga/qapi-schema.json:1818
 msgid ""
 "When ``type`` is ``linux``: The members of :qapi:type:`GuestLinuxCpuStats`."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1826
+#: ../../../../qga/qapi-schema.json:1827
 msgid "Retrieve information about CPU stats."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1828
+#: ../../../../qga/qapi-schema.json:1829
 msgid "List of CPU stats of guest."
 msgstr ""
 
@@ -1753,7 +1753,7 @@ msgstr ""
 msgid ""
 "Windows does not have load average API, so QGA emulates it by calculating "
 "the average CPU usage in the last 1, 5, 15 minutes similar as Linux does "
-"this. Calculation starts from the first time this command is called."
+"this.  Calculation starts from the first time this command is called."
 msgstr ""
 
 #: ../../../../qga/qapi-schema.json:1870
@@ -1770,72 +1770,72 @@ msgid ""
 "table"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1886
+#: ../../../../qga/qapi-schema.json:1887
 msgid ""
 "The IP address of the target network or host, The final destination of the "
 "packet"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1888
+#: ../../../../qga/qapi-schema.json:1890
 msgid "Route metric"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1890
+#: ../../../../qga/qapi-schema.json:1892
 msgid "The IP address of the next hop router"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1892
+#: ../../../../qga/qapi-schema.json:1894
 msgid "Subnet Mask (IPv4 only)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1894
+#: ../../../../qga/qapi-schema.json:1896
 msgid "Initial round-trip delay (not for windows, IPv4 only)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1896
+#: ../../../../qga/qapi-schema.json:1898
 msgid "Route flags (not for windows)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1898
+#: ../../../../qga/qapi-schema.json:1900
 msgid "The route's reference count (not for windows)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1900
+#: ../../../../qga/qapi-schema.json:1902
 msgid "Route usage count (not for windows)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1902
+#: ../../../../qga/qapi-schema.json:1904
 msgid "TCP window size, used for flow control (not for windows, IPv4 only)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1904
+#: ../../../../qga/qapi-schema.json:1907
 msgid "Data link layer maximum packet size (not for windows)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1906
+#: ../../../../qga/qapi-schema.json:1909
 msgid "Destination prefix length (for IPv6)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1908
+#: ../../../../qga/qapi-schema.json:1911
 msgid "Source IP address (for IPv6)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1910
+#: ../../../../qga/qapi-schema.json:1913
 msgid "Source prefix length (for IPv6)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1912
+#: ../../../../qga/qapi-schema.json:1915
 msgid "Next hop IP address (for IPv6)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1914
+#: ../../../../qga/qapi-schema.json:1917
 msgid "IP version (4 or 6)"
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1942
+#: ../../../../qga/qapi-schema.json:1944
 msgid "Retrieve information about route of network."
 msgstr ""
 
-#: ../../../../qga/qapi-schema.json:1944
+#: ../../../../qga/qapi-schema.json:1946
 msgid "List of route info of guest."
 msgstr ""
