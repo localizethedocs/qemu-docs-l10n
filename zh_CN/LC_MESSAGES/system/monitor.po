@@ -1,0 +1,2065 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/monitor.rst:4
+msgid "QEMU Monitor"
+msgstr ""
+
+#: ../../../system/monitor.rst:6
+msgid ""
+"The QEMU monitor is used to give complex commands to the QEMU emulator. You "
+"can use it to:"
+msgstr ""
+
+#: ../../../system/monitor.rst:9
+msgid "Remove or insert removable media images (such as CD-ROM or floppies)."
+msgstr ""
+
+#: ../../../system/monitor.rst:12
+msgid ""
+"Freeze/unfreeze the Virtual Machine (VM) and save or restore its state from "
+"a disk file."
+msgstr ""
+
+#: ../../../system/monitor.rst:15
+msgid "Inspect the VM state without an external debugger."
+msgstr ""
+
+#: ../../../system/monitor.rst:18
+msgid "Commands"
+msgstr ""
+
+#: ../../../system/monitor.rst:20
+msgid "The following commands are available:"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:19
+msgid "``help`` or ``?`` [*cmd*]"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:20
+msgid "Show the help for all commands or just for command *cmd*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:32
+msgid "``commit``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:33
+msgid ""
+"Commit changes to the disk images (if -snapshot is used) or backing files. "
+"If the backing file is smaller than the snapshot, then the backing file will "
+"be resized to be the same size as the snapshot.  If the snapshot is smaller "
+"than the backing file, the backing file will not be truncated. If you want "
+"the backing file to match the size of the smaller snapshot, you can safely "
+"truncate it yourself once the commit operation successfully completes."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:52
+msgid "``quit`` or ``q``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:53
+msgid "Quit the emulator."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:66
+msgid "``exit_preconfig``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:67
+msgid ""
+"This command makes QEMU exit the preconfig state and proceed with VM "
+"initialization using configuration data provided on the command line and via "
+"the QMP monitor during the preconfig state. The command is only available "
+"during the preconfig state (i.e. when the --preconfig command line option "
+"was in use)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:85
+msgid "``block_resize``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:86
+msgid ""
+"Resize a block image while a guest is running.  Usually requires guest "
+"action to see the updated size.  Resize to a lower size is supported, but "
+"should be used with extreme caution.  Note that this command only resizes "
+"image files, it can not resize block devices like LVM volumes."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:102
+msgid "``block_stream``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:103
+msgid "Copy data from a backing file into a block device."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:116
+msgid "``block_job_set_speed``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:117
+msgid "Set maximum speed for a background block operation."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:132
+msgid "``block_job_cancel``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:133
+msgid "Stop an active background block operation (streaming, mirroring)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:146
+msgid "``block_job_complete``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:147
+msgid ""
+"Manually trigger completion of an active background block operation. For "
+"mirroring, this will switch the device to the destination path."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:161
+msgid "``block_job_pause``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:162
+msgid "Pause an active block streaming operation."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:175
+msgid "``block_job_resume``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:176
+msgid "Resume a paused block streaming operation."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:188
+msgid "``eject [-f]`` *device*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:189
+msgid "Eject a removable medium (use -f to force it)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:201
+msgid "``drive_del`` *device*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:202
+msgid ""
+"Remove host block device.  The result is that guest generated IO is no "
+"longer submitted against the host device underlying the disk.  Once a drive "
+"has been deleted, the QEMU Block layer returns -EIO which results in IO "
+"errors in the guest for applications that are reading/writing to the device. "
+"These errors are always reported to the guest, regardless of the drive's "
+"error actions (drive options rerror, werror)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:219
+msgid "``change`` *device* *setting*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:220
+msgid "Change the configuration of a device."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:222
+msgid "``change`` *diskdevice* [-f] *filename* [*format* [*read-only-mode*]]"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:223
+msgid ""
+"Change the medium for a removable disk device to point to *filename*. eg::"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:225
+msgid "(qemu) change ide1-cd0 /path/to/some.iso"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:227
+msgid "``-f``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:228
+msgid "forces the operation even if the guest has locked the tray."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:230
+msgid "*format* is optional."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:232
+msgid ""
+"*read-only-mode* may be used to change the read-only status of the device. "
+"It accepts the following values:"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:235
+msgid "retain"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:236
+msgid "Retains the current status; this is the default."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:238
+msgid "read-only"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:239
+msgid "Makes the device read-only."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:241
+msgid "read-write"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:242
+msgid "Makes the device writable."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:244
+msgid "``change vnc password`` [*password*]"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:246
+msgid ""
+"Change the password associated with the VNC server. If the new password is "
+"not supplied, the monitor will prompt for it to be entered. VNC passwords "
+"are only significant up to 8 letters. eg::"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:250
+msgid ""
+"(qemu) change vnc password\n"
+"Password: ********"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:268
+msgid "``screendump`` *filename*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:269
+msgid "Save screen into PPM image *filename*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:282
+msgid "``logfile`` *filename*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:283
+msgid "Output logs to *filename*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:297
+msgid "``trace-event``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:298
+msgid "changes status of a trace event"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:311
+msgid "``trace-file on|off|flush``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:312
+msgid ""
+"Open, close, or flush the trace file.  If no argument is given, the status "
+"of the trace file is displayed."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:326
+msgid "``log`` *item1*\\ [,...]"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:327
+msgid "Activate logging of the specified items."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:339
+msgid "``savevm`` *tag*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:340
+msgid ""
+"Create a snapshot of the whole virtual machine. If *tag* is provided, it is "
+"used as human readable identifier. If there is already a snapshot with the "
+"same tag, it is replaced. More info at :ref:`vm_005fsnapshots`."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:345
+msgid ""
+"Since 4.0, savevm stopped allowing the snapshot id to be set, accepting only "
+"*tag* as parameter."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:359
+msgid "``loadvm`` *tag*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:360
+msgid ""
+"Set the whole virtual machine to the snapshot identified by the tag *tag*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:363
+msgid "Since 4.0, loadvm stopped accepting snapshot id as parameter."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:376
+msgid "``delvm`` *tag*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:377
+msgid "Delete the snapshot identified by *tag*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:379
+msgid ""
+"Since 4.0, delvm stopped deleting snapshots by snapshot id, accepting only "
+"*tag* as parameter."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:392
+msgid "``one-insn-per-tb [off]``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:393
+msgid ""
+"Run the emulation with one guest instruction per translation block. This "
+"slows down emulation a lot, but can be useful in some situations, such as "
+"when trying to analyse the logs produced by the ``-d`` option. This only has "
+"an effect when using TCG, not with KVM or other accelerators."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:398
+msgid "If called with option off, the emulation returns to normal mode."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:410
+msgid "``stop`` or ``s``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:411
+msgid "Stop emulation."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:423
+msgid "``cont`` or ``c``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:424
+msgid "Resume emulation."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:436
+msgid "``system_wakeup``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:437
+msgid "Wakeup guest from suspend."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:449
+msgid "``gdbserver`` [*port*]"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:450
+msgid "Start gdbserver session (default *port*\\=1234)"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:462
+msgid "``x/``\\ *fmt* *addr*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:463
+msgid "Virtual memory dump starting at *addr*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:475
+msgid "``xp /``\\ *fmt* *addr*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:476
+msgid "Physical memory dump starting at *addr*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:478
+msgid ""
+"*fmt* is a format which tells the command how to format the data. Its syntax "
+"is: ``/{count}{format}{size}``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:481
+msgid "*count*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:482
+msgid "is the number of items to be dumped."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:483
+msgid "*format*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:484
+msgid ""
+"can be x (hex), d (signed decimal), u (unsigned decimal), o (octal), c "
+"(char) or i (asm instruction)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:486
+msgid "*size*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:487
+msgid ""
+"can be b (8 bits), h (16 bits), w (32 bits) or g (64 bits). On x86, ``h`` or "
+"``w`` can be specified with the ``i`` format to respectively select 16 or 32 "
+"bit code instruction size."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:491
+msgid "Examples:"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:493
+msgid "Dump 10 instructions at the current instruction pointer::"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:495
+msgid ""
+"(qemu) x/10i $eip\n"
+"0x90107063:  ret\n"
+"0x90107064:  sti\n"
+"0x90107065:  lea    0x0(%esi,1),%esi\n"
+"0x90107069:  lea    0x0(%edi,1),%edi\n"
+"0x90107070:  ret\n"
+"0x90107071:  jmp    0x90107080\n"
+"0x90107073:  nop\n"
+"0x90107074:  nop\n"
+"0x90107075:  nop\n"
+"0x90107076:  nop"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:507
+msgid "Dump 80 16 bit values at the start of the video memory::"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:509
+msgid ""
+"(qemu) xp/80hx 0xb8000\n"
+"0x000b8000: 0x0b50 0x0b6c 0x0b65 0x0b78 0x0b38 0x0b36 0x0b2f 0x0b42\n"
+"0x000b8010: 0x0b6f 0x0b63 0x0b68 0x0b73 0x0b20 0x0b56 0x0b47 0x0b41\n"
+"0x000b8020: 0x0b42 0x0b69 0x0b6f 0x0b73 0x0b20 0x0b63 0x0b75 0x0b72\n"
+"0x000b8030: 0x0b72 0x0b65 0x0b6e 0x0b74 0x0b2d 0x0b63 0x0b76 0x0b73\n"
+"0x000b8040: 0x0b20 0x0b30 0x0b35 0x0b20 0x0b4e 0x0b6f 0x0b76 0x0b20\n"
+"0x000b8050: 0x0b32 0x0b30 0x0b30 0x0b33 0x0720 0x0720 0x0720 0x0720\n"
+"0x000b8060: 0x0720 0x0720 0x0720 0x0720 0x0720 0x0720 0x0720 0x0720\n"
+"0x000b8070: 0x0720 0x0720 0x0720 0x0720 0x0720 0x0720 0x0720 0x0720\n"
+"0x000b8080: 0x0720 0x0720 0x0720 0x0720 0x0720 0x0720 0x0720 0x0720\n"
+"0x000b8090: 0x0720 0x0720 0x0720 0x0720 0x0720 0x0720 0x0720 0x0720"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:532
+msgid "``gpa2hva`` *addr*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:533
+msgid ""
+"Print the host virtual address at which the guest's physical address *addr* "
+"is mapped."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:548
+msgid "``gpa2hpa`` *addr*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:549
+msgid ""
+"Print the host physical address at which the guest's physical address *addr* "
+"is mapped."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:562
+msgid "``gva2gpa`` *addr*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:563
+msgid ""
+"Print the guest physical address at which the guest's virtual address *addr* "
+"is mapped based on the mapping for the current CPU."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:576
+msgid "``print`` or ``p/``\\ *fmt* *expr*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:577
+msgid "Print expression value. Only the *format* part of *fmt* is used."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:590
+msgid "``i/``\\ *fmt* *addr* [.\\ *index*\\ ]"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:591
+msgid "Read I/O port."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:603
+msgid "``o/``\\ *fmt* *addr* *val*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:604
+msgid "Write to I/O port."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:617
+msgid "``sendkey`` *keys*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:618
+msgid ""
+"Send *keys* to the guest. *keys* could be the name of the key or the raw "
+"value in hexadecimal format. Use ``-`` to press several keys simultaneously. "
+"Example::"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:622
+msgid "sendkey ctrl-alt-f1"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:624
+msgid ""
+"This command is useful to send keys that your graphical user interface "
+"intercepts at low level, such as ``ctrl-alt-f1`` in X Window."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:637
+msgid "``sync-profile [on|off|reset]``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:638
+msgid ""
+"Enable, disable or reset synchronization profiling. With no arguments, "
+"prints whether profiling is on or off."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:651
+msgid "``system_reset``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:652
+msgid "Reset the system."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:664
+msgid "``system_powerdown``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:665
+msgid "Power down the system (if supported)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:677
+msgid "``sum`` *addr* *size*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:678
+msgid "Compute the checksum of a memory region."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:691
+msgid "``device_add`` *config*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:692
+msgid "Add device."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:705
+msgid "``device_del`` *id*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:706
+msgid "Remove device *id*. *id* may be a short ID or a QOM object path."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:719
+msgid "``cpu`` *index*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:720
+msgid "Set the default CPU."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:732
+msgid "``mouse_move`` *dx* *dy* [*dz*]"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:733
+msgid ""
+"Move the active mouse to the specified coordinates *dx* *dy* with optional "
+"scroll axis *dz*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:746
+msgid "``mouse_button`` *val*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:747
+msgid "Change the active mouse button state *val* (1=L, 2=M, 4=R)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:759
+msgid "``mouse_set`` *index*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:760
+msgid ""
+"Set which mouse device receives events at given *index*, index can be "
+"obtained with::"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:763
+msgid "info mice"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:776
+msgid ""
+"``wavcapture`` *filename* *audiodev* [*frequency* [*bits* [*channels*]]]"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:777
+msgid ""
+"Capture audio into *filename* from *audiodev*, using sample rate *frequency* "
+"bits per sample *bits* and number of channels *channels*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:781
+msgid "Defaults:"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:783
+msgid "Sample rate = 44100 Hz - CD quality"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:784
+msgid "Bits = 16"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:785
+msgid "Number of channels = 2 - Stereo"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:787 ../../../../hmp-commands.hx:803
+msgid "Deprecated."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:798
+msgid "``stopcapture`` *index*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:799
+msgid "Stop capture with a given *index*, index can be obtained with::"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:801
+msgid "info capture"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:816
+msgid "``memsave`` *addr* *size* *file*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:817
+msgid "save to disk virtual memory dump starting at *addr* of size *size*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:829
+msgid "``pmemsave`` *addr* *size* *file*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:830
+msgid "save to disk physical memory dump starting at *addr* of size *size*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:842
+msgid "``boot_set`` *bootdevicelist*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:843
+msgid ""
+"Define new values for the boot device list. Those values will override the "
+"values specified on the command line through the ``-boot`` option."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:846
+msgid ""
+"The values that can be specified here depend on the machine type, but are "
+"the same that can be specified in the ``-boot`` command line option."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:858
+msgid "``nmi`` *cpu*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:859
+msgid "Inject an NMI on the default CPU (x86/s390) or all CPUs (ppc64)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:872
+msgid "``ringbuf_write`` *device* *data*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:873
+msgid ""
+"Write *data* to ring buffer character device *device*. *data* must be a "
+"UTF-8 string."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:887
+msgid "``ringbuf_read`` *device*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:888
+msgid ""
+"Read and print up to *size* bytes from ring buffer character device "
+"*device*. Certain non-printable characters are printed ``\\uXXXX``, where "
+"``XXXX`` is the character code in hexadecimal.  Character ``\\`` is printed "
+"``\\\\``. Bug: can screw up when the buffer contains invalid UTF-8 "
+"sequences, NUL characters, after the ring buffer lost data, and when reading "
+"stops because the size limit is reached."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:906
+msgid "``announce_self``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:907
+msgid ""
+"Trigger a round of GARP/RARP broadcasts; this is useful for explicitly "
+"updating the network infrastructure after a reconfiguration or some forms of "
+"migration. The timings of the round are set by the migration announce "
+"parameters. An optional comma separated *interfaces* list restricts the "
+"announce to the named set of interfaces. An optional *id* can be used to "
+"start a separate announce timer and to change the parameters of it later."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:926
+msgid "``migrate [-d] [-r]`` *uri*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:927
+msgid "Migrate the VM to *uri*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:929
+msgid "``-d``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:930
+msgid ""
+"Start the migration process, but do not wait for its completion.  To query "
+"an ongoing migration process, use \"info migrate\"."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:932
+msgid "``-r``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:933
+msgid "Resume a paused postcopy migration."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:945
+msgid "``migrate_cancel``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:946
+msgid "Cancel the current VM migration."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:957
+msgid "``migrate_continue`` *state*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:958
+msgid "Continue migration from the paused state *state*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:970
+msgid "``migrate_incoming`` *uri*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:971
+msgid ""
+"Continue an incoming migration using the *uri* (that has the same syntax as "
+"the ``-incoming`` option)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:984
+msgid "``migrate_recover`` *uri*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:985
+msgid "Continue a paused incoming postcopy migration using the *uri*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:997
+msgid "``migrate_pause``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:998
+msgid "Pause an ongoing migration.  Currently it only supports postcopy."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1011
+msgid "``migrate_set_capability`` *capability* *state*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1012
+msgid "Enable/Disable the usage of a capability *capability* for migration."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1025
+msgid "``migrate_set_parameter`` *parameter* *value*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1026
+msgid "Set the parameter *parameter* for migration."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1041
+msgid "``migrate_start_postcopy``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1042
+msgid ""
+"Switch in-progress migration to postcopy mode. Ignored after the end of "
+"migration (or once already in postcopy)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1058
+msgid "``x_colo_lost_heartbeat``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1059
+msgid "Tell COLO that heartbeat is lost, a failover or takeover is needed."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1071
+msgid ""
+"``client_migrate_info`` *protocol* *hostname* *port* *tls-port* *cert-"
+"subject*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1072
+msgid ""
+"Set migration information for remote display.  This makes the server ask the "
+"client to automatically reconnect using the new parameters once migration "
+"finished successfully.  Only implemented for SPICE."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1097
+msgid "``dump-guest-memory [-p]`` *filename* *begin* *length*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1098
+msgid "\\"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1099
+msgid "``dump-guest-memory [-z|-l|-s|-w]`` *filename*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1100
+msgid ""
+"Dump guest memory to *protocol*. The file can be processed with crash or "
+"gdb. Without ``-z|-l|-s|-w``, the dump format is ELF."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1103
+msgid "``-p``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1104
+msgid "do paging to get guest's memory mapping."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1105
+msgid "``-z``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1106
+msgid "dump in kdump-compressed format, with zlib compression."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1107
+msgid "``-l``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1108
+msgid "dump in kdump-compressed format, with lzo compression."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1109
+msgid "``-s``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1110
+msgid "dump in kdump-compressed format, with snappy compression."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1111
+msgid "``-R``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1112
+msgid ""
+"when using kdump (-z, -l, -s), use raw rather than makedumpfile-flattened "
+"format"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1114
+msgid "``-w``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1115
+msgid ""
+"dump in Windows crashdump format (can be used instead of ELF-dump "
+"converting), for Windows x64 guests with vmcoreinfo driver only"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1117
+msgid "*filename*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1118
+msgid "dump file name."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1119
+msgid "*begin*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1120
+msgid ""
+"the starting physical address. It's optional, and should be specified "
+"together with *length*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1122
+msgid "*length*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1123
+msgid ""
+"the memory size, in bytes. It's optional, and should be specified together "
+"with *begin*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1139
+msgid "``dump-skeys`` *filename*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1140
+msgid "Save guest storage keys to a file."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1154
+msgid "``migration_mode`` *mode*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1155
+msgid "Enables or disables migration mode."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1174
+msgid "``snapshot_blkdev``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1175
+msgid "Snapshot device, using snapshot file as target if provided"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1189
+msgid "``snapshot_blkdev_internal``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1190
+msgid "Take an internal snapshot on device if it support"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1206
+msgid "``snapshot_delete_blkdev_internal``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1207
+msgid "Delete an internal snapshot on device if it support"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1225
+msgid "``drive_mirror``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1226
+msgid ""
+"Start mirroring a block device's writes to a new destination, using the "
+"specified target."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1247
+msgid "``drive_backup``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1248
+msgid "Start a point-in-time copy of a block device to a specified target."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1264
+msgid "``drive_add``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1265
+msgid "Add drive to PCI storage controller."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1287
+msgid "``pcie_aer_inject_error``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1288
+msgid "Inject PCIe AER error"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1312
+msgid "``netdev_add``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1313
+msgid "Add host network device."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1327
+msgid "``netdev_del``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1328
+msgid "Remove host network device."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1342
+msgid "``object_add``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1343
+msgid "Create QOM object."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1357
+msgid "``object_del``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1358
+msgid "Destroy QOM object."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1371
+msgid "``hostfwd_add``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1372
+msgid ""
+"Redirect TCP or UDP connections from host to guest (requires -net user)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1386
+msgid "``hostfwd_remove``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1387
+msgid "Remove host-to-guest TCP or UDP redirection."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1399
+msgid "``balloon`` *value*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1400
+msgid "Request VM to change its memory allocation to *value* (in MB)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1413
+msgid "``set_link`` *name* ``[on|off]``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1414
+msgid "Switch link *name* on (i.e. up) or off (i.e. down)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1427
+msgid "``watchdog_action``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1428
+msgid "Change watchdog action."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1440
+msgid "``nbd_server_start`` *host*:*port*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1441
+msgid ""
+"Start an NBD server on the given host and/or port.  If the ``-a`` option is "
+"included, all of the virtual machine's block devices that have an inserted "
+"media on them are automatically exported; in this case, the ``-w`` option "
+"makes the devices writable too."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1456
+msgid "``nbd_server_add`` *device* [ *name* ]"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1457
+msgid ""
+"Export a block device through QEMU's NBD server, which must be started "
+"beforehand with ``nbd_server_start``.  The ``-w`` option makes the exported "
+"device writable too.  The export name is controlled by *name*, defaulting to "
+"*device*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1472
+msgid "``nbd_server_remove [-f]`` *name*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1473
+msgid ""
+"Stop exporting a block device through QEMU's NBD server, which was "
+"previously started with ``nbd_server_add``.  The ``-f`` option forces the "
+"server to drop the export immediately even if clients are connected; "
+"otherwise the command fails unless there are no clients."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1489
+msgid "``nbd_server_stop``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1490
+msgid "Stop the QEMU embedded NBD server."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1506
+msgid "``mce`` *cpu* *bank* *status* *mcgstatus* *addr* *misc*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1507
+msgid "Inject an MCE on the given CPU (x86 only)."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1521
+msgid "``getfd`` *fdname*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1522
+msgid ""
+"If a file descriptor is passed alongside this command using the SCM_RIGHTS "
+"mechanism on unix sockets, it is stored using the name *fdname* for later "
+"use by other monitor commands."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1538
+msgid "``closefd`` *fdname*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1539
+msgid ""
+"Close the file descriptor previously assigned to *fdname* using the "
+"``getfd`` command. This is only needed if the file descriptor was never used "
+"by another monitor command."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1554
+msgid ""
+"``block_set_io_throttle`` *device* *bps* *bps_rd* *bps_wr* *iops* *iops_rd* "
+"*iops_wr*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1555
+msgid ""
+"Change I/O throttle limits for a block drive to *bps* *bps_rd* *bps_wr* "
+"*iops* *iops_rd* *iops_wr*. *device* can be a block device name, a qdev ID "
+"or a QOM path."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1569
+msgid ""
+"``set_password [ vnc | spice ] password [ -d display ] [ action-if-"
+"connected ]``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1570
+msgid ""
+"Change spice/vnc password.  *display* can be used with 'vnc' to specify "
+"which display to set the password on.  *action-if-connected* specifies what "
+"should happen in case a connection is established: *fail* makes the password "
+"change fail.  *disconnect* changes the password and disconnects the client.  "
+"*keep* changes the password and keeps the connection up.  *keep* is the "
+"default."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1587
+msgid "``expire_password [ vnc | spice ] expire-time [ -d display ]``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1588
+msgid ""
+"Specify when a password for spice/vnc becomes invalid. *display* behaves the "
+"same as in ``set_password``. *expire-time* accepts:"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1592
+msgid "``now``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1593
+msgid "Invalidate password instantly."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1594
+msgid "``never``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1595
+msgid "Password stays valid forever."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1596
+msgid "``+``\\ *nsec*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1597
+msgid "Password stays valid for *nsec* seconds starting now."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1598
+msgid "*nsec*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1599
+msgid ""
+"Password is invalidated at the given time.  *nsec* are the seconds passed "
+"since 1970, i.e. unix epoch."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1614
+msgid "``chardev-add`` *args*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1615
+msgid ""
+"chardev-add accepts the same parameters as the -chardev command line switch."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1627
+msgid "``chardev-change`` *args*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1628
+msgid ""
+"chardev-change accepts existing chardev *id* and then the same arguments as "
+"the -chardev command line switch (except for \"id\")."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1642
+msgid "``chardev-remove`` *id*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1643
+msgid "Removes the chardev *id*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1656
+msgid "``chardev-send-break`` *id*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1657
+msgid "Send a break on the chardev *id*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1671
+msgid "``qemu-io`` *device* *command*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1672
+msgid "Executes a qemu-io command on the given block device."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1685
+msgid "``qom-list`` [*path*]"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1686
+msgid "Print QOM properties of object at location *path*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1699
+msgid "``qom-get`` *path* *property*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1700
+msgid "Print QOM property *property* of object at location *path*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1714
+msgid "``qom-set`` *path* *property* *value*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1715
+msgid ""
+"Set QOM property *property* of object at location *path* to value *value*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1727
+msgid "``replay_break`` *icount*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1728
+msgid ""
+"Set replay breakpoint at instruction count *icount*. Execution stops when "
+"the specified instruction is reached. There can be at most one breakpoint. "
+"When breakpoint is set, any prior one is removed.  The breakpoint may be set "
+"only in replay mode and only \"in the future\", i.e. at instruction counts "
+"greater than the current one. The current instruction count can be observed "
+"with ``info replay``."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1745
+msgid "``replay_delete_break``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1746
+msgid ""
+"Remove replay breakpoint which was previously set with ``replay_break``. The "
+"command is ignored when there are no replay breakpoints."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1759
+msgid "``replay_seek`` *icount*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1760
+msgid ""
+"Automatically proceed to the instruction count *icount*, when replaying the "
+"execution. The command automatically loads nearest snapshot and replays the "
+"execution to find the desired instruction. When there is no preceding "
+"snapshot or the execution is not replayed, then the command fails. *icount* "
+"for the reference may be observed with ``info replay`` command."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1779
+msgid "``calc_dirty_rate`` *second*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1780
+msgid ""
+"Start a round of dirty rate measurement with the period specified in "
+"*second*. The result of the dirty rate measurement may be observed with "
+"``info dirty_rate`` command."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1795
+msgid "``set_vcpu_dirty_limit``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1796
+msgid ""
+"Set dirty page rate limit on virtual CPU, the information about all the "
+"virtual CPU dirty limit status can be observed with ``info "
+"vcpu_dirty_limit`` command."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1811
+msgid "``cancel_vcpu_dirty_limit``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1812
+msgid ""
+"Cancel dirty page rate limit on virtual CPU, the information about all the "
+"virtual CPU dirty limit status can be observed with ``info "
+"vcpu_dirty_limit`` command."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1837
+msgid "``dumpdtb`` *filename*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1838
+msgid "Dump the FDT in dtb format to *filename*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1852
+msgid "``xen-event-inject`` *port*"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1853
+msgid "Notify guest via event channel on port *port*."
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1866
+msgid "``xen-event-list``"
+msgstr ""
+
+#: ../../../../hmp-commands.hx:1867
+msgid "List event channels in the guest"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:15
+msgid "``info`` *subcommand*"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:16
+msgid "Show various information about the system state."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:30
+msgid "``info version``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:31
+msgid "Show the version of QEMU."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:43
+msgid "``info network``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:44
+msgid "Show the network state."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:57
+msgid "``info chardev``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:58
+msgid "Show the character devices."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:71
+msgid "``info block``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:72
+msgid "Show info of one block device or all block devices."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:84
+msgid "``info blockstats``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:85
+msgid "Show block device statistics."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:97
+msgid "``info block-jobs``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:98
+msgid "Show progress of ongoing block device operations."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:112
+msgid "``info registers``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:113
+msgid "Show the cpu registers."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:128
+msgid "``info lapic``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:129
+msgid "Show local APIC state"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:141
+msgid "``info cpus``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:142
+msgid "Show infos for each CPU."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:155
+msgid "``info history``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:156
+msgid "Show the command line history."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:168
+msgid "``info irq``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:169
+msgid "Show the interrupts statistics (if available)."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:181
+msgid "``info pic``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:182
+msgid "Show PIC state."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:194
+msgid "``info pci``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:195
+msgid "Show PCI information."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:210
+msgid "``info tlb``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:211
+msgid "Show virtual to physical memory mappings."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:225
+msgid "``info mem``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:226
+msgid "Show the active virtual memory mappings."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:241
+msgid "``info mtree``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:242
+msgid "Show memory tree."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:255
+msgid "``info jit``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:256
+msgid "Show dynamic compiler info."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:278
+msgid "``info accel``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:279
+msgid "Show accelerator statistics."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:283
+msgid "``info sync-profile [-m|-n]`` [*max*]"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:284
+msgid ""
+"Show synchronization profiling info, up to *max* entries (default: 10), "
+"sorted by total wait time."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:287
+msgid "``-m``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:288
+msgid "sort by mean wait time"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:289
+msgid "``-n``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:290
+msgid "do not coalesce objects with the same call site"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:292
+msgid ""
+"When different objects that share the same call site are coalesced, the "
+"\"Object\" field shows---enclosed in brackets---the number of objects being "
+"coalesced."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:306
+msgid "``info kvm``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:307
+msgid "Show KVM information."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:319
+msgid "``info accelerators``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:320
+msgid ""
+"Show which accelerators are compiled into a QEMU binary, and what "
+"accelerator is in use. For example::"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:323
+msgid "kvm qtest [tcg]"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:325
+msgid "indicates that TCG in use, and that KVM and qtest are also available."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:337
+msgid "``info numa``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:338
+msgid "Show NUMA information."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:350
+msgid "``info usb``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:351
+msgid "Show guest USB devices."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:362
+msgid "``info usbhost``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:363
+msgid "Show host USB devices."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:376
+msgid "``info capture``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:377
+msgid "Show capture information (deprecated)."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:390
+msgid "``info snapshots``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:391
+msgid "Show the currently saved VM snapshots."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:404
+msgid "``info status``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:405
+msgid "Show the current VM status (running|paused)."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:417
+msgid "``info mice``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:418
+msgid "Show which guest mouse is receiving events."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:432
+msgid "``info vnc``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:433
+msgid "Show the vnc server status."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:447
+msgid "``info spice``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:448
+msgid "Show the spice server status."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:461
+msgid "``info name``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:462
+msgid "Show the current VM name."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:475
+msgid "``info uuid``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:476
+msgid "Show the current VM UUID."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:490
+msgid "``info usernet``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:491
+msgid "Show user network stack connection states."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:503
+msgid "``info migrate``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:504
+msgid "Show migration status."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:516
+msgid "``info migrate_capabilities``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:517
+msgid "Show current migration capabilities."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:529
+msgid "``info migrate_parameters``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:530
+msgid "Show current migration parameters."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:542
+msgid "``info balloon``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:543
+msgid "Show balloon information."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:555
+msgid "``info qtree``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:556
+msgid "Show device tree."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:568
+msgid "``info qdm``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:569
+msgid "Show qdev device model list."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:582
+msgid "``info qom-tree``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:583
+msgid "Show QOM composition tree."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:595
+msgid "``info roms``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:596
+msgid "Show roms."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:610
+msgid "``info trace-events``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:611
+msgid "Show available trace-events & their state."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:623
+msgid "``info tpm``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:624
+msgid "Show the TPM device."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:637
+msgid "``info memdev``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:638
+msgid "Show memory backends"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:650
+msgid "``info memory-devices``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:651
+msgid "Show memory devices."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:664
+msgid "``info iothreads``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:665
+msgid "Show iothread's identifiers."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:677
+msgid "``info rocker`` *name*"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:678
+msgid "Show rocker switch."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:690
+msgid "``info rocker-ports`` *name*-ports"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:691
+msgid "Show rocker ports."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:703
+msgid "``info rocker-of-dpa-flows`` *name* [*tbl_id*]"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:704
+msgid "Show rocker OF-DPA flow tables."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:716
+msgid "``info rocker-of-dpa-groups`` *name* [*type*]"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:717
+msgid "Show rocker OF-DPA groups."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:731
+msgid "``info skeys`` *address*"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:732
+msgid "Display the value of a storage key (s390 only)"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:746
+msgid "``info cmma`` *address*"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:747
+msgid ""
+"Display the values of the CMMA storage attributes for a range of pages (s390 "
+"only)"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:760
+msgid "``info dump``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:761
+msgid "Display the latest dump status."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:773
+msgid "``info ramblock``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:774
+msgid "Dump all the ramblocks of the system."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:787
+msgid "``info hotpluggable-cpus``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:788
+msgid "Show information about hotpluggable CPUs"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:800
+msgid "``info vm-generation-id``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:801
+msgid "Show Virtual Machine Generation ID"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:814
+msgid "``info memory_size_summary``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:815
+msgid ""
+"Display the amount of initially allocated and present hotpluggable (if "
+"enabled) memory in bytes."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:830
+msgid "``info sev``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:831
+msgid "Show SEV information."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:843
+msgid "``info replay``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:844
+msgid "Display the record/replay information: mode and the current icount."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:856
+msgid "``info dirty_rate``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:857
+msgid "Display the vcpu dirty rate information."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:869
+msgid "``info vcpu_dirty_limit``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:870
+msgid "Display the vcpu dirty page limit information."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:884
+msgid "``info sgx``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:885
+msgid "Show intel SGX information."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:899
+msgid "``info via``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:900
+msgid "Show guest mos6522 VIA devices."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:913
+msgid "``info stats``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:914
+msgid "Show runtime-collected statistics"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:927
+msgid "``info virtio``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:928
+msgid "List all available virtio devices"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:941
+msgid "``info virtio-status`` *path*"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:942
+msgid "Display status of a given virtio device"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:955
+msgid "``info virtio-queue-status`` *path* *queue*"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:956
+msgid "Display status of a given virtio queue"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:969
+msgid "``info virtio-vhost-queue-status`` *path* *queue*"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:970
+msgid "Display status of a given vhost queue"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:983
+msgid "``info virtio-queue-element`` *path* *queue* [*index*]"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:984
+msgid "Display element of a given virtio queue"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:997
+msgid "``info cryptodev``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:998
+msgid "Show the crypto devices."
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:1010
+msgid "``info firmware-log``"
+msgstr ""
+
+#: ../../../../hmp-commands-info.hx:1011
+msgid "Show the firmware (ovmf) debug log."
+msgstr ""
+
+#: ../../../system/monitor.rst:27
+msgid "Integer expressions"
+msgstr ""
+
+#: ../../../system/monitor.rst:29
+msgid ""
+"The monitor understands integers expressions for every integer argument. You "
+"can use register names to get the value of specifics CPU registers by "
+"prefixing them with *$*."
+msgstr ""
