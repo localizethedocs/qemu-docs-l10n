@@ -1,0 +1,194 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/ppc-spapr-hcalls.rst:3
+msgid "sPAPR hypervisor calls"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:5
+msgid ""
+"When used with the ``pseries`` machine type, ``qemu-system-ppc64`` "
+"implements a set of hypervisor calls (a.k.a. hcalls) defined in the Linux on "
+"Power Architecture Reference ([LoPAR]_) document. This document is a subset "
+"of the Power Architecture Platform Reference (PAPR+) specification (IBM "
+"internal only), which is what PowerVM, the IBM proprietary hypervisor, "
+"adheres to."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:11
+msgid ""
+"The subset in LoPAR is selected based on the requirements of Linux as a "
+"guest."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:13
+msgid ""
+"In addition to those calls, we have added our own private hypervisor calls "
+"which are mostly used as a private interface between the firmware running in "
+"the guest and QEMU."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:17
+msgid ""
+"All those hypercalls start at hcall number 0xf000 which correspond to an "
+"implementation specific range in PAPR."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:21
+msgid "``H_RTAS (0xf000)``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:23
+msgid ""
+"RTAS stands for Run-Time Abstraction Sercies and is a set of runtime "
+"services generally provided by the firmware inside the guest to the "
+"operating system. It predates the existence of hypervisors (it was "
+"originally an extension to Open Firmware) and is still used by PAPR and "
+"LoPAR to provide various services that are not performance sensitive."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:29
+msgid ""
+"We currently implement the RTAS services in QEMU itself. The actual RTAS "
+"\"firmware\" blob in the guest is a small stub of a few instructions which "
+"calls our private H_RTAS hypervisor call to pass the RTAS calls to QEMU."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:33
+#: ../../../specs/ppc-spapr-hcalls.rst:68
+msgid "Arguments:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:35
+msgid "``r3``: ``H_RTAS (0xf000)``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:37
+msgid "``r4``: Guest physical address of RTAS parameter block."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:39
+#: ../../../specs/ppc-spapr-hcalls.rst:95
+msgid "Returns:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:41
+msgid ""
+"``H_SUCCESS``: Successfully called the RTAS function (RTAS result will have "
+"been stored in the parameter block)."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:44
+msgid "``H_PARAMETER``: Unknown token."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:47
+msgid "``H_LOGICAL_MEMOP (0xf001)``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:49
+msgid ""
+"When the guest runs in \"real mode\" (in powerpc terminology this means with "
+"MMU disabled, i.e. guest effective address equals to guest physical "
+"address), it only has access to a subset of memory and no I/Os."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:53
+msgid ""
+"PAPR and LoPAR provides a set of hypervisor calls to perform cacheable or "
+"non-cacheable accesses to any guest physical addresses that the guest can "
+"use in order to access IO devices while in real mode."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:57
+msgid "This is typically used by the firmware running in the guest."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:59
+msgid ""
+"However, doing a hypercall for each access is extremely inefficient (even "
+"more so when running KVM) when accessing the frame buffer. In that case, "
+"things like scrolling become unusably slow."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:63
+msgid ""
+"This hypercall allows the guest to request a \"memory op\" to be applied to "
+"memory. The supported memory ops at this point are to copy a range of memory "
+"(supports overlap of source and destination) and XOR which is used by our "
+"SLOF firmware to invert the screen."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:70
+msgid "``r3 ``: ``H_LOGICAL_MEMOP (0xf001)``"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:72
+msgid "``r4``: Guest physical address of destination."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:74
+msgid "``r5``: Guest physical address of source."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:76
+msgid ""
+"``r6``: Individual element size, defined by the binary logarithm of the "
+"desired size. Supported values are:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:79
+msgid "``0`` = 1 byte"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:81
+msgid "``1`` = 2 bytes"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:83
+msgid "``2`` = 4 bytes"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:85
+msgid "``3`` = 8 bytes"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:87
+msgid "``r7``: Number of elements."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:89
+msgid "``r8``: Operation. Supported values are:"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:91
+msgid "``0``: copy"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:93
+msgid "``1``: xor"
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:97
+msgid "``H_SUCCESS``: Success."
+msgstr ""
+
+#: ../../../specs/ppc-spapr-hcalls.rst:99
+msgid "``H_PARAMETER``: Invalid argument."
+msgstr ""

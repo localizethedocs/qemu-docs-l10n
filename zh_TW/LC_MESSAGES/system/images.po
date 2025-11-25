@@ -1,0 +1,1400 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/images.rst:4
+msgid "Disk Images"
+msgstr ""
+
+#: ../../../system/images.rst:6
+msgid ""
+"QEMU supports many disk image formats, including growable disk images (their "
+"size increase as non empty sectors are written), compressed and encrypted "
+"disk images."
+msgstr ""
+
+#: ../../../system/images.rst:13
+msgid "Quick start for disk image creation"
+msgstr ""
+
+#: ../../../system/images.rst:15
+msgid "You can create a disk image with the command::"
+msgstr ""
+
+#: ../../../system/images.rst:17
+msgid "qemu-img create myimage.img mysize"
+msgstr ""
+
+#: ../../../system/images.rst:19
+msgid ""
+"where myimage.img is the disk image filename and mysize is its size in "
+"kilobytes. You can add an ``M`` suffix to give the size in megabytes and a "
+"``G`` suffix for gigabytes."
+msgstr ""
+
+#: ../../../system/images.rst:23
+msgid "See the ``qemu-img`` invocation documentation for more information."
+msgstr ""
+
+#: ../../../system/images.rst:28
+msgid "Snapshot mode"
+msgstr ""
+
+#: ../../../system/images.rst:30
+msgid ""
+"If you use the option ``-snapshot``, all disk images are considered as read "
+"only. When sectors in written, they are written in a temporary file created "
+"in ``/tmp``. You can however force the write back to the raw disk images by "
+"using the ``commit`` monitor command (or C-a s in the serial console)."
+msgstr ""
+
+#: ../../../system/images.rst:39
+msgid "VM snapshots"
+msgstr ""
+
+#: ../../../system/images.rst:41
+msgid ""
+"VM snapshots are snapshots of the complete virtual machine including CPU "
+"state, RAM, device state and the content of all the writable disks. In order "
+"to use VM snapshots, you must have at least one non removable and writable "
+"block device using the ``qcow2`` disk image format. Normally this device is "
+"the first virtual hard drive."
+msgstr ""
+
+#: ../../../system/images.rst:47
+msgid ""
+"Use the monitor command ``savevm`` to create a new VM snapshot or replace an "
+"existing one. A human readable name can be assigned to each snapshot in "
+"addition to its numerical ID."
+msgstr ""
+
+#: ../../../system/images.rst:51
+msgid ""
+"Use ``loadvm`` to restore a VM snapshot and ``delvm`` to remove a VM "
+"snapshot. ``info snapshots`` lists the available snapshots with their "
+"associated information::"
+msgstr ""
+
+#: ../../../system/images.rst:55
+msgid ""
+"(qemu) info snapshots\n"
+"Snapshot devices: hda\n"
+"Snapshot list (from hda):\n"
+"ID        TAG                 VM SIZE                DATE       VM CLOCK\n"
+"1         start                   41M 2006-08-06 12:38:02   00:00:14.954\n"
+"2                                 40M 2006-08-06 12:43:29   00:00:18.633\n"
+"3         msys                    40M 2006-08-06 12:44:04   00:00:23.514"
+msgstr ""
+
+#: ../../../system/images.rst:63
+msgid ""
+"A VM snapshot is made of a VM state info (its size is shown in ``info "
+"snapshots``) and a snapshot of every writable disk image. The VM state info "
+"is stored in the first ``qcow2`` non removable and writable block device. "
+"The disk image snapshots are stored in every disk image. The size of a "
+"snapshot in a disk image is difficult to evaluate and is not shown by ``info "
+"snapshots`` because the associated disk sectors are shared among all the "
+"snapshots to save disk space (otherwise each snapshot would need a full copy "
+"of all the disk images)."
+msgstr ""
+
+#: ../../../system/images.rst:72
+msgid ""
+"When using the (unrelated) ``-snapshot`` option (:ref:"
+"`disk_005fimages_005fsnapshot_005fmode`), you can always make VM snapshots, "
+"but they are deleted as soon as you exit QEMU."
+msgstr ""
+
+#: ../../../system/images.rst:77
+msgid "VM snapshots currently have the following known limitations:"
+msgstr ""
+
+#: ../../../system/images.rst:79
+msgid ""
+"They cannot cope with removable devices if they are removed or inserted "
+"after a snapshot is done."
+msgstr ""
+
+#: ../../../system/images.rst:82
+msgid ""
+"A few device drivers still have incomplete snapshot support so their state "
+"is not saved or restored properly (in particular USB)."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:2
+msgid "Disk image file formats"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:4
+msgid ""
+"QEMU supports many image file formats that can be used with VMs as well as "
+"with any of the tools (like ``qemu-img``). This includes the preferred "
+"formats raw and qcow2 as well as formats that are supported for "
+"compatibility with older QEMU versions or other hypervisors."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:9
+msgid ""
+"Depending on the image format, different options can be passed to ``qemu-img "
+"create`` and ``qemu-img convert`` using the ``-o`` option. This section "
+"describes each format and the options that are supported for it."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:16
+msgid ""
+"Raw disk image format. This format has the advantage of being simple and "
+"easily exportable to all other emulators. If your file system supports "
+"*holes* (for example in ext2 or ext3 on Linux or NTFS on Windows), then only "
+"the written sectors will reserve space. Use ``qemu-img info`` to know the "
+"real size used by the image or ``ls -ls`` on Unix/Linux."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:23
+#: ../../../system/qemu-block-drivers.rst.inc:42
+#: ../../../system/qemu-block-drivers.rst.inc:184
+#: ../../../system/qemu-block-drivers.rst.inc:215
+#: ../../../system/qemu-block-drivers.rst.inc:251
+#: ../../../system/qemu-block-drivers.rst.inc:292
+#: ../../../system/qemu-block-drivers.rst.inc:305
+#: ../../../system/qemu-block-drivers.rst.inc:335
+#: ../../../system/qemu-block-drivers.rst.inc:348
+#: ../../../system/qemu-block-drivers.rst.inc:928
+msgid "Supported options:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:28
+msgid ""
+"Preallocation mode (allowed values: ``off``, ``falloc``, ``full``). "
+"``falloc`` mode preallocates space for image by calling "
+"``posix_fallocate()``. ``full`` mode preallocates space for image by writing "
+"data to underlying storage. This data may or may not be zero, depending on "
+"the storage location."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:37
+msgid ""
+"QEMU image format, the most versatile format. Use it to have smaller images "
+"(useful if your filesystem does not supports holes, for example on Windows), "
+"zlib based compression and support of multiple VM snapshots."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:47
+msgid ""
+"Determines the qcow2 version to use. ``compat=0.10`` uses the traditional "
+"image format that can be read by any QEMU since 0.10. ``compat=1.1`` enables "
+"image format extensions that only QEMU 1.1 and newer understand (this is the "
+"default). Amongst others, this includes zero clusters, which allow efficient "
+"copy-on-read for sparse images."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:55
+#: ../../../system/qemu-block-drivers.rst.inc:220
+msgid "File name of a base image (see ``create`` subcommand)"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:59
+msgid "Image format of the base image"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:63
+#: ../../../system/qemu-block-drivers.rst.inc:224
+msgid "This option is deprecated and equivalent to ``encrypt.format=aes``"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:67
+msgid ""
+"If this is set to ``luks``, it requests that the qcow2 payload (not qcow2 "
+"header) be encrypted using the LUKS format. The passphrase to use to unlock "
+"the LUKS key slot is given by the ``encrypt.key-secret`` parameter. LUKS "
+"encryption parameters can be tuned with the other ``encrypt.*`` parameters."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:73
+msgid ""
+"If this is set to ``aes``, the image is encrypted with 128-bit AES-CBC. The "
+"encryption key is given by the ``encrypt.key-secret`` parameter. This "
+"encryption format is considered to be flawed by modern cryptography "
+"standards, suffering from a number of design problems:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:78
+msgid ""
+"The AES-CBC cipher is used with predictable initialization vectors based on "
+"the sector number. This makes it vulnerable to chosen plaintext attacks "
+"which can reveal the existence of encrypted data."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:81
+msgid ""
+"The user passphrase is directly used as the encryption key. A poorly chosen "
+"or short passphrase will compromise the security of the encryption."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:83
+msgid ""
+"In the event of the passphrase being compromised there is no way to change "
+"the passphrase to protect data in any qcow images. The files must be cloned, "
+"using a different encryption passphrase in the new file. The original file "
+"must then be securely erased using a program like shred, though even this is "
+"ineffective with many modern storage technologies."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:89
+msgid ""
+"The use of this is no longer supported in system emulators. Support only "
+"remains in the command line utilities, for the purposes of data liberation "
+"and interoperability with old versions of QEMU. The ``luks`` format should "
+"be used instead."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:96
+msgid ""
+"Provides the ID of a ``secret`` object that contains the passphrase "
+"(``encrypt.format=luks``) or encryption key (``encrypt.format=aes``)."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:101
+msgid ""
+"Name of the cipher algorithm and key length. Currently defaults to "
+"``aes-256``. Only used when ``encrypt.format=luks``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:106
+msgid ""
+"Name of the encryption mode to use. Currently defaults to ``xts``. Only used "
+"when ``encrypt.format=luks``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:111
+msgid ""
+"Name of the initialization vector generator algorithm. Currently defaults to "
+"``plain64``. Only used when ``encrypt.format=luks``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:116
+msgid ""
+"Name of the hash algorithm to use with the initialization vector generator "
+"(if required). Defaults to ``sha256``. Only used when ``encrypt."
+"format=luks``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:121
+msgid ""
+"Name of the hash algorithm to use for PBKDF algorithm Defaults to "
+"``sha256``. Only used when ``encrypt.format=luks``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:126
+msgid ""
+"Amount of time, in milliseconds, to use for PBKDF algorithm per key slot. "
+"Defaults to ``2000``. Only used when ``encrypt.format=luks``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:131
+msgid ""
+"Changes the qcow2 cluster size (must be between 512 and 2M). Smaller cluster "
+"sizes can improve the image file size whereas larger cluster sizes generally "
+"provide better performance."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:137
+msgid ""
+"Preallocation mode (allowed values: ``off``, ``metadata``, ``falloc``, "
+"``full``). An image with preallocated metadata is initially larger but can "
+"improve performance when the image needs to grow. ``falloc`` and ``full`` "
+"preallocations are like the same options of ``raw`` format, but sets up "
+"metadata also."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:145
+msgid ""
+"If this option is set to ``on``, reference count updates are postponed with "
+"the goal of avoiding metadata I/O and improving performance. This is "
+"particularly interesting with :option:`cache=writethrough` which doesn't "
+"batch metadata updates. The tradeoff is that after a host crash, the "
+"reference count tables must be rebuilt, i.e. on the next open an (automatic) "
+"``qemu-img check -r all`` is required, which may take some time."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:152
+msgid "This option can only be enabled if ``compat=1.1`` is specified."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:156
+msgid ""
+"If this option is set to ``on``, it will turn off COW of the file. It's only "
+"valid on btrfs, no effect on other file systems."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:159
+msgid ""
+"Btrfs has low performance when hosting a VM image file, even more when the "
+"guest on the VM also using btrfs as file system. Turning off COW is a way to "
+"mitigate this bad performance. Generally there are two ways to turn off COW "
+"on btrfs:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:164
+msgid ""
+"Disable it by mounting with nodatacow, then all newly created files will be "
+"NOCOW."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:166
+msgid ""
+"For an empty file, add the NOCOW file attribute. That's what this option "
+"does."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:169
+msgid ""
+"Note: this option is only valid to new or empty files. If there is an "
+"existing file which is COW and has data blocks already, it couldn't be "
+"changed to NOCOW by setting ``nocow=on``. One can issue ``lsattr filename`` "
+"to check if the NOCOW flag is set or not (Capital 'C' is NOCOW flag)."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:178
+msgid ""
+"Old QEMU image format with support for backing files and compact image files "
+"(when your filesystem or transport medium does not support holes)."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:181
+msgid ""
+"When converting QED images to qcow2, you might want to consider using the "
+"``lazy_refcounts=on`` option to get a more QED-like behaviour."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:189
+#: ../../../system/qemu-block-drivers.rst.inc:310
+msgid "File name of a base image (see ``create`` subcommand)."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:193
+msgid ""
+"Image file format of backing file (optional).  Useful if the format cannot "
+"be autodetected because it has no header, like some vhd/vpc files."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:198
+msgid ""
+"Changes the cluster size (must be power-of-2 between 4K and 64K). Smaller "
+"cluster sizes can improve the image file size whereas larger cluster sizes "
+"generally provide better performance."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:204
+msgid ""
+"Changes the number of clusters per L1/L2 table (must be power-of-2 between 1 "
+"and 16).  There is normally no need to change this value but this option can "
+"between used for performance benchmarking."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:212
+msgid ""
+"Old QEMU image format with support for backing files, compact image files, "
+"encryption and compression."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:228
+msgid ""
+"If this is set to ``aes``, the image is encrypted with 128-bit AES-CBC. The "
+"encryption key is given by the ``encrypt.key-secret`` parameter. This "
+"encryption format is considered to be flawed by modern cryptography "
+"standards, suffering from a number of design problems enumerated previously "
+"against the ``qcow2`` image format."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:234
+msgid ""
+"The use of this is no longer supported in system emulators. Support only "
+"remains in the command line utilities, for the purposes of data liberation "
+"and interoperability with old versions of QEMU."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:238
+msgid ""
+"Users requiring native encryption should use the ``qcow2`` format instead "
+"with ``encrypt.format=luks``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:243
+msgid ""
+"Provides the ID of a ``secret`` object that contains the encryption key "
+"(``encrypt.format=aes``)."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:249
+msgid "LUKS v1 encryption format, compatible with Linux dm-crypt/cryptsetup"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:256
+msgid "Provides the ID of a ``secret`` object that contains the passphrase."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:260
+msgid ""
+"Name of the cipher algorithm and key length. Currently defaults to "
+"``aes-256``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:265
+msgid "Name of the encryption mode to use. Currently defaults to ``xts``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:269
+msgid ""
+"Name of the initialization vector generator algorithm. Currently defaults to "
+"``plain64``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:274
+msgid ""
+"Name of the hash algorithm to use with the initialization vector generator "
+"(if required). Defaults to ``sha256``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:279
+msgid ""
+"Name of the hash algorithm to use for PBKDF algorithm Defaults to ``sha256``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:284
+msgid ""
+"Amount of time, in milliseconds, to use for PBKDF algorithm per key slot. "
+"Defaults to ``2000``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:290
+msgid "VirtualBox 1.1 compatible image format."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:297
+msgid ""
+"If this option is set to ``on``, the image is created with metadata "
+"preallocation."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:303
+msgid "VMware 3 and 4 compatible image format."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:314
+msgid "Create a VMDK version 6 image (instead of version 4)"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:318
+msgid ""
+"Specify vmdk virtual hardware version. Compat6 flag cannot be enabled if "
+"hwversion is specified."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:323
+msgid ""
+"Specifies which VMDK subformat to use. Valid options are "
+"``monolithicSparse`` (default), ``monolithicFlat``, "
+"``twoGbMaxExtentSparse``, ``twoGbMaxExtentFlat`` and ``streamOptimized``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:333
+msgid "VirtualPC compatible image format (VHD)."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:340
+msgid ""
+"Specifies which VHD subformat to use. Valid options are ``dynamic`` "
+"(default) and ``fixed``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:346
+msgid "Hyper-V compatible image format (VHDX)."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:353
+msgid ""
+"Specifies which VHDX subformat to use. Valid options are ``dynamic`` "
+"(default) and ``fixed``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:358
+msgid ""
+"Force use of payload blocks of type 'ZERO'.  Can be set to ``on`` (default) "
+"or ``off``.  When set to ``off``, new blocks will be created as "
+"``PAYLOAD_BLOCK_NOT_PRESENT``, which means parsers are free to return "
+"arbitrary data for those blocks.  Do not set to ``off`` when using ``qemu-"
+"img convert`` with ``subformat=dynamic``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:366
+msgid ""
+"Block size; min 1 MB, max 256 MB.  0 means auto-calculate based on image "
+"size."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:371
+msgid "Log size; min 1 MB."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:374
+msgid "Read-only formats"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:376
+msgid "More disk image file formats are supported in a read-only mode."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:381
+msgid "Bochs images of ``growing`` type."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:386
+msgid ""
+"Linux Compressed Loop image, useful only to reuse directly compressed CD-ROM "
+"images present for example in the Knoppix CD-ROMs."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:392
+msgid "Apple disk image."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:397
+msgid "Parallels disk image format."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:400
+msgid "Using host drives"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:402
+msgid ""
+"In addition to disk image files, QEMU can directly access host devices. We "
+"describe here the usage for QEMU version >= 0.8.3."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:406
+msgid "Linux"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:408
+msgid ""
+"On Linux, you can directly use the host device filename instead of a disk "
+"image filename provided you have enough privileges to access it. For "
+"example, use ``/dev/cdrom`` to access to the CDROM."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:412
+#: ../../../system/qemu-block-drivers.rst.inc:442
+msgid "CD"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:413
+msgid ""
+"You can specify a CDROM device even if no CDROM is loaded. QEMU has specific "
+"code to detect CDROM insertion or removal. CDROM ejection by the guest OS is "
+"supported. Currently only data CDs are supported."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:417
+msgid "Floppy"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:418
+msgid ""
+"You can specify a floppy device even if no floppy is loaded. Floppy removal "
+"is currently not detected accurately (if you change floppy without doing "
+"floppy access while the floppy is not loaded, the guest OS will think that "
+"the same floppy is loaded). Use of the host's floppy device is deprecated, "
+"and support for it will be removed in a future release."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:425
+#: ../../../system/qemu-block-drivers.rst.inc:451
+msgid "Hard disks"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:426
+msgid ""
+"Hard disks can be used. Normally you must specify the whole disk (``/dev/"
+"hdb`` instead of ``/dev/hdb1``) so that the guest OS can see it as a "
+"partitioned disk. WARNING: unless you know what you do, it is better to only "
+"make READ-ONLY accesses to the hard disk otherwise you may corrupt your host "
+"data (use the ``-snapshot`` command line option or modify the device "
+"permissions accordingly)."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:433
+msgid "Zoned block devices"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:434
+msgid ""
+"Zoned block devices can be passed through to the guest if the emulated "
+"storage controller supports zoned storage. Use ``--blockdev host_device, "
+"node-name=drive0,filename=/dev/nullb0,cache.direct=on`` to pass through ``/"
+"dev/nullb0`` as ``drive0``."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:440
+msgid "Windows"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:443
+msgid ""
+"The preferred syntax is the drive letter (e.g. ``d:``). The alternate syntax "
+"``\\\\.\\d:`` is supported. ``/dev/cdrom`` is supported as an alias to the "
+"first CDROM drive."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:447
+#: ../../../system/qemu-block-drivers.rst.inc:465
+msgid ""
+"Currently there is no specific code to handle removable media, so it is "
+"better to use the ``change`` or ``eject`` monitor commands to change or "
+"eject media."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:452
+msgid ""
+"Hard disks can be used with the syntax: ``\\\\.\\PhysicalDriveN`` where *N* "
+"is the drive number (0 is the first hard disk)."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:455
+msgid ""
+"WARNING: unless you know what you do, it is better to only make READ-ONLY "
+"accesses to the hard disk otherwise you may corrupt your host data (use the "
+"``-snapshot`` command line so that the modifications are written in a "
+"temporary file)."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:461
+msgid "Mac OS X"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:463
+msgid "``/dev/cdrom`` is an alias to the first CDROM."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:470
+msgid "Virtual FAT disk images"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:472
+msgid ""
+"QEMU can automatically create a virtual FAT disk image from a directory "
+"tree. In order to use it, just type:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:566
+msgid "|qemu_system| linux.img -hdb fat:/my_directory"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:479
+msgid ""
+"Then you access access to all the files in the ``/my_directory`` directory "
+"without having to copy them in a disk image or to export them via SAMBA or "
+"NFS. The default access is *read-only*."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:483
+msgid "Floppies can be emulated with the ``:floppy:`` option:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:576
+msgid "|qemu_system| linux.img -fda fat:floppy:/my_directory"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:489
+msgid ""
+"A read/write support is available for testing (beta stage) with the ``:rw:`` "
+"option:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:583
+msgid "|qemu_system| linux.img -fda fat:floppy:rw:/my_directory"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:496
+msgid "What you should *never* do:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:498
+msgid "use non-ASCII filenames"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:499
+msgid "use \"-snapshot\" together with \":rw:\""
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:500
+msgid "expect it to work when loadvm'ing"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:501
+msgid ""
+"write to the FAT directory on the host system while accessing it with the "
+"guest system"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:504
+msgid "NBD access"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:506
+msgid ""
+"QEMU can access directly to block device exported using the Network Block "
+"Device protocol."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:600
+msgid "|qemu_system| linux.img -hdb nbd://my_nbd_server.mydomain.org:1024/"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:513
+msgid ""
+"If the NBD server is located on the same host, you can use an unix socket "
+"instead of an inet socket:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:607
+msgid "|qemu_system| linux.img -hdb nbd+unix://?socket=/tmp/my_socket"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:520
+msgid "In this case, the block device must be exported using ``qemu-nbd``:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:613
+msgid "qemu-nbd --socket=/tmp/my_socket my_disk.qcow2"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:526
+msgid ""
+"The use of ``qemu-nbd`` allows sharing of a disk between several guests:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:619
+msgid "qemu-nbd --socket=/tmp/my_socket --share=2 my_disk.qcow2"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:532
+msgid "and then you can use it with two guests:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:625
+msgid ""
+"|qemu_system| linux1.img -hdb nbd+unix://?socket=/tmp/my_socket\n"
+"|qemu_system| linux2.img -hdb nbd+unix://?socket=/tmp/my_socket"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:539
+msgid ""
+"If the ``nbd-server`` uses named exports (supported since NBD 2.9.18, or "
+"with QEMU's own embedded NBD server), you must specify an export name in the "
+"URI:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:633
+msgid ""
+"|qemu_system| -cdrom nbd://localhost/debian-500-ppc-netinst\n"
+"|qemu_system| -cdrom nbd://localhost/openSUSE-11.1-ppc-netinst"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:547
+msgid ""
+"The URI syntax for NBD is supported since QEMU 1.3.  An alternative syntax "
+"is also available.  Here are some example of the older syntax:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:641
+msgid ""
+"|qemu_system| linux.img -hdb nbd:my_nbd_server.mydomain.org:1024\n"
+"|qemu_system| linux2.img -hdb nbd:unix:/tmp/my_socket\n"
+"|qemu_system| -cdrom nbd:localhost:10809:exportname=debian-500-ppc-netinst"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:557
+msgid "iSCSI LUNs"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:559
+msgid ""
+"iSCSI is a popular protocol used to access SCSI devices across a computer "
+"network."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:562
+msgid "There are two different ways iSCSI devices can be used by QEMU."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:564
+msgid ""
+"The first method is to mount the iSCSI LUN on the host, and make it appear "
+"as any other ordinary SCSI device on the host and then to access this device "
+"as a /dev/sd device from QEMU. How to do this differs between host OSes."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:568
+msgid ""
+"The second method involves using the iSCSI initiator that is built into "
+"QEMU. This provides a mechanism that works the same way regardless of which "
+"host OS you are running QEMU on. This section will describe this second "
+"method of using iSCSI together with QEMU."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:573
+msgid ""
+"In QEMU, iSCSI devices are described using special iSCSI URLs. URL syntax:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:577
+msgid ""
+"iscsi://[<username>[%<password>]@]<host>[:<port>]/<target-iqn-name>/<lun>"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:579
+msgid ""
+"Username and password are optional and only used if your target is set up "
+"using CHAP authentication for access control. Alternatively the username and "
+"password can also be set via environment variables to have these not show up "
+"in the process list:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:586
+msgid ""
+"export LIBISCSI_CHAP_USERNAME=<username>\n"
+"export LIBISCSI_CHAP_PASSWORD=<password>\n"
+"iscsi://<host>/<target-iqn-name>/<lun>"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:590
+msgid ""
+"Various session related parameters can be set via special options, either in "
+"a configuration file provided via '-readconfig' or directly on the command "
+"line."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:594
+msgid ""
+"If the initiator-name is not specified qemu will use a default name of "
+"'iqn.2008-11.org.linux-kvm[:<uuid>'] where <uuid> is the UUID of the virtual "
+"machine. If the UUID is not specified qemu will use 'iqn.2008-11.org.linux-"
+"kvm[:<name>'] where <name> is the name of the virtual machine."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:600
+msgid "Setting a specific initiator name to use when logging in to the target:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:604
+msgid "-iscsi initiator-name=iqn.qemu.test:my-initiator"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:606
+msgid "Controlling which type of header digest to negotiate with the target:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:610
+msgid "-iscsi header-digest=CRC32C|CRC32C-NONE|NONE-CRC32C|NONE"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:612
+msgid "These can also be set via a configuration file:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:616
+msgid ""
+"[iscsi]\n"
+"  user = \"CHAP username\"\n"
+"  password = \"CHAP password\"\n"
+"  initiator-name = \"iqn.qemu.test:my-initiator\"\n"
+"  # header digest is one of CRC32C|CRC32C-NONE|NONE-CRC32C|NONE\n"
+"  header-digest = \"CRC32C\""
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:623
+msgid "Setting the target name allows different options for different targets:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:627
+msgid ""
+"[iscsi \"iqn.target.name\"]\n"
+"  user = \"CHAP username\"\n"
+"  password = \"CHAP password\"\n"
+"  initiator-name = \"iqn.qemu.test:my-initiator\"\n"
+"  # header digest is one of CRC32C|CRC32C-NONE|NONE-CRC32C|NONE\n"
+"  header-digest = \"CRC32C\""
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:634
+msgid "How to use a configuration file to set iSCSI configuration options:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:727
+msgid ""
+"cat >iscsi.conf <<EOF\n"
+"[iscsi]\n"
+"  user = \"me\"\n"
+"  password = \"my password\"\n"
+"  initiator-name = \"iqn.qemu.test:my-initiator\"\n"
+"  header-digest = \"CRC32C\"\n"
+"EOF\n"
+"\n"
+"|qemu_system| -drive file=iscsi://127.0.0.1/iqn.qemu.test/1 \\\\\n"
+"  -readconfig iscsi.conf"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:649
+msgid ""
+"How to set up a simple iSCSI target on loopback and access it via QEMU: this "
+"example shows how to set up an iSCSI target with one CDROM and one DISK "
+"using the Linux STGT software target. This target is available on Red Hat "
+"based systems as the package 'scsi-target-utils'."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:745
+msgid ""
+"tgtd --iscsi portal=127.0.0.1:3260\n"
+"tgtadm --lld iscsi --op new --mode target --tid 1 -T iqn.qemu.test\n"
+"tgtadm --lld iscsi --mode logicalunit --op new --tid 1 --lun 1 \\\\\n"
+"    -b /IMAGES/disk.img --device-type=disk\n"
+"tgtadm --lld iscsi --mode logicalunit --op new --tid 1 --lun 2 \\\\\n"
+"    -b /IMAGES/cd.iso --device-type=cd\n"
+"tgtadm --lld iscsi --op bind --mode target --tid 1 -I ALL\n"
+"\n"
+"|qemu_system| -iscsi initiator-name=iqn.qemu.test:my-initiator \\\\\n"
+"  -boot d -drive file=iscsi://127.0.0.1/iqn.qemu.test/1 \\\\\n"
+"  -cdrom iscsi://127.0.0.1/iqn.qemu.test/2"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:669
+msgid "GlusterFS disk images"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:671
+msgid "GlusterFS is a user space distributed file system."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:673
+msgid "You can boot from the GlusterFS disk image with the command:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:675
+msgid "URI:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:768
+msgid ""
+"|qemu_system| -drive file=gluster[+TYPE]://[HOST}[:PORT]]/VOLUME/PATH\n"
+"                             [?socket=...][,file.debug=9][,file.logfile=...]"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:682
+msgid "JSON:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:775
+msgid ""
+"|qemu_system| 'json:{\"driver\":\"qcow2\",\n"
+"                         \"file\":{\"driver\":\"gluster\",\n"
+"                                  \"volume\":\"testvol\",\"path\":\"a.img\","
+"\"debug\":9,\"logfile\":\"...\",\n"
+"                                  \"server\":[{\"type\":\"tcp\",\"host\":"
+"\"...\",\"port\":\"...\"},\n"
+"                                            {\"type\":\"unix\",\"socket\":"
+"\"...\"}]}}'"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:692
+msgid "*gluster* is the protocol."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:694
+msgid ""
+"*TYPE* specifies the transport type used to connect to gluster management "
+"daemon (glusterd). Valid transport types are tcp and unix. In the URI form, "
+"if a transport type isn't specified, then tcp type is assumed."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:699
+msgid ""
+"*HOST* specifies the server where the volume file specification for the "
+"given volume resides. This can be either a hostname or an ipv4 address. If "
+"transport type is unix, then *HOST* field should not be specified. Instead "
+"*socket* field needs to be populated with the path to unix domain socket."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:705
+msgid ""
+"*PORT* is the port number on which glusterd is listening. This is optional "
+"and if not specified, it defaults to port 24007. If the transport type is "
+"unix, then *PORT* should not be specified."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:709
+msgid ""
+"*VOLUME* is the name of the gluster volume which contains the disk image."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:711
+msgid ""
+"*PATH* is the path to the actual disk image that resides on gluster volume."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:713
+msgid ""
+"*debug* is the logging level of the gluster protocol driver. Debug levels "
+"are 0-9, with 9 being the most verbose, and 0 representing no debugging "
+"output. The default level is 4. The current logging levels defined in the "
+"gluster source are 0 - None, 1 - Emergency, 2 - Alert, 3 - Critical, 4 - "
+"Error, 5 - Warning, 6 - Notice, 7 - Info, 8 - Debug, 9 - Trace"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:719
+msgid ""
+"*logfile* is a commandline option to mention log file path which helps in "
+"logging to the specified file and also help in persisting the gfapi logs. "
+"The default is stderr."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:723
+msgid "You can create a GlusterFS disk image with the command:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:816
+msgid "qemu-img create gluster://HOST/VOLUME/PATH SIZE"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:729
+msgid "Examples"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:822
+msgid ""
+"|qemu_system| -drive file=gluster://1.2.3.4/testvol/a.img\n"
+"|qemu_system| -drive file=gluster+tcp://1.2.3.4/testvol/a.img\n"
+"|qemu_system| -drive file=gluster+tcp://1.2.3.4:24007/testvol/dir/a.img\n"
+"|qemu_system| -drive file=gluster+tcp://[1:2:3:4:5:6:7:8]/testvol/dir/a.img\n"
+"|qemu_system| -drive file=gluster+tcp://[1:2:3:4:5:6:7:8]:24007/testvol/dir/"
+"a.img\n"
+"|qemu_system| -drive file=gluster+tcp://server.domain.com:24007/testvol/dir/"
+"a.img\n"
+"|qemu_system| -drive file=gluster+unix:///testvol/dir/a.img?socket=/tmp/"
+"glusterd.socket\n"
+"|qemu_system| -drive file=gluster://1.2.3.4/testvol/a.img,file.debug=9,file."
+"logfile=/var/log/qemu-gluster.log\n"
+"|qemu_system| 'json:{\"driver\":\"qcow2\",\n"
+"                         \"file\":{\"driver\":\"gluster\",\n"
+"                                  \"volume\":\"testvol\",\"path\":\"a."
+"img\",\n"
+"                                  \"debug\":9,\"logfile\":\"/var/log/qemu-"
+"gluster.log\",\n"
+"                                  \"server\":[{\"type\":\"tcp\",\"host\":"
+"\"1.2.3.4\",\"port\":24007},\n"
+"                                            {\"type\":\"unix\",\"socket\":\"/"
+"var/run/glusterd.socket\"}]}}'\n"
+"|qemu_system| -drive driver=qcow2,file.driver=gluster,file.volume=testvol,"
+"file.path=/path/a.img,\n"
+"                                     file.debug=9,file.logfile=/var/log/qemu-"
+"gluster.log,\n"
+"                                     file.server.0.type=tcp,file.server.0."
+"host=1.2.3.4,file.server.0.port=24007,\n"
+"                                     file.server.1.type=unix,file.server.1."
+"socket=/var/run/glusterd.socket"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:753
+msgid "Secure Shell (ssh) disk images"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:755
+msgid ""
+"You can access disk images located on a remote ssh server by using the ssh "
+"protocol:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:849
+msgid ""
+"|qemu_system| -drive file=ssh://[USER@]SERVER[:PORT]/PATH[?"
+"host_key_check=HOST_KEY_CHECK]"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:762
+#: ../../../system/qemu-block-drivers.rst.inc:855
+msgid "Alternative syntax using properties:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:855
+msgid ""
+"|qemu_system| -drive file.driver=ssh[,file.user=USER],file.host=SERVER[,file."
+"port=PORT],file.path=PATH[,file.host_key_check=HOST_KEY_CHECK]"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:768
+msgid "*ssh* is the protocol."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:770
+msgid ""
+"*USER* is the remote user.  If not specified, then the local username is "
+"tried."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:773
+msgid ""
+"*SERVER* specifies the remote ssh server.  Any ssh server can be used, but "
+"it must implement the sftp-server protocol.  Most Unix/Linux systems should "
+"work without requiring any extra configuration."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:777
+msgid ""
+"*PORT* is the port number on which sshd is listening.  By default the "
+"standard ssh port (22) is used."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:780
+msgid "*PATH* is the path to the disk image."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:782
+msgid ""
+"The optional *HOST_KEY_CHECK* parameter controls how the remote host's key "
+"is checked.  The default is ``yes`` which means to use the local ``.ssh/"
+"known_hosts`` file.  Setting this to ``no`` turns off known-hosts checking.  "
+"Or you can check that the host key matches a specific fingerprint. The "
+"fingerprint can be provided in ``md5``, ``sha1``, or ``sha256`` format, "
+"however, it is strongly recommended to only use ``sha256``, since the other "
+"options are considered insecure by modern standards. The fingerprint value "
+"must be given as a hex encoded string::"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:792
+msgid "host_key_check=sha256:04ce2ae89ff4295a6b9c4111640bdcb3297858ee55cb434d9dd88796e93aa795"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:794
+msgid ""
+"The key string may optionally contain \":\" separators between each pair of "
+"hex digits."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:797
+msgid ""
+"The ``$HOME/.ssh/known_hosts`` file contains the base64 encoded host keys. "
+"These can be converted into the format needed for QEMU using a command such "
+"as::"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:801
+msgid ""
+"$ for key in `grep 10.33.8.112 known_hosts | awk '{print $3}'`\n"
+"  do\n"
+"    echo $key | base64 -d | sha256sum\n"
+"  done\n"
+"  6c3aa525beda9dc83eadfbd7e5ba7d976ecb59575d1633c87cd06ed2ed6e366f  -\n"
+"  12214fd9ea5b408086f98ecccd9958609bd9ac7c0ea316734006bc7818b45dc8  -\n"
+"  d36420137bcbd101209ef70c3b15dc07362fbe0fa53c5b135eba6e6afa82f0ce  -"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:809
+msgid ""
+"Note that there can be multiple keys present per host, each with different "
+"key ciphers. Care is needed to pick the key fingerprint that matches the "
+"cipher QEMU will negotiate with the remote server."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:813
+msgid ""
+"Currently authentication must be done using ssh-agent.  Other authentication "
+"methods may be supported in future."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:816
+msgid ""
+"Note: Many ssh servers do not support an ``fsync``-style operation. The ssh "
+"driver cannot guarantee that disk flush requests are obeyed, and this causes "
+"a risk of disk corruption if the remote server or network goes down during "
+"writes.  The driver will print a warning when ``fsync`` is not supported:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:824
+msgid "warning: ssh server ssh.example.com:22 does not support fsync"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:826
+msgid ""
+"With sufficiently new versions of libssh and OpenSSH, ``fsync`` is supported."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:830
+msgid "NVMe disk images"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:832
+msgid ""
+"NVM Express (NVMe) storage controllers can be accessed directly by a "
+"userspace driver in QEMU.  This bypasses the host kernel file system and "
+"block layers while retaining QEMU block layer functionalities, such as block "
+"jobs, I/O throttling, image formats, etc.  Disk I/O performance is typically "
+"higher than with ``-drive file=/dev/sda`` using either thread pool or linux-"
+"aio."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:838
+msgid ""
+"The controller will be exclusively used by the QEMU process once started. To "
+"be able to share storage between multiple VMs and other applications on the "
+"host, please use the file based protocols."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:842
+msgid ""
+"Before starting QEMU, bind the host NVMe controller to the host vfio-pci "
+"driver.  For example:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:936
+msgid ""
+"# modprobe vfio-pci\n"
+"# lspci -n -s 0000:06:0d.0\n"
+"06:0d.0 0401: 1102:0002 (rev 08)\n"
+"# echo 0000:06:0d.0 > /sys/bus/pci/devices/0000:06:0d.0/driver/unbind\n"
+"# echo 1102 0002 > /sys/bus/pci/drivers/vfio-pci/new_id\n"
+"\n"
+"# |qemu_system| -drive file=nvme://HOST:BUS:SLOT.FUNC/NAMESPACE"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:948
+msgid ""
+"|qemu_system| -drive file.driver=nvme,file.device=HOST:BUS:SLOT.FUNC,file."
+"namespace=NAMESPACE"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:861
+msgid ""
+"*HOST*:*BUS*:*SLOT*.\\ *FUNC* is the NVMe controller's PCI device address on "
+"the host."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:864
+msgid "*NAMESPACE* is the NVMe namespace number, starting from 1."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:867
+msgid "Disk image file locking"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:869
+msgid ""
+"By default, QEMU tries to protect image files from unexpected concurrent "
+"access, as long as it's supported by the block protocol driver and host "
+"operating system. If multiple QEMU processes (including QEMU emulators and "
+"utilities) try to open the same image with conflicting accessing modes, all "
+"but the first one will get an error."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:875
+msgid ""
+"This feature is currently supported by the file protocol on Linux with the "
+"Open File Descriptor (OFD) locking API, and can be configured to fall back "
+"to POSIX locking if the POSIX host doesn't support Linux OFD locking."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:879
+msgid ""
+"To explicitly enable image locking, specify \"locking=on\" in the file "
+"protocol driver options. If OFD locking is not possible, a warning will be "
+"printed and the POSIX locking API will be used. In this case there is a risk "
+"that the lock will get silently lost when doing hot plugging and block jobs, "
+"due to the shortcomings of the POSIX locking API."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:885
+msgid ""
+"QEMU transparently handles lock handover during shared storage migration.  "
+"For shared virtual disk images between multiple VMs, the \"share-rw\" device "
+"option should be used."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:889
+msgid ""
+"By default, the guest has exclusive write access to its disk image. If the "
+"guest can safely share the disk image with other writers the ``-device ...,"
+"share-rw=on`` parameter can be used.  This is only safe if the guest is "
+"running software, such as a cluster file system, that coordinates disk "
+"accesses to avoid corruption."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:895
+msgid ""
+"Note that share-rw=on only declares the guest's ability to share the disk. "
+"Some QEMU features, such as image file formats, require exclusive write "
+"access to the disk image and this is unaffected by the share-rw=on option."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:899
+msgid ""
+"Alternatively, locking can be fully disabled by \"locking=off\" block device "
+"option. In the command line, the option is usually in the form of \"file."
+"locking=off\" as the protocol driver is normally placed as a \"file\" child "
+"under a format driver. For example:"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:906
+msgid ""
+"-blockdev driver=qcow2,file.filename=/path/to/image,file.locking=off,file."
+"driver=file"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:908
+msgid ""
+"To check if image locking is active, check the output of the \"lslocks\" "
+"command on host and see if there are locks held by the QEMU process on the "
+"image file. More than one byte could be locked by the QEMU instance, each "
+"byte of which reflects a particular permission that is acquired or protected "
+"by the running block driver."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:915
+msgid "Filter drivers"
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:917
+msgid ""
+"QEMU supports several filter drivers, which don't store any data, but "
+"perform some additional tasks, hooking io requests."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:923
+msgid ""
+"The preallocate filter driver is intended to be inserted between format and "
+"protocol nodes and preallocates some additional space (expanding the "
+"protocol file) when writing past the file’s end. This can be useful for file-"
+"systems with slow allocation."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:933
+msgid ""
+"On preallocation, align the file length to this value (in bytes), default 1M."
+msgstr ""
+
+#: ../../../system/qemu-block-drivers.rst.inc:938
+msgid "How much to preallocate (in bytes), default 128M."
+msgstr ""
