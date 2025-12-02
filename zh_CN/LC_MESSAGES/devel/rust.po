@@ -1,0 +1,893 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/rust.rst:4
+msgid "Rust in QEMU"
+msgstr ""
+
+#: ../../../devel/rust.rst:6
+msgid ""
+"Rust in QEMU is a project to enable using the Rust programming language to "
+"add new functionality to QEMU."
+msgstr ""
+
+#: ../../../devel/rust.rst:9
+msgid ""
+"Right now, the focus is on making it possible to write devices that inherit "
+"from ``SysBusDevice`` in `*safe*`__ Rust.  Later, it may become possible to "
+"write other kinds of devices (e.g. PCI devices that can do DMA), complete "
+"boards, or backends (e.g. block device formats)."
+msgstr ""
+
+#: ../../../devel/rust.rst:17
+msgid "Building the Rust in QEMU code"
+msgstr ""
+
+#: ../../../devel/rust.rst:19
+msgid ""
+"The Rust in QEMU code is included in the emulators via Meson.  Meson invokes "
+"rustc directly, building static libraries that are then linked together with "
+"the C code.  This is completely automatic when you run ``make`` or ``ninja``."
+msgstr ""
+
+#: ../../../devel/rust.rst:24
+msgid ""
+"However, QEMU's build system also tries to be easy to use for people who are "
+"accustomed to the more \"normal\" Cargo-based development workflow. In "
+"particular:"
+msgstr ""
+
+#: ../../../devel/rust.rst:28
+msgid ""
+"the set of warnings and lints that are used to build QEMU always comes from "
+"the ``rust/Cargo.toml`` workspace file"
+msgstr ""
+
+#: ../../../devel/rust.rst:31
+msgid ""
+"it is also possible to use ``cargo`` for common Rust-specific coding tasks, "
+"in particular to invoke ``clippy``, ``rustfmt`` and ``rustdoc``."
+msgstr ""
+
+#: ../../../devel/rust.rst:34
+msgid ""
+"To this end, QEMU includes a ``build.rs`` build script that picks up "
+"generated sources from QEMU's build directory and puts it in Cargo's output "
+"directory (typically ``rust/target/``).  A vanilla invocation of Cargo will "
+"complain that it cannot find the generated sources, which can be fixed in "
+"different ways:"
+msgstr ""
+
+#: ../../../devel/rust.rst:40
+msgid ""
+"by using Makefile targets, provided by Meson, that run ``clippy`` or "
+"``rustdoc``:"
+msgstr ""
+
+#: ../../../devel/rust.rst:43
+msgid "make clippy make rustdoc"
+msgstr ""
+
+#: ../../../devel/rust.rst:46
+msgid "A target for ``rustfmt`` is also declared in ``rust/meson.build``:"
+msgstr ""
+
+#: ../../../devel/rust.rst:48
+msgid "make rustfmt"
+msgstr ""
+
+#: ../../../devel/rust.rst:50
+msgid ""
+"by invoking ``cargo`` through the Meson `development environment`__ feature::"
+msgstr ""
+
+#: ../../../devel/rust.rst:53
+msgid ""
+"pyvenv/bin/meson devenv -w ../rust cargo clippy --tests\n"
+"pyvenv/bin/meson devenv -w ../rust cargo fmt"
+msgstr ""
+
+#: ../../../devel/rust.rst:56
+msgid ""
+"If you are going to use ``cargo`` repeatedly, ``pyvenv/bin/meson devenv`` "
+"will enter a shell where commands like ``cargo fmt`` just work."
+msgstr ""
+
+#: ../../../devel/rust.rst:61
+msgid ""
+"by pointing the ``MESON_BUILD_ROOT`` to the top of your QEMU build tree.  "
+"This third method is useful if you are using ``rust-analyzer``; you can set "
+"the environment variable through the ``rust-analyzer.cargo.extraEnv`` "
+"setting."
+msgstr ""
+
+#: ../../../devel/rust.rst:66
+msgid ""
+"As shown above, you can use the ``--tests`` option as usual to operate on "
+"test code.  Note however that you cannot *build* or run tests via ``cargo``, "
+"because they need support C code from QEMU that Cargo does not know about.  "
+"Tests can be run via ``meson test`` or ``make``::"
+msgstr ""
+
+#: ../../../devel/rust.rst:71
+msgid "make check-rust"
+msgstr ""
+
+#: ../../../devel/rust.rst:73
+msgid ""
+"Note that doctests require all ``.o`` files from the build to be available."
+msgstr ""
+
+#: ../../../devel/rust.rst:76
+msgid "Supported tools"
+msgstr ""
+
+#: ../../../devel/rust.rst:78
+msgid ""
+"QEMU supports rustc version 1.77.0 and newer.  Notably, the following "
+"features are missing:"
+msgstr ""
+
+#: ../../../devel/rust.rst:81
+msgid ""
+"inline const expression (stable in 1.79.0), currently worked around with "
+"associated constants in the ``FnCall`` trait."
+msgstr ""
+
+#: ../../../devel/rust.rst:84
+msgid ""
+"associated constants have to be explicitly marked ``'static`` (`changed in "
+"1.81.0`__)"
+msgstr ""
+
+#: ../../../devel/rust.rst:87
+msgid ""
+"``&raw`` (stable in 1.82.0).  Use ``addr_of!`` and ``addr_of_mut!`` instead, "
+"though hopefully the need for raw pointers will go down over time."
+msgstr ""
+
+#: ../../../devel/rust.rst:90
+msgid ""
+"``new_uninit`` (stable in 1.82.0).  This is used internally by the "
+"``pinned_init`` crate, which is planned for inclusion in QEMU, but it can be "
+"easily patched out."
+msgstr ""
+
+#: ../../../devel/rust.rst:94
+msgid ""
+"referencing statics in constants (stable in 1.83.0).  For now use a const "
+"function; this is an important limitation for QEMU's migration stream "
+"architecture (VMState).  Right now, VMState lacks type safety because it is "
+"hard to place the ``VMStateField`` definitions in traits."
+msgstr ""
+
+#: ../../../devel/rust.rst:99
+msgid ""
+"NUL-terminated file names with ``#[track_caller]`` are scheduled for "
+"inclusion as ``#![feature(location_file_nul)]``, but it will be a while "
+"before QEMU can use them.  For now, there is special code in ``util/error."
+"c`` to support non-NUL-terminated file names."
+msgstr ""
+
+#: ../../../devel/rust.rst:104
+msgid ""
+"associated const equality would be nice to have for some users of "
+"``callbacks::FnCall``, but is still experimental.  ``ASSERT_IS_SOME`` "
+"replaces it."
+msgstr ""
+
+#: ../../../devel/rust.rst:110
+msgid ""
+"QEMU also supports version 0.60.x of bindgen, which is missing option ``--"
+"generate-cstr``.  This option requires version 0.66.x and will be adopted as "
+"soon as supporting these older versions is not necessary anymore."
+msgstr ""
+
+#: ../../../devel/rust.rst:116
+msgid "Writing Rust code in QEMU"
+msgstr ""
+
+#: ../../../devel/rust.rst:118
+msgid "QEMU includes four crates:"
+msgstr ""
+
+#: ../../../devel/rust.rst:120
+msgid "``qemu_api`` for bindings to C code and useful functionality"
+msgstr ""
+
+#: ../../../devel/rust.rst:122
+msgid ""
+"``qemu_api_macros`` defines several procedural macros that are useful when "
+"writing C code"
+msgstr ""
+
+#: ../../../devel/rust.rst:125
+msgid ""
+"``pl011`` (under ``rust/hw/char/pl011``) and ``hpet`` (under ``rust/hw/timer/"
+"hpet``) are sample devices that demonstrate ``qemu_api`` and "
+"``qemu_api_macros``, and are used to further develop them.  These two crates "
+"are functional\\ [#issues]_ replacements for the ``hw/char/pl011.c`` and "
+"``hw/timer/hpet.c`` files."
+msgstr ""
+
+#: ../../../devel/rust.rst:130
+msgid ""
+"The ``pl011`` crate is synchronized with ``hw/char/pl011.c`` as of commit "
+"3e0f118f82.  The ``hpet`` crate is synchronized as of commit 1433e38cc8.  "
+"Both are lacking tracing functionality."
+msgstr ""
+
+#: ../../../devel/rust.rst:134
+msgid "This section explains how to work with them."
+msgstr ""
+
+#: ../../../devel/rust.rst:137
+msgid "Status"
+msgstr ""
+
+#: ../../../devel/rust.rst:139
+msgid "Modules of ``qemu_api`` can be defined as:"
+msgstr ""
+
+#: ../../../devel/rust.rst:141
+msgid ""
+"*complete*: ready for use in new devices; if applicable, the API supports "
+"the full functionality available in C"
+msgstr ""
+
+#: ../../../devel/rust.rst:144
+msgid ""
+"*stable*: ready for production use, the API is safe and should not undergo "
+"major changes"
+msgstr ""
+
+#: ../../../devel/rust.rst:147
+msgid ""
+"*proof of concept*: the API is subject to change but allows working with "
+"safe Rust"
+msgstr ""
+
+#: ../../../devel/rust.rst:150
+msgid ""
+"*initial*: the API is in its initial stages; it requires large amount of "
+"unsafe code; it might have soundness or type-safety issues"
+msgstr ""
+
+#: ../../../devel/rust.rst:153
+msgid "The status of the modules is as follows:"
+msgstr ""
+
+#: ../../../devel/rust.rst:156
+msgid "module"
+msgstr ""
+
+#: ../../../devel/rust.rst:156
+msgid "status"
+msgstr ""
+
+#: ../../../devel/rust.rst:158
+msgid "``assertions``"
+msgstr ""
+
+#: ../../../devel/rust.rst:158 ../../../devel/rust.rst:161
+#: ../../../devel/rust.rst:163 ../../../devel/rust.rst:166
+#: ../../../devel/rust.rst:168 ../../../devel/rust.rst:169
+#: ../../../devel/rust.rst:170 ../../../devel/rust.rst:171
+#: ../../../devel/rust.rst:173
+msgid "stable"
+msgstr ""
+
+#: ../../../devel/rust.rst:159
+msgid "``bitops``"
+msgstr ""
+
+#: ../../../devel/rust.rst:159 ../../../devel/rust.rst:160
+#: ../../../devel/rust.rst:162 ../../../devel/rust.rst:164
+#: ../../../devel/rust.rst:167
+msgid "complete"
+msgstr ""
+
+#: ../../../devel/rust.rst:160
+msgid "``callbacks``"
+msgstr ""
+
+#: ../../../devel/rust.rst:161
+msgid "``cell``"
+msgstr ""
+
+#: ../../../devel/rust.rst:162
+msgid "``errno``"
+msgstr ""
+
+#: ../../../devel/rust.rst:163
+msgid "``error``"
+msgstr ""
+
+#: ../../../devel/rust.rst:164
+msgid "``irq``"
+msgstr ""
+
+#: ../../../devel/rust.rst:165
+msgid "``log``"
+msgstr ""
+
+#: ../../../devel/rust.rst:165 ../../../devel/rust.rst:172
+msgid "proof of concept"
+msgstr ""
+
+#: ../../../devel/rust.rst:166
+msgid "``memory``"
+msgstr ""
+
+#: ../../../devel/rust.rst:167
+msgid "``module``"
+msgstr ""
+
+#: ../../../devel/rust.rst:168
+msgid "``qdev``"
+msgstr ""
+
+#: ../../../devel/rust.rst:169
+msgid "``qom``"
+msgstr ""
+
+#: ../../../devel/rust.rst:170
+msgid "``sysbus``"
+msgstr ""
+
+#: ../../../devel/rust.rst:171
+msgid "``timer``"
+msgstr ""
+
+#: ../../../devel/rust.rst:172
+msgid "``vmstate``"
+msgstr ""
+
+#: ../../../devel/rust.rst:173
+msgid "``zeroable``"
+msgstr ""
+
+#: ../../../devel/rust.rst:177
+msgid ""
+"API stability is not a promise, if anything because the C APIs are not a "
+"stable interface either.  Also, ``unsafe`` interfaces may be replaced by "
+"safe interfaces later."
+msgstr ""
+
+#: ../../../devel/rust.rst:182
+msgid "Naming convention"
+msgstr ""
+
+#: ../../../devel/rust.rst:184
+msgid ""
+"C function names usually are prefixed according to the data type that they "
+"apply to, for example ``timer_mod`` or ``sysbus_connect_irq``.  Furthermore, "
+"both function and structs sometimes have a ``qemu_`` or ``QEMU`` prefix. "
+"Generally speaking, these are all removed in the corresponding Rust "
+"functions: ``QEMUTimer`` becomes ``timer::Timer``, ``timer_mod`` becomes "
+"``Timer::modify``, ``sysbus_connect_irq`` becomes ``SysBusDeviceMethods::"
+"connect_irq``."
+msgstr ""
+
+#: ../../../devel/rust.rst:191
+msgid ""
+"Sometimes however a name appears multiple times in the QOM class hierarchy, "
+"and the only difference is in the prefix.  An example is ``qdev_realize`` "
+"and ``sysbus_realize``.  In such cases, whenever a name is not unique in the "
+"hierarchy, always add the prefix to the classes that are lower in the "
+"hierarchy; for the top class, decide on a case by case basis."
+msgstr ""
+
+#: ../../../devel/rust.rst:197
+msgid "For example:"
+msgstr ""
+
+#: ../../../devel/rust.rst:200
+msgid "``device_cold_reset()``"
+msgstr ""
+
+#: ../../../devel/rust.rst:200
+msgid "``DeviceMethods::cold_reset()``"
+msgstr ""
+
+#: ../../../devel/rust.rst:201
+msgid "``pci_device_reset()``"
+msgstr ""
+
+#: ../../../devel/rust.rst:201
+msgid "``PciDeviceMethods::pci_device_reset()``"
+msgstr ""
+
+#: ../../../devel/rust.rst:202
+msgid "``pci_bridge_reset()``"
+msgstr ""
+
+#: ../../../devel/rust.rst:202
+msgid "``PciBridgeMethods::pci_bridge_reset()``"
+msgstr ""
+
+#: ../../../devel/rust.rst:205
+msgid ""
+"Here, the name is not exactly the same, but nevertheless "
+"``PciDeviceMethods`` adds the prefix to avoid confusion, because the "
+"functionality of ``device_cold_reset()`` and ``pci_device_reset()`` is "
+"subtly different."
+msgstr ""
+
+#: ../../../devel/rust.rst:209
+msgid "In this case, however, no prefix is needed:"
+msgstr ""
+
+#: ../../../devel/rust.rst:212
+msgid "``device_realize()``"
+msgstr ""
+
+#: ../../../devel/rust.rst:212
+msgid "``DeviceMethods::realize()``"
+msgstr ""
+
+#: ../../../devel/rust.rst:213
+msgid "``sysbus_realize()``"
+msgstr ""
+
+#: ../../../devel/rust.rst:213
+msgid "``SysbusDeviceMethods::sysbus_realize()``"
+msgstr ""
+
+#: ../../../devel/rust.rst:214
+msgid "``pci_realize()``"
+msgstr ""
+
+#: ../../../devel/rust.rst:214
+msgid "``PciDeviceMethods::pci_realize()``"
+msgstr ""
+
+#: ../../../devel/rust.rst:217
+msgid ""
+"Here, the lower classes do not add any functionality, and mostly provide "
+"extra compile-time checking; the basic *realize* functionality is the same "
+"for all devices.  Therefore, ``DeviceMethods`` does not add the prefix."
+msgstr ""
+
+#: ../../../devel/rust.rst:222
+msgid ""
+"Whenever a name is unique in the hierarchy, instead, you should always "
+"remove the class name prefix."
+msgstr ""
+
+#: ../../../devel/rust.rst:226
+msgid "Common pitfalls"
+msgstr ""
+
+#: ../../../devel/rust.rst:228
+msgid ""
+"Rust has very strict rules with respect to how you get an exclusive "
+"(``&mut``) reference; failure to respect those rules is a source of "
+"undefined behavior. In particular, even if a value is loaded from a raw "
+"mutable pointer (``*mut``), it *cannot* be casted to ``&mut`` unless the "
+"value was stored to the ``*mut`` from a mutable reference.  Furthermore, it "
+"is undefined behavior if any shared reference was created between the store "
+"to the ``*mut`` and the load::"
+msgstr ""
+
+#: ../../../devel/rust.rst:235
+msgid ""
+"let mut p: u32 = 42;\n"
+"let p_mut = &mut p;                              // 1\n"
+"let p_raw = p_mut as *mut u32;                   // 2\n"
+"\n"
+"// p_raw keeps the mutable reference \"alive\"\n"
+"\n"
+"let p_shared = &p;                               // 3\n"
+"println!(\"access from &u32: {}\", *p_shared);\n"
+"\n"
+"// Bring back the mutable reference, its lifetime overlaps\n"
+"// with that of a shared reference.\n"
+"let p_mut = unsafe { &mut *p_raw };              // 4\n"
+"println!(\"access from &mut 32: {}\", *p_mut);\n"
+"\n"
+"println!(\"access from &u32: {}\", *p_shared);     // 5"
+msgstr ""
+
+#: ../../../devel/rust.rst:251
+msgid "These rules can be tested with `MIRI`__, for example."
+msgstr ""
+
+#: ../../../devel/rust.rst:255
+msgid ""
+"Almost all Rust code in QEMU will involve QOM objects, and pointers to these "
+"objects are *shared*, for example because they are part of the QOM "
+"composition tree.  This creates exactly the above scenario:"
+msgstr ""
+
+#: ../../../devel/rust.rst:259
+msgid "a QOM object is created"
+msgstr ""
+
+#: ../../../devel/rust.rst:261
+msgid ""
+"a ``*mut`` is created, for example as the opaque value for a ``MemoryRegion``"
+msgstr ""
+
+#: ../../../devel/rust.rst:263
+msgid "the QOM object is placed in the composition tree"
+msgstr ""
+
+#: ../../../devel/rust.rst:265
+msgid "a memory access dereferences the opaque value to a ``&mut``"
+msgstr ""
+
+#: ../../../devel/rust.rst:267
+msgid "but the shared reference is still present in the composition tree"
+msgstr ""
+
+#: ../../../devel/rust.rst:269
+msgid ""
+"Because of this, QOM objects should almost always use ``&self`` instead of "
+"``&mut self``; access to internal fields must use *interior mutability* to "
+"go from a shared reference to a ``&mut``."
+msgstr ""
+
+#: ../../../devel/rust.rst:273
+msgid ""
+"Whenever C code provides you with an opaque ``void *``, avoid converting it "
+"to a Rust mutable reference, and use a shared reference instead.  The "
+"``qemu_api::cell`` module provides wrappers that can be used to tell the "
+"Rust compiler about interior mutability, and optionally to enforce locking "
+"rules for the \"Big QEMU Lock\".  In the future, similar cell types might "
+"also be provided for ``AioContext``-based locking as well."
+msgstr ""
+
+#: ../../../devel/rust.rst:280
+msgid ""
+"In particular, device code will usually rely on the ``BqlRefCell`` and "
+"``BqlCell`` type to ensure that data is accessed correctly under the \"Big "
+"QEMU Lock\".  These cell types are also known to the ``vmstate`` crate, "
+"which is able to \"look inside\" them when building an in-memory "
+"representation of a ``struct``'s layout.  Note that the same is not true of "
+"a ``RefCell`` or ``Mutex``."
+msgstr ""
+
+#: ../../../devel/rust.rst:287
+msgid ""
+"Bindings code instead will usually use the ``Opaque`` type, which hides the "
+"contents of the underlying struct and can be easily converted to a raw "
+"pointer, for use in calls to C functions.  It can be used for example as "
+"follows::"
+msgstr ""
+
+#: ../../../devel/rust.rst:292
+msgid ""
+"#[repr(transparent)]\n"
+"#[derive(Debug, qemu_api_macros::Wrapper)]\n"
+"pub struct Object(Opaque<bindings::Object>);"
+msgstr ""
+
+#: ../../../devel/rust.rst:296
+msgid ""
+"where the special ``derive`` macro provides useful methods such as "
+"``from_raw``, ``as_ptr`, ``as_mut_ptr`` and ``raw_get``.  The bindings will "
+"then manually check for the big QEMU lock with assertions, which allows the "
+"wrapper to be declared thread-safe::"
+msgstr ""
+
+#: ../../../devel/rust.rst:301
+msgid ""
+"unsafe impl Send for Object {}\n"
+"unsafe impl Sync for Object {}"
+msgstr ""
+
+#: ../../../devel/rust.rst:305
+msgid "Writing bindings to C code"
+msgstr ""
+
+#: ../../../devel/rust.rst:307
+msgid ""
+"Here are some things to keep in mind when working on the ``qemu_api`` crate."
+msgstr ""
+
+#: ../../../devel/rust.rst:309
+msgid "**Look at existing code**"
+msgstr ""
+
+#: ../../../devel/rust.rst:310
+msgid ""
+"Very often, similar idioms in C code correspond to similar tricks in Rust "
+"bindings.  If the C code uses ``offsetof``, look at qdev properties or "
+"``vmstate``.  If the C code has a complex const struct, look at "
+"``MemoryRegion``.  Reuse existing patterns for handling lifetimes; for "
+"example use ``&T`` for QOM objects that do not need a reference count "
+"(including those that can be embedded in other objects) and ``Owned<T>`` for "
+"those that need it."
+msgstr ""
+
+#: ../../../devel/rust.rst:318
+msgid "**Use the type system**"
+msgstr ""
+
+#: ../../../devel/rust.rst:319
+msgid ""
+"Bindings often will need access information that is specific to a type "
+"(either a builtin one or a user-defined one) in order to pass it to C "
+"functions.  Put them in a trait and access it through generic parameters. "
+"The ``vmstate`` module has examples of how to retrieve type information for "
+"the fields of a Rust ``struct``."
+msgstr ""
+
+#: ../../../devel/rust.rst:325
+msgid "**Prefer unsafe traits to unsafe functions**"
+msgstr ""
+
+#: ../../../devel/rust.rst:326
+msgid ""
+"Unsafe traits are much easier to prove correct than unsafe functions. They "
+"are an excellent place to store metadata that can later be accessed by "
+"generic functions.  C code usually places metadata in global variables; in "
+"Rust, they can be stored in traits and then turned into ``static`` "
+"variables.  Often, unsafe traits can be generated by procedural macros."
+msgstr ""
+
+#: ../../../devel/rust.rst:332
+msgid "**Document limitations due to old Rust versions**"
+msgstr ""
+
+#: ../../../devel/rust.rst:333
+msgid ""
+"If you need to settle for an inferior solution because of the currently "
+"supported set of Rust versions, document it in the source and in this file.  "
+"This ensures that it can be fixed when the minimum supported version is "
+"bumped."
+msgstr ""
+
+#: ../../../devel/rust.rst:338
+msgid "**Keep locking in mind**."
+msgstr ""
+
+#: ../../../devel/rust.rst:339
+msgid ""
+"When marking a type ``Sync``, be careful of whether it needs the big QEMU "
+"lock.  Use ``BqlCell`` and ``BqlRefCell`` for interior data, or assert "
+"``bql_locked()``."
+msgstr ""
+
+#: ../../../devel/rust.rst:343
+msgid "**Don't be afraid of complexity, but document and isolate it**"
+msgstr ""
+
+#: ../../../devel/rust.rst:344
+msgid ""
+"It's okay to be tricky; device code is written more often than bindings code "
+"and it's important that it is idiomatic.  However, you should strive to "
+"isolate any tricks in a place (for example a ``struct``, a trait or a macro) "
+"where it can be documented and tested.  If needed, include toy versions of "
+"the code in the documentation."
+msgstr ""
+
+#: ../../../devel/rust.rst:351
+msgid "Writing procedural macros"
+msgstr ""
+
+#: ../../../devel/rust.rst:353
+msgid ""
+"By conventions, procedural macros are split in two functions, one returning "
+"``Result<proc_macro2::TokenStream, syn::Error>`` with the body of the "
+"procedural macro, and the second returning ``proc_macro::TokenStream`` which "
+"is the actual procedural macro.  The former's name is the same as the latter "
+"with the ``_or_error`` suffix.  The code for the latter is more or less "
+"fixed; it follows the following template, which is fixed apart from the type "
+"after ``as`` in the invocation of ``parse_macro_input!``::"
+msgstr ""
+
+#: ../../../devel/rust.rst:361
+msgid ""
+"#[proc_macro_derive(Object)]\n"
+"pub fn derive_object(input: TokenStream) -> TokenStream {\n"
+"    let input = parse_macro_input!(input as DeriveInput);\n"
+"\n"
+"    derive_object_or_error(input)\n"
+"        .unwrap_or_else(syn::Error::into_compile_error)\n"
+"        .into()\n"
+"}"
+msgstr ""
+
+#: ../../../devel/rust.rst:370
+msgid ""
+"The ``qemu_api_macros`` crate has utility functions to examine a "
+"``DeriveInput`` and perform common checks (e.g. looking for a struct with "
+"named fields).  These functions return ``Result<..., syn::Error>`` and can "
+"be used easily in the procedural macro function::"
+msgstr ""
+
+#: ../../../devel/rust.rst:375
+msgid ""
+"fn derive_object_or_error(input: DeriveInput) ->\n"
+"    Result<proc_macro2::TokenStream, Error>\n"
+"{\n"
+"    is_c_repr(&input, \"#[derive(Object)]\")?;\n"
+"\n"
+"    let name = &input.ident;\n"
+"    let parent = &get_fields(&input, \"#[derive(Object)]\")?[0].ident;\n"
+"    ...\n"
+"}"
+msgstr ""
+
+#: ../../../devel/rust.rst:385
+msgid ""
+"Use procedural macros with care.  They are mostly useful for two purposes:"
+msgstr ""
+
+#: ../../../devel/rust.rst:387
+msgid ""
+"Performing consistency checks; for example ``#[derive(Object)]`` checks that "
+"the structure has ``#[repr[C])`` and that the type of the first field is "
+"consistent with the ``ObjectType`` declaration."
+msgstr ""
+
+#: ../../../devel/rust.rst:391
+msgid ""
+"Extracting information from Rust source code into traits, typically based on "
+"types and attributes.  For example, ``#[derive(TryInto)]`` builds an "
+"implementation of ``TryFrom``, and it uses the ``#[repr(...)]`` attribute as "
+"the ``TryFrom`` source and error types."
+msgstr ""
+
+#: ../../../devel/rust.rst:396
+msgid ""
+"Procedural macros can be hard to debug and test; if the code generation "
+"exceeds a few lines of code, it may be worthwhile to delegate work to "
+"\"regular\" declarative (``macro_rules!``) macros and write unit tests for "
+"those instead."
+msgstr ""
+
+#: ../../../devel/rust.rst:403
+msgid "Coding style"
+msgstr ""
+
+#: ../../../devel/rust.rst:405
+msgid "Code should pass clippy and be formatted with rustfmt."
+msgstr ""
+
+#: ../../../devel/rust.rst:407
+msgid ""
+"Right now, only the nightly version of ``rustfmt`` is supported.  This might "
+"change in the future.  While CI checks for correct formatting via ``cargo "
+"fmt --check``, maintainers can fix this for you when applying patches."
+msgstr ""
+
+#: ../../../devel/rust.rst:411
+msgid ""
+"It is expected that ``qemu_api`` provides full ``rustdoc`` documentation for "
+"bindings that are in their final shape or close."
+msgstr ""
+
+#: ../../../devel/rust.rst:415
+msgid "Adding dependencies"
+msgstr ""
+
+#: ../../../devel/rust.rst:417
+msgid ""
+"Generally, the set of dependent crates is kept small.  Think twice before "
+"adding a new external crate, especially if it comes with a large set of "
+"dependencies itself.  Sometimes QEMU only needs a small subset of the "
+"functionality; see for example QEMU's ``assertions`` module."
+msgstr ""
+
+#: ../../../devel/rust.rst:422
+msgid ""
+"On top of this recommendation, adding external crates to QEMU is a slightly "
+"complicated process, mostly due to the need to teach Meson how to build "
+"them.  While Meson has initial support for parsing ``Cargo.lock`` files, it "
+"is still highly experimental and is therefore not used."
+msgstr ""
+
+#: ../../../devel/rust.rst:427
+msgid ""
+"Therefore, external crates must be added as subprojects for Meson to learn "
+"how to build them, as well as to the relevant ``Cargo.toml`` files. The "
+"versions specified in ``rust/Cargo.lock`` must be the same as the "
+"subprojects; note that the ``rust/`` directory forms a Cargo `workspace`__, "
+"and therefore there is a single lock file for the whole build."
+msgstr ""
+
+#: ../../../devel/rust.rst:435
+msgid ""
+"Choose a version of the crate that works with QEMU's minimum supported Rust "
+"version (|msrv|)."
+msgstr ""
+
+#: ../../../devel/rust.rst:438
+msgid ""
+"Second, a new ``wrap`` file must be added to teach Meson how to download the "
+"crate.  The wrap file must be named ``NAME-SEMVER-rs.wrap``, where ``NAME`` "
+"is the name of the crate and ``SEMVER`` is the version up to and including "
+"the first non-zero number.  For example, a crate with version ``0.2.3`` will "
+"use ``0.2`` for its ``SEMVER``, while a crate with version ``1.0.84`` will "
+"use ``1``."
+msgstr ""
+
+#: ../../../devel/rust.rst:444
+msgid ""
+"Third, the Meson rules to build the crate must be added at ``subprojects/"
+"NAME-SEMVER-rs/meson.build``.  Generally this includes:"
+msgstr ""
+
+#: ../../../devel/rust.rst:447
+msgid "``subproject`` and ``dependency`` lines for all dependent crates"
+msgstr ""
+
+#: ../../../devel/rust.rst:449
+msgid ""
+"a ``static_library`` or ``rust.proc_macro`` line to perform the actual build"
+msgstr ""
+
+#: ../../../devel/rust.rst:451
+msgid ""
+"``declare_dependency`` and a ``meson.override_dependency`` lines to expose "
+"the result to QEMU and to other subprojects"
+msgstr ""
+
+#: ../../../devel/rust.rst:454
+msgid ""
+"Remember to add ``native: true`` to ``dependency``, ``static_library`` and "
+"``meson.override_dependency`` for dependencies of procedural macros. If a "
+"crate is needed in both procedural macros and QEMU binaries, everything "
+"apart from ``subproject`` must be duplicated to build both native and non-"
+"native versions of the crate."
+msgstr ""
+
+#: ../../../devel/rust.rst:460
+msgid "It's important to specify the right compiler options.  These include:"
+msgstr ""
+
+#: ../../../devel/rust.rst:462
+msgid "the language edition (which can be found in the ``Cargo.toml`` file)"
+msgstr ""
+
+#: ../../../devel/rust.rst:464
+msgid ""
+"the ``--cfg`` (which have to be \"reverse engineered\" from the ``build.rs`` "
+"file of the crate)."
+msgstr ""
+
+#: ../../../devel/rust.rst:467
+msgid ""
+"usually, a ``--cap-lints allow`` argument to hide warnings from rustc or "
+"clippy."
+msgstr ""
+
+#: ../../../devel/rust.rst:470
+msgid ""
+"After every change to the ``meson.build`` file you have to update the "
+"patched version with ``meson subprojects update --reset ``NAME-SEMVER-rs``.  "
+"This might be automated in the future."
+msgstr ""
+
+#: ../../../devel/rust.rst:474
+msgid ""
+"Also, after every change to the ``meson.build`` file it is strongly "
+"suggested to do a dummy change to the ``.wrap`` file (for example adding a "
+"comment like ``# version 2``), which will help Meson notice that the "
+"subproject is out of date."
+msgstr ""
+
+#: ../../../devel/rust.rst:478
+msgid ""
+"As a last step, add the new subproject to ``scripts/archive-source.sh``, "
+"``scripts/make-release`` and ``subprojects/.gitignore``."
+msgstr ""
