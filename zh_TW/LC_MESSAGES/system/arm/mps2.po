@@ -1,0 +1,163 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/arm/mps2.rst:2
+msgid ""
+"Arm MPS2 and MPS3 boards (``mps2-an385``, ``mps2-an386``, ``mps2-an500``, "
+"``mps2-an505``, ``mps2-an511``, ``mps2-an521``, ``mps3-an524``, ``mps3-"
+"an547``)"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:4
+msgid "These board models all use Arm M-profile CPUs."
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:6
+msgid ""
+"The Arm MPS2, MPS2+ and MPS3 dev boards are FPGA based (the 2+ has a bigger "
+"FPGA but is otherwise the same as the 2; the 3 has a bigger FPGA again, can "
+"handle 4GB of RAM and has a USB controller and QSPI flash)."
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:10
+msgid ""
+"Since the CPU itself and most of the devices are in the FPGA, the details of "
+"the board as seen by the guest depend significantly on the FPGA image."
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:14
+msgid "QEMU models the following FPGA images:"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:16
+msgid "``mps2-an385``"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:17
+msgid "Cortex-M3 as documented in Arm Application Note AN385"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:18
+msgid "``mps2-an386``"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:19
+msgid "Cortex-M4 as documented in Arm Application Note AN386"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:20
+msgid "``mps2-an500``"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:21
+msgid "Cortex-M7 as documented in Arm Application Note AN500"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:22
+msgid "``mps2-an505``"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:23
+msgid "Cortex-M33 as documented in Arm Application Note AN505"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:24
+msgid "``mps2-an511``"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:25
+msgid "Cortex-M3 'DesignStart' as documented in Arm Application Note AN511"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:26
+msgid "``mps2-an521``"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:27
+msgid "Dual Cortex-M33 as documented in Arm Application Note AN521"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:28
+msgid "``mps3-an524``"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:29
+msgid "Dual Cortex-M33 on an MPS3, as documented in Arm Application Note AN524"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:30
+msgid "``mps3-an547``"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:31
+msgid "Cortex-M55 on an MPS3, as documented in Arm Application Note AN547"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:33
+msgid "Differences between QEMU and real hardware:"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:35
+msgid ""
+"AN385/AN386 remapping of low 16K of memory to either ZBT SSRAM1 or to block "
+"RAM is unimplemented (QEMU always maps this to ZBT SSRAM1, as if "
+"zbt_boot_ctrl is always zero)"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:38
+msgid ""
+"AN524 remapping of low memory to either BRAM or to QSPI flash is "
+"unimplemented (QEMU always maps this to BRAM, ignoring the SCC CFG_REG0 "
+"memory-remap bit)"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:41
+msgid ""
+"QEMU provides a LAN9118 ethernet rather than LAN9220; the only guest visible "
+"difference is that the LAN9118 doesn't support checksum offloading"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:44
+msgid ""
+"QEMU does not model the QSPI flash in MPS3 boards as real QSPI flash, but "
+"only as simple ROM, so attempting to rewrite the flash from the guest will "
+"fail"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:47
+msgid "QEMU does not model the USB controller in MPS3 boards"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:50
+msgid "Machine-specific options"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:52
+msgid "The following machine-specific options are supported:"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:54
+msgid "remap"
+msgstr ""
+
+#: ../../../system/arm/mps2.rst:55
+msgid ""
+"Supported for ``mps3-an524`` only. Set ``BRAM``/``QSPI`` to select the "
+"initial memory mapping. The default is ``BRAM``."
+msgstr ""
