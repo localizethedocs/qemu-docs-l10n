@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2025-12-01 09:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,230 +140,236 @@ msgid ""
 "comes in."
 msgstr ""
 
-#: ../../../../system/qtest.c:76
+#: ../../../../system/qtest.c:70
+msgid ""
+"Extra ASCII space characters in command inputs are permitted and ignored. "
+"Lines containing only spaces are permitted and ignored."
+msgstr ""
+
+#: ../../../../system/qtest.c:79
 msgid ""
 "The qtest client is completely in charge of the QEMU_CLOCK_VIRTUAL.  qtest "
 "commands let you adjust the value of the clock (monotonically).  All the "
 "commands return the current value of the clock in nanoseconds."
 msgstr ""
 
-#: ../../../../system/qtest.c:80
+#: ../../../../system/qtest.c:83
 msgid ""
 "If the commands FAIL then time wasn't advanced which is likely because the "
 "machine was in a paused state or no timer events exist in the future. This "
 "will cause qtest to abort and the test will need to check its assumptions."
 msgstr ""
 
-#: ../../../../system/qtest.c:85
+#: ../../../../system/qtest.c:88
 msgid ""
 "> clock_step\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:90
+#: ../../../../system/qtest.c:93
 msgid ""
 "Advance the clock to the next deadline.  Useful when waiting for "
 "asynchronous events."
 msgstr ""
 
-#: ../../../../system/qtest.c:93
+#: ../../../../system/qtest.c:96
 msgid ""
 "> clock_step NS\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:98
+#: ../../../../system/qtest.c:101
 msgid "Advance the clock by NS nanoseconds."
 msgstr ""
 
-#: ../../../../system/qtest.c:100
+#: ../../../../system/qtest.c:103
 msgid ""
 "> clock_set NS\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:105
+#: ../../../../system/qtest.c:108
 msgid "Advance the clock to NS nanoseconds (do nothing if it's already past)."
 msgstr ""
 
-#: ../../../../system/qtest.c:110
+#: ../../../../system/qtest.c:113
 msgid ""
 "> outb ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:115
+#: ../../../../system/qtest.c:118
 msgid ""
 "> outw ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:120
+#: ../../../../system/qtest.c:123
 msgid ""
 "> outl ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:125
+#: ../../../../system/qtest.c:128
 msgid ""
 "> inb ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:130
+#: ../../../../system/qtest.c:133
 msgid ""
 "> inw ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:135
+#: ../../../../system/qtest.c:138
 msgid ""
 "> inl ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:140
+#: ../../../../system/qtest.c:143
 msgid ""
 "> writeb ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:145
+#: ../../../../system/qtest.c:148
 msgid ""
 "> writew ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:150
+#: ../../../../system/qtest.c:153
 msgid ""
 "> writel ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:155
+#: ../../../../system/qtest.c:158
 msgid ""
 "> writeq ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:160
+#: ../../../../system/qtest.c:163
 msgid ""
 "> readb ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:165
+#: ../../../../system/qtest.c:168
 msgid ""
 "> readw ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:170
+#: ../../../../system/qtest.c:173
 msgid ""
 "> readl ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:175
+#: ../../../../system/qtest.c:178
 msgid ""
 "> readq ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:180
+#: ../../../../system/qtest.c:183
 msgid ""
 "> read ADDR SIZE\n"
 "< OK DATA"
 msgstr ""
 
-#: ../../../../system/qtest.c:185
+#: ../../../../system/qtest.c:188
 msgid ""
 "> write ADDR SIZE DATA\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:190
+#: ../../../../system/qtest.c:193
 msgid ""
 "> b64read ADDR SIZE\n"
 "< OK B64_DATA"
 msgstr ""
 
-#: ../../../../system/qtest.c:195
+#: ../../../../system/qtest.c:198
 msgid ""
 "> b64write ADDR SIZE B64_DATA\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:200
+#: ../../../../system/qtest.c:203
 msgid ""
 "> memset ADDR SIZE VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:205
+#: ../../../../system/qtest.c:208
 msgid ""
 "ADDR, SIZE, VALUE are all integers parsed with strtoul() with a base of 0. "
 "For 'memset' a zero size is permitted and does nothing."
 msgstr ""
 
-#: ../../../../system/qtest.c:208
+#: ../../../../system/qtest.c:211
 msgid ""
 "DATA is an arbitrarily long hex number prefixed with '0x'.  If it's smaller "
 "than the expected size, the value will be zero filled at the end of the data "
 "sequence."
 msgstr ""
 
-#: ../../../../system/qtest.c:212
+#: ../../../../system/qtest.c:215
 msgid ""
 "B64_DATA is an arbitrarily long base64 encoded string. If the sizes do not "
 "match, the data will be truncated."
 msgstr ""
 
-#: ../../../../system/qtest.c:218
+#: ../../../../system/qtest.c:221
 msgid ""
 "> irq_intercept_in QOM-PATH\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:223
+#: ../../../../system/qtest.c:226
 msgid ""
 "> irq_intercept_out QOM-PATH\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:228
+#: ../../../../system/qtest.c:231
 msgid ""
 "Attach to the gpio-in (resp. gpio-out) pins exported by the device at QOM-"
 "PATH.  When the pin is triggered, one of the following async messages will "
 "be printed to the qtest stream::"
 msgstr ""
 
-#: ../../../../system/qtest.c:232
+#: ../../../../system/qtest.c:235
 msgid ""
 "IRQ raise NUM\n"
 "IRQ lower NUM"
 msgstr ""
 
-#: ../../../../system/qtest.c:235
+#: ../../../../system/qtest.c:238
 msgid ""
 "where NUM is an IRQ number.  For the PC, interrupts can be intercepted "
 "simply with \"irq_intercept_in ioapic\" (note that IRQ0 comes out with NUM=0 "
 "even though it is remapped to GSI 2)."
 msgstr ""
 
-#: ../../../../system/qtest.c:242
+#: ../../../../system/qtest.c:245
 msgid ""
 "> set_irq_in QOM-PATH NAME NUM LEVEL\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:247
+#: ../../../../system/qtest.c:250
 msgid ""
 "where NAME is the name of the irq/gpio list, NUM is an IRQ number and LEVEL "
 "is an signed integer IRQ level."
 msgstr ""
 
-#: ../../../../system/qtest.c:250
+#: ../../../../system/qtest.c:253
 msgid "Forcibly set the given interrupt pin to the given level."
 msgstr ""
 
