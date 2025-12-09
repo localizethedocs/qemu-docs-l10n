@@ -1,0 +1,608 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 6.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/deprecated.rst:2
+msgid "Deprecated features"
+msgstr ""
+
+#: ../../../system/deprecated.rst:4
+msgid ""
+"In general features are intended to be supported indefinitely once "
+"introduced into QEMU. In the event that a feature needs to be removed, it "
+"will be listed in this section. The feature will remain functional for the "
+"release in which it was deprecated and one further release. After these two "
+"releases, the feature is liable to be removed. Deprecated features may also "
+"generate warnings on the console when QEMU starts up, or if activated via a "
+"monitor command, however, this is not a mandatory requirement."
+msgstr ""
+
+#: ../../../system/deprecated.rst:12
+msgid ""
+"Prior to the 2.10.0 release there was no official policy on how long "
+"features would be deprecated prior to their removal, nor any documented list "
+"of which features were deprecated. Thus any features deprecated prior to "
+"2.10.0 will be treated as if they were first deprecated in the 2.10.0 "
+"release."
+msgstr ""
+
+#: ../../../system/deprecated.rst:18
+msgid "What follows is a list of all features currently marked as deprecated."
+msgstr ""
+
+#: ../../../system/deprecated.rst:22
+msgid "System emulator command line arguments"
+msgstr ""
+
+#: ../../../system/deprecated.rst:25
+msgid "``QEMU_AUDIO_`` environment variables and ``-audio-help`` (since 4.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:27
+msgid ""
+"The ``-audiodev`` argument is now the preferred way to specify audio backend "
+"settings instead of environment variables.  To ease migration to the new "
+"format, the ``-audiodev-help`` option can be used to convert the current "
+"values of the environment variables to ``-audiodev`` options."
+msgstr ""
+
+#: ../../../system/deprecated.rst:33
+msgid ""
+"Creating sound card devices and vnc without ``audiodev=`` property (since "
+"4.2)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:35
+msgid ""
+"When not using the deprecated legacy audio config, each sound card should "
+"specify an ``audiodev=`` property.  Additionally, when using vnc, you should "
+"specify an ``audiodev=`` property if you plan to transmit audio through the "
+"VNC protocol."
+msgstr ""
+
+#: ../../../system/deprecated.rst:41
+msgid "Creating sound card devices using ``-soundhw`` (since 5.1)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:43
+msgid ""
+"Sound card devices should be created using ``-device`` instead.  The names "
+"are the same for most devices.  The exceptions are ``hda`` which needs two "
+"devices (``-device intel-hda -device hda-duplex``) and ``pcspk`` which can "
+"be activated using ``-machine pcspk-audiodev=<name>``."
+msgstr ""
+
+#: ../../../system/deprecated.rst:50
+msgid "``-chardev`` backend aliases ``tty`` and ``parport`` (since 6.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:52
+msgid ""
+"``tty`` and ``parport`` are aliases that will be removed. Instead, the "
+"actual backend names ``serial`` and ``parallel`` should be used."
+msgstr ""
+
+#: ../../../system/deprecated.rst:56
+msgid "RISC-V ``-bios`` (since 5.1)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:58
+msgid ""
+"QEMU 4.1 introduced support for the -bios option in QEMU for RISC-V for the "
+"RISC-V virt machine and sifive_u machine. QEMU 4.1 had no changes to the "
+"default behaviour to avoid breakages."
+msgstr ""
+
+#: ../../../system/deprecated.rst:62
+msgid ""
+"QEMU 5.1 changes the default behaviour from ``-bios none`` to ``-bios "
+"default``."
+msgstr ""
+
+#: ../../../system/deprecated.rst:64
+msgid "QEMU 5.1 has three options:"
+msgstr ""
+
+#: ../../../system/deprecated.rst:65
+msgid ""
+"``-bios default`` - This is the current default behavior if no -bios option"
+msgstr ""
+
+#: ../../../system/deprecated.rst:66
+msgid ""
+"is included. This option will load the default OpenSBI firmware "
+"automatically. The firmware is included with the QEMU release and no user "
+"interaction is required. All a user needs to do is specify the kernel they "
+"want to boot with the -kernel option"
+msgstr ""
+
+#: ../../../system/deprecated.rst:70
+msgid ""
+"``-bios none`` - QEMU will not automatically load any firmware. It is up"
+msgstr ""
+
+#: ../../../system/deprecated.rst:71
+msgid "to the user to load all the images they need."
+msgstr ""
+
+#: ../../../system/deprecated.rst:72
+msgid ""
+"``-bios <file>`` - Tells QEMU to load the specified file as the firmwrae."
+msgstr ""
+
+#: ../../../system/deprecated.rst:75
+msgid "Short-form boolean options (since 6.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:77
+msgid ""
+"Boolean options such as ``share=on``/``share=off`` could be written in short "
+"form as ``share`` and ``noshare``.  This is now deprecated and will cause a "
+"warning."
+msgstr ""
+
+#: ../../../system/deprecated.rst:82
+msgid "``delay`` option for socket character devices (since 6.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:84
+msgid ""
+"The replacement for the ``nodelay`` short-form boolean option is "
+"``nodelay=on`` rather than ``delay=off``."
+msgstr ""
+
+#: ../../../system/deprecated.rst:88
+msgid "``--enable-fips`` (since 6.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:90
+msgid ""
+"This option restricts usage of certain cryptographic algorithms when the "
+"host is operating in FIPS mode."
+msgstr ""
+
+#: ../../../system/deprecated.rst:93
+msgid ""
+"If FIPS compliance is required, QEMU should be built with the ``libgcrypt`` "
+"library enabled as a cryptography provider."
+msgstr ""
+
+#: ../../../system/deprecated.rst:96
+msgid ""
+"Neither the ``nettle`` library, or the built-in cryptography provider are "
+"supported on FIPS enabled hosts."
+msgstr ""
+
+#: ../../../system/deprecated.rst:100
+msgid "``-writeconfig`` (since 6.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:102
+msgid ""
+"The ``-writeconfig`` option is not able to serialize the entire contents of "
+"the QEMU command line.  It is thus considered a failed experiment and "
+"deprecated, with no current replacement."
+msgstr ""
+
+#: ../../../system/deprecated.rst:107
+msgid "Userspace local APIC with KVM (x86, since 6.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:109
+msgid ""
+"Using ``-M kernel-irqchip=off`` with x86 machine types that include a local "
+"APIC is deprecated.  The ``split`` setting is supported, as is using ``-M "
+"kernel-irqchip=off`` with the ISA PC machine type."
+msgstr ""
+
+#: ../../../system/deprecated.rst:114
+msgid "hexadecimal sizes with scaling multipliers (since 6.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:116
+msgid ""
+"Input parameters that take a size value should only use a size suffix (such "
+"as 'k' or 'M') when the base is written in decimal, and not when the value "
+"is hexadecimal.  That is, '0x20M' is deprecated, and should be written "
+"either as '32M' or as '0x2000000'."
+msgstr ""
+
+#: ../../../system/deprecated.rst:122
+msgid "``-spice password=string`` (since 6.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:124
+msgid ""
+"This option is insecure because the SPICE password remains visible in the "
+"process listing. This is replaced by the new ``password-secret`` option "
+"which lets the password be securely provided on the command line using a "
+"``secret`` object instance."
+msgstr ""
+
+#: ../../../system/deprecated.rst:130
+msgid "``opened`` property of ``rng-*`` objects (since 6.0.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:132
+msgid ""
+"The only effect of specifying ``opened=on`` in the command line or QMP "
+"``object-add`` is that the device is opened immediately, possibly before all "
+"other options have been processed.  This will either have no effect (if "
+"``opened`` was the last option) or cause errors.  The property is therefore "
+"useless and should not be specified."
+msgstr ""
+
+#: ../../../system/deprecated.rst:139
+msgid ""
+"``loaded`` property of ``secret`` and ``secret_keyring`` objects (since "
+"6.0.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:141
+msgid ""
+"The only effect of specifying ``loaded=on`` in the command line or QMP "
+"``object-add`` is that the secret is loaded immediately, possibly before all "
+"other options have been processed.  This will either have no effect (if "
+"``loaded`` was the last option) or cause options to be effectively ignored "
+"as if they were not given.  The property is therefore useless and should not "
+"be specified."
+msgstr ""
+
+#: ../../../system/deprecated.rst:150
+msgid "QEMU Machine Protocol (QMP) commands"
+msgstr ""
+
+#: ../../../system/deprecated.rst:153
+msgid ""
+"``blockdev-open-tray``, ``blockdev-close-tray`` argument ``device`` (since "
+"2.8.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:155 ../../../system/deprecated.rst:160
+#: ../../../system/deprecated.rst:165 ../../../system/deprecated.rst:170
+msgid "Use argument ``id`` instead."
+msgstr ""
+
+#: ../../../system/deprecated.rst:158
+msgid "``eject`` argument ``device`` (since 2.8.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:163
+msgid "``blockdev-change-medium`` argument ``device`` (since 2.8.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:168
+msgid "``block_set_io_throttle`` argument ``device`` (since 2.8.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:173
+msgid "``blockdev-add`` empty string argument ``backing`` (since 2.10.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:175
+msgid "Use argument value ``null`` instead."
+msgstr ""
+
+#: ../../../system/deprecated.rst:178
+msgid "``block-commit`` arguments ``base`` and ``top`` (since 3.1.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:180
+msgid "Use arguments ``base-node`` and ``top-node`` instead."
+msgstr ""
+
+#: ../../../system/deprecated.rst:183
+msgid "``nbd-server-add`` and ``nbd-server-remove`` (since 5.2)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:185
+msgid ""
+"Use the more generic commands ``block-export-add`` and ``block-export-del`` "
+"instead.  As part of this deprecation, where ``nbd-server-add`` used a "
+"single ``bitmap``, the new ``block-export-add`` uses a list of ``bitmaps``."
+msgstr ""
+
+#: ../../../system/deprecated.rst:190
+msgid "System accelerators"
+msgstr ""
+
+#: ../../../system/deprecated.rst:193
+msgid "MIPS ``Trap-and-Emul`` KVM support (since 6.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:195
+msgid ""
+"The MIPS ``Trap-and-Emul`` KVM host and guest support has been removed from "
+"Linux upstream kernel, declare it deprecated."
+msgstr ""
+
+#: ../../../system/deprecated.rst:199
+msgid "System emulator CPUS"
+msgstr ""
+
+#: ../../../system/deprecated.rst:202
+msgid "``moxie`` CPU (since 5.2.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:204
+msgid ""
+"The ``moxie`` guest CPU support is deprecated and will be removed in a "
+"future version of QEMU. It's unclear whether anybody is still using CPU "
+"emulation in QEMU, and there are no test images available to make sure that "
+"the code is still working."
+msgstr ""
+
+#: ../../../system/deprecated.rst:210
+msgid "``lm32`` CPUs (since 5.2.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:212
+msgid ""
+"The ``lm32`` guest CPU support is deprecated and will be removed in a future "
+"version of QEMU. The only public user of this architecture was the milkymist "
+"project, which has been dead for years; there was never an upstream Linux "
+"port."
+msgstr ""
+
+#: ../../../system/deprecated.rst:218
+msgid "``unicore32`` CPUs (since 5.2.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:220
+msgid ""
+"The ``unicore32`` guest CPU support is deprecated and will be removed in a "
+"future version of QEMU. Support for this CPU was removed from the upstream "
+"Linux kernel, and there is no available upstream toolchain to build binaries "
+"for it."
+msgstr ""
+
+#: ../../../system/deprecated.rst:226
+msgid "``Icelake-Client`` CPU Model (since 5.2.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:228
+msgid ""
+"``Icelake-Client`` CPU Models are deprecated. Use ``Icelake-Server`` CPU "
+"Models instead."
+msgstr ""
+
+#: ../../../system/deprecated.rst:232
+msgid "MIPS ``I7200`` CPU Model (since 5.2)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:234 ../../../system/deprecated.rst:311
+msgid ""
+"The ``I7200`` guest CPU relies on the nanoMIPS ISA, which is deprecated (the "
+"ISA has never been upstreamed to a compiler toolchain). Therefore this CPU "
+"is also deprecated."
+msgstr ""
+
+#: ../../../system/deprecated.rst:239
+msgid "System emulator machines"
+msgstr ""
+
+#: ../../../system/deprecated.rst:242
+msgid "Raspberry Pi ``raspi2`` and ``raspi3`` machines (since 5.2)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:244
+msgid ""
+"The Raspberry Pi machines come in various models (A, A+, B, B+). To be able "
+"to distinguish which model QEMU is implementing, the ``raspi2`` and "
+"``raspi3`` machines have been renamed ``raspi2b`` and ``raspi3b``."
+msgstr ""
+
+#: ../../../system/deprecated.rst:249
+msgid "Device options"
+msgstr ""
+
+#: ../../../system/deprecated.rst:252
+msgid "Emulated device options"
+msgstr ""
+
+#: ../../../system/deprecated.rst:255
+msgid "``-device virtio-blk,scsi=on|off`` (since 5.0.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:257
+msgid ""
+"The virtio-blk SCSI passthrough feature is a legacy VIRTIO feature.  VIRTIO "
+"1.0 and later do not support it because the virtio-scsi device was "
+"introduced for full SCSI support.  Use virtio-scsi instead when SCSI "
+"passthrough is required."
+msgstr ""
+
+#: ../../../system/deprecated.rst:261
+msgid ""
+"Note this also applies to ``-device virtio-blk-pci,scsi=on|off``, which is "
+"an alias."
+msgstr ""
+
+#: ../../../system/deprecated.rst:265
+msgid "Block device options"
+msgstr ""
+
+#: ../../../system/deprecated.rst:268
+msgid "``\"backing\": \"\"`` (since 2.12.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:270
+msgid ""
+"In order to prevent QEMU from automatically opening an image's backing "
+"chain, use ``\"backing\": null`` instead."
+msgstr ""
+
+#: ../../../system/deprecated.rst:274
+msgid "``rbd`` keyvalue pair encoded filenames: ``\"\"`` (since 3.1.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:276
+msgid ""
+"Options for ``rbd`` should be specified according to its runtime options, "
+"like other block drivers.  Legacy parsing of keyvalue pair encoded filenames "
+"is useful to open images with the old format for backing files; These image "
+"files should be updated to use the current format."
+msgstr ""
+
+#: ../../../system/deprecated.rst:281
+msgid "Example of legacy encoding::"
+msgstr ""
+
+#: ../../../system/deprecated.rst:283
+msgid "json:{\"file.driver\":\"rbd\", \"file.filename\":\"rbd:rbd/name\"}"
+msgstr ""
+
+#: ../../../system/deprecated.rst:285
+msgid "The above, converted to the current supported format::"
+msgstr ""
+
+#: ../../../system/deprecated.rst:287
+msgid ""
+"json:{\"file.driver\":\"rbd\", \"file.pool\":\"rbd\", \"file.image\":"
+"\"name\"}"
+msgstr ""
+
+#: ../../../system/deprecated.rst:290
+msgid "``sheepdog`` driver (since 5.2.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:292
+msgid ""
+"The ``sheepdog`` block device driver is deprecated. The corresponding "
+"upstream server project is no longer actively maintained. Users are "
+"recommended to switch to an alternative distributed block device driver such "
+"as RBD. The ``qemu-img convert`` command can be used to liberate existing "
+"data by moving it out of sheepdog volumes into an alternative storage "
+"backend."
+msgstr ""
+
+#: ../../../system/deprecated.rst:299
+msgid "linux-user mode CPUs"
+msgstr ""
+
+#: ../../../system/deprecated.rst:302
+msgid "``ppc64abi32`` CPUs (since 5.2.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:304
+msgid ""
+"The ``ppc64abi32`` architecture has a number of issues which regularly trip "
+"up our CI testing and is suspected to be quite broken. For that reason the "
+"maintainers strongly suspect no one actually uses it."
+msgstr ""
+
+#: ../../../system/deprecated.rst:309
+msgid "MIPS ``I7200`` CPU (since 5.2)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:316
+msgid "Related binaries"
+msgstr ""
+
+#: ../../../system/deprecated.rst:319
+msgid "qemu-img amend to adjust backing file (since 5.1)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:321
+msgid ""
+"The use of ``qemu-img amend`` to modify the name or format of a qcow2 "
+"backing image is deprecated; this functionality was never fully documented "
+"or tested, and interferes with other amend operations that need access to "
+"the original backing image (such as deciding whether a v3 zero cluster may "
+"be left unallocated when converting to a v2 image).  Rather, any changes to "
+"the backing chain should be performed with ``qemu-img rebase -u`` either "
+"before or after the remaining changes being performed by amend, as "
+"appropriate."
+msgstr ""
+
+#: ../../../system/deprecated.rst:331
+msgid "qemu-img backing file without format (since 5.1)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:333
+msgid ""
+"The use of ``qemu-img create``, ``qemu-img rebase``, or ``qemu-img convert`` "
+"to create or modify an image that depends on a backing file now recommends "
+"that an explicit backing format be provided.  This is for safety: if QEMU "
+"probes a different format than what you thought, the data presented to the "
+"guest will be corrupt; similarly, presenting a raw image to a guest allows a "
+"potential security exploit if a future probe sees a non-raw image based on "
+"guest writes."
+msgstr ""
+
+#: ../../../system/deprecated.rst:341
+msgid ""
+"To avoid the warning message, or even future refusal to create an unsafe "
+"image, you must pass ``-o backing_fmt=`` (or the shorthand ``-F`` during "
+"create) to specify the intended backing format.  You may use ``qemu-img "
+"rebase -u`` to retroactively add a backing format to an existing image.  "
+"However, be aware that there are already potential security risks to blindly "
+"using ``qemu-img info`` to probe the format of an untrusted backing image, "
+"when deciding what format to add into an existing image."
+msgstr ""
+
+#: ../../../system/deprecated.rst:351
+msgid "Backwards compatibility"
+msgstr ""
+
+#: ../../../system/deprecated.rst:354
+msgid "Runnability guarantee of CPU models (since 4.1.0)"
+msgstr ""
+
+#: ../../../system/deprecated.rst:356
+msgid ""
+"Previous versions of QEMU never changed existing CPU models in ways that "
+"introduced additional host software or hardware requirements to the VM.  "
+"This allowed management software to safely change the machine type of an "
+"existing VM without introducing new requirements (\"runnability "
+"guarantee\").  This prevented CPU models from being updated to include CPU "
+"vulnerability mitigations, leaving guests vulnerable in the default "
+"configuration."
+msgstr ""
+
+#: ../../../system/deprecated.rst:365
+msgid ""
+"The CPU model runnability guarantee won't apply anymore to existing CPU "
+"models.  Management software that needs runnability guarantees must resolve "
+"the CPU model aliases using the ``alias-of`` field returned by the ``query-"
+"cpu-definitions`` QMP command."
+msgstr ""
+
+#: ../../../system/deprecated.rst:371
+msgid ""
+"While those guarantees are kept, the return value of ``query-cpu-"
+"definitions`` will have existing CPU model aliases point to a version that "
+"doesn't break runnability guarantees (specifically, version 1 of those CPU "
+"models).  In future QEMU versions, aliases will point to newer CPU model "
+"versions depending on the machine type, so management software must resolve "
+"CPU model aliases before starting a virtual machine."
+msgstr ""
+
+#: ../../../system/deprecated.rst:380
+msgid "Guest Emulator ISAs"
+msgstr ""
+
+#: ../../../system/deprecated.rst:383
+msgid "nanoMIPS ISA"
+msgstr ""
+
+#: ../../../system/deprecated.rst:385
+msgid ""
+"The ``nanoMIPS`` ISA has never been upstreamed to any compiler toolchain. As "
+"it is hard to generate binaries for it, declare it deprecated."
+msgstr ""
