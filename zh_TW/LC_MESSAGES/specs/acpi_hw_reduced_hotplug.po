@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 7.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/acpi_hw_reduced_hotplug.rst:3
+msgid "QEMU and ACPI BIOS Generic Event Device interface"
+msgstr ""
+
+#: ../../../specs/acpi_hw_reduced_hotplug.rst:5
+msgid ""
+"The ACPI *Generic Event Device* (GED) is a HW reduced platform specific "
+"device introduced in ACPI v6.1 that handles all platform events, including "
+"the hotplug ones. GED is modelled as a device in the namespace with a _HID "
+"defined to be ACPI0013. This document describes the interface between QEMU "
+"and the ACPI BIOS."
+msgstr ""
+
+#: ../../../specs/acpi_hw_reduced_hotplug.rst:11
+msgid ""
+"GED allows HW reduced platforms to handle interrupts in ACPI ASL statements. "
+"It follows a very similar approach to the _EVT method from GPIO events. All "
+"interrupts are listed in  _CRS and the handler is written in _EVT method. "
+"However, the QEMU implementation uses a single interrupt for the GED device, "
+"relying on an IO memory region to communicate the type of device affected by "
+"the interrupt. This way, we can support up to 32 events with a unique "
+"interrupt."
+msgstr ""
+
+#: ../../../specs/acpi_hw_reduced_hotplug.rst:19
+msgid "**Here is an example,**"
+msgstr ""
+
+#: ../../../specs/acpi_hw_reduced_hotplug.rst:23
+msgid ""
+"Device (\\_SB.GED)\n"
+"{\n"
+"    Name (_HID, \"ACPI0013\")\n"
+"    Name (_UID, Zero)\n"
+"    Name (_CRS, ResourceTemplate ()\n"
+"    {\n"
+"        Interrupt (ResourceConsumer, Edge, ActiveHigh, Exclusive, ,, )\n"
+"        {\n"
+"            0x00000029,\n"
+"        }\n"
+"    })\n"
+"    OperationRegion (EREG, SystemMemory, 0x09080000, 0x04)\n"
+"    Field (EREG, DWordAcc, NoLock, WriteAsZeros)\n"
+"    {\n"
+"        ESEL,   32\n"
+"    }\n"
+"    Method (_EVT, 1, Serialized)\n"
+"    {\n"
+"        Local0 = ESEL // ESEL = IO memory region which specifies the\n"
+"                      // device type.\n"
+"        If (((Local0 & One) == One))\n"
+"        {\n"
+"            MethodEvent1()\n"
+"        }\n"
+"        If ((Local0 & 0x2) == 0x2)\n"
+"        {\n"
+"            MethodEvent2()\n"
+"        }\n"
+"        ...\n"
+"    }\n"
+"}"
+msgstr ""
+
+#: ../../../specs/acpi_hw_reduced_hotplug.rst:56
+msgid "GED IO interface (4 byte access)"
+msgstr ""
+
+#: ../../../specs/acpi_hw_reduced_hotplug.rst:57
+msgid "**read access:**"
+msgstr ""
+
+#: ../../../specs/acpi_hw_reduced_hotplug.rst:61
+msgid ""
+"[0x0-0x3] Event selector bit field (32 bit) set by QEMU.\n"
+"\n"
+" bits:\n"
+"    0: Memory hotplug event\n"
+"    1: System power down event\n"
+"    2: NVDIMM hotplug event\n"
+" 3-31: Reserved"
+msgstr ""
+
+#: ../../../specs/acpi_hw_reduced_hotplug.rst:69
+msgid "**write_access:**"
+msgstr ""
+
+#: ../../../specs/acpi_hw_reduced_hotplug.rst:71
+msgid "Nothing is expected to be written into GED IO memory"
+msgstr ""
