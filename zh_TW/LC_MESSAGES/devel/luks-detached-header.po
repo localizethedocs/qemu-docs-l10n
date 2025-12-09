@@ -1,0 +1,305 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/luks-detached-header.rst:3
+msgid "LUKS volume with detached header"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:6
+msgid "Introduction"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:8
+msgid ""
+"This document gives an overview of the design of LUKS volume with detached "
+"header and how to use it."
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:12
+msgid "Background"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:14
+msgid ""
+"The LUKS format has ability to store the header in a separate volume from "
+"the payload. We could extend the LUKS driver in QEMU to support this use "
+"case."
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:18
+msgid "Normally a LUKS volume has a layout:"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:22
+msgid ""
+"        +-----------------------------------------------+\n"
+"        |         |                |                    |\n"
+"disk    | header  |  key material  |  disk payload data |\n"
+"        |         |                |                    |\n"
+"        +-----------------------------------------------+"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:28
+msgid "With a detached LUKS header, you need 2 disks so getting:"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:32
+msgid ""
+"        +--------------------------+\n"
+"disk1   |   header  | key material |\n"
+"        +--------------------------+\n"
+"        +---------------------+\n"
+"disk2   |  disk payload data  |\n"
+"        +---------------------+"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:39
+msgid "There are a variety of benefits to doing this:"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:41
+msgid "Secrecy - the disk2 cannot be identified as containing LUKS"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:42
+msgid "volume since there's no header"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:43
+msgid "Control - if access to the disk1 is restricted, then even"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:44
+msgid ""
+"if someone has access to disk2 they can't unlock it. Might be useful if you "
+"have disks on NFS but want to restrict which host can launch a VM instance "
+"from it, by dynamically providing access to the header to a designated host"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:49
+msgid "Flexibility - your application data volume may be a given"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:50
+msgid ""
+"size and it is inconvenient to resize it to add encryption.You can store the "
+"LUKS header separately and use the existing storage volume for payload"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:54
+msgid "Recovery - corruption of a bit in the header may make the"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:55
+msgid ""
+"entire payload inaccessible. It might be convenient to take backups of the "
+"header. If your primary disk header becomes corrupt, you can unlock the data "
+"still by pointing to the backup detached header"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:62
+msgid "Architecture"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:64
+msgid ""
+"Take the qcow2 encryption, for example. The architecture of the LUKS volume "
+"with detached header is shown in the diagram below."
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:67
+msgid ""
+"There are two children of the root node: a file and a header. Data from the "
+"disk payload is stored in the file node. The LUKS header and key material "
+"are located in the header node, as previously mentioned."
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:74
+msgid ""
+"                     +-----------------------------+\n"
+"Root node            |          foo[luks]          |\n"
+"                     +-----------------------------+\n"
+"                        |                       |\n"
+"                   file |                header |\n"
+"                        |                       |\n"
+"             +---------------------+    +------------------+\n"
+"Child node   |payload-format[qcow2]|    |header-format[raw]|\n"
+"             +---------------------+    +------------------+\n"
+"                        |                       |\n"
+"                   file |                 file  |\n"
+"                        |                       |\n"
+"             +----------------------+  +---------------------+\n"
+"Child node   |payload-protocol[file]|  |header-protocol[file]|\n"
+"             +----------------------+  +---------------------+\n"
+"                        |                       |\n"
+"                        |                       |\n"
+"                        |                       |\n"
+"                   Host storage            Host storage"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:95
+msgid "Usage"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:98
+msgid "Create a LUKS disk with a detached header using qemu-img"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:100
+msgid "Shell commandline::"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:102
+msgid ""
+"# qemu-img create --object secret,id=sec0,data=abc123 -f luks \\\n"
+"  -o cipher-alg=aes-256,cipher-mode=xts -o key-secret=sec0 \\\n"
+"  -o detached-header=true test-header.img\n"
+"# qemu-img create -f qcow2 test-payload.qcow2 200G\n"
+"# qemu-img info 'json:{\"driver\":\"luks\",\"file\":{\"filename\": \\\n"
+"  \"test-payload.img\"},\"header\":{\"filename\":\"test-header.img\"}}'"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:110
+msgid "Set up a VM's LUKS volume with a detached header"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:112
+msgid "Qemu commandline::"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:114
+msgid ""
+"# qemu-system-x86_64 ... \\\n"
+"  -object '{\"qom-type\":\"secret\",\"id\":\"libvirt-3-format-secret\", \\\n"
+"  \"data\":\"abc123\"}' \\\n"
+"  -blockdev '{\"driver\":\"file\",\"filename\":\"/path/to/test-header.img\", "
+"\\\n"
+"  \"node-name\":\"libvirt-1-storage\"}' \\\n"
+"  -blockdev '{\"node-name\":\"libvirt-1-format\",\"read-only\":false, \\\n"
+"  \"driver\":\"raw\",\"file\":\"libvirt-1-storage\"}' \\\n"
+"  -blockdev '{\"driver\":\"file\",\"filename\":\"/path/to/test-payload."
+"qcow2\", \\\n"
+"  \"node-name\":\"libvirt-2-storage\"}' \\\n"
+"  -blockdev '{\"node-name\":\"libvirt-2-format\",\"read-only\":false, \\\n"
+"  \"driver\":\"qcow2\",\"file\":\"libvirt-2-storage\"}' \\\n"
+"  -blockdev '{\"node-name\":\"libvirt-3-format\",\"driver\":\"luks\", \\\n"
+"  \"file\":\"libvirt-2-format\",\"header\":\"libvirt-1-format\",\"key-"
+"secret\": \\\n"
+"  \"libvirt-3-format-secret\"}' \\\n"
+"  -device '{\"driver\":\"virtio-blk-pci\",\"bus\":XXX,\"addr\":YYY,"
+"\"drive\": \\\n"
+"  \"libvirt-3-format\",\"id\":\"virtio-disk1\"}'"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:132
+msgid "Add LUKS volume to a VM with a detached header"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:134
+msgid ""
+"object-add the secret for decrypting the cipher stored in LUKS header above::"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:137
+msgid ""
+"# virsh qemu-monitor-command vm '{\"execute\":\"object-add\", \\\n"
+"  \"arguments\":{\"qom-type\":\"secret\", \"id\": \\\n"
+"  \"libvirt-4-format-secret\", \"data\":\"abc123\"}}'"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:141
+msgid "block-add the protocol node for LUKS header::"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:143
+msgid ""
+"# virsh qemu-monitor-command vm '{\"execute\":\"blockdev-add\", \\\n"
+"  \"arguments\":{\"node-name\":\"libvirt-1-storage\", \"driver\":\"file\", "
+"\\\n"
+"  \"filename\": \"/path/to/test-header.img\" }}'"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:147
+msgid "block-add the raw-drived node for LUKS header::"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:149
+msgid ""
+"# virsh qemu-monitor-command vm '{\"execute\":\"blockdev-add\", \\\n"
+"  \"arguments\":{\"node-name\":\"libvirt-1-format\", \"driver\":\"raw\", \\\n"
+"  \"file\":\"libvirt-1-storage\"}}'"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:153
+msgid "block-add the protocol node for disk payload image::"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:155
+msgid ""
+"# virsh qemu-monitor-command vm '{\"execute\":\"blockdev-add\", \\\n"
+"  \"arguments\":{\"node-name\":\"libvirt-2-storage\", \"driver\":\"file\", "
+"\\\n"
+"  \"filename\":\"/path/to/test-payload.qcow2\"}}'"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:159
+msgid "block-add the qcow2-drived format node for disk payload data::"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:161
+msgid ""
+"# virsh qemu-monitor-command vm '{\"execute\":\"blockdev-add\", \\\n"
+"  \"arguments\":{\"node-name\":\"libvirt-2-format\", \"driver\":\"qcow2\", "
+"\\\n"
+"  \"file\":\"libvirt-2-storage\"}}'"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:165
+msgid ""
+"block-add the luks-drived format node to link the qcow2 disk with the LUKS "
+"header by specifying the field \"header\"::"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:168
+msgid ""
+"# virsh qemu-monitor-command vm '{\"execute\":\"blockdev-add\", \\\n"
+"  \"arguments\":{\"node-name\":\"libvirt-3-format\", \"driver\":\"luks\", "
+"\\\n"
+"  \"file\":\"libvirt-2-format\", \"header\":\"libvirt-1-format\", \\\n"
+"  \"key-secret\":\"libvirt-2-format-secret\"}}'"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:173
+msgid "hot-plug the virtio-blk device finally::"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:175
+msgid ""
+"# virsh qemu-monitor-command vm '{\"execute\":\"device_add\", \\\n"
+"  \"arguments\": {\"driver\":\"virtio-blk-pci\", \\\n"
+"  \"drive\": \"libvirt-3-format\", \"id\":\"virtio-disk2\"}}"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:180
+msgid "TODO"
+msgstr ""
+
+#: ../../../devel/luks-detached-header.rst:182
+msgid "Support the shared detached LUKS header within the VM."
+msgstr ""
