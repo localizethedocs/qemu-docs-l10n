@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/openrisc/virt.rst:2
+msgid "'virt' generic virtual platform"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:4
+msgid ""
+"The ``virt`` board is a platform which does not correspond to any real "
+"hardware; it is designed for use in virtual machines. It is the recommended "
+"board type if you simply want to run a guest such as Linux and do not care "
+"about reproducing the idiosyncrasies and limitations of a particular bit of "
+"real-world hardware."
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:12
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:14
+msgid "PCI/PCIe devices"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:15
+msgid "8 virtio-mmio transport devices"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:16
+msgid "16550A UART"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:17
+msgid "Goldfish RTC"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:18
+msgid "SiFive Test device for poweroff and reboot"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:19
+msgid "SMP (OpenRISC multicore using ompic)"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:22
+msgid "Boot options"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:24
+msgid ""
+"The virt machine can be started using the ``-kernel`` and ``-initrd`` "
+"options to load a Linux kernel and optional disk image. For example:"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:27
+msgid ""
+"$ qemu-system-or1k -cpu or1220 -M or1k-sim -nographic \\\n"
+"      -device virtio-net-device,netdev=user -netdev user,id=user,"
+"net=10.9.0.1/24,host=10.9.0.100 \\\n"
+"      -device virtio-blk-device,drive=d0 -drive file=virt.qcow2,id=d0,"
+"if=none,format=qcow2 \\\n"
+"      -kernel vmlinux \\\n"
+"      -initrd initramfs.cpio.gz \\\n"
+"      -m 128"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:37
+msgid "Linux guest kernel configuration"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:39
+msgid ""
+"The 'virt_defconfig' for Linux openrisc kernels includes the right drivers "
+"for the ``virt`` machine."
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:43
+msgid "Hardware configuration information"
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:45
+msgid ""
+"The ``virt`` board automatically generates a device tree blob (\"dtb\") "
+"which it passes to the guest. This provides information about the addresses, "
+"interrupt lines and other configuration of the various devices in the system."
+msgstr ""
+
+#: ../../../system/openrisc/virt.rst:49
+msgid ""
+"The location of the DTB will be passed in register ``r3`` to the guest "
+"operating system."
+msgstr ""
