@@ -1,0 +1,179 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-10 09:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/arm/imx8mp-evk.rst:2
+msgid "NXP i.MX 8M Plus Evaluation Kit (``imx8mp-evk``)"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:4
+msgid ""
+"The ``imx8mp-evk`` machine models the i.MX 8M Plus Evaluation Kit, based on "
+"an i.MX 8M Plus SoC."
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:8
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:10
+msgid "The ``imx8mp-evk`` machine implements the following devices:"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:12
+msgid "Up to 4 Cortex-A53 cores"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:13
+msgid "Generic Interrupt Controller (GICv3)"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:14
+msgid "4 UARTs"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:15
+msgid "3 USDHC Storage Controllers"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:16
+msgid "1 Designware PCI Express Controller"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:17
+msgid "1 Ethernet Controller"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:18
+msgid "2 Designware USB 3 Controllers"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:19
+msgid "5 GPIO Controllers"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:20
+msgid "6 I2C Controllers"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:21
+msgid "3 SPI Controllers"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:22
+msgid "3 Watchdogs"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:23
+msgid "6 General Purpose Timers"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:24
+msgid "Secure Non-Volatile Storage (SNVS) including an RTC"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:25
+msgid "Clock Tree"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:28
+msgid "Boot options"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:30
+msgid ""
+"The ``imx8mp-evk`` machine can start a Linux kernel directly using the "
+"standard ``-kernel`` functionality."
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:34
+msgid "Direct Linux Kernel Boot"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:36
+msgid ""
+"Probably the easiest way to get started with a whole Linux system on the "
+"machine is to generate an image with Buildroot. Version 2024.11.1 is tested "
+"at the time of writing and involves two steps. First run the following "
+"commands in the toplevel directory of the Buildroot source tree:"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:41
+msgid ""
+"$ make freescale_imx8mpevk_defconfig\n"
+"$ make"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:46
+msgid ""
+"Once finished successfully there is an ``output/image`` subfolder. Navigate "
+"into it and resize the SD card image to a power of two:"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:49
+msgid "$ qemu-img resize sdcard.img 256M"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:53
+msgid "Now that everything is prepared the machine can be started as follows:"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:55
+msgid ""
+"$ qemu-system-aarch64 -M imx8mp-evk -smp 4 -m 3G \\\n"
+"    -display none -serial null -serial stdio \\\n"
+"    -kernel Image \\\n"
+"    -dtb imx8mp-evk.dtb \\\n"
+"    -append \"root=/dev/mmcblk2p2\" \\\n"
+"    -drive file=sdcard.img,if=sd,bus=2,format=raw,id=mmcblk2"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:66
+msgid "KVM Acceleration"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:68
+msgid ""
+"To enable hardware-assisted acceleration via KVM, append ``-accel kvm -cpu "
+"host`` to the command line. While this speeds up performance significantly, "
+"be aware of the following limitations:"
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:72
+msgid ""
+"The ``imx8mp-evk`` machine is not included under the \"virtualization use "
+"case\" of :doc:`QEMU's security policy </system/security>`. This means that "
+"you should not trust that it can contain malicious guests, whether it is run "
+"using TCG or KVM. If you don't trust your guests and you're relying on QEMU "
+"to be the security boundary, you want to choose another machine such as "
+"``virt``."
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:77
+msgid ""
+"Rather than Cortex-A53 CPUs, the same CPU type as the host's will be used. "
+"This is a limitation of KVM and may not work with guests with a tight "
+"dependency on Cortex-A53."
+msgstr ""
+
+#: ../../../system/arm/imx8mp-evk.rst:80
+msgid ""
+"No EL2 and EL3 exception levels are available which is also a KVM "
+"limitation. Direct kernel boot should work but running U-Boot, TF-A, etc. "
+"won't succeed."
+msgstr ""
