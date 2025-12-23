@@ -1,0 +1,393 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../interop/qed_spec.rst:3
+msgid "QED Image File Format Specification"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:5
+msgid "The file format looks like this::"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:7
+msgid ""
+"+----------+----------+----------+-----+\n"
+"| cluster0 | cluster1 | cluster2 | ... |\n"
+"+----------+----------+----------+-----+"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:11
+msgid ""
+"The first cluster begins with the ``header``. The header contains "
+"information about where regular clusters start; this allows the header to be "
+"extensible and store extra information about the image file. A regular "
+"cluster may be a ``data cluster``, an ``L2``, or an ``L1 table``. L1 and L2 "
+"tables are composed of one or more contiguous clusters."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:17
+msgid ""
+"Normally the file size will be a multiple of the cluster size.  If the file "
+"size is not a multiple, extra information after the last cluster may not be "
+"preserved if data is written. Legitimate extra information should use space "
+"between the header and the first regular cluster."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:22
+msgid "All fields are little-endian."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:25
+msgid "Header"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:29
+msgid ""
+"Header {\n"
+"   uint32_t magic;               /* QED\\0 */\n"
+"\n"
+"   uint32_t cluster_size;        /* in bytes */\n"
+"   uint32_t table_size;          /* for L1 and L2 tables, in clusters */\n"
+"   uint32_t header_size;         /* in clusters */\n"
+"\n"
+"   uint64_t features;            /* format feature bits */\n"
+"   uint64_t compat_features;     /* compat feature bits */\n"
+"   uint64_t autoclear_features;  /* self-resetting feature bits */\n"
+"\n"
+"   uint64_t l1_table_offset;     /* in bytes */\n"
+"   uint64_t image_size;          /* total logical image size, in bytes */\n"
+"\n"
+"   /* if (features & QED_F_BACKING_FILE) */\n"
+"   uint32_t backing_filename_offset; /* in bytes from start of header */\n"
+"   uint32_t backing_filename_size;   /* in bytes */\n"
+"}"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:49
+msgid "Field descriptions:"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:51
+msgid "``cluster_size`` must be a power of 2 in range [2^12, 2^26]."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:52
+msgid "``table_size`` must be a power of 2 in range [1, 16]."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:53
+msgid ""
+"``header_size`` is the number of clusters used by the header and any "
+"additional information stored before regular clusters."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:55
+msgid ""
+"``features``, ``compat_features``, and ``autoclear_features`` are file "
+"format extension bitmaps. They work as follows:"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:58
+msgid ""
+"An image with unknown ``features`` bits enabled must not be opened. File "
+"format changes that are not backwards-compatible must use ``features`` bits."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:60
+msgid ""
+"An image with unknown ``compat_features`` bits enabled can be opened safely. "
+"The unknown features are simply ignored and represent backwards-compatible "
+"changes to the file format."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:63
+msgid ""
+"An image with unknown ``autoclear_features`` bits enable can be opened "
+"safely after clearing the unknown bits. This allows for backwards-compatible "
+"changes to the file format which degrade gracefully and can be re-enabled "
+"again by a new program later."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:67
+msgid ""
+"``l1_table_offset`` is the offset of the first byte of the L1 table in the "
+"image file and must be a multiple of ``cluster_size``."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:69
+msgid ""
+"``image_size`` is the block device size seen by the guest and must be a "
+"multiple of 512 bytes."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:71
+msgid ""
+"``backing_filename_offset`` and ``backing_filename_size`` describe a string "
+"in (byte offset, byte size) form. It is not NUL-terminated and has no "
+"alignment constraints. The string must be stored within the first "
+"``header_size`` clusters. The backing filename may be an absolute path or "
+"relative to the image file."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:77
+msgid "Feature bits:"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:79
+msgid "``QED_F_BACKING_FILE = 0x01``. The image uses a backing file."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:80
+msgid ""
+"``QED_F_NEED_CHECK = 0x02``. The image needs a consistency check before use."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:81
+msgid ""
+"``QED_F_BACKING_FORMAT_NO_PROBE = 0x04``. The backing file is a raw disk "
+"image and no file format autodetection should be attempted.  This should be "
+"used to ensure that raw backing files are never detected as an image format "
+"if they happen to contain magic constants."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:86
+msgid ""
+"There are currently no defined ``compat_features`` or ``autoclear_features`` "
+"bits."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:88
+msgid ""
+"Fields predicated on a feature bit are only used when that feature is set. "
+"The fields always take up header space, regardless of whether or not the "
+"feature bit is set."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:93
+msgid "Tables"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:95
+msgid ""
+"Tables provide the translation from logical offsets in the block device to "
+"cluster offsets in the file."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:100
+msgid ""
+"#define TABLE_NOFFSETS (table_size * cluster_size / sizeof(uint64_t))\n"
+"\n"
+"Table {\n"
+"    uint64_t offsets[TABLE_NOFFSETS];\n"
+"}"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:106
+msgid "The tables are organized as follows::"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:108
+msgid ""
+"                   +----------+\n"
+"                   | L1 table |\n"
+"                   +----------+\n"
+"              ,------'  |  '------.\n"
+"         +----------+   |    +----------+\n"
+"         | L2 table |  ...   | L2 table |\n"
+"         +----------+        +----------+\n"
+"     ,------'  |  '------.\n"
+"+----------+   |    +----------+\n"
+"|   Data   |  ...   |   Data   |\n"
+"+----------+        +----------+"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:120
+msgid ""
+"A table is made up of one or more contiguous clusters.  The ``table_size`` "
+"header field determines table size for an image file. For example, "
+"``cluster_size=64 KB`` and ``table_size=4`` results in 256 KB tables."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:124
+msgid ""
+"The logical image size must be less than or equal to the maximum possible "
+"size of clusters rooted by the L1 table:"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:127
+msgid ""
+"header.image_size <= TABLE_NOFFSETS * TABLE_NOFFSETS * header.cluster_size"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:131
+msgid ""
+"L1, L2, and data cluster offsets must be aligned to ``header.cluster_size``. "
+"The following offsets have special meanings:"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:135
+msgid "L2 table offsets"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:137
+msgid "0 - unallocated. The L2 table is not yet allocated."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:140
+msgid "Data cluster offsets"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:142
+msgid "0 - unallocated.  The data cluster is not yet allocated."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:143
+msgid ""
+"1 - zero. The data cluster contents are all zeroes and no cluster is "
+"allocated."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:145
+msgid ""
+"Future format extensions may wish to store per-offset information. The least "
+"significant 12 bits of an offset are reserved for this purpose and must be "
+"set to zero. Image files with ``cluster_size`` > 2^12 will have more unused "
+"bits which should also be zeroed."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:151
+msgid "Unallocated L2 tables and data clusters"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:153
+msgid ""
+"Reads to an unallocated area of the image file access the backing file. If "
+"there is no backing file, then zeroes are produced. The backing file may be "
+"smaller than the image file and reads of unallocated areas beyond the end of "
+"the backing file produce zeroes."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:158
+msgid ""
+"Writes to an unallocated area cause a new data clusters to be allocated, and "
+"a new L2 table if that is also unallocated. The new data cluster is "
+"populated with data from the backing file (or zeroes if no backing file) and "
+"the data being written."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:163
+msgid "Zero data clusters"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:165
+msgid ""
+"Zero data clusters are a space-efficient way of storing zeroed regions of "
+"the image."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:167
+msgid "Reads to a zero data cluster produce zeroes."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:170
+msgid ""
+"The difference between an unallocated and a zero data cluster is that zero "
+"data clusters stop the reading of contents from the backing file."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:173
+msgid ""
+"Writes to a zero data cluster cause a new data cluster to be allocated.  The "
+"new data cluster is populated with zeroes and the data being written."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:177
+msgid "Logical offset translation"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:179
+msgid "Logical offsets are translated into cluster offsets as follows::"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:181
+msgid ""
+" table_bits table_bits    cluster_bits\n"
+" <--------> <--------> <--------------->\n"
+"+----------+----------+-----------------+\n"
+"| L1 index | L2 index |     byte offset |\n"
+"+----------+----------+-----------------+\n"
+"\n"
+"      Structure of a logical offset\n"
+"\n"
+"offset_mask = ~(cluster_size - 1) # mask for the image file byte offset\n"
+"\n"
+"def logical_to_cluster_offset(l1_index, l2_index, byte_offset):\n"
+"  l2_offset = l1_table[l1_index]\n"
+"  l2_table = load_table(l2_offset)\n"
+"  cluster_offset = l2_table[l2_index] & offset_mask\n"
+"  return cluster_offset + byte_offset"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:198
+msgid "Consistency checking"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:200
+msgid ""
+"This section is informational and included to provide background on the use "
+"of the ``QED_F_NEED_CHECK features`` bit."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:203
+msgid ""
+"The ``QED_F_NEED_CHECK`` bit is used to mark an image as dirty before "
+"starting an operation that could leave the image in an inconsistent state if "
+"interrupted by a crash or power failure.  A dirty image must be checked on "
+"open because its metadata may not be consistent."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:208
+msgid "Consistency check includes the following invariants:"
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:210
+msgid ""
+"Each cluster is referenced once and only once. It is an inconsistency to "
+"have a cluster referenced more than once by L1 or L2 tables. A cluster has "
+"been leaked if it has no references."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:213
+msgid ""
+"Offsets must be within the image file size and must be ``cluster_size`` "
+"aligned."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:214
+msgid ""
+"Table offsets must at least ``table_size`` * ``cluster_size`` bytes from the "
+"end of the image file so that there is space for the entire table."
+msgstr ""
+
+#: ../../../interop/qed_spec.rst:217
+msgid ""
+"The consistency check process starts from ``l1_table_offset`` and scans all "
+"L2 tables. After the check completes with no other errors besides leaks, the "
+"``QED_F_NEED_CHECK`` bit can be cleared and the image can be accessed."
+msgstr ""
