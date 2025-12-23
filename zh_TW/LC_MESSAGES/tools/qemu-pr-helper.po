@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tools/qemu-pr-helper.rst:2
+msgid "QEMU persistent reservation helper"
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:5
+msgid "Synopsis"
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:7
+msgid "**qemu-pr-helper** [*OPTION*]"
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:10
+msgid "Description"
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:12
+msgid "Implements the persistent reservation helper for QEMU."
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:14
+msgid ""
+"SCSI persistent reservations allow restricting access to block devices to "
+"specific initiators in a shared storage setup.  When implementing clustering "
+"of virtual machines, it is a common requirement for virtual machines to send "
+"persistent reservation SCSI commands.  However, the operating system "
+"restricts sending these commands to unprivileged programs because incorrect "
+"usage can disrupt regular operation of the storage fabric. QEMU's SCSI "
+"passthrough devices ``scsi-block`` and ``scsi-generic`` support passing "
+"guest persistent reservation requests to a privileged external helper "
+"program. :program:`qemu-pr-helper` is that external helper; it creates a "
+"socket which QEMU can connect to to communicate with it."
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:26
+msgid ""
+"If you want to run VMs in a setup like this, this helper should be started "
+"as a system service, and you should read the QEMU manual section on "
+"\"persistent reservation managers\" to find out how to configure QEMU to "
+"connect to the socket created by :program:`qemu-pr-helper`."
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:32
+msgid ""
+"After connecting to the socket, :program:`qemu-pr-helper` can optionally "
+"drop root privileges, except for those capabilities that are needed for its "
+"operation."
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:36
+msgid ""
+":program:`qemu-pr-helper` can also use the systemd socket activation "
+"protocol.  In this case, the systemd socket unit should specify a Unix "
+"stream socket, like this::"
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:40
+msgid ""
+"[Socket]\n"
+"ListenStream=/var/run/qemu-pr-helper.sock"
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:44
+msgid "Options"
+msgstr "選項"
+
+#: ../../../tools/qemu-pr-helper.rst:50
+msgid "run in the background (and create a PID file)"
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:54
+msgid "decrease verbosity"
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:58
+msgid "increase verbosity"
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:62
+msgid ""
+"PID file when running as a daemon. By default the PID file is created in the "
+"system runtime state directory, for example :file:`/var/run/qemu-pr-helper."
+"pid`."
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:68
+msgid ""
+"path to the socket. By default the socket is created in the system runtime "
+"state directory, for example :file:`/var/run/qemu-pr-helper.sock`."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:2
+msgid "Specify tracing options."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:4
+msgid "``[enable=]PATTERN``"
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:6
+msgid ""
+"Immediately enable events matching *PATTERN* (either event name or a "
+"globbing pattern).  This option is only available if QEMU has been compiled "
+"with the ``simple``, ``log`` or ``ftrace`` tracing backend.  To specify "
+"multiple events or patterns, specify the :option:`-trace` option multiple "
+"times."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:12
+msgid "Use :option:`-trace help` to print a list of names of trace points."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:14
+msgid "``events=FILE``"
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:16
+msgid ""
+"Immediately enable events listed in *FILE*. The file must contain one event "
+"name (as listed in the ``trace-events-all`` file) per line; globbing "
+"patterns are accepted too.  This option is only available if QEMU has been "
+"compiled with the ``simple``, ``log`` or ``ftrace`` tracing backend."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:22
+msgid "``file=FILE``"
+msgstr "``file=FILE``"
+
+#: ../../../qemu-option-trace.rst.inc:24
+msgid ""
+"Log output traces to *FILE*. This option is only available if QEMU has been "
+"compiled with the ``simple`` tracing backend."
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:78
+msgid "user to drop privileges to"
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:82
+msgid "group to drop privileges to"
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:86
+msgid "Display a help message and exit."
+msgstr ""
+
+#: ../../../tools/qemu-pr-helper.rst:90
+msgid "Display version information and exit."
+msgstr ""
