@@ -1,0 +1,310 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:2
+msgid "Microchip PolarFire SoC Icicle Kit (``microchip-icicle-kit``)"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:4
+msgid ""
+"Microchip PolarFire SoC Icicle Kit integrates a PolarFire SoC, with one "
+"SiFive's E51 plus four U54 cores and many on-chip peripherals and an FPGA."
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:7
+msgid ""
+"For more details about Microchip PolarFire SoC, please see: https://www."
+"microsemi.com/product-directory/soc-fpgas/5498-polarfire-soc-fpga"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:10
+msgid ""
+"The Icicle Kit board information can be found here: https://www.microsemi."
+"com/existing-parts/parts/152514"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:14
+msgid "Supported devices"
+msgstr "支援的裝置"
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:16
+msgid "The ``microchip-icicle-kit`` machine supports the following devices:"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:18
+msgid "1 E51 core"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:19
+msgid "4 U54 cores"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:20
+msgid "Core Level Interruptor (CLINT)"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:21
+msgid "Platform-Level Interrupt Controller (PLIC)"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:22
+msgid "L2 Loosely Integrated Memory (L2-LIM)"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:23
+msgid "DDR memory controller"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:24
+msgid "5 MMUARTs"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:25
+msgid "1 DMA controller"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:26
+msgid "2 GEM Ethernet controllers"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:27
+msgid "1 SDHC storage controller"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:30
+msgid "Boot options"
+msgstr "開機選項"
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:32
+msgid ""
+"The ``microchip-icicle-kit`` machine can start using the standard -bios "
+"functionality for loading its BIOS image, aka Hart Software Services (HSS_). "
+"HSS loads the second stage bootloader U-Boot from an SD card. Then a kernel "
+"can be loaded from U-Boot. It also supports direct kernel booting via the -"
+"kernel option along with the device tree blob via -dtb. When direct kernel "
+"boot is used, the OpenSBI fw_dynamic BIOS image is used to boot a payload "
+"like U-Boot or OS kernel directly."
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:40
+msgid "The user provided DTB should have the following requirements:"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:42
+msgid ""
+"The /cpus node should contain at least one subnode for E51 and the number of "
+"subnodes should match QEMU's ``-smp`` option"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:44
+msgid "The /memory reg size should match QEMU’s selected ram_size via ``-m``"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:45
+msgid ""
+"Should contain a node for the CLINT device with a compatible string \"riscv,"
+"clint0\""
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:48
+msgid "QEMU follows below truth table to select which payload to execute:"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:51
+msgid "-bios"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:51
+msgid "-kernel"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:51
+msgid "-dtb"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:51
+msgid "payload"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:53
+#: ../../../system/riscv/microchip-icicle-kit.rst:55
+msgid "N"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:53
+#: ../../../system/riscv/microchip-icicle-kit.rst:54
+msgid "don't care"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:53
+#: ../../../system/riscv/microchip-icicle-kit.rst:54
+msgid "HSS"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:54
+#: ../../../system/riscv/microchip-icicle-kit.rst:55
+msgid "Y"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:55
+msgid "kernel"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:58
+msgid ""
+"The memory is set to 1537 MiB by default which is the minimum required high "
+"memory size by HSS. A sanity check on ram size is performed in the machine "
+"init routine to prompt user to increase the RAM size to > 1537 MiB when less "
+"than 1537 MiB ram is detected."
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:64
+msgid "Running HSS"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:66
+msgid ""
+"HSS 2020.12 release is tested at the time of writing. To build an HSS image "
+"that can be booted by the ``microchip-icicle-kit`` machine, type the "
+"following in the HSS source tree:"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:70
+msgid ""
+"$ export CROSS_COMPILE=riscv64-linux-\n"
+"$ cp boards/mpfs-icicle-kit-es/def_config .config\n"
+"$ make BOARD=mpfs-icicle-kit-es"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:76
+msgid ""
+"Download the official SD card image released by Microchip and prepare it for "
+"QEMU usage:"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:79
+msgid ""
+"$ wget ftp://ftpsoc.microsemi.com/outgoing/core-image-minimal-dev-icicle-kit-"
+"es-sd-20201009141623.rootfs.wic.gz\n"
+"$ gunzip core-image-minimal-dev-icicle-kit-es-sd-20201009141623.rootfs.wic."
+"gz\n"
+"$ qemu-img resize core-image-minimal-dev-icicle-kit-es-sd-20201009141623."
+"rootfs.wic 4G"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:85
+#: ../../../system/riscv/microchip-icicle-kit.rst:127
+msgid "Then we can boot the machine by:"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:87
+msgid ""
+"$ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \\\n"
+"    -bios path/to/hss.bin -sd path/to/sdcard.img \\\n"
+"    -nic user,model=cadence_gem \\\n"
+"    -nic tap,ifname=tap,model=cadence_gem,script=no \\\n"
+"    -display none -serial stdio \\\n"
+"    -chardev socket,id=serial1,path=serial1.sock,server=on,wait=on \\\n"
+"    -serial chardev:serial1"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:97
+msgid ""
+"With above command line, current terminal session will be used for the first "
+"serial port. Open another terminal window, and use ``minicom`` to connect "
+"the second serial port."
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:101
+msgid "$ minicom -D unix\\#serial1.sock"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:105
+msgid ""
+"HSS output is on the first serial port (stdio) and U-Boot outputs on the "
+"second serial port. U-Boot will automatically load the Linux kernel from the "
+"SD card image."
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:110
+msgid "Direct Kernel Boot"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:112
+msgid ""
+"Sometimes we just want to test booting a new kernel, and transforming the "
+"kernel image to the format required by the HSS bootflow is tedious. We can "
+"use '-kernel' for direct kernel booting just like other RISC-V machines do."
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:116
+msgid ""
+"In this mode, the OpenSBI fw_dynamic BIOS image for 'generic' platform is "
+"used to boot an S-mode payload like U-Boot or OS kernel directly."
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:119
+msgid ""
+"For example, the following commands show building a U-Boot image from U-Boot "
+"mainline v2021.07 for the Microchip Icicle Kit board:"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:122
+msgid ""
+"$ export CROSS_COMPILE=riscv64-linux-\n"
+"$ make microchip_mpfs_icicle_defconfig"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:129
+msgid ""
+"$ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \\\n"
+"    -sd path/to/sdcard.img \\\n"
+"    -nic user,model=cadence_gem \\\n"
+"    -nic tap,ifname=tap,model=cadence_gem,script=no \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel path/to/u-boot/build/dir/u-boot.bin \\\n"
+"    -dtb path/to/u-boot/build/dir/u-boot.dtb"
+msgstr ""
+"$ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \\\n"
+"    -sd path/to/sdcard.img \\\n"
+"    -nic user,model=cadence_gem \\\n"
+"    -nic tap,ifname=tap,model=cadence_gem,script=no \\\n"
+"    -display none -serial stdio \\\n"
+"    -kernel path/to/u-boot/build/dir/u-boot.bin \\\n"
+"    -dtb path/to/u-boot/build/dir/u-boot.dtb"
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:139
+msgid "CAVEATS:"
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:141
+msgid ""
+"Check the \"stdout-path\" property in the /chosen node in the DTB to "
+"determine which serial port is used for the serial console, e.g.: if the "
+"console is set to the second serial port, change to use \"-serial null -"
+"serial stdio\"."
+msgstr ""
+
+#: ../../../system/riscv/microchip-icicle-kit.rst:144
+msgid ""
+"The default U-Boot configuration uses CONFIG_OF_SEPARATE hence the ELF image "
+"``u-boot`` cannot be passed to \"-kernel\" as it does not contain the DTB "
+"hence ``u-boot.bin`` has to be used which does contain one. To use the ELF "
+"image, we need to change to CONFIG_OF_EMBED or CONFIG_OF_PRIOR_STAGE."
+msgstr ""
