@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2025-12-22 08:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,7 +138,7 @@ msgid ""
 "from the ``ioctl()`` will have a name derived from the ``ioctl()`` command "
 "name.  E.g., the ``VFIO_DEVICE_GET_INFO`` ``ioctl()`` command becomes a "
 "``VFIO_USER_DEVICE_GET_INFO`` message.  The purpose of this reuse is to "
-"share as much code as feasible with the ``ioctl()`` implementation``."
+"share as much code as feasible with the ``ioctl()`` implementation."
 msgstr ""
 
 #: ../../../interop/vfio-user.rst:82
@@ -346,19 +346,46 @@ msgstr ""
 
 #: ../../../interop/vfio-user.rst:204
 msgid ""
-"The current protocol specification requires a dedicated socket per client/"
-"server connection. It is a server-side implementation detail whether a "
-"single server handles multiple virtual devices from the same or multiple "
-"clients. The location of the socket is implementation-specific. Multiplexing "
-"clients, devices, and servers over the same socket is not supported in this "
-"version of the protocol."
+"The current protocol specification requires dedicated sockets per client/"
+"server connection. Commands in the client-to-server direction are handled on "
+"the main communication socket which the client connects to, and replies to "
+"these commands are passed on the same socket. Commands sent in the other "
+"direction from the server to the client as well as their corresponding "
+"replies can optionally be passed across a separate socket, which is set up "
+"during negotiation (AF_UNIX servers just pass the file descriptor)."
 msgstr ""
 
 #: ../../../interop/vfio-user.rst:212
+msgid ""
+"Using separate sockets for each command channel avoids introducing an "
+"artificial point of synchronization between the channels. This simplifies "
+"implementations since it obviates the need to demultiplex incoming messages "
+"into commands and replies and interleave command handling and reply "
+"processing. Note that it is still illegal for implementations to stall "
+"command or reply processing indefinitely while waiting for replies on the "
+"other channel, as this may lead to deadlocks. However, since incoming "
+"commands and requests arrive on different sockets, it's possible to meet "
+"this requirement e.g. by running two independent request processing threads "
+"that can internally operate synchronously. It is expected that this is "
+"simpler to implement than fully asynchronous message handling code. "
+"Implementations may still choose a fully asynchronous, event-based design "
+"for other reasons, and the protocol fully supports it."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:226
+msgid ""
+"It is a server-side implementation detail whether a single server handles "
+"multiple virtual devices from the same or multiple clients. The location of "
+"the socket is implementation-specific. Multiplexing clients, devices, and "
+"servers over the same socket is not supported in this version of the "
+"protocol."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:232
 msgid "Authentication"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:214
+#: ../../../interop/vfio-user.rst:234
 msgid ""
 "For ``AF_UNIX``, we rely on OS mandatory access controls on the socket "
 "files, therefore it is up to the management layer to set up the socket as "
@@ -367,11 +394,11 @@ msgid ""
 "version of the protocol."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:221
+#: ../../../interop/vfio-user.rst:241
 msgid "Command Concurrency"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:223
+#: ../../../interop/vfio-user.rst:243
 msgid ""
 "A client may pipeline multiple commands without waiting for previous command "
 "replies.  The server will process commands in the order they are received.  "
@@ -384,20 +411,20 @@ msgid ""
 "client must ensure these accesses obey device semantics."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:233
+#: ../../../interop/vfio-user.rst:253
 msgid ""
 "An example is a frame buffer device, where the device may allow concurrent "
 "access to different areas of video memory, but may have indeterminate "
 "behavior if concurrent accesses are performed to command or status registers."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:237
+#: ../../../interop/vfio-user.rst:257
 msgid ""
 "Note that unrelated messages sent from the server to the client can appear "
 "in between a client to server request/reply and vice versa."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:240
+#: ../../../interop/vfio-user.rst:260
 msgid ""
 "Implementers should be prepared for certain commands to exhibit potentially "
 "unbounded latencies.  For example, ``VFIO_USER_DEVICE_RESET`` may take an "
@@ -405,36 +432,36 @@ msgid ""
 "unnecessarily."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:246
+#: ../../../interop/vfio-user.rst:266
 msgid "Socket Disconnection Behavior"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:247
+#: ../../../interop/vfio-user.rst:267
 msgid ""
 "The server and the client can disconnect from each other, either "
 "intentionally or unexpectedly. Both the client and the server need to know "
 "how to handle such events."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:252
+#: ../../../interop/vfio-user.rst:272
 msgid "Server Disconnection"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:253
+#: ../../../interop/vfio-user.rst:273
 msgid "A server disconnecting from the client may indicate that:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:255
+#: ../../../interop/vfio-user.rst:275
 msgid ""
 "A virtual device has been restarted, either intentionally (e.g. because of a "
 "device update) or unintentionally (e.g. because of a crash)."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:257
+#: ../../../interop/vfio-user.rst:277
 msgid "A virtual device has been shut down with no intention to be restarted."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:259
+#: ../../../interop/vfio-user.rst:279
 msgid ""
 "It is impossible for the client to know whether or not a failure is "
 "intermittent or innocuous and should be retried, therefore the client should "
@@ -442,11 +469,11 @@ msgid ""
 "Error recovery will be driven by the guest's device error handling behavior."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:266
+#: ../../../interop/vfio-user.rst:286
 msgid "Client Disconnection"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:267
+#: ../../../interop/vfio-user.rst:287
 msgid ""
 "The client disconnecting from the server primarily means that the client has "
 "exited. Currently, this means that the guest is shut down so the device is "
@@ -454,53 +481,53 @@ msgid ""
 "can be cases where a client disconnection should not result in a server exit:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:272
+#: ../../../interop/vfio-user.rst:292
 msgid "A single server serving multiple clients."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:273
+#: ../../../interop/vfio-user.rst:293
 msgid ""
 "A multi-process QEMU upgrading itself step by step, which is not yet "
 "implemented."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:276
+#: ../../../interop/vfio-user.rst:296
 msgid ""
 "Therefore in order for the protocol to be forward compatible, the server "
 "should respond to a client disconnection as follows:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:279
+#: ../../../interop/vfio-user.rst:299
 msgid ""
 "all client memory regions are unmapped and cleaned up (including closing any "
 "passed file descriptors)"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:281
+#: ../../../interop/vfio-user.rst:301
 msgid "all IRQ file descriptors passed from the old client are closed"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:282
+#: ../../../interop/vfio-user.rst:302
 msgid "the device state should otherwise be retained"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:284
+#: ../../../interop/vfio-user.rst:304
 msgid ""
 "The expectation is that when a client reconnects, it will re-establish IRQ "
 "and client memory mappings."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:287
+#: ../../../interop/vfio-user.rst:307
 msgid ""
 "If anything happens to the client (such as qemu really did exit), the "
 "control stack will know about it and can clean up resources accordingly."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:291
+#: ../../../interop/vfio-user.rst:311
 msgid "Security Considerations"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:293
+#: ../../../interop/vfio-user.rst:313
 msgid ""
 "Speaking generally, vfio-user clients should not trust servers, and vice "
 "versa. Standard tools and mechanisms should be used on both sides to "
@@ -508,11 +535,11 @@ msgid ""
 "overflow, etc."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:298
+#: ../../../interop/vfio-user.rst:318
 msgid "Request Retry and Response Timeout"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:299
+#: ../../../interop/vfio-user.rst:319
 msgid ""
 "A failed command is a command that has been successfully sent and has been "
 "responded to with an error code. Failure to send the command in the first "
@@ -520,24 +547,24 @@ msgid ""
 "examined earlier in the disconnect section."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:305
+#: ../../../interop/vfio-user.rst:325
 msgid ""
 "QEMU's VFIO retries certain operations if they fail. While this makes sense "
 "for real HW, we don't know for sure whether it makes sense for virtual "
 "devices."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:309
+#: ../../../interop/vfio-user.rst:329
 msgid ""
 "Defining a retry and timeout scheme is deferred to a future version of the "
 "protocol."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:313
+#: ../../../interop/vfio-user.rst:333
 msgid "Message sizes"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:315
+#: ../../../interop/vfio-user.rst:335
 msgid ""
 "Some requests have an ``argsz`` field. In a request, it defines the maximum "
 "expected reply payload size, which should be at least the size of the fixed "
@@ -545,7 +572,7 @@ msgid ""
 "the usual ``msg_size`` field in the header, not the ``argsz`` field."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:320
+#: ../../../interop/vfio-user.rst:340
 msgid ""
 "In a reply, the server sets ``argsz`` field to the size needed for a full "
 "payload size. This may be less than the requested maximum size. This may be "
@@ -555,7 +582,7 @@ msgid ""
 "the reply before trying again."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:327
+#: ../../../interop/vfio-user.rst:347
 msgid ""
 "In addition, during negotiation (see  `Version`_), the client and server may "
 "each specify a ``max_data_xfer_size`` value; this defines the maximum data "
@@ -563,11 +590,11 @@ msgid ""
 "WRITE`` messages; see `Read and Write Operations`_."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:333
+#: ../../../interop/vfio-user.rst:353
 msgid "Protocol Specification"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:335
+#: ../../../interop/vfio-user.rst:355
 msgid ""
 "To distinguish from the base VFIO symbols, all vfio-user symbols are "
 "prefixed with ``vfio_user`` or ``VFIO_USER``. In this revision, all data is "
@@ -576,382 +603,449 @@ msgid ""
 "different endianness."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:341
+#: ../../../interop/vfio-user.rst:361
 msgid ""
 "Unless otherwise specified, all sizes should be presumed to be in bytes."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:346
+#: ../../../interop/vfio-user.rst:366
 msgid "Commands"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:347
+#: ../../../interop/vfio-user.rst:367
 msgid ""
 "The following table lists the VFIO message command IDs, and whether the "
 "message command is sent from the client or the server."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:351 ../../../interop/vfio-user.rst:377
-#: ../../../interop/vfio-user.rst:470 ../../../interop/vfio-user.rst:481
-#: ../../../interop/vfio-user.rst:490 ../../../interop/vfio-user.rst:519
-#: ../../../interop/vfio-user.rst:550 ../../../interop/vfio-user.rst:617
-#: ../../../interop/vfio-user.rst:656 ../../../interop/vfio-user.rst:682
-#: ../../../interop/vfio-user.rst:725 ../../../interop/vfio-user.rst:749
-#: ../../../interop/vfio-user.rst:814 ../../../interop/vfio-user.rst:832
-#: ../../../interop/vfio-user.rst:852 ../../../interop/vfio-user.rst:902
-#: ../../../interop/vfio-user.rst:924 ../../../interop/vfio-user.rst:962
-#: ../../../interop/vfio-user.rst:1001 ../../../interop/vfio-user.rst:1050
-#: ../../../interop/vfio-user.rst:1081 ../../../interop/vfio-user.rst:1131
-#: ../../../interop/vfio-user.rst:1257 ../../../interop/vfio-user.rst:1274
-#: ../../../interop/vfio-user.rst:1301 ../../../interop/vfio-user.rst:1321
-#: ../../../interop/vfio-user.rst:1344 ../../../interop/vfio-user.rst:1359
-#: ../../../interop/vfio-user.rst:1382 ../../../interop/vfio-user.rst:1400
-#: ../../../interop/vfio-user.rst:1427 ../../../interop/vfio-user.rst:1441
-#: ../../../interop/vfio-user.rst:1462
+#: ../../../interop/vfio-user.rst:371 ../../../interop/vfio-user.rst:400
+#: ../../../interop/vfio-user.rst:493 ../../../interop/vfio-user.rst:504
+#: ../../../interop/vfio-user.rst:513 ../../../interop/vfio-user.rst:543
+#: ../../../interop/vfio-user.rst:608 ../../../interop/vfio-user.rst:675
+#: ../../../interop/vfio-user.rst:714 ../../../interop/vfio-user.rst:740
+#: ../../../interop/vfio-user.rst:783 ../../../interop/vfio-user.rst:807
+#: ../../../interop/vfio-user.rst:872 ../../../interop/vfio-user.rst:890
+#: ../../../interop/vfio-user.rst:910 ../../../interop/vfio-user.rst:960
+#: ../../../interop/vfio-user.rst:982 ../../../interop/vfio-user.rst:1020
+#: ../../../interop/vfio-user.rst:1059 ../../../interop/vfio-user.rst:1108
+#: ../../../interop/vfio-user.rst:1139 ../../../interop/vfio-user.rst:1189
+#: ../../../interop/vfio-user.rst:1315 ../../../interop/vfio-user.rst:1332
+#: ../../../interop/vfio-user.rst:1359 ../../../interop/vfio-user.rst:1379
+#: ../../../interop/vfio-user.rst:1404 ../../../interop/vfio-user.rst:1419
+#: ../../../interop/vfio-user.rst:1444 ../../../interop/vfio-user.rst:1462
+#: ../../../interop/vfio-user.rst:1489 ../../../interop/vfio-user.rst:1503
+#: ../../../interop/vfio-user.rst:1524 ../../../interop/vfio-user.rst:1543
+#: ../../../interop/vfio-user.rst:1605 ../../../interop/vfio-user.rst:1632
+#: ../../../interop/vfio-user.rst:1660 ../../../interop/vfio-user.rst:1673
+#: ../../../interop/vfio-user.rst:1765 ../../../interop/vfio-user.rst:1788
+#: ../../../interop/vfio-user.rst:1811 ../../../interop/vfio-user.rst:1860
+#: ../../../interop/vfio-user.rst:1877 ../../../interop/vfio-user.rst:1908
 msgid "Name"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:351 ../../../interop/vfio-user.rst:381
+#: ../../../interop/vfio-user.rst:371 ../../../interop/vfio-user.rst:404
 msgid "Command"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:351
+#: ../../../interop/vfio-user.rst:371
 msgid "Request Direction"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:353 ../../../interop/vfio-user.rst:437
+#: ../../../interop/vfio-user.rst:373 ../../../interop/vfio-user.rst:460
 msgid "``VFIO_USER_VERSION``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:353 ../../../interop/vfio-user.rst:561
-#: ../../../interop/vfio-user.rst:667 ../../../interop/vfio-user.rst:693
-#: ../../../interop/vfio-user.rst:760 ../../../interop/vfio-user.rst:1061
-#: ../../../interop/vfio-user.rst:1092 ../../../interop/vfio-user.rst:1142
+#: ../../../interop/vfio-user.rst:373 ../../../interop/vfio-user.rst:619
+#: ../../../interop/vfio-user.rst:725 ../../../interop/vfio-user.rst:751
+#: ../../../interop/vfio-user.rst:818 ../../../interop/vfio-user.rst:1119
+#: ../../../interop/vfio-user.rst:1150 ../../../interop/vfio-user.rst:1200
+#: ../../../interop/vfio-user.rst:1607 ../../../interop/vfio-user.rst:1641
+#: ../../../interop/vfio-user.rst:1677
 msgid "1"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:353 ../../../interop/vfio-user.rst:354
-#: ../../../interop/vfio-user.rst:355 ../../../interop/vfio-user.rst:356
-#: ../../../interop/vfio-user.rst:357 ../../../interop/vfio-user.rst:358
-#: ../../../interop/vfio-user.rst:359 ../../../interop/vfio-user.rst:360
-#: ../../../interop/vfio-user.rst:361 ../../../interop/vfio-user.rst:362
-#: ../../../interop/vfio-user.rst:365 ../../../interop/vfio-user.rst:366
+#: ../../../interop/vfio-user.rst:373 ../../../interop/vfio-user.rst:374
+#: ../../../interop/vfio-user.rst:375 ../../../interop/vfio-user.rst:376
+#: ../../../interop/vfio-user.rst:377 ../../../interop/vfio-user.rst:378
+#: ../../../interop/vfio-user.rst:379 ../../../interop/vfio-user.rst:380
+#: ../../../interop/vfio-user.rst:381 ../../../interop/vfio-user.rst:382
+#: ../../../interop/vfio-user.rst:385 ../../../interop/vfio-user.rst:386
+#: ../../../interop/vfio-user.rst:387 ../../../interop/vfio-user.rst:388
+#: ../../../interop/vfio-user.rst:389
 msgid "client -> server"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:354 ../../../interop/vfio-user.rst:536
+#: ../../../interop/vfio-user.rst:374 ../../../interop/vfio-user.rst:594
 msgid "``VFIO_USER_DMA_MAP``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:354 ../../../interop/vfio-user.rst:379
-#: ../../../interop/vfio-user.rst:381 ../../../interop/vfio-user.rst:472
-#: ../../../interop/vfio-user.rst:473 ../../../interop/vfio-user.rst:762
-#: ../../../interop/vfio-user.rst:816 ../../../interop/vfio-user.rst:818
-#: ../../../interop/vfio-user.rst:1063 ../../../interop/vfio-user.rst:1094
-#: ../../../interop/vfio-user.rst:1144
+#: ../../../interop/vfio-user.rst:374 ../../../interop/vfio-user.rst:402
+#: ../../../interop/vfio-user.rst:404 ../../../interop/vfio-user.rst:495
+#: ../../../interop/vfio-user.rst:496 ../../../interop/vfio-user.rst:820
+#: ../../../interop/vfio-user.rst:874 ../../../interop/vfio-user.rst:876
+#: ../../../interop/vfio-user.rst:1121 ../../../interop/vfio-user.rst:1152
+#: ../../../interop/vfio-user.rst:1202 ../../../interop/vfio-user.rst:1609
+#: ../../../interop/vfio-user.rst:1643 ../../../interop/vfio-user.rst:1679
 msgid "2"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:355 ../../../interop/vfio-user.rst:603
+#: ../../../interop/vfio-user.rst:375 ../../../interop/vfio-user.rst:661
 msgid "``VFIO_USER_DMA_UNMAP``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:355 ../../../interop/vfio-user.rst:764
-#: ../../../interop/vfio-user.rst:1065 ../../../interop/vfio-user.rst:1096
-#: ../../../interop/vfio-user.rst:1146
+#: ../../../interop/vfio-user.rst:375 ../../../interop/vfio-user.rst:822
+#: ../../../interop/vfio-user.rst:1123 ../../../interop/vfio-user.rst:1154
+#: ../../../interop/vfio-user.rst:1204 ../../../interop/vfio-user.rst:1681
 msgid "3"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:356 ../../../interop/vfio-user.rst:647
+#: ../../../interop/vfio-user.rst:376 ../../../interop/vfio-user.rst:705
 msgid "``VFIO_USER_DEVICE_GET_INFO``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:356 ../../../interop/vfio-user.rst:383
-#: ../../../interop/vfio-user.rst:385 ../../../interop/vfio-user.rst:392
-#: ../../../interop/vfio-user.rst:397 ../../../interop/vfio-user.rst:474
-#: ../../../interop/vfio-user.rst:552 ../../../interop/vfio-user.rst:554
-#: ../../../interop/vfio-user.rst:619 ../../../interop/vfio-user.rst:621
-#: ../../../interop/vfio-user.rst:658 ../../../interop/vfio-user.rst:660
-#: ../../../interop/vfio-user.rst:670 ../../../interop/vfio-user.rst:672
-#: ../../../interop/vfio-user.rst:684 ../../../interop/vfio-user.rst:686
-#: ../../../interop/vfio-user.rst:696 ../../../interop/vfio-user.rst:698
-#: ../../../interop/vfio-user.rst:727 ../../../interop/vfio-user.rst:729
-#: ../../../interop/vfio-user.rst:731 ../../../interop/vfio-user.rst:733
-#: ../../../interop/vfio-user.rst:751 ../../../interop/vfio-user.rst:753
-#: ../../../interop/vfio-user.rst:768 ../../../interop/vfio-user.rst:770
-#: ../../../interop/vfio-user.rst:820 ../../../interop/vfio-user.rst:854
-#: ../../../interop/vfio-user.rst:856 ../../../interop/vfio-user.rst:904
-#: ../../../interop/vfio-user.rst:906 ../../../interop/vfio-user.rst:908
-#: ../../../interop/vfio-user.rst:910 ../../../interop/vfio-user.rst:926
-#: ../../../interop/vfio-user.rst:928 ../../../interop/vfio-user.rst:930
-#: ../../../interop/vfio-user.rst:932 ../../../interop/vfio-user.rst:968
-#: ../../../interop/vfio-user.rst:970 ../../../interop/vfio-user.rst:972
-#: ../../../interop/vfio-user.rst:974 ../../../interop/vfio-user.rst:1007
-#: ../../../interop/vfio-user.rst:1009 ../../../interop/vfio-user.rst:1011
-#: ../../../interop/vfio-user.rst:1013 ../../../interop/vfio-user.rst:1052
-#: ../../../interop/vfio-user.rst:1054 ../../../interop/vfio-user.rst:1068
-#: ../../../interop/vfio-user.rst:1070 ../../../interop/vfio-user.rst:1083
-#: ../../../interop/vfio-user.rst:1085 ../../../interop/vfio-user.rst:1099
-#: ../../../interop/vfio-user.rst:1101 ../../../interop/vfio-user.rst:1133
-#: ../../../interop/vfio-user.rst:1135 ../../../interop/vfio-user.rst:1148
-#: ../../../interop/vfio-user.rst:1153 ../../../interop/vfio-user.rst:1155
-#: ../../../interop/vfio-user.rst:1157 ../../../interop/vfio-user.rst:1261
-#: ../../../interop/vfio-user.rst:1263 ../../../interop/vfio-user.rst:1278
-#: ../../../interop/vfio-user.rst:1280 ../../../interop/vfio-user.rst:1305
-#: ../../../interop/vfio-user.rst:1307 ../../../interop/vfio-user.rst:1325
-#: ../../../interop/vfio-user.rst:1327 ../../../interop/vfio-user.rst:1404
-#: ../../../interop/vfio-user.rst:1445 ../../../interop/vfio-user.rst:1447
+#: ../../../interop/vfio-user.rst:376 ../../../interop/vfio-user.rst:406
+#: ../../../interop/vfio-user.rst:408 ../../../interop/vfio-user.rst:415
+#: ../../../interop/vfio-user.rst:420 ../../../interop/vfio-user.rst:497
+#: ../../../interop/vfio-user.rst:610 ../../../interop/vfio-user.rst:612
+#: ../../../interop/vfio-user.rst:677 ../../../interop/vfio-user.rst:679
+#: ../../../interop/vfio-user.rst:716 ../../../interop/vfio-user.rst:718
+#: ../../../interop/vfio-user.rst:728 ../../../interop/vfio-user.rst:730
+#: ../../../interop/vfio-user.rst:742 ../../../interop/vfio-user.rst:744
+#: ../../../interop/vfio-user.rst:754 ../../../interop/vfio-user.rst:756
+#: ../../../interop/vfio-user.rst:785 ../../../interop/vfio-user.rst:787
+#: ../../../interop/vfio-user.rst:789 ../../../interop/vfio-user.rst:791
+#: ../../../interop/vfio-user.rst:809 ../../../interop/vfio-user.rst:811
+#: ../../../interop/vfio-user.rst:826 ../../../interop/vfio-user.rst:828
+#: ../../../interop/vfio-user.rst:878 ../../../interop/vfio-user.rst:912
+#: ../../../interop/vfio-user.rst:914 ../../../interop/vfio-user.rst:962
+#: ../../../interop/vfio-user.rst:964 ../../../interop/vfio-user.rst:966
+#: ../../../interop/vfio-user.rst:968 ../../../interop/vfio-user.rst:984
+#: ../../../interop/vfio-user.rst:986 ../../../interop/vfio-user.rst:988
+#: ../../../interop/vfio-user.rst:990 ../../../interop/vfio-user.rst:1026
+#: ../../../interop/vfio-user.rst:1028 ../../../interop/vfio-user.rst:1030
+#: ../../../interop/vfio-user.rst:1032 ../../../interop/vfio-user.rst:1065
+#: ../../../interop/vfio-user.rst:1067 ../../../interop/vfio-user.rst:1069
+#: ../../../interop/vfio-user.rst:1071 ../../../interop/vfio-user.rst:1110
+#: ../../../interop/vfio-user.rst:1112 ../../../interop/vfio-user.rst:1126
+#: ../../../interop/vfio-user.rst:1128 ../../../interop/vfio-user.rst:1141
+#: ../../../interop/vfio-user.rst:1143 ../../../interop/vfio-user.rst:1157
+#: ../../../interop/vfio-user.rst:1159 ../../../interop/vfio-user.rst:1191
+#: ../../../interop/vfio-user.rst:1193 ../../../interop/vfio-user.rst:1206
+#: ../../../interop/vfio-user.rst:1211 ../../../interop/vfio-user.rst:1213
+#: ../../../interop/vfio-user.rst:1215 ../../../interop/vfio-user.rst:1319
+#: ../../../interop/vfio-user.rst:1321 ../../../interop/vfio-user.rst:1336
+#: ../../../interop/vfio-user.rst:1338 ../../../interop/vfio-user.rst:1363
+#: ../../../interop/vfio-user.rst:1365 ../../../interop/vfio-user.rst:1383
+#: ../../../interop/vfio-user.rst:1385 ../../../interop/vfio-user.rst:1466
+#: ../../../interop/vfio-user.rst:1507 ../../../interop/vfio-user.rst:1509
+#: ../../../interop/vfio-user.rst:1545 ../../../interop/vfio-user.rst:1547
+#: ../../../interop/vfio-user.rst:1662 ../../../interop/vfio-user.rst:1664
+#: ../../../interop/vfio-user.rst:1683 ../../../interop/vfio-user.rst:1769
+#: ../../../interop/vfio-user.rst:1771 ../../../interop/vfio-user.rst:1862
+#: ../../../interop/vfio-user.rst:1864 ../../../interop/vfio-user.rst:1879
+#: ../../../interop/vfio-user.rst:1881 ../../../interop/vfio-user.rst:1910
+#: ../../../interop/vfio-user.rst:1912
 msgid "4"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:357 ../../../interop/vfio-user.rst:715
+#: ../../../interop/vfio-user.rst:377 ../../../interop/vfio-user.rst:773
 msgid "``VFIO_USER_DEVICE_GET_REGION_INFO``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:357 ../../../interop/vfio-user.rst:394
-#: ../../../interop/vfio-user.rst:1150
+#: ../../../interop/vfio-user.rst:377 ../../../interop/vfio-user.rst:417
+#: ../../../interop/vfio-user.rst:1208 ../../../interop/vfio-user.rst:1685
 msgid "5"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:358 ../../../interop/vfio-user.rst:876
+#: ../../../interop/vfio-user.rst:378 ../../../interop/vfio-user.rst:934
 msgid "``VFIO_USER_DEVICE_GET_REGION_IO_FDS``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:358
+#: ../../../interop/vfio-user.rst:378 ../../../interop/vfio-user.rst:1611
+#: ../../../interop/vfio-user.rst:1687
 msgid "6"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:359 ../../../interop/vfio-user.rst:1040
+#: ../../../interop/vfio-user.rst:379 ../../../interop/vfio-user.rst:1098
 msgid "``VFIO_USER_DEVICE_GET_IRQ_INFO``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:359
+#: ../../../interop/vfio-user.rst:379 ../../../interop/vfio-user.rst:1613
+#: ../../../interop/vfio-user.rst:1689
 msgid "7"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:360 ../../../interop/vfio-user.rst:1121
+#: ../../../interop/vfio-user.rst:380 ../../../interop/vfio-user.rst:1179
 msgid "``VFIO_USER_DEVICE_SET_IRQS``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:360 ../../../interop/vfio-user.rst:385
-#: ../../../interop/vfio-user.rst:564 ../../../interop/vfio-user.rst:566
-#: ../../../interop/vfio-user.rst:568 ../../../interop/vfio-user.rst:623
-#: ../../../interop/vfio-user.rst:625 ../../../interop/vfio-user.rst:670
-#: ../../../interop/vfio-user.rst:696 ../../../interop/vfio-user.rst:731
-#: ../../../interop/vfio-user.rst:735 ../../../interop/vfio-user.rst:737
-#: ../../../interop/vfio-user.rst:768 ../../../interop/vfio-user.rst:772
-#: ../../../interop/vfio-user.rst:774 ../../../interop/vfio-user.rst:858
-#: ../../../interop/vfio-user.rst:860 ../../../interop/vfio-user.rst:908
-#: ../../../interop/vfio-user.rst:930 ../../../interop/vfio-user.rst:964
-#: ../../../interop/vfio-user.rst:966 ../../../interop/vfio-user.rst:976
-#: ../../../interop/vfio-user.rst:1003 ../../../interop/vfio-user.rst:1005
-#: ../../../interop/vfio-user.rst:1015 ../../../interop/vfio-user.rst:1068
-#: ../../../interop/vfio-user.rst:1099 ../../../interop/vfio-user.rst:1153
-#: ../../../interop/vfio-user.rst:1259 ../../../interop/vfio-user.rst:1261
-#: ../../../interop/vfio-user.rst:1276 ../../../interop/vfio-user.rst:1278
-#: ../../../interop/vfio-user.rst:1303 ../../../interop/vfio-user.rst:1305
-#: ../../../interop/vfio-user.rst:1323 ../../../interop/vfio-user.rst:1325
-#: ../../../interop/vfio-user.rst:1346 ../../../interop/vfio-user.rst:1348
+#: ../../../interop/vfio-user.rst:380 ../../../interop/vfio-user.rst:408
+#: ../../../interop/vfio-user.rst:622 ../../../interop/vfio-user.rst:624
+#: ../../../interop/vfio-user.rst:626 ../../../interop/vfio-user.rst:681
+#: ../../../interop/vfio-user.rst:683 ../../../interop/vfio-user.rst:728
+#: ../../../interop/vfio-user.rst:754 ../../../interop/vfio-user.rst:789
+#: ../../../interop/vfio-user.rst:793 ../../../interop/vfio-user.rst:795
+#: ../../../interop/vfio-user.rst:826 ../../../interop/vfio-user.rst:830
+#: ../../../interop/vfio-user.rst:832 ../../../interop/vfio-user.rst:916
+#: ../../../interop/vfio-user.rst:918 ../../../interop/vfio-user.rst:966
+#: ../../../interop/vfio-user.rst:988 ../../../interop/vfio-user.rst:1022
+#: ../../../interop/vfio-user.rst:1024 ../../../interop/vfio-user.rst:1034
+#: ../../../interop/vfio-user.rst:1061 ../../../interop/vfio-user.rst:1063
+#: ../../../interop/vfio-user.rst:1073 ../../../interop/vfio-user.rst:1126
+#: ../../../interop/vfio-user.rst:1157 ../../../interop/vfio-user.rst:1211
+#: ../../../interop/vfio-user.rst:1317 ../../../interop/vfio-user.rst:1319
+#: ../../../interop/vfio-user.rst:1334 ../../../interop/vfio-user.rst:1336
 #: ../../../interop/vfio-user.rst:1361 ../../../interop/vfio-user.rst:1363
-#: ../../../interop/vfio-user.rst:1384 ../../../interop/vfio-user.rst:1386
-#: ../../../interop/vfio-user.rst:1402 ../../../interop/vfio-user.rst:1404
-#: ../../../interop/vfio-user.rst:1429 ../../../interop/vfio-user.rst:1431
-#: ../../../interop/vfio-user.rst:1443 ../../../interop/vfio-user.rst:1445
-#: ../../../interop/vfio-user.rst:1449 ../../../interop/vfio-user.rst:1464
+#: ../../../interop/vfio-user.rst:1381 ../../../interop/vfio-user.rst:1383
+#: ../../../interop/vfio-user.rst:1406 ../../../interop/vfio-user.rst:1408
+#: ../../../interop/vfio-user.rst:1421 ../../../interop/vfio-user.rst:1423
+#: ../../../interop/vfio-user.rst:1446 ../../../interop/vfio-user.rst:1448
+#: ../../../interop/vfio-user.rst:1464 ../../../interop/vfio-user.rst:1466
+#: ../../../interop/vfio-user.rst:1491 ../../../interop/vfio-user.rst:1493
+#: ../../../interop/vfio-user.rst:1505 ../../../interop/vfio-user.rst:1507
+#: ../../../interop/vfio-user.rst:1511 ../../../interop/vfio-user.rst:1526
+#: ../../../interop/vfio-user.rst:1561 ../../../interop/vfio-user.rst:1615
+#: ../../../interop/vfio-user.rst:1634 ../../../interop/vfio-user.rst:1767
+#: ../../../interop/vfio-user.rst:1769 ../../../interop/vfio-user.rst:1790
+#: ../../../interop/vfio-user.rst:1792 ../../../interop/vfio-user.rst:1813
+#: ../../../interop/vfio-user.rst:1815 ../../../interop/vfio-user.rst:1817
+#: ../../../interop/vfio-user.rst:1883 ../../../interop/vfio-user.rst:1914
 msgid "8"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:361 ../../../interop/vfio-user.rst:1247
+#: ../../../interop/vfio-user.rst:381 ../../../interop/vfio-user.rst:1305
 msgid "``VFIO_USER_REGION_READ``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:361
+#: ../../../interop/vfio-user.rst:381
 msgid "9"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:362 ../../../interop/vfio-user.rst:1291
+#: ../../../interop/vfio-user.rst:382 ../../../interop/vfio-user.rst:1349
 msgid "``VFIO_USER_REGION_WRITE``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:362
+#: ../../../interop/vfio-user.rst:382
 msgid "10"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:363 ../../../interop/vfio-user.rst:1335
+#: ../../../interop/vfio-user.rst:383 ../../../interop/vfio-user.rst:1393
 msgid "``VFIO_USER_DMA_READ``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:363
+#: ../../../interop/vfio-user.rst:383
 msgid "11"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:363 ../../../interop/vfio-user.rst:364
+#: ../../../interop/vfio-user.rst:383 ../../../interop/vfio-user.rst:384
 msgid "server -> client"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:364 ../../../interop/vfio-user.rst:1373
+#: ../../../interop/vfio-user.rst:384 ../../../interop/vfio-user.rst:1433
 msgid "``VFIO_USER_DMA_WRITE``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:364 ../../../interop/vfio-user.rst:397
-#: ../../../interop/vfio-user.rst:672 ../../../interop/vfio-user.rst:698
-#: ../../../interop/vfio-user.rst:733 ../../../interop/vfio-user.rst:770
-#: ../../../interop/vfio-user.rst:910 ../../../interop/vfio-user.rst:932
-#: ../../../interop/vfio-user.rst:1070 ../../../interop/vfio-user.rst:1101
-#: ../../../interop/vfio-user.rst:1155 ../../../interop/vfio-user.rst:1263
-#: ../../../interop/vfio-user.rst:1280 ../../../interop/vfio-user.rst:1307
-#: ../../../interop/vfio-user.rst:1327 ../../../interop/vfio-user.rst:1447
+#: ../../../interop/vfio-user.rst:384 ../../../interop/vfio-user.rst:420
+#: ../../../interop/vfio-user.rst:730 ../../../interop/vfio-user.rst:756
+#: ../../../interop/vfio-user.rst:791 ../../../interop/vfio-user.rst:828
+#: ../../../interop/vfio-user.rst:968 ../../../interop/vfio-user.rst:990
+#: ../../../interop/vfio-user.rst:1128 ../../../interop/vfio-user.rst:1159
+#: ../../../interop/vfio-user.rst:1213 ../../../interop/vfio-user.rst:1321
+#: ../../../interop/vfio-user.rst:1338 ../../../interop/vfio-user.rst:1365
+#: ../../../interop/vfio-user.rst:1385 ../../../interop/vfio-user.rst:1509
+#: ../../../interop/vfio-user.rst:1771
 msgid "12"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:365 ../../../interop/vfio-user.rst:1411
+#: ../../../interop/vfio-user.rst:385 ../../../interop/vfio-user.rst:1473
 msgid "``VFIO_USER_DEVICE_RESET``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:365
+#: ../../../interop/vfio-user.rst:385
 msgid "13"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:366 ../../../interop/vfio-user.rst:1417
+#: ../../../interop/vfio-user.rst:386 ../../../interop/vfio-user.rst:1479
 msgid "``VFIO_USER_REGION_WRITE_MULTI``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:366
+#: ../../../interop/vfio-user.rst:386
 msgid "15"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:370
+#: ../../../interop/vfio-user.rst:387 ../../../interop/vfio-user.rst:1532
+msgid "``VFIO_USER_DEVICE_FEATURE``"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:387 ../../../interop/vfio-user.rst:422
+#: ../../../interop/vfio-user.rst:624 ../../../interop/vfio-user.rst:683
+#: ../../../interop/vfio-user.rst:793 ../../../interop/vfio-user.rst:830
+#: ../../../interop/vfio-user.rst:918 ../../../interop/vfio-user.rst:992
+#: ../../../interop/vfio-user.rst:1026 ../../../interop/vfio-user.rst:1065
+#: ../../../interop/vfio-user.rst:1215 ../../../interop/vfio-user.rst:1340
+#: ../../../interop/vfio-user.rst:1367 ../../../interop/vfio-user.rst:1425
+#: ../../../interop/vfio-user.rst:1450 ../../../interop/vfio-user.rst:1511
+#: ../../../interop/vfio-user.rst:1554 ../../../interop/vfio-user.rst:1773
+#: ../../../interop/vfio-user.rst:1817
+msgid "16"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:388 ../../../interop/vfio-user.rst:1842
+msgid "``VFIO_USER_MIG_DATA_READ``"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:388 ../../../interop/vfio-user.rst:1556
+msgid "17"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:389 ../../../interop/vfio-user.rst:1894
+msgid "``VFIO_USER_MIG_DATA_WRITE``"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:389 ../../../interop/vfio-user.rst:1558
+msgid "18"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:393
 msgid "Header"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:372
+#: ../../../interop/vfio-user.rst:395
 msgid ""
 "All messages, both command messages and reply messages, are preceded by a 16-"
 "byte header that contains basic information about the message. The header is "
 "followed by message-specific data described in the sections below."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:377 ../../../interop/vfio-user.rst:470
-#: ../../../interop/vfio-user.rst:550 ../../../interop/vfio-user.rst:617
-#: ../../../interop/vfio-user.rst:656 ../../../interop/vfio-user.rst:682
-#: ../../../interop/vfio-user.rst:725 ../../../interop/vfio-user.rst:749
-#: ../../../interop/vfio-user.rst:814 ../../../interop/vfio-user.rst:852
-#: ../../../interop/vfio-user.rst:902 ../../../interop/vfio-user.rst:924
-#: ../../../interop/vfio-user.rst:962 ../../../interop/vfio-user.rst:1001
-#: ../../../interop/vfio-user.rst:1050 ../../../interop/vfio-user.rst:1081
-#: ../../../interop/vfio-user.rst:1131 ../../../interop/vfio-user.rst:1257
-#: ../../../interop/vfio-user.rst:1274 ../../../interop/vfio-user.rst:1301
-#: ../../../interop/vfio-user.rst:1321 ../../../interop/vfio-user.rst:1344
-#: ../../../interop/vfio-user.rst:1359 ../../../interop/vfio-user.rst:1382
-#: ../../../interop/vfio-user.rst:1400 ../../../interop/vfio-user.rst:1427
-#: ../../../interop/vfio-user.rst:1441 ../../../interop/vfio-user.rst:1462
+#: ../../../interop/vfio-user.rst:400 ../../../interop/vfio-user.rst:493
+#: ../../../interop/vfio-user.rst:608 ../../../interop/vfio-user.rst:675
+#: ../../../interop/vfio-user.rst:714 ../../../interop/vfio-user.rst:740
+#: ../../../interop/vfio-user.rst:783 ../../../interop/vfio-user.rst:807
+#: ../../../interop/vfio-user.rst:872 ../../../interop/vfio-user.rst:910
+#: ../../../interop/vfio-user.rst:960 ../../../interop/vfio-user.rst:982
+#: ../../../interop/vfio-user.rst:1020 ../../../interop/vfio-user.rst:1059
+#: ../../../interop/vfio-user.rst:1108 ../../../interop/vfio-user.rst:1139
+#: ../../../interop/vfio-user.rst:1189 ../../../interop/vfio-user.rst:1315
+#: ../../../interop/vfio-user.rst:1332 ../../../interop/vfio-user.rst:1359
+#: ../../../interop/vfio-user.rst:1379 ../../../interop/vfio-user.rst:1404
+#: ../../../interop/vfio-user.rst:1419 ../../../interop/vfio-user.rst:1444
+#: ../../../interop/vfio-user.rst:1462 ../../../interop/vfio-user.rst:1489
+#: ../../../interop/vfio-user.rst:1503 ../../../interop/vfio-user.rst:1524
+#: ../../../interop/vfio-user.rst:1543 ../../../interop/vfio-user.rst:1632
+#: ../../../interop/vfio-user.rst:1660 ../../../interop/vfio-user.rst:1765
+#: ../../../interop/vfio-user.rst:1788 ../../../interop/vfio-user.rst:1811
+#: ../../../interop/vfio-user.rst:1860 ../../../interop/vfio-user.rst:1877
+#: ../../../interop/vfio-user.rst:1908
 msgid "Offset"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:377 ../../../interop/vfio-user.rst:470
-#: ../../../interop/vfio-user.rst:550 ../../../interop/vfio-user.rst:617
-#: ../../../interop/vfio-user.rst:656 ../../../interop/vfio-user.rst:682
-#: ../../../interop/vfio-user.rst:725 ../../../interop/vfio-user.rst:749
-#: ../../../interop/vfio-user.rst:814 ../../../interop/vfio-user.rst:852
-#: ../../../interop/vfio-user.rst:902 ../../../interop/vfio-user.rst:924
-#: ../../../interop/vfio-user.rst:962 ../../../interop/vfio-user.rst:1001
-#: ../../../interop/vfio-user.rst:1050 ../../../interop/vfio-user.rst:1081
-#: ../../../interop/vfio-user.rst:1131 ../../../interop/vfio-user.rst:1257
-#: ../../../interop/vfio-user.rst:1274 ../../../interop/vfio-user.rst:1301
-#: ../../../interop/vfio-user.rst:1321 ../../../interop/vfio-user.rst:1344
-#: ../../../interop/vfio-user.rst:1359 ../../../interop/vfio-user.rst:1382
-#: ../../../interop/vfio-user.rst:1400 ../../../interop/vfio-user.rst:1427
-#: ../../../interop/vfio-user.rst:1441 ../../../interop/vfio-user.rst:1462
+#: ../../../interop/vfio-user.rst:400 ../../../interop/vfio-user.rst:493
+#: ../../../interop/vfio-user.rst:608 ../../../interop/vfio-user.rst:675
+#: ../../../interop/vfio-user.rst:714 ../../../interop/vfio-user.rst:740
+#: ../../../interop/vfio-user.rst:783 ../../../interop/vfio-user.rst:807
+#: ../../../interop/vfio-user.rst:872 ../../../interop/vfio-user.rst:910
+#: ../../../interop/vfio-user.rst:960 ../../../interop/vfio-user.rst:982
+#: ../../../interop/vfio-user.rst:1020 ../../../interop/vfio-user.rst:1059
+#: ../../../interop/vfio-user.rst:1108 ../../../interop/vfio-user.rst:1139
+#: ../../../interop/vfio-user.rst:1189 ../../../interop/vfio-user.rst:1315
+#: ../../../interop/vfio-user.rst:1332 ../../../interop/vfio-user.rst:1359
+#: ../../../interop/vfio-user.rst:1379 ../../../interop/vfio-user.rst:1404
+#: ../../../interop/vfio-user.rst:1419 ../../../interop/vfio-user.rst:1444
+#: ../../../interop/vfio-user.rst:1462 ../../../interop/vfio-user.rst:1489
+#: ../../../interop/vfio-user.rst:1503 ../../../interop/vfio-user.rst:1524
+#: ../../../interop/vfio-user.rst:1543 ../../../interop/vfio-user.rst:1632
+#: ../../../interop/vfio-user.rst:1660 ../../../interop/vfio-user.rst:1765
+#: ../../../interop/vfio-user.rst:1788 ../../../interop/vfio-user.rst:1811
+#: ../../../interop/vfio-user.rst:1860 ../../../interop/vfio-user.rst:1877
+#: ../../../interop/vfio-user.rst:1908
 msgid "Size"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:379
+#: ../../../interop/vfio-user.rst:402
 msgid "Message ID"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:379 ../../../interop/vfio-user.rst:472
-#: ../../../interop/vfio-user.rst:552 ../../../interop/vfio-user.rst:559
-#: ../../../interop/vfio-user.rst:619 ../../../interop/vfio-user.rst:658
-#: ../../../interop/vfio-user.rst:665 ../../../interop/vfio-user.rst:684
-#: ../../../interop/vfio-user.rst:691 ../../../interop/vfio-user.rst:727
-#: ../../../interop/vfio-user.rst:751 ../../../interop/vfio-user.rst:758
-#: ../../../interop/vfio-user.rst:816 ../../../interop/vfio-user.rst:854
-#: ../../../interop/vfio-user.rst:904 ../../../interop/vfio-user.rst:926
-#: ../../../interop/vfio-user.rst:964 ../../../interop/vfio-user.rst:1003
-#: ../../../interop/vfio-user.rst:1052 ../../../interop/vfio-user.rst:1059
-#: ../../../interop/vfio-user.rst:1083 ../../../interop/vfio-user.rst:1090
-#: ../../../interop/vfio-user.rst:1133 ../../../interop/vfio-user.rst:1140
-#: ../../../interop/vfio-user.rst:1259 ../../../interop/vfio-user.rst:1276
-#: ../../../interop/vfio-user.rst:1303 ../../../interop/vfio-user.rst:1323
-#: ../../../interop/vfio-user.rst:1346 ../../../interop/vfio-user.rst:1361
-#: ../../../interop/vfio-user.rst:1384 ../../../interop/vfio-user.rst:1402
-#: ../../../interop/vfio-user.rst:1429 ../../../interop/vfio-user.rst:1443
-#: ../../../interop/vfio-user.rst:1464
+#: ../../../interop/vfio-user.rst:402 ../../../interop/vfio-user.rst:495
+#: ../../../interop/vfio-user.rst:610 ../../../interop/vfio-user.rst:617
+#: ../../../interop/vfio-user.rst:677 ../../../interop/vfio-user.rst:716
+#: ../../../interop/vfio-user.rst:723 ../../../interop/vfio-user.rst:742
+#: ../../../interop/vfio-user.rst:749 ../../../interop/vfio-user.rst:785
+#: ../../../interop/vfio-user.rst:809 ../../../interop/vfio-user.rst:816
+#: ../../../interop/vfio-user.rst:874 ../../../interop/vfio-user.rst:912
+#: ../../../interop/vfio-user.rst:962 ../../../interop/vfio-user.rst:984
+#: ../../../interop/vfio-user.rst:1022 ../../../interop/vfio-user.rst:1061
+#: ../../../interop/vfio-user.rst:1110 ../../../interop/vfio-user.rst:1117
+#: ../../../interop/vfio-user.rst:1141 ../../../interop/vfio-user.rst:1148
+#: ../../../interop/vfio-user.rst:1191 ../../../interop/vfio-user.rst:1198
+#: ../../../interop/vfio-user.rst:1317 ../../../interop/vfio-user.rst:1334
+#: ../../../interop/vfio-user.rst:1361 ../../../interop/vfio-user.rst:1381
+#: ../../../interop/vfio-user.rst:1406 ../../../interop/vfio-user.rst:1421
+#: ../../../interop/vfio-user.rst:1446 ../../../interop/vfio-user.rst:1464
+#: ../../../interop/vfio-user.rst:1491 ../../../interop/vfio-user.rst:1505
+#: ../../../interop/vfio-user.rst:1526 ../../../interop/vfio-user.rst:1545
+#: ../../../interop/vfio-user.rst:1634 ../../../interop/vfio-user.rst:1639
+#: ../../../interop/vfio-user.rst:1662 ../../../interop/vfio-user.rst:1675
+#: ../../../interop/vfio-user.rst:1767 ../../../interop/vfio-user.rst:1790
+#: ../../../interop/vfio-user.rst:1813 ../../../interop/vfio-user.rst:1862
+#: ../../../interop/vfio-user.rst:1879 ../../../interop/vfio-user.rst:1910
 msgid "0"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:383
+#: ../../../interop/vfio-user.rst:406
 msgid "Message size"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:385
+#: ../../../interop/vfio-user.rst:408
 msgid "Flags"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:388 ../../../interop/vfio-user.rst:557
-#: ../../../interop/vfio-user.rst:663 ../../../interop/vfio-user.rst:689
-#: ../../../interop/vfio-user.rst:756 ../../../interop/vfio-user.rst:1057
-#: ../../../interop/vfio-user.rst:1088 ../../../interop/vfio-user.rst:1138
+#: ../../../interop/vfio-user.rst:411 ../../../interop/vfio-user.rst:615
+#: ../../../interop/vfio-user.rst:721 ../../../interop/vfio-user.rst:747
+#: ../../../interop/vfio-user.rst:814 ../../../interop/vfio-user.rst:1115
+#: ../../../interop/vfio-user.rst:1146 ../../../interop/vfio-user.rst:1196
+#: ../../../interop/vfio-user.rst:1550 ../../../interop/vfio-user.rst:1637
 msgid "Bit"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:388 ../../../interop/vfio-user.rst:557
-#: ../../../interop/vfio-user.rst:663 ../../../interop/vfio-user.rst:689
-#: ../../../interop/vfio-user.rst:756 ../../../interop/vfio-user.rst:1057
-#: ../../../interop/vfio-user.rst:1088 ../../../interop/vfio-user.rst:1138
+#: ../../../interop/vfio-user.rst:411 ../../../interop/vfio-user.rst:615
+#: ../../../interop/vfio-user.rst:721 ../../../interop/vfio-user.rst:747
+#: ../../../interop/vfio-user.rst:814 ../../../interop/vfio-user.rst:1115
+#: ../../../interop/vfio-user.rst:1146 ../../../interop/vfio-user.rst:1196
+#: ../../../interop/vfio-user.rst:1550 ../../../interop/vfio-user.rst:1637
 msgid "Definition"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:390
+#: ../../../interop/vfio-user.rst:413
 msgid "0-3"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:390 ../../../interop/vfio-user.rst:481
-#: ../../../interop/vfio-user.rst:490 ../../../interop/vfio-user.rst:519
+#: ../../../interop/vfio-user.rst:413 ../../../interop/vfio-user.rst:504
+#: ../../../interop/vfio-user.rst:513 ../../../interop/vfio-user.rst:543
 msgid "Type"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:392
+#: ../../../interop/vfio-user.rst:415
 msgid "No_reply"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:394 ../../../interop/vfio-user.rst:397
+#: ../../../interop/vfio-user.rst:417 ../../../interop/vfio-user.rst:420
 msgid "Error"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:399
+#: ../../../interop/vfio-user.rst:422
 msgid "<message data>"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:399 ../../../interop/vfio-user.rst:566
-#: ../../../interop/vfio-user.rst:625 ../../../interop/vfio-user.rst:735
-#: ../../../interop/vfio-user.rst:772 ../../../interop/vfio-user.rst:860
-#: ../../../interop/vfio-user.rst:934 ../../../interop/vfio-user.rst:968
-#: ../../../interop/vfio-user.rst:1007 ../../../interop/vfio-user.rst:1157
-#: ../../../interop/vfio-user.rst:1282 ../../../interop/vfio-user.rst:1309
-#: ../../../interop/vfio-user.rst:1365 ../../../interop/vfio-user.rst:1388
-#: ../../../interop/vfio-user.rst:1449
-msgid "16"
-msgstr ""
-
-#: ../../../interop/vfio-user.rst:399 ../../../interop/vfio-user.rst:1159
-#: ../../../interop/vfio-user.rst:1282 ../../../interop/vfio-user.rst:1309
-#: ../../../interop/vfio-user.rst:1365 ../../../interop/vfio-user.rst:1388
-#: ../../../interop/vfio-user.rst:1431
+#: ../../../interop/vfio-user.rst:422 ../../../interop/vfio-user.rst:1217
+#: ../../../interop/vfio-user.rst:1340 ../../../interop/vfio-user.rst:1367
+#: ../../../interop/vfio-user.rst:1425 ../../../interop/vfio-user.rst:1450
+#: ../../../interop/vfio-user.rst:1493 ../../../interop/vfio-user.rst:1561
+#: ../../../interop/vfio-user.rst:1773 ../../../interop/vfio-user.rst:1883
+#: ../../../interop/vfio-user.rst:1914
 msgid "variable"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:402
+#: ../../../interop/vfio-user.rst:425
 msgid ""
 "*Message ID* identifies the message, and is echoed in the command's reply "
 "message. Message IDs belong entirely to the sender, can be re-used (even "
@@ -959,67 +1053,67 @@ msgid ""
 "uniqueness."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:406
+#: ../../../interop/vfio-user.rst:429
 msgid ""
 "*Command* specifies the command to be executed, listed in Commands_. It is "
 "also set in the reply header."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:408
+#: ../../../interop/vfio-user.rst:431
 msgid ""
 "*Message size* contains the size of the entire message, including the header."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:409
+#: ../../../interop/vfio-user.rst:432
 msgid "*Flags* contains attributes of the message:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:411
+#: ../../../interop/vfio-user.rst:434
 msgid "The *Type* bits indicate the message type."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:413
+#: ../../../interop/vfio-user.rst:436
 msgid "*Command* (value 0x0) indicates a command message."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:414
+#: ../../../interop/vfio-user.rst:437
 msgid ""
 "*Reply* (value 0x1) indicates a reply message acknowledging a previous "
 "command with the same message ID."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:416
+#: ../../../interop/vfio-user.rst:439
 msgid ""
 "*No_reply* in a command message indicates that no reply is needed for this "
 "command.  This is commonly used when multiple commands are sent, and only "
 "the last needs acknowledgement."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:419
+#: ../../../interop/vfio-user.rst:442
 msgid ""
 "*Error* in a reply message indicates the command being acknowledged had an "
 "error. In this case, the *Error* field will be valid."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:422
+#: ../../../interop/vfio-user.rst:445
 msgid ""
 "*Error* in a reply message is an optional UNIX errno value. It may be zero "
 "even if the Error bit is set in Flags. It is reserved in a command message."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:425
+#: ../../../interop/vfio-user.rst:448
 msgid ""
 "Each command message in Commands_ must be replied to with a reply message, "
 "unless the message sets the *No_Reply* bit.  The reply consists of the "
 "header with the *Reply* bit set, plus any additional data."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:429
+#: ../../../interop/vfio-user.rst:452
 msgid ""
 "If an error occurs, the reply message must only include the reply header."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:431
+#: ../../../interop/vfio-user.rst:454
 msgid ""
 "As the header is standard in both requests and replies, it is not included "
 "in the command-specific specifications below; each message definition should "
@@ -1027,13 +1121,13 @@ msgid ""
 "of the standard header."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:441
+#: ../../../interop/vfio-user.rst:464
 msgid ""
 "This is the initial message sent by the client after the socket connection "
 "is established; the same format is used for the server's reply."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:444
+#: ../../../interop/vfio-user.rst:467
 msgid ""
 "Upon establishing a connection, the client must send a ``VFIO_USER_VERSION`` "
 "message proposing a protocol version and a set of capabilities. The server "
@@ -1041,25 +1135,25 @@ msgid ""
 "``VFIO_USER_VERSION`` reply according to the following rules."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:449
+#: ../../../interop/vfio-user.rst:472
 msgid ""
 "The major version in the reply must be the same as proposed. If the client "
 "does not support the proposed major, it closes the connection."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:451
+#: ../../../interop/vfio-user.rst:474
 msgid ""
 "The minor version in the reply must be equal to or less than the minor "
 "version proposed."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:453
+#: ../../../interop/vfio-user.rst:476
 msgid ""
 "The capability list must be a subset of those proposed. If the server "
 "requires a capability the client did not include, it closes the connection."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:456
+#: ../../../interop/vfio-user.rst:479
 msgid ""
 "The protocol major version will only change when incompatible protocol "
 "changes are made, such as changing the message format. The minor version may "
@@ -1069,177 +1163,246 @@ msgid ""
 "that supports version 1.3 must also support 1.0 through 1.2."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:463
+#: ../../../interop/vfio-user.rst:486
 msgid ""
 "When making a change to this specification, the protocol version number must "
 "be included in the form \"added in version X.Y\""
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:467 ../../../interop/vfio-user.rst:545
-#: ../../../interop/vfio-user.rst:612 ../../../interop/vfio-user.rst:653
-#: ../../../interop/vfio-user.rst:722 ../../../interop/vfio-user.rst:899
-#: ../../../interop/vfio-user.rst:1047 ../../../interop/vfio-user.rst:1128
-#: ../../../interop/vfio-user.rst:1254 ../../../interop/vfio-user.rst:1298
-#: ../../../interop/vfio-user.rst:1341 ../../../interop/vfio-user.rst:1379
-#: ../../../interop/vfio-user.rst:1424
+#: ../../../interop/vfio-user.rst:490 ../../../interop/vfio-user.rst:603
+#: ../../../interop/vfio-user.rst:670 ../../../interop/vfio-user.rst:711
+#: ../../../interop/vfio-user.rst:780 ../../../interop/vfio-user.rst:957
+#: ../../../interop/vfio-user.rst:1105 ../../../interop/vfio-user.rst:1186
+#: ../../../interop/vfio-user.rst:1312 ../../../interop/vfio-user.rst:1356
+#: ../../../interop/vfio-user.rst:1401 ../../../interop/vfio-user.rst:1441
+#: ../../../interop/vfio-user.rst:1486 ../../../interop/vfio-user.rst:1538
+#: ../../../interop/vfio-user.rst:1855 ../../../interop/vfio-user.rst:1903
 msgid "Request"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:472
+#: ../../../interop/vfio-user.rst:495
 msgid "version major"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:473
+#: ../../../interop/vfio-user.rst:496
 msgid "version minor"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:474
+#: ../../../interop/vfio-user.rst:497
 msgid "version data"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:474
+#: ../../../interop/vfio-user.rst:497
 msgid "variable (including terminating NUL). Optional."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:477
+#: ../../../interop/vfio-user.rst:500
 msgid ""
 "The version data is an optional UTF-8 encoded JSON byte array with the "
 "following format:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:481 ../../../interop/vfio-user.rst:490
-#: ../../../interop/vfio-user.rst:519
+#: ../../../interop/vfio-user.rst:504 ../../../interop/vfio-user.rst:513
+#: ../../../interop/vfio-user.rst:543 ../../../interop/vfio-user.rst:1673
 msgid "Description"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:483
+#: ../../../interop/vfio-user.rst:506
 msgid "capabilities"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:483 ../../../interop/vfio-user.rst:509
+#: ../../../interop/vfio-user.rst:506 ../../../interop/vfio-user.rst:532
 msgid "object"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:483
+#: ../../../interop/vfio-user.rst:506
 msgid "Contains common capabilities that the sender supports. Optional."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:487
+#: ../../../interop/vfio-user.rst:510
 msgid "Capabilities:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:492
+#: ../../../interop/vfio-user.rst:515
 msgid "max_msg_fds"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:492 ../../../interop/vfio-user.rst:497
-#: ../../../interop/vfio-user.rst:501 ../../../interop/vfio-user.rst:505
-#: ../../../interop/vfio-user.rst:521 ../../../interop/vfio-user.rst:524
+#: ../../../interop/vfio-user.rst:515 ../../../interop/vfio-user.rst:520
+#: ../../../interop/vfio-user.rst:524 ../../../interop/vfio-user.rst:528
+#: ../../../interop/vfio-user.rst:548
 msgid "number"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:492
+#: ../../../interop/vfio-user.rst:515
 msgid ""
 "Maximum number of file descriptors that can be received by the sender in one "
 "message. Optional. If not specified then the receiver must assume a value of "
 "``1``."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:497
+#: ../../../interop/vfio-user.rst:520
 msgid "max_data_xfer_size"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:497
+#: ../../../interop/vfio-user.rst:520
 msgid ""
 "Maximum ``count`` for data transfer messages; see `Read and Write "
 "Operations`_. Optional, with a default value of 1048576 bytes."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:501
-msgid "pgsizes"
-msgstr ""
-
-#: ../../../interop/vfio-user.rst:501
-msgid ""
-"Page sizes supported in DMA map operations or'ed together. Optional, with a "
-"default value of supporting only 4k pages."
-msgstr ""
-
-#: ../../../interop/vfio-user.rst:505
+#: ../../../interop/vfio-user.rst:524
 msgid "max_dma_maps"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:505
+#: ../../../interop/vfio-user.rst:524
 msgid ""
 "Maximum number DMA map windows that can be valid simultaneously.  Optional, "
 "with a value of 65535 (64k-1)."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:509
-msgid "migration"
+#: ../../../interop/vfio-user.rst:528
+msgid "pgsizes"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:509
+#: ../../../interop/vfio-user.rst:528
 msgid ""
-"Migration capability parameters. If missing then migration is not supported "
-"by the sender."
+"Page sizes supported in DMA map operations or'ed together. Optional, with a "
+"default value of supporting only 4k pages."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:512
+#: ../../../interop/vfio-user.rst:532
+msgid "twin_socket"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:532
+msgid ""
+"Parameters for twin-socket mode, which handles server-to-client commands and "
+"their replies on a separate socket. Optional."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:536
 msgid "write_multiple"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:512
+#: ../../../interop/vfio-user.rst:536 ../../../interop/vfio-user.rst:545
 msgid "boolean"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:512
+#: ../../../interop/vfio-user.rst:536
 msgid ""
 "``VFIO_USER_REGION_WRITE_MULTI`` messages are supported if the value is "
 "``true``."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:516
-msgid "The migration capability contains the following name/value pairs:"
+#: ../../../interop/vfio-user.rst:540
+msgid "The ``twin_socket`` capability object holds these name/value pairs:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:521
-msgid "pgsize"
+#: ../../../interop/vfio-user.rst:545
+msgid "supported"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:521
+#: ../../../interop/vfio-user.rst:545
 msgid ""
-"Page size of dirty pages bitmap. The smallest between the client and the "
-"server is used."
+"Indicates whether the sender supports twin-socket mode. Optional, defaults "
+"to false."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:524
-msgid "max_bitmap_size"
+#: ../../../interop/vfio-user.rst:548 ../../../interop/vfio-user.rst:1026
+#: ../../../interop/vfio-user.rst:1065
+msgid "fd_index"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:524
+#: ../../../interop/vfio-user.rst:548
 msgid ""
-"Maximum bitmap size in ``VFIO_USER_DIRTY_PAGES`` and ``VFIO_DMA_UNMAP`` "
-"messages.  Optional, with a default value of 256MB."
+"Specifies an index in the file descriptor array included with the message. "
+"The designated file descriptor is a socket which is to be used for the "
+"server-to-client command channel. Optional, only valid in the reply message."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:530 ../../../interop/vfio-user.rst:598
-#: ../../../interop/vfio-user.rst:637 ../../../interop/vfio-user.rst:679
-#: ../../../interop/vfio-user.rst:746 ../../../interop/vfio-user.rst:921
-#: ../../../interop/vfio-user.rst:1078 ../../../interop/vfio-user.rst:1234
-#: ../../../interop/vfio-user.rst:1271 ../../../interop/vfio-user.rst:1318
-#: ../../../interop/vfio-user.rst:1356 ../../../interop/vfio-user.rst:1397
-#: ../../../interop/vfio-user.rst:1459
+#: ../../../interop/vfio-user.rst:556 ../../../interop/vfio-user.rst:656
+#: ../../../interop/vfio-user.rst:695 ../../../interop/vfio-user.rst:737
+#: ../../../interop/vfio-user.rst:804 ../../../interop/vfio-user.rst:979
+#: ../../../interop/vfio-user.rst:1136 ../../../interop/vfio-user.rst:1292
+#: ../../../interop/vfio-user.rst:1329 ../../../interop/vfio-user.rst:1376
+#: ../../../interop/vfio-user.rst:1416 ../../../interop/vfio-user.rst:1459
+#: ../../../interop/vfio-user.rst:1521 ../../../interop/vfio-user.rst:1591
+#: ../../../interop/vfio-user.rst:1872 ../../../interop/vfio-user.rst:1924
 msgid "Reply"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:532
+#: ../../../interop/vfio-user.rst:558
 msgid ""
 "The same message format is used in the server's reply with the semantics "
 "described above."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:538
+#: ../../../interop/vfio-user.rst:561
+msgid ""
+"If and only if the client has indicated support for twin-socket mode by "
+"setting ``twin_socket.supported`` to true in its capabilities, the server "
+"may optionally set up a separate command channel for server-to-client "
+"commands and their replies. The server enables twin-socket mode as follows:"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:566
+msgid "Create a fresh socket pair."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:567
+msgid ""
+"Keep the server end of the socket pair and pass the client end in the file "
+"descriptor array included with the reply message."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:569
+msgid "Set ``twin_socket.supported`` to true in the reply."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:570
+msgid ""
+"Indicate the index in the file descriptor array by the ``twin_socket."
+"fd_index`` capability field in the reply, so the client can identify the "
+"correct file descriptor to use."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:574
+msgid ""
+"A client requesting twin-socket mode must examine the ``twin_socket`` "
+"capability in the reply:"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:577
+msgid ""
+"If ``twin_socket.supported`` is false, the field is missing, or the entire "
+"``twin_socket`` object is absent, the server does not support twin-socket "
+"mode or decided not to enable it. The client can choose whether it wants to "
+"proceed without twin-socket mode, or close the connection if not."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:581
+msgid ""
+"If ``twin_socket.supported`` is true and ``twin_socket.fd_index`` is present "
+"and refers to a valid file descriptor, twin-socket mode negotiation has "
+"succeeded. The client monitors the provided file descriptor for commands "
+"from the server."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:585
+msgid ""
+"Otherwise, the reply from the server is inconsistent. The client must abort "
+"and close the connection since it is potentially unable to receive commands "
+"from the server."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:589
+msgid ""
+"The twin-socket feature is optional, so some servers may not support it. "
+"However, for server implementations that do send server-to-client commands "
+"it is strongly recommended to implement twin-socket support."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:596
 msgid ""
 "This command message is sent by the client to the server to inform it of the "
 "memory regions the server can access. It must be sent before the server can "
@@ -1248,104 +1411,108 @@ msgid ""
 "the client, or if the client uses a vIOMMU."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:547 ../../../interop/vfio-user.rst:614
+#: ../../../interop/vfio-user.rst:605 ../../../interop/vfio-user.rst:672
 msgid ""
 "The request payload for this message is a structure of the following format:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:552 ../../../interop/vfio-user.rst:619
-#: ../../../interop/vfio-user.rst:658 ../../../interop/vfio-user.rst:684
-#: ../../../interop/vfio-user.rst:727 ../../../interop/vfio-user.rst:751
-#: ../../../interop/vfio-user.rst:904 ../../../interop/vfio-user.rst:926
-#: ../../../interop/vfio-user.rst:1052 ../../../interop/vfio-user.rst:1083
-#: ../../../interop/vfio-user.rst:1133
+#: ../../../interop/vfio-user.rst:610 ../../../interop/vfio-user.rst:677
+#: ../../../interop/vfio-user.rst:716 ../../../interop/vfio-user.rst:742
+#: ../../../interop/vfio-user.rst:785 ../../../interop/vfio-user.rst:809
+#: ../../../interop/vfio-user.rst:962 ../../../interop/vfio-user.rst:984
+#: ../../../interop/vfio-user.rst:1110 ../../../interop/vfio-user.rst:1141
+#: ../../../interop/vfio-user.rst:1191 ../../../interop/vfio-user.rst:1545
+#: ../../../interop/vfio-user.rst:1862 ../../../interop/vfio-user.rst:1879
+#: ../../../interop/vfio-user.rst:1910
 msgid "argsz"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:554 ../../../interop/vfio-user.rst:621
-#: ../../../interop/vfio-user.rst:660 ../../../interop/vfio-user.rst:686
-#: ../../../interop/vfio-user.rst:729 ../../../interop/vfio-user.rst:753
-#: ../../../interop/vfio-user.rst:906 ../../../interop/vfio-user.rst:928
-#: ../../../interop/vfio-user.rst:972 ../../../interop/vfio-user.rst:1011
-#: ../../../interop/vfio-user.rst:1054 ../../../interop/vfio-user.rst:1085
-#: ../../../interop/vfio-user.rst:1135
+#: ../../../interop/vfio-user.rst:612 ../../../interop/vfio-user.rst:679
+#: ../../../interop/vfio-user.rst:718 ../../../interop/vfio-user.rst:744
+#: ../../../interop/vfio-user.rst:787 ../../../interop/vfio-user.rst:811
+#: ../../../interop/vfio-user.rst:964 ../../../interop/vfio-user.rst:986
+#: ../../../interop/vfio-user.rst:1030 ../../../interop/vfio-user.rst:1069
+#: ../../../interop/vfio-user.rst:1112 ../../../interop/vfio-user.rst:1143
+#: ../../../interop/vfio-user.rst:1193 ../../../interop/vfio-user.rst:1547
+#: ../../../interop/vfio-user.rst:1634
 msgid "flags"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:559
+#: ../../../interop/vfio-user.rst:617
 msgid "readable"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:561
+#: ../../../interop/vfio-user.rst:619
 msgid "writeable"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:564 ../../../interop/vfio-user.rst:737
-#: ../../../interop/vfio-user.rst:774 ../../../interop/vfio-user.rst:858
-#: ../../../interop/vfio-user.rst:964 ../../../interop/vfio-user.rst:1003
-#: ../../../interop/vfio-user.rst:1259 ../../../interop/vfio-user.rst:1276
-#: ../../../interop/vfio-user.rst:1303 ../../../interop/vfio-user.rst:1323
-#: ../../../interop/vfio-user.rst:1443
+#: ../../../interop/vfio-user.rst:622 ../../../interop/vfio-user.rst:795
+#: ../../../interop/vfio-user.rst:832 ../../../interop/vfio-user.rst:916
+#: ../../../interop/vfio-user.rst:1022 ../../../interop/vfio-user.rst:1061
+#: ../../../interop/vfio-user.rst:1317 ../../../interop/vfio-user.rst:1334
+#: ../../../interop/vfio-user.rst:1361 ../../../interop/vfio-user.rst:1381
+#: ../../../interop/vfio-user.rst:1505
 msgid "offset"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:566 ../../../interop/vfio-user.rst:623
-#: ../../../interop/vfio-user.rst:1346 ../../../interop/vfio-user.rst:1361
-#: ../../../interop/vfio-user.rst:1384 ../../../interop/vfio-user.rst:1402
+#: ../../../interop/vfio-user.rst:624 ../../../interop/vfio-user.rst:681
+#: ../../../interop/vfio-user.rst:1406 ../../../interop/vfio-user.rst:1421
+#: ../../../interop/vfio-user.rst:1446 ../../../interop/vfio-user.rst:1464
 msgid "address"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:568 ../../../interop/vfio-user.rst:625
-#: ../../../interop/vfio-user.rst:735 ../../../interop/vfio-user.rst:772
-#: ../../../interop/vfio-user.rst:860 ../../../interop/vfio-user.rst:966
-#: ../../../interop/vfio-user.rst:1005
+#: ../../../interop/vfio-user.rst:626 ../../../interop/vfio-user.rst:683
+#: ../../../interop/vfio-user.rst:793 ../../../interop/vfio-user.rst:830
+#: ../../../interop/vfio-user.rst:918 ../../../interop/vfio-user.rst:1024
+#: ../../../interop/vfio-user.rst:1063 ../../../interop/vfio-user.rst:1864
+#: ../../../interop/vfio-user.rst:1881 ../../../interop/vfio-user.rst:1912
 msgid "size"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:568 ../../../interop/vfio-user.rst:737
-#: ../../../interop/vfio-user.rst:774 ../../../interop/vfio-user.rst:972
-#: ../../../interop/vfio-user.rst:1011
+#: ../../../interop/vfio-user.rst:626 ../../../interop/vfio-user.rst:795
+#: ../../../interop/vfio-user.rst:832 ../../../interop/vfio-user.rst:1030
+#: ../../../interop/vfio-user.rst:1069
 msgid "24"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:571
+#: ../../../interop/vfio-user.rst:629
 msgid ""
 "*argsz* is the size of the above structure. Note there is no reply payload, "
 "so this field differs from other message types."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:573
+#: ../../../interop/vfio-user.rst:631
 msgid "*flags* contains the following region attributes:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:575
+#: ../../../interop/vfio-user.rst:633
 msgid "*readable* indicates that the region can be read from."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:577
+#: ../../../interop/vfio-user.rst:635
 msgid "*writeable* indicates that the region can be written to."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:579
+#: ../../../interop/vfio-user.rst:637
 msgid ""
 "*offset* is the file offset of the region with respect to the associated "
 "file descriptor, or zero if the region is not mappable"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:581
+#: ../../../interop/vfio-user.rst:639
 msgid "*address* is the base DMA address of the region."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:582 ../../../interop/vfio-user.rst:796
+#: ../../../interop/vfio-user.rst:640 ../../../interop/vfio-user.rst:854
 msgid "*size* is the size of the region."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:584
+#: ../../../interop/vfio-user.rst:642
 msgid ""
 "This structure is 32 bytes in size, so the message size is 16 + 32 bytes."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:586
+#: ../../../interop/vfio-user.rst:644
 msgid ""
 "If the DMA region being added can be directly mapped by the server, a file "
 "descriptor must be sent as part of the message meta-data. The region can be "
@@ -1359,11 +1526,11 @@ msgid ""
 "``EEXIST`` set in error field in the reply."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:600
+#: ../../../interop/vfio-user.rst:658
 msgid "There is no payload in the reply message."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:605
+#: ../../../interop/vfio-user.rst:663
 msgid ""
 "This command message is sent by the client to the server to inform it that a "
 "DMA region, previously made available via a ``VFIO_USER_DMA_MAP`` command "
@@ -1372,168 +1539,169 @@ msgid ""
 "described by the following structure:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:628
+#: ../../../interop/vfio-user.rst:686 ../../../interop/vfio-user.rst:1564
+#: ../../../interop/vfio-user.rst:1867 ../../../interop/vfio-user.rst:1917
 msgid "*argsz* is the maximum size of the reply payload."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:629
+#: ../../../interop/vfio-user.rst:687
 msgid "*flags* is unused in this version."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:630
+#: ../../../interop/vfio-user.rst:688
 msgid "*address* is the base DMA address of the DMA region."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:631
+#: ../../../interop/vfio-user.rst:689
 msgid "*size* is the size of the DMA region."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:633
+#: ../../../interop/vfio-user.rst:691
 msgid ""
 "The address and size of the DMA region being unmapped must match exactly a "
 "previous mapping."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:639
+#: ../../../interop/vfio-user.rst:697
 msgid ""
 "Upon receiving a ``VFIO_USER_DMA_UNMAP`` command, if the file descriptor is "
 "mapped then the server must release all references to that DMA region before "
 "replying, which potentially includes in-flight DMA transactions."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:643
+#: ../../../interop/vfio-user.rst:701
 msgid "The server responds with the original DMA entry in the request."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:649
+#: ../../../interop/vfio-user.rst:707
 msgid ""
 "This command message is sent by the client to the server to query for basic "
 "information about the device."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:665 ../../../interop/vfio-user.rst:691
+#: ../../../interop/vfio-user.rst:723 ../../../interop/vfio-user.rst:749
 msgid "VFIO_DEVICE_FLAGS_RESET"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:667 ../../../interop/vfio-user.rst:693
+#: ../../../interop/vfio-user.rst:725 ../../../interop/vfio-user.rst:751
 msgid "VFIO_DEVICE_FLAGS_PCI"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:670 ../../../interop/vfio-user.rst:696
+#: ../../../interop/vfio-user.rst:728 ../../../interop/vfio-user.rst:754
 msgid "num_regions"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:672 ../../../interop/vfio-user.rst:698
+#: ../../../interop/vfio-user.rst:730 ../../../interop/vfio-user.rst:756
 msgid "num_irqs"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:675
+#: ../../../interop/vfio-user.rst:733
 msgid "*argsz* is the maximum size of the reply payload"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:676 ../../../interop/vfio-user.rst:743
+#: ../../../interop/vfio-user.rst:734 ../../../interop/vfio-user.rst:801
 msgid "all other fields must be zero."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:701 ../../../interop/vfio-user.rst:1104
+#: ../../../interop/vfio-user.rst:759 ../../../interop/vfio-user.rst:1162
 msgid ""
 "*argsz* is the size required for the full reply payload (16 bytes today)"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:702
+#: ../../../interop/vfio-user.rst:760
 msgid "*flags* contains the following device attributes."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:704
+#: ../../../interop/vfio-user.rst:762
 msgid ""
 "``VFIO_DEVICE_FLAGS_RESET`` indicates that the device supports the "
 "``VFIO_USER_DEVICE_RESET`` message."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:706
+#: ../../../interop/vfio-user.rst:764
 msgid "``VFIO_DEVICE_FLAGS_PCI`` indicates that the device is a PCI device."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:708
+#: ../../../interop/vfio-user.rst:766
 msgid "*num_regions* is the number of memory regions that the device exposes."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:709
+#: ../../../interop/vfio-user.rst:767
 msgid ""
 "*num_irqs* is the number of distinct interrupt types that the device "
 "supports."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:711
+#: ../../../interop/vfio-user.rst:769
 msgid ""
 "This version of the protocol only supports PCI devices. Additional devices "
 "may be supported in future versions."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:717
+#: ../../../interop/vfio-user.rst:775
 msgid ""
 "This command message is sent by the client to the server to query for "
 "information about device regions. The VFIO region info structure is defined "
 "in ``<linux/vfio.h>`` (``struct vfio_region_info``)."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:731 ../../../interop/vfio-user.rst:768
-#: ../../../interop/vfio-user.rst:908 ../../../interop/vfio-user.rst:930
-#: ../../../interop/vfio-user.rst:1068 ../../../interop/vfio-user.rst:1099
-#: ../../../interop/vfio-user.rst:1153
+#: ../../../interop/vfio-user.rst:789 ../../../interop/vfio-user.rst:826
+#: ../../../interop/vfio-user.rst:966 ../../../interop/vfio-user.rst:988
+#: ../../../interop/vfio-user.rst:1126 ../../../interop/vfio-user.rst:1157
+#: ../../../interop/vfio-user.rst:1211
 msgid "index"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:733 ../../../interop/vfio-user.rst:770
+#: ../../../interop/vfio-user.rst:791 ../../../interop/vfio-user.rst:828
 msgid "cap_offset"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:740 ../../../interop/vfio-user.rst:913
+#: ../../../interop/vfio-user.rst:798 ../../../interop/vfio-user.rst:971
 msgid "*argsz* the maximum size of the reply payload"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:741 ../../../interop/vfio-user.rst:790
+#: ../../../interop/vfio-user.rst:799 ../../../interop/vfio-user.rst:848
 msgid ""
 "*index* is the index of memory region being queried, it is the only field "
 "that is required to be set in the command message."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:758
+#: ../../../interop/vfio-user.rst:816
 msgid "VFIO_REGION_INFO_FLAG_READ"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:760
+#: ../../../interop/vfio-user.rst:818
 msgid "VFIO_REGION_INFO_FLAG_WRITE"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:762
+#: ../../../interop/vfio-user.rst:820
 msgid "VFIO_REGION_INFO_FLAG_MMAP"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:764
+#: ../../../interop/vfio-user.rst:822
 msgid "VFIO_REGION_INFO_FLAG_CAPS"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:777
+#: ../../../interop/vfio-user.rst:835
 msgid ""
 "*argsz* is the size required for the full reply payload (region info "
 "structure plus the size of any region capabilities)"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:779
+#: ../../../interop/vfio-user.rst:837
 msgid "*flags* are attributes of the region:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:781
+#: ../../../interop/vfio-user.rst:839
 msgid "``VFIO_REGION_INFO_FLAG_READ`` allows client read access to the region."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:782
+#: ../../../interop/vfio-user.rst:840
 msgid ""
 "``VFIO_REGION_INFO_FLAG_WRITE`` allows client write access to the region."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:783
+#: ../../../interop/vfio-user.rst:841
 msgid ""
 "``VFIO_REGION_INFO_FLAG_MMAP`` specifies the client can mmap() the region. "
 "When this flag is set, the reply will include a file descriptor in its meta-"
@@ -1541,13 +1709,13 @@ msgid ""
 "``SCM_RIGHTS`` type ancillary data."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:787
+#: ../../../interop/vfio-user.rst:845
 msgid ""
 "``VFIO_REGION_INFO_FLAG_CAPS`` indicates additional capabilities found in "
 "the reply."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:792
+#: ../../../interop/vfio-user.rst:850
 msgid ""
 "*cap_offset* describes where additional region capabilities can be found. "
 "cap_offset is relative to the beginning of the VFIO region info structure. "
@@ -1555,18 +1723,18 @@ msgid ""
 "h>``."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:797
+#: ../../../interop/vfio-user.rst:855
 msgid ""
 "*offset* is the offset that should be given to the mmap() system call for "
 "regions with the MMAP attribute. It is also used as the base offset when "
 "mapping a VFIO sparse mmap area, described below."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:802
+#: ../../../interop/vfio-user.rst:860
 msgid "VFIO region capabilities"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:804
+#: ../../../interop/vfio-user.rst:862
 msgid ""
 "The VFIO region information can also include a capabilities list. This list "
 "is similar to a PCI capability list - each entry has a common header that "
@@ -1575,65 +1743,65 @@ msgid ""
 "(``struct vfio_info_cap_header``)."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:811
+#: ../../../interop/vfio-user.rst:869
 msgid "VFIO cap header format"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:816 ../../../interop/vfio-user.rst:834
+#: ../../../interop/vfio-user.rst:874 ../../../interop/vfio-user.rst:892
 msgid "id"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:818 ../../../interop/vfio-user.rst:836
+#: ../../../interop/vfio-user.rst:876 ../../../interop/vfio-user.rst:894
 msgid "version"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:820 ../../../interop/vfio-user.rst:838
+#: ../../../interop/vfio-user.rst:878 ../../../interop/vfio-user.rst:896
 msgid "next"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:823
+#: ../../../interop/vfio-user.rst:881
 msgid "*id* is the capability identity."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:824
+#: ../../../interop/vfio-user.rst:882
 msgid "*version* is a capability-specific version number."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:825
+#: ../../../interop/vfio-user.rst:883
 msgid ""
 "*next* specifies the offset of the next capability in the capability list. "
 "It is relative to the beginning of the VFIO region info structure."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:829
+#: ../../../interop/vfio-user.rst:887
 msgid "VFIO sparse mmap cap header"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:832
+#: ../../../interop/vfio-user.rst:890
 msgid "Value"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:834
+#: ../../../interop/vfio-user.rst:892
 msgid "VFIO_REGION_INFO_CAP_SPARSE_MMAP"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:836
+#: ../../../interop/vfio-user.rst:894
 msgid "0x1"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:838
+#: ../../../interop/vfio-user.rst:896
 msgid "<next>"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:840
+#: ../../../interop/vfio-user.rst:898
 msgid "sparse mmap info"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:840
+#: ../../../interop/vfio-user.rst:898
 msgid "VFIO region info sparse mmap"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:843
+#: ../../../interop/vfio-user.rst:901
 msgid ""
 "This capability is defined when only a subrange of the region supports "
 "direct access by the client via mmap(). The VFIO sparse mmap area is defined "
@@ -1641,27 +1809,27 @@ msgid ""
 "vfio_region_info_cap_sparse_mmap``)."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:849
+#: ../../../interop/vfio-user.rst:907
 msgid "VFIO region info cap sparse mmap"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:854
+#: ../../../interop/vfio-user.rst:912
 msgid "nr_areas"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:856
+#: ../../../interop/vfio-user.rst:914 ../../../interop/vfio-user.rst:1771
 msgid "reserved"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:862 ../../../interop/vfio-user.rst:934
+#: ../../../interop/vfio-user.rst:920 ../../../interop/vfio-user.rst:992
 msgid "..."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:865
+#: ../../../interop/vfio-user.rst:923
 msgid "*nr_areas* is the number of sparse mmap areas in the region."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:866
+#: ../../../interop/vfio-user.rst:924
 msgid ""
 "*offset* and size describe a single area that can be mapped by the client. "
 "There will be *nr_areas* pairs of offset and size. The offset will be added "
@@ -1669,19 +1837,19 @@ msgid ""
 "the offset argument of the subsequent mmap() call."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:871
+#: ../../../interop/vfio-user.rst:929
 msgid ""
 "The VFIO sparse mmap area is defined in ``<linux/vfio.h>`` (``struct "
 "vfio_region_info_cap_sparse_mmap``)."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:878
+#: ../../../interop/vfio-user.rst:936
 msgid ""
 "Clients can access regions via ``VFIO_USER_REGION_READ/WRITE`` or, if "
 "provided, by ``mmap()`` of a file descriptor provided by the server."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:881
+#: ../../../interop/vfio-user.rst:939
 msgid ""
 "``VFIO_USER_DEVICE_GET_REGION_IO_FDS`` provides an alternative access "
 "mechanism via file descriptors. This is an optional feature intended for "
@@ -1690,7 +1858,7 @@ msgid ""
 "without needing to round-trip through the client."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:887
+#: ../../../interop/vfio-user.rst:945
 msgid ""
 "The server returns an array of sub-regions for the requested region. Each "
 "sub-region describes a span (offset and size) of a region, along with the "
@@ -1700,7 +1868,7 @@ msgid ""
 "and ioregionfds."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:893
+#: ../../../interop/vfio-user.rst:951
 msgid ""
 "The server in addition returns a file descriptor in the ancillary data; "
 "clients are expected to configure each sub-region's file descriptor with the "
@@ -1708,35 +1876,35 @@ msgid ""
 "with the requested ioeventfd via a ``KVM_IOEVENTFD`` ``ioctl()``."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:910 ../../../interop/vfio-user.rst:932
-#: ../../../interop/vfio-user.rst:1070 ../../../interop/vfio-user.rst:1101
-#: ../../../interop/vfio-user.rst:1157 ../../../interop/vfio-user.rst:1263
-#: ../../../interop/vfio-user.rst:1280 ../../../interop/vfio-user.rst:1307
-#: ../../../interop/vfio-user.rst:1327 ../../../interop/vfio-user.rst:1348
-#: ../../../interop/vfio-user.rst:1363 ../../../interop/vfio-user.rst:1386
-#: ../../../interop/vfio-user.rst:1404 ../../../interop/vfio-user.rst:1447
+#: ../../../interop/vfio-user.rst:968 ../../../interop/vfio-user.rst:990
+#: ../../../interop/vfio-user.rst:1128 ../../../interop/vfio-user.rst:1159
+#: ../../../interop/vfio-user.rst:1215 ../../../interop/vfio-user.rst:1321
+#: ../../../interop/vfio-user.rst:1338 ../../../interop/vfio-user.rst:1365
+#: ../../../interop/vfio-user.rst:1385 ../../../interop/vfio-user.rst:1408
+#: ../../../interop/vfio-user.rst:1423 ../../../interop/vfio-user.rst:1448
+#: ../../../interop/vfio-user.rst:1466 ../../../interop/vfio-user.rst:1509
 msgid "count"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:914 ../../../interop/vfio-user.rst:943
+#: ../../../interop/vfio-user.rst:972 ../../../interop/vfio-user.rst:1001
 msgid "*index* is the index of memory region being queried"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:915 ../../../interop/vfio-user.rst:1075
+#: ../../../interop/vfio-user.rst:973 ../../../interop/vfio-user.rst:1133
 msgid "all other fields must be zero"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:917
+#: ../../../interop/vfio-user.rst:975
 msgid ""
 "The client must set ``flags`` to zero and specify the region being queried "
 "in the ``index``."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:934
+#: ../../../interop/vfio-user.rst:992
 msgid "sub-regions"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:937
+#: ../../../interop/vfio-user.rst:995
 msgid ""
 "*argsz* is the size of the region IO FD info structure plus the total size "
 "of the sub-region array. Thus, each array entry \"i\" is at offset i * "
@@ -1745,288 +1913,286 @@ msgid ""
 "full reply payload size needed."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:942
+#: ../../../interop/vfio-user.rst:1000
 msgid "*flags* must be zero"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:944
+#: ../../../interop/vfio-user.rst:1002
 msgid "*count* is the number of sub-regions in the array"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:945
+#: ../../../interop/vfio-user.rst:1003
 msgid "*sub-regions* is the array of Sub-Region IO FD info structures"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:947
+#: ../../../interop/vfio-user.rst:1005
 msgid ""
 "The reply message will additionally include at least one file descriptor in "
 "the ancillary data. Note that more than one sub-region may share the same "
 "file descriptor."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:951
+#: ../../../interop/vfio-user.rst:1009
 msgid ""
 "Note that it is the client's responsibility to verify the requested values "
 "(for example, that the requested offset does not exceed the region's bounds)."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:954
+#: ../../../interop/vfio-user.rst:1012
 msgid ""
 "Each sub-region given in the response has one of two possible structures, "
 "depending whether *type* is ``VFIO_USER_IO_FD_TYPE_IOEVENTFD`` or "
 "``VFIO_USER_IO_FD_TYPE_IOREGIONFD``:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:959
+#: ../../../interop/vfio-user.rst:1017
 msgid "Sub-Region IO FD info format (ioeventfd)"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:968 ../../../interop/vfio-user.rst:1007
-msgid "fd_index"
-msgstr ""
-
-#: ../../../interop/vfio-user.rst:970 ../../../interop/vfio-user.rst:1009
+#: ../../../interop/vfio-user.rst:1028 ../../../interop/vfio-user.rst:1067
 msgid "type"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:970 ../../../interop/vfio-user.rst:1009
-#: ../../../interop/vfio-user.rst:1159
+#: ../../../interop/vfio-user.rst:1028 ../../../interop/vfio-user.rst:1067
+#: ../../../interop/vfio-user.rst:1217
 msgid "20"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:974 ../../../interop/vfio-user.rst:1013
+#: ../../../interop/vfio-user.rst:1032 ../../../interop/vfio-user.rst:1071
 msgid "padding"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:974 ../../../interop/vfio-user.rst:1013
+#: ../../../interop/vfio-user.rst:1032 ../../../interop/vfio-user.rst:1071
 msgid "28"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:976
+#: ../../../interop/vfio-user.rst:1034
 msgid "datamatch"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:976 ../../../interop/vfio-user.rst:1015
+#: ../../../interop/vfio-user.rst:1034 ../../../interop/vfio-user.rst:1073
 msgid "32"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:979 ../../../interop/vfio-user.rst:1018
+#: ../../../interop/vfio-user.rst:1037 ../../../interop/vfio-user.rst:1076
 msgid ""
 "*offset* is the offset of the start of the sub-region within the region "
 "requested (\"physical address offset\" for the region)"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:981
+#: ../../../interop/vfio-user.rst:1039
 msgid ""
 "*size* is the length of the sub-region. This may be zero if the access size "
 "is not relevant, which may allow for optimizations"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:983
+#: ../../../interop/vfio-user.rst:1041
 msgid ""
 "*fd_index* is the index in the ancillary data of the FD to use for ioeventfd "
 "notification; it may be shared."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:985
+#: ../../../interop/vfio-user.rst:1043
 msgid "*type* is ``VFIO_USER_IO_FD_TYPE_IOEVENTFD``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:986 ../../../interop/vfio-user.rst:1026
+#: ../../../interop/vfio-user.rst:1044 ../../../interop/vfio-user.rst:1084
 msgid "*flags* is any of:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:988
+#: ../../../interop/vfio-user.rst:1046
 msgid "``KVM_IOEVENTFD_FLAG_DATAMATCH``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:989
+#: ../../../interop/vfio-user.rst:1047
 msgid "``KVM_IOEVENTFD_FLAG_PIO``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:990
+#: ../../../interop/vfio-user.rst:1048
 msgid "``KVM_IOEVENTFD_FLAG_VIRTIO_CCW_NOTIFY`` (FIXME: makes sense?)"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:992
+#: ../../../interop/vfio-user.rst:1050
 msgid "*datamatch* is the datamatch value if needed"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:994
+#: ../../../interop/vfio-user.rst:1052
 msgid ""
 "See https://www.kernel.org/doc/Documentation/virtual/kvm/api.txt, *4.59 "
 "KVM_IOEVENTFD* for further context on the ioeventfd-specific fields."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:998
+#: ../../../interop/vfio-user.rst:1056
 msgid "Sub-Region IO FD info format (ioregionfd)"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1015
+#: ../../../interop/vfio-user.rst:1073
 msgid "user_data"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1020
+#: ../../../interop/vfio-user.rst:1078
 msgid ""
 "*size* is the length of the sub-region. This may be zero if the access size "
 "is not relevant, which may allow for optimizations; "
 "``KVM_IOREGION_POSTED_WRITES`` must be set in *flags* in this case"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1023
+#: ../../../interop/vfio-user.rst:1081
 msgid ""
 "*fd_index* is the index in the ancillary data of the FD to use for "
 "ioregionfd messages; it may be shared"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1025
+#: ../../../interop/vfio-user.rst:1083
 msgid "*type* is ``VFIO_USER_IO_FD_TYPE_IOREGIONFD``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1028
+#: ../../../interop/vfio-user.rst:1086
 msgid "``KVM_IOREGION_PIO``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1029
+#: ../../../interop/vfio-user.rst:1087
 msgid "``KVM_IOREGION_POSTED_WRITES``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1031
+#: ../../../interop/vfio-user.rst:1089
 msgid ""
 "*user_data* is an opaque value passed back to the server via a message on "
 "the file descriptor"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1034
+#: ../../../interop/vfio-user.rst:1092
 msgid ""
 "For further information on the ioregionfd-specific fields, see: https://lore."
 "kernel.org/kvm/cover.1613828726.git.eafanasova@gmail.com/"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1037
+#: ../../../interop/vfio-user.rst:1095
 msgid "(FIXME: update with final API docs.)"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1042
+#: ../../../interop/vfio-user.rst:1100
 msgid ""
 "This command message is sent by the client to the server to query for "
 "information about device interrupt types. The VFIO IRQ info structure is "
 "defined in ``<linux/vfio.h>`` (``struct vfio_irq_info``)."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1059 ../../../interop/vfio-user.rst:1090
+#: ../../../interop/vfio-user.rst:1117 ../../../interop/vfio-user.rst:1148
 msgid "VFIO_IRQ_INFO_EVENTFD"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1061 ../../../interop/vfio-user.rst:1092
+#: ../../../interop/vfio-user.rst:1119 ../../../interop/vfio-user.rst:1150
 msgid "VFIO_IRQ_INFO_MASKABLE"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1063 ../../../interop/vfio-user.rst:1094
+#: ../../../interop/vfio-user.rst:1121 ../../../interop/vfio-user.rst:1152
 msgid "VFIO_IRQ_INFO_AUTOMASKED"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1065 ../../../interop/vfio-user.rst:1096
+#: ../../../interop/vfio-user.rst:1123 ../../../interop/vfio-user.rst:1154
 msgid "VFIO_IRQ_INFO_NORESIZE"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1073
+#: ../../../interop/vfio-user.rst:1131
 msgid "*argsz* is the maximum size of the reply payload (16 bytes today)"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1074
+#: ../../../interop/vfio-user.rst:1132
 msgid ""
 "index is the index of IRQ type being queried (e.g. "
 "``VFIO_PCI_MSIX_IRQ_INDEX``)"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1105
+#: ../../../interop/vfio-user.rst:1163
 msgid "*flags* defines IRQ attributes:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1107
+#: ../../../interop/vfio-user.rst:1165
 msgid ""
 "``VFIO_IRQ_INFO_EVENTFD`` indicates the IRQ type can support server eventfd "
 "signalling."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1109
+#: ../../../interop/vfio-user.rst:1167
 msgid ""
 "``VFIO_IRQ_INFO_MASKABLE`` indicates that the IRQ type supports the ``MASK`` "
 "and ``UNMASK`` actions in a ``VFIO_USER_DEVICE_SET_IRQS`` message."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1111
+#: ../../../interop/vfio-user.rst:1169
 msgid ""
 "``VFIO_IRQ_INFO_AUTOMASKED`` indicates the IRQ type masks itself after being "
 "triggered, and the client must send an ``UNMASK`` action to receive new "
 "interrupts."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1114
+#: ../../../interop/vfio-user.rst:1172
 msgid ""
 "``VFIO_IRQ_INFO_NORESIZE`` indicates ``VFIO_USER_SET_IRQS`` operations setup "
 "interrupts as a set, and new sub-indexes cannot be enabled without disabling "
 "the entire type."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1117
+#: ../../../interop/vfio-user.rst:1175
 msgid "index is the index of IRQ type being queried"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1118
+#: ../../../interop/vfio-user.rst:1176
 msgid "count describes the number of interrupts of the queried type."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1123
+#: ../../../interop/vfio-user.rst:1181
 msgid ""
 "This command message is sent by the client to the server to set actions for "
 "device interrupt types. The VFIO IRQ set structure is defined in ``<linux/"
 "vfio.h>`` (``struct vfio_irq_set``)."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1140
+#: ../../../interop/vfio-user.rst:1198
 msgid "VFIO_IRQ_SET_DATA_NONE"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1142
+#: ../../../interop/vfio-user.rst:1200
 msgid "VFIO_IRQ_SET_DATA_BOOL"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1144
+#: ../../../interop/vfio-user.rst:1202
 msgid "VFIO_IRQ_SET_DATA_EVENTFD"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1146
+#: ../../../interop/vfio-user.rst:1204
 msgid "VFIO_IRQ_SET_ACTION_MASK"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1148
+#: ../../../interop/vfio-user.rst:1206
 msgid "VFIO_IRQ_SET_ACTION_UNMASK"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1150
+#: ../../../interop/vfio-user.rst:1208
 msgid "VFIO_IRQ_SET_ACTION_TRIGGER"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1155
+#: ../../../interop/vfio-user.rst:1213
 msgid "start"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1159 ../../../interop/vfio-user.rst:1282
-#: ../../../interop/vfio-user.rst:1309 ../../../interop/vfio-user.rst:1365
-#: ../../../interop/vfio-user.rst:1388 ../../../interop/vfio-user.rst:1449
+#: ../../../interop/vfio-user.rst:1217 ../../../interop/vfio-user.rst:1340
+#: ../../../interop/vfio-user.rst:1367 ../../../interop/vfio-user.rst:1425
+#: ../../../interop/vfio-user.rst:1450 ../../../interop/vfio-user.rst:1511
+#: ../../../interop/vfio-user.rst:1561 ../../../interop/vfio-user.rst:1883
+#: ../../../interop/vfio-user.rst:1914
 msgid "data"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1162
+#: ../../../interop/vfio-user.rst:1220
 msgid ""
 "*argsz* is the size of the VFIO IRQ set request payload, including any "
 "*data* field. Note there is no reply payload, so this field differs from "
 "other message types."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1165
+#: ../../../interop/vfio-user.rst:1223
 msgid ""
 "*flags* defines the action performed on the interrupt range. The ``DATA`` "
 "flags describe the data field sent in the message; the ``ACTION`` flags "
@@ -2034,19 +2200,19 @@ msgid ""
 "both sets."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1170
+#: ../../../interop/vfio-user.rst:1228
 msgid ""
 "``VFIO_IRQ_SET_DATA_NONE`` indicates there is no data field in the command. "
 "The action is performed unconditionally."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1172
+#: ../../../interop/vfio-user.rst:1230
 msgid ""
 "``VFIO_IRQ_SET_DATA_BOOL`` indicates the data field is an array of boolean "
 "bytes. The action is performed if the corresponding boolean is true."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1174
+#: ../../../interop/vfio-user.rst:1232
 msgid ""
 "``VFIO_IRQ_SET_DATA_EVENTFD`` indicates an array of event file descriptors "
 "was sent in the message meta-data. These descriptors will be signalled when "
@@ -2056,7 +2222,7 @@ msgid ""
 "configured interrupts."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1180
+#: ../../../interop/vfio-user.rst:1238
 msgid ""
 "``VFIO_IRQ_SET_ACTION_MASK`` indicates a masking event. It can be used with "
 "``VFIO_IRQ_SET_DATA_BOOL`` or ``VFIO_IRQ_SET_DATA_NONE`` to mask an "
@@ -2064,7 +2230,7 @@ msgid ""
 "the guest masks the interrupt."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1184
+#: ../../../interop/vfio-user.rst:1242
 msgid ""
 "``VFIO_IRQ_SET_ACTION_UNMASK`` indicates an unmasking event. It can be used "
 "with ``VFIO_IRQ_SET_DATA_BOOL`` or ``VFIO_IRQ_SET_DATA_NONE`` to unmask an "
@@ -2072,7 +2238,7 @@ msgid ""
 "the guest unmasks the interrupt."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1188
+#: ../../../interop/vfio-user.rst:1246
 msgid ""
 "``VFIO_IRQ_SET_ACTION_TRIGGER`` indicates a triggering event. It can be used "
 "with ``VFIO_IRQ_SET_DATA_BOOL`` or ``VFIO_IRQ_SET_DATA_NONE`` to trigger an "
@@ -2080,22 +2246,22 @@ msgid ""
 "the server triggers the interrupt."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1193
+#: ../../../interop/vfio-user.rst:1251
 msgid "*index* is the index of IRQ type being setup."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1194
+#: ../../../interop/vfio-user.rst:1252
 msgid "*start* is the start of the sub-index being set."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1195
+#: ../../../interop/vfio-user.rst:1253
 msgid ""
 "*count* describes the number of sub-indexes being set. As a special case, a "
 "count (and start) of 0, with data flags of ``VFIO_IRQ_SET_DATA_NONE`` "
 "disables all interrupts of the index."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1198
+#: ../../../interop/vfio-user.rst:1256
 msgid ""
 "*data* is an optional field included when the ``VFIO_IRQ_SET_DATA_BOOL`` "
 "flag is present. It contains an array of booleans that specify whether the "
@@ -2103,18 +2269,18 @@ msgid ""
 "action is only performed on a subset of the range specified."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1204
+#: ../../../interop/vfio-user.rst:1262
 msgid ""
 "Not all interrupt types support every combination of data and action flags. "
 "The client must know the capabilities of the device and IRQ index before it "
 "sends a ``VFIO_USER_DEVICE_SET_IRQ`` message."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1208
+#: ../../../interop/vfio-user.rst:1266
 msgid "In typical operation, a specific IRQ may operate as follows:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1210
+#: ../../../interop/vfio-user.rst:1268
 msgid ""
 "The client sends a ``VFIO_USER_DEVICE_SET_IRQ`` message with "
 "``flags=(VFIO_IRQ_SET_DATA_EVENTFD|VFIO_IRQ_SET_ACTION_TRIGGER)`` along with "
@@ -2122,7 +2288,7 @@ msgid ""
 "side."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1215
+#: ../../../interop/vfio-user.rst:1273
 msgid ""
 "The client may send a ``VFIO_USER_DEVICE_SET_IRQ`` message with "
 "``flags=(VFIO_IRQ_SET_DATA_EVENTFD|VFIO_IRQ_SET_ACTION_MASK/UNMASK)`` along "
@@ -2130,223 +2296,776 @@ msgid ""
 "state on the server side."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1220
+#: ../../../interop/vfio-user.rst:1278
 msgid "The server may trigger the IRQ by writing 1 to the eventfd."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1222
+#: ../../../interop/vfio-user.rst:1280
 msgid ""
 "The server may mask/unmask an IRQ which will write 1 to the corresponding "
 "mask/unmask eventfd, if there is one."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1225
+#: ../../../interop/vfio-user.rst:1283
 msgid ""
 "A client may trigger a device IRQ itself, by sending a "
 "``VFIO_USER_DEVICE_SET_IRQ`` message with ``flags=(VFIO_IRQ_SET_DATA_NONE/"
 "BOOL|VFIO_IRQ_SET_ACTION_TRIGGER)``."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1229
+#: ../../../interop/vfio-user.rst:1287
 msgid ""
 "A client may mask or unmask the IRQ, by sending a "
 "``VFIO_USER_DEVICE_SET_IRQ`` message with ``flags=(VFIO_IRQ_SET_DATA_NONE/"
 "BOOL|VFIO_IRQ_SET_ACTION_MASK/UNMASK)``."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1236
+#: ../../../interop/vfio-user.rst:1294
 msgid "There is no payload in the reply."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1240
+#: ../../../interop/vfio-user.rst:1298
 msgid ""
 "Note that all of these operations must be supported by the client and/or "
 "server, even if the corresponding memory or device region has been shared as "
 "mappable."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1243
+#: ../../../interop/vfio-user.rst:1301
 msgid ""
 "The ``count`` field must not exceed the value of ``max_data_xfer_size`` of "
 "the peer, for both reads and writes."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1249
+#: ../../../interop/vfio-user.rst:1307
 msgid ""
 "If a device region is not mappable, it's not directly accessible by the "
 "client via ``mmap()`` of the underlying file descriptor. In this case, a "
 "client can read from a device region with this message."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1261 ../../../interop/vfio-user.rst:1278
-#: ../../../interop/vfio-user.rst:1305 ../../../interop/vfio-user.rst:1325
-#: ../../../interop/vfio-user.rst:1445
+#: ../../../interop/vfio-user.rst:1319 ../../../interop/vfio-user.rst:1336
+#: ../../../interop/vfio-user.rst:1363 ../../../interop/vfio-user.rst:1383
+#: ../../../interop/vfio-user.rst:1507
 msgid "region"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1266 ../../../interop/vfio-user.rst:1312
-#: ../../../interop/vfio-user.rst:1452
+#: ../../../interop/vfio-user.rst:1324 ../../../interop/vfio-user.rst:1370
+#: ../../../interop/vfio-user.rst:1514
 msgid "*offset* into the region being accessed."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1267 ../../../interop/vfio-user.rst:1313
-#: ../../../interop/vfio-user.rst:1453
+#: ../../../interop/vfio-user.rst:1325 ../../../interop/vfio-user.rst:1371
+#: ../../../interop/vfio-user.rst:1515
 msgid "*region* is the index of the region being accessed."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1268 ../../../interop/vfio-user.rst:1314
-#: ../../../interop/vfio-user.rst:1353 ../../../interop/vfio-user.rst:1393
+#: ../../../interop/vfio-user.rst:1326 ../../../interop/vfio-user.rst:1372
+#: ../../../interop/vfio-user.rst:1413 ../../../interop/vfio-user.rst:1455
 msgid "*count* is the size of the data to be transferred."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1285 ../../../interop/vfio-user.rst:1330
+#: ../../../interop/vfio-user.rst:1343 ../../../interop/vfio-user.rst:1388
 msgid "*offset* into the region accessed."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1286 ../../../interop/vfio-user.rst:1331
+#: ../../../interop/vfio-user.rst:1344 ../../../interop/vfio-user.rst:1389
 msgid "*region* is the index of the region accessed."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1287 ../../../interop/vfio-user.rst:1332
-#: ../../../interop/vfio-user.rst:1369 ../../../interop/vfio-user.rst:1408
+#: ../../../interop/vfio-user.rst:1345 ../../../interop/vfio-user.rst:1390
+#: ../../../interop/vfio-user.rst:1429 ../../../interop/vfio-user.rst:1470
 msgid "*count* is the size of the data transferred."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1288
+#: ../../../interop/vfio-user.rst:1346
 msgid "*data* is the data that was read from the device region."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1293
+#: ../../../interop/vfio-user.rst:1351
 msgid ""
 "If a device region is not mappable, it's not directly accessible by the "
 "client via mmap() of the underlying fd. In this case, a client can write to "
 "a device region with this message."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1315 ../../../interop/vfio-user.rst:1394
+#: ../../../interop/vfio-user.rst:1373 ../../../interop/vfio-user.rst:1456
 msgid "*data* is the data to write"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1337
+#: ../../../interop/vfio-user.rst:1395
 msgid ""
 "If the client has not shared mappable memory, the server can use this "
-"message to read from guest memory."
+"message to read from guest memory. This message and its reply are passed "
+"over the separate server-to-client socket if twin-socket mode has been "
+"negotiated during connection setup."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1351 ../../../interop/vfio-user.rst:1391
+#: ../../../interop/vfio-user.rst:1411 ../../../interop/vfio-user.rst:1453
 msgid ""
 "*address* is the client DMA memory address being accessed. This address must "
 "have been previously exported to the server with a ``VFIO_USER_DMA_MAP`` "
 "message."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1368 ../../../interop/vfio-user.rst:1407
+#: ../../../interop/vfio-user.rst:1428 ../../../interop/vfio-user.rst:1469
 msgid "*address* is the client DMA memory address being accessed."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1370
+#: ../../../interop/vfio-user.rst:1430
 msgid "*data* is the data read."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1375
+#: ../../../interop/vfio-user.rst:1435
 msgid ""
 "If the client has not shared mappable memory, the server can use this "
-"message to write to guest memory."
+"message to write to guest memory. This message and its reply are passed over "
+"the separate server-to-client socket if twin-socket mode has been negotiated "
+"during connection setup."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1413
+#: ../../../interop/vfio-user.rst:1475
 msgid ""
 "This command message is sent from the client to the server to reset the "
 "device. Neither the request or reply have a payload."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1419
+#: ../../../interop/vfio-user.rst:1481
 msgid ""
 "This message can be used to coalesce multiple device write operations into a "
 "single messgage.  It is only used as an optimization when the outgoing "
 "message queue is relatively full."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1429 ../../../interop/vfio-user.rst:1464
+#: ../../../interop/vfio-user.rst:1491 ../../../interop/vfio-user.rst:1526
 msgid "wr_cnt"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1431
+#: ../../../interop/vfio-user.rst:1493
 msgid "wrs"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1434
+#: ../../../interop/vfio-user.rst:1496
 msgid "*wr_cnt* is the number of device writes coalesced in the message"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1435
+#: ../../../interop/vfio-user.rst:1497
 msgid "*wrs* is an array of device writes defined below"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1438
+#: ../../../interop/vfio-user.rst:1500
 msgid "Single Device Write Format"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1454
+#: ../../../interop/vfio-user.rst:1516
 msgid ""
 "*count* is the size of the data to be transferred.  This format can only "
 "describe writes of 8 bytes or less."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1456
+#: ../../../interop/vfio-user.rst:1518
 msgid "*data* is the data to write."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1467
+#: ../../../interop/vfio-user.rst:1529
 msgid "*wr_cnt* is the number of device writes completed."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1471
+#: ../../../interop/vfio-user.rst:1534
+msgid ""
+"This command is analogous to ``VFIO_DEVICE_FEATURE``. It is used to get, "
+"set, or probe feature data of the device."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1540 ../../../interop/vfio-user.rst:1857
+#: ../../../interop/vfio-user.rst:1905
+msgid ""
+"The request payload for this message is a structure of the following format."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1552
+msgid "0 to 15"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1552
+msgid "Feature index"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1554
+msgid "VFIO_DEVICE_FEATURE_GET"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1556
+msgid "VFIO_DEVICE_FEATURE_SET"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1558
+msgid "VFIO_DEVICE_FEATURE_PROBE"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1566
+msgid ""
+"*flags* defines the action to be performed by the server and upon which "
+"feature:"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1569
+msgid ""
+"The feature index consists of the least significant 16 bits of the flags "
+"field, and can be accessed using the ``VFIO_DEVICE_FEATURE_MASK`` bit mask."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1572
+msgid ""
+"``VFIO_DEVICE_FEATURE_GET`` instructs the server to get the data for the "
+"given feature."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1575
+msgid ""
+"``VFIO_DEVICE_FEATURE_SET`` instructs the server to set the feature data to "
+"that given in the ``data`` field of the payload."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1578
+msgid ""
+"``VFIO_DEVICE_FEATURE_PROBE`` instructs the server to probe for feature "
+"support. If ``VFIO_DEVICE_FEATURE_GET`` and/or ``VFIO_DEVICE_FEATURE_SET`` "
+"are also set, the probe will only return success if all of the indicated "
+"methods are supported."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1583
+msgid ""
+"``VFIO_DEVICE_FEATURE_GET`` and ``VFIO_DEVICE_FEATURE_SET`` are mutually "
+"exclusive, except for use with ``VFIO_DEVICE_FEATURE_PROBE``."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1586
+msgid ""
+"*data* is specific to the particular feature. It is not used for probing."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1588
+msgid ""
+"This part of the request is analogous to VFIO's ``struct "
+"vfio_device_feature``."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1593
+msgid ""
+"The reply payload must be the same as the request payload for setting or "
+"probing a feature. For getting a feature's data, the data is added in the "
+"data section and its length is added to ``argsz``."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1598
+msgid "Device Features"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1600
+msgid ""
+"The only device features supported by vfio-user are those related to "
+"migration, although this may change in the future. They are a subset of "
+"those supported in the VFIO implementation of the Linux kernel."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1605
+msgid "Feature Index"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1607
+msgid "VFIO_DEVICE_FEATURE_MIGRATION"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1609
+msgid "VFIO_DEVICE_FEATURE_MIG_DEVICE_STATE"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1611
+msgid "VFIO_DEVICE_FEATURE_DMA_LOGGING_START"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1613
+msgid "VFIO_DEVICE_FEATURE_DMA_LOGGING_STOP"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1615
+msgid "VFIO_DEVICE_FEATURE_DMA_LOGGING_REPORT"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1619
+msgid "``VFIO_DEVICE_FEATURE_MIGRATION``"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1621
+msgid ""
+"This feature indicates that the device can support the migration API through "
+"``VFIO_DEVICE_FEATURE_MIG_DEVICE_STATE``. If ``GET`` succeeds, the "
+"``RUNNING`` and ``ERROR`` states are always supported. Support for "
+"additional states is indicated via the flags field; at least "
+"``VFIO_MIGRATION_STOP_COPY`` must be set."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1627
+msgid "There is no data field of the request message."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1629
+msgid "The data field of the reply message is structured as follows:"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1639
+msgid "VFIO_MIGRATION_STOP_COPY"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1641
+msgid "VFIO_MIGRATION_P2P"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1643
+msgid "VFIO_MIGRATION_PRE_COPY"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1647
+msgid "These flags are interpreted in the same way as VFIO."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1650
+msgid "``VFIO_DEVICE_FEATURE_MIG_DEVICE_STATE``"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1652
+msgid ""
+"Upon ``VFIO_DEVICE_FEATURE_SET``, execute a migration state change on the "
+"VFIO device. The new state is supplied in ``device_state``. The state "
+"transition must fully complete before the reply is sent."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1656
+msgid ""
+"The data field of the reply message, as well as the ``SET`` request message, "
+"is structured as follows:"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1662
+msgid "device_state"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1664
+msgid "data_fd"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1667
+msgid ""
+"*device_state* is the current state of the device (for ``GET``) or the state "
+"to transition to (for ``SET``). It is defined by the "
+"``vfio_device_mig_state`` enum as detailed below. These states are the "
+"states of the device migration Finite State Machine."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1673
+msgid "State"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1675
+msgid "VFIO_DEVICE_STATE_ERROR"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1675
+msgid "The device has failed and must be reset."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1677
+msgid "VFIO_DEVICE_STATE_STOP"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1677
+msgid "The device does not change the internal or external state."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1679
+msgid "VFIO_DEVICE_STATE_RUNNING"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1679
+msgid "The device is running normally."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1681
+msgid "VFIO_DEVICE_STATE_STOP_COPY"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1681
+msgid "The device internal state can be read out."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1683
+msgid "VFIO_DEVICE_STATE_RESUMING"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1683
+msgid "The device is stopped and is loading a new internal state."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1685
+msgid "VFIO_DEVICE_STATE_RUNNING_P2P"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1685 ../../../interop/vfio-user.rst:1689
+msgid "(not used in vfio-user)"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1687
+msgid "VFIO_DEVICE_STATE_PRE_COPY"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1687
+msgid "The device is running normally but tracking internal state changes."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1689
+msgid "VFIO_DEVICE_STATE_PRE_COPY_P2P"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1692
+msgid ""
+"*data_fd* is unused in vfio-user, as the ``VFIO_USER_MIG_DATA_READ`` and "
+"``VFIO_USER_MIG_DATA_WRITE`` messages are used instead for migration data "
+"transport."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1697
+msgid "Direct State Transitions"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1699
+msgid ""
+"The device migration FSM is a Mealy machine, so actions are taken upon the "
+"arcs between FSM states. The following transitions need to be supported by "
+"the server, a subset of those defined in ``<linux/vfio.h>`` (``enum "
+"vfio_device_mig_state``)."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1704
+msgid ""
+"``RUNNING -> STOP``, ``STOP_COPY -> STOP``: Stop the operation of the "
+"device. The ``STOP_COPY`` arc terminates the data transfer session."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1707
+msgid ""
+"``RESUMING -> STOP``: Terminate the data transfer session. Complete "
+"processing of the migration data. Stop the operation of the device. If the "
+"delivered data is found to be incomplete, inconsistent, or otherwise "
+"invalid, fail the ``SET`` command and optionally transition to the ``ERROR`` "
+"state."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1712
+msgid ""
+"``PRE_COPY -> RUNNING``: Terminate the data transfer session. The device is "
+"now fully operational."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1715
+msgid "``STOP -> RUNNING``: Start the operation of the device."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1717
+msgid ""
+"``RUNNING -> PRE_COPY``, ``STOP -> STOP_COPY``: Begin the process of saving "
+"the device state. The device operation is unchanged, but data transfer "
+"begins. ``PRE_COPY`` and ``STOP_COPY`` are referred to as the \"saving "
+"group\" of states."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1722
+msgid ""
+"``PRE_COPY -> STOP_COPY``: Continue to transfer migration data, but stop "
+"device operation."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1725
+msgid ""
+"``STOP -> RESUMING``: Start the process of restoring the device state. The "
+"internal device state may be changed to prepare the device to receive the "
+"migration data."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1729
+msgid ""
+"The ``STOP_COPY -> PRE_COPY`` transition is explicitly not allowed and "
+"should return an error if requested."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1732
+msgid ""
+"``ERROR`` cannot be specified as a device state, but any transition request "
+"can be failed and then move the state into ``ERROR`` if the server was "
+"unable to execute the requested arc AND was unable to restore the device "
+"into any valid state. To recover from ``ERROR``, ``VFIO_USER_DEVICE_RESET`` "
+"must be used to return back to ``RUNNING``."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1738
+msgid "If ``PRE_COPY`` is not supported, arcs touching it are removed."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1741
+msgid "Complex State Transitions"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1743
+msgid ""
+"The remaining possible transitions are to be implemented as combinations of "
+"the above FSM arcs. As there are multiple paths, the path should be selected "
+"based on the following rules:"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1747
+msgid "Select the shortest path."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1749
+msgid ""
+"The path cannot have saving group states as interior arcs, only start/end "
+"states."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1753
+msgid ""
+"``VFIO_DEVICE_FEATURE_DMA_LOGGING_START`` / "
+"``VFIO_DEVICE_FEATURE_DMA_LOGGING_STOP``"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1755
+msgid ""
+"Upon ``VFIO_DEVICE_FEATURE_SET``, start/stop DMA logging. These features can "
+"also be probed to determine whether the device supports DMA logging."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1758
+msgid ""
+"When DMA logging is started, a range of IOVAs to monitor is provided and the "
+"device can optimize its logging to cover only the IOVA range given. Only DMA "
+"writes are logged."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1762
+msgid "The data field of the ``SET`` request is structured as follows:"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1767 ../../../interop/vfio-user.rst:1817
+msgid "page_size"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1769
+msgid "num_ranges"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1773
+msgid "ranges"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1776
+msgid ""
+"*page_size* hints what tracking granularity the device should try to "
+"achieve. If the device cannot do the hinted page size then it's the driver's "
+"choice which page size to pick based on its support. On output the device "
+"will return the page size it selected."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1781
+msgid ""
+"*num_ranges* is the number of IOVA ranges to monitor. A value of zero "
+"indicates that all writes should be logged."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1784
+msgid ""
+"*ranges* is an array of ``vfio_user_device_feature_dma_logging_range`` "
+"entries:"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1790 ../../../interop/vfio-user.rst:1813
+msgid "iova"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1792 ../../../interop/vfio-user.rst:1815
+msgid "length"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1795 ../../../interop/vfio-user.rst:1820
+msgid "*iova* is the base IO virtual address"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1796
+msgid "*length* is the length of the range to log"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1798
+msgid ""
+"Upon success, the response data field will be the same as the request, "
+"unless the page size was changed, in which case this will be reflected in "
+"the response."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1802
+msgid "``VFIO_DEVICE_FEATURE_DMA_LOGGING_REPORT``"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1804
+msgid ""
+"Upon ``VFIO_DEVICE_FEATURE_GET``, returns the dirty bitmap for a specific "
+"IOVA range. This operation is only valid if logging of dirty pages has been "
+"previously started by setting ``VFIO_DEVICE_FEATURE_DMA_LOGGING_START``."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1808
+msgid "The data field of the request is structured as follows:"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1822
+msgid "*length* is the length of the range"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1824
+msgid ""
+"*page_size* is the unit of granularity of the bitmap, and must be a power of "
+"two. It doesn't have to match the value given to "
+"``VFIO_DEVICE_FEATURE_DMA_LOGGING_START`` because the driver will format its "
+"internal logging to match the reporting page size possibly by replicating "
+"bits if the internal page size is lower than requested"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1830
+msgid ""
+"The data field of the response is identical, except with the bitmap added on "
+"the end at offset 24."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1833
+msgid ""
+"The bitmap is an array of u64s that holds the output bitmap, with 1 bit "
+"reporting a *page_size* unit of IOVA. The bits outside of the requested "
+"range must be zero."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1837
+msgid "The mapping of IOVA to bits is given by:"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1839
+msgid "``bitmap[(addr - iova)/page_size] & (1ULL << (addr % 64))``"
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1844
+msgid ""
+"This command is used to read data from the source migration server while it "
+"is in a saving group state (``PRE_COPY`` or ``STOP_COPY``)."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1847
+msgid ""
+"This command, and ``VFIO_USER_MIG_DATA_WRITE``, are used in place of the "
+"``data_fd`` file descriptor in ``<linux/vfio.h>`` (``struct "
+"vfio_device_feature_mig_state``) to enable all data transport to use the "
+"single already-established UNIX socket. Hence, the migration data is treated "
+"like a stream, so the client must continue reading until no more migration "
+"data remains."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1869
+msgid "*size* is the size of the migration data to read."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1874
+msgid ""
+"The reply payload for this message is a structure of the following format."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1886
+msgid ""
+"*argsz* is the size of the above structure, including the size of the data."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1888
+msgid ""
+"*size* indicates the size of returned migration data. If this is less than "
+"the requested size, there is no more migration data to read."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1891 ../../../interop/vfio-user.rst:1921
+msgid "*data* contains the migration data."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1896
+msgid ""
+"This command is used to write data to the destination migration server while "
+"it is in the ``RESUMING`` state."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1899
+msgid ""
+"As above, this replaces the ``data_fd`` file descriptor for transport of "
+"migration data, and as such, the migration data is treated like a stream."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1919
+msgid "*size* is the size of the migration data to be written."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1926
+msgid "There is no reply payload for this message."
+msgstr ""
+
+#: ../../../interop/vfio-user.rst:1929
 msgid "Appendices"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1474
+#: ../../../interop/vfio-user.rst:1932
 msgid "Unused VFIO ``ioctl()`` commands"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1476
+#: ../../../interop/vfio-user.rst:1934
 msgid ""
 "The following VFIO commands do not have an equivalent vfio-user command:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1478
+#: ../../../interop/vfio-user.rst:1936
 msgid "``VFIO_GET_API_VERSION``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1479
+#: ../../../interop/vfio-user.rst:1937
 msgid "``VFIO_CHECK_EXTENSION``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1480
+#: ../../../interop/vfio-user.rst:1938
 msgid "``VFIO_SET_IOMMU``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1481
+#: ../../../interop/vfio-user.rst:1939
 msgid "``VFIO_GROUP_GET_STATUS``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1482
+#: ../../../interop/vfio-user.rst:1940
 msgid "``VFIO_GROUP_SET_CONTAINER``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1483
+#: ../../../interop/vfio-user.rst:1941
 msgid "``VFIO_GROUP_UNSET_CONTAINER``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1484
+#: ../../../interop/vfio-user.rst:1942
 msgid "``VFIO_GROUP_GET_DEVICE_FD``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1485
+#: ../../../interop/vfio-user.rst:1943
 msgid "``VFIO_IOMMU_GET_INFO``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1487
+#: ../../../interop/vfio-user.rst:1945
 msgid ""
 "However, once support for live migration for VFIO devices is finalized some "
 "of the above commands may have to be handled by the client in their "
@@ -2354,11 +3073,11 @@ msgid ""
 "version."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1493
+#: ../../../interop/vfio-user.rst:1951
 msgid "VFIO groups and containers"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1495
+#: ../../../interop/vfio-user.rst:1953
 msgid ""
 "The current VFIO implementation includes group and container idioms that "
 "describe how a device relates to the host IOMMU. In the vfio-user "
@@ -2367,54 +3086,54 @@ msgid ""
 "device into its own group and container."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1502
+#: ../../../interop/vfio-user.rst:1960
 msgid "Backend Program Conventions"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1504
+#: ../../../interop/vfio-user.rst:1962
 msgid "vfio-user backend program conventions are based on the vhost-user ones."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1506
+#: ../../../interop/vfio-user.rst:1964
 msgid "The backend program must not daemonize itself."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1507
+#: ../../../interop/vfio-user.rst:1965
 msgid ""
 "No assumptions must be made as to what access the backend program has on the "
 "system."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1509
+#: ../../../interop/vfio-user.rst:1967
 msgid ""
 "File descriptors 0, 1 and 2 must exist, must have regular stdin/stdout/"
 "stderr semantics, and can be redirected."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1511
+#: ../../../interop/vfio-user.rst:1969
 msgid "The backend program must honor the SIGTERM signal."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1512
+#: ../../../interop/vfio-user.rst:1970
 msgid "The backend program must accept the following commands line options:"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1514
+#: ../../../interop/vfio-user.rst:1972
 msgid "``--socket-path=PATH``: path to UNIX domain socket,"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1515
+#: ../../../interop/vfio-user.rst:1973
 msgid ""
 "``--fd=FDNUM``: file descriptor for UNIX domain socket, incompatible with "
 "``--socket-path``"
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1517
+#: ../../../interop/vfio-user.rst:1975
 msgid ""
 "The backend program must be accompanied with a JSON file stored under ``/usr/"
 "share/vfio-user``."
 msgstr ""
 
-#: ../../../interop/vfio-user.rst:1520
+#: ../../../interop/vfio-user.rst:1978
 msgid "TODO add schema similar to docs/interop/vhost-user.json."
 msgstr ""

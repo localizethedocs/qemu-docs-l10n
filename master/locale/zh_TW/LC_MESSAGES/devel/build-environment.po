@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2025-12-22 08:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,125 +23,183 @@ msgstr ""
 
 #: ../../../devel/build-environment.rst:7
 msgid ""
-"QEMU uses a lot of dependencies on the host system. glib2 is used everywhere "
-"in the code base, and most of the other dependencies are optional."
-msgstr ""
-
-#: ../../../devel/build-environment.rst:10
-msgid ""
-"We present here simple instructions to enable native builds on most popular "
-"systems."
+"QEMU uses a lot of dependencies on the host system a large number of which "
+"are optional. At a minimum we expect to have a system C library (usually "
+"glibc but others can work), the glib2 library (used heavily in the code "
+"base) and a few other core libraries for interfacing with code modules and "
+"system build descriptions."
 msgstr ""
 
 #: ../../../devel/build-environment.rst:13
 msgid ""
-"You can find additional instructions on `QEMU wiki <https://wiki.qemu.org/"
-">`_:"
-msgstr ""
-
-#: ../../../devel/build-environment.rst:15
-msgid "`Linux <https://wiki.qemu.org/Hosts/Linux>`_"
-msgstr ""
-
-#: ../../../devel/build-environment.rst:16
-msgid "`MacOS <https://wiki.qemu.org/Hosts/Mac>`_"
+"We use the ``libvirt-ci`` project to handle the mapping of dependencies to a "
+"wide variety output formats including system install scripts. For example:"
 msgstr ""
 
 #: ../../../devel/build-environment.rst:17
-msgid "`Windows <https://wiki.qemu.org/Hosts/W32>`_"
-msgstr ""
-
-#: ../../../devel/build-environment.rst:18
-msgid "`BSD <https://wiki.qemu.org/Hosts/BSD>`_"
-msgstr ""
-
-#: ../../../devel/build-environment.rst:20
 msgid ""
-"Note: Installing dependencies using your package manager build dependencies "
-"may miss out on deps that have been newly introduced in qemu.git. In more, "
-"it misses deps the distribution has decided to exclude."
+"# THIS FILE WAS AUTO-GENERATED\n"
+"#\n"
+"#  $ lcitool buildenvscript debian-13 ./tests/lcitool/projects/qemu-minimal."
+"yml\n"
+"#\n"
+"# https://gitlab.com/libvirt/libvirt-ci\n"
+"\n"
+"function install_buildenv() {\n"
+"    export DEBIAN_FRONTEND=noninteractive\n"
+"    apt-get update\n"
+"    apt-get dist-upgrade -y\n"
+"    apt-get install --no-install-recommends -y \\\n"
+"            bash \\\n"
+"            bc \\\n"
+"            bison \\\n"
+"            bzip2 \\\n"
+"            ca-certificates \\\n"
+"            ccache \\\n"
+"            findutils \\\n"
+"            flex \\\n"
+"            gcc \\\n"
+"            git \\\n"
+"            libc6-dev \\\n"
+"            libfdt-dev \\\n"
+"            libffi-dev \\\n"
+"            libglib2.0-dev \\\n"
+"            libpixman-1-dev \\\n"
+"            locales \\\n"
+"            make \\\n"
+"            meson \\\n"
+"            ninja-build \\\n"
+"            pkgconf \\\n"
+"            python3 \\\n"
+"            python3-venv \\\n"
+"            sed \\\n"
+"            tar\n"
+"    sed -Ei 's,^# (en_US\\.UTF-8 .*)$,\\1,' /etc/locale.gen\n"
+"    dpkg-reconfigure locales\n"
+"    rm -f /usr/lib*/python3*/EXTERNALLY-MANAGED\n"
+"    dpkg-query --showformat '${Package}_${Version}_${Architecture}\\n' --"
+"show > /packages.txt\n"
+"    mkdir -p /usr/libexec/ccache-wrappers\n"
+"    ln -s /usr/bin/ccache /usr/libexec/ccache-wrappers/cc\n"
+"    ln -s /usr/bin/ccache /usr/libexec/ccache-wrappers/gcc\n"
+"}\n"
+"\n"
+"export CCACHE_WRAPPERSDIR=\"/usr/libexec/ccache-wrappers\"\n"
+"export LANG=\"en_US.UTF-8\"\n"
+"export MAKE=\"/usr/bin/make\"\n"
+"export NINJA=\"/usr/bin/ninja\"\n"
+"export PYTHON=\"/usr/bin/python3\""
 msgstr ""
 
-#: ../../../devel/build-environment.rst:25
-msgid "Linux"
+#: ../../../devel/build-environment.rst:69
+msgid ""
+"If you instead select the ``qemu.yml`` project file you will get all the "
+"dependencies that the project can use."
 msgstr ""
 
-#: ../../../devel/build-environment.rst:28
+#: ../../../devel/build-environment.rst:73
+msgid "Using you system package manager"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:77
+msgid ""
+"Installing dependencies using your package manager build dependencies may "
+"miss out on deps that have been newly introduced in qemu.git. It also misses "
+"deps the distribution has decided to exclude."
+msgstr ""
+
+#: ../../../devel/build-environment.rst:82
+msgid "Systems with Package Managers"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:84
+msgid "Package Manager Commands"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:88
+msgid "System"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:89
+msgid "Command"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:90
+msgid "Notes"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:91
 msgid "Fedora"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:32
-msgid "sudo dnf update && sudo dnf builddep qemu"
+#: ../../../devel/build-environment.rst:92
+msgid "``sudo dnf update && sudo dnf builddep qemu``"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:35
+#: ../../../devel/build-environment.rst:94
 msgid "Debian/Ubuntu"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:37
-msgid ""
-"You first need to enable `Sources List <https://wiki.debian.org/"
-"SourcesList>`_. Then, use apt to install dependencies:"
+#: ../../../devel/build-environment.rst:95
+msgid "``sudo apt update && sudo apt build-dep qemu``"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:42
-msgid "sudo apt update && sudo apt build-dep qemu"
+#: ../../../devel/build-environment.rst:96
+msgid "Must enable `Sources List <https://wiki.debian.org/SourcesList>`_ first"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:45
+#: ../../../devel/build-environment.rst:98
 msgid "MacOS"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:47
-msgid ""
-"You first need to install `Homebrew <https://brew.sh/>`_. Then, use it to "
-"install dependencies:"
+#: ../../../devel/build-environment.rst:99
+msgid "``brew update && brew install $(brew deps --include-build qemu)``"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:52
-msgid "brew update && brew install $(brew deps --include-build qemu)"
+#: ../../../devel/build-environment.rst:100
+msgid "Using `Homebrew <https://brew.sh/>`_."
 msgstr ""
 
-#: ../../../devel/build-environment.rst:55
+#: ../../../devel/build-environment.rst:103
 msgid "Windows"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:57
+#: ../../../devel/build-environment.rst:105
 msgid ""
 "You first need to install `MSYS2 <https://www.msys2.org/>`_. MSYS2 offers "
 "`different environments <https://www.msys2.org/docs/environments/>`_. x86_64 "
 "environments are based on GCC, while aarch64 is based on Clang."
 msgstr ""
 
-#: ../../../devel/build-environment.rst:61
+#: ../../../devel/build-environment.rst:109
 msgid ""
 "We recommend to use MINGW64 for windows-x86_64 and CLANGARM64 for windows-"
 "aarch64 (only available on windows-aarch64 hosts)."
 msgstr ""
 
-#: ../../../devel/build-environment.rst:64
+#: ../../../devel/build-environment.rst:112
 msgid "Then, you can open a windows shell, and enter msys2 env using:"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:68
+#: ../../../devel/build-environment.rst:116
 msgid ""
 "c:/msys64/msys2_shell.cmd -defterm -here -no-start -mingw64\n"
 "# Replace -ucrt64 by -clangarm64 or -ucrt64 for other environments."
 msgstr ""
 
-#: ../../../devel/build-environment.rst:71
+#: ../../../devel/build-environment.rst:119
 msgid ""
 "MSYS2 package manager does not offer a built-in way to install build "
 "dependencies. You can start with this list of packages using pacman:"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:74
+#: ../../../devel/build-environment.rst:122
 msgid ""
 "Note: Dependencies need to be installed again if you use a different MSYS2 "
 "environment."
 msgstr ""
 
-#: ../../../devel/build-environment.rst:79
+#: ../../../devel/build-environment.rst:127
 msgid ""
 "# update MSYS2 itself, you need to reopen your shell at the end.\n"
 "pacman -Syu\n"
@@ -160,13 +218,13 @@ msgid ""
 "    ${MINGW_PACKAGE_PREFIX}-zstd"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:95
+#: ../../../devel/build-environment.rst:143
 msgid ""
 "If you want to install all dependencies, it's possible to use recipe used to "
 "build QEMU in MSYS2 itself."
 msgstr ""
 
-#: ../../../devel/build-environment.rst:100
+#: ../../../devel/build-environment.rst:148
 msgid ""
 "pacman -S wget base-devel git\n"
 "wget https://raw.githubusercontent.com/msys2/MINGW-packages/refs/heads/"
@@ -177,22 +235,22 @@ msgid ""
 "makepkg --syncdeps --nobuild PKGBUILD || true"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:107
+#: ../../../devel/build-environment.rst:155
 msgid "Build on windows-aarch64"
 msgstr ""
 
-#: ../../../devel/build-environment.rst:109
+#: ../../../devel/build-environment.rst:157
 msgid ""
 "When trying to cross compile meson for x86_64 using UCRT64 or MINGW64 env, "
 "configure will run into an error because the cpu detected is not correct."
 msgstr ""
 
-#: ../../../devel/build-environment.rst:112
+#: ../../../devel/build-environment.rst:160
 msgid ""
 "Meson detects x86_64 processes emulated, so you need to manually set the "
 "cpu, and force a cross compilation (with empty prefix)."
 msgstr ""
 
-#: ../../../devel/build-environment.rst:117
+#: ../../../devel/build-environment.rst:165
 msgid "./configure --cpu=x86_64 --cross-prefix="
 msgstr ""
