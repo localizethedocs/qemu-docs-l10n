@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Virtual CPU hotplug &#8212; QEMU 4.1.1 說明文件</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=1bee490e"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=cbf116e0"></script>
+    <link rel="canonical" href="https://projects.localizethedocs.org/qemu-docs-l10n/cpu-hotplug.html" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜尋" href="search.html" />
+
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+<script type="text/javascript" src="ltd-provenance.js"></script>
+<script type="text/javascript" src="ltd-current.js"></script>
+<script type="text/javascript" src="../../ltd-config.js"></script>
+<script type="text/javascript" src="../../ltd-flyout.js"></script>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="virtual-cpu-hotplug">
+<h1>Virtual CPU hotplug<a class="headerlink" href="#virtual-cpu-hotplug" title="連結到這個標頭">¶</a></h1>
+<p>A complete example of vCPU hotplug (and hot-unplug) using QMP
+<code class="docutils literal notranslate"><span class="pre">device_add</span></code> and <code class="docutils literal notranslate"><span class="pre">device_del</span></code>.</p>
+<section id="vcpu-hotplug">
+<h2>vCPU hotplug<a class="headerlink" href="#vcpu-hotplug" title="連結到這個標頭">¶</a></h2>
+<ol class="arabic">
+<li><p>Launch QEMU as follows (note that the &quot;maxcpus&quot; is mandatory to
+allow vCPU hotplug):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-system-x86_64 -display none -no-user-config -m 2048 \
+    -nodefaults -monitor stdio -machine pc,accel=kvm,usb=off \
+    -smp 1,maxcpus=2 -cpu IvyBridge-IBRS \
+    -qmp unix:/tmp/qmp-sock,server,nowait
+</pre></div>
+</div>
+</li>
+<li><p>Run 'qmp-shell' (located in the source tree, under: &quot;scripts/qmp/)
+to connect to the just-launched QEMU:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$&gt; ./qmp-shell -p -v /tmp/qmp-sock
+[...]
+(QEMU)
+</pre></div>
+</div>
+</li>
+<li><p>Find out which CPU types could be plugged, and into which sockets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">QEMU</span><span class="p">)</span> <span class="n">query</span><span class="o">-</span><span class="n">hotpluggable</span><span class="o">-</span><span class="n">cpus</span>
+<span class="p">{</span>
+    <span class="s2">&quot;execute&quot;</span><span class="p">:</span> <span class="s2">&quot;query-hotpluggable-cpus&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;arguments&quot;</span><span class="p">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="p">{</span>
+    <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;IvyBridge-IBRS-x86_64-cpu&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;vcpus-count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;props&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;socket-id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;core-id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;thread-id&quot;</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;qom-path&quot;</span><span class="p">:</span> <span class="s2">&quot;/machine/unattached/device[0]&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;IvyBridge-IBRS-x86_64-cpu&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;vcpus-count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;props&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;socket-id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;core-id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;thread-id&quot;</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+<span class="p">(</span><span class="n">QEMU</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">query-hotpluggable-cpus</span></code> command returns an object for CPUs
+that are present (containing a &quot;qom-path&quot; member) or which may be
+hot-plugged (no &quot;qom-path&quot; member).  From its output in step (3), we
+can see that <code class="docutils literal notranslate"><span class="pre">IvyBridge-IBRS-x86_64-cpu</span></code> is present in socket 0,
+while hot-plugging a CPU into socket 1 requires passing the listed
+properties to QMP <code class="docutils literal notranslate"><span class="pre">device_add</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">QEMU</span><span class="p">)</span> <span class="n">device_add</span> <span class="nb">id</span><span class="o">=</span><span class="n">cpu</span><span class="o">-</span><span class="mi">2</span> <span class="n">driver</span><span class="o">=</span><span class="n">IvyBridge</span><span class="o">-</span><span class="n">IBRS</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="n">cpu</span> <span class="n">socket</span><span class="o">-</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span> <span class="n">core</span><span class="o">-</span><span class="nb">id</span><span class="o">=</span><span class="mi">0</span> <span class="n">thread</span><span class="o">-</span><span class="nb">id</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">{</span>
+    <span class="s2">&quot;execute&quot;</span><span class="p">:</span> <span class="s2">&quot;device_add&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;arguments&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;socket-id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="s2">&quot;IvyBridge-IBRS-x86_64-cpu&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;cpu-2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;core-id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;thread-id&quot;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">{</span>
+    <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="p">(</span><span class="n">QEMU</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Optionally, run QMP <cite>query-cpus-fast</cite> for some details about the
+vCPUs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">QEMU</span><span class="p">)</span> <span class="n">query</span><span class="o">-</span><span class="n">cpus</span><span class="o">-</span><span class="n">fast</span>
+<span class="p">{</span>
+    <span class="s2">&quot;execute&quot;</span><span class="p">:</span> <span class="s2">&quot;query-cpus-fast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;arguments&quot;</span><span class="p">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="p">{</span>
+    <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;qom-path&quot;</span><span class="p">:</span> <span class="s2">&quot;/machine/unattached/device[0]&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;x86_64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;thread-id&quot;</span><span class="p">:</span> <span class="mi">11534</span><span class="p">,</span>
+            <span class="s2">&quot;cpu-index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;props&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;socket-id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;core-id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;thread-id&quot;</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;arch&quot;</span><span class="p">:</span> <span class="s2">&quot;x86&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;qom-path&quot;</span><span class="p">:</span> <span class="s2">&quot;/machine/peripheral/cpu-2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;x86_64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;thread-id&quot;</span><span class="p">:</span> <span class="mi">12106</span><span class="p">,</span>
+            <span class="s2">&quot;cpu-index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;props&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;socket-id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;core-id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;thread-id&quot;</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;arch&quot;</span><span class="p">:</span> <span class="s2">&quot;x86&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+<span class="p">(</span><span class="n">QEMU</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="vcpu-hot-unplug">
+<h2>vCPU hot-unplug<a class="headerlink" href="#vcpu-hot-unplug" title="連結到這個標頭">¶</a></h2>
+<p>From the 'qmp-shell', invoke the QMP <code class="docutils literal notranslate"><span class="pre">device_del</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">QEMU</span><span class="p">)</span> <span class="n">device_del</span> <span class="nb">id</span><span class="o">=</span><span class="n">cpu</span><span class="o">-</span><span class="mi">2</span>
+<span class="p">{</span>
+    <span class="s2">&quot;execute&quot;</span><span class="p">:</span> <span class="s2">&quot;device_del&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;arguments&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;cpu-2&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">{</span>
+    <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="p">(</span><span class="n">QEMU</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">備註</p>
+<p>vCPU hot-unplug requires guest cooperation; so the <code class="docutils literal notranslate"><span class="pre">device_del</span></code>
+command above does not guarantee vCPU removal -- it's a &quot;request to
+unplug&quot;.  At this point, the guest will get a System Control
+Interrupt (SCI) and calls the ACPI handler for the affected vCPU
+device.  Then the guest kernel will bring the vCPU offline and tell
+QEMU to unplug it.</p>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+
+
+
+
+
+<h3>瀏覽</h3>
+<p class="caption" role="heading"><span class="caption-text">目次：</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="interop/index.html">QEMU System Emulation Management and Interoperability Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devel/index.html">QEMU Developer's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specs/index.html">QEMU System Emulation Guest Hardware Specifications</a></li>
+</ul>
+
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜尋</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="前往" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2019, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
