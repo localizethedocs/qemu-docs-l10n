@@ -65,7 +65,7 @@
 The goal of this project is to translate the QEMU Documentation into multiple languages. Translations are contributed via the Crowdin platform, automatically synchronized with the GitHub repository, and can be previewed on GitHub Pages.
 
 > [!NOTE]
-> The translation is community-driven. If you find any inaccuracies, always refer to the <a href="https://www.qemu.org/docs/master">official documentation</a> or the <a href="https://gitlab.com/qemu-project/qemu">source repository</a> of the upstream project for the most reliable information.
+> The translation is <strong>unofficial</strong> and <strong>community-driven</strong>. If you find any inaccuracies, always refer to the <a href="https://www.qemu.org/docs/master">official documentation</a> or the <a href="https://gitlab.com/qemu-project/qemu">source repository</a> of the upstream project for the most reliable information.
 
 <div align="center">
 <table>
