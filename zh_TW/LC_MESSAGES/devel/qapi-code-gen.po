@@ -1,0 +1,2973 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 7.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/qapi-code-gen.rst:3
+msgid "How to use the QAPI code generator"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:14
+msgid "Introduction"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:16
+msgid ""
+"QAPI is a native C API within QEMU which provides management-level "
+"functionality to internal and external users.  For external users/processes, "
+"this interface is made available by a JSON-based wire format for the QEMU "
+"Monitor Protocol (QMP) for controlling qemu, as well as the QEMU Guest Agent "
+"(QGA) for communicating with the guest. The remainder of this document uses "
+"\"Client JSON Protocol\" when referring to the wire contents of a QMP or QGA "
+"connection."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:24
+msgid ""
+"To map between Client JSON Protocol interfaces and the native C API, we "
+"generate C code from a QAPI schema.  This document describes the QAPI schema "
+"language, and how it gets mapped to the Client JSON Protocol and to C.  It "
+"additionally provides guidance on maintaining Client JSON Protocol "
+"compatibility."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:32
+msgid "The QAPI schema language"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:34
+msgid ""
+"The QAPI schema defines the Client JSON Protocol's commands and events, as "
+"well as types used by them.  Forward references are allowed."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:38
+msgid ""
+"It is permissible for the schema to contain additional types not used by any "
+"commands or events, for the side effect of generated C code used internally."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:42
+msgid ""
+"There are several kinds of types: simple types (a number of built-in types, "
+"such as ``int`` and ``str``; as well as enumerations), arrays, complex types "
+"(structs and unions), and alternate types (a choice between other types)."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:49
+msgid "Schema syntax"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:51
+msgid ""
+"Syntax is loosely based on `JSON <http://www.ietf.org/rfc/rfc8259.txt>`_. "
+"Differences:"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:54
+msgid ""
+"Comments: start with a hash character (``#``) that is not part of a string, "
+"and extend to the end of the line."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:57
+msgid "Strings are enclosed in ``'single quotes'``, not ``\"double quotes\"``."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:59
+msgid ""
+"Strings are restricted to printable ASCII, and escape sequences to just ``\\"
+"\\``."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:62
+msgid "Numbers and ``null`` are not supported."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:64
+msgid ""
+"A second layer of syntax defines the sequences of JSON texts that are a "
+"correctly structured QAPI schema.  We provide a grammar for this syntax in "
+"an EBNF-like notation:"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:68
+msgid "Production rules look like ``non-terminal = expression``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:69
+msgid "Concatenation: expression ``A B`` matches expression ``A``, then ``B``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:70
+msgid "Alternation: expression ``A | B`` matches expression ``A`` or ``B``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:71
+msgid ""
+"Repetition: expression ``A...`` matches zero or more occurrences of "
+"expression ``A``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:73
+msgid ""
+"Repetition: expression ``A, ...`` matches zero or more occurrences of "
+"expression ``A`` separated by ``,``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:75
+msgid "Grouping: expression ``( A )`` matches expression ``A``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:76
+msgid "JSON's structural characters are terminals: ``{ } [ ] : ,``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:77
+msgid "JSON's literal names are terminals: ``false true``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:78
+msgid ""
+"String literals enclosed in ``'single quotes'`` are terminal, and match this "
+"JSON string, with a leading ``*`` stripped off"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:80
+msgid ""
+"When JSON object member's name starts with ``*``, the member is optional."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:82
+msgid "The symbol ``STRING`` is a terminal, and matches any JSON string"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:83
+msgid ""
+"The symbol ``BOOL`` is a terminal, and matches JSON ``false`` or ``true``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:84
+msgid "ALL-CAPS words other than ``STRING`` are non-terminals"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:86
+msgid ""
+"The order of members within JSON objects does not matter unless explicitly "
+"noted."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:89
+msgid "A QAPI schema consists of a series of top-level expressions::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:91
+msgid "SCHEMA = TOP-LEVEL-EXPR..."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:93
+msgid ""
+"The top-level expressions are all JSON objects.  Code and documentation is "
+"generated in schema definition order.  Code order should not matter."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:97
+msgid "A top-level expressions is either a directive or a definition::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:99
+msgid "TOP-LEVEL-EXPR = DIRECTIVE | DEFINITION"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:101
+msgid "There are two kinds of directives and six kinds of definitions::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:103
+msgid ""
+"DIRECTIVE = INCLUDE | PRAGMA\n"
+"DEFINITION = ENUM | STRUCT | UNION | ALTERNATE | COMMAND | EVENT"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:106
+msgid "These are discussed in detail below."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:110
+msgid "Built-in Types"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:112
+msgid "The following types are predefined, and map to C as follows:"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:115
+msgid "Schema"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:115
+msgid "C"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:115
+msgid "JSON"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:117
+msgid "``str``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:117
+msgid "``char *``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:117
+msgid "any JSON string, UTF-8"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:118
+msgid "``number``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:118
+msgid "``double``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:118
+msgid "any JSON number"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:119
+msgid "``int``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:119 ../../../devel/qapi-code-gen.rst:124
+msgid "``int64_t``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:119
+msgid "a JSON number without fractional part that fits into the C integer type"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:121
+msgid "``int8``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:121
+msgid "``int8_t``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:121 ../../../devel/qapi-code-gen.rst:122
+#: ../../../devel/qapi-code-gen.rst:123 ../../../devel/qapi-code-gen.rst:124
+#: ../../../devel/qapi-code-gen.rst:125 ../../../devel/qapi-code-gen.rst:126
+#: ../../../devel/qapi-code-gen.rst:127 ../../../devel/qapi-code-gen.rst:128
+msgid "likewise"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:122
+msgid "``int16``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:122
+msgid "``int16_t``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:123
+msgid "``int32``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:123
+msgid "``int32_t``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:124
+msgid "``int64``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:125
+msgid "``uint8``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:125
+msgid "``uint8_t``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:126
+msgid "``uint16``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:126
+msgid "``uint16_t``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:127
+msgid "``uint32``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:127
+msgid "``uint32_t``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:128
+msgid "``uint64``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:128 ../../../devel/qapi-code-gen.rst:129
+msgid "``uint64_t``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:129
+msgid "``size``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:129
+msgid "like ``uint64_t``, except ``StringInputVisitor`` accepts size suffixes"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:131
+msgid "``bool``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:131
+msgid "JSON ``true`` or ``false``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:132
+msgid "``null``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:132
+msgid "``QNull *``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:132
+msgid "JSON ``null``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:133
+msgid "``any``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:133
+msgid "``QObject *``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:133
+msgid "any JSON value"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:134
+msgid "``QType``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:134
+msgid "JSON string matching enum ``QType`` values"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:139
+msgid "Include directives"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:141 ../../../devel/qapi-code-gen.rst:164
+#: ../../../devel/qapi-code-gen.rst:195 ../../../devel/qapi-code-gen.rst:247
+#: ../../../devel/qapi-code-gen.rst:261 ../../../devel/qapi-code-gen.rst:321
+#: ../../../devel/qapi-code-gen.rst:390 ../../../devel/qapi-code-gen.rst:446
+#: ../../../devel/qapi-code-gen.rst:625 ../../../devel/qapi-code-gen.rst:677
+#: ../../../devel/qapi-code-gen.rst:778
+msgid "Syntax::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:143
+msgid "INCLUDE = { 'include': STRING }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:145
+msgid ""
+"The QAPI schema definitions can be modularized using the 'include' "
+"directive::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:147
+msgid "{ 'include': 'path/to/file.json' }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:149
+msgid ""
+"The directive is evaluated recursively, and include paths are relative to "
+"the file using the directive.  Multiple includes of the same file are "
+"idempotent."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:153
+msgid ""
+"As a matter of style, it is a good idea to have all files be self-contained, "
+"but at the moment, nothing prevents an included file from making a forward "
+"reference to a type that is only introduced by an outer file.  The parser "
+"may be made stricter in the future to prevent incomplete include files."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:162
+msgid "Pragma directives"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:166
+msgid ""
+"PRAGMA = { 'pragma': {\n"
+"               '*doc-required': BOOL,\n"
+"               '*command-name-exceptions': [ STRING, ... ],\n"
+"               '*command-returns-exceptions': [ STRING, ... ],\n"
+"               '*member-name-exceptions': [ STRING, ... ] } }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:172
+msgid "The pragma directive lets you control optional generator behavior."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:174
+msgid ""
+"Pragma's scope is currently the complete schema.  Setting the same pragma to "
+"different values in parts of the schema doesn't work."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:177
+msgid ""
+"Pragma 'doc-required' takes a boolean value.  If true, documentation is "
+"required.  Default is false."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:180
+msgid ""
+"Pragma 'command-name-exceptions' takes a list of commands whose names may "
+"contain ``\"_\"`` instead of ``\"-\"``.  Default is none."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:183
+msgid ""
+"Pragma 'command-returns-exceptions' takes a list of commands that may "
+"violate the rules on permitted return types.  Default is none."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:186
+msgid ""
+"Pragma 'member-name-exceptions' takes a list of types whose member names may "
+"contain uppercase letters, and ``\"_\"`` instead of ``\"-\"``. Default is "
+"none."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:193
+msgid "Enumeration types"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:197
+msgid ""
+"ENUM = { 'enum': STRING,\n"
+"         'data': [ ENUM-VALUE, ... ],\n"
+"         '*prefix': STRING,\n"
+"         '*if': COND,\n"
+"         '*features': FEATURES }\n"
+"ENUM-VALUE = STRING\n"
+"           | { 'name': STRING,\n"
+"               '*if': COND,\n"
+"               '*features': FEATURES }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:207
+msgid "Member 'enum' names the enum type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:209
+msgid ""
+"Each member of the 'data' array defines a value of the enumeration type.  "
+"The form STRING is shorthand for :code:`{ 'name': STRING }`.  The 'name' "
+"values must be be distinct."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:213 ../../../devel/qapi-code-gen.rst:286
+#: ../../../devel/qapi-code-gen.rst:297 ../../../devel/qapi-code-gen.rst:358
+#: ../../../devel/qapi-code-gen.rst:410 ../../../devel/qapi-code-gen.rst:695
+#: ../../../devel/qapi-code-gen.rst:931 ../../../devel/qapi-code-gen.rst:1395
+#: ../../../devel/qapi-code-gen.rst:1498 ../../../devel/qapi-code-gen.rst:1643
+#: ../../../devel/qapi-code-gen.rst:1782 ../../../devel/qapi-code-gen.rst:1862
+msgid "Example::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:215
+msgid "{ 'enum': 'MyEnum', 'data': [ 'value1', 'value2', 'value3' ] }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:217
+msgid ""
+"Nothing prevents an empty enumeration, although it is probably not useful."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:220
+msgid ""
+"On the wire, an enumeration type's value is represented by its (string) "
+"name.  In C, it's represented by an enumeration constant. These are of the "
+"form PREFIX_NAME, where PREFIX is derived from the enumeration type's name, "
+"and NAME from the value's name.  For the example above, the generator maps "
+"'MyEnum' to MY_ENUM and 'value1' to VALUE1, resulting in the enumeration "
+"constant MY_ENUM_VALUE1.  The optional 'prefix' member overrides PREFIX."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:228
+msgid ""
+"The generated C enumeration constants have values 0, 1, ..., N-1 (in QAPI "
+"schema order), where N is the number of values.  There is an additional "
+"enumeration constant PREFIX__MAX with value N."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:232
+msgid ""
+"Do not use string or an integer type when an enumeration type can do the job "
+"satisfactorily."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:235 ../../../devel/qapi-code-gen.rst:311
+#: ../../../devel/qapi-code-gen.rst:380 ../../../devel/qapi-code-gen.rst:436
+#: ../../../devel/qapi-code-gen.rst:615 ../../../devel/qapi-code-gen.rst:665
+#: ../../../devel/qapi-code-gen.rst:692
+msgid ""
+"The optional 'if' member specifies a conditional.  See `Configuring the "
+"schema`_ below for more on this."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:238 ../../../devel/qapi-code-gen.rst:314
+#: ../../../devel/qapi-code-gen.rst:383 ../../../devel/qapi-code-gen.rst:439
+#: ../../../devel/qapi-code-gen.rst:618 ../../../devel/qapi-code-gen.rst:668
+msgid ""
+"The optional 'features' member specifies features.  See Features_ below for "
+"more on this."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:245
+msgid "Type references and array types"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:249
+msgid ""
+"TYPE-REF = STRING | ARRAY-TYPE\n"
+"ARRAY-TYPE = [ STRING ]"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:252
+msgid "A string denotes the type named by the string."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:254
+msgid ""
+"A one-element array containing a string denotes an array of the type named "
+"by the string.  Example: ``['int']`` denotes an array of ``int``."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:259
+msgid "Struct types"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:263
+msgid ""
+"STRUCT = { 'struct': STRING,\n"
+"           'data': MEMBERS,\n"
+"           '*base': STRING,\n"
+"           '*if': COND,\n"
+"           '*features': FEATURES }\n"
+"MEMBERS = { MEMBER, ... }\n"
+"MEMBER = STRING : TYPE-REF\n"
+"       | STRING : { 'type': TYPE-REF,\n"
+"                    '*if': COND,\n"
+"                    '*features': FEATURES }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:274
+msgid "Member 'struct' names the struct type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:276
+msgid "Each MEMBER of the 'data' object defines a member of the struct type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:280
+msgid ""
+"The MEMBER's STRING name consists of an optional ``*`` prefix and the struct "
+"member name.  If ``*`` is present, the member is optional."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:283
+msgid ""
+"The MEMBER's value defines its properties, in particular its type. The form "
+"TYPE-REF_ is shorthand for :code:`{ 'type': TYPE-REF }`."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:288
+msgid ""
+"{ 'struct': 'MyType',\n"
+"  'data': { 'member1': 'str', 'member2': ['int'], '*member3': 'str' } }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:291
+msgid ""
+"A struct type corresponds to a struct in C, and an object in JSON. The C "
+"struct's members are generated in QAPI schema order."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:294
+msgid ""
+"The optional 'base' member names a struct type whose members are to be "
+"included in this type.  They go first in the C struct."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:299
+msgid ""
+"{ 'struct': 'BlockdevOptionsGenericFormat',\n"
+"  'data': { 'file': 'str' } }\n"
+"{ 'struct': 'BlockdevOptionsGenericCOWFormat',\n"
+"  'base': 'BlockdevOptionsGenericFormat',\n"
+"  'data': { '*backing': 'str' } }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:305
+msgid ""
+"An example BlockdevOptionsGenericCOWFormat object on the wire could use both "
+"members like this::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:308
+msgid ""
+"{ \"file\": \"/some/place/my-image\",\n"
+"  \"backing\": \"/some/place/my-backing-file\" }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:319
+msgid "Union types"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:323
+msgid ""
+"UNION = { 'union': STRING,\n"
+"          'base': ( MEMBERS | STRING ),\n"
+"          'discriminator': STRING,\n"
+"          'data': BRANCHES,\n"
+"          '*if': COND,\n"
+"          '*features': FEATURES }\n"
+"BRANCHES = { BRANCH, ... }\n"
+"BRANCH = STRING : TYPE-REF\n"
+"       | STRING : { 'type': TYPE-REF, '*if': COND }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:333
+msgid "Member 'union' names the union type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:335
+msgid ""
+"The 'base' member defines the common members.  If it is a MEMBERS_ object, "
+"it defines common members just like a struct type's 'data' member defines "
+"struct type members.  If it is a STRING, it names a struct type whose "
+"members are the common members."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:340
+msgid ""
+"Member 'discriminator' must name a non-optional enum-typed member of the "
+"base struct.  That member's value selects a branch by its name. If no such "
+"branch exists, an empty branch is assumed."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:344
+msgid ""
+"Each BRANCH of the 'data' object defines a branch of the union.  A union "
+"must have at least one branch."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:347
+msgid ""
+"The BRANCH's STRING name is the branch name.  It must be a value of the "
+"discriminator enum type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:350
+msgid ""
+"The BRANCH's value defines the branch's properties, in particular its type.  "
+"The type must a struct type.  The form TYPE-REF_ is shorthand for :code:"
+"`{ 'type': TYPE-REF }`."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:354
+msgid ""
+"In the Client JSON Protocol, a union is represented by an object with the "
+"common members (from the base type) and the selected branch's members.  The "
+"two sets of member names must be disjoint."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:360
+msgid ""
+"{ 'enum': 'BlockdevDriver', 'data': [ 'file', 'qcow2' ] }\n"
+"{ 'union': 'BlockdevOptions',\n"
+"  'base': { 'driver': 'BlockdevDriver', '*read-only': 'bool' },\n"
+"  'discriminator': 'driver',\n"
+"  'data': { 'file': 'BlockdevOptionsFile',\n"
+"            'qcow2': 'BlockdevOptionsQcow2' } }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:367
+msgid "Resulting in these JSON objects::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:369
+msgid ""
+"{ \"driver\": \"file\", \"read-only\": true,\n"
+"  \"filename\": \"/some/place/my-image\" }\n"
+"{ \"driver\": \"qcow2\", \"read-only\": false,\n"
+"  \"backing\": \"/some/place/my-image\", \"lazy-refcounts\": true }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:374
+msgid ""
+"The order of branches need not match the order of the enum values. The "
+"branches need not cover all possible enum values.  In the resulting "
+"generated C data types, a union is represented as a struct with the base "
+"members in QAPI schema order, and then a union of structures for each branch "
+"of the struct."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:388
+msgid "Alternate types"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:392
+msgid ""
+"ALTERNATE = { 'alternate': STRING,\n"
+"              'data': ALTERNATIVES,\n"
+"              '*if': COND,\n"
+"              '*features': FEATURES }\n"
+"ALTERNATIVES = { ALTERNATIVE, ... }\n"
+"ALTERNATIVE = STRING : STRING\n"
+"            | STRING : { 'type': STRING, '*if': COND }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:400
+msgid "Member 'alternate' names the alternate type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:402
+msgid ""
+"Each ALTERNATIVE of the 'data' object defines a branch of the alternate.  An "
+"alternate must have at least one branch."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:405
+msgid "The ALTERNATIVE's STRING name is the branch name."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:407
+msgid ""
+"The ALTERNATIVE's value defines the branch's properties, in particular its "
+"type.  The form STRING is shorthand for :code:`{ 'type': STRING }`."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:412
+msgid ""
+"{ 'alternate': 'BlockdevRef',\n"
+"  'data': { 'definition': 'BlockdevOptions',\n"
+"            'reference': 'str' } }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:416
+msgid ""
+"An alternate type is like a union type, except there is no discriminator on "
+"the wire.  Instead, the branch to use is inferred from the value.  An "
+"alternate can only express a choice between types represented differently on "
+"the wire."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:421
+msgid ""
+"If a branch is typed as the 'bool' built-in, the alternate accepts true and "
+"false; if it is typed as any of the various numeric built-ins, it accepts a "
+"JSON number; if it is typed as a 'str' built-in or named enum type, it "
+"accepts a JSON string; if it is typed as the 'null' built-in, it accepts "
+"JSON null; and if it is typed as a complex type (struct or union), it "
+"accepts a JSON object."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:428
+msgid ""
+"The example alternate declaration above allows using both of the following "
+"example objects::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:431
+msgid ""
+"{ \"file\": \"my_existing_block_device_id\" }\n"
+"{ \"file\": { \"driver\": \"file\",\n"
+"            \"read-only\": false,\n"
+"            \"filename\": \"/tmp/mydisk.qcow2\" } }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:444
+msgid "Commands"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:448
+msgid ""
+"COMMAND = { 'command': STRING,\n"
+"            (\n"
+"            '*data': ( MEMBERS | STRING ),\n"
+"            |\n"
+"            'data': STRING,\n"
+"            'boxed': true,\n"
+"            )\n"
+"            '*returns': TYPE-REF,\n"
+"            '*success-response': false,\n"
+"            '*gen': false,\n"
+"            '*allow-oob': true,\n"
+"            '*allow-preconfig': true,\n"
+"            '*coroutine': true,\n"
+"            '*if': COND,\n"
+"            '*features': FEATURES }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:464
+msgid "Member 'command' names the command."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:466
+msgid ""
+"Member 'data' defines the arguments.  It defaults to an empty MEMBERS_ "
+"object."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:469
+msgid ""
+"If 'data' is a MEMBERS_ object, then MEMBERS defines arguments just like a "
+"struct type's 'data' defines struct type members."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:472
+msgid ""
+"If 'data' is a STRING, then STRING names a complex type whose members are "
+"the arguments.  A union type requires ``'boxed': true``."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:475
+msgid ""
+"Member 'returns' defines the command's return type.  It defaults to an empty "
+"struct type.  It must normally be a complex type or an array of a complex "
+"type.  To return anything else, the command must be listed in pragma "
+"'commands-returns-exceptions'.  If you do this, extending the command to "
+"return additional information will be harder.  Use of the pragma for new "
+"commands is strongly discouraged."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:482
+msgid ""
+"A command's error responses are not specified in the QAPI schema. Error "
+"conditions should be documented in comments."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:485
+msgid ""
+"In the Client JSON Protocol, the value of the \"execute\" or \"exec-oob\" "
+"member is the command name.  The value of the \"arguments\" member then has "
+"to conform to the arguments, and the value of the success response's "
+"\"return\" member will conform to the return type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:490
+msgid "Some example commands::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:492
+msgid ""
+"{ 'command': 'my-first-command',\n"
+"  'data': { 'arg1': 'str', '*arg2': 'str' } }\n"
+"{ 'struct': 'MyType', 'data': { '*value': 'str' } }\n"
+"{ 'command': 'my-second-command',\n"
+"  'returns': [ 'MyType' ] }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:498
+msgid "which would validate this Client JSON Protocol transaction::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:500
+msgid ""
+"=> { \"execute\": \"my-first-command\",\n"
+"     \"arguments\": { \"arg1\": \"hello\" } }\n"
+"<= { \"return\": { } }\n"
+"=> { \"execute\": \"my-second-command\" }\n"
+"<= { \"return\": [ { \"value\": \"one\" }, { } ] }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:506
+msgid ""
+"The generator emits a prototype for the C function implementing the "
+"command.  The function itself needs to be written by hand.  See section "
+"`Code generated for commands`_ for examples."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:510
+msgid ""
+"The function returns the return type.  When member 'boxed' is absent, it "
+"takes the command arguments as arguments one by one, in QAPI schema order.  "
+"Else it takes them wrapped in the C struct generated for the complex "
+"argument type.  It takes an additional ``Error **`` argument in either case."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:516
+msgid ""
+"The generator also emits a marshalling function that extracts arguments for "
+"the user's function out of an input QDict, calls the user's function, and if "
+"it succeeded, builds an output QObject from its return value.  This is for "
+"use by the QMP monitor core."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:521
+msgid ""
+"In rare cases, QAPI cannot express a type-safe representation of a "
+"corresponding Client JSON Protocol command.  You then have to suppress "
+"generation of a marshalling function by including a member 'gen' with "
+"boolean value false, and instead write your own function.  For example::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:527
+msgid ""
+"{ 'command': 'netdev_add',\n"
+"  'data': {'type': 'str', 'id': 'str'},\n"
+"  'gen': false }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:531
+msgid ""
+"Please try to avoid adding new commands that rely on this, and instead use "
+"type-safe unions."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:534
+msgid ""
+"Normally, the QAPI schema is used to describe synchronous exchanges, where a "
+"response is expected.  But in some cases, the action of a command is "
+"expected to change state in a way that a successful response is not possible "
+"(although the command will still return an error object on failure).  When a "
+"successful reply is not possible, the command definition includes the "
+"optional member 'success-response' with boolean value false.  So far, only "
+"QGA makes use of this member."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:542
+msgid ""
+"Member 'allow-oob' declares whether the command supports out-of-band (OOB) "
+"execution.  It defaults to false.  For example::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:545
+msgid ""
+"{ 'command': 'migrate_recover',\n"
+"  'data': { 'uri': 'str' }, 'allow-oob': true }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:548
+msgid "See qmp-spec.txt for out-of-band execution syntax and semantics."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:550
+msgid ""
+"Commands supporting out-of-band execution can still be executed in-band."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:553
+msgid ""
+"When a command is executed in-band, its handler runs in the main thread with "
+"the BQL held."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:556
+msgid ""
+"When a command is executed out-of-band, its handler runs in a dedicated "
+"monitor I/O thread with the BQL *not* held."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:559
+msgid "An OOB-capable command handler must satisfy the following conditions:"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:561
+msgid "It terminates quickly."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:562
+msgid "It does not invoke system calls that may block."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:563
+msgid ""
+"It does not access guest RAM that may block when userfaultfd is enabled for "
+"postcopy live migration."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:565
+msgid ""
+"It takes only \"fast\" locks, i.e. all critical sections protected by any "
+"lock it takes also satisfy the conditions for OOB command handler code."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:569
+msgid ""
+"The restrictions on locking limit access to shared state.  Such access "
+"requires synchronization, but OOB commands can't take the BQL or any other "
+"\"slow\" lock."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:573
+msgid "When in doubt, do not implement OOB execution support."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:575
+msgid ""
+"Member 'allow-preconfig' declares whether the command is available before "
+"the machine is built.  It defaults to false.  For example::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:578
+msgid ""
+"{ 'enum': 'QMPCapability',\n"
+"  'data': [ 'oob' ] }\n"
+"{ 'command': 'qmp_capabilities',\n"
+"  'data': { '*enable': [ 'QMPCapability' ] },\n"
+"  'allow-preconfig': true }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:584
+msgid ""
+"QMP is available before the machine is built only when QEMU was started with "
+"--preconfig."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:587
+msgid ""
+"Member 'coroutine' tells the QMP dispatcher whether the command handler is "
+"safe to be run in a coroutine.  It defaults to false.  If it is true, the "
+"command handler is called from coroutine context and may yield while waiting "
+"for an external event (such as I/O completion) in order to avoid blocking "
+"the guest and other background operations."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:593
+msgid ""
+"Coroutine safety can be hard to prove, similar to thread safety.  Common "
+"pitfalls are:"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:596
+msgid ""
+"The global mutex isn't held across ``qemu_coroutine_yield()``, so operations "
+"that used to assume that they execute atomically may have to be more careful "
+"to protect against changes in the global state."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:600
+msgid ""
+"Nested event loops (``AIO_WAIT_WHILE()`` etc.) are problematic in coroutine "
+"context and can easily lead to deadlocks.  They should be replaced by "
+"yielding and reentering the coroutine when the condition becomes false."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:605
+msgid ""
+"Since the command handler may assume coroutine context, any callers other "
+"than the QMP dispatcher must also call it in coroutine context. In "
+"particular, HMP commands calling such a QMP command handler must be marked "
+"``.coroutine = true`` in hmp-commands.hx."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:610
+msgid ""
+"It is an error to specify both ``'coroutine': true`` and ``'allow-oob': "
+"true`` for a command.  We don't currently have a use case for both together "
+"and without a use case, it's not entirely clear what the semantics should be."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:623
+msgid "Events"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:627
+msgid ""
+"EVENT = { 'event': STRING,\n"
+"          (\n"
+"          '*data': ( MEMBERS | STRING ),\n"
+"          |\n"
+"          'data': STRING,\n"
+"          'boxed': true,\n"
+"          )\n"
+"          '*if': COND,\n"
+"          '*features': FEATURES }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:637
+msgid ""
+"Member 'event' names the event.  This is the event name used in the Client "
+"JSON Protocol."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:640
+msgid ""
+"Member 'data' defines the event-specific data.  It defaults to an empty "
+"MEMBERS object."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:643
+msgid ""
+"If 'data' is a MEMBERS object, then MEMBERS defines event-specific data just "
+"like a struct type's 'data' defines struct type members."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:646
+msgid ""
+"If 'data' is a STRING, then STRING names a complex type whose members are "
+"the event-specific data.  A union type requires ``'boxed': true``."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:649
+msgid "An example event is::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:651
+msgid ""
+"{ 'event': 'EVENT_C',\n"
+"  'data': { '*a': 'int', 'b': 'str' } }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:654
+msgid "Resulting in this JSON object::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:656
+msgid ""
+"{ \"event\": \"EVENT_C\",\n"
+"  \"data\": { \"b\": \"test string\" },\n"
+"  \"timestamp\": { \"seconds\": 1267020223, \"microseconds\": 435656 } }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:660
+msgid ""
+"The generator emits a function to send the event.  When member 'boxed' is "
+"absent, it takes event-specific data one by one, in QAPI schema order.  Else "
+"it takes them wrapped in the C struct generated for the complex type.  See "
+"section `Code generated for events`_ for examples."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:675
+msgid "Features"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:679
+msgid ""
+"FEATURES = [ FEATURE, ... ]\n"
+"FEATURE = STRING\n"
+"        | { 'name': STRING, '*if': COND }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:683
+msgid ""
+"Sometimes, the behaviour of QEMU changes compatibly, but without a change in "
+"the QMP syntax (usually by allowing values or operations that previously "
+"resulted in an error).  QMP clients may still need to know whether the "
+"extension is available."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:688
+msgid ""
+"For this purpose, a list of features can be specified for a command or "
+"struct type.  Each list member can either be ``{ 'name': STRING, '*if': "
+"COND }``, or STRING, which is shorthand for ``{ 'name': STRING }``."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:697
+msgid ""
+"{ 'struct': 'TestType',\n"
+"  'data': { 'number': 'int' },\n"
+"  'features': [ 'allow-negative-numbers' ] }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:701
+msgid ""
+"The feature strings are exposed to clients in introspection, as explained in "
+"section `Client JSON Protocol introspection`_."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:704
+msgid ""
+"Intended use is to have each feature string signal that this build of QEMU "
+"shows a certain behaviour."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:709
+msgid "Special features"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:711
+msgid ""
+"Feature \"deprecated\" marks a command, event, enum value, or struct member "
+"as deprecated.  It is not supported elsewhere so far. Interfaces so marked "
+"may be withdrawn in future releases in accordance with QEMU's deprecation "
+"policy."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:716
+msgid ""
+"Feature \"unstable\" marks a command, event, enum value, or struct member as "
+"unstable.  It is not supported elsewhere so far.  Interfaces so marked may "
+"be withdrawn or changed incompatibly in future releases."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:722
+msgid "Naming rules and reserved names"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:724
+msgid ""
+"All names must begin with a letter, and contain only ASCII letters, digits, "
+"hyphen, and underscore.  There are two exceptions: enum values may start "
+"with a digit, and names that are downstream extensions (see section "
+"`Downstream extensions`_) start with underscore."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:729
+msgid ""
+"Names beginning with ``q_`` are reserved for the generator, which uses them "
+"for munging QMP names that resemble C keywords or other problematic "
+"strings.  For example, a member named ``default`` in qapi becomes "
+"``q_default`` in the generated C code."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:734
+msgid ""
+"Types, commands, and events share a common namespace.  Therefore, generally "
+"speaking, type definitions should always use CamelCase for user-defined type "
+"names, while built-in types are lowercase."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:738
+msgid ""
+"Type names ending with ``Kind`` or ``List`` are reserved for the generator, "
+"which uses them for implicit union enums and array types, respectively."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:742
+msgid ""
+"Command names, member names within a type, and feature names should be all "
+"lower case with words separated by a hyphen.  However, some existing older "
+"commands and complex types use underscore; when extending them, consistency "
+"is preferred over blindly avoiding underscore."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:748
+msgid "Event names should be ALL_CAPS with words separated by underscore."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:750
+msgid ""
+"Member name ``u`` and names starting with ``has-`` or ``has_`` are reserved "
+"for the generator, which uses them for unions and for tracking optional "
+"members."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:754
+msgid ""
+"Names beginning with ``x-`` used to signify \"experimental\".  This "
+"convention has been replaced by special feature \"unstable\"."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:757
+msgid ""
+"Pragmas ``command-name-exceptions`` and ``member-name-exceptions`` let you "
+"violate naming rules.  Use for new code is strongly discouraged. See `Pragma "
+"directives`_ for details."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:763
+msgid "Downstream extensions"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:765
+msgid ""
+"QAPI schema names that are externally visible, say in the Client JSON "
+"Protocol, need to be managed with care.  Names starting with a downstream "
+"prefix of the form __RFQDN_ are reserved for the downstream who controls the "
+"valid, reverse fully qualified domain name RFQDN. RFQDN may only contain "
+"ASCII letters, digits, hyphen and period."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:771
+msgid ""
+"Example: Red Hat, Inc. controls redhat.com, and may therefore add a "
+"downstream command ``__com.redhat_drive-mirror``."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:776
+msgid "Configuring the schema"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:780
+msgid ""
+"COND = STRING\n"
+"     | { 'all: [ COND, ... ] }\n"
+"     | { 'any: [ COND, ... ] }\n"
+"     | { 'not': COND }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:785
+msgid ""
+"All definitions take an optional 'if' member.  Its value must be a string, "
+"or an object with a single member 'all', 'any' or 'not'."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:788
+msgid ""
+"The C code generated for the definition will then be guarded by an #if "
+"preprocessing directive with an operand generated from that condition:"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:791
+msgid "STRING will generate defined(STRING)"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:792
+msgid "{ 'all': [COND, ...] } will generate (COND && ...)"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:793
+msgid "{ 'any': [COND, ...] } will generate (COND || ...)"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:794
+msgid "{ 'not': COND } will generate !COND"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:796
+msgid "Example: a conditional struct ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:798
+msgid ""
+"{ 'struct': 'IfStruct', 'data': { 'foo': 'int' },\n"
+"  'if': { 'all': [ 'CONFIG_FOO', 'HAVE_BAR' ] } }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:801
+msgid "gets its generated code guarded like this::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:803
+msgid ""
+"#if defined(CONFIG_FOO) && defined(HAVE_BAR)\n"
+"... generated code ...\n"
+"#endif /* defined(HAVE_BAR) && defined(CONFIG_FOO) */"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:807
+msgid ""
+"Individual members of complex types, commands arguments, and event-specific "
+"data can also be made conditional.  This requires the longhand form of "
+"MEMBER."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:811
+msgid ""
+"Example: a struct type with unconditional member 'foo' and conditional "
+"member 'bar' ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:814
+msgid ""
+"{ 'struct': 'IfStruct',\n"
+"  'data': { 'foo': 'int',\n"
+"            'bar': { 'type': 'int', 'if': 'IFCOND'} } }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:818
+msgid "A union's discriminator may not be conditional."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:820
+msgid ""
+"Likewise, individual enumeration values be conditional.  This requires the "
+"longhand form of ENUM-VALUE_."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:823
+msgid ""
+"Example: an enum type with unconditional value 'foo' and conditional value "
+"'bar' ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:826
+msgid ""
+"{ 'enum': 'IfEnum',\n"
+"  'data': [ 'foo',\n"
+"            { 'name' : 'bar', 'if': 'IFCOND' } ] }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:830
+msgid ""
+"Likewise, features can be conditional.  This requires the longhand form of "
+"FEATURE_."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:833
+msgid "Example: a struct with conditional feature 'allow-negative-numbers' ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:835
+msgid ""
+"{ 'struct': 'TestType',\n"
+"  'data': { 'number': 'int' },\n"
+"  'features': [ { 'name': 'allow-negative-numbers',\n"
+"                  'if': 'IFCOND' } ] }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:840
+msgid ""
+"Please note that you are responsible to ensure that the C code will compile "
+"with an arbitrary combination of conditions, since the generator is unable "
+"to check it at this point."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:844
+msgid ""
+"The conditions apply to introspection as well, i.e. introspection shows a "
+"conditional entity only when the condition is satisfied in this particular "
+"build."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:850
+msgid "Documentation comments"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:852
+msgid ""
+"A multi-line comment that starts and ends with a ``##`` line is a "
+"documentation comment."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:855
+msgid "If the documentation comment starts like ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:857
+msgid ""
+"##\n"
+"# @SYMBOL:"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:860
+msgid ""
+"it documents the definition of SYMBOL, else it's free-form documentation."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:863
+msgid "See below for more on `Definition documentation`_."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:865
+msgid ""
+"Free-form documentation may be used to provide additional text and "
+"structuring content."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:870
+msgid "Headings and subheadings"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:872
+msgid ""
+"A free-form documentation comment containing a line which starts with some "
+"``=`` symbols and then a space defines a section heading::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:875
+msgid ""
+"##\n"
+"# = This is a top level heading\n"
+"#\n"
+"# This is a free-form comment which will go under the\n"
+"# top level heading.\n"
+"##\n"
+"\n"
+"##\n"
+"# == This is a second level heading\n"
+"##"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:886
+msgid ""
+"A heading line must be the first line of the documentation comment block."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:889
+msgid ""
+"Section headings must always be correctly nested, so you can only define a "
+"third-level heading inside a second-level heading, and so on."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:894
+msgid "Documentation markup"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:896
+msgid ""
+"Documentation comments can use most rST markup.  In particular, a ``::`` "
+"literal block can be used for examples::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:899
+msgid ""
+"# ::\n"
+"#\n"
+"#   Text of the example, may span\n"
+"#   multiple lines"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:904
+msgid "``*`` starts an itemized list::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:906
+msgid ""
+"# * First item, may span\n"
+"#   multiple lines\n"
+"# * Second item"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:910
+msgid "You can also use ``-`` instead of ``*``."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:912
+msgid "A decimal number followed by ``.`` starts a numbered list::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:914
+msgid ""
+"# 1. First item, may span\n"
+"#    multiple lines\n"
+"# 2. Second item"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:918
+msgid "The actual number doesn't matter."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:920
+msgid ""
+"Lists of either kind must be preceded and followed by a blank line. If a "
+"list item's text spans multiple lines, then the second and subsequent lines "
+"must be correctly indented to line up with the first character of the first "
+"line."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:925
+msgid ""
+"The usual ****strong****, *\\*emphasized\\** and ````literal```` markup "
+"should be used.  If you need a single literal ``*``, you will need to "
+"backslash-escape it.  As an extension beyond the usual rST syntax, you can "
+"also use ``@foo`` to reference a name in the schema; this is rendered the "
+"same way as ````foo````."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:933
+msgid ""
+"##\n"
+"# Some text foo with **bold** and *emphasis*\n"
+"# 1. with a list\n"
+"# 2. like that\n"
+"#\n"
+"# And some code:\n"
+"#\n"
+"# ::\n"
+"#\n"
+"#   $ echo foo\n"
+"#   -> do this\n"
+"#   <- get that\n"
+"##"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:949
+msgid "Definition documentation"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:951
+msgid ""
+"Definition documentation, if present, must immediately precede the "
+"definition it documents."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:954
+msgid ""
+"When documentation is required (see pragma_ 'doc-required'), every "
+"definition must have documentation."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:957
+msgid ""
+"Definition documentation starts with a line naming the definition, followed "
+"by an optional overview, a description of each argument (for commands and "
+"events), member (for structs and unions), branch (for alternates), or value "
+"(for enums), a description of each feature (if any), and finally optional "
+"tagged sections."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:963
+msgid ""
+"The description of an argument or feature 'name' starts with '\\@name:'.  "
+"The description text can start on the line following the '\\@name:', in "
+"which case it must not be indented at all.  It can also start on the same "
+"line as the '\\@name:'.  In this case if it spans multiple lines then second "
+"and subsequent lines must be indented to line up with the first character of "
+"the first line of the description::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:971
+msgid ""
+"# @argone:\n"
+"# This is a two line description\n"
+"# in the first style.\n"
+"#\n"
+"# @argtwo: This is a two line description\n"
+"#          in the second style."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:978
+msgid "The number of spaces between the ':' and the text is not significant."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:980 ../../../devel/qapi-code-gen.rst:984
+msgid "FIXME"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:982
+msgid "The parser accepts these things in almost any order."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:986
+msgid "union branches should be described, too."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:988
+msgid ""
+"Extensions added after the definition was first released carry a '(since x.y."
+"z)' comment."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:991
+msgid ""
+"The feature descriptions must be preceded by a line \"Features:\", like "
+"this::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:994
+msgid ""
+"# Features:\n"
+"# @feature: Description text"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:997
+msgid ""
+"A tagged section starts with one of the following words: \"Note:\"/\"Notes:"
+"\", \"Since:\", \"Example\"/\"Examples\", \"Returns:\", \"TODO:\". The "
+"section ends with the start of a new section."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1001
+msgid ""
+"The text of a section can start on a new line, in which case it must not be "
+"indented at all.  It can also start on the same line as the 'Note:', "
+"'Returns:', etc tag.  In this case if it spans multiple lines then second "
+"and subsequent lines must be indented to match the first, in the same way as "
+"multiline argument descriptions."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1008
+msgid ""
+"A 'Since: x.y.z' tagged section lists the release that introduced the "
+"definition."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1011
+msgid ""
+"An 'Example' or 'Examples' section is automatically rendered entirely as "
+"literal fixed-width text.  In other sections, the text is formatted, and rST "
+"markup can be used."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1015
+msgid "For example::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1017
+msgid ""
+"##\n"
+"# @BlockStats:\n"
+"#\n"
+"# Statistics of a virtual block device or a block backing device.\n"
+"#\n"
+"# @device: If the stats are for a virtual block device, the name\n"
+"#          corresponding to the virtual block device.\n"
+"#\n"
+"# @node-name: The node name of the device. (since 2.3)\n"
+"#\n"
+"# ... more members ...\n"
+"#\n"
+"# Since: 0.14.0\n"
+"##\n"
+"{ 'struct': 'BlockStats',\n"
+"  'data': {'*device': 'str', '*node-name': 'str',\n"
+"           ... more members ... } }\n"
+"\n"
+"##\n"
+"# @query-blockstats:\n"
+"#\n"
+"# Query the @BlockStats for all virtual block devices.\n"
+"#\n"
+"# @query-nodes: If true, the command will query all the\n"
+"#               block nodes ... explain, explain ...  (since 2.3)\n"
+"#\n"
+"# Returns: A list of @BlockStats for each virtual block devices.\n"
+"#\n"
+"# Since: 0.14.0\n"
+"#\n"
+"# Example:\n"
+"#\n"
+"# -> { \"execute\": \"query-blockstats\" }\n"
+"# <- {\n"
+"#      ... lots of output ...\n"
+"#    }\n"
+"#\n"
+"##\n"
+"{ 'command': 'query-blockstats',\n"
+"  'data': { '*query-nodes': 'bool' },\n"
+"  'returns': ['BlockStats'] }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1061
+msgid "Client JSON Protocol introspection"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1063
+msgid ""
+"Clients of a Client JSON Protocol commonly need to figure out what exactly "
+"the server (QEMU) supports."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1066
+msgid ""
+"For this purpose, QMP provides introspection via command query-qmp-schema.  "
+"QGA currently doesn't support introspection."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1069
+msgid ""
+"While Client JSON Protocol wire compatibility should be maintained between "
+"qemu versions, we cannot make the same guarantees for introspection "
+"stability.  For example, one version of qemu may provide a non-variant "
+"optional member of a struct, and a later version rework the member to "
+"instead be non-optional and associated with a variant. Likewise, one version "
+"of qemu may list a member with open-ended type 'str', and a later version "
+"could convert it to a finite set of strings via an enum type; or a member "
+"may be converted from a specific type to an alternate that represents a "
+"choice between the original type and something else."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1080
+msgid ""
+"query-qmp-schema returns a JSON array of SchemaInfo objects.  These objects "
+"together describe the wire ABI, as defined in the QAPI schema. There is no "
+"specified order to the SchemaInfo objects returned; a client must search for "
+"a particular name throughout the entire array to learn more about that name, "
+"but is at least guaranteed that there will be no collisions between type, "
+"command, and event names."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1087
+msgid ""
+"However, the SchemaInfo can't reflect all the rules and restrictions that "
+"apply to QMP.  It's interface introspection (figuring out what's there), not "
+"interface specification.  The specification is in the QAPI schema.  To "
+"understand how QMP is to be used, you need to study the QAPI schema."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1093
+msgid ""
+"Like any other command, query-qmp-schema is itself defined in the QAPI "
+"schema, along with the SchemaInfo type.  This text attempts to give an "
+"overview how things work.  For details you need to consult the QAPI schema."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1098
+msgid ""
+"SchemaInfo objects have common members \"name\", \"meta-type\", "
+"\"features\", and additional variant members depending on the value of meta-"
+"type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1102
+msgid ""
+"Each SchemaInfo object describes a wire ABI entity of a certain meta-type: a "
+"command, event or one of several kinds of type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1105
+msgid ""
+"SchemaInfo for commands and events have the same name as in the QAPI schema."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1108
+msgid ""
+"Command and event names are part of the wire ABI, but type names are not.  "
+"Therefore, the SchemaInfo for types have auto-generated meaningless names.  "
+"For readability, the examples in this section use meaningful type names "
+"instead."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1113
+msgid ""
+"Optional member \"features\" exposes the entity's feature strings as a JSON "
+"array of strings."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1116
+msgid ""
+"To examine a type, start with a command or event using it, then follow "
+"references by name."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1119
+msgid "QAPI schema definitions not reachable that way are omitted."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1121
+msgid ""
+"The SchemaInfo for a command has meta-type \"command\", and variant members "
+"\"arg-type\", \"ret-type\" and \"allow-oob\".  On the wire, the "
+"\"arguments\" member of a client's \"execute\" command must conform to the "
+"object type named by \"arg-type\".  The \"return\" member that the server "
+"passes in a success response conforms to the type named by \"ret-type\". "
+"When \"allow-oob\" is true, it means the command supports out-of-band "
+"execution.  It defaults to false."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1129
+msgid ""
+"If the command takes no arguments, \"arg-type\" names an object type without "
+"members.  Likewise, if the command returns nothing, \"ret-type\" names an "
+"object type without members."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1133
+msgid "Example: the SchemaInfo for command query-qmp-schema ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1135
+msgid ""
+"{ \"name\": \"query-qmp-schema\", \"meta-type\": \"command\",\n"
+"  \"arg-type\": \"q_empty\", \"ret-type\": \"SchemaInfoList\" }\n"
+"\n"
+"  Type \"q_empty\" is an automatic object type without members, and type\n"
+"  \"SchemaInfoList\" is the array of SchemaInfo type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1141
+msgid ""
+"The SchemaInfo for an event has meta-type \"event\", and variant member "
+"\"arg-type\".  On the wire, a \"data\" member that the server passes in an "
+"event conforms to the object type named by \"arg-type\"."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1145
+msgid ""
+"If the event carries no additional information, \"arg-type\" names an object "
+"type without members.  The event may not have a data member on the wire then."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1149
+msgid ""
+"Each command or event defined with 'data' as MEMBERS object in the QAPI "
+"schema implicitly defines an object type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1152
+msgid "Example: the SchemaInfo for EVENT_C from section Events_ ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1154
+msgid ""
+"{ \"name\": \"EVENT_C\", \"meta-type\": \"event\",\n"
+"  \"arg-type\": \"q_obj-EVENT_C-arg\" }\n"
+"\n"
+"Type \"q_obj-EVENT_C-arg\" is an implicitly defined object type with\n"
+"the two members from the event's definition."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1160
+msgid "The SchemaInfo for struct and union types has meta-type \"object\"."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1162
+msgid "The SchemaInfo for a struct type has variant member \"members\"."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1164
+msgid ""
+"The SchemaInfo for a union type additionally has variant members \"tag\" and "
+"\"variants\"."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1167
+msgid ""
+"\"members\" is a JSON array describing the object's common members, if any.  "
+"Each element is a JSON object with members \"name\" (the member's name), "
+"\"type\" (the name of its type), \"features\" (a JSON array of feature "
+"strings), and \"default\".  The latter two are optional.  The member is "
+"optional if \"default\" is present.  Currently, \"default\" can only have "
+"value null.  Other values are reserved for future extensions.  The "
+"\"members\" array is in no particular order; clients must search the entire "
+"object when learning whether a particular member is supported."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1177
+msgid "Example: the SchemaInfo for MyType from section `Struct types`_ ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1179
+msgid ""
+"{ \"name\": \"MyType\", \"meta-type\": \"object\",\n"
+"  \"members\": [\n"
+"      { \"name\": \"member1\", \"type\": \"str\" },\n"
+"      { \"name\": \"member2\", \"type\": \"int\" },\n"
+"      { \"name\": \"member3\", \"type\": \"str\", \"default\": null } ] }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1185
+msgid ""
+"\"features\" exposes the command's feature strings as a JSON array of "
+"strings."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1188
+msgid "Example: the SchemaInfo for TestType from section Features_::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1190
+msgid ""
+"{ \"name\": \"TestType\", \"meta-type\": \"object\",\n"
+"  \"members\": [\n"
+"      { \"name\": \"number\", \"type\": \"int\" } ],\n"
+"  \"features\": [\"allow-negative-numbers\"] }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1195
+msgid ""
+"\"tag\" is the name of the common member serving as type tag. \"variants\" "
+"is a JSON array describing the object's variant members. Each element is a "
+"JSON object with members \"case\" (the value of type tag this element "
+"applies to) and \"type\" (the name of an object type that provides the "
+"variant members for this type tag value).  The \"variants\" array is in no "
+"particular order, and is not guaranteed to list cases in the same order as "
+"the corresponding \"tag\" enum type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1203
+msgid ""
+"Example: the SchemaInfo for union BlockdevOptions from section `Union "
+"types`_ ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1206
+msgid ""
+"{ \"name\": \"BlockdevOptions\", \"meta-type\": \"object\",\n"
+"  \"members\": [\n"
+"      { \"name\": \"driver\", \"type\": \"BlockdevDriver\" },\n"
+"      { \"name\": \"read-only\", \"type\": \"bool\", \"default\": null } ],\n"
+"  \"tag\": \"driver\",\n"
+"  \"variants\": [\n"
+"      { \"case\": \"file\", \"type\": \"BlockdevOptionsFile\" },\n"
+"      { \"case\": \"qcow2\", \"type\": \"BlockdevOptionsQcow2\" } ] }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1215
+msgid ""
+"Note that base types are \"flattened\": its members are included in the "
+"\"members\" array."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1218
+msgid ""
+"The SchemaInfo for an alternate type has meta-type \"alternate\", and "
+"variant member \"members\".  \"members\" is a JSON array.  Each element is a "
+"JSON object with member \"type\", which names a type.  Values of the "
+"alternate type conform to exactly one of its member types.  There is no "
+"guarantee on the order in which \"members\" will be listed."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1224
+msgid ""
+"Example: the SchemaInfo for BlockdevRef from section `Alternate types`_ ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1226
+msgid ""
+"{ \"name\": \"BlockdevRef\", \"meta-type\": \"alternate\",\n"
+"  \"members\": [\n"
+"      { \"type\": \"BlockdevOptions\" },\n"
+"      { \"type\": \"str\" } ] }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1231
+msgid ""
+"The SchemaInfo for an array type has meta-type \"array\", and variant member "
+"\"element-type\", which names the array's element type.  Array types are "
+"implicitly defined.  For convenience, the array's name may resemble the "
+"element type; however, clients should examine member \"element-type\" "
+"instead of making assumptions based on parsing member \"name\"."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1238
+msgid "Example: the SchemaInfo for ['str'] ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1240
+msgid ""
+"{ \"name\": \"[str]\", \"meta-type\": \"array\",\n"
+"  \"element-type\": \"str\" }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1243
+msgid ""
+"The SchemaInfo for an enumeration type has meta-type \"enum\" and variant "
+"member \"members\"."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1246
+msgid ""
+"\"members\" is a JSON array describing the enumeration values.  Each element "
+"is a JSON object with member \"name\" (the member's name), and optionally "
+"\"features\" (a JSON array of feature strings).  The \"members\" array is in "
+"no particular order; clients must search the entire array when learning "
+"whether a particular value is supported."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1252
+msgid "Example: the SchemaInfo for MyEnum from section `Enumeration types`_ ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1254
+msgid ""
+"{ \"name\": \"MyEnum\", \"meta-type\": \"enum\",\n"
+"  \"members\": [\n"
+"    { \"name\": \"value1\" },\n"
+"    { \"name\": \"value2\" },\n"
+"    { \"name\": \"value3\" }\n"
+"  ] }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1261
+msgid ""
+"The SchemaInfo for a built-in type has the same name as the type in the QAPI "
+"schema (see section `Built-in Types`_), with one exception detailed below.  "
+"It has variant member \"json-type\" that shows how values of this type are "
+"encoded on the wire."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1266
+msgid "Example: the SchemaInfo for str ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1268
+msgid ""
+"{ \"name\": \"str\", \"meta-type\": \"builtin\", \"json-type\": \"string\" }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1270
+msgid ""
+"The QAPI schema supports a number of integer types that only differ in how "
+"they map to C.  They are identical as far as SchemaInfo is concerned.  "
+"Therefore, they get all mapped to a single type \"int\" in SchemaInfo."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1275
+msgid ""
+"As explained above, type names are not part of the wire ABI.  Not even the "
+"names of built-in types.  Clients should examine member \"json-type\" "
+"instead of hard-coding names of built-in types."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1281
+msgid "Compatibility considerations"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1283
+msgid ""
+"Maintaining backward compatibility at the Client JSON Protocol level while "
+"evolving the schema requires some care.  This section is about syntactic "
+"compatibility, which is necessary, but not sufficient, for actual "
+"compatibility."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1288
+msgid ""
+"Clients send commands with argument data, and receive command responses with "
+"return data and events with event data."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1291
+msgid ""
+"Adding opt-in functionality to the send direction is backwards compatible: "
+"adding commands, optional arguments, enumeration values, union and alternate "
+"branches; turning an argument type into an alternate of that type; making "
+"mandatory arguments optional.  Clients oblivious of the new functionality "
+"continue to work."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1297
+msgid ""
+"Incompatible changes include removing commands, command arguments, "
+"enumeration values, union and alternate branches, adding mandatory command "
+"arguments, and making optional arguments mandatory."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1301
+msgid ""
+"The specified behavior of an absent optional argument should remain the "
+"same.  With proper documentation, this policy still allows some flexibility; "
+"for example, when an optional 'buffer-size' argument is specified to default "
+"to a sensible buffer size, the actual default value can still be changed.  "
+"The specified default behavior is not the exact size of the buffer, only "
+"that the default size is sensible."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1308
+msgid ""
+"Adding functionality to the receive direction is generally backwards "
+"compatible: adding events, adding return and event data members. Clients are "
+"expected to ignore the ones they don't know."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1312
+msgid ""
+"Removing \"unreachable\" stuff like events that can't be triggered anymore, "
+"optional return or event data members that can't be sent anymore, and return "
+"or event data member (enumeration) values that can't be sent anymore makes "
+"no difference to clients, except for introspection.  The latter can "
+"conceivably confuse clients, so tread carefully."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1319
+msgid "Incompatible changes include removing return and event data members."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1321
+msgid ""
+"Any change to a command definition's 'data' or one of the types used there "
+"(recursively) needs to consider send direction compatibility."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1324
+msgid ""
+"Any change to a command definition's 'return', an event definition's 'data', "
+"or one of the types used there (recursively) needs to consider receive "
+"direction compatibility."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1328
+msgid "Any change to types used in both contexts need to consider both."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1330
+msgid ""
+"Enumeration type values and complex and alternate type members may be "
+"reordered freely.  For enumerations and alternate types, this doesn't affect "
+"the wire encoding.  For complex types, this might make the implementation "
+"emit JSON object members in a different order, which the Client JSON "
+"Protocol permits."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1336
+msgid ""
+"Since type names are not visible in the Client JSON Protocol, types may be "
+"freely renamed.  Even certain refactorings are invisible, such as splitting "
+"members from one type into a common base type."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1342
+msgid "Code generation"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1344
+msgid ""
+"The QAPI code generator qapi-gen.py generates code and documentation from "
+"the schema.  Together with the core QAPI libraries, this code provides "
+"everything required to take JSON commands read in by a Client JSON Protocol "
+"server, unmarshal the arguments into the underlying C types, call into the "
+"corresponding C function, map the response back to a Client JSON Protocol "
+"response to be returned to the user, and introspect the commands."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1352
+msgid ""
+"As an example, we'll use the following schema, which describes a single "
+"complex user-defined type, along with command which takes a list of that "
+"type as a parameter, and returns a single element of that type.  The user is "
+"responsible for writing the implementation of qmp_my_command(); everything "
+"else is produced by the generator. ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1358
+msgid ""
+"$ cat example-schema.json\n"
+"{ 'struct': 'UserDefOne',\n"
+"  'data': { 'integer': 'int', '*string': 'str' } }\n"
+"\n"
+"{ 'command': 'my-command',\n"
+"  'data': { 'arg1': ['UserDefOne'] },\n"
+"  'returns': 'UserDefOne' }\n"
+"\n"
+"{ 'event': 'MY_EVENT' }"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1368
+msgid "We run qapi-gen.py like this::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1370
+msgid ""
+"$ python scripts/qapi-gen.py --output-dir=\"qapi-generated\" \\\n"
+"--prefix=\"example-\" example-schema.json"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1373
+msgid ""
+"For a more thorough look at generated code, the testsuite includes tests/"
+"qapi-schema/qapi-schema-tests.json that covers more examples of what the "
+"generator will accept, and compiles the resulting C code as part of 'make "
+"check-unit'."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1380
+msgid "Code generated for QAPI types"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1382 ../../../devel/qapi-code-gen.rst:1768
+#: ../../../devel/qapi-code-gen.rst:1854
+msgid "The following files are created:"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1384
+msgid "``$(prefix)qapi-types.h``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1385
+msgid "C types corresponding to types defined in the schema"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1387
+msgid "``$(prefix)qapi-types.c``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1388 ../../../devel/qapi-code-gen.rst:1477
+msgid "Cleanup functions for the above C types"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1390
+msgid ""
+"The $(prefix) is an optional parameter used as a namespace to keep the "
+"generated code from one schema/code-generation separated from others so code "
+"can be generated/used from multiple schemas without clobbering previously "
+"created code."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1397
+msgid ""
+"$ cat qapi-generated/example-qapi-types.h\n"
+"[Uninteresting stuff omitted...]\n"
+"\n"
+"#ifndef EXAMPLE_QAPI_TYPES_H\n"
+"#define EXAMPLE_QAPI_TYPES_H\n"
+"\n"
+"#include \"qapi/qapi-builtin-types.h\"\n"
+"\n"
+"typedef struct UserDefOne UserDefOne;\n"
+"\n"
+"typedef struct UserDefOneList UserDefOneList;\n"
+"\n"
+"typedef struct q_obj_my_command_arg q_obj_my_command_arg;\n"
+"\n"
+"struct UserDefOne {\n"
+"    int64_t integer;\n"
+"    bool has_string;\n"
+"    char *string;\n"
+"};\n"
+"\n"
+"void qapi_free_UserDefOne(UserDefOne *obj);\n"
+"G_DEFINE_AUTOPTR_CLEANUP_FUNC(UserDefOne, qapi_free_UserDefOne)\n"
+"\n"
+"struct UserDefOneList {\n"
+"    UserDefOneList *next;\n"
+"    UserDefOne *value;\n"
+"};\n"
+"\n"
+"void qapi_free_UserDefOneList(UserDefOneList *obj);\n"
+"G_DEFINE_AUTOPTR_CLEANUP_FUNC(UserDefOneList, qapi_free_UserDefOneList)\n"
+"\n"
+"struct q_obj_my_command_arg {\n"
+"    UserDefOneList *arg1;\n"
+"};\n"
+"\n"
+"#endif /* EXAMPLE_QAPI_TYPES_H */\n"
+"$ cat qapi-generated/example-qapi-types.c\n"
+"[Uninteresting stuff omitted...]\n"
+"\n"
+"void qapi_free_UserDefOne(UserDefOne *obj)\n"
+"{\n"
+"    Visitor *v;\n"
+"\n"
+"    if (!obj) {\n"
+"        return;\n"
+"    }\n"
+"\n"
+"    v = qapi_dealloc_visitor_new();\n"
+"    visit_type_UserDefOne(v, NULL, &obj, NULL);\n"
+"    visit_free(v);\n"
+"}\n"
+"\n"
+"void qapi_free_UserDefOneList(UserDefOneList *obj)\n"
+"{\n"
+"    Visitor *v;\n"
+"\n"
+"    if (!obj) {\n"
+"        return;\n"
+"    }\n"
+"\n"
+"    v = qapi_dealloc_visitor_new();\n"
+"    visit_type_UserDefOneList(v, NULL, &obj, NULL);\n"
+"    visit_free(v);\n"
+"}\n"
+"\n"
+"[Uninteresting stuff omitted...]"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1464 ../../../devel/qapi-code-gen.rst:1602
+#: ../../../devel/qapi-code-gen.rst:1844
+msgid ""
+"For a modular QAPI schema (see section `Include directives`_), code for each "
+"sub-module SUBDIR/SUBMODULE.json is actually generated into ::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1467
+msgid ""
+"SUBDIR/$(prefix)qapi-types-SUBMODULE.h\n"
+"SUBDIR/$(prefix)qapi-types-SUBMODULE.c"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1470 ../../../devel/qapi-code-gen.rst:1608
+msgid ""
+"If qapi-gen.py is run with option --builtins, additional files are created:"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1473
+msgid "``qapi-builtin-types.h``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1474
+msgid "C types corresponding to built-in types"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1476
+msgid "``qapi-builtin-types.c``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1481
+msgid "Code generated for visiting QAPI types"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1483
+msgid ""
+"These are the visitor functions used to walk through and convert between a "
+"native QAPI C data structure and some other format (such as QObject); the "
+"generated functions are named visit_type_FOO() and visit_type_FOO_members()."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1488 ../../../devel/qapi-code-gen.rst:1625
+msgid "The following files are generated:"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1490
+msgid "``$(prefix)qapi-visit.c``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1491
+msgid ""
+"Visitor function for a particular C type, used to automagically convert "
+"QObjects into the corresponding C type and vice-versa, as well as for "
+"deallocating memory for an existing C type"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1495
+msgid "``$(prefix)qapi-visit.h``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1496
+msgid "Declarations for previously mentioned visitor functions"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1500
+msgid ""
+"$ cat qapi-generated/example-qapi-visit.h\n"
+"[Uninteresting stuff omitted...]\n"
+"\n"
+"#ifndef EXAMPLE_QAPI_VISIT_H\n"
+"#define EXAMPLE_QAPI_VISIT_H\n"
+"\n"
+"#include \"qapi/qapi-builtin-visit.h\"\n"
+"#include \"example-qapi-types.h\"\n"
+"\n"
+"\n"
+"bool visit_type_UserDefOne_members(Visitor *v, UserDefOne *obj, Error "
+"**errp);\n"
+"\n"
+"bool visit_type_UserDefOne(Visitor *v, const char *name,\n"
+"                 UserDefOne **obj, Error **errp);\n"
+"\n"
+"bool visit_type_UserDefOneList(Visitor *v, const char *name,\n"
+"                 UserDefOneList **obj, Error **errp);\n"
+"\n"
+"bool visit_type_q_obj_my_command_arg_members(Visitor *v, "
+"q_obj_my_command_arg *obj, Error **errp);\n"
+"\n"
+"#endif /* EXAMPLE_QAPI_VISIT_H */\n"
+"$ cat qapi-generated/example-qapi-visit.c\n"
+"[Uninteresting stuff omitted...]\n"
+"\n"
+"bool visit_type_UserDefOne_members(Visitor *v, UserDefOne *obj, Error "
+"**errp)\n"
+"{\n"
+"    if (!visit_type_int(v, \"integer\", &obj->integer, errp)) {\n"
+"        return false;\n"
+"    }\n"
+"    if (visit_optional(v, \"string\", &obj->has_string)) {\n"
+"        if (!visit_type_str(v, \"string\", &obj->string, errp)) {\n"
+"            return false;\n"
+"        }\n"
+"    }\n"
+"    return true;\n"
+"}\n"
+"\n"
+"bool visit_type_UserDefOne(Visitor *v, const char *name,\n"
+"                 UserDefOne **obj, Error **errp)\n"
+"{\n"
+"    bool ok = false;\n"
+"\n"
+"    if (!visit_start_struct(v, name, (void **)obj, sizeof(UserDefOne), "
+"errp)) {\n"
+"        return false;\n"
+"    }\n"
+"    if (!*obj) {\n"
+"        /* incomplete */\n"
+"        assert(visit_is_dealloc(v));\n"
+"        ok = true;\n"
+"        goto out_obj;\n"
+"    }\n"
+"    if (!visit_type_UserDefOne_members(v, *obj, errp)) {\n"
+"        goto out_obj;\n"
+"    }\n"
+"    ok = visit_check_struct(v, errp);\n"
+"out_obj:\n"
+"    visit_end_struct(v, (void **)obj);\n"
+"    if (!ok && visit_is_input(v)) {\n"
+"        qapi_free_UserDefOne(*obj);\n"
+"        *obj = NULL;\n"
+"    }\n"
+"    return ok;\n"
+"}\n"
+"\n"
+"bool visit_type_UserDefOneList(Visitor *v, const char *name,\n"
+"                 UserDefOneList **obj, Error **errp)\n"
+"{\n"
+"    bool ok = false;\n"
+"    UserDefOneList *tail;\n"
+"    size_t size = sizeof(**obj);\n"
+"\n"
+"    if (!visit_start_list(v, name, (GenericList **)obj, size, errp)) {\n"
+"        return false;\n"
+"    }\n"
+"\n"
+"    for (tail = *obj; tail;\n"
+"         tail = (UserDefOneList *)visit_next_list(v, (GenericList *)tail, "
+"size)) {\n"
+"        if (!visit_type_UserDefOne(v, NULL, &tail->value, errp)) {\n"
+"            goto out_obj;\n"
+"        }\n"
+"    }\n"
+"\n"
+"    ok = visit_check_list(v, errp);\n"
+"out_obj:\n"
+"    visit_end_list(v, (void **)obj);\n"
+"    if (!ok && visit_is_input(v)) {\n"
+"        qapi_free_UserDefOneList(*obj);\n"
+"        *obj = NULL;\n"
+"    }\n"
+"    return ok;\n"
+"}\n"
+"\n"
+"bool visit_type_q_obj_my_command_arg_members(Visitor *v, "
+"q_obj_my_command_arg *obj, Error **errp)\n"
+"{\n"
+"    if (!visit_type_UserDefOneList(v, \"arg1\", &obj->arg1, errp)) {\n"
+"        return false;\n"
+"    }\n"
+"    return true;\n"
+"}\n"
+"\n"
+"[Uninteresting stuff omitted...]"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1605
+msgid ""
+"SUBDIR/$(prefix)qapi-visit-SUBMODULE.h\n"
+"SUBDIR/$(prefix)qapi-visit-SUBMODULE.c"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1611
+msgid "``qapi-builtin-visit.h``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1612
+msgid "Visitor functions for built-in types"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1614
+msgid "``qapi-builtin-visit.c``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1615
+msgid "Declarations for these visitor functions"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1619
+msgid "Code generated for commands"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1621
+msgid ""
+"These are the marshaling/dispatch functions for the commands defined in the "
+"schema.  The generated code provides qmp_marshal_COMMAND(), and declares "
+"qmp_COMMAND() that the user must implement."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1627
+msgid "``$(prefix)qapi-commands.c``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1628
+msgid ""
+"Command marshal/dispatch functions for each QMP command defined in the schema"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1631
+msgid "``$(prefix)qapi-commands.h``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1632
+msgid "Function prototypes for the QMP commands specified in the schema"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1634
+msgid "``$(prefix)qapi-commands.trace-events``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1635
+msgid "Trace event declarations, see :ref:`tracing`."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1637
+msgid "``$(prefix)qapi-init-commands.h``"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1638
+msgid "Command initialization prototype"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1640
+msgid "``$(prefix)qapi-init-commands.c``"
+msgstr "``$(prefix)qapi-init-commands.c``"
+
+#: ../../../devel/qapi-code-gen.rst:1641
+msgid "Command initialization code"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1645
+msgid ""
+"$ cat qapi-generated/example-qapi-commands.h\n"
+"[Uninteresting stuff omitted...]\n"
+"\n"
+"#ifndef EXAMPLE_QAPI_COMMANDS_H\n"
+"#define EXAMPLE_QAPI_COMMANDS_H\n"
+"\n"
+"#include \"example-qapi-types.h\"\n"
+"\n"
+"UserDefOne *qmp_my_command(UserDefOneList *arg1, Error **errp);\n"
+"void qmp_marshal_my_command(QDict *args, QObject **ret, Error **errp);\n"
+"\n"
+"#endif /* EXAMPLE_QAPI_COMMANDS_H */\n"
+"\n"
+"$ cat qapi-generated/example-qapi-commands.trace-events\n"
+"# AUTOMATICALLY GENERATED, DO NOT MODIFY\n"
+"\n"
+"qmp_enter_my_command(const char *json) \"%s\"\n"
+"qmp_exit_my_command(const char *result, bool succeeded) \"%s %d\"\n"
+"\n"
+"$ cat qapi-generated/example-qapi-commands.c\n"
+"[Uninteresting stuff omitted...]\n"
+"\n"
+"\n"
+"static void qmp_marshal_output_UserDefOne(UserDefOne *ret_in,\n"
+"                                QObject **ret_out, Error **errp)\n"
+"{\n"
+"    Visitor *v;\n"
+"\n"
+"    v = qobject_output_visitor_new_qmp(ret_out);\n"
+"    if (visit_type_UserDefOne(v, \"unused\", &ret_in, errp)) {\n"
+"        visit_complete(v, ret_out);\n"
+"    }\n"
+"    visit_free(v);\n"
+"    v = qapi_dealloc_visitor_new();\n"
+"    visit_type_UserDefOne(v, \"unused\", &ret_in, NULL);\n"
+"    visit_free(v);\n"
+"}\n"
+"\n"
+"void qmp_marshal_my_command(QDict *args, QObject **ret, Error **errp)\n"
+"{\n"
+"    Error *err = NULL;\n"
+"    bool ok = false;\n"
+"    Visitor *v;\n"
+"    UserDefOne *retval;\n"
+"    q_obj_my_command_arg arg = {0};\n"
+"\n"
+"    v = qobject_input_visitor_new_qmp(QOBJECT(args));\n"
+"    if (!visit_start_struct(v, NULL, NULL, 0, errp)) {\n"
+"        goto out;\n"
+"    }\n"
+"    if (visit_type_q_obj_my_command_arg_members(v, &arg, errp)) {\n"
+"        ok = visit_check_struct(v, errp);\n"
+"    }\n"
+"    visit_end_struct(v, NULL);\n"
+"    if (!ok) {\n"
+"        goto out;\n"
+"    }\n"
+"\n"
+"    if (trace_event_get_state_backends(TRACE_QMP_ENTER_MY_COMMAND)) {\n"
+"        g_autoptr(GString) req_json = qobject_to_json(QOBJECT(args));\n"
+"\n"
+"        trace_qmp_enter_my_command(req_json->str);\n"
+"    }\n"
+"\n"
+"    retval = qmp_my_command(arg.arg1, &err);\n"
+"    if (err) {\n"
+"        trace_qmp_exit_my_command(error_get_pretty(err), false);\n"
+"        error_propagate(errp, err);\n"
+"        goto out;\n"
+"    }\n"
+"\n"
+"    qmp_marshal_output_UserDefOne(retval, ret, errp);\n"
+"\n"
+"    if (trace_event_get_state_backends(TRACE_QMP_EXIT_MY_COMMAND)) {\n"
+"        g_autoptr(GString) ret_json = qobject_to_json(*ret);\n"
+"\n"
+"        trace_qmp_exit_my_command(ret_json->str, true);\n"
+"    }\n"
+"\n"
+"out:\n"
+"    visit_free(v);\n"
+"    v = qapi_dealloc_visitor_new();\n"
+"    visit_start_struct(v, NULL, NULL, 0, NULL);\n"
+"    visit_type_q_obj_my_command_arg_members(v, &arg, NULL);\n"
+"    visit_end_struct(v, NULL);\n"
+"    visit_free(v);\n"
+"}\n"
+"\n"
+"[Uninteresting stuff omitted...]\n"
+"$ cat qapi-generated/example-qapi-init-commands.h\n"
+"[Uninteresting stuff omitted...]\n"
+"#ifndef EXAMPLE_QAPI_INIT_COMMANDS_H\n"
+"#define EXAMPLE_QAPI_INIT_COMMANDS_H\n"
+"\n"
+"#include \"qapi/qmp/dispatch.h\"\n"
+"\n"
+"void example_qmp_init_marshal(QmpCommandList *cmds);\n"
+"\n"
+"#endif /* EXAMPLE_QAPI_INIT_COMMANDS_H */\n"
+"$ cat qapi-generated/example-qapi-init-commands.c\n"
+"[Uninteresting stuff omitted...]\n"
+"void example_qmp_init_marshal(QmpCommandList *cmds)\n"
+"{\n"
+"    QTAILQ_INIT(cmds);\n"
+"\n"
+"    qmp_register_command(cmds, \"my-command\",\n"
+"                         qmp_marshal_my_command, QCO_NO_OPTIONS);\n"
+"}\n"
+"[Uninteresting stuff omitted...]"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1755
+msgid ""
+"For a modular QAPI schema (see section `Include directives`_), code for each "
+"sub-module SUBDIR/SUBMODULE.json is actually generated into::"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1758
+msgid ""
+"SUBDIR/$(prefix)qapi-commands-SUBMODULE.h\n"
+"SUBDIR/$(prefix)qapi-commands-SUBMODULE.c"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1763
+msgid "Code generated for events"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1765
+msgid ""
+"This is the code related to events defined in the schema, providing "
+"qapi_event_send_EVENT()."
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1770
+msgid "``$(prefix)qapi-events.h``"
+msgstr "``$(prefix)qapi-events.h``"
+
+#: ../../../devel/qapi-code-gen.rst:1771
+msgid "Function prototypes for each event type"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1773
+msgid "``$(prefix)qapi-events.c``"
+msgstr "``$(prefix)qapi-events.c``"
+
+#: ../../../devel/qapi-code-gen.rst:1774
+msgid "Implementation of functions to send an event"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1776
+msgid "``$(prefix)qapi-emit-events.h``"
+msgstr "``$(prefix)qapi-emit-events.h``"
+
+#: ../../../devel/qapi-code-gen.rst:1777
+msgid "Enumeration of all event names, and common event code declarations"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1779
+msgid "``$(prefix)qapi-emit-events.c``"
+msgstr "``$(prefix)qapi-emit-events.c``"
+
+#: ../../../devel/qapi-code-gen.rst:1780
+msgid "Common event code definitions"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1784
+msgid ""
+"$ cat qapi-generated/example-qapi-events.h\n"
+"[Uninteresting stuff omitted...]\n"
+"\n"
+"#ifndef EXAMPLE_QAPI_EVENTS_H\n"
+"#define EXAMPLE_QAPI_EVENTS_H\n"
+"\n"
+"#include \"qapi/util.h\"\n"
+"#include \"example-qapi-types.h\"\n"
+"\n"
+"void qapi_event_send_my_event(void);\n"
+"\n"
+"#endif /* EXAMPLE_QAPI_EVENTS_H */\n"
+"$ cat qapi-generated/example-qapi-events.c\n"
+"[Uninteresting stuff omitted...]\n"
+"\n"
+"void qapi_event_send_my_event(void)\n"
+"{\n"
+"    QDict *qmp;\n"
+"\n"
+"    qmp = qmp_event_build_dict(\"MY_EVENT\");\n"
+"\n"
+"    example_qapi_event_emit(EXAMPLE_QAPI_EVENT_MY_EVENT, qmp);\n"
+"\n"
+"    qobject_unref(qmp);\n"
+"}\n"
+"\n"
+"[Uninteresting stuff omitted...]\n"
+"$ cat qapi-generated/example-qapi-emit-events.h\n"
+"[Uninteresting stuff omitted...]\n"
+"\n"
+"#ifndef EXAMPLE_QAPI_EMIT_EVENTS_H\n"
+"#define EXAMPLE_QAPI_EMIT_EVENTS_H\n"
+"\n"
+"#include \"qapi/util.h\"\n"
+"\n"
+"typedef enum example_QAPIEvent {\n"
+"    EXAMPLE_QAPI_EVENT_MY_EVENT,\n"
+"    EXAMPLE_QAPI_EVENT__MAX,\n"
+"} example_QAPIEvent;\n"
+"\n"
+"#define example_QAPIEvent_str(val) \\\n"
+"    qapi_enum_lookup(&example_QAPIEvent_lookup, (val))\n"
+"\n"
+"extern const QEnumLookup example_QAPIEvent_lookup;\n"
+"\n"
+"void example_qapi_event_emit(example_QAPIEvent event, QDict *qdict);\n"
+"\n"
+"#endif /* EXAMPLE_QAPI_EMIT_EVENTS_H */\n"
+"$ cat qapi-generated/example-qapi-emit-events.c\n"
+"[Uninteresting stuff omitted...]\n"
+"\n"
+"const QEnumLookup example_QAPIEvent_lookup = {\n"
+"    .array = (const char *const[]) {\n"
+"        [EXAMPLE_QAPI_EVENT_MY_EVENT] = \"MY_EVENT\",\n"
+"    },\n"
+"    .size = EXAMPLE_QAPI_EVENT__MAX\n"
+"};\n"
+"\n"
+"[Uninteresting stuff omitted...]"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1847
+msgid ""
+"SUBDIR/$(prefix)qapi-events-SUBMODULE.h\n"
+"SUBDIR/$(prefix)qapi-events-SUBMODULE.c"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1852
+msgid "Code generated for introspection"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1856
+msgid "``$(prefix)qapi-introspect.c``"
+msgstr "``$(prefix)qapi-introspect.c``"
+
+#: ../../../devel/qapi-code-gen.rst:1857
+msgid "Defines a string holding a JSON description of the schema"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1859
+msgid "``$(prefix)qapi-introspect.h``"
+msgstr "``$(prefix)qapi-introspect.h``"
+
+#: ../../../devel/qapi-code-gen.rst:1860
+msgid "Declares the above string"
+msgstr ""
+
+#: ../../../devel/qapi-code-gen.rst:1864
+msgid ""
+"$ cat qapi-generated/example-qapi-introspect.h\n"
+"[Uninteresting stuff omitted...]\n"
+"\n"
+"#ifndef EXAMPLE_QAPI_INTROSPECT_H\n"
+"#define EXAMPLE_QAPI_INTROSPECT_H\n"
+"\n"
+"#include \"qapi/qmp/qlit.h\"\n"
+"\n"
+"extern const QLitObject example_qmp_schema_qlit;\n"
+"\n"
+"#endif /* EXAMPLE_QAPI_INTROSPECT_H */\n"
+"$ cat qapi-generated/example-qapi-introspect.c\n"
+"[Uninteresting stuff omitted...]\n"
+"\n"
+"const QLitObject example_qmp_schema_qlit = QLIT_QLIST(((QLitObject[]) {\n"
+"    QLIT_QDICT(((QLitDictEntry[]) {\n"
+"        { \"arg-type\", QLIT_QSTR(\"0\"), },\n"
+"        { \"meta-type\", QLIT_QSTR(\"command\"), },\n"
+"        { \"name\", QLIT_QSTR(\"my-command\"), },\n"
+"        { \"ret-type\", QLIT_QSTR(\"1\"), },\n"
+"        {}\n"
+"    })),\n"
+"    QLIT_QDICT(((QLitDictEntry[]) {\n"
+"        { \"arg-type\", QLIT_QSTR(\"2\"), },\n"
+"        { \"meta-type\", QLIT_QSTR(\"event\"), },\n"
+"        { \"name\", QLIT_QSTR(\"MY_EVENT\"), },\n"
+"        {}\n"
+"    })),\n"
+"    /* \"0\" = q_obj_my-command-arg */\n"
+"    QLIT_QDICT(((QLitDictEntry[]) {\n"
+"        { \"members\", QLIT_QLIST(((QLitObject[]) {\n"
+"            QLIT_QDICT(((QLitDictEntry[]) {\n"
+"                { \"name\", QLIT_QSTR(\"arg1\"), },\n"
+"                { \"type\", QLIT_QSTR(\"[1]\"), },\n"
+"                {}\n"
+"            })),\n"
+"            {}\n"
+"        })), },\n"
+"        { \"meta-type\", QLIT_QSTR(\"object\"), },\n"
+"        { \"name\", QLIT_QSTR(\"0\"), },\n"
+"        {}\n"
+"    })),\n"
+"    /* \"1\" = UserDefOne */\n"
+"    QLIT_QDICT(((QLitDictEntry[]) {\n"
+"        { \"members\", QLIT_QLIST(((QLitObject[]) {\n"
+"            QLIT_QDICT(((QLitDictEntry[]) {\n"
+"                { \"name\", QLIT_QSTR(\"integer\"), },\n"
+"                { \"type\", QLIT_QSTR(\"int\"), },\n"
+"                {}\n"
+"            })),\n"
+"            QLIT_QDICT(((QLitDictEntry[]) {\n"
+"                { \"default\", QLIT_QNULL, },\n"
+"                { \"name\", QLIT_QSTR(\"string\"), },\n"
+"                { \"type\", QLIT_QSTR(\"str\"), },\n"
+"                {}\n"
+"            })),\n"
+"            {}\n"
+"        })), },\n"
+"        { \"meta-type\", QLIT_QSTR(\"object\"), },\n"
+"        { \"name\", QLIT_QSTR(\"1\"), },\n"
+"        {}\n"
+"    })),\n"
+"    /* \"2\" = q_empty */\n"
+"    QLIT_QDICT(((QLitDictEntry[]) {\n"
+"        { \"members\", QLIT_QLIST(((QLitObject[]) {\n"
+"            {}\n"
+"        })), },\n"
+"        { \"meta-type\", QLIT_QSTR(\"object\"), },\n"
+"        { \"name\", QLIT_QSTR(\"2\"), },\n"
+"        {}\n"
+"    })),\n"
+"    QLIT_QDICT(((QLitDictEntry[]) {\n"
+"        { \"element-type\", QLIT_QSTR(\"1\"), },\n"
+"        { \"meta-type\", QLIT_QSTR(\"array\"), },\n"
+"        { \"name\", QLIT_QSTR(\"[1]\"), },\n"
+"        {}\n"
+"    })),\n"
+"    QLIT_QDICT(((QLitDictEntry[]) {\n"
+"        { \"json-type\", QLIT_QSTR(\"int\"), },\n"
+"        { \"meta-type\", QLIT_QSTR(\"builtin\"), },\n"
+"        { \"name\", QLIT_QSTR(\"int\"), },\n"
+"        {}\n"
+"    })),\n"
+"    QLIT_QDICT(((QLitDictEntry[]) {\n"
+"        { \"json-type\", QLIT_QSTR(\"string\"), },\n"
+"        { \"meta-type\", QLIT_QSTR(\"builtin\"), },\n"
+"        { \"name\", QLIT_QSTR(\"str\"), },\n"
+"        {}\n"
+"    })),\n"
+"    {}\n"
+"}));\n"
+"\n"
+"[Uninteresting stuff omitted...]"
+msgstr ""
