@@ -1,0 +1,581 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/codebase.rst:3
+msgid "Codebase"
+msgstr ""
+
+#: ../../../devel/codebase.rst:5
+msgid ""
+"This section presents the various parts of QEMU and how the codebase is "
+"organized."
+msgstr ""
+
+#: ../../../devel/codebase.rst:8
+msgid ""
+"Beyond giving succinct descriptions, the goal is to offer links to various "
+"parts of the documentation/codebase."
+msgstr ""
+
+#: ../../../devel/codebase.rst:12
+msgid "Subsystems"
+msgstr ""
+
+#: ../../../devel/codebase.rst:14
+msgid ""
+"An exhaustive list of subsystems and associated files can be found in the "
+"`MAINTAINERS <https://gitlab.com/qemu-project/qemu/-/blob/master/"
+"MAINTAINERS>`_ file."
+msgstr ""
+
+#: ../../../devel/codebase.rst:18
+msgid "Some of the main QEMU subsystems are:"
+msgstr ""
+
+#: ../../../devel/codebase.rst:20
+msgid "`Accelerators<Accelerators>`"
+msgstr ""
+
+#: ../../../devel/codebase.rst:21
+msgid "Block devices and `disk images<disk images>` support"
+msgstr ""
+
+#: ../../../devel/codebase.rst:22
+msgid "`CI<ci>` and `Tests<testing>`"
+msgstr ""
+
+#: ../../../devel/codebase.rst:23
+msgid "`Devices<device-emulation>` & Board models"
+msgstr ""
+
+#: ../../../devel/codebase.rst:24
+msgid "`Documentation <documentation-root>`"
+msgstr ""
+
+#: ../../../devel/codebase.rst:25
+msgid "`GDB support<GDB usage>`"
+msgstr ""
+
+#: ../../../devel/codebase.rst:26
+msgid ":ref:`Migration<migration>`"
+msgstr ""
+
+#: ../../../devel/codebase.rst:27
+msgid "`Monitor<QEMU monitor>`"
+msgstr ""
+
+#: ../../../devel/codebase.rst:28
+msgid ":ref:`QOM (QEMU Object Model)<qom>`"
+msgstr ""
+
+#: ../../../devel/codebase.rst:29
+msgid "`System mode<System emulation>`"
+msgstr ""
+
+#: ../../../devel/codebase.rst:30
+msgid ":ref:`TCG (Tiny Code Generator)<tcg>`"
+msgstr ""
+
+#: ../../../devel/codebase.rst:31
+msgid ""
+"`User mode<user-mode>` (`Linux<linux-user-mode>` & `BSD<bsd-user-mode>`)"
+msgstr ""
+
+#: ../../../devel/codebase.rst:32
+msgid "User Interfaces"
+msgstr ""
+
+#: ../../../devel/codebase.rst:34
+msgid ""
+"More documentation on QEMU subsystems can be found on :ref:`internal-"
+"subsystem` page."
+msgstr ""
+
+#: ../../../devel/codebase.rst:38
+msgid "The Grand tour"
+msgstr ""
+
+#: ../../../devel/codebase.rst:40
+msgid ""
+"We present briefly here what every folder in the top directory of the "
+"codebase contains. Hop on!"
+msgstr ""
+
+#: ../../../devel/codebase.rst:43
+msgid ""
+"The folder name links here will take you to that folder in our gitlab "
+"repository. Other links will take you to more detailed documentation for "
+"that subsystem, where we have it. Unfortunately not every subsystem has "
+"documentation yet, so sometimes the source code is all you have."
+msgstr ""
+
+#: ../../../devel/codebase.rst:48
+msgid ""
+"`accel <https://gitlab.com/qemu-project/qemu/-/tree/master/accel>`_: "
+"Infrastructure and architecture agnostic code related to the various "
+"`accelerators <Accelerators>` supported by QEMU (TCG, KVM, hvf, whpx, xen, "
+"nvmm). Contains interfaces for operations that will be implemented per "
+"`target <https://gitlab.com/qemu-project/qemu/-/tree/master/target>`_."
+msgstr ""
+
+#: ../../../devel/codebase.rst:54
+msgid ""
+"`audio <https://gitlab.com/qemu-project/qemu/-/tree/master/audio>`_: Audio "
+"(host) support."
+msgstr ""
+
+#: ../../../devel/codebase.rst:56
+msgid ""
+"`authz <https://gitlab.com/qemu-project/qemu/-/tree/master/authz>`_: `QEMU "
+"Authorization framework<client authorization>`."
+msgstr ""
+
+#: ../../../devel/codebase.rst:58
+msgid ""
+"`backends <https://gitlab.com/qemu-project/qemu/-/tree/master/backends>`_: "
+"Various backends that are used to access resources on the host (e.g. for "
+"random number generation, memory backing or cryptographic functions)."
+msgstr ""
+
+#: ../../../devel/codebase.rst:61
+msgid ""
+"`block <https://gitlab.com/qemu-project/qemu/-/tree/master/block>`_: Block "
+"devices and `image formats<disk images>` implementation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:63
+msgid ""
+"`bsd-user <https://gitlab.com/qemu-project/qemu/-/tree/master/bsd-user>`_: "
+"`BSD User mode<bsd-user-mode>`."
+msgstr ""
+
+#: ../../../devel/codebase.rst:65
+msgid ""
+"build: Where the code built goes by default. You can tell the QEMU build "
+"system to put the built code anywhere else you like."
+msgstr ""
+
+#: ../../../devel/codebase.rst:67
+msgid ""
+"`chardev <https://gitlab.com/qemu-project/qemu/-/tree/master/chardev>`_: "
+"Various backends used by char devices."
+msgstr ""
+
+#: ../../../devel/codebase.rst:69
+msgid ""
+"`common-user <https://gitlab.com/qemu-project/qemu/-/tree/master/common-"
+"user>`_: User-mode assembly code for dealing with signals occurring during "
+"syscalls."
+msgstr ""
+
+#: ../../../devel/codebase.rst:71
+msgid ""
+"`configs <https://gitlab.com/qemu-project/qemu/-/tree/master/configs>`_: "
+"Makefiles defining configurations to build QEMU."
+msgstr ""
+
+#: ../../../devel/codebase.rst:73
+msgid ""
+"`contrib <https://gitlab.com/qemu-project/qemu/-/tree/master/contrib>`_: "
+"Community contributed devices/plugins/tools."
+msgstr ""
+
+#: ../../../devel/codebase.rst:75
+msgid ""
+"`crypto <https://gitlab.com/qemu-project/qemu/-/tree/master/crypto>`_: "
+"Cryptographic algorithms used in QEMU."
+msgstr ""
+
+#: ../../../devel/codebase.rst:77
+msgid ""
+"`disas <https://gitlab.com/qemu-project/qemu/-/tree/master/disas>`_: "
+"Disassembly functions used by QEMU target code."
+msgstr ""
+
+#: ../../../devel/codebase.rst:79
+msgid ""
+"`docs <https://gitlab.com/qemu-project/qemu/-/tree/master/docs>`_: QEMU "
+"Documentation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:81
+msgid ""
+"`dump <https://gitlab.com/qemu-project/qemu/-/tree/master/dump>`_: Code to "
+"dump memory of a running VM."
+msgstr ""
+
+#: ../../../devel/codebase.rst:83
+msgid ""
+"`ebpf <https://gitlab.com/qemu-project/qemu/-/tree/master/ebpf>`_: eBPF "
+"program support in QEMU. `virtio-net RSS<ebpf-rss>` uses it."
+msgstr ""
+
+#: ../../../devel/codebase.rst:85
+msgid ""
+"`fpu <https://gitlab.com/qemu-project/qemu/-/tree/master/fpu>`_: Floating-"
+"point software emulation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:87
+msgid ""
+"`fsdev <https://gitlab.com/qemu-project/qemu/-/tree/master/fsdev>`_: `VirtFS "
+"<https://www.linux-kvm.org/page/VirtFS>`_ support."
+msgstr ""
+
+#: ../../../devel/codebase.rst:89
+msgid ""
+"`gdbstub <https://gitlab.com/qemu-project/qemu/-/tree/master/gdbstub>`_: "
+"`GDB <GDB usage>` support."
+msgstr ""
+
+#: ../../../devel/codebase.rst:91
+msgid ""
+"`gdb-xml <https://gitlab.com/qemu-project/qemu/-/tree/master/gdb-xml>`_: Set "
+"of XML files describing architectures and used by `gdbstub <GDB usage>`."
+msgstr ""
+
+#: ../../../devel/codebase.rst:93
+msgid ""
+"`host <https://gitlab.com/qemu-project/qemu/-/tree/master/host>`_: Various "
+"architecture specific header files (crypto, atomic, memory operations)."
+msgstr ""
+
+#: ../../../devel/codebase.rst:96
+msgid ""
+"`linux-headers <https://gitlab.com/qemu-project/qemu/-/tree/master/linux-"
+"headers>`_: A subset of headers imported from Linux kernel and used for "
+"implementing KVM support and user-mode."
+msgstr ""
+
+#: ../../../devel/codebase.rst:99
+msgid ""
+"`linux-user <https://gitlab.com/qemu-project/qemu/-/tree/master/linux-"
+"user>`_: `User mode <user-mode>` implementation. Contains one folder per "
+"target architecture."
+msgstr ""
+
+#: ../../../devel/codebase.rst:102
+msgid ""
+"`.gitlab-ci.d <https://gitlab.com/qemu-project/qemu/-/tree/master/.gitlab-ci."
+"d>`_: `CI <ci>` yaml and scripts."
+msgstr ""
+
+#: ../../../devel/codebase.rst:104
+msgid ""
+"`include <https://gitlab.com/qemu-project/qemu/-/tree/master/include>`_: All "
+"headers associated to different subsystems in QEMU. The hierarchy used "
+"mirrors source code organization and naming."
+msgstr ""
+
+#: ../../../devel/codebase.rst:107
+msgid ""
+"`hw <https://gitlab.com/qemu-project/qemu/-/tree/master/hw>`_: `Devices "
+"<device-emulation>` and boards emulation. Devices are categorized by type/"
+"protocol/architecture and located in associated subfolder."
+msgstr ""
+
+#: ../../../devel/codebase.rst:110
+msgid ""
+"`io <https://gitlab.com/qemu-project/qemu/-/tree/master/io>`_: QEMU `I/O "
+"channels <https://lists.gnu.org/archive/html/qemu-devel/2015-11/msg04208."
+"html>`_."
+msgstr ""
+
+#: ../../../devel/codebase.rst:112
+msgid ""
+"`libdecnumber <https://gitlab.com/qemu-project/qemu/-/tree/master/"
+"libdecnumber>`_: Import of gcc library, used to implement decimal number "
+"arithmetic."
+msgstr ""
+
+#: ../../../devel/codebase.rst:114
+msgid ""
+"`migration <https://gitlab.com/qemu-project/qemu/-/tree/master/"
+"migration>`__: :ref:`Migration framework <migration>`."
+msgstr ""
+
+#: ../../../devel/codebase.rst:116
+msgid ""
+"`monitor <https://gitlab.com/qemu-project/qemu/-/tree/master/monitor>`_: "
+"`Monitor <QEMU monitor>` implementation (HMP & QMP)."
+msgstr ""
+
+#: ../../../devel/codebase.rst:118
+msgid ""
+"`nbd <https://gitlab.com/qemu-project/qemu/-/tree/master/nbd>`_: QEMU NBD "
+"(Network Block Device) server."
+msgstr ""
+
+#: ../../../devel/codebase.rst:120
+msgid ""
+"`net <https://gitlab.com/qemu-project/qemu/-/tree/master/net>`_: Network "
+"(host) support."
+msgstr ""
+
+#: ../../../devel/codebase.rst:122
+msgid ""
+"`pc-bios <https://gitlab.com/qemu-project/qemu/-/tree/master/pc-bios>`_: "
+"Contains pre-built firmware binaries and boot images, ready to use in QEMU "
+"without compilation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:125
+msgid ""
+"`plugins <https://gitlab.com/qemu-project/qemu/-/tree/master/plugins>`_: :"
+"ref:`TCG plugins <tcg-plugins>` core implementation. Plugins can be found in "
+"`tests <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/tcg/"
+"plugins>`__ and `contrib <https://gitlab.com/qemu-project/qemu/-/tree/master/"
+"contrib/plugins>`__ folders."
+msgstr ""
+
+#: ../../../devel/codebase.rst:130
+msgid ""
+"`po <https://gitlab.com/qemu-project/qemu/-/tree/master/po>`_: Translation "
+"files."
+msgstr ""
+
+#: ../../../devel/codebase.rst:132
+msgid ""
+"`python <https://gitlab.com/qemu-project/qemu/-/tree/master/python>`_: "
+"Python part of our build/test system."
+msgstr ""
+
+#: ../../../devel/codebase.rst:134
+msgid ""
+"`qapi <https://gitlab.com/qemu-project/qemu/-/tree/master/qapi>`_: `QAPI "
+"<qapi>` implementation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:136
+msgid ""
+"`qobject <https://gitlab.com/qemu-project/qemu/-/tree/master/qobject>`_: "
+"QEMU Object implementation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:138
+msgid ""
+"`qga <https://gitlab.com/qemu-project/qemu/-/tree/master/qga>`_: QEMU `Guest "
+"agent <qemu-ga>` implementation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:140
+msgid ""
+"`qom <https://gitlab.com/qemu-project/qemu/-/tree/master/qom>`_: QEMU :ref:"
+"`Object model <qom>` implementation, with monitor associated commands."
+msgstr ""
+
+#: ../../../devel/codebase.rst:142
+msgid ""
+"`replay <https://gitlab.com/qemu-project/qemu/-/tree/master/replay>`_: QEMU :"
+"ref:`Record/replay <replay>` implementation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:144
+msgid ""
+"`roms <https://gitlab.com/qemu-project/qemu/-/tree/master/roms>`_: Contains "
+"source code for various firmware and ROMs, which can be compiled if custom "
+"or updated versions are needed."
+msgstr ""
+
+#: ../../../devel/codebase.rst:147
+msgid ""
+"`rust <https://gitlab.com/qemu-project/qemu/-/tree/master/rust>`_: Rust "
+"integration in QEMU. It contains the new interfaces defined and associated "
+"devices using it."
+msgstr ""
+
+#: ../../../devel/codebase.rst:150
+msgid ""
+"`scripts <https://gitlab.com/qemu-project/qemu/-/tree/master/scripts>`_: "
+"Collection of scripts used in build and test systems, and various tools for "
+"QEMU codebase and execution traces."
+msgstr ""
+
+#: ../../../devel/codebase.rst:153
+msgid ""
+"`scsi <https://gitlab.com/qemu-project/qemu/-/tree/master/scsi>`_: Code "
+"related to SCSI support, used by SCSI devices."
+msgstr ""
+
+#: ../../../devel/codebase.rst:155
+msgid ""
+"`semihosting <https://gitlab.com/qemu-project/qemu/-/tree/master/"
+"semihosting>`_: QEMU `Semihosting <Semihosting>` implementation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:157
+msgid ""
+"`stats <https://gitlab.com/qemu-project/qemu/-/tree/master/stats>`_: "
+"`Monitor <QEMU monitor>` stats commands implementation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:159
+msgid ""
+"`storage-daemon <https://gitlab.com/qemu-project/qemu/-/tree/master/storage-"
+"daemon>`_: QEMU `Storage daemon <storage-daemon>` implementation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:161
+msgid ""
+"`stubs <https://gitlab.com/qemu-project/qemu/-/tree/master/stubs>`_: Various "
+"stubs (empty functions) used to compile QEMU with specific configurations."
+msgstr ""
+
+#: ../../../devel/codebase.rst:164
+msgid ""
+"`subprojects <https://gitlab.com/qemu-project/qemu/-/tree/master/"
+"subprojects>`_: QEMU submodules used by QEMU build system."
+msgstr ""
+
+#: ../../../devel/codebase.rst:166
+msgid ""
+"`system <https://gitlab.com/qemu-project/qemu/-/tree/master/system>`_: QEMU "
+"`system mode <System emulation>` implementation (cpu, mmu, boot support)."
+msgstr ""
+
+#: ../../../devel/codebase.rst:168
+msgid ""
+"`target <https://gitlab.com/qemu-project/qemu/-/tree/master/target>`_: "
+"Contains code for all target architectures supported (one subfolder per "
+"arch). For every architecture, you can find accelerator specific "
+"implementations."
+msgstr ""
+
+#: ../../../devel/codebase.rst:172
+msgid ""
+"`tcg <https://gitlab.com/qemu-project/qemu/-/tree/master/tcg>`_: :ref:`TCG "
+"<tcg>` related code. Contains one subfolder per host supported architecture."
+msgstr ""
+
+#: ../../../devel/codebase.rst:175
+msgid ""
+"`tests <https://gitlab.com/qemu-project/qemu/-/tree/master/tests>`_: QEMU "
+"`test <testing>` suite"
+msgstr ""
+
+#: ../../../devel/codebase.rst:178
+msgid ""
+"`data <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/data>`_: "
+"Data for various tests."
+msgstr ""
+
+#: ../../../devel/codebase.rst:180
+msgid ""
+"`decode <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/decode>`_: "
+"Testsuite for :ref:`decodetree <decodetree>` implementation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:182
+msgid ""
+"`docker <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/docker>`_: "
+"Code and scripts to create `containers <container-ref>` used in `CI <ci>`."
+msgstr ""
+
+#: ../../../devel/codebase.rst:184
+msgid ""
+"`fp <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/fp>`_: QEMU "
+"testsuite for soft float implementation."
+msgstr ""
+
+#: ../../../devel/codebase.rst:186
+msgid ""
+"`functional <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/"
+"functional>`_: `Functional tests <checkfunctional-ref>` (full VM boot)."
+msgstr ""
+
+#: ../../../devel/codebase.rst:188
+msgid ""
+"`lcitool <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/"
+"lcitool>`_: Generate dockerfiles for CI containers."
+msgstr ""
+
+#: ../../../devel/codebase.rst:190
+msgid ""
+"`migration <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/"
+"migration>`_: Test scripts and data for :ref:`Migration framework "
+"<migration>`."
+msgstr ""
+
+#: ../../../devel/codebase.rst:192
+msgid ""
+"`multiboot <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/"
+"multiboot>`_: Test multiboot functionality for x86_64/i386."
+msgstr ""
+
+#: ../../../devel/codebase.rst:194
+msgid ""
+"`qapi-schema <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/qapi-"
+"schema>`_: Test scripts and data for `QAPI <qapi-tests>`."
+msgstr ""
+
+#: ../../../devel/codebase.rst:196
+msgid ""
+"`qemu-iotests <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/qemu-"
+"iotests>`_: `Disk image and block tests <qemu-iotests>`."
+msgstr ""
+
+#: ../../../devel/codebase.rst:198
+msgid ""
+"`qtest <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/qtest>`_: "
+"`Device emulation testing <qtest>`."
+msgstr ""
+
+#: ../../../devel/codebase.rst:200
+msgid ""
+"`tcg <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/tcg>`__: `TCG "
+"related tests <checktcg-ref>`. Contains code per architecture (subfolder) "
+"and multiarch tests as well."
+msgstr ""
+
+#: ../../../devel/codebase.rst:203
+msgid ""
+"`tsan <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/tsan>`_: "
+"`Suppressions <tsan-suppressions>` for thread sanitizer."
+msgstr ""
+
+#: ../../../devel/codebase.rst:205
+msgid ""
+"`uefi-test-tools <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/"
+"uefi-test-tools>`_: Test tool for UEFI support."
+msgstr ""
+
+#: ../../../devel/codebase.rst:207
+msgid ""
+"`unit <https://gitlab.com/qemu-project/qemu/-/tree/master/tests/unit>`_: "
+"QEMU `Unit tests <unit-tests>`."
+msgstr ""
+
+#: ../../../devel/codebase.rst:209
+msgid ""
+"`trace <https://gitlab.com/qemu-project/qemu/-/tree/master/trace>`_: :ref:"
+"`Tracing framework <tracing>`. Used to print information associated to "
+"various events during execution."
+msgstr ""
+
+#: ../../../devel/codebase.rst:212
+msgid ""
+"`ui <https://gitlab.com/qemu-project/qemu/-/tree/master/ui>`_: QEMU User "
+"interfaces."
+msgstr ""
+
+#: ../../../devel/codebase.rst:214
+msgid ""
+"`util <https://gitlab.com/qemu-project/qemu/-/tree/master/util>`_: Utility "
+"code used by other parts of QEMU."
+msgstr ""

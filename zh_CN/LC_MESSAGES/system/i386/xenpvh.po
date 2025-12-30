@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/i386/xenpvh.rst:2
+msgid "Xen PVH machine (``xenpvh``)"
+msgstr ""
+
+#: ../../../system/i386/xenpvh.rst:4
+msgid ""
+"Xen supports a spectrum of types of guests that vary in how they depend on "
+"HW virtualization features, emulation models and paravirtualization. PVH is "
+"a mode that uses HW virtualization features (like HVM) but tries to avoid "
+"emulation models and instead use passthrough or paravirtualized devices."
+msgstr ""
+
+#: ../../../system/i386/xenpvh.rst:10
+msgid ""
+"QEMU can be used to provide PV virtio devices on an emulated PCIe "
+"controller. That is the purpose of this minimal machine."
+msgstr ""
+
+#: ../../../system/i386/xenpvh.rst:14
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/i386/xenpvh.rst:16
+msgid "The x86 Xen PVH QEMU machine provide the following devices:"
+msgstr ""
+
+#: ../../../system/i386/xenpvh.rst:18
+msgid "RAM"
+msgstr ""
+
+#: ../../../system/i386/xenpvh.rst:19
+msgid "GPEX host bridge"
+msgstr ""
+
+#: ../../../system/i386/xenpvh.rst:20
+msgid "virtio-pci devices"
+msgstr ""
+
+#: ../../../system/i386/xenpvh.rst:22
+msgid ""
+"The idea is to only connect virtio-pci devices but in theory any compatible "
+"PCI device model will work depending on Xen and guest support."
+msgstr ""
+
+#: ../../../system/i386/xenpvh.rst:26
+msgid "Running"
+msgstr ""
+
+#: ../../../system/i386/xenpvh.rst:28
+msgid ""
+"The Xen tools will typically construct a command-line and launch QEMU for "
+"you when needed. But here's an example of what it can look like in case you "
+"need to construct one manually:"
+msgstr ""
+
+#: ../../../system/i386/xenpvh.rst:32
+msgid ""
+"qemu-system-i386 -xen-domid 3 -no-shutdown        \\\n"
+"  -chardev socket,id=libxl-cmd,path=/var/run/xen/qmp-libxl-3,server=on,"
+"wait=off \\\n"
+"  -mon chardev=libxl-cmd,mode=control             \\\n"
+"  -chardev socket,id=libxenstat-cmd,path=/var/run/xen/qmp-libxenstat-3,"
+"server=on,wait=off \\\n"
+"  -mon chardev=libxenstat-cmd,mode=control        \\\n"
+"  -nodefaults                                     \\\n"
+"  -no-user-config                                 \\\n"
+"  -xen-attach -name g0                            \\\n"
+"  -vnc none                                       \\\n"
+"  -display none                                   \\\n"
+"  -device virtio-net-pci,id=nic0,netdev=net0,mac=00:16:3e:5c:81:78 \\\n"
+"  -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=no,"
+"downscript=no \\\n"
+"  -smp 4,maxcpus=4                                \\\n"
+"  -nographic                                      \\\n"
+"  -machine xenpvh,ram-low-base=0,ram-low-size=2147483648,ram-high-"
+"base=4294967296,ram-high-size=2147483648,pci-ecam-base=824633720832,pci-ecam-"
+"size=268435456,pci-mmio-base=4026531840,pci-mmio-size=33554432,pci-mmio-high-"
+"base=824902156288,pci-mmio-high-size=68719476736 \\\n"
+"  -m 4096"
+msgstr ""
