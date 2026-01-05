@@ -1,0 +1,409 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/introduction.rst:2
+msgid "Introduction"
+msgstr ""
+
+#: ../../../system/introduction.rst:7
+msgid "Virtualisation Accelerators"
+msgstr ""
+
+#: ../../../system/introduction.rst:9
+msgid ""
+"QEMU's system emulation provides a virtual model of a machine (CPU, memory "
+"and emulated devices) to run a guest OS. It supports a number of hypervisors "
+"(known as accelerators) as well as a JIT known as the Tiny Code Generator "
+"(TCG) capable of emulating many CPUs."
+msgstr ""
+
+#: ../../../system/introduction.rst:14
+msgid "Supported Accelerators"
+msgstr ""
+
+#: ../../../system/introduction.rst:17 ../../../system/introduction.rst:138
+msgid "Accelerator"
+msgstr ""
+
+#: ../../../system/introduction.rst:18
+msgid "Host OS"
+msgstr ""
+
+#: ../../../system/introduction.rst:19
+msgid "Host Architectures"
+msgstr ""
+
+#: ../../../system/introduction.rst:20
+msgid "KVM"
+msgstr ""
+
+#: ../../../system/introduction.rst:21
+msgid "Linux"
+msgstr ""
+
+#: ../../../system/introduction.rst:22
+msgid "Arm (64 bit only), MIPS, PPC, RISC-V, s390x, x86"
+msgstr ""
+
+#: ../../../system/introduction.rst:23
+msgid "Xen"
+msgstr ""
+
+#: ../../../system/introduction.rst:24 ../../../system/introduction.rst:27
+msgid "Linux (as dom0)"
+msgstr ""
+
+#: ../../../system/introduction.rst:25
+msgid "Arm, x86"
+msgstr ""
+
+#: ../../../system/introduction.rst:26
+msgid "MSHV"
+msgstr ""
+
+#: ../../../system/introduction.rst:28 ../../../system/introduction.rst:34
+#: ../../../system/introduction.rst:37
+msgid "x86"
+msgstr ""
+
+#: ../../../system/introduction.rst:29
+msgid "Hypervisor Framework (hvf)"
+msgstr ""
+
+#: ../../../system/introduction.rst:30
+msgid "MacOS"
+msgstr ""
+
+#: ../../../system/introduction.rst:31
+msgid "x86 (64 bit only), Arm (64 bit only)"
+msgstr ""
+
+#: ../../../system/introduction.rst:32
+msgid "Windows Hypervisor Platform (whpx)"
+msgstr ""
+
+#: ../../../system/introduction.rst:33
+msgid "Windows"
+msgstr ""
+
+#: ../../../system/introduction.rst:35
+msgid "NetBSD Virtual Machine Monitor (nvmm)"
+msgstr ""
+
+#: ../../../system/introduction.rst:36
+msgid "NetBSD"
+msgstr ""
+
+#: ../../../system/introduction.rst:38
+msgid "Tiny Code Generator (tcg)"
+msgstr ""
+
+#: ../../../system/introduction.rst:39
+msgid "Linux, other POSIX, Windows, MacOS"
+msgstr ""
+
+#: ../../../system/introduction.rst:40
+msgid "Arm, x86, Loongarch64, MIPS, PPC, s390x, Sparc64"
+msgstr ""
+
+#: ../../../system/introduction.rst:43
+msgid "Feature Overview"
+msgstr ""
+
+#: ../../../system/introduction.rst:45
+msgid ""
+"System emulation provides a wide range of device models to emulate various "
+"hardware components you may want to add to your machine. This includes a "
+"wide number of VirtIO devices which are specifically tuned for efficient "
+"operation under virtualisation. Some of the device emulation can be "
+"offloaded from the main QEMU process using either vhost-user (for VirtIO) "
+"or :ref:`Multi-process QEMU`. If the platform supports it QEMU also supports "
+"directly passing devices through to guest VMs to eliminate the device "
+"emulation overhead. See :ref:`device-emulation` for more details."
+msgstr ""
+
+#: ../../../system/introduction.rst:55
+msgid ""
+"There is a full :ref:`featured block layer<Live Block Operations>` which "
+"allows for construction of complex storage topology which can be stacked "
+"across multiple layers supporting redirection, networking, snapshots and "
+"migration support."
+msgstr ""
+
+#: ../../../system/introduction.rst:60
+msgid ""
+"The flexible ``chardev`` system allows for handling IO from character like "
+"devices using stdio, files, unix sockets and TCP networking."
+msgstr ""
+
+#: ../../../system/introduction.rst:63
+msgid ""
+"QEMU provides a number of management interfaces including a line based :ref:"
+"`Human Monitor Protocol (HMP)<QEMU monitor>` that allows you to dynamically "
+"add and remove devices as well as introspect the system state. The :ref:"
+"`QEMU Monitor Protocol<QMP Ref>` (QMP) is a well defined, versioned, machine "
+"usable API that presents a rich interface to other tools to create, control "
+"and manage Virtual Machines. This is the interface used by higher level "
+"tools interfaces such as `Virt Manager <https://virt-manager.org/>`_ using "
+"the `libvirt framework <https://libvirt.org>`_."
+msgstr ""
+
+#: ../../../system/introduction.rst:73
+msgid ""
+"For the common accelerators QEMU, supported debugging with its :ref:"
+"`gdbstub<GDB usage>` which allows users to connect GDB and debug system "
+"software images."
+msgstr ""
+
+#: ../../../system/introduction.rst:78
+msgid "Running"
+msgstr ""
+
+#: ../../../system/introduction.rst:80
+msgid ""
+"QEMU provides a rich and complex API which can be overwhelming to "
+"understand. While some architectures can boot something with just a disk "
+"image, those examples elide a lot of details with defaults that may not be "
+"optimal for modern systems."
+msgstr ""
+
+#: ../../../system/introduction.rst:85
+msgid ""
+"For a non-x86 system where we emulate a broad range of machine types, the "
+"command lines are generally more explicit in defining the machine and boot "
+"behaviour. You will often find example command lines in the :ref:`system-"
+"targets-ref` section of the manual."
+msgstr ""
+
+#: ../../../system/introduction.rst:90
+msgid ""
+"While the project doesn't want to discourage users from using the command "
+"line to launch VMs, we do want to highlight that there are a number of "
+"projects dedicated to providing a more user friendly experience. Those built "
+"around the ``libvirt`` framework can make use of feature probing to build "
+"modern VM images tailored to run on the hardware you have."
+msgstr ""
+
+#: ../../../system/introduction.rst:97
+msgid "That said, the general form of a QEMU command line can be expressed as:"
+msgstr ""
+
+#: ../../../system/introduction.rst:102
+msgid ""
+"$ |qemu_system| [machine opts] \\\\\n"
+"                [cpu opts] \\\\\n"
+"                [accelerator opts] \\\\\n"
+"                [device opts] \\\\\n"
+"                [backend opts] \\\\\n"
+"                [interface opts] \\\\\n"
+"                [boot opts]"
+msgstr ""
+
+#: ../../../system/introduction.rst:110
+msgid "Most options will generate some help information. So for example:"
+msgstr ""
+
+#: ../../../system/introduction.rst:114
+msgid "$ |qemu_system| -M help"
+msgstr ""
+
+#: ../../../system/introduction.rst:116
+msgid ""
+"will list the machine types supported by that QEMU binary. ``help`` can also "
+"be passed as an argument to another option. For example:"
+msgstr ""
+
+#: ../../../system/introduction.rst:121
+msgid "$ |qemu_system| -device scsi-hd,help"
+msgstr ""
+
+#: ../../../system/introduction.rst:123
+msgid ""
+"will list the arguments and their default values of additional options that "
+"can control the behaviour of the ``scsi-hd`` device."
+msgstr ""
+
+#: ../../../system/introduction.rst:126
+msgid "Options Overview"
+msgstr ""
+
+#: ../../../system/introduction.rst:130
+msgid "Options"
+msgstr ""
+
+#: ../../../system/introduction.rst:132
+msgid "Machine"
+msgstr ""
+
+#: ../../../system/introduction.rst:133
+msgid "Define the machine type, amount of memory etc"
+msgstr ""
+
+#: ../../../system/introduction.rst:134
+msgid "CPU"
+msgstr ""
+
+#: ../../../system/introduction.rst:135
+msgid ""
+"Type and number/topology of vCPUs. Most accelerators offer a ``host`` cpu "
+"option which simply passes through your host CPU configuration without "
+"filtering out any features."
+msgstr ""
+
+#: ../../../system/introduction.rst:139
+msgid ""
+"This will depend on the hypervisor you run. Note that the default is TCG, "
+"which is purely emulated, so you must specify an accelerator type to take "
+"advantage of hardware virtualization."
+msgstr ""
+
+#: ../../../system/introduction.rst:142
+msgid "Devices"
+msgstr ""
+
+#: ../../../system/introduction.rst:143
+msgid ""
+"Additional devices that are not defined by default with the machine type."
+msgstr ""
+
+#: ../../../system/introduction.rst:145
+msgid "Backends"
+msgstr ""
+
+#: ../../../system/introduction.rst:146
+msgid ""
+"Backends are how QEMU deals with the guest's data, for example how a block "
+"device is stored, how network devices see the network or how a serial device "
+"is directed to the outside world."
+msgstr ""
+
+#: ../../../system/introduction.rst:149
+msgid "Interfaces"
+msgstr ""
+
+#: ../../../system/introduction.rst:150
+msgid ""
+"How the system is displayed, how it is managed and controlled or debugged."
+msgstr ""
+
+#: ../../../system/introduction.rst:152
+msgid "Boot"
+msgstr ""
+
+#: ../../../system/introduction.rst:153
+msgid "How the system boots, via firmware or direct kernel boot."
+msgstr ""
+
+#: ../../../system/introduction.rst:155
+msgid ""
+"In the following example we first define a ``virt`` machine which is a "
+"general purpose platform for running Aarch64 guests. We enable "
+"virtualisation so we can use KVM inside the emulated guest. As the ``virt`` "
+"machine comes with some built in pflash devices we give them names so we can "
+"override the defaults later."
+msgstr ""
+
+#: ../../../system/introduction.rst:161
+msgid ""
+"$ qemu-system-aarch64 \\\n"
+"   -machine type=virt,virtualization=on,pflash0=rom,pflash1=efivars \\\n"
+"   -m 4096 \\"
+msgstr ""
+
+#: ../../../system/introduction.rst:167
+msgid ""
+"We then define the 4 vCPUs using the ``max`` option which gives us all the "
+"Arm features QEMU is capable of emulating. We enable a more emulation "
+"friendly implementation of Arm's pointer authentication algorithm. We "
+"explicitly specify TCG acceleration even though QEMU would default to it "
+"anyway."
+msgstr ""
+
+#: ../../../system/introduction.rst:173
+msgid ""
+"-cpu max \\\n"
+"-smp 4 \\\n"
+"-accel tcg \\"
+msgstr ""
+
+#: ../../../system/introduction.rst:179
+msgid ""
+"As the ``virt`` platform doesn't have any default network or storage devices "
+"we need to define them. We give them ids so we can link them with the "
+"backend later on."
+msgstr ""
+
+#: ../../../system/introduction.rst:183
+msgid ""
+"-device virtio-net-pci,netdev=unet \\\n"
+"-device virtio-scsi-pci \\\n"
+"-device scsi-hd,drive=hd \\"
+msgstr ""
+
+#: ../../../system/introduction.rst:189
+msgid ""
+"We connect the user-mode networking to our network device. As user-mode "
+"networking isn't directly accessible from the outside world we forward "
+"localhost port 2222 to the ssh port on the guest."
+msgstr ""
+
+#: ../../../system/introduction.rst:193
+msgid "-netdev user,id=unet,hostfwd=tcp::2222-:22 \\"
+msgstr ""
+
+#: ../../../system/introduction.rst:197
+msgid ""
+"We connect the guest visible block device to an LVM partition we have set "
+"aside for our guest."
+msgstr ""
+
+#: ../../../system/introduction.rst:200
+msgid ""
+"-blockdev driver=raw,node-name=hd,file.driver=host_device,file.filename=/dev/"
+"lvm-disk/debian-bullseye-arm64 \\"
+msgstr ""
+
+#: ../../../system/introduction.rst:204
+msgid ""
+"We then tell QEMU to multiplex the :ref:`QEMU monitor` with the serial port "
+"output (we can switch between the two using :ref:`keys in the character "
+"backend multiplexer`). As there is no default graphical device we disable "
+"the display as we can work entirely in the terminal."
+msgstr ""
+
+#: ../../../system/introduction.rst:209
+msgid ""
+"-serial mon:stdio \\\n"
+"-display none \\"
+msgstr ""
+
+#: ../../../system/introduction.rst:214
+msgid ""
+"Finally we override the default firmware to ensure we have some storage for "
+"EFI to persist its configuration. That firmware is responsible for finding "
+"the disk, booting grub and eventually running our system."
+msgstr ""
+
+#: ../../../system/introduction.rst:219
+msgid ""
+"-blockdev node-name=rom,driver=file,filename=(pwd)/pc-bios/edk2-aarch64-code."
+"fd,read-only=true \\\n"
+"-blockdev node-name=efivars,driver=file,filename=$HOME/images/qemu-arm64-"
+"efivars"
+msgstr ""

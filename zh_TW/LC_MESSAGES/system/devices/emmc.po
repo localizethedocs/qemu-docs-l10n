@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-24 08:41+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/devices/emmc.rst:5
+msgid "eMMC Emulation"
+msgstr ""
+
+#: ../../../system/devices/emmc.rst:7
+msgid ""
+"Besides SD card emulation, QEMU also offers an eMMC model as found on many "
+"embedded boards. An eMMC, just like an SD card, is connected to the machine "
+"via an SDHCI controller."
+msgstr ""
+
+#: ../../../system/devices/emmc.rst:12
+msgid "Create eMMC Images"
+msgstr ""
+
+#: ../../../system/devices/emmc.rst:14
+msgid ""
+"A recent eMMC consists of 4 partitions: 2 boot partitions, 1 Replay "
+"protected Memory Block (RPMB), and the user data area. QEMU expects backing "
+"images for the eMMC to contain those partitions concatenated in exactly that "
+"order. However, the boot partitions as well as the RPMB might be absent if "
+"their sizes are configured to zero."
+msgstr ""
+
+#: ../../../system/devices/emmc.rst:20
+msgid ""
+"The eMMC specification defines alignment constraints for the partitions. The "
+"two boot partitions must be of the same size. Furthermore, boot and RPMB "
+"partitions must be multiples of 128 KB with a maximum of 32640 KB for each "
+"boot partition and 16384K for the RPMB partition."
+msgstr ""
+
+#: ../../../system/devices/emmc.rst:25
+msgid ""
+"The alignment constrain of the user data area depends on its size. Up to 2 "
+"GByte, the size must be a power of 2. From 2 GByte onward, the size has to "
+"be multiples of 512 byte."
+msgstr ""
+
+#: ../../../system/devices/emmc.rst:29
+msgid ""
+"QEMU is enforcing those alignment rules before instantiating the device. "
+"Therefore, the provided image has to strictly follow them as well. The "
+"helper script ``scripts/mkemmc.sh`` can be used to create compliant images, "
+"with or without pre-filled partitions. E.g., to create an eMMC image from a "
+"firmware image and an OS image with an empty 2 MByte RPMB, use the following "
+"command:"
+msgstr ""
+
+#: ../../../system/devices/emmc.rst:35
+msgid "scripts/mkemmc.sh -b firmware.img -r /dev/zero:2M os.img emmc.img"
+msgstr ""
+
+#: ../../../system/devices/emmc.rst:39
+msgid ""
+"This will take care of rounding up the partition sizes to the next valid "
+"value and will leave the RPMB and the second boot partition empty (zeroed)."
+msgstr ""
+
+#: ../../../system/devices/emmc.rst:43
+msgid "Adding eMMC Devices"
+msgstr ""
+
+#: ../../../system/devices/emmc.rst:45
+msgid ""
+"An eMMC is either automatically created by a machine model (e.g. Aspeed "
+"boards) or can be user-created when using a PCI-attached SDHCI controller. "
+"To instantiate the eMMC image from the example above in a machine without "
+"other SDHCI controllers while assuming that the firmware needs a boot "
+"partitions of 1 MB, use the following options:"
+msgstr ""
+
+#: ../../../system/devices/emmc.rst:51
+msgid ""
+"-drive file=emmc.img,if=none,format=raw,id=emmc-img\n"
+"-device sdhci-pci\n"
+"-device emmc,drive=emmc-img,boot-partition-size=1048576,rpmb-partition-"
+"size=2097152"
+msgstr ""
