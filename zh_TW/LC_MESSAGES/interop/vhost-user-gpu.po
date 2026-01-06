@@ -1,0 +1,523 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../interop/vhost-user-gpu.rst:3
+msgid "Vhost-user-gpu Protocol"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:10
+msgid "Table of Contents"
+msgstr "目次表"
+
+#: ../../../interop/vhost-user-gpu.rst:13
+msgid "Introduction"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:15
+msgid ""
+"The vhost-user-gpu protocol is aiming at sharing the rendering result of a "
+"virtio-gpu, done from a vhost-user slave process to a vhost-user master "
+"process (such as QEMU). It bears a resemblance to a display server protocol, "
+"if you consider QEMU as the display server and the slave as the client, but "
+"in a very limited way. Typically, it will work by setting a scanout/display "
+"configuration, before sending flush events for the display updates. It will "
+"also update the cursor shape and position."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:24
+msgid ""
+"The protocol is sent over a UNIX domain stream socket, since it uses socket "
+"ancillary data to share opened file descriptors (DMABUF fds or shared "
+"memory). The socket is usually obtained via ``VHOST_USER_GPU_SET_SOCKET``."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:29
+msgid ""
+"Requests are sent by the *slave*, and the optional replies by the *master*."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:33
+msgid "Wire format"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:35
+msgid ""
+"Unless specified differently, numbers are in the machine native byte order."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:38
+msgid ""
+"A vhost-user-gpu message (request and reply) consists of 3 header fields and "
+"a payload."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0 ../../../interop/vhost-user-gpu.rst:42
+msgid "request"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0 ../../../interop/vhost-user-gpu.rst:42
+#: ../../../interop/vhost-user-gpu.rst:113
+msgid "flags"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0 ../../../interop/vhost-user-gpu.rst:42
+msgid "size"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:42
+msgid "payload"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:46
+msgid "Header"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:48
+msgid "``u32``, type of the request"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:50
+msgid "``u32``, 32-bit bit field:"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:52
+msgid "Bit 2 is the reply flag - needs to be set on each reply"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:54
+msgid "``u32``, size of the payload"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:57
+msgid "Payload types"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:59
+msgid "Depending on the request type, **payload** can be:"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:62
+msgid "VhostUserGpuCursorPos"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0 ../../../interop/vhost-user-gpu.rst:65
+#: ../../../interop/vhost-user-gpu.rst:89
+#: ../../../interop/vhost-user-gpu.rst:100
+#: ../../../interop/vhost-user-gpu.rst:113
+msgid "scanout-id"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:65
+#: ../../../interop/vhost-user-gpu.rst:100
+#: ../../../interop/vhost-user-gpu.rst:113
+msgid "x"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:65
+#: ../../../interop/vhost-user-gpu.rst:100
+#: ../../../interop/vhost-user-gpu.rst:113
+msgid "y"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:68
+msgid "``u32``, the scanout where the cursor is located"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0
+msgid "x/y"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:70
+msgid "``u32``, the cursor position"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:73
+msgid "VhostUserGpuCursorUpdate"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0 ../../../interop/vhost-user-gpu.rst:76
+msgid "pos"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:76
+msgid "hot_x"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:76
+msgid "hot_y"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0 ../../../interop/vhost-user-gpu.rst:76
+msgid "cursor"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:79
+msgid "a ``VhostUserGpuCursorPos``, the cursor location"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0
+msgid "hot_x/hot_y"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:81
+msgid "``u32``, the cursor hot location"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:83
+msgid "``[u32; 64 * 64]``, 64x64 RGBA cursor data (PIXMAN_a8r8g8b8 format)"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:86
+msgid "VhostUserGpuScanout"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:89
+#: ../../../interop/vhost-user-gpu.rst:100
+#: ../../../interop/vhost-user-gpu.rst:113
+msgid "w"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:89
+#: ../../../interop/vhost-user-gpu.rst:100
+#: ../../../interop/vhost-user-gpu.rst:113
+msgid "h"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:92
+#: ../../../interop/vhost-user-gpu.rst:116
+msgid "``u32``, the scanout configuration to set"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0
+msgid "w/h"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:94
+#: ../../../interop/vhost-user-gpu.rst:120
+msgid "``u32``, the scanout width/height size"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:97
+msgid "VhostUserGpuUpdate"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0
+#: ../../../interop/vhost-user-gpu.rst:100
+msgid "data"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:103
+msgid "``u32``, the scanout content to update"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0
+msgid "x/y/w/h"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:105
+msgid "``u32``, region of the update"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:107
+msgid "RGB data (PIXMAN_x8r8g8b8 format)"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:110
+msgid "VhostUserGpuDMABUFScanout"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:113
+msgid "fdw"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:113
+msgid "fwh"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:113
+msgid "stride"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0
+#: ../../../interop/vhost-user-gpu.rst:113
+msgid "fourcc"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:118
+msgid "``u32``, the location of the scanout within the DMABUF"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0
+msgid "fdw/fdh/stride/flags"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:122
+msgid "``u32``, the DMABUF width/height/stride/flags"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:124
+msgid "``i32``, the DMABUF fourcc"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:128
+msgid "C structure"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:130
+msgid ""
+"In QEMU the vhost-user-gpu message is implemented with the following struct:"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:132
+msgid ""
+"typedef struct VhostUserGpuMsg {\n"
+"    uint32_t request; /* VhostUserGpuRequest */\n"
+"    uint32_t flags;\n"
+"    uint32_t size; /* the following payload size */\n"
+"    union {\n"
+"        VhostUserGpuCursorPos cursor_pos;\n"
+"        VhostUserGpuCursorUpdate cursor_update;\n"
+"        VhostUserGpuScanout scanout;\n"
+"        VhostUserGpuUpdate update;\n"
+"        VhostUserGpuDMABUFScanout dmabuf_scanout;\n"
+"        struct virtio_gpu_resp_display_info display_info;\n"
+"        uint64_t u64;\n"
+"    } payload;\n"
+"} QEMU_PACKED VhostUserGpuMsg;"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:150
+msgid "Protocol features"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:152
+msgid "None yet."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:154
+msgid ""
+"As the protocol may need to evolve, new messages and communication changes "
+"are negotiated thanks to preliminary "
+"``VHOST_USER_GPU_GET_PROTOCOL_FEATURES`` and "
+"``VHOST_USER_GPU_SET_PROTOCOL_FEATURES`` requests."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:160
+msgid "Communication"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:163
+msgid "Message types"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:165
+msgid "``VHOST_USER_GPU_GET_PROTOCOL_FEATURES``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0
+msgid "id"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:166
+msgid "1"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0
+msgid "request payload"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:167
+#: ../../../interop/vhost-user-gpu.rst:175
+#: ../../../interop/vhost-user-gpu.rst:181
+#: ../../../interop/vhost-user-gpu.rst:189
+#: ../../../interop/vhost-user-gpu.rst:196
+#: ../../../interop/vhost-user-gpu.rst:203
+#: ../../../interop/vhost-user-gpu.rst:210
+#: ../../../interop/vhost-user-gpu.rst:218
+#: ../../../interop/vhost-user-gpu.rst:226
+msgid "N/A"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:0
+msgid "reply payload"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:168
+#: ../../../interop/vhost-user-gpu.rst:174
+msgid "``u64``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:170
+msgid "Get the supported protocol features bitmask."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:172
+msgid "``VHOST_USER_GPU_SET_PROTOCOL_FEATURES``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:173
+msgid "2"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:177
+msgid "Enable protocol features using a bitmask."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:179
+msgid "``VHOST_USER_GPU_GET_DISPLAY_INFO``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:180
+msgid "3"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:182
+msgid "``struct virtio_gpu_resp_display_info`` (from virtio specification)"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:184
+msgid "Get the preferred display configuration."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:186
+msgid "``VHOST_USER_GPU_CURSOR_POS``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:187
+msgid "4"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:188
+#: ../../../interop/vhost-user-gpu.rst:195
+msgid "``VhostUserGpuCursorPos``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:191
+msgid "Set/show the cursor position."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:193
+msgid "``VHOST_USER_GPU_CURSOR_POS_HIDE``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:194
+msgid "5"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:198
+msgid "Set/hide the cursor."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:200
+msgid "``VHOST_USER_GPU_CURSOR_UPDATE``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:201
+msgid "6"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:202
+msgid "``VhostUserGpuCursorUpdate``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:205
+msgid "Update the cursor shape and location."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:207
+msgid "``VHOST_USER_GPU_SCANOUT``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:208
+msgid "7"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:209
+msgid "``VhostUserGpuScanout``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:212
+msgid ""
+"Set the scanout resolution. To disable a scanout, the dimensions width/"
+"height are set to 0."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:215
+msgid "``VHOST_USER_GPU_UPDATE``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:216
+msgid "8"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:217
+#: ../../../interop/vhost-user-gpu.rst:235
+msgid "``VhostUserGpuUpdate``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:220
+msgid ""
+"Update the scanout content. The data payload contains the graphical bits. "
+"The display should be flushed and presented."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:223
+msgid "``VHOST_USER_GPU_DMABUF_SCANOUT``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:224
+msgid "9"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:225
+msgid "``VhostUserGpuDMABUFScanout``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:228
+msgid ""
+"Set the scanout resolution/configuration, and share a DMABUF file descriptor "
+"for the scanout content, which is passed as ancillary data. To disable a "
+"scanout, the dimensions width/height are set to 0, there is no file "
+"descriptor passed."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:233
+msgid "``VHOST_USER_GPU_DMABUF_UPDATE``"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:234
+msgid "10"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:236
+msgid "empty payload"
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:238
+msgid ""
+"The display should be flushed and presented according to updated region from "
+"``VhostUserGpuUpdate``."
+msgstr ""
+
+#: ../../../interop/vhost-user-gpu.rst:241
+msgid ""
+"Note: there is no data payload, since the scanout is shared thanks to "
+"DMABUF, that must have been set previously with "
+"``VHOST_USER_GPU_DMABUF_SCANOUT``."
+msgstr ""
