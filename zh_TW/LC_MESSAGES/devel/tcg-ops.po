@@ -1,0 +1,1739 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/tcg-ops.rst:5
+msgid "TCG Intermediate Representation"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:8
+msgid "Introduction"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:10
+msgid ""
+"TCG (Tiny Code Generator) began as a generic backend for a C compiler. It "
+"was simplified to be used in QEMU.  It also has its roots in the QOP code "
+"generator written by Paul Brook."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:15
+msgid "Definitions"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:17
+msgid ""
+"The TCG *target* is the architecture for which we generate the code. It is "
+"of course not the same as the \"target\" of QEMU which is the emulated "
+"architecture.  As TCG started as a generic C backend used for cross "
+"compiling, the assumption was that TCG target might be different from the "
+"host, although this is never the case for QEMU."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:23
+msgid ""
+"In this document, we use *guest* to specify what architecture we are "
+"emulating; *target* always means the TCG target, the machine on which we are "
+"running QEMU."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:27
+msgid "An operation with *undefined behavior* may result in a crash."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:29
+msgid ""
+"An operation with *unspecified behavior* shall not crash.  However, the "
+"result may be one of several possibilities so may be considered an "
+"*undefined result*."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:34
+msgid "Basic Blocks"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:36
+msgid ""
+"A TCG *basic block* is a single entry, multiple exit region which "
+"corresponds to a list of instructions terminated by a label, or any branch "
+"instruction."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:40
+msgid ""
+"A TCG *extended basic block* is a single entry, multiple exit region which "
+"corresponds to a list of instructions terminated by a label or an "
+"unconditional branch.  Specifically, an extended basic block is a sequence "
+"of basic blocks connected by the fall-through paths of zero or more "
+"conditional branch instructions."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:47
+msgid "Operations"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:49
+msgid ""
+"TCG instructions or *ops* operate on TCG *variables*, both of which are "
+"strongly typed.  Each instruction has a fixed number of output variable "
+"operands, input variable operands and constant operands. Vector instructions "
+"have a field specifying the element size within the vector.  The notable "
+"exception is the call instruction which has a variable number of outputs and "
+"inputs."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:56
+msgid ""
+"In the textual form, output operands usually come first, followed by input "
+"operands, followed by constant operands. The output type is included in the "
+"instruction name. Constants are prefixed with a '$'."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:60
+msgid "add_i32 t0, t1, t2    /* (t0 <- t1 + t2) */"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:65
+msgid "Variables"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:67
+msgid "``TEMP_FIXED``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:69
+msgid ""
+"There is one TCG *fixed global* variable, ``cpu_env``, which is live in all "
+"translation blocks, and holds a pointer to ``CPUArchState``. This variable "
+"is held in a host cpu register at all times in all translation blocks."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:74
+msgid "``TEMP_GLOBAL``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:76
+msgid ""
+"A TCG *global* is a variable which is live in all translation blocks, and "
+"corresponds to memory location that is within ``CPUArchState``. These may be "
+"specified as an offset from ``cpu_env``, in which case they are called "
+"*direct globals*, or may be specified as an offset from a direct global, in "
+"which case they are called *indirect globals*. Even indirect globals should "
+"still reference memory within ``CPUArchState``.  All TCG globals are defined "
+"during ``TCGCPUOps.initialize``, before any translation blocks are generated."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:85
+msgid "``TEMP_CONST``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:87
+msgid ""
+"A TCG *constant* is a variable which is live throughout the entire "
+"translation block, and contains a constant value.  These variables are "
+"allocated on demand during translation and are hashed so that there is "
+"exactly one variable holding a given value."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:92
+msgid "``TEMP_TB``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:94
+msgid ""
+"A TCG *translation block temporary* is a variable which is live throughout "
+"the entire translation block, but dies on any exit. These temporaries are "
+"allocated explicitly during translation."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:98
+msgid "``TEMP_EBB``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:100
+msgid ""
+"A TCG *extended basic block temporary* is a variable which is live "
+"throughout an extended basic block, but dies on any exit. These temporaries "
+"are allocated explicitly during translation."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:105
+msgid "Types"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:107
+msgid "``TCG_TYPE_I32``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:109
+msgid "A 32-bit integer."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:111
+msgid "``TCG_TYPE_I64``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:113
+msgid ""
+"A 64-bit integer.  For 32-bit hosts, such variables are split into a pair of "
+"variables with ``type=TCG_TYPE_I32`` and ``base_type=TCG_TYPE_I64``. The "
+"``temp_subindex`` for each indicates where it falls within the host-endian "
+"representation."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:118
+msgid "``TCG_TYPE_PTR``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:120
+msgid ""
+"An alias for ``TCG_TYPE_I32`` or ``TCG_TYPE_I64``, depending on the size of "
+"a pointer for the host."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:123
+msgid "``TCG_TYPE_REG``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:125
+msgid ""
+"An alias for ``TCG_TYPE_I32`` or ``TCG_TYPE_I64``, depending on the size of "
+"the integer registers for the host.  This may be larger than "
+"``TCG_TYPE_PTR`` depending on the host ABI."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:129
+msgid "``TCG_TYPE_I128``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:131
+msgid ""
+"A 128-bit integer.  For all hosts, such variables are split into a number of "
+"variables with ``type=TCG_TYPE_REG`` and ``base_type=TCG_TYPE_I128``. The "
+"``temp_subindex`` for each indicates where it falls within the host-endian "
+"representation."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:136
+msgid "``TCG_TYPE_V64``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:138
+msgid ""
+"A 64-bit vector.  This type is valid only if the TCG target sets "
+"``TCG_TARGET_HAS_v64``."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:141
+msgid "``TCG_TYPE_V128``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:143
+msgid ""
+"A 128-bit vector.  This type is valid only if the TCG target sets "
+"``TCG_TARGET_HAS_v128``."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:146
+msgid "``TCG_TYPE_V256``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:148
+msgid ""
+"A 256-bit vector.  This type is valid only if the TCG target sets "
+"``TCG_TARGET_HAS_v256``."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:152
+msgid "Helpers"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:154
+msgid ""
+"Helpers are registered in a guest-specific ``helper.h``, which is processed "
+"to generate ``tcg_gen_helper_*`` functions. With these functions it is "
+"possible to call a function taking i32, i64, i128 or pointer types."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:159
+msgid ""
+"By default, before calling a helper, all globals are stored at their "
+"canonical location.  By default, the helper is allowed to modify the CPU "
+"state (including the state represented by tcg globals) or may raise an "
+"exception.  This default can be overridden using the following function "
+"modifiers:"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:165
+msgid "``TCG_CALL_NO_WRITE_GLOBALS``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:167
+msgid ""
+"The helper does not modify any globals, but may read them. Globals will be "
+"saved to their canonical location before calling helpers, but need not be "
+"reloaded afterwards."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:171
+msgid "``TCG_CALL_NO_READ_GLOBALS``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:173
+msgid ""
+"The helper does not read globals, either directly or via an exception. They "
+"will not be saved to their canonical locations before calling the helper.  "
+"This implies ``TCG_CALL_NO_WRITE_GLOBALS``."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:177
+msgid "``TCG_CALL_NO_SIDE_EFFECTS``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:179
+msgid ""
+"The call to the helper function may be removed if the return value is not "
+"used.  This means that it may not modify any CPU state nor may it raise an "
+"exception."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:184
+msgid "Code Optimizations"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:186
+msgid ""
+"When generating instructions, you can count on at least the following "
+"optimizations:"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:189
+msgid "Single instructions are simplified, e.g."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:191
+msgid "and_i32 t0, t0, $0xffffffff"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:195
+msgid "is suppressed."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:197
+msgid ""
+"A liveness analysis is done at the basic block level. The information is "
+"used to suppress moves from a dead variable to another one. It is also used "
+"to remove instructions which compute dead results. The later is especially "
+"useful for condition code optimization in QEMU."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:203
+msgid "In the following example:"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:205
+msgid ""
+"add_i32 t0, t1, t2\n"
+"add_i32 t0, t0, $1\n"
+"mov_i32 t0, $1"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:211
+msgid "only the last instruction is kept."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:215
+msgid "Instruction Reference"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:218
+msgid "Function call"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:222
+msgid "call *<ret>* *<params>* ptr"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "call function 'ptr' (pointer type)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*<ret>* optional 32 bit or 64 bit return value"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*<params>* optional 32 bit or 64 bit parameters"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:230
+msgid "Jumps/Labels"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:234
+msgid "set_label $label"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Define label 'label' at the current program point."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:238
+msgid "br $label"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Jump to label."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:242
+msgid "brcond_i32/i64 *t0*, *t1*, *cond*, *label*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Conditional jump if *t0* *cond* *t1* is true. *cond* can be:"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "``TCG_COND_EQ``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "``TCG_COND_NE``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "``TCG_COND_LT /* signed */``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "``TCG_COND_GE /* signed */``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "``TCG_COND_LE /* signed */``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "``TCG_COND_GT /* signed */``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "``TCG_COND_LTU /* unsigned */``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "``TCG_COND_GEU /* unsigned */``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "``TCG_COND_LEU /* unsigned */``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "``TCG_COND_GTU /* unsigned */``"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:258
+msgid "Arithmetic"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:262
+msgid "add_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* + *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:266
+msgid "sub_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* - *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:270
+msgid "neg_i32/i64 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = -*t1* (two's complement)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:274
+msgid "mul_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* * *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:278
+msgid "div_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* / *t2* (signed)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Undefined behavior if division by zero or overflow."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:283
+msgid "divu_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* / *t2* (unsigned)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Undefined behavior if division by zero."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:288
+msgid "rem_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* % *t2* (signed)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:293
+msgid "remu_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* % *t2* (unsigned)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:300
+msgid "Logical"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:304
+msgid "and_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* & *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:308
+msgid "or_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* | *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:312
+msgid "xor_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* ^ *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:316
+msgid "not_i32/i64 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = ~\\ *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:320
+msgid "andc_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* & ~\\ *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:324
+msgid "eqv_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = ~(*t1* ^ *t2*), or equivalently, *t0* = *t1* ^ ~\\ *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:328
+msgid "nand_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = ~(*t1* & *t2*)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:332
+msgid "nor_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = ~(*t1* | *t2*)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:336
+msgid "orc_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* | ~\\ *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:340
+msgid "clz_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* ? clz(*t1*) : *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:344
+msgid "ctz_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* ? ctz(*t1*) : *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:348
+msgid "ctpop_i32/i64 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = number of bits set in *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "With *ctpop* short for \"count population\", matching"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "the function name used in ``include/qemu/host-utils.h``."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:357
+msgid "Shifts/Rotates"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:361
+msgid "shl_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* << *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Unspecified behavior if *t2* < 0 or *t2* >= 32 (resp 64)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:366
+msgid "shr_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* >> *t2* (unsigned)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:371
+msgid "sar_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1* >> *t2* (signed)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:376
+msgid "rotl_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Rotation of *t2* bits to the left"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:381
+msgid "rotr_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Rotation of *t2* bits to the right."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:388
+msgid "Misc"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:392
+msgid "mov_i32/i64 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Move *t1* to *t0* (both operands must have the same type)."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:397
+msgid "ext8s_i32/i64 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:399
+msgid "ext8u_i32/i64 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:401
+msgid "ext16s_i32/i64 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:403
+msgid "ext16u_i32/i64 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:405
+msgid "ext32s_i64 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:407
+msgid "ext32u_i64 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"8, 16 or 32 bit sign/zero extension (both operands must have the same type)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:411
+msgid "bswap16_i32/i64 *t0*, *t1*, *flags*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "16 bit byte swap on the low bits of a 32/64 bit input."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"If *flags* & ``TCG_BSWAP_IZ``, then *t1* is known to be zero-extended from "
+"bit 15."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"If *flags* & ``TCG_BSWAP_OZ``, then *t0* will be zero-extended from bit 15."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"If *flags* & ``TCG_BSWAP_OS``, then *t0* will be sign-extended from bit 15."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"If neither ``TCG_BSWAP_OZ`` nor ``TCG_BSWAP_OS`` are set, then the bits of "
+"*t0* above bit 15 may contain any value."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:421
+msgid "bswap32_i64 *t0*, *t1*, *flags*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"32 bit byte swap on a 64-bit value.  The flags are the same as for bswap16, "
+"except they apply from bit 31 instead of bit 15."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:426
+msgid "bswap32_i32 *t0*, *t1*, *flags*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:428
+msgid "bswap64_i64 *t0*, *t1*, *flags*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"32/64 bit byte swap. The flags are ignored, but still present for "
+"consistency with the other bswap opcodes."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:433
+msgid "discard_i32/i64 *t0*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Indicate that the value of *t0* won't be used later. It is useful to force "
+"dead code elimination."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:438
+msgid "deposit_i32/i64 *dest*, *t1*, *t2*, *pos*, *len*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Deposit *t2* as a bitfield into *t1*, placing the result in *dest*."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "The bitfield is described by *pos*/*len*, which are immediate values:"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*len* - the length of the bitfield"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*pos* - the position of the first bit, counting from the LSB"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"For example, \"deposit_i32 dest, t1, t2, 8, 4\" indicates a 4-bit field at "
+"bit 8. This operation would be equivalent to"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*dest* = (*t1* & ~0x0f00) | ((*t2* << 8) & 0x0f00)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:452
+msgid "extract_i32/i64 *dest*, *t1*, *pos*, *len*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:454
+msgid "sextract_i32/i64 *dest*, *t1*, *pos*, *len*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Extract a bitfield from *t1*, placing the result in *dest*."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"The bitfield is described by *pos*/*len*, which are immediate values, as "
+"above for deposit.  For extract_*, the result will be extended to the left "
+"with zeros; for sextract_*, the result will be extended to the left with "
+"copies of the bitfield sign bit at *pos* + *len* - 1."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"For example, \"sextract_i32 dest, t1, 8, 4\" indicates a 4-bit field at bit "
+"8. This operation would be equivalent to"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*dest* = (*t1* << 20) >> 28"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "(using an arithmetic right shift)."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:470
+msgid "extract2_i32/i64 *dest*, *t1*, *t2*, *pos*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"For N = {32,64}, extract an N-bit quantity from the concatenation of *t2*:"
+"*t1*, beginning at *pos*. The tcg_gen_extract2_{i32,i64} expander accepts 0 "
+"<= *pos* <= N as inputs. The backend code generator will not see either 0 or "
+"N as inputs for these opcodes."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:477
+msgid "extrl_i64_i32 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"For 64-bit hosts only, extract the low 32-bits of input *t1* and place it "
+"into 32-bit output *t0*.  Depending on the host, this may be a simple move, "
+"or may require additional canonicalization."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:483
+msgid "extrh_i64_i32 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"For 64-bit hosts only, extract the high 32-bits of input *t1* and place it "
+"into 32-bit output *t0*.  Depending on the host, this may be a simple shift, "
+"or may require additional canonicalization."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:491
+msgid "Conditional moves"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:495
+msgid "setcond_i32/i64 *dest*, *t1*, *t2*, *cond*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*dest* = (*t1* *cond* *t2*)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Set *dest* to 1 if (*t1* *cond* *t2*) is true, otherwise set to 0."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:501
+msgid "movcond_i32/i64 *dest*, *c1*, *c2*, *v1*, *v2*, *cond*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*dest* = (*c1* *cond* *c2* ? *v1* : *v2*)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Set *dest* to *v1* if (*c1* *cond* *c2*) is true, otherwise set to *v2*."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:509
+msgid "Type conversions"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:513
+msgid "ext_i32_i64 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Convert *t1* (32 bit) to *t0* (64 bit) and does sign extension"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:517
+msgid "extu_i32_i64 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Convert *t1* (32 bit) to *t0* (64 bit) and does zero extension"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:521
+msgid "trunc_i64_i32 *t0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Truncate *t1* (64 bit) to *t0* (32 bit)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:525
+msgid "concat_i32_i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Construct *t0* (64-bit) taking the low half from *t1* (32 bit) and the high "
+"half from *t2* (32 bit)."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:530
+msgid "concat32_i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Construct *t0* (64-bit) taking the low half from *t1* (64 bit) and the high "
+"half from *t2* (64 bit)."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:537
+msgid "Load/Store"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:541
+msgid "ld_i32/i64 *t0*, *t1*, *offset*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:543
+msgid "ld8s_i32/i64 *t0*, *t1*, *offset*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:545
+msgid "ld8u_i32/i64 *t0*, *t1*, *offset*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:547
+msgid "ld16s_i32/i64 *t0*, *t1*, *offset*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:549
+msgid "ld16u_i32/i64 *t0*, *t1*, *offset*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:551
+msgid "ld32s_i64 t0, *t1*, *offset*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:553
+msgid "ld32u_i64 t0, *t1*, *offset*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*t0* = read(*t1* + *offset*)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Load 8, 16, 32 or 64 bits with or without sign extension from host memory. "
+"*offset* must be a constant."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:560
+msgid "st_i32/i64 *t0*, *t1*, *offset*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:562
+msgid "st8_i32/i64 *t0*, *t1*, *offset*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:564
+msgid "st16_i32/i64 *t0*, *t1*, *offset*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:566
+msgid "st32_i64 *t0*, *t1*, *offset*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "write(*t0*, *t1* + *offset*)"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Write 8, 16, 32 or 64 bits to host memory."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:572
+msgid ""
+"All this opcodes assume that the pointed host memory doesn't correspond to a "
+"global. In the latter case the behaviour is unpredictable."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:577
+msgid "Multiword arithmetic support"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:581
+msgid ""
+"add2_i32/i64 *t0_low*, *t0_high*, *t1_low*, *t1_high*, *t2_low*, *t2_high*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:583
+msgid ""
+"sub2_i32/i64 *t0_low*, *t0_high*, *t1_low*, *t1_high*, *t2_low*, *t2_high*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Similar to add/sub, except that the double-word inputs *t1* and *t2* are "
+"formed from two single-word arguments, and the double-word output *t0* is "
+"returned in two single-word outputs."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:589
+msgid "mulu2_i32/i64 *t0_low*, *t0_high*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Similar to mul, except two unsigned inputs *t1* and *t2* yielding the full "
+"double-word product *t0*. The latter is returned in two single-word outputs."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:594
+msgid "muls2_i32/i64 *t0_low*, *t0_high*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Similar to mulu2, except the two inputs *t1* and *t2* are signed."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:598
+msgid "mulsh_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:600
+msgid "muluh_i32/i64 *t0*, *t1*, *t2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Provide the high part of a signed or unsigned multiply, respectively."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"If mulu2/muls2 are not provided by the backend, the tcg-op generator can "
+"obtain the same results by emitting a pair of opcodes, mul + muluh/mulsh."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:609
+msgid "Memory Barrier support"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:613
+msgid "mb *<$arg>*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Generate a target memory barrier instruction to ensure memory ordering as "
+"being  enforced by a corresponding guest memory barrier instruction."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"The ordering enforced by the backend may be stricter than the ordering "
+"required by the guest. It cannot be weaker. This opcode takes a constant "
+"argument which is required to generate the appropriate barrier instruction. "
+"The backend should take care to emit the target barrier instruction only "
+"when necessary i.e., for SMP guests and when MTTCG is enabled."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"The guest translators should generate this opcode for all guest instructions "
+"which have ordering side effects."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Please see :ref:`atomics-ref` for more information on memory barriers."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:632
+msgid "64-bit guest on 32-bit host support"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:634
+msgid ""
+"The following opcodes are internal to TCG.  Thus they are to be implemented "
+"by 32-bit host code generators, but are not to be emitted by guest "
+"translators. They are emitted as needed by inline functions within ``tcg-op."
+"h``."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:640
+msgid "brcond2_i32 *t0_low*, *t0_high*, *t1_low*, *t1_high*, *cond*, *label*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Similar to brcond, except that the 64-bit values *t0* and *t1* are formed "
+"from two 32-bit arguments."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:645
+msgid "setcond2_i32 *dest*, *t1_low*, *t1_high*, *t2_low*, *t2_high*, *cond*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Similar to setcond, except that the 64-bit values *t1* and *t2* are formed "
+"from two 32-bit arguments. The result is a 32-bit value."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:652
+msgid "QEMU specific operations"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:656
+msgid "exit_tb *t0*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Exit the current TB and return the value *t0* (word type)."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:660
+msgid "goto_tb *index*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Exit the current TB and jump to the TB index *index* (constant) if the "
+"current TB was linked to this TB. Otherwise execute the next instructions. "
+"Only indices 0 and 1 are valid and tcg_gen_goto_tb may be issued at most "
+"once with each slot index per TB."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:667
+msgid "lookup_and_goto_ptr *tb_addr*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Look up a TB address *tb_addr* and jump to it if valid. If not valid, jump "
+"to the TCG epilogue to go back to the exec loop."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"This operation is optional. If the TCG backend does not implement the "
+"goto_ptr opcode, emitting this op is equivalent to emitting exit_tb(0)."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:675
+msgid "qemu_ld_i32/i64 *t0*, *t1*, *flags*, *memidx*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:677
+msgid "qemu_st_i32/i64 *t0*, *t1*, *flags*, *memidx*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:679
+msgid "qemu_st8_i32 *t0*, *t1*, *flags*, *memidx*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Load data at the guest address *t1* into *t0*, or store data in *t0* at "
+"guest address *t1*.  The _i32/_i64 size applies to the size of the input/"
+"output register *t0* only.  The address *t1* is always sized according to "
+"the guest, and the width of the memory operation is controlled by *flags*."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Both *t0* and *t1* may be split into little-endian ordered pairs of "
+"registers if dealing with 64-bit quantities on a 32-bit host."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"The *memidx* selects the qemu tlb index to use (e.g. user or kernel access). "
+"The flags are the MemOp bits, selecting the sign, width, and endianness of "
+"the memory access."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"For a 32-bit host, qemu_ld/st_i64 is guaranteed to only be used with a 64-"
+"bit memory access specified in *flags*."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"For i386, qemu_st8_i32 is exactly like qemu_st_i32, except the size of the "
+"memory operation is known to be 8-bit.  This allows the backend to provide a "
+"different set of register constraints."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:702
+msgid "Host vector operations"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:704
+msgid ""
+"All of the vector ops have two parameters, ``TCGOP_VECL`` & ``TCGOP_VECE``. "
+"The former specifies the length of the vector in log2 64-bit units; the "
+"latter specifies the length of the element (if applicable) in log2 8-bit "
+"units. E.g. VECL = 1 -> 64 << 1 -> v128, and VECE = 2 -> 1 << 2 -> i32."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:711
+msgid "mov_vec *v0*, *v1* ld_vec *v0*, *t1* st_vec *v0*, *t1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Move, load and store."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:717
+msgid "dup_vec *v0*, *r1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Duplicate the low N bits of *r1* into VECL/VECE copies across *v0*."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:721
+msgid "dupi_vec *v0*, *c*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Similarly, for a constant."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Smaller values will be replicated to host register size by the expanders."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:726
+msgid "dup2_vec *v0*, *r1*, *r2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Duplicate *r2*:*r1* into VECL/64 copies across *v0*. This opcode is only "
+"present for 32-bit hosts."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:731
+msgid "add_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "*v0* = *v1* + *v2*, in elements across the vector."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:735
+msgid "sub_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Similarly, *v0* = *v1* - *v2*."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:739
+msgid "mul_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Similarly, *v0* = *v1* * *v2*."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:743
+msgid "neg_vec *v0*, *v1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Similarly, *v0* = -*v1*."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:747
+msgid "abs_vec *v0*, *v1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Similarly, *v0* = *v1* < 0 ? -*v1* : *v1*, in elements across the vector."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:751
+msgid "smin_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:753
+msgid "umin_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Similarly, *v0* = MIN(*v1*, *v2*), for signed and unsigned element types."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:757
+msgid "smax_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:759
+msgid "umax_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Similarly, *v0* = MAX(*v1*, *v2*), for signed and unsigned element types."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:763
+msgid "ssadd_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:765
+msgid "sssub_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:767
+msgid "usadd_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:769
+msgid "ussub_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Signed and unsigned saturating addition and subtraction."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"If the true result is not representable within the element type, the element "
+"is set to the minimum or maximum value for the type."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:776
+msgid "and_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:778
+msgid "or_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:780
+msgid "xor_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:782
+msgid "andc_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:784
+msgid "orc_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:786
+msgid "not_vec *v0*, *v1*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Similarly, logical operations with and without complement."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Note that VECE is unused."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:792
+msgid "shli_vec *v0*, *v1*, *i2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:794
+msgid "shls_vec *v0*, *v1*, *s2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Shift all elements from v1 by a scalar *i2*/*s2*. I.e."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:798
+msgid ""
+"for (i = 0; i < VECL/VECE; ++i) {\n"
+"    v0[i] = v1[i] << s2;\n"
+"}"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:804
+msgid "shri_vec *v0*, *v1*, *i2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:806
+msgid "sari_vec *v0*, *v1*, *i2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:808
+msgid "rotli_vec *v0*, *v1*, *i2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:810
+msgid "shrs_vec *v0*, *v1*, *s2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:812
+msgid "sars_vec *v0*, *v1*, *s2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Similarly for logical and arithmetic right shift, and left rotate."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:816
+msgid "shlv_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Shift elements from *v1* by elements from *v2*. I.e."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:820
+msgid ""
+"for (i = 0; i < VECL/VECE; ++i) {\n"
+"    v0[i] = v1[i] << v2[i];\n"
+"}"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:826
+msgid "shrv_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:828
+msgid "sarv_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:830
+msgid "rotlv_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:832
+msgid "rotrv_vec *v0*, *v1*, *v2*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Similarly for logical and arithmetic right shift, and rotates."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:836
+msgid "cmp_vec *v0*, *v1*, *v2*, *cond*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Compare vectors by element, storing -1 for true and 0 for false."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:840
+msgid "bitsel_vec *v0*, *v1*, *v2*, *v3*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid ""
+"Bitwise select, *v0* = (*v2* & *v1*) | (*v3* & ~\\ *v1*), across the entire "
+"vector."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:844
+msgid "cmpsel_vec *v0*, *c1*, *c2*, *v3*, *v4*, *cond*"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:0
+msgid "Select elements based on comparison results:"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:848
+msgid ""
+"for (i = 0; i < n; ++i) {\n"
+"    v0[i] = (c1[i] cond c2[i]) ? v3[i] : v4[i].\n"
+"}"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:854
+msgid ""
+"**Note 1**: Some shortcuts are defined when the last operand is known to be "
+"a constant (e.g. addi for add, movi for mov)."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:857
+msgid ""
+"**Note 2**: When using TCG, the opcodes must never be generated directly as "
+"some of them may not be available as \"real\" opcodes. Always use the "
+"function tcg_gen_xxx(args)."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:863
+msgid "Backend"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:865
+msgid ""
+"``tcg-target.h`` contains the target specific definitions. ``tcg-target.c."
+"inc`` contains the target specific code; it is #included by ``tcg/tcg.c``, "
+"rather than being a standalone C file."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:870
+msgid "Assumptions"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:872
+msgid ""
+"The target word size (``TCG_TARGET_REG_BITS``) is expected to be 32 bit or "
+"64 bit. It is expected that the pointer has the same size as the word."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:875
+msgid ""
+"On a 32 bit target, all 64 bit operations are converted to 32 bits. A few "
+"specific operations must be implemented to allow it (see add2_i32, sub2_i32, "
+"brcond2_i32)."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:879
+msgid ""
+"On a 64 bit target, the values are transferred between 32 and 64-bit "
+"registers using the following ops:"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:882
+msgid "trunc_shr_i64_i32"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:883
+msgid "ext_i32_i64"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:884
+msgid "extu_i32_i64"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:886
+msgid ""
+"They ensure that the values are correctly truncated or extended when moved "
+"from a 32-bit to a 64-bit register or vice-versa. Note that the "
+"trunc_shr_i64_i32 is an optional op. It is not necessary to implement it if "
+"all the following conditions are met:"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:891
+msgid "64-bit registers can hold 32-bit values"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:892
+msgid ""
+"32-bit values in a 64-bit register do not need to stay zero or sign extended"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:894
+msgid "all 32-bit TCG ops ignore the high part of 64-bit registers"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:896
+msgid ""
+"Floating point operations are not supported in this version. A previous "
+"incarnation of the code generator had full support of them, but it is better "
+"to concentrate on integer operations first."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:901
+msgid "Constraints"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:903
+msgid ""
+"GCC like constraints are used to define the constraints of every "
+"instruction. Memory constraints are not supported in this version. Aliases "
+"are specified in the input operands as for GCC."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:907
+msgid ""
+"The same register may be used for both an input and an output, even when "
+"they are not explicitly aliased.  If an op expands to multiple target "
+"instructions then care must be taken to avoid clobbering input values. GCC "
+"style \"early clobber\" outputs are supported, with '``&``'."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:912
+msgid ""
+"A target can define specific register or constant constraints. If an "
+"operation uses a constant input constraint which does not allow all "
+"constants, it must also accept registers in order to have a fallback. The "
+"constraint '``i``' is defined generically to accept any constant. The "
+"constraint '``r``' is not defined generically, but is consistently used by "
+"each backend to indicate all registers."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:919
+msgid "The movi_i32 and movi_i64 operations must accept any constants."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:921
+msgid ""
+"The mov_i32 and mov_i64 operations must accept any registers of the same "
+"type."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:924
+msgid ""
+"The ld/st/sti instructions must accept signed 32 bit constant offsets. This "
+"can be implemented by reserving a specific register in which to compute the "
+"address if the offset is too big."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:928
+msgid ""
+"The ld/st instructions must accept any destination (ld) or source (st) "
+"register."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:931
+msgid "The sti instruction may fail if it cannot store the given constant."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:934
+msgid "Function call assumptions"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:936
+msgid ""
+"The only supported types for parameters and return value are: 32 and 64 bit "
+"integers and pointer."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:938
+msgid "The stack grows downwards."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:939
+msgid "The first N parameters are passed in registers."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:940
+msgid "The next parameters are passed on the stack by storing them as words."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:941
+msgid "Some registers are clobbered during the call."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:942
+msgid ""
+"The function can return 0 or 1 value in registers. On a 32 bit target, "
+"functions must be able to return 2 values in registers for 64 bit return "
+"type."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:948
+msgid "Recommended coding rules for best performance"
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:950
+msgid ""
+"Use globals to represent the parts of the QEMU CPU state which are often "
+"modified, e.g. the integer registers and the condition codes. TCG will be "
+"able to use host registers to store them."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:954
+msgid ""
+"Don't hesitate to use helpers for complicated or seldom used guest "
+"instructions. There is little performance advantage in using TCG to "
+"implement guest instructions taking more than about twenty TCG instructions. "
+"Note that this rule of thumb is more applicable to helpers doing complex "
+"logic or arithmetic, where the C compiler has scope to do a good job of "
+"optimisation; it is less relevant where the instruction is mostly doing "
+"loads and stores, and in those cases inline TCG may still be faster for "
+"longer sequences."
+msgstr ""
+
+#: ../../../devel/tcg-ops.rst:963
+msgid ""
+"Use the 'discard' instruction if you know that TCG won't be able to prove "
+"that a given global is \"dead\" at a given program point. The x86 guest uses "
+"it to improve the condition codes optimisation."
+msgstr ""
