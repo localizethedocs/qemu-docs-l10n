@@ -1,0 +1,198 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/build-environment.rst:5
+msgid "Setup build environment"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:7
+msgid ""
+"QEMU uses a lot of dependencies on the host system. glib2 is used everywhere "
+"in the code base, and most of the other dependencies are optional."
+msgstr ""
+
+#: ../../../devel/build-environment.rst:10
+msgid ""
+"We present here simple instructions to enable native builds on most popular "
+"systems."
+msgstr ""
+
+#: ../../../devel/build-environment.rst:13
+msgid ""
+"You can find additional instructions on `QEMU wiki <https://wiki.qemu.org/"
+">`_:"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:15
+msgid "`Linux <https://wiki.qemu.org/Hosts/Linux>`_"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:16
+msgid "`MacOS <https://wiki.qemu.org/Hosts/Mac>`_"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:17
+msgid "`Windows <https://wiki.qemu.org/Hosts/W32>`_"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:18
+msgid "`BSD <https://wiki.qemu.org/Hosts/BSD>`_"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:20
+msgid ""
+"Note: Installing dependencies using your package manager build dependencies "
+"may miss out on deps that have been newly introduced in qemu.git. In more, "
+"it misses deps the distribution has decided to exclude."
+msgstr ""
+
+#: ../../../devel/build-environment.rst:25
+msgid "Linux"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:28
+msgid "Fedora"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:32
+msgid "sudo dnf update && sudo dnf builddep qemu"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:35
+msgid "Debian/Ubuntu"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:37
+msgid ""
+"You first need to enable `Sources List <https://wiki.debian.org/"
+"SourcesList>`_. Then, use apt to install dependencies:"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:42
+msgid "sudo apt update && sudo apt build-dep qemu"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:45
+msgid "MacOS"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:47
+msgid ""
+"You first need to install `Homebrew <https://brew.sh/>`_. Then, use it to "
+"install dependencies:"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:52
+msgid "brew update && brew install $(brew deps --include-build qemu)"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:55
+msgid "Windows"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:57
+msgid ""
+"You first need to install `MSYS2 <https://www.msys2.org/>`_. MSYS2 offers "
+"`different environments <https://www.msys2.org/docs/environments/>`_. x86_64 "
+"environments are based on GCC, while aarch64 is based on Clang."
+msgstr ""
+
+#: ../../../devel/build-environment.rst:61
+msgid ""
+"We recommend to use MINGW64 for windows-x86_64 and CLANGARM64 for windows-"
+"aarch64 (only available on windows-aarch64 hosts)."
+msgstr ""
+
+#: ../../../devel/build-environment.rst:64
+msgid "Then, you can open a windows shell, and enter msys2 env using:"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:68
+msgid ""
+"c:/msys64/msys2_shell.cmd -defterm -here -no-start -mingw64\n"
+"# Replace -ucrt64 by -clangarm64 or -ucrt64 for other environments."
+msgstr ""
+
+#: ../../../devel/build-environment.rst:71
+msgid ""
+"MSYS2 package manager does not offer a built-in way to install build "
+"dependencies. You can start with this list of packages using pacman:"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:74
+msgid ""
+"Note: Dependencies need to be installed again if you use a different MSYS2 "
+"environment."
+msgstr ""
+
+#: ../../../devel/build-environment.rst:79
+msgid ""
+"# update MSYS2 itself, you need to reopen your shell at the end.\n"
+"pacman -Syu\n"
+"pacman -S \\\n"
+"    base-devel binutils bison diffutils flex git grep make sed \\\n"
+"    ${MINGW_PACKAGE_PREFIX}-toolchain \\\n"
+"    ${MINGW_PACKAGE_PREFIX}-glib2 \\\n"
+"    ${MINGW_PACKAGE_PREFIX}-gtk3 \\\n"
+"    ${MINGW_PACKAGE_PREFIX}-libnfs \\\n"
+"    ${MINGW_PACKAGE_PREFIX}-libssh \\\n"
+"    ${MINGW_PACKAGE_PREFIX}-ninja \\\n"
+"    ${MINGW_PACKAGE_PREFIX}-pixman \\\n"
+"    ${MINGW_PACKAGE_PREFIX}-pkgconf \\\n"
+"    ${MINGW_PACKAGE_PREFIX}-python \\\n"
+"    ${MINGW_PACKAGE_PREFIX}-SDL2 \\\n"
+"    ${MINGW_PACKAGE_PREFIX}-zstd"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:95
+msgid ""
+"If you want to install all dependencies, it's possible to use recipe used to "
+"build QEMU in MSYS2 itself."
+msgstr ""
+
+#: ../../../devel/build-environment.rst:100
+msgid ""
+"pacman -S wget\n"
+"wget https://raw.githubusercontent.com/msys2/MINGW-packages/refs/heads/"
+"master/mingw-w64-qemu/PKGBUILD\n"
+"# Some packages may be missing for your environment, installation will "
+"still\n"
+"# be done though.\n"
+"makepkg -s PKGBUILD || true"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:107
+msgid "Build on windows-aarch64"
+msgstr ""
+
+#: ../../../devel/build-environment.rst:109
+msgid ""
+"When trying to cross compile meson for x86_64 using UCRT64 or MINGW64 env, "
+"configure will run into an error because the cpu detected is not correct."
+msgstr ""
+
+#: ../../../devel/build-environment.rst:112
+msgid ""
+"Meson detects x86_64 processes emulated, so you need to manually set the "
+"cpu, and force a cross compilation (with empty prefix)."
+msgstr ""
+
+#: ../../../devel/build-environment.rst:117
+msgid "./configure --cpu=x86_64 --cross-prefix="
+msgstr ""
