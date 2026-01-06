@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/acpi_pci_hotplug.rst:2
+msgid "QEMU<->ACPI BIOS PCI hotplug interface"
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:4
+msgid ""
+"QEMU supports PCI hotplug via ACPI, for PCI bus 0. This document describes "
+"the interface between QEMU and the ACPI BIOS."
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:8
+msgid "ACPI GPE block (IO ports 0xafe0-0xafe3, byte access)"
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:10
+msgid ""
+"Generic ACPI GPE block. Bit 1 (GPE.1) used to notify PCI hotplug/eject event "
+"to ACPI BIOS, via SCI interrupt."
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:14
+msgid ""
+"PCI slot injection notification pending (IO port 0xae00-0xae03, 4-byte "
+"access)"
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:16
+msgid "Slot injection notification pending. One bit per slot."
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:18
+msgid ""
+"Read by ACPI BIOS GPE.1 handler to notify OS of injection events.  Read-only."
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:22
+msgid "PCI slot removal notification (IO port 0xae04-0xae07, 4-byte access)"
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:24
+msgid "Slot removal notification pending. One bit per slot."
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:26
+msgid ""
+"Read by ACPI BIOS GPE.1 handler to notify OS of removal events.  Read-only."
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:30
+msgid "PCI device eject (IO port 0xae08-0xae0b, 4-byte access)"
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:32
+msgid ""
+"Write: Used by ACPI BIOS _EJ0 method to request device removal. One bit per "
+"slot."
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:35
+msgid ""
+"Read: Hotplug features register.  Used by platform to identify features "
+"available.  Current base feature set (no bits set):"
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:38
+msgid "Read-only \"up\" register @0xae00, 4-byte access, bit per slot"
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:39
+msgid "Read-only \"down\" register @0xae04, 4-byte access, bit per slot"
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:40
+msgid ""
+"Read/write \"eject\" register @0xae08, 4-byte access, write: bit per slot "
+"eject, read: hotplug feature set"
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:42
+msgid "Read-only hotplug capable register @0xae0c, 4-byte access, bit per slot"
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:45
+msgid "PCI removability status (IO port 0xae0c-0xae0f, 4-byte access)"
+msgstr ""
+
+#: ../../../specs/acpi_pci_hotplug.rst:47
+msgid ""
+"Used by ACPI BIOS _RMV method to indicate removability status to OS. One bit "
+"per slot.  Read-only."
+msgstr ""
