@@ -1,0 +1,1022 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/migration/main.rst:5
+msgid "Migration framework"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:7
+msgid ""
+"QEMU has code to load/save the state of the guest that it is running. These "
+"are two complementary operations.  Saving the state just does that, saves "
+"the state for each device that the guest is running. Restoring a guest is "
+"just the opposite operation: we need to load the state of each device."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:13
+msgid ""
+"For this to work, QEMU has to be launched with the same arguments the two "
+"times.  I.e. it can only restore the state in one guest that has the same "
+"devices that the one it was saved (this last requirement can be relaxed a "
+"bit, but for now we can consider that configuration has to be exactly the "
+"same)."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:19
+msgid ""
+"Once that we are able to save/restore a guest, a new functionality is "
+"requested: migration.  This means that QEMU is able to start in one machine "
+"and being \"migrated\" to another machine.  I.e. being moved to another "
+"machine."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:24
+msgid ""
+"Next was the \"live migration\" functionality.  This is important because "
+"some guests run with a lot of state (specially RAM), and it can take a while "
+"to move all state from one machine to another.  Live migration allows the "
+"guest to continue running while the state is transferred.  Only while the "
+"last part of the state is transferred has the guest to be stopped.  "
+"Typically the time that the guest is unresponsive during live migration is "
+"the low hundred of milliseconds (notice that this depends on a lot of "
+"things)."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:33
+msgid "Contents"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:36
+msgid "Transports"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:38
+msgid ""
+"The migration stream is normally just a byte stream that can be passed over "
+"any transport."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:41
+msgid "tcp migration: do the migration using tcp sockets"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:42
+msgid "unix migration: do the migration using unix sockets"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:43
+msgid ""
+"exec migration: do the migration using the stdin/stdout through a process."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:44
+msgid ""
+"fd migration: do the migration using a file descriptor that is passed to "
+"QEMU.  QEMU doesn't care how this file descriptor is opened."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:46
+msgid ""
+"file migration: do the migration using a file that is passed to QEMU by "
+"path. A file offset option is supported to allow a management application to "
+"add its own metadata to the start of the file without QEMU interference. "
+"Note that QEMU does not flush cached file data/metadata at the end of "
+"migration."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:52
+msgid ""
+"The file migration also supports using a file that has already been opened. "
+"A set of file descriptors is passed to QEMU via an \"fdset\" (see add-fd QMP "
+"command documentation). This method allows a management application to have "
+"control over the migration file opening operation. There are, however, "
+"strict requirements to this interface if the multifd capability is enabled:"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:59
+msgid ""
+"the fdset must contain two file descriptors that are not duplicates between "
+"themselves;"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:61
+msgid ""
+"if the direct-io capability is to be used, exactly one of the file "
+"descriptors must have the O_DIRECT flag set;"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:63
+msgid ""
+"the file must be opened with WRONLY on the migration source side and RDONLY "
+"on the migration destination side."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:66
+msgid ""
+"rdma migration: support is included for migration using RDMA, which "
+"transports the page data using ``RDMA``, where the hardware takes care of "
+"transporting the pages, and the load on the CPU is much lower.  While the "
+"internals of RDMA migration are a bit different, this isn't really visible "
+"outside the RAM migration code."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:72
+msgid ""
+"All these migration protocols use the same infrastructure to save/restore "
+"state devices.  This infrastructure is shared with the savevm/loadvm "
+"functionality."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:77
+msgid "Common infrastructure"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:79
+msgid ""
+"The files, sockets or fd's that carry the migration stream are abstracted by "
+"the  ``QEMUFile`` type (see ``migration/qemu-file.h``).  In most cases this "
+"is connected to a subtype of ``QIOChannel`` (see ``io/``)."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:85
+msgid "Saving the state of one device"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:87
+msgid ""
+"For most devices, the state is saved in a single call to the migration "
+"infrastructure; these are *non-iterative* devices.  The data for these "
+"devices is sent at the end of precopy migration, when the CPUs are paused. "
+"There are also *iterative* devices, which contain a very large amount of "
+"data (e.g. RAM or large tables).  See the iterative device section below."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:94
+msgid "General advice for device developers"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:96
+msgid ""
+"The migration state saved should reflect the device being modelled rather "
+"than the way your implementation works.  That way if you change the "
+"implementation later the migration stream will stay compatible.  That model "
+"may include internal state that's not directly visible in a register."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:101
+msgid ""
+"When saving a migration stream the device code may walk and check the state "
+"of the device.  These checks might fail in various ways (e.g. discovering "
+"internal state is corrupt or that the guest has done something bad). "
+"Consider carefully before asserting/aborting at this point, since the normal "
+"response from users is that *migration broke their VM* since it had "
+"apparently been running fine until then.  In these error cases, the device "
+"should log a message indicating the cause of error, and should consider "
+"putting the device into an error state, allowing the rest of the VM to "
+"continue execution."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:111
+msgid ""
+"The migration might happen at an inconvenient point, e.g. right in the "
+"middle of the guest reprogramming the device, during guest reboot or "
+"shutdown or while the device is waiting for external IO. It's strongly "
+"preferred that migrations do not fail in this situation, since in the cloud "
+"environment migrations might happen automatically to VMs that the "
+"administrator doesn't directly control."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:118
+msgid ""
+"If you do need to fail a migration, ensure that sufficient information is "
+"logged to identify what went wrong."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:121
+msgid ""
+"The destination should treat an incoming migration stream as hostile (which "
+"we do to varying degrees in the existing code).  Check that offsets into "
+"buffers and the like can't cause overruns.  Fail the incoming migration in "
+"the case of a corrupted stream like this."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:126
+msgid ""
+"Take care with internal device state or behaviour that might become "
+"migration version dependent.  For example, the order of PCI capabilities is "
+"required to stay constant across migration.  Another example would be that a "
+"special case handled by subsections (see below) might become much more "
+"common if a default behaviour is changed."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:132
+msgid ""
+"The state of the source should not be changed or destroyed by the outgoing "
+"migration.  Migrations timing out or being failed by higher levels of "
+"management, or failures of the destination host are not unusual, and in that "
+"case the VM is restarted on the source. Note that the management layer can "
+"validly revert the migration even though the QEMU level of migration has "
+"succeeded as long as it does it before starting execution on the destination."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:140
+msgid ""
+"Buses and devices should be able to explicitly specify addresses when "
+"instantiated, and management tools should use those.  For example, when hot "
+"adding USB devices it's important to specify the ports and addresses, since "
+"implicit ordering based on the command line order may be different on the "
+"destination.  This can result in the device state being loaded into the "
+"wrong device."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:148
+msgid "VMState"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:150
+msgid ""
+"Most device data can be described using the ``VMSTATE`` macros (mostly "
+"defined in ``include/migration/vmstate.h``)."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:153
+msgid "An example (from hw/input/pckbd.c)"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:155
+msgid ""
+"static const VMStateDescription vmstate_kbd = {\n"
+"    .name = \"pckbd\",\n"
+"    .version_id = 3,\n"
+"    .minimum_version_id = 3,\n"
+"    .fields = (const VMStateField[]) {\n"
+"        VMSTATE_UINT8(write_cmd, KBDState),\n"
+"        VMSTATE_UINT8(status, KBDState),\n"
+"        VMSTATE_UINT8(mode, KBDState),\n"
+"        VMSTATE_UINT8(pending, KBDState),\n"
+"        VMSTATE_END_OF_LIST()\n"
+"    }\n"
+"};"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:170
+msgid ""
+"We are declaring the state with name \"pckbd\".  The ``version_id`` is 3, "
+"and there are 4 uint8_t fields in the KBDState structure.  We registered "
+"this ``VMSTATEDescription`` with one of the following functions.  The first "
+"one will generate a device ``instance_id`` different for each registration.  "
+"Use the second one if you already have an id that is different for each "
+"instance of the device:"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:177
+msgid ""
+"vmstate_register_any(NULL, &vmstate_kbd, s);\n"
+"vmstate_register(NULL, instance_id, &vmstate_kbd, s);"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:182
+msgid ""
+"For devices that are ``qdev`` based, we can register the device in the class "
+"init function:"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:185
+msgid "dc->vmsd = &vmstate_kbd_isa;"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:189
+msgid ""
+"The VMState macros take care of ensuring that the device data section is "
+"formatted portably (normally big endian) and make some compile time checks "
+"against the types of the fields in the structures."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:193
+msgid ""
+"VMState macros can include other VMStateDescriptions to store substructures "
+"(see ``VMSTATE_STRUCT_``), arrays (``VMSTATE_ARRAY_``) and variable length "
+"arrays (``VMSTATE_VARRAY_``).  Various other macros exist for special cases."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:198
+msgid ""
+"Note that the format on the wire is still very raw; i.e. a VMSTATE_UINT32 "
+"ends up with a 4 byte bigendian representation on the wire; in the future it "
+"might be possible to use a more structured format."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:203
+msgid "Legacy way"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:205
+msgid ""
+"This way is going to disappear as soon as all current users are ported to "
+"VMSTATE; although converting existing code can be tricky, and thus 'soon' is "
+"relative."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:208
+msgid ""
+"Each device has to register two functions, one to save the state and another "
+"to load the state back."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:211
+msgid ""
+"int register_savevm_live(const char *idstr,\n"
+"                         int instance_id,\n"
+"                         int version_id,\n"
+"                         SaveVMHandlers *ops,\n"
+"                         void *opaque);"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:219
+msgid ""
+"Two functions in the ``ops`` structure are the ``save_state`` and "
+"``load_state`` functions.  Notice that ``load_state`` receives a version_id "
+"parameter to know what state format is receiving.  ``save_state`` doesn't "
+"have a version_id parameter because it always uses the latest version."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:224
+msgid ""
+"Note that because the VMState macros still save the data in a raw format, in "
+"many cases it's possible to replace legacy code with a carefully constructed "
+"VMState description that matches the byte layout of the existing code."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:230
+msgid "Changing migration data structures"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:232
+msgid ""
+"When we migrate a device, we save/load the state as a series of fields.  "
+"Sometimes, due to bugs or new functionality, we need to change the state to "
+"store more/different information.  Changing the migration state saved for a "
+"device can break migration compatibility unless care is taken to use the "
+"appropriate techniques.  In general QEMU tries to maintain forward migration "
+"compatibility (i.e. migrating from QEMU n->n+1) and there are users who "
+"benefit from backward compatibility as well."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:242
+msgid "Subsections"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:244
+msgid ""
+"The most common structure change is adding new data, e.g. when adding a "
+"newer form of device, or adding that state that you previously forgot to "
+"migrate.  This is best solved using a subsection."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:248
+msgid ""
+"A subsection is \"like\" a device vmstate, but with a particularity, it has "
+"a Boolean function that tells if that values are needed to be sent or not.  "
+"If this functions returns false, the subsection is not sent. Subsections "
+"have a unique name, that is looked for on the receiving side."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:254
+msgid ""
+"On the receiving side, if we found a subsection for a device that we don't "
+"understand, we just fail the migration.  If we understand all the "
+"subsections, then we load the state with success.  There's no check that a "
+"subsection is loaded, so a newer QEMU that knows about a subsection can "
+"(with care) load a stream from an older QEMU that didn't send the subsection."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:261
+msgid ""
+"If the new data is only needed in a rare case, then the subsection can be "
+"made conditional on that case and the migration will still succeed to older "
+"QEMUs in most cases.  This is OK for data that's critical, but in some use "
+"cases it's preferred that the migration should succeed even with the data "
+"missing.  To support this the subsection can be connected to a device "
+"property and from there to a versioned machine type."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:269
+msgid ""
+"The 'pre_load' and 'post_load' functions on subsections are only called if "
+"the subsection is loaded."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:272
+msgid ""
+"One important note is that the outer post_load() function is called "
+"\"after\" loading all subsections, because a newer subsection could change "
+"the same value that it uses.  A flag, and the combination of outer pre_load "
+"and post_load can be used to detect whether a subsection was loaded, and to "
+"fall back on default behaviour when the subsection isn't present."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:278
+msgid "Example:"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:280
+msgid ""
+"static bool ide_drive_pio_state_needed(void *opaque)\n"
+"{\n"
+"    IDEState *s = opaque;\n"
+"\n"
+"    return ((s->status & DRQ_STAT) != 0)\n"
+"        || (s->bus->error_status & BM_STATUS_PIO_RETRY);\n"
+"}\n"
+"\n"
+"const VMStateDescription vmstate_ide_drive_pio_state = {\n"
+"    .name = \"ide_drive/pio_state\",\n"
+"    .version_id = 1,\n"
+"    .minimum_version_id = 1,\n"
+"    .pre_save = ide_drive_pio_pre_save,\n"
+"    .post_load = ide_drive_pio_post_load,\n"
+"    .needed = ide_drive_pio_state_needed,\n"
+"    .fields = (const VMStateField[]) {\n"
+"        VMSTATE_INT32(req_nb_sectors, IDEState),\n"
+"        VMSTATE_VARRAY_INT32(io_buffer, IDEState, io_buffer_total_len, 1,\n"
+"                             vmstate_info_uint8, uint8_t),\n"
+"        VMSTATE_INT32(cur_io_buffer_offset, IDEState),\n"
+"        VMSTATE_INT32(cur_io_buffer_len, IDEState),\n"
+"        VMSTATE_UINT8(end_transfer_fn_idx, IDEState),\n"
+"        VMSTATE_INT32(elementary_transfer_size, IDEState),\n"
+"        VMSTATE_INT32(packet_transfer_size, IDEState),\n"
+"        VMSTATE_END_OF_LIST()\n"
+"    }\n"
+"};\n"
+"\n"
+"const VMStateDescription vmstate_ide_drive = {\n"
+"    .name = \"ide_drive\",\n"
+"    .version_id = 3,\n"
+"    .minimum_version_id = 0,\n"
+"    .post_load = ide_drive_post_load,\n"
+"    .fields = (const VMStateField[]) {\n"
+"        .... several fields ....\n"
+"        VMSTATE_END_OF_LIST()\n"
+"    },\n"
+"    .subsections = (const VMStateDescription * const []) {\n"
+"        &vmstate_ide_drive_pio_state,\n"
+"        NULL\n"
+"    }\n"
+"};"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:325
+msgid ""
+"Here we have a subsection for the pio state.  We only need to save/send this "
+"state when we are in the middle of a pio operation (that is what "
+"``ide_drive_pio_state_needed()`` checks).  If DRQ_STAT is not enabled, the "
+"values on that fields are garbage and don't need to be sent."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:332
+msgid "Connecting subsections to properties"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:334
+msgid ""
+"Using a condition function that checks a 'property' to determine whether to "
+"send a subsection allows backward migration compatibility when new "
+"subsections are added, especially when combined with versioned machine types."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:339
+msgid "For example:"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:341
+msgid ""
+"Add a new property using ``DEFINE_PROP_BOOL`` - e.g. support-foo and default "
+"it to true."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:343
+msgid ""
+"Add an entry to the ``hw_compat_`` for the previous version that sets the "
+"property to false."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:345
+msgid "Add a static bool  support_foo function that tests the property."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:346
+msgid "Add a subsection with a .needed set to the support_foo function"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:347
+msgid ""
+"(potentially) Add an outer pre_load that sets up a default value for 'foo' "
+"to be used if the subsection isn't loaded."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:350
+msgid ""
+"Now that subsection will not be generated when using an older machine type "
+"and the migration stream will be accepted by older QEMU versions."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:355
+msgid "Not sending existing elements"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:357
+msgid "Sometimes members of the VMState are no longer needed:"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:359
+msgid "removing them will break migration compatibility"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:361
+msgid ""
+"making them version dependent and bumping the version will break backward "
+"migration compatibility."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:364
+msgid ""
+"Adding a dummy field into the migration stream is normally the best way to "
+"preserve compatibility."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:367
+msgid "If the field really does need to be removed then:"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:369
+msgid ""
+"Add a new property/compatibility/function in the same way for subsections "
+"above."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:370
+msgid "replace the VMSTATE macro with the _TEST version of the macro, e.g.:"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:372
+msgid "``VMSTATE_UINT32(foo, barstruct)``"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:374
+msgid "becomes"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:376
+msgid "``VMSTATE_UINT32_TEST(foo, barstruct, pre_version_baz)``"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:378
+msgid ""
+"Sometime in the future when we no longer care about the ancient versions "
+"these can be killed off. Note that for backward compatibility it's important "
+"to fill in the structure with data that the destination will understand."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:382
+msgid ""
+"Any difference in the predicates on the source and destination will end up "
+"with different fields being enabled and data being loaded into the wrong "
+"fields; for this reason conditional fields like this are very fragile."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:387
+msgid "Versions"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:389
+msgid ""
+"Version numbers are intended for major incompatible changes to the migration "
+"of a device, and using them breaks backward-migration compatibility; in "
+"general most changes can be made by adding Subsections (see above) or _TEST "
+"macros (see above) which won't break compatibility."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:394
+msgid ""
+"Each version is associated with a series of fields saved.  The "
+"``save_state`` always saves the state as the newer version.  But "
+"``load_state`` sometimes is able to load state from an older version."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:398
+msgid "You can see that there are two version fields:"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:400
+msgid ""
+"``version_id``: the maximum version_id supported by VMState for that device."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:401
+msgid ""
+"``minimum_version_id``: the minimum version_id that VMState is able to "
+"understand for that device."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:404
+msgid "VMState is able to read versions from minimum_version_id to version_id."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:406
+msgid ""
+"There are *_V* forms of many ``VMSTATE_`` macros to load fields for version "
+"dependent fields, e.g."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:409
+msgid "VMSTATE_UINT16_V(ip_id, Slirp, 2),"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:413
+msgid "only loads that field for versions 2 and newer."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:415
+msgid ""
+"Saving state will always create a section with the 'version_id' value and "
+"thus can't be loaded by any older QEMU."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:419
+msgid "Massaging functions"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:421
+msgid ""
+"Sometimes, it is not enough to be able to save the state directly from one "
+"structure, we need to fill the correct values there.  One example is when we "
+"are using kvm.  Before saving the cpu state, we need to ask kvm to copy to "
+"QEMU the state that it is using.  And the opposite when we are loading the "
+"state, we need a way to tell kvm to load the state for the cpu that we have "
+"just loaded from the QEMUFile."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:428
+msgid ""
+"The functions to do that are inside a vmstate definition, and are called:"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:430
+msgid "``int (*pre_load)(void *opaque);``"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:432
+msgid "This function is called before we load the state of one device."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:434
+msgid "``int (*post_load)(void *opaque, int version_id);``"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:436
+msgid "This function is called after we load the state of one device."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:438
+msgid "``int (*pre_save)(void *opaque);``"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:440
+msgid "This function is called before we save the state of one device."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:442
+msgid "``int (*post_save)(void *opaque);``"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:444
+msgid ""
+"This function is called after we save the state of one device (even upon "
+"failure, unless the call to pre_save returned an error)."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:447
+msgid ""
+"Example: You can look at hpet.c, that uses the first three functions to "
+"massage the state that is transferred."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:450
+msgid ""
+"The ``VMSTATE_WITH_TMP`` macro may be useful when the migration data doesn't "
+"match the stored device data well; it allows an intermediate temporary "
+"structure to be populated with migration data and then transferred to the "
+"main structure."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:455
+msgid ""
+"If you use memory or portio_list API functions that update memory layout "
+"outside initialization (i.e., in response to a guest action), this is a "
+"strong indication that you need to call these functions in a ``post_load`` "
+"callback. Examples of such API functions are:"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:460
+msgid "memory_region_add_subregion()"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:461
+msgid "memory_region_del_subregion()"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:462
+msgid "memory_region_set_readonly()"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:463
+msgid "memory_region_set_nonvolatile()"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:464
+msgid "memory_region_set_enabled()"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:465
+msgid "memory_region_set_address()"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:466
+msgid "memory_region_set_alias_offset()"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:467
+msgid "portio_list_set_address()"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:468
+msgid "portio_list_set_enabled()"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:470
+msgid ""
+"Since the order of device save/restore is not defined, you must avoid "
+"accessing or changing any other device's state in one of these callbacks. "
+"(For instance, don't do anything that calls ``update_irq()`` in a "
+"``post_load`` hook.) Otherwise, restore will not be deterministic, and this "
+"will break execution record/replay."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:477
+msgid "Iterative device migration"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:479
+msgid ""
+"Some devices, such as RAM or certain platform devices, have large amounts of "
+"data that would mean that the CPUs would be paused for too long if they were "
+"sent in one section.  For these devices an *iterative* approach is taken."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:484
+msgid ""
+"The iterative devices generally don't use VMState macros (although it may be "
+"possible in some cases) and instead use qemu_put_*/qemu_get_* macros to read/"
+"write data to the stream.  Specialist versions exist for high bandwidth IO."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:490
+msgid "An iterative device must provide:"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:492
+msgid ""
+"A ``save_setup`` function that initialises the data structures and transmits "
+"a first section containing information on the device.  In the case of RAM "
+"this transmits a list of RAMBlocks and sizes."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:496
+msgid ""
+"A ``load_setup`` function that initialises the data structures on the "
+"destination."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:499
+msgid ""
+"A ``state_pending_exact`` function that indicates how much more data we must "
+"save.  The core migration code will use this to determine when to pause the "
+"CPUs and complete the migration."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:503
+msgid ""
+"A ``state_pending_estimate`` function that indicates how much more data we "
+"must save.  When the estimated amount is smaller than the threshold, we call "
+"``state_pending_exact``."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:507
+msgid ""
+"A ``save_live_iterate`` function should send a chunk of data until the point "
+"that stream bandwidth limits tell it to stop.  Each call generates one "
+"section."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:511
+msgid ""
+"A ``save_complete`` function that must transmit the last section for the "
+"device containing any remaining data."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:514
+msgid ""
+"A ``load_state`` function used to load sections generated by any of the save "
+"functions that generate sections."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:517
+msgid ""
+"``cleanup`` functions for both save and load that are called at the end of "
+"migration."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:520
+msgid ""
+"Note that the contents of the sections for iterative migration tend to be "
+"open-coded by the devices; care should be taken in parsing the results and "
+"structuring the stream to make them easy to validate."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:525
+msgid "Device ordering"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:527
+msgid ""
+"There are cases in which the ordering of device loading matters; for example "
+"in some systems where a device may assert an interrupt during loading, if "
+"the interrupt controller is loaded later then it might lose the state."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:531
+msgid ""
+"Some ordering is implicitly provided by the order in which the machine "
+"definition creates devices, however this is somewhat fragile."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:534
+msgid ""
+"The ``MigrationPriority`` enum provides a means of explicitly enforcing "
+"ordering.  Numerically higher priorities are loaded earlier. The priority is "
+"set by setting the ``priority`` field of the top level "
+"``VMStateDescription`` for the device."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:540
+msgid "Stream structure"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:542
+msgid ""
+"The stream tries to be word and endian agnostic, allowing migration between "
+"hosts of different characteristics running the same VM."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:545
+msgid "Header"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:547
+msgid "Magic"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:548
+msgid "Version"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:549
+msgid "VM configuration section"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:551
+msgid "Machine type"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:552
+msgid "Target page bits"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:553
+msgid ""
+"List of sections Each section contains a device, or one iteration of a "
+"device save."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:556
+msgid "section type"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:557
+msgid "section id"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:558
+msgid "ID string (First section of each device)"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:559
+msgid "instance id (First section of each device)"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:560
+msgid "version id (First section of each device)"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:561
+msgid "<device data>"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:562
+msgid "Footer mark"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:563
+msgid "EOF mark"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:564
+msgid ""
+"VM Description structure Consisting of a JSON description of the contents "
+"for analysis only"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:567
+msgid ""
+"The ``device data`` in each section consists of the data produced by the "
+"code described above.  For non-iterative devices they have a single section; "
+"iterative devices have an initial and last section and a set of parts in "
+"between. Note that there is very little checking by the common code of the "
+"integrity of the ``device data`` contents, that's up to the devices "
+"themselves. The ``footer mark`` provides a little bit of protection for the "
+"case where the receiving side reads more or less data than expected."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:576
+msgid ""
+"The ``ID string`` is normally unique, having been formed from a bus name and "
+"device address, PCI devices and storage devices hung off PCI controllers fit "
+"this pattern well.  Some devices are fixed single instances (e.g. \"pc-"
+"ram\"). Others (especially either older devices or system devices which for "
+"some reason don't have a bus concept) make use of the ``instance id`` for "
+"otherwise identically named devices."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:584
+msgid "Return path"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:586
+msgid ""
+"Only a unidirectional stream is required for normal migration, however a "
+"``return path`` can be created when bidirectional communication is desired. "
+"This is primarily used by postcopy, but is also used to return a success "
+"flag to the source at the end of migration."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:591
+msgid ""
+"``qemu_file_get_return_path(QEMUFile* fwdpath)`` gives the QEMUFile* for the "
+"return path."
+msgstr ""
+
+#: ../../../devel/migration/main.rst:594
+msgid "Source side"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:596
+msgid ""
+"Forward path - written by migration thread Return path  - opened by main "
+"thread, read by return-path thread"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:599
+msgid "Destination side"
+msgstr ""
+
+#: ../../../devel/migration/main.rst:601
+msgid ""
+"Forward path - read by main thread Return path  - opened by main thread, "
+"written by main thread AND postcopy thread (protected by rp_mutex)"
+msgstr ""

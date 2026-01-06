@@ -1,0 +1,212 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/spdm.rst:3
+msgid "QEMU Security Protocols and Data Models (SPDM) Support"
+msgstr ""
+
+#: ../../../specs/spdm.rst:5
+msgid ""
+"SPDM enables authentication, attestation and key exchange to assist in "
+"providing infrastructure security enablement. It's a standard published by "
+"the `DMTF`_."
+msgstr ""
+
+#: ../../../specs/spdm.rst:9
+msgid ""
+"QEMU supports connecting to a SPDM responder implementation. This allows an "
+"external application to emulate the SPDM responder logic for an SPDM device."
+msgstr ""
+
+#: ../../../specs/spdm.rst:13
+msgid "Setting up a SPDM server"
+msgstr ""
+
+#: ../../../specs/spdm.rst:15
+msgid ""
+"When using QEMU with SPDM devices QEMU will connect to a server which "
+"implements the SPDM functionality."
+msgstr ""
+
+#: ../../../specs/spdm.rst:19
+msgid "SPDM-Utils"
+msgstr ""
+
+#: ../../../specs/spdm.rst:21
+msgid ""
+"You can use `SPDM Utils`_ to emulate a responder. This is the simplest "
+"method."
+msgstr ""
+
+#: ../../../specs/spdm.rst:23
+msgid ""
+"SPDM-Utils is a Linux applications to manage, test and develop devices "
+"supporting DMTF Security Protocol and Data Model (SPDM). It is written in "
+"Rust and utilises libspdm."
+msgstr ""
+
+#: ../../../specs/spdm.rst:27
+msgid ""
+"To use SPDM-Utils you will need to do the following steps. Details are "
+"included in the SPDM-Utils README."
+msgstr ""
+
+#: ../../../specs/spdm.rst:30
+msgid "`Build libspdm`_"
+msgstr ""
+
+#: ../../../specs/spdm.rst:31
+msgid "`Build SPDM Utils`_"
+msgstr ""
+
+#: ../../../specs/spdm.rst:32
+msgid "`Run it as a server`_"
+msgstr ""
+
+#: ../../../specs/spdm.rst:35
+msgid "spdm-emu"
+msgstr ""
+
+#: ../../../specs/spdm.rst:37
+msgid "You can use `spdm emu`_ to model the SPDM responder."
+msgstr ""
+
+#: ../../../specs/spdm.rst:40
+msgid ""
+"$ cd spdm-emu\n"
+"$ git submodule init; git submodule update --recursive\n"
+"$ mkdir build; cd build\n"
+"$ cmake -DARCH=x64 -DTOOLCHAIN=GCC -DTARGET=Debug -DCRYPTO=openssl ..\n"
+"$ make -j32\n"
+"$ make copy_sample_key # Build certificates, required for SPDM "
+"authentication."
+msgstr ""
+
+#: ../../../specs/spdm.rst:49
+msgid ""
+"It is worth noting that the certificates should be in compliance with PCIe "
+"r6.1 sec 6.31.3. This means you will need to add the following to openssl.cnf"
+msgstr ""
+
+#: ../../../specs/spdm.rst:53
+msgid ""
+"subjectAltName = otherName:2.23.147;UTF8:Vendor=1b36:Device=0010:CC=010802:"
+"REV=02:SSVID=1af4:SSID=1100\n"
+"2.23.147 = ASN1:OID:2.23.147"
+msgstr ""
+
+#: ../../../specs/spdm.rst:58
+msgid "and then manually regenerate some certificates with:"
+msgstr ""
+
+#: ../../../specs/spdm.rst:60
+msgid ""
+"$ openssl req -nodes -newkey ec:param.pem -keyout end_responder.key \\\n"
+"    -out end_responder.req -sha384 -batch \\\n"
+"    -subj \"/CN=DMTF libspdm ECP384 responder cert\"\n"
+"\n"
+"$ openssl x509 -req -in end_responder.req -out end_responder.cert \\\n"
+"    -CA inter.cert -CAkey inter.key -sha384 -days 3650 -set_serial 3 \\\n"
+"    -extensions v3_end -extfile ../openssl.cnf\n"
+"\n"
+"$ openssl asn1parse -in end_responder.cert -out end_responder.cert.der\n"
+"\n"
+"$ cat ca.cert.der inter.cert.der end_responder.cert.der > bundle_responder."
+"certchain.der"
+msgstr ""
+"$ openssl req -nodes -newkey ec:param.pem -keyout end_responder.key \\\n"
+"    -out end_responder.req -sha384 -batch \\\n"
+"    -subj \"/CN=DMTF libspdm ECP384 responder cert\"\n"
+"\n"
+"$ openssl x509 -req -in end_responder.req -out end_responder.cert \\\n"
+"    -CA inter.cert -CAkey inter.key -sha384 -days 3650 -set_serial 3 \\\n"
+"    -extensions v3_end -extfile ../openssl.cnf\n"
+"\n"
+"$ openssl asn1parse -in end_responder.cert -out end_responder.cert.der\n"
+"\n"
+"$ cat ca.cert.der inter.cert.der end_responder.cert.der > bundle_responder."
+"certchain.der"
+
+#: ../../../specs/spdm.rst:74
+msgid ""
+"You can use SPDM-Utils instead as it will generate the correct certificates "
+"automatically."
+msgstr ""
+
+#: ../../../specs/spdm.rst:77
+msgid "The responder can then be launched with"
+msgstr ""
+
+#: ../../../specs/spdm.rst:79
+msgid ""
+"$ cd bin\n"
+"$ ./spdm_responder_emu --trans PCI_DOE"
+msgstr ""
+
+#: ../../../specs/spdm.rst:85
+msgid "Connecting an SPDM NVMe device"
+msgstr ""
+
+#: ../../../specs/spdm.rst:87
+msgid ""
+"Once a SPDM server is running we can start QEMU and connect to the server."
+msgstr ""
+
+#: ../../../specs/spdm.rst:89
+msgid "For an NVMe device first let's setup a block we can use"
+msgstr ""
+
+#: ../../../specs/spdm.rst:91
+msgid ""
+"$ cd qemu-spdm/linux/image\n"
+"$ dd if=/dev/zero of=blknvme bs=1M count=2096 # 2GB NNMe Drive"
+msgstr ""
+"$ cd qemu-spdm/linux/image\n"
+"$ dd if=/dev/zero of=blknvme bs=1M count=2096 # 2GB NNMe Drive"
+
+#: ../../../specs/spdm.rst:96
+msgid "Then you can add this to your QEMU command line:"
+msgstr ""
+
+#: ../../../specs/spdm.rst:98
+msgid ""
+"-drive file=blknvme,if=none,id=mynvme,format=raw \\\n"
+"    -device nvme,drive=mynvme,serial=deadbeef,spdm_port=2323"
+msgstr ""
+
+#: ../../../specs/spdm.rst:103
+msgid "At which point QEMU will try to connect to the SPDM server."
+msgstr ""
+
+#: ../../../specs/spdm.rst:105
+msgid ""
+"Note that if using x64-64 you will want to use the q35 machine instead of "
+"the default. So the entire QEMU command might look like this"
+msgstr ""
+
+#: ../../../specs/spdm.rst:108
+msgid ""
+"qemu-system-x86_64 -M q35 \\\n"
+"    --kernel bzImage \\\n"
+"    -drive file=rootfs.ext2,if=virtio,format=raw \\\n"
+"    -append \"root=/dev/vda console=ttyS0\" \\\n"
+"    -net none -nographic \\\n"
+"    -drive file=blknvme,if=none,id=mynvme,format=raw \\\n"
+"    -device nvme,drive=mynvme,serial=deadbeef,spdm_port=2323"
+msgstr ""

@@ -1,0 +1,1131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/qapi-domain.rst:3
+msgid "The Sphinx QAPI Domain"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:5
+msgid ""
+"An extension to the `rST syntax <https://www.sphinx-doc.org/en/master/usage/"
+"restructuredtext/basics.html>`_ in Sphinx is provided by the QAPI Domain, "
+"located in ``docs/sphinx/qapi_domain.py``. This extension is analogous to "
+"the `Python Domain <https://www.sphinx-doc.org/en/master/usage/domains/"
+"python.html>`_ included with Sphinx, but provides special directives and "
+"roles for annotating and documenting QAPI definitions specifically."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:15
+msgid ""
+"A `Domain <https://www.sphinx-doc.org/en/master/usage/domains/index.html>`_ "
+"provides a set of special rST directives and cross-referencing roles to "
+"Sphinx for understanding rST markup written to document a specific language. "
+"By itself, this QAPI extension is only sufficient to parse rST markup "
+"written by hand; the `autodoc <https://www.sphinx-doc.org/en/master/usage/"
+"extensions/autodoc.html>`_ functionality is provided elsewhere, in ``docs/"
+"sphinx/qapidoc.py``, by the \"Transmogrifier\"."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:25
+msgid ""
+"It is not expected that any developer nor documentation writer would never "
+"need to write *nor* read these special rST forms. However, in the event that "
+"something needs to be debugged, knowing the syntax of the domain is quite "
+"handy. This reference may also be useful as a guide for understanding the "
+"QAPI Domain extension code itself. Although most of these forms will not be "
+"needed for documentation writing purposes, understanding the cross-"
+"referencing syntax *will* be helpful when writing rST documentation "
+"elsewhere, or for enriching the body of QAPIDoc blocks themselves."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:37
+msgid "Concepts"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:39
+msgid ""
+"The QAPI Domain itself provides no mechanisms for reading the QAPI Schema or "
+"generating documentation from code that exists. It is merely the rST syntax "
+"used to describe things. For instance, the Sphinx Python domain adds syntax "
+"like ``:py:func:`` for describing Python functions in documentation, but "
+"it's the autodoc module that is responsible for reading Python code and "
+"generating such syntax. QAPI is analogous here: qapidoc.py is responsible "
+"for reading the QAPI Schema and generating rST syntax, and qapi_domain.py is "
+"responsible for translating that special syntax and providing APIs for "
+"Sphinx internals."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:49
+msgid "In other words:"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:51
+msgid ""
+"qapi_domain.py adds syntax like ``.. qapi:command::`` to Sphinx, and qapidoc."
+"py transforms the documentation in ``qapi/*.json`` into rST using directives "
+"defined by the domain."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:55
+msgid "Or even shorter:"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:57
+msgid "``:py:`` is to ``:qapi:`` as *autodoc* is to *qapidoc*."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:61
+msgid "Info Field Lists"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:63
+msgid ""
+"`Field lists <https://www.sphinx-doc.org/en/master/usage/restructuredtext/"
+"basics.html#field-lists>`_ are a standard syntax in reStructuredText. Sphinx "
+"`extends that syntax <https://www.sphinx-doc.org/en/master/usage/domains/"
+"python.html#info-field-lists>`_ to give certain field list entries special "
+"meaning and parsing to, for example, add cross-references. The QAPI Domain "
+"takes advantage of this field list extension to document things like "
+"Arguments, Members, Values, and so on."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:72
+msgid ""
+"The special parsing and handling of info field lists in Sphinx is provided "
+"by three main classes; Field, GroupedField, and TypedField. The behavior and "
+"formatting for each configured field list entry in the domain changes "
+"depending on which class is used."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:77
+msgid "Field:"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:78
+msgid ""
+"Creates an ungrouped field: i.e., each entry will create its own section and "
+"they will not be combined."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:80
+msgid "May *optionally* support an argument."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:81
+msgid ""
+"May apply cross-reference roles to *either* the argument *or* the content "
+"body, both, or neither."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:84
+msgid ""
+"This is used primarily for entries which are not expected to be repeated, i."
+"e., items that may only show up at most once. The QAPI domain uses this "
+"class for \"Errors\" section."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:88
+msgid "GroupedField:"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:89
+msgid ""
+"Creates a grouped field: i.e. multiple adjacent entries will be merged into "
+"one section, and the content will form a bulleted list."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:91
+msgid "*Must* take an argument."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:92
+msgid ""
+"May optionally apply a cross-reference role to the argument, but not the "
+"body."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:94 ../../../devel/qapi-domain.rst:110
+msgid ""
+"Can be configured to remove the bulleted list if there is only a single "
+"entry."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:96
+msgid "All items will be generated with the form: \"argument -- body\""
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:98
+msgid ""
+"This is used for entries which are expected to be repeated, but aren't "
+"expected to have two arguments, i.e. types without names, or names without "
+"types. The QAPI domain uses this class for features, returns, and enum "
+"values."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:103
+msgid "TypedField:"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:104
+msgid ""
+"Creates a grouped, typed field. Multiple adjacent entries will be merged "
+"into one section, and the content will form a bulleted list."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:106
+msgid ""
+"*Must* take at least one argument, but supports up to two - nominally, a "
+"name and a type."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:108
+msgid ""
+"May optionally apply a cross-reference role to the type or the name "
+"argument, but not the body."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:112
+msgid "All items will be generated with the form \"name (type) -- body\""
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:114
+msgid ""
+"This is used for entries that are expected to be repeated and will have a "
+"name, a type, and a description. The QAPI domain uses this class for "
+"arguments, alternatives, and members. Wherever type names are referenced "
+"below, They must be a valid, documented type that will be cross-referenced "
+"in the HTML output; or one of the built-in JSON types (string, number, int, "
+"boolean, null, value, q_empty)."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:123
+msgid "``:feat:``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:125
+msgid "Document a feature attached to a QAPI definition."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:0
+msgid "availability"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:127
+msgid ""
+"This field list is available in the body of Command, Event, Enum, Object and "
+"Alternate directives."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:0
+msgid "syntax"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:129
+msgid "``:feat name: Lorem ipsum, dolor sit amet...``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:0
+msgid "type"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:130 ../../../devel/qapi-domain.rst:222
+#: ../../../devel/qapi-domain.rst:284
+msgid ""
+"`sphinx.util.docfields.GroupedField <https://pydoc.dev/sphinx/latest/sphinx."
+"util.docfields.GroupedField.html?private=1>`_"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:133 ../../../devel/qapi-domain.rst:159
+#: ../../../devel/qapi-domain.rst:193 ../../../devel/qapi-domain.rst:226
+#: ../../../devel/qapi-domain.rst:258 ../../../devel/qapi-domain.rst:287
+#: ../../../devel/qapi-domain.rst:319 ../../../devel/qapi-domain.rst:346
+#: ../../../devel/qapi-domain.rst:553 ../../../devel/qapi-domain.rst:569
+#: ../../../devel/qapi-domain.rst:591 ../../../devel/qapi-domain.rst:625
+#: ../../../devel/qapi-domain.rst:660 ../../../devel/qapi-domain.rst:694
+#: ../../../devel/qapi-domain.rst:727
+msgid "Example::"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:135
+msgid ""
+".. qapi:object:: BlockdevOptionsVirtioBlkVhostVdpa\n"
+"   :since: 7.2\n"
+"   :ifcond: CONFIG_BLKIO\n"
+"\n"
+"   Driver specific block device options for the virtio-blk-vhost-vdpa\n"
+"   backend.\n"
+"\n"
+":memb string path: path to the vhost-vdpa character device.\n"
+":feat fdset: Member ``path`` supports the special \"/dev/fdset/N\" path\n"
+"    (since 8.1)"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:148
+msgid "``:arg:``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:150
+msgid "Document an argument to a QAPI command."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:152 ../../../devel/qapi-domain.rst:183
+#: ../../../devel/qapi-domain.rst:219 ../../../devel/qapi-domain.rst:251
+msgid "This field list is only available in the body of the Command directive."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:154
+msgid "``:arg type name: description``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:155 ../../../devel/qapi-domain.rst:311
+#: ../../../devel/qapi-domain.rst:340
+msgid ""
+"`sphinx.util.docfields.TypedField <https://pydoc.dev/sphinx/latest/sphinx."
+"util.docfields.TypedField.html?private=1>`_"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:161
+msgid ""
+".. qapi:command:: job-pause\n"
+"   :since: 3.0\n"
+"\n"
+"   Pause an active job.\n"
+"\n"
+"   This command returns immediately after marking the active job for\n"
+"   pausing.  Pausing an already paused job is an error.\n"
+"\n"
+"   The job will pause as soon as possible, which means transitioning\n"
+"   into the PAUSED state if it was RUNNING, or into STANDBY if it was\n"
+"   READY.  The corresponding JOB_STATUS_CHANGE event will be emitted.\n"
+"\n"
+"   Cancelling a paused job automatically resumes it.\n"
+"\n"
+"   :arg string id: The job identifier."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:179
+msgid "``:error:``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:181
+msgid "Document the error condition(s) of a QAPI command."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:185
+msgid "``:error: Lorem ipsum dolor sit amet ...``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:186 ../../../devel/qapi-domain.rst:254
+msgid ""
+"`sphinx.util.docfields.Field <https://pydoc.dev/sphinx/latest/sphinx.util."
+"docfields.Field.html?private=1>`_"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:189
+msgid ""
+"The format of the :errors: field list description is free-form rST. The "
+"alternative spelling \":errors:\" is also permitted, but strictly analogous."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:195
+msgid ""
+".. qapi:command:: block-job-set-speed\n"
+"   :since: 1.1\n"
+"\n"
+"   Set maximum speed for a background block operation.\n"
+"\n"
+"   This command can only be issued when there is an active block job.\n"
+"\n"
+"   Throttling can be disabled by setting the speed to 0.\n"
+"\n"
+"   :arg string device: The job identifier.  This used to be a device\n"
+"       name (hence the name of the parameter), but since QEMU 2.7 it\n"
+"       can have other values.\n"
+"   :arg int speed: the maximum speed, in bytes per second, or 0 for\n"
+"       unlimited.  Defaults to 0.\n"
+"   :error:\n"
+"       - If no background operation is active on this device,\n"
+"         DeviceNotActive"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:215
+msgid "``:return:``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:217
+msgid "Document the return type(s) and value(s) of a QAPI command."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:221
+msgid "``:return type: Lorem ipsum dolor sit amet ...``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:228
+msgid ""
+".. qapi:command:: query-replay\n"
+"   :since: 5.2\n"
+"\n"
+"   Retrieve the record/replay information.  It includes current\n"
+"   instruction count which may be used for ``replay-break`` and\n"
+"   ``replay-seek`` commands.\n"
+"\n"
+"   :return ReplayInfo: record/replay information.\n"
+"\n"
+"   .. qmp-example::\n"
+"\n"
+"       -> { \"execute\": \"query-replay\" }\n"
+"       <- { \"return\": {\n"
+"              \"mode\": \"play\", \"filename\": \"log.rr\", \"icount\": "
+"220414 }\n"
+"          }"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:246
+msgid "``:return-nodesc:``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:248
+msgid ""
+"Document the return type of a QAPI command, without an accompanying "
+"description."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:253
+msgid "``:return-nodesc: type``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:260
+msgid ""
+".. qapi:command:: query-replay\n"
+"   :since: 5.2\n"
+"\n"
+"   Retrieve the record/replay information.  It includes current\n"
+"   instruction count which may be used for ``replay-break`` and\n"
+"   ``replay-seek`` commands.\n"
+"\n"
+"   :return-nodesc: ReplayInfo\n"
+"\n"
+"   .. qmp-example::\n"
+"\n"
+"       -> { \"execute\": \"query-replay\" }\n"
+"       <- { \"return\": {\n"
+"              \"mode\": \"play\", \"filename\": \"log.rr\", \"icount\": "
+"220414 }\n"
+"          }"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:277
+msgid "``:value:``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:279
+msgid "Document a possible value for a QAPI enum."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:281
+msgid "This field list is only available in the body of the Enum directive."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:283
+msgid "``:value name: Lorem ipsum, dolor sit amet ...``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:289
+msgid ""
+".. qapi:enum:: QapiErrorClass\n"
+"   :since: 1.2\n"
+"\n"
+"   QEMU error classes\n"
+"\n"
+"   :value GenericError: this is used for errors that don't require a "
+"specific\n"
+"       error class.  This should be the default case for most errors\n"
+"   :value CommandNotFound: the requested command has not been found\n"
+"   :value DeviceNotActive: a device has failed to be become active\n"
+"   :value DeviceNotFound: the requested device has not been found\n"
+"   :value KVMMissingCap: the requested operation can't be fulfilled because "
+"a\n"
+"       required KVM capability is missing"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:304
+msgid "``:alt:``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:306
+msgid "Document a possible branch for a QAPI alternate."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:308
+msgid ""
+"This field list is only available in the body of the Alternate directive."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:310
+msgid "``:alt type name: Lorem ipsum, dolor sit amet ...``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:314
+msgid ""
+"As a limitation of Sphinx, we must document the \"name\" of the branch in "
+"addition to the type, even though this information is not visible on the "
+"wire in the QMP protocol format. This limitation *may* be lifted at a future "
+"date."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:321
+msgid ""
+".. qapi:alternate:: StrOrNull\n"
+"   :since: 2.10\n"
+"\n"
+"   This is a string value or the explicit lack of a string (null\n"
+"   pointer in C).  Intended for cases when 'optional absent' already\n"
+"   has a different meaning.\n"
+"\n"
+"    :alt string s: the string value\n"
+"    :alt null n: no string value"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:333
+msgid "``:memb:``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:335
+msgid "Document a member of an Event or Object."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:337
+msgid "This field list is available in the body of Event or Object directives."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:339
+msgid "``:memb type name: Lorem ipsum, dolor sit amet ...``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:343
+msgid ""
+"This is fundamentally the same as ``:arg:`` and ``:alt:``, but uses the "
+"\"Members\" phrasing for Events and Objects (Structs and Unions)."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:348
+msgid ""
+".. qapi:event:: JOB_STATUS_CHANGE\n"
+"   :since: 3.0\n"
+"\n"
+"   Emitted when a job transitions to a different status.\n"
+"\n"
+"   :memb string id: The job identifier\n"
+"   :memb JobStatus status: The new job status"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:358
+msgid "Arbitrary field lists"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:360
+msgid ""
+"Other field list names, while valid rST syntax, are prohibited inside of "
+"QAPI directives to help prevent accidental misspellings of info field list "
+"names. If you want to add a new arbitrary \"non-value-added\" field list to "
+"QAPI documentation, you must add the field name to the allow list in ``docs/"
+"conf.py``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:366
+msgid "For example::"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:368
+msgid ""
+"qapi_allowed_fields = {\n"
+"    \"see also\",\n"
+"}"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:372
+msgid "Will allow you to add arbitrary field lists in QAPI directives::"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:374
+msgid ""
+".. qapi:command:: x-fake-command\n"
+"\n"
+"   :see also: Lorem ipsum, dolor sit amet ..."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:381
+msgid "Cross-references"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:383
+msgid ""
+"Cross-reference `roles <https://www.sphinx-doc.org/en/master/usage/"
+"restructuredtext/roles.html>`_ in the QAPI domain are modeled closely after "
+"the `Python cross-referencing syntax <https://www.sphinx-doc.org/en/master/"
+"usage/domains/python.html#cross-referencing-python-objects>`_."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:389
+msgid ""
+"QAPI definitions can be referenced using the standard `any <https://www."
+"sphinx-doc.org/en/master/usage/referencing.html#role-any>`_ role cross-"
+"reference syntax, such as with ```query-blockstats```.  In the event that "
+"disambiguation is needed, cross-references can also be written using a "
+"number of explicit cross-reference roles:"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:395
+msgid ""
+"``:qapi:mod:`block-core``` -- Reference a QAPI module. The link will take "
+"you to the beginning of that section in the documentation."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:397
+msgid "``:qapi:cmd:`query-block``` -- Reference a QAPI command."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:398
+msgid "``:qapi:event:`JOB_STATUS_CHANGE``` -- Reference a QAPI event."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:399
+msgid "``:qapi:enum:`QapiErrorClass``` -- Reference a QAPI enum."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:400
+msgid ""
+"``:qapi:obj:`BlockdevOptionsVirtioBlkVhostVdpa`` -- Reference a QAPI object "
+"(struct or union)"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:402
+msgid "``:qapi:alt:`StrOrNull``` -- Reference a QAPI alternate."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:403
+msgid ""
+"``:qapi:type:`BlockDirtyInfo``` -- Reference *any* QAPI type; this excludes "
+"modules, commands, and events."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:405
+msgid ""
+"``:qapi:any:`block-job-set-speed``` -- Reference absolutely any QAPI entity."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:407
+msgid ""
+"Type arguments in info field lists are converted into references as if you "
+"had used the ``:qapi:type:`` role. All of the special syntax below applies "
+"to both info field lists and standalone explicit cross-references."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:414
+msgid "Type decorations"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:416
+msgid ""
+"Type names in references can be surrounded by brackets, like ``[typename]``, "
+"to indicate an array of that type.  The cross-reference will apply only to "
+"the type name between the brackets. For example; ``:qapi:type:"
+"`[Qcow2BitmapInfoFlags]``` renders to: :qapi:type:`[QMP:"
+"Qcow2BitmapInfoFlags]`"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:422
+msgid ""
+"To indicate an optional argument/member in a field list, the type name can "
+"be suffixed with ``?``. The cross-reference will be transformed to \"type, "
+"Optional\" with the link applying only to the type name. For example; ``:"
+"qapi:type:`BitmapSyncMode?``` renders to: :qapi:type:`QMP:BitmapSyncMode?`"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:430
+msgid "Namespaces"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:432
+msgid ""
+"Mimicking the `Python domain target specification syntax <https://www.sphinx-"
+"doc.org/en/master/usage/domains/python.html#target-specification>`_, QAPI "
+"allows you to specify the fully qualified path for a data type."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:437
+msgid ""
+"A namespace can be explicitly provided; e.g. ``:qapi:type:`QMP:"
+"BitmapSyncMode``"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:439
+msgid ""
+"A module can be explicitly provided; ``:qapi:type:`QMP:block-core."
+"BitmapSyncMode``` will render to: :qapi:type:`QMP:block-core.BitmapSyncMode`"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:442
+msgid ""
+"If you don't want to display the \"fully qualified\" name, it can be "
+"prefixed with a tilde; ``:qapi:type:`~QMP:block-core.BitmapSyncMode``` will "
+"render to: :qapi:type:`~QMP:block-core.BitmapSyncMode`"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:448
+msgid "Target resolution"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:450
+msgid ""
+"Any cross-reference to a QAPI type, whether using the ```any``` style of "
+"reference or the more explicit ```:qapi:any:`target``` syntax, allows for "
+"the presence or absence of either the namespace or module information."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:455
+msgid ""
+"When absent, their value will be inferred from context by the presence of "
+"any ``qapi:namespace`` or ``qapi:module`` directives preceding the cross-"
+"reference."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:459
+msgid ""
+"If no results are found when using the inferred values, other namespaces/"
+"modules will be searched as a last resort; but any explicitly provided "
+"values must always match in order to succeed."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:463
+msgid ""
+"This allows for efficient cross-referencing with a minimum of syntax in the "
+"large majority of cases, but additional context or namespace markup may be "
+"required outside of the QAPI reference documents when linking to items that "
+"share a name across multiple documented QAPI schema."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:470
+msgid "Custom link text"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:472
+msgid ""
+"The name of a cross-reference link can be explicitly overridden like `most "
+"stock Sphinx references <https://www.sphinx-doc.org/en/master/usage/"
+"referencing.html#syntax>`_ using the ``custom text <target>`` syntax."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:477
+msgid ""
+"For example, ``:qapi:cmd:`Merge dirty bitmaps <block-dirty-bitmap-merge>``` "
+"will render as: :qapi:cmd:`Merge dirty bitmaps <QMP:block-dirty-bitmap-"
+"merge>`"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:483
+msgid "Directives"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:485
+msgid ""
+"The QAPI domain adds a number of custom directives for documenting various "
+"QAPI/QMP entities. The syntax is plain rST, and follows this general format::"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:489
+msgid ""
+".. qapi:directive:: argument\n"
+"   :option:\n"
+"   :another-option: with an argument\n"
+"\n"
+"   Content body, arbitrary rST is allowed here."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:497
+msgid "Sphinx standard options"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:499
+msgid ""
+"All QAPI directives inherit a number of `standard options <https://www."
+"sphinx-doc.org/en/master/usage/domains/index.html#basic-markup>`_ from "
+"Sphinx's ObjectDescription class."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:503
+msgid ""
+"The dashed spellings of the below options were added in Sphinx 7.2, the "
+"undashed spellings are currently retained as aliases, but will be removed in "
+"a future version."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:507
+msgid ""
+"``:no-index:`` and ``:noindex:`` -- Do not add this item into the Index, and "
+"do not make it available for cross-referencing."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:509
+msgid ""
+"``no-index-entry:`` and ``:noindexentry:`` -- Do not add this item into the "
+"Index, but allow it to be cross-referenced."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:511
+msgid ""
+"``no-contents-entry`` and ``:nocontentsentry:`` -- Exclude this item from "
+"the Table of Contents."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:513
+msgid ""
+"``no-typesetting`` -- Create TOC, Index and cross-referencing entities, but "
+"don't actually display the content."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:518
+msgid "QAPI standard options"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:520
+msgid ""
+"All QAPI directives -- *except* for namespace and module -- support these "
+"common options."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:523
+msgid ""
+"``:namespace: name`` -- This option allows you to override the namespace "
+"association of a given definition."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:525
+msgid ""
+"``:module: modname`` -- Borrowed from the Python domain, this option allows "
+"you to override the module association of a given definition."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:527
+msgid ""
+"``:since: x.y`` -- Allows the documenting of \"Since\" information, which is "
+"displayed in the signature bar."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:529
+msgid ""
+"``:ifcond: CONDITION`` -- Allows the documenting of conditional availability "
+"information, which is displayed in an eyecatch just below the signature bar."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:532
+msgid ""
+"``:deprecated:`` -- Adds an eyecatch just below the signature bar that "
+"advertises that this definition is deprecated and should be avoided."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:534
+msgid ""
+"``:unstable:`` -- Adds an eyecatch just below the signature bar that "
+"advertises that this definition is unstable and should not be used in "
+"production code."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:540
+msgid "qapi:namespace"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:542
+msgid ""
+"The ``qapi:namespace`` directive marks the start of a QAPI namespace. It "
+"does not take a content body, nor any options. All subsequent QAPI "
+"directives are associated with the most recent namespace. This affects the "
+"definition's \"fully qualified name\", allowing two different namespaces to "
+"create an otherwise identically named definition."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:548
+msgid ""
+"This directive also influences how reference resolution works for any "
+"references that do not explicitly specify a namespace, so this directive can "
+"be used to nudge references into preferring targets from within that "
+"namespace."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:555
+msgid ".. qapi:namespace:: QMP"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:558
+msgid "This directive has no visible effect."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:562
+msgid "qapi:module"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:564
+msgid ""
+"The ``qapi:module`` directive marks the start of a QAPI module. It may have "
+"a content body, but it can be omitted. All subsequent QAPI directives are "
+"associated with the most recent module; this effects their \"fully "
+"qualified\" name, but has no other effect."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:571
+msgid ""
+".. qapi:module:: block-core\n"
+"\n"
+"   Welcome to the block-core module!"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:575 ../../../devel/qapi-domain.rst:604
+#: ../../../devel/qapi-domain.rst:638 ../../../devel/qapi-domain.rst:672
+#: ../../../devel/qapi-domain.rst:706 ../../../devel/qapi-domain.rst:738
+msgid "Will be rendered as:"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:580
+msgid "Welcome to the block-core module!"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:584
+msgid "qapi:command"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:586
+msgid ""
+"This directive documents a QMP command. It may use any of the standard "
+"Sphinx or QAPI options, and the documentation body may contain ``:arg:``, ``:"
+"feat:``, ``:error:``, or ``:return:`` info field list entries."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:593
+msgid ""
+".. qapi:command:: x-fake-command\n"
+"   :since: 42.0\n"
+"   :unstable:\n"
+"\n"
+"   This command is fake, so it can't hurt you!\n"
+"\n"
+"   :arg int foo: Your favorite number.\n"
+"   :arg string? bar: Your favorite season.\n"
+"   :return [string]: A lovely computer-written poem for you."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:611
+msgid "This command is fake, so it can't hurt you!"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:0
+msgid "Arguments"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:613
+msgid "Your favorite number."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:614
+msgid "Your favorite season."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:0
+msgid "Return"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:615
+msgid "A lovely computer-written poem for you."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:619
+msgid "qapi:event"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:621
+msgid ""
+"This directive documents a QMP event. It may use any of the standard Sphinx "
+"or QAPI options, and the documentation body may contain ``:memb:`` or ``:"
+"feat:`` info field list entries."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:627
+msgid ""
+".. qapi:event:: COMPUTER_IS_RUINED\n"
+"   :since: 0.1\n"
+"   :deprecated:\n"
+"\n"
+"   This event is emitted when your computer is *extremely* ruined.\n"
+"\n"
+"   :memb string reason: Diagnostics as to what caused your computer to\n"
+"      be ruined.\n"
+"   :feat sadness: When present, the diagnostic message will also\n"
+"      explain how sad the computer is as a result of your wrongdoings."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:645
+msgid "This event is emitted when your computer is *extremely* ruined."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:0
+msgid "Members"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:647
+msgid "Diagnostics as to what caused your computer to be ruined."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:0
+msgid "Features"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:649
+msgid ""
+"When present, the diagnostic message will also explain how sad the computer "
+"is as a result of your wrongdoings."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:654
+msgid "qapi:enum"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:656
+msgid ""
+"This directive documents a QAPI enum. It may use any of the standard Sphinx "
+"or QAPI options, and the documentation body may contain ``:value:`` or ``:"
+"feat:`` info field list entries."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:662
+msgid ""
+".. qapi:enum:: Mood\n"
+"   :ifcond: LIB_PERSONALITY\n"
+"\n"
+"   This enum represents your virtual machine's current mood!\n"
+"\n"
+"   :value Happy: Your VM is content and well-fed.\n"
+"   :value Hungry: Your VM needs food.\n"
+"   :value Melancholic: Your VM is experiencing existential angst.\n"
+"   :value Petulant: Your VM is throwing a temper tantrum."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:678
+msgid "This enum represents your virtual machine's current mood!"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:0
+msgid "Values"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:680
+msgid "Your VM is content and well-fed."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:681
+msgid "Your VM needs food."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:682
+msgid "Your VM is experiencing existential angst."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:683
+msgid "Your VM is throwing a temper tantrum."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:687
+msgid "qapi:object"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:689
+msgid ""
+"This directive documents a QAPI structure or union and represents a QMP "
+"object. It may use any of the standard Sphinx or QAPI options, and the "
+"documentation body may contain ``:memb:`` or ``:feat:`` info field list "
+"entries."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:696
+msgid ""
+".. qapi:object:: BigBlobOfStuff\n"
+"\n"
+"   This object has a bunch of disparate and unrelated things in it.\n"
+"\n"
+"   :memb int Birthday: Your birthday, represented in seconds since the\n"
+"                       UNIX epoch.\n"
+"   :memb [string] Fav-Foods: A list of your favorite foods.\n"
+"   :memb boolean? Bizarre-Docs: True if the documentation reference\n"
+"      should be strange."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:711
+msgid "This object has a bunch of disparate and unrelated things in it."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:713
+msgid "Your birthday, represented in seconds since the UNIX epoch."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:715
+msgid "A list of your favorite foods."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:716
+msgid "True if the documentation reference should be strange."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:721
+msgid "qapi:alternate"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:723
+msgid ""
+"This directive documents a QAPI alternate. It may use any of the standard "
+"Sphinx or QAPI options, and the documentation body may contain ``:alt:`` or "
+"``:feat:`` info field list entries."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:729
+msgid ""
+".. qapi:alternate:: ErrorCode\n"
+"\n"
+"   This alternate represents an Error Code from the VM.\n"
+"\n"
+"   :alt int ec: An error code, like the type you're used to.\n"
+"   :alt string em: An expletive-laced error message, if your\n"
+"      computer is feeling particularly cranky and tired of your\n"
+"      antics."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:743
+msgid "This alternate represents an Error Code from the VM."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:0
+msgid "Alternatives"
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:745
+msgid "An error code, like the type you're used to."
+msgstr ""
+
+#: ../../../devel/qapi-domain.rst:746
+msgid ""
+"An expletive-laced error message, if your computer is feeling particularly "
+"cranky and tired of your antics."
+msgstr ""
