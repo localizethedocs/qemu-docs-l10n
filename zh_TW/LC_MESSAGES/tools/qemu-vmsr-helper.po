@@ -1,0 +1,175 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tools/qemu-vmsr-helper.rst:3
+msgid "QEMU virtual RAPL MSR helper"
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:6
+msgid "Synopsis"
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:8
+msgid "**qemu-vmsr-helper** [*OPTION*]"
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:11
+msgid "Description"
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:13
+msgid "Implements the virtual RAPL MSR helper for QEMU."
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:15
+msgid ""
+"Accessing the RAPL (Running Average Power Limit) MSR enables the RAPL "
+"powercap driver to advertise and monitor the power consumption or "
+"accumulated energy consumption of different power domains, such as CPU "
+"packages, DRAM, and other components when available."
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:20
+msgid ""
+"However those registers are accessible under privileged access "
+"(CAP_SYS_RAWIO). QEMU can use an external helper to access those privileged "
+"registers."
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:23
+msgid ""
+":program:`qemu-vmsr-helper` is that external helper; it creates a listener "
+"socket which will accept incoming connections for communication with QEMU."
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:26
+msgid ""
+"If you want to run VMs in a setup like this, this helper should be started "
+"as a system service, and you should read the QEMU manual section on \"RAPL "
+"MSR support\" to find out how to configure QEMU to connect to the socket "
+"created by :program:`qemu-vmsr-helper`."
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:31
+msgid ""
+"After connecting to the socket, :program:`qemu-vmsr-helper` can optionally "
+"drop root privileges, except for those capabilities that are needed for its "
+"operation."
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:35
+msgid ""
+":program:`qemu-vmsr-helper` can also use the systemd socket activation "
+"protocol.  In this case, the systemd socket unit should specify a Unix "
+"stream socket, like this::"
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:39
+msgid ""
+"[Socket]\n"
+"ListenStream=/var/run/qemu-vmsr-helper.sock"
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:43
+msgid "Options"
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:49
+msgid "run in the background (and create a PID file)"
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:53
+msgid "decrease verbosity"
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:57
+msgid "increase verbosity"
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:61
+msgid ""
+"PID file when running as a daemon. By default the PID file is created in the "
+"system runtime state directory, for example :file:`/var/run/qemu-vmsr-helper."
+"pid`."
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:67
+msgid ""
+"path to the socket. By default the socket is created in the system runtime "
+"state directory, for example :file:`/var/run/qemu-vmsr-helper.sock`."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:2
+msgid "Specify tracing options."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:4
+msgid "``[enable=]PATTERN``"
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:6
+msgid ""
+"Immediately enable events matching *PATTERN* (either event name or a "
+"globbing pattern).  This option is only available if QEMU has been compiled "
+"with the ``simple``, ``log`` or ``ftrace`` tracing backend.  To specify "
+"multiple events or patterns, specify the :option:`-trace` option multiple "
+"times."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:12
+msgid "Use :option:`-trace help` to print a list of names of trace points."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:14
+msgid "``events=FILE``"
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:16
+msgid ""
+"Immediately enable events listed in *FILE*. The file must contain one event "
+"name (as listed in the ``trace-events-all`` file) per line; globbing "
+"patterns are accepted too.  This option is only available if QEMU has been "
+"compiled with the ``simple``, ``log`` or ``ftrace`` tracing backend."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:22
+msgid "``file=FILE``"
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:24
+msgid ""
+"Log output traces to *FILE*. This option is only available if QEMU has been "
+"compiled with the ``simple`` tracing backend."
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:77
+msgid "user to drop privileges to"
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:81
+msgid "group to drop privileges to"
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:85
+msgid "Display a help message and exit."
+msgstr ""
+
+#: ../../../tools/qemu-vmsr-helper.rst:89
+msgid "Display version information and exit."
+msgstr ""
