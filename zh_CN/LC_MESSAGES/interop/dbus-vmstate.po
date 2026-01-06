@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 5.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../interop/dbus-vmstate.rst:3
+msgid "D-Bus VMState"
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:6
+msgid "Introduction"
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:8
+msgid ""
+"The QEMU dbus-vmstate object's aim is to migrate helpers' data running on a "
+"QEMU D-Bus bus. (refer to the :doc:`dbus` document for some recommendations "
+"on D-Bus usage)"
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:12
+msgid ""
+"Upon migration, QEMU will go through the queue of ``org.qemu.VMState1`` D-"
+"Bus name owners and query their ``Id``. It must be unique among the helpers."
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:16
+msgid ""
+"It will then save arbitrary data of each Id to be transferred in the "
+"migration stream and restored/loaded at the corresponding destination helper."
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:20
+msgid ""
+"For now, the data amount to be transferred is arbitrarily limited to 1Mb. "
+"The state must be saved quickly (a fraction of a second). (D-Bus imposes a "
+"time limit on reply anyway, and migration would fail if data isn't given "
+"quickly enough.)"
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:25
+msgid ""
+"dbus-vmstate object can be configured with the expected list of helpers by "
+"setting its ``id-list`` property, with a comma-separated ``Id`` list."
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:30
+msgid "Interface"
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:32
+msgid ""
+"On object path ``/org/qemu/VMState1``, the following ``org.qemu.VMState1`` "
+"interface should be implemented:"
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:35
+msgid ""
+"<interface name=\"org.qemu.VMState1\">\n"
+"  <property name=\"Id\" type=\"s\" access=\"read\"/>\n"
+"  <method name=\"Load\">\n"
+"    <arg type=\"ay\" name=\"data\" direction=\"in\"/>\n"
+"  </method>\n"
+"  <method name=\"Save\">\n"
+"    <arg type=\"ay\" name=\"data\" direction=\"out\"/>\n"
+"  </method>\n"
+"</interface>"
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:48
+msgid "\"Id\" property"
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:50
+msgid ""
+"A string that identifies the helper uniquely. (maximum 256 bytes including "
+"terminating NUL byte)"
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:55
+msgid ""
+"The helper ID namespace is a separate namespace. In particular, it is not "
+"related to QEMU \"id\" used in -object/-device objects."
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:59
+msgid "Load(in u8[] bytes) method"
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:61
+msgid "The method called on destination with the state to restore."
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:63
+msgid ""
+"The helper may be initially started in a waiting state (with an --incoming "
+"argument for example), and it may resume on success."
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:66 ../../../interop/dbus-vmstate.rst:74
+msgid "An error may be returned to the caller."
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:69
+msgid "Save(out u8[] bytes) method"
+msgstr ""
+
+#: ../../../interop/dbus-vmstate.rst:71
+msgid ""
+"The method called on the source to get the current state to be migrated. The "
+"helper should continue to run normally."
+msgstr ""
