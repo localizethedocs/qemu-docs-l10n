@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-02-23 09:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -668,10 +668,108 @@ msgid ""
 msgstr ""
 
 #: ../../../devel/rust.rst:343
-msgid "Writing procedural macros"
+msgid "FFI Binding Generation"
 msgstr ""
 
 #: ../../../devel/rust.rst:345
+msgid ""
+"QEMU's Rust integration uses multiple ``*-sys`` crates that contain raw FFI "
+"bindings to different QEMU subsystems. These crates mirror the dependency "
+"structure that meson.build uses for C code, and which is reflected in "
+"``static_library()`` declarations. For example:"
+msgstr ""
+
+#: ../../../devel/rust.rst:350
+msgid "util-sys: Basic utilities (no dependencies)"
+msgstr ""
+
+#: ../../../devel/rust.rst:351
+msgid "qom-sys: QEMU Object Model (depends on util-sys)"
+msgstr ""
+
+#: ../../../devel/rust.rst:352
+msgid "chardev-sys: Character devices (depends on qom-sys, util-sys)"
+msgstr ""
+
+#: ../../../devel/rust.rst:353
+msgid "hwcore-sys: Hardware core (depends on qom-sys, util-sys)"
+msgstr ""
+
+#: ../../../devel/rust.rst:354
+msgid "migration-sys: Migration (depends on util-sys)"
+msgstr ""
+
+#: ../../../devel/rust.rst:355
+msgid "system-sys: System-level APIs (depends on all others)"
+msgstr ""
+
+#: ../../../devel/rust.rst:357
+msgid ""
+"Having multiple crates avoids massive rebuilds of all Rust code when C "
+"headers are changed. On the other hand, bindgen is not aware of how headers "
+"are split across crates, and therefore it would generate declarations for "
+"dependencies again. These duplicate declarations are not only large, they "
+"create distinct types and therefore they are incompatible with each other."
+msgstr ""
+
+#: ../../../devel/rust.rst:364
+msgid "Bindgen Configuration"
+msgstr ""
+
+#: ../../../devel/rust.rst:366
+msgid ""
+"Bindgen options such as symbol blocklists or how to configure enums can be "
+"defined in each crate's ``Cargo.toml`` via a ``[package.metadata.bindgen]`` "
+"section. For example::"
+msgstr ""
+
+#: ../../../devel/rust.rst:370
+msgid ""
+"[package.metadata.bindgen]\n"
+"header = \"wrapper.h\"                    # Main header file for this crate\n"
+"rustified-enum = [\"QEMUClockType\"]      # Enums to generate as Rust enums\n"
+"bitfield-enum = [\"VMStateFlags\"]        # Enums to treat as bitfields\n"
+"blocklist-function = [                  # Functions to exclude\n"
+"    \"vmstate_register_ram\",\n"
+"    \"vmstate_unregister_ram\"\n"
+"]\n"
+"additional-files = [                    # Extra files to allowlist\n"
+"    \"include/system/memory_ldst.*\"\n"
+"]"
+msgstr ""
+
+#: ../../../devel/rust.rst:382
+msgid ""
+"All bindgen options are supported in the metadata section. The complete list "
+"can be found in ``rust/bindings/generate_bindgen_args.py``."
+msgstr ""
+
+#: ../../../devel/rust.rst:386
+msgid "Dependency Management"
+msgstr ""
+
+#: ../../../devel/rust.rst:388
+msgid ""
+"By examining the dependency chain before bindgen creates the code for the "
+"``*-sys`` crates, the build system ensures that header files included in one "
+"crate are blocked from appearing in dependent crates, thus avoiding "
+"duplicate definitions. Dependent crates can import the definition via "
+"\"use\" statements."
+msgstr ""
+
+#: ../../../devel/rust.rst:394
+msgid ""
+"This dependency-aware binding generation is handled automatically by ``rust/"
+"bindings/generate_bindgen_args.py``, which processes the Cargo.toml files in "
+"dependency order and generates appropriate ``--allowlist-file`` and ``--"
+"blocklist-file`` arguments for bindgen."
+msgstr ""
+
+#: ../../../devel/rust.rst:400
+msgid "Writing procedural macros"
+msgstr ""
+
+#: ../../../devel/rust.rst:402
 msgid ""
 "By conventions, procedural macros are split in two functions, one returning "
 "``Result<proc_macro2::TokenStream, syn::Error>`` with the body of the "
@@ -682,7 +780,7 @@ msgid ""
 "after ``as`` in the invocation of ``parse_macro_input!``::"
 msgstr ""
 
-#: ../../../devel/rust.rst:353
+#: ../../../devel/rust.rst:410
 msgid ""
 "#[proc_macro_derive(Object)]\n"
 "pub fn derive_object(input: TokenStream) -> TokenStream {\n"
@@ -694,7 +792,7 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../devel/rust.rst:362
+#: ../../../devel/rust.rst:419
 msgid ""
 "The ``qemu_macros`` crate has utility functions to examine a ``DeriveInput`` "
 "and perform common checks (e.g. looking for a struct with named fields).  "
@@ -702,7 +800,7 @@ msgid ""
 "the procedural macro function::"
 msgstr ""
 
-#: ../../../devel/rust.rst:367
+#: ../../../devel/rust.rst:424
 msgid ""
 "fn derive_object_or_error(input: DeriveInput) ->\n"
 "    Result<proc_macro2::TokenStream, Error>\n"
@@ -715,19 +813,19 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../devel/rust.rst:377
+#: ../../../devel/rust.rst:434
 msgid ""
 "Use procedural macros with care.  They are mostly useful for two purposes:"
 msgstr ""
 
-#: ../../../devel/rust.rst:379
+#: ../../../devel/rust.rst:436
 msgid ""
 "Performing consistency checks; for example ``#[derive(Object)]`` checks that "
 "the structure has ``#[repr[C])`` and that the type of the first field is "
 "consistent with the ``ObjectType`` declaration."
 msgstr ""
 
-#: ../../../devel/rust.rst:383
+#: ../../../devel/rust.rst:440
 msgid ""
 "Extracting information from Rust source code into traits, typically based on "
 "types and attributes.  For example, ``#[derive(TryInto)]`` builds an "
@@ -735,7 +833,7 @@ msgid ""
 "the ``TryFrom`` source and error types."
 msgstr ""
 
-#: ../../../devel/rust.rst:388
+#: ../../../devel/rust.rst:445
 msgid ""
 "Procedural macros can be hard to debug and test; if the code generation "
 "exceeds a few lines of code, it may be worthwhile to delegate work to "
@@ -743,32 +841,32 @@ msgid ""
 "those instead."
 msgstr ""
 
-#: ../../../devel/rust.rst:395
+#: ../../../devel/rust.rst:452
 msgid "Coding style"
 msgstr ""
 
-#: ../../../devel/rust.rst:397
+#: ../../../devel/rust.rst:454
 msgid "Code should pass clippy and be formatted with rustfmt."
 msgstr ""
 
-#: ../../../devel/rust.rst:399
+#: ../../../devel/rust.rst:456
 msgid ""
 "Right now, only the nightly version of ``rustfmt`` is supported.  This might "
 "change in the future.  While CI checks for correct formatting via ``cargo "
 "fmt --check``, maintainers can fix this for you when applying patches."
 msgstr ""
 
-#: ../../../devel/rust.rst:403
+#: ../../../devel/rust.rst:460
 msgid ""
 "It is expected that QEMU Rust crates provides full ``rustdoc`` documentation "
 "for bindings that are in their final shape or close."
 msgstr ""
 
-#: ../../../devel/rust.rst:407
+#: ../../../devel/rust.rst:464
 msgid "Adding dependencies"
 msgstr ""
 
-#: ../../../devel/rust.rst:409
+#: ../../../devel/rust.rst:466
 msgid ""
 "Generally, the set of dependent crates is kept small.  Think twice before "
 "adding a new external crate, especially if it comes with a large set of "
@@ -776,7 +874,7 @@ msgid ""
 "functionality; see for example QEMU's ``assertions`` module."
 msgstr ""
 
-#: ../../../devel/rust.rst:414
+#: ../../../devel/rust.rst:471
 msgid ""
 "On top of this recommendation, adding external crates to QEMU is a slightly "
 "complicated process, mostly due to the need to teach Meson how to build "
@@ -784,7 +882,7 @@ msgid ""
 "is still highly experimental and is therefore not used."
 msgstr ""
 
-#: ../../../devel/rust.rst:419
+#: ../../../devel/rust.rst:476
 msgid ""
 "Therefore, external crates must be added as subprojects for Meson to learn "
 "how to build them, as well as to the relevant ``Cargo.toml`` files. The "
@@ -793,13 +891,13 @@ msgid ""
 "and therefore there is a single lock file for the whole build."
 msgstr ""
 
-#: ../../../devel/rust.rst:427
+#: ../../../devel/rust.rst:484
 msgid ""
 "Choose a version of the crate that works with QEMU's minimum supported Rust "
 "version (|msrv|)."
 msgstr ""
 
-#: ../../../devel/rust.rst:430
+#: ../../../devel/rust.rst:487
 msgid ""
 "Second, a new ``wrap`` file must be added to teach Meson how to download the "
 "crate.  The wrap file must be named ``NAME-SEMVER-rs.wrap``, where ``NAME`` "
@@ -809,28 +907,28 @@ msgid ""
 "use ``1``."
 msgstr ""
 
-#: ../../../devel/rust.rst:436
+#: ../../../devel/rust.rst:493
 msgid ""
 "Third, the Meson rules to build the crate must be added at ``subprojects/"
 "NAME-SEMVER-rs/meson.build``.  Generally this includes:"
 msgstr ""
 
-#: ../../../devel/rust.rst:439
+#: ../../../devel/rust.rst:496
 msgid "``subproject`` and ``dependency`` lines for all dependent crates"
 msgstr ""
 
-#: ../../../devel/rust.rst:441
+#: ../../../devel/rust.rst:498
 msgid ""
 "a ``static_library`` or ``rust.proc_macro`` line to perform the actual build"
 msgstr ""
 
-#: ../../../devel/rust.rst:443
+#: ../../../devel/rust.rst:500
 msgid ""
 "``declare_dependency`` and a ``meson.override_dependency`` lines to expose "
 "the result to QEMU and to other subprojects"
 msgstr ""
 
-#: ../../../devel/rust.rst:446
+#: ../../../devel/rust.rst:503
 msgid ""
 "Remember to add ``native: true`` to ``dependency``, ``static_library`` and "
 "``meson.override_dependency`` for dependencies of procedural macros. If a "
@@ -839,34 +937,34 @@ msgid ""
 "native versions of the crate."
 msgstr ""
 
-#: ../../../devel/rust.rst:452
+#: ../../../devel/rust.rst:509
 msgid "It's important to specify the right compiler options.  These include:"
 msgstr ""
 
-#: ../../../devel/rust.rst:454
+#: ../../../devel/rust.rst:511
 msgid "the language edition (which can be found in the ``Cargo.toml`` file)"
 msgstr ""
 
-#: ../../../devel/rust.rst:456
+#: ../../../devel/rust.rst:513
 msgid ""
 "the ``--cfg`` (which have to be \"reverse engineered\" from the ``build.rs`` "
 "file of the crate)."
 msgstr ""
 
-#: ../../../devel/rust.rst:459
+#: ../../../devel/rust.rst:516
 msgid ""
 "usually, a ``--cap-lints allow`` argument to hide warnings from rustc or "
 "clippy."
 msgstr ""
 
-#: ../../../devel/rust.rst:462
+#: ../../../devel/rust.rst:519
 msgid ""
 "After every change to the ``meson.build`` file you have to update the "
 "patched version with ``meson subprojects update --reset ``NAME-SEMVER-rs``.  "
 "This might be automated in the future."
 msgstr ""
 
-#: ../../../devel/rust.rst:466
+#: ../../../devel/rust.rst:523
 msgid ""
 "Also, after every change to the ``meson.build`` file it is strongly "
 "suggested to do a dummy change to the ``.wrap`` file (for example adding a "
@@ -874,7 +972,7 @@ msgid ""
 "subproject is out of date."
 msgstr ""
 
-#: ../../../devel/rust.rst:470
+#: ../../../devel/rust.rst:527
 msgid ""
 "As a last step, add the new subproject to ``scripts/archive-source.sh``, "
 "``scripts/make-release`` and ``subprojects/.gitignore``."
