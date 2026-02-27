@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-10 09:02+0000\n"
+"POT-Creation-Date: 2026-02-23 09:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2431,11 +2431,11 @@ msgstr ""
 #: ../../../../qapi/block-core.json:6189 ../../../../qapi/block-core.json:6275
 #: ../../../../qapi/block-core.json:6321 ../../../../qapi/char.json:64
 #: ../../../../qapi/char.json:105 ../../../../qapi/char.json:148
-#: ../../../../qapi/char.json:184 ../../../../qapi/char.json:768
-#: ../../../../qapi/char.json:776 ../../../../qapi/char.json:782
-#: ../../../../qapi/char.json:806 ../../../../qapi/char.json:823
-#: ../../../../qapi/char.json:842 ../../../../qapi/char.json:859
-#: ../../../../qapi/char.json:881 ../../../../qapi/control.json:26
+#: ../../../../qapi/char.json:184 ../../../../qapi/char.json:772
+#: ../../../../qapi/char.json:780 ../../../../qapi/char.json:786
+#: ../../../../qapi/char.json:810 ../../../../qapi/char.json:827
+#: ../../../../qapi/char.json:846 ../../../../qapi/char.json:863
+#: ../../../../qapi/char.json:885 ../../../../qapi/control.json:26
 #: ../../../../qapi/control.json:114 ../../../../qapi/control.json:153
 #: ../../../../qapi/control.json:173 ../../../../qapi/qom.json:97
 #: ../../../../qapi/qom.json:197 ../../../../qapi/qom.json:1336
@@ -7262,7 +7262,7 @@ msgid ""
 msgstr ""
 
 #: ../../../../qapi/block-core.json:5792 ../../../../qapi/block-core.json:6181
-#: ../../../../qapi/block-core.json:6212 ../../../../qapi/char.json:873
+#: ../../../../qapi/block-core.json:6212 ../../../../qapi/char.json:877
 msgid "This event is rate-limited."
 msgstr ""
 
@@ -8414,7 +8414,7 @@ msgid ""
 "<- { \"return\": \"abcdefgh\" }"
 msgstr ""
 
-#: ../../../../qapi/char.json:193 ../../../../qapi/char.json:583
+#: ../../../../qapi/char.json:193 ../../../../qapi/char.json:587
 msgid "Configuration shared across all chardev backends"
 msgstr ""
 
@@ -8426,55 +8426,59 @@ msgstr ""
 msgid "true to append instead of truncate (default to false to truncate)"
 msgstr ""
 
-#: ../../../../qapi/char.json:209
-msgid "Configuration info for file chardevs."
-msgstr ""
-
-#: ../../../../qapi/char.json:211
-msgid "The name of the input file"
+#: ../../../../qapi/char.json:200
+msgid "true to insert timestamps into logfile (default false) (since 11.0)"
 msgstr ""
 
 #: ../../../../qapi/char.json:213
-msgid "The name of the output file"
+msgid "Configuration info for file chardevs."
 msgstr ""
 
 #: ../../../../qapi/char.json:215
+msgid "The name of the input file"
+msgstr ""
+
+#: ../../../../qapi/char.json:217
+msgid "The name of the output file"
+msgstr ""
+
+#: ../../../../qapi/char.json:219
 msgid "Open the file in append mode (default false to truncate) (Since 2.6)"
 msgstr ""
 
-#: ../../../../qapi/char.json:220 ../../../../qapi/char.json:236
-#: ../../../../qapi/char.json:279 ../../../../qapi/char.json:303
-#: ../../../../qapi/char.json:317 ../../../../qapi/char.json:330
-#: ../../../../qapi/char.json:344 ../../../../qapi/char.json:357
-#: ../../../../qapi/char.json:371 ../../../../qapi/char.json:385
-#: ../../../../qapi/char.json:409 ../../../../qapi/char.json:425
-#: ../../../../qapi/char.json:440 ../../../../qapi/char.json:456
+#: ../../../../qapi/char.json:224 ../../../../qapi/char.json:240
+#: ../../../../qapi/char.json:283 ../../../../qapi/char.json:307
+#: ../../../../qapi/char.json:321 ../../../../qapi/char.json:334
+#: ../../../../qapi/char.json:348 ../../../../qapi/char.json:361
+#: ../../../../qapi/char.json:375 ../../../../qapi/char.json:389
+#: ../../../../qapi/char.json:413 ../../../../qapi/char.json:429
+#: ../../../../qapi/char.json:444 ../../../../qapi/char.json:460
 msgid "The members of :qapi:type:`ChardevCommon`."
 msgstr ""
 
-#: ../../../../qapi/char.json:229
+#: ../../../../qapi/char.json:233
 msgid "Configuration info for device and pipe chardevs."
 msgstr ""
 
-#: ../../../../qapi/char.json:231
+#: ../../../../qapi/char.json:235
 msgid ""
 "The name of the special file for the device, i.e. /dev/ttyS0 on Unix or "
 "COM1: on Windows"
 msgstr ""
 
-#: ../../../../qapi/char.json:243
+#: ../../../../qapi/char.json:247
 msgid "Configuration info for (stream) socket chardevs."
 msgstr ""
 
-#: ../../../../qapi/char.json:245
+#: ../../../../qapi/char.json:249
 msgid "socket address to listen on (server=true) or connect to (server=false)"
 msgstr ""
 
-#: ../../../../qapi/char.json:248
+#: ../../../../qapi/char.json:252
 msgid "the ID of the TLS credentials object (since 2.6)"
 msgstr ""
 
-#: ../../../../qapi/char.json:250
+#: ../../../../qapi/char.json:254
 msgid ""
 "the ID of the QAuthZ authorization object against which the client's x509 "
 "distinguished name will be validated.  This object is only resolved at time "
@@ -8482,468 +8486,468 @@ msgid ""
 "is active.  If missing, it will default to denying access (since 4.0)"
 msgstr ""
 
-#: ../../../../qapi/char.json:256
+#: ../../../../qapi/char.json:260
 msgid "create server socket (default: true)"
 msgstr ""
 
-#: ../../../../qapi/char.json:258
+#: ../../../../qapi/char.json:262
 msgid ""
 "wait for incoming connection on server sockets (default: false).  Silently "
 "ignored with server: false.  This use is deprecated."
 msgstr ""
 
-#: ../../../../qapi/char.json:262
+#: ../../../../qapi/char.json:266
 msgid "set TCP_NODELAY socket option (default: false)"
 msgstr ""
 
-#: ../../../../qapi/char.json:264
+#: ../../../../qapi/char.json:268
 msgid "enable telnet protocol on server sockets (default: false)"
 msgstr ""
 
-#: ../../../../qapi/char.json:266
+#: ../../../../qapi/char.json:270
 msgid "enable tn3270 protocol on server sockets (default: false) (Since: 2.10)"
 msgstr ""
 
-#: ../../../../qapi/char.json:269
+#: ../../../../qapi/char.json:273
 msgid ""
 "enable websocket protocol on server sockets (default: false) (Since: 3.1)"
 msgstr ""
 
-#: ../../../../qapi/char.json:272
+#: ../../../../qapi/char.json:276
 msgid ""
 "For a client socket, if a socket is disconnected, then attempt a reconnect "
 "after the given number of milliseconds. Setting this to zero disables this "
 "function. (default: 0) (Since: 9.2)"
 msgstr ""
 
-#: ../../../../qapi/char.json:295
+#: ../../../../qapi/char.json:299
 msgid "Configuration info for datagram socket chardevs."
 msgstr ""
 
-#: ../../../../qapi/char.json:297
+#: ../../../../qapi/char.json:301
 msgid "remote address"
 msgstr ""
 
-#: ../../../../qapi/char.json:299
+#: ../../../../qapi/char.json:303
 msgid "local address"
 msgstr ""
 
-#: ../../../../qapi/char.json:311
+#: ../../../../qapi/char.json:315
 msgid "Configuration info for mux chardevs."
 msgstr ""
 
-#: ../../../../qapi/char.json:313
+#: ../../../../qapi/char.json:317
 msgid "name of the base chardev."
 msgstr ""
 
-#: ../../../../qapi/char.json:324
+#: ../../../../qapi/char.json:328
 msgid "Configuration info for hub chardevs."
 msgstr ""
 
-#: ../../../../qapi/char.json:326
+#: ../../../../qapi/char.json:330
 msgid "IDs to be added to this hub (maximum 4 devices)."
 msgstr ""
 
-#: ../../../../qapi/char.json:337
+#: ../../../../qapi/char.json:341
 msgid "Configuration info for stdio chardevs."
 msgstr ""
 
-#: ../../../../qapi/char.json:339
+#: ../../../../qapi/char.json:343
 msgid ""
 "Allow signals (such as SIGINT triggered by ^C) be delivered to QEMU.  "
 "Default: true."
 msgstr ""
 
-#: ../../../../qapi/char.json:351
+#: ../../../../qapi/char.json:355
 msgid "Configuration info for spice vm channel chardevs."
 msgstr ""
 
-#: ../../../../qapi/char.json:353
+#: ../../../../qapi/char.json:357
 msgid "kind of channel (for example vdagent)."
 msgstr ""
 
-#: ../../../../qapi/char.json:365
+#: ../../../../qapi/char.json:369
 msgid "Configuration info for spice port chardevs."
 msgstr ""
 
-#: ../../../../qapi/char.json:367
+#: ../../../../qapi/char.json:371
 msgid "name of the channel (see docs/spice-port-fqdn.txt)"
 msgstr ""
 
-#: ../../../../qapi/char.json:379
+#: ../../../../qapi/char.json:383
 msgid "Configuration info for DBus chardevs."
 msgstr ""
 
-#: ../../../../qapi/char.json:381
+#: ../../../../qapi/char.json:385
 msgid "name of the channel (following docs/spice-port-fqdn.txt)"
 msgstr ""
 
-#: ../../../../qapi/char.json:393
+#: ../../../../qapi/char.json:397
 msgid "Configuration info for virtual console chardevs."
 msgstr ""
 
-#: ../../../../qapi/char.json:395
+#: ../../../../qapi/char.json:399
 msgid "console width, in pixels"
 msgstr ""
 
-#: ../../../../qapi/char.json:397
+#: ../../../../qapi/char.json:401
 msgid "console height, in pixels"
 msgstr ""
 
-#: ../../../../qapi/char.json:399
+#: ../../../../qapi/char.json:403
 msgid "console width, in chars"
 msgstr ""
 
-#: ../../../../qapi/char.json:401
+#: ../../../../qapi/char.json:405
 msgid "console height, in chars"
 msgstr ""
 
-#: ../../../../qapi/char.json:403
+#: ../../../../qapi/char.json:407
 msgid ""
 "The options are only effective when the VNC or SDL graphical display backend "
 "is active.  They are ignored with the GTK, Spice, VNC and D-Bus display "
 "backends."
 msgstr ""
 
-#: ../../../../qapi/char.json:419
+#: ../../../../qapi/char.json:423
 msgid "Configuration info for ring buffer chardevs."
 msgstr ""
 
-#: ../../../../qapi/char.json:421
+#: ../../../../qapi/char.json:425
 msgid "ring buffer size, must be power of two, default is 65536"
 msgstr ""
 
-#: ../../../../qapi/char.json:432
+#: ../../../../qapi/char.json:436
 msgid "Configuration info for QEMU vdagent implementation."
 msgstr ""
 
-#: ../../../../qapi/char.json:434
+#: ../../../../qapi/char.json:438
 msgid "enable/disable mouse, default is enabled."
 msgstr ""
 
-#: ../../../../qapi/char.json:436
+#: ../../../../qapi/char.json:440
 msgid "enable/disable clipboard, default is disabled."
 msgstr ""
 
-#: ../../../../qapi/char.json:449
+#: ../../../../qapi/char.json:453
 msgid "Configuration info for pty implementation."
 msgstr ""
 
-#: ../../../../qapi/char.json:451
+#: ../../../../qapi/char.json:455
 msgid ""
 "optional path to create a symbolic link that points to the allocated PTY"
 msgstr ""
 
-#: ../../../../qapi/char.json:463
+#: ../../../../qapi/char.json:467
 msgid "regular files"
 msgstr ""
 
-#: ../../../../qapi/char.json:465
+#: ../../../../qapi/char.json:469
 msgid "serial host device"
 msgstr ""
 
-#: ../../../../qapi/char.json:467
+#: ../../../../qapi/char.json:471
 msgid "parallel host device"
 msgstr ""
 
-#: ../../../../qapi/char.json:469
+#: ../../../../qapi/char.json:473
 msgid "pipes (since 1.5)"
 msgstr ""
 
-#: ../../../../qapi/char.json:471
+#: ../../../../qapi/char.json:475
 msgid "stream socket"
 msgstr ""
 
-#: ../../../../qapi/char.json:473
+#: ../../../../qapi/char.json:477
 msgid "datagram socket (since 1.5)"
 msgstr ""
 
-#: ../../../../qapi/char.json:475
+#: ../../../../qapi/char.json:479
 msgid "pseudo-terminal"
 msgstr ""
 
-#: ../../../../qapi/char.json:477
+#: ../../../../qapi/char.json:481
 msgid "provides no input, throws away output"
 msgstr ""
 
-#: ../../../../qapi/char.json:479
+#: ../../../../qapi/char.json:483
 msgid "(since 1.5)"
 msgstr ""
 
-#: ../../../../qapi/char.json:481
+#: ../../../../qapi/char.json:485
 msgid "(since 10.0)"
 msgstr ""
 
-#: ../../../../qapi/char.json:483
+#: ../../../../qapi/char.json:487
 msgid "emulated Microsoft serial mouse (since 1.5)"
 msgstr ""
 
-#: ../../../../qapi/char.json:485
+#: ../../../../qapi/char.json:489
 msgid "emulated Wacom Penpartner serial tablet (since 2.9)"
 msgstr ""
 
-#: ../../../../qapi/char.json:487
+#: ../../../../qapi/char.json:491
 msgid "Baum Braille device (since 1.5)"
 msgstr ""
 
-#: ../../../../qapi/char.json:489
+#: ../../../../qapi/char.json:493
 msgid "device for test-suite control (since 2.2)"
 msgstr ""
 
-#: ../../../../qapi/char.json:491
+#: ../../../../qapi/char.json:495
 msgid "standard I/O (since 1.5)"
 msgstr ""
 
-#: ../../../../qapi/char.json:493
+#: ../../../../qapi/char.json:497
 msgid "Windows console (since 1.5)"
 msgstr ""
 
-#: ../../../../qapi/char.json:495
+#: ../../../../qapi/char.json:499
 msgid "spice vm channel (since 1.5)"
 msgstr ""
 
-#: ../../../../qapi/char.json:497
+#: ../../../../qapi/char.json:501
 msgid "Spice port channel (since 1.5)"
 msgstr ""
 
-#: ../../../../qapi/char.json:499
+#: ../../../../qapi/char.json:503
 msgid "Spice vdagent (since 6.1)"
 msgstr ""
 
-#: ../../../../qapi/char.json:501
+#: ../../../../qapi/char.json:505
 msgid "D-Bus channel (since 7.0)"
 msgstr ""
 
-#: ../../../../qapi/char.json:503
+#: ../../../../qapi/char.json:507
 msgid "virtual console (since 1.5)"
 msgstr ""
 
-#: ../../../../qapi/char.json:505
+#: ../../../../qapi/char.json:509
 msgid "memory ring buffer (since 1.6)"
 msgstr ""
 
-#: ../../../../qapi/char.json:507
+#: ../../../../qapi/char.json:511
 msgid "synonym for ``ringbuf`` (since 1.5)"
 msgstr ""
 
-#: ../../../../qapi/char.json:511
+#: ../../../../qapi/char.json:515
 msgid "Member ``memory`` is deprecated.  Use ``ringbuf`` instead."
 msgstr ""
 
-#: ../../../../qapi/char.json:543
+#: ../../../../qapi/char.json:547
 msgid "Configuration info for file chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:553
+#: ../../../../qapi/char.json:557
 msgid "Configuration info for device and pipe chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:563
+#: ../../../../qapi/char.json:567
 msgid "Configuration info for (stream) socket chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:573
+#: ../../../../qapi/char.json:577
 msgid "Configuration info for datagram socket chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:593
+#: ../../../../qapi/char.json:597
 msgid "Configuration info for mux chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:603
+#: ../../../../qapi/char.json:607
 msgid "Configuration info for hub chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:613
+#: ../../../../qapi/char.json:617
 msgid "Configuration info for stdio chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:623
+#: ../../../../qapi/char.json:627
 msgid "Configuration info for spice vm channel chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:634
+#: ../../../../qapi/char.json:638
 msgid "Configuration info for spice port chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:645
+#: ../../../../qapi/char.json:649
 msgid "Configuration info for QEMU vdagent implementation"
 msgstr ""
 
-#: ../../../../qapi/char.json:656
+#: ../../../../qapi/char.json:660
 msgid "Configuration info for DBus chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:667
+#: ../../../../qapi/char.json:671
 msgid "Configuration info for virtual console chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:677
+#: ../../../../qapi/char.json:681
 msgid "Configuration info for ring buffer chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:687
+#: ../../../../qapi/char.json:691
 msgid "Configuration info for pty chardevs"
 msgstr ""
 
-#: ../../../../qapi/char.json:697
+#: ../../../../qapi/char.json:701
 msgid "Configuration info for the new chardev backend."
 msgstr ""
 
-#: ../../../../qapi/char.json:699
+#: ../../../../qapi/char.json:703
 msgid "backend type"
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``file``: The members of :qapi:type:`ChardevFileWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``serial``: The members of :qapi:type:"
 "`ChardevHostdevWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``parallel``: The members of :qapi:type:"
 "`ChardevHostdevWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``pipe``: The members of :qapi:type:`ChardevHostdevWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``socket``: The members of :qapi:type:"
 "`ChardevSocketWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``udp``: The members of :qapi:type:`ChardevUdpWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``pty``: The members of :qapi:type:`ChardevPtyWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``null``: The members of :qapi:type:`ChardevCommonWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``mux``: The members of :qapi:type:`ChardevMuxWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``hub``: The members of :qapi:type:`ChardevHubWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``msmouse``: The members of :qapi:type:"
 "`ChardevCommonWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``wctablet``: The members of :qapi:type:"
 "`ChardevCommonWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``braille``: The members of :qapi:type:"
 "`ChardevCommonWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``testdev``: The members of :qapi:type:"
 "`ChardevCommonWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``stdio``: The members of :qapi:type:`ChardevStdioWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``console``: The members of :qapi:type:"
 "`ChardevCommonWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``spicevmc``: The members of :qapi:type:"
 "`ChardevSpiceChannelWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``spiceport``: The members of :qapi:type:"
 "`ChardevSpicePortWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``qemu-vdagent``: The members of :qapi:type:"
 "`ChardevQemuVDAgentWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``dbus``: The members of :qapi:type:`ChardevDBusWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid "When ``type`` is ``vc``: The members of :qapi:type:`ChardevVCWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``ringbuf``: The members of :qapi:type:"
 "`ChardevRingbufWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:703
+#: ../../../../qapi/char.json:707
 msgid ""
 "When ``type`` is ``memory``: The members of :qapi:type:"
 "`ChardevRingbufWrapper`."
 msgstr ""
 
-#: ../../../../qapi/char.json:741
+#: ../../../../qapi/char.json:745
 msgid "Return info about the chardev backend just created."
 msgstr ""
 
-#: ../../../../qapi/char.json:743
+#: ../../../../qapi/char.json:747
 msgid ""
 "name of the slave pseudoterminal device, present if and only if a chardev of "
 "type 'pty' was created"
 msgstr ""
 
-#: ../../../../qapi/char.json:754
+#: ../../../../qapi/char.json:758
 msgid "Add a character device backend"
 msgstr ""
 
-#: ../../../../qapi/char.json:756
+#: ../../../../qapi/char.json:760
 msgid "the chardev's ID, must be unique"
 msgstr ""
 
-#: ../../../../qapi/char.json:758
+#: ../../../../qapi/char.json:762
 msgid "backend type and parameters"
 msgstr ""
 
-#: ../../../../qapi/char.json:762
+#: ../../../../qapi/char.json:766
 msgid ""
 "-> { \"execute\" : \"chardev-add\",\n"
 "     \"arguments\" : { \"id\" : \"foo\",\n"
@@ -8952,7 +8956,7 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/char.json:769
+#: ../../../../qapi/char.json:773
 msgid ""
 "-> { \"execute\" : \"chardev-add\",\n"
 "     \"arguments\" : { \"id\" : \"bar\",\n"
@@ -8962,7 +8966,7 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/char.json:777
+#: ../../../../qapi/char.json:781
 msgid ""
 "-> { \"execute\" : \"chardev-add\",\n"
 "     \"arguments\" : { \"id\" : \"baz\",\n"
@@ -8971,19 +8975,19 @@ msgid ""
 "<- { \"return\": { \"pty\" : \"/dev/pty/42\" } }"
 msgstr ""
 
-#: ../../../../qapi/char.json:792
+#: ../../../../qapi/char.json:796
 msgid "Change a character device backend"
 msgstr ""
 
-#: ../../../../qapi/char.json:794 ../../../../qapi/char.json:852
+#: ../../../../qapi/char.json:798 ../../../../qapi/char.json:856
 msgid "the chardev's ID, must exist"
 msgstr ""
 
-#: ../../../../qapi/char.json:796
+#: ../../../../qapi/char.json:800
 msgid "new backend type and parameters"
 msgstr ""
 
-#: ../../../../qapi/char.json:800
+#: ../../../../qapi/char.json:804
 msgid ""
 "-> { \"execute\" : \"chardev-change\",\n"
 "     \"arguments\" : { \"id\" : \"baz\",\n"
@@ -8992,7 +8996,7 @@ msgid ""
 "<- { \"return\": { \"pty\" : \"/dev/pty/42\" } }"
 msgstr ""
 
-#: ../../../../qapi/char.json:807
+#: ../../../../qapi/char.json:811
 msgid ""
 "-> {\"execute\" : \"chardev-change\",\n"
 "    \"arguments\" : {\n"
@@ -9011,44 +9015,44 @@ msgid ""
 "<- {\"return\": {}}"
 msgstr ""
 
-#: ../../../../qapi/char.json:833
+#: ../../../../qapi/char.json:837
 msgid "Remove a character device backend"
 msgstr ""
 
-#: ../../../../qapi/char.json:835
+#: ../../../../qapi/char.json:839
 msgid "the chardev's ID, must exist and not be in use"
 msgstr ""
 
-#: ../../../../qapi/char.json:839
+#: ../../../../qapi/char.json:843
 msgid ""
 "-> { \"execute\": \"chardev-remove\", \"arguments\": { \"id\" : \"foo\" } }\n"
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/char.json:850
+#: ../../../../qapi/char.json:854
 msgid "Send a break to a character device"
 msgstr ""
 
-#: ../../../../qapi/char.json:856
+#: ../../../../qapi/char.json:860
 msgid ""
 "-> { \"execute\": \"chardev-send-break\", \"arguments\": { \"id\" : "
 "\"foo\" } }\n"
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/char.json:867
+#: ../../../../qapi/char.json:871
 msgid "Emitted when the guest opens or closes a virtio-serial port."
 msgstr ""
 
-#: ../../../../qapi/char.json:869
+#: ../../../../qapi/char.json:873
 msgid "device identifier of the virtio-serial port"
 msgstr ""
 
-#: ../../../../qapi/char.json:871
+#: ../../../../qapi/char.json:875
 msgid "true if the guest has opened the virtio-serial port"
 msgstr ""
 
-#: ../../../../qapi/char.json:877
+#: ../../../../qapi/char.json:881
 msgid ""
 "<- { \"event\": \"VSERPORT_CHANGE\",\n"
 "     \"data\": { \"id\": \"channel0\", \"open\": true },\n"

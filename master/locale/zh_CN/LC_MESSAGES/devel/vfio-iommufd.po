@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-02-23 09:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -198,7 +198,7 @@ msgid "Supported platform"
 msgstr ""
 
 #: ../../../devel/vfio-iommufd.rst:125
-msgid "Supports x86, ARM and s390x currently."
+msgid "Supports x86, Arm and s390x currently."
 msgstr ""
 
 #: ../../../devel/vfio-iommufd.rst:128
@@ -206,44 +206,27 @@ msgid "Caveats"
 msgstr ""
 
 #: ../../../devel/vfio-iommufd.rst:131
-msgid "Dirty page sync"
-msgstr ""
-
-#: ../../../devel/vfio-iommufd.rst:133
-msgid ""
-"Dirty page sync with iommufd backend is unsupported yet, live migration is "
-"disabled by default. But it can be force enabled like below, low efficient "
-"though."
-msgstr ""
-
-#: ../../../devel/vfio-iommufd.rst:137
-msgid ""
-"-object iommufd,id=iommufd0\n"
-"-device vfio-pci,host=0000:02:00.0,iommufd=iommufd0,enable-migration=on"
-msgstr ""
-
-#: ../../../devel/vfio-iommufd.rst:143
 msgid "P2P DMA"
 msgstr ""
 
-#: ../../../devel/vfio-iommufd.rst:145
+#: ../../../devel/vfio-iommufd.rst:133
 msgid ""
 "PCI p2p DMA is unsupported as IOMMUFD doesn't support mapping hardware PCI "
 "BAR region yet. Below warning shows for assigned PCI device, it's not a bug."
 msgstr ""
 
-#: ../../../devel/vfio-iommufd.rst:148
+#: ../../../devel/vfio-iommufd.rst:136
 msgid ""
 "qemu-system-x86_64: warning: IOMMU_IOAS_MAP failed: Bad address, PCI BAR?\n"
 "qemu-system-x86_64: vfio_container_dma_map(0x560cb6cb1620, 0xe000000021000, "
 "0x3000, 0x7f32ed55c000) = -14 (Bad address)"
 msgstr ""
 
-#: ../../../devel/vfio-iommufd.rst:154
+#: ../../../devel/vfio-iommufd.rst:142
 msgid "FD passing with mdev"
 msgstr ""
 
-#: ../../../devel/vfio-iommufd.rst:156
+#: ../../../devel/vfio-iommufd.rst:144
 msgid ""
 "``vfio-pci`` device checks sysfsdev property to decide if backend is a mdev. "
 "If FD passing is used, there is no way to know that and the mdev is treated "
@@ -251,15 +234,56 @@ msgid ""
 "RAM discarding for mdev."
 msgstr ""
 
-#: ../../../devel/vfio-iommufd.rst:161
+#: ../../../devel/vfio-iommufd.rst:149
 msgid ""
 "qemu-system-x86_64: -device vfio-pci,iommufd=iommufd0,x-balloon-allowed=on,"
 "fd=9: vfio VFIO_FD9: x-balloon-allowed only potentially compatible with mdev "
 "devices"
 msgstr ""
 
-#: ../../../devel/vfio-iommufd.rst:165
+#: ../../../devel/vfio-iommufd.rst:153
 msgid ""
 "``vfio-ap`` and ``vfio-ccw`` devices don't have same issue as their backend "
 "devices are always mdev and RAM discarding is force enabled."
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:157
+msgid "Usage with intel_iommu featuring x-flts=on"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:159
+msgid ""
+"Only IOMMUFD backed VFIO device is supported when intel_iommu is configured "
+"with x-flts=on, for legacy container backed VFIO device, below error shows:"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:162
+msgid ""
+"qemu-system-x86_64: -device vfio-pci,host=0000:02:00.0: vfio 0000:02:00.0: "
+"Failed to set vIOMMU: Need IOMMUFD backend when x-flts=on"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:166
+msgid ""
+"VFIO device under PCI bridge is unsupported, use PCIE bridge if necessary, "
+"otherwise below error shows:"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:169
+msgid ""
+"qemu-system-x86_64: -device vfio-pci,host=0000:02:00.0,bus=bridge1,"
+"iommufd=iommufd0: vfio 0000:02:00.0: Failed to set vIOMMU: Host device "
+"downstream to a PCI bridge is unsupported when x-flts=on"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:173
+msgid ""
+"If host IOMMU has ERRATA_772415_SPR17, running guest with \"intel_iommu=on,"
+"sm_off\" is unsupported, kexec or reboot guest from \"intel_iommu=on,sm_on\" "
+"to \"intel_iommu=on,sm_off\" is also unsupported. Configure scalable mode "
+"off as below if it's not needed by guest:"
+msgstr ""
+
+#: ../../../devel/vfio-iommufd.rst:178
+msgid "-device intel-iommu,x-scalable-mode=off"
 msgstr ""

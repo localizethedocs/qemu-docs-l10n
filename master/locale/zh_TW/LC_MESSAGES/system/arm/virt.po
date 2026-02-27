@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-02-23 09:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,128 +104,129 @@ msgstr ""
 
 #: ../../../system/arm/virt.rst:44
 msgid ""
-"An MSI controller (GICv2M or ITS). GICv2M is selected by default along with "
-"GICv2. ITS is selected by default with GICv3 (>= virt-2.7). Note that ITS is "
-"not modeled in TCG mode."
-msgstr ""
-
-#: ../../../system/arm/virt.rst:47
-msgid "32 virtio-mmio transport devices"
+"An MSI controller (GICv2m or ITS). - When using GICv3, ITS is selected by "
+"default when available on the platform. - If using GICv2, a GICv2m is "
+"provided by default instead. - When ITS is not available on a GICv3 "
+"platform, a GICv2m is provided by default."
 msgstr ""
 
 #: ../../../system/arm/virt.rst:48
-msgid "running guests using the KVM accelerator on aarch64 hardware"
+msgid "32 virtio-mmio transport devices"
 msgstr ""
 
 #: ../../../system/arm/virt.rst:49
-msgid "large amounts of RAM (at least 255GB, and more if using highmem)"
+msgid "running guests using the KVM accelerator on aarch64 hardware"
 msgstr ""
 
 #: ../../../system/arm/virt.rst:50
-msgid "many CPUs (up to 512 if using a GICv3 and highmem)"
+msgid "large amounts of RAM (at least 255GB, and more if using highmem)"
 msgstr ""
 
 #: ../../../system/arm/virt.rst:51
+msgid "many CPUs (up to 512 if using a GICv3 and highmem)"
+msgstr ""
+
+#: ../../../system/arm/virt.rst:52
 msgid "Secure-World-only devices if the CPU has TrustZone:"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:53
+#: ../../../system/arm/virt.rst:54
 msgid "A second PL011 UART"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:54
+#: ../../../system/arm/virt.rst:55
 msgid ""
 "A second PL061 GPIO controller, with GPIO lines for triggering a system "
 "reset or system poweroff"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:56
+#: ../../../system/arm/virt.rst:57
 msgid "A secure flash memory"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:57
+#: ../../../system/arm/virt.rst:58
 msgid "16MB of secure RAM"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:59
+#: ../../../system/arm/virt.rst:60
 msgid ""
 "The second NonSecure UART only exists if a backend is configured explicitly "
 "(e.g. with a second -serial command line option) and TrustZone emulation is "
 "not enabled."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:63
+#: ../../../system/arm/virt.rst:64
 msgid "Supported guest CPU types:"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:65
+#: ../../../system/arm/virt.rst:66
 msgid "``cortex-a7`` (32-bit)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:66
+#: ../../../system/arm/virt.rst:67
 msgid "``cortex-a15`` (32-bit; the default)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:67
+#: ../../../system/arm/virt.rst:68
 msgid "``cortex-a35`` (64-bit)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:68
+#: ../../../system/arm/virt.rst:69
 msgid "``cortex-a53`` (64-bit)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:69
+#: ../../../system/arm/virt.rst:70
 msgid "``cortex-a55`` (64-bit)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:70
+#: ../../../system/arm/virt.rst:71
 msgid "``cortex-a57`` (64-bit)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:71
+#: ../../../system/arm/virt.rst:72
 msgid "``cortex-a72`` (64-bit)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:72
+#: ../../../system/arm/virt.rst:73
 msgid "``cortex-a76`` (64-bit)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:73
+#: ../../../system/arm/virt.rst:74
 msgid "``cortex-a710`` (64-bit)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:74
+#: ../../../system/arm/virt.rst:75
 msgid "``a64fx`` (64-bit)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:75
+#: ../../../system/arm/virt.rst:76
 msgid "``host`` (with KVM and HVF only)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:76
+#: ../../../system/arm/virt.rst:77
 msgid "``neoverse-n1`` (64-bit)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:77
+#: ../../../system/arm/virt.rst:78
 msgid "``neoverse-v1`` (64-bit)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:78
+#: ../../../system/arm/virt.rst:79
 msgid "``neoverse-n2`` (64-bit)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:79
+#: ../../../system/arm/virt.rst:80
 msgid ""
 "``max`` (same as ``host`` for KVM and HVF; best possible emulation with TCG)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:81
+#: ../../../system/arm/virt.rst:82
 msgid ""
 "Note that the default is ``cortex-a15``, so for an AArch64 guest you must "
 "specify a CPU type."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:84
+#: ../../../system/arm/virt.rst:85
 msgid ""
 "Also, please note that passing ``max`` CPU (i.e. ``-cpu max``) won't enable "
 "all the CPU features for a given ``virt`` machine. Where a CPU architectural "
@@ -234,20 +235,20 @@ msgid ""
 "a machine option to enable it."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:90
+#: ../../../system/arm/virt.rst:91
 msgid ""
 "For example, MTE support must be enabled with ``-machine virt,mte=on``, as "
 "well as by selecting an MTE-capable CPU (e.g., ``max``) with the ``-cpu`` "
 "option."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:94
+#: ../../../system/arm/virt.rst:95
 msgid ""
 "See the machine-specific options below, or check them for a given machine by "
 "passing the ``help`` suboption, like: ``-machine virt-9.0,help``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:97
+#: ../../../system/arm/virt.rst:98
 msgid ""
 "Graphics output is available, but unlike the x86 PC machine types there is "
 "no default display device enabled: you should select one from the Display "
@@ -257,49 +258,49 @@ msgid ""
 "below."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:105
+#: ../../../system/arm/virt.rst:106
 msgid "Machine-specific options"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:107
+#: ../../../system/arm/virt.rst:108
 msgid "The following machine-specific options are supported:"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:109
+#: ../../../system/arm/virt.rst:110
 msgid "secure"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:110
+#: ../../../system/arm/virt.rst:111
 msgid ""
 "Set ``on``/``off`` to enable/disable emulating a guest CPU which implements "
 "the Arm Security Extensions (TrustZone). The default is ``off``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:113
+#: ../../../system/arm/virt.rst:114
 msgid "virtualization"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:114
+#: ../../../system/arm/virt.rst:115
 msgid ""
 "Set ``on``/``off`` to enable/disable emulating a guest CPU which implements "
 "the Arm Virtualization Extensions. The default is ``off``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:117
+#: ../../../system/arm/virt.rst:118
 msgid "mte"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:118
+#: ../../../system/arm/virt.rst:119
 msgid ""
 "Set ``on``/``off`` to enable/disable emulating a guest CPU which implements "
 "the Arm Memory Tagging Extensions. The default is ``off``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:121
+#: ../../../system/arm/virt.rst:122
 msgid "highmem"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:122
+#: ../../../system/arm/virt.rst:123
 msgid ""
 "Set ``on``/``off`` to enable/disable placing devices and RAM in physical "
 "address space above 32 bits. The default is ``on`` for machine types later "
@@ -311,197 +312,242 @@ msgid ""
 "the PCI controller, will not be accessible."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:132
+#: ../../../system/arm/virt.rst:133
 msgid "compact-highmem"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:133
+#: ../../../system/arm/virt.rst:134
 msgid ""
 "Set ``on``/``off`` to enable/disable the compact layout for high memory "
 "regions. The default is ``on`` for machine types later than ``virt-7.2``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:136
+#: ../../../system/arm/virt.rst:137
 msgid "highmem-redists"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:137
+#: ../../../system/arm/virt.rst:138
 msgid ""
 "Set ``on``/``off`` to enable/disable the high memory region for GICv3 or "
 "GICv4 redistributor. The default is ``on``. Setting this to ``off`` will "
 "limit the maximum number of CPUs when GICv3 or GICv4 is used."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:141
+#: ../../../system/arm/virt.rst:142
 msgid "highmem-ecam"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:142
+#: ../../../system/arm/virt.rst:143
 msgid ""
 "Set ``on``/``off`` to enable/disable the high memory region for PCI ECAM. "
 "The default is ``on`` for machine types later than ``virt-3.0``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:145
+#: ../../../system/arm/virt.rst:146
 msgid "highmem-mmio"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:146
+#: ../../../system/arm/virt.rst:147
 msgid ""
 "Set ``on``/``off`` to enable/disable the high memory region for PCI MMIO. "
 "The default is ``on``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:149
+#: ../../../system/arm/virt.rst:150
 msgid "highmem-mmio-size"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:150
+#: ../../../system/arm/virt.rst:151
 msgid ""
 "Set the high memory region size for PCI MMIO. Must be a power of 2 and "
 "greater than or equal to the default size (512G)."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:153
+#: ../../../system/arm/virt.rst:154
 msgid "gic-version"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:154
+#: ../../../system/arm/virt.rst:155
 msgid ""
 "Specify the version of the Generic Interrupt Controller (GIC) to provide. "
 "Valid values are:"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:157
+#: ../../../system/arm/virt.rst:158
 msgid "``2``"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:158
+#: ../../../system/arm/virt.rst:159
 msgid "GICv2. Note that this limits the number of CPUs to 8."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:159
+#: ../../../system/arm/virt.rst:160
 msgid "``3``"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:160
+#: ../../../system/arm/virt.rst:161
 msgid "GICv3. This allows up to 512 CPUs."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:161
+#: ../../../system/arm/virt.rst:162
 msgid "``4``"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:162
+#: ../../../system/arm/virt.rst:163
 msgid "GICv4. Requires ``virtualization`` to be ``on``; allows up to 317 CPUs."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:163
+#: ../../../system/arm/virt.rst:164
 msgid "``host``"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:164
+#: ../../../system/arm/virt.rst:165
 msgid "Use the same GIC version the host provides, when using KVM"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:165
+#: ../../../system/arm/virt.rst:166
 msgid "``max``"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:166
+#: ../../../system/arm/virt.rst:167
 msgid ""
 "Use the best GIC version possible (same as host when using KVM; with TCG "
 "this is currently ``3`` if ``virtualization`` is ``off`` and ``4`` if "
 "``virtualization`` is ``on``, but this may change in future)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:170
-msgid "its"
-msgstr ""
-
 #: ../../../system/arm/virt.rst:171
-msgid ""
-"Set ``on``/``off`` to enable/disable ITS instantiation. The default is "
-"``on`` for machine types later than ``virt-2.7``."
+msgid "msi"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:174
-msgid "iommu"
+#: ../../../system/arm/virt.rst:172
+msgid ""
+"Specify the MSI and MSI-X controller (GIC) to provide. Valid values are:"
 msgstr ""
 
 #: ../../../system/arm/virt.rst:175
-msgid "Set the IOMMU type to create for the guest. Valid values are:"
+msgid "``auto``"
+msgstr ""
+
+#: ../../../system/arm/virt.rst:176
+msgid ""
+"Use the best available MSI-X controller option. ITS when supported, GICv2m "
+"otherwise."
 msgstr ""
 
 #: ../../../system/arm/virt.rst:177
-msgid "``none``"
+msgid "``gicv2m``"
 msgstr ""
 
 #: ../../../system/arm/virt.rst:178
-msgid "Don't create an IOMMU (the default)"
+msgid "GICv2m. Typically used with a GICv2. Also available with a newer GIC."
 msgstr ""
 
 #: ../../../system/arm/virt.rst:179
-msgid "``smmuv3``"
+msgid "``its``"
 msgstr ""
 
 #: ../../../system/arm/virt.rst:180
-msgid "Create a machine-wide SMMUv3."
+msgid ""
+"GICv3 ITS. This is the default option when using a GICv3 or GICv4 with a "
+"supported accelerator."
 msgstr ""
 
 #: ../../../system/arm/virt.rst:182
-msgid "default-bus-bypass-iommu"
+msgid "``off``"
 msgstr ""
 
 #: ../../../system/arm/virt.rst:183
+msgid "Disable support for MSI/MSI-X interrupts."
+msgstr ""
+
+#: ../../../system/arm/virt.rst:185
+msgid "its"
+msgstr ""
+
+#: ../../../system/arm/virt.rst:186
+msgid ""
+"Set ``on``/``off`` to control ITS instantiation. This is a deprecated "
+"option, use ``msi`` instead."
+msgstr ""
+
+#: ../../../system/arm/virt.rst:188
+msgid "iommu"
+msgstr ""
+
+#: ../../../system/arm/virt.rst:189
+msgid "Set the IOMMU type to create for the guest. Valid values are:"
+msgstr ""
+
+#: ../../../system/arm/virt.rst:191
+msgid "``none``"
+msgstr ""
+
+#: ../../../system/arm/virt.rst:192
+msgid "Don't create an IOMMU (the default)"
+msgstr ""
+
+#: ../../../system/arm/virt.rst:193
+msgid "``smmuv3``"
+msgstr ""
+
+#: ../../../system/arm/virt.rst:194
+msgid "Create a machine-wide SMMUv3."
+msgstr ""
+
+#: ../../../system/arm/virt.rst:196
+msgid "default-bus-bypass-iommu"
+msgstr ""
+
+#: ../../../system/arm/virt.rst:197
 msgid ""
 "Set ``on``/``off`` to enable/disable `bypass_iommu <https://gitlab.com/qemu-"
 "project/qemu/-/blob/master/docs/bypass-iommu.txt>`_ for default root bus."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:187
+#: ../../../system/arm/virt.rst:201
 msgid "ras"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:188
+#: ../../../system/arm/virt.rst:202
 msgid ""
 "Set ``on``/``off`` to enable/disable reporting host memory errors to a guest "
 "using ACPI and guest external abort exceptions. The default is off."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:191
+#: ../../../system/arm/virt.rst:205
 msgid "acpi"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:192
+#: ../../../system/arm/virt.rst:206
 msgid "Set ``on``/``off``/``auto`` to enable/disable ACPI."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:194
+#: ../../../system/arm/virt.rst:208
 msgid "cxl"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:195
+#: ../../../system/arm/virt.rst:209
 msgid ""
 "Set  ``on``/``off`` to enable/disable CXL. More details in :doc:`../devices/"
 "cxl`. The default is off."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:198
+#: ../../../system/arm/virt.rst:212
 msgid "cxl-fmw"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:199
+#: ../../../system/arm/virt.rst:213
 msgid ""
 "Array of CXL fixed memory windows describing fixed address routing to target "
 "CXL host bridges. See :doc:`../devices/cxl`."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:202
+#: ../../../system/arm/virt.rst:216
 msgid "dtb-randomness"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:203
+#: ../../../system/arm/virt.rst:217
 msgid ""
 "Set ``on``/``off`` to pass random seeds via the guest DTB rng-seed and kaslr-"
 "seed nodes (in both \"/chosen\" and \"/secure-chosen\") to use for features "
@@ -512,60 +558,60 @@ msgid ""
 "with a seed and pass it on if it wants to."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:212
+#: ../../../system/arm/virt.rst:226
 msgid "dtb-kaslr-seed"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:213
+#: ../../../system/arm/virt.rst:227
 msgid "A deprecated synonym for dtb-randomness."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:215
+#: ../../../system/arm/virt.rst:229
 msgid "x-oem-id"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:216
+#: ../../../system/arm/virt.rst:230
 msgid ""
 "Set string (up to 6 bytes) to override the default value of field OEMID in "
 "ACPI table header."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:219
+#: ../../../system/arm/virt.rst:233
 msgid "x-oem-table-id"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:220
+#: ../../../system/arm/virt.rst:234
 msgid ""
 "Set string (up to 8 bytes) to override the default value of field OEM Table "
 "ID in ACPI table header."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:224
+#: ../../../system/arm/virt.rst:238
 msgid "SMMU configuration"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:226
+#: ../../../system/arm/virt.rst:240
 msgid "Machine-wide SMMUv3 IOMMU"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:227
+#: ../../../system/arm/virt.rst:241
 msgid ""
 "Setting the machine-specific option ``iommu=smmuv3`` causes QEMU to create a "
 "single, machine-wide SMMUv3 instance that applies to all devices in the PCIe "
 "topology."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:231
+#: ../../../system/arm/virt.rst:245
 msgid ""
 "For information about selectively bypassing devices, refer to ``docs/bypass-"
 "iommu.txt``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:234
+#: ../../../system/arm/virt.rst:248
 msgid "User-creatable SMMUv3 devices"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:235
+#: ../../../system/arm/virt.rst:249
 msgid ""
 "You can use the ``-device arm-smmuv3`` option to create multiple user-"
 "defined SMMUv3 devices, each associated with a separate PCIe root complex. "
@@ -574,18 +620,18 @@ msgid ""
 "to specify which PCIe root complex it is associated with."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:242
+#: ../../../system/arm/virt.rst:256
 msgid ""
 "This model is useful when you want to mirror a host configuration where each "
 "NUMA node typically has its own SMMU, allowing the VM topology to align more "
 "closely with the host’s hardware layout."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:246
+#: ../../../system/arm/virt.rst:260
 msgid "Example::"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:248
+#: ../../../system/arm/virt.rst:262
 msgid ""
 "-device arm-smmuv3,primary-bus=pcie.0,id=smmuv3.0\n"
 "...\n"
@@ -593,11 +639,11 @@ msgid ""
 "-device arm-smmuv3,primary-bus=pcie.1,id=smmuv3.1"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:254
+#: ../../../system/arm/virt.rst:268
 msgid "Linux guest kernel configuration"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:256
+#: ../../../system/arm/virt.rst:270
 msgid ""
 "The 'defconfig' for Linux arm and arm64 kernels should include the right "
 "device drivers for virtio and the PCI controller; however some older kernel "
@@ -606,30 +652,30 @@ msgid ""
 "your guest config has::"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:262
+#: ../../../system/arm/virt.rst:276
 msgid ""
 "CONFIG_PCI=y\n"
 "CONFIG_VIRTIO_PCI=y\n"
 "CONFIG_PCI_HOST_GENERIC=y"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:266
+#: ../../../system/arm/virt.rst:280
 msgid ""
 "If you want to use the ``virtio-gpu-pci`` graphics device you will also "
 "need::"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:269
+#: ../../../system/arm/virt.rst:283
 msgid ""
 "CONFIG_DRM=y\n"
 "CONFIG_DRM_VIRTIO_GPU=y"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:273
+#: ../../../system/arm/virt.rst:287
 msgid "Hardware configuration information for bare-metal programming"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:275
+#: ../../../system/arm/virt.rst:289
 msgid ""
 "The ``virt`` board automatically generates a device tree blob (\"dtb\") "
 "which it passes to the guest. This provides information about the addresses, "
@@ -637,34 +683,34 @@ msgid ""
 "system. Guest code can rely on and hard-code the following addresses:"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:281
+#: ../../../system/arm/virt.rst:295
 msgid "Flash memory starts at address 0x0000_0000"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:283
+#: ../../../system/arm/virt.rst:297
 msgid "RAM starts at 0x4000_0000"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:285
+#: ../../../system/arm/virt.rst:299
 msgid ""
 "All other information about device locations may change between QEMU "
 "versions, so guest code must look in the DTB."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:288
+#: ../../../system/arm/virt.rst:302
 msgid ""
 "QEMU supports two types of guest image boot for ``virt``, and the way for "
 "the guest code to locate the dtb binary differs:"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:291
+#: ../../../system/arm/virt.rst:305
 msgid ""
 "For guests using the Linux kernel boot protocol (this means any non-ELF file "
 "passed to the QEMU ``-kernel`` option) the address of the DTB is passed in a "
 "register (``r2`` for 32-bit guests, or ``x0`` for 64-bit guests)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:296
+#: ../../../system/arm/virt.rst:310
 msgid ""
 "For guests booting as \"bare-metal\" (any other kind of boot), the DTB is at "
 "the start of RAM (0x4000_0000)"
