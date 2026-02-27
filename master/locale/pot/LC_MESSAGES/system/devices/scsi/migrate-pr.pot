@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-23 09:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/devices/scsi/migrate-pr.rst:7
+msgid "SCSI Persistent Reservation Live Migration"
+msgstr ""
+
+#: ../../../system/devices/scsi/migrate-pr.rst:9
+msgid ""
+"This document explains how to live migrate SCSI Persistent Reservations."
+msgstr ""
+
+#: ../../../system/devices/scsi/migrate-pr.rst:11
+msgid ""
+"The ``scsi-block`` device migrates SCSI Persistent Reservations when the "
+"``migrate-pr=on`` parameter is given. Migration is enabled by default in "
+"versioned machine types since QEMU 11.0. It is disabled by default on older "
+"machine types and needs to be explicitly enabled with ``--device scsi-block,"
+"migrate-pr=on,...``."
+msgstr ""
+
+#: ../../../system/devices/scsi/migrate-pr.rst:17
+msgid ""
+"When migration is enabled, QEMU snoops PERSISTENT RESERVATION OUT commands "
+"and tracks the reservation key registered by the guest as well as "
+"reservations that the guest acquires. This information is migrated along "
+"with the guest and the destination QEMU submits a PERSISTENT RESERVATION OUT "
+"command with the PREEMPT service action to atomically transfer the "
+"reservation to the destination before the guest starts running on the "
+"destination."
+msgstr ""
+
+#: ../../../system/devices/scsi/migrate-pr.rst:24
+msgid ""
+"The following persistent reservation capabilities reported by the PERSISTENT "
+"RESERVATION IN command with the REPORT CAPABILITIES service action are "
+"masked from the guest by QEMU when migration is enabled:"
+msgstr ""
+
+#: ../../../system/devices/scsi/migrate-pr.rst:28
+msgid "Specify Initiator Ports Capable (SIP_C)"
+msgstr ""
+
+#: ../../../system/devices/scsi/migrate-pr.rst:29
+msgid "All Target Ports Capable (ATC_C)"
+msgstr ""
+
+#: ../../../system/devices/scsi/migrate-pr.rst:31
+msgid ""
+"When migration is disabled, the ``scsi-block`` device is live migrated but "
+"reservations remain in place on the source. Usually this is not the intended "
+"behavior unless there is another mechanism to update reservations during "
+"migration. The PERSISTENT RESERVATION IN command also does not mask "
+"capabilities reported to the guest when migration is disabled."
+msgstr ""
+
+#: ../../../system/devices/scsi/migrate-pr.rst:38
+msgid "Limitations"
+msgstr ""
+
+#: ../../../system/devices/scsi/migrate-pr.rst:40
+msgid ""
+"QEMU does not remember snooped reservation details across restart, so "
+"software inside the guest must acquire the reservation after boot in order "
+"for live migration to work. Similarly, if the reservation is acquired "
+"outside the guest then it will not live migrate along with the guest."
+msgstr ""
+
+#: ../../../system/devices/scsi/migrate-pr.rst:45
+msgid ""
+"Snooping only considers the PERSISTENT RESERVATION OUT commands from the "
+"guest and does not track reservation changes made by other SCSI initiators. "
+"QEMU's snooped reservation details can become stale if another SCSI "
+"initiator makes changes to the reservation."
+msgstr ""
+
+#: ../../../system/devices/scsi/migrate-pr.rst:50
+msgid ""
+"Guests running on the same host share a single SCSI initiator identity "
+"unless Fibre Channel N_Port ID Virtualization is configured. As a "
+"consequence, multiple guests on the same hosts may observe unexpected "
+"behavior if they use the same physical LUN. From the LUN's perspective all "
+"guests are the same initiator and there is no way to distinguish between "
+"guests."
+msgstr ""

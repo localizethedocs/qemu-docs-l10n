@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-24 08:41+0000\n"
+"POT-Creation-Date: 2026-02-23 09:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -769,7 +769,7 @@ msgid "Use ``-run-with chroot=dir`` instead."
 msgstr ""
 
 #: ../../../about/removed-features.rst:486
-#: ../../../about/removed-features.rst:580
+#: ../../../about/removed-features.rst:586
 msgid "``-singlestep`` (removed in 9.0)"
 msgstr ""
 
@@ -911,22 +911,32 @@ msgid ""
 "supports need ``param_struct`` support, so this option has been removed."
 msgstr ""
 
-#: ../../../about/removed-features.rst:577
+#: ../../../about/removed-features.rst:576
+msgid "32-bit host operating systems (removed in 11.0)"
+msgstr ""
+
+#: ../../../about/removed-features.rst:578
+msgid ""
+"Keeping 32-bit host support alive was a substantial burden for the QEMU "
+"project.  Thus QEMU dropped all support for all 32-bit host systems."
+msgstr ""
+
+#: ../../../about/removed-features.rst:583
 msgid "User-mode emulator command line arguments"
 msgstr ""
 
-#: ../../../about/removed-features.rst:582
+#: ../../../about/removed-features.rst:588
 msgid ""
 "The ``-singlestep`` option has been given a name that better reflects what "
 "it actually does. For both linux-user and bsd-user, use the ``-one-insn-per-"
 "tb`` option instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:587
+#: ../../../about/removed-features.rst:593
 msgid "``-p`` (removed in 10.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:589
+#: ../../../about/removed-features.rst:595
 msgid ""
 "The ``-p`` option pretends to control the host page size.  However, it is "
 "not possible to change the host page size; we stopped trying to do anything "
@@ -934,135 +944,135 @@ msgid ""
 "removed entirely."
 msgstr ""
 
-#: ../../../about/removed-features.rst:596
+#: ../../../about/removed-features.rst:602
 msgid "QEMU Machine Protocol (QMP) commands"
 msgstr ""
 
-#: ../../../about/removed-features.rst:599
+#: ../../../about/removed-features.rst:605
 msgid "``block-dirty-bitmap-add`` \"autoload\" parameter (removed in 4.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:601
+#: ../../../about/removed-features.rst:607
 msgid ""
 "The \"autoload\" parameter has been ignored since 2.12.0. All bitmaps are "
 "automatically loaded from qcow2 images."
 msgstr ""
 
-#: ../../../about/removed-features.rst:605
-#: ../../../about/removed-features.rst:790
+#: ../../../about/removed-features.rst:611
+#: ../../../about/removed-features.rst:826
 msgid "``cpu-add`` (removed in 5.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:607
-#: ../../../about/removed-features.rst:792
+#: ../../../about/removed-features.rst:613
+#: ../../../about/removed-features.rst:828
 msgid ""
 "Use ``device_add`` for hotplugging vCPUs instead of ``cpu-add``.  See "
 "documentation of ``query-hotpluggable-cpus`` for additional details."
 msgstr ""
 
-#: ../../../about/removed-features.rst:611
+#: ../../../about/removed-features.rst:617
 msgid "``change`` (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:613
+#: ../../../about/removed-features.rst:619
 msgid ""
 "Use ``blockdev-change-medium`` or ``change-vnc-password`` or ``display-"
 "update`` instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:617
+#: ../../../about/removed-features.rst:623
 msgid "``query-events`` (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:619
+#: ../../../about/removed-features.rst:625
 msgid ""
 "The ``query-events`` command has been superseded by the more powerful and "
 "accurate ``query-qmp-schema`` command."
 msgstr ""
 
-#: ../../../about/removed-features.rst:623
+#: ../../../about/removed-features.rst:629
 msgid ""
 "``migrate_set_cache_size`` and ``query-migrate-cache-size`` (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:625
+#: ../../../about/removed-features.rst:631
 msgid "Use ``migrate_set_parameter`` and ``info migrate_parameters`` instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:628
-#: ../../../about/removed-features.rst:814
+#: ../../../about/removed-features.rst:634
+#: ../../../about/removed-features.rst:850
 msgid "``migrate_set_downtime`` and ``migrate_set_speed`` (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:630
+#: ../../../about/removed-features.rst:636
 msgid "Use ``migrate_set_parameter`` instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:633
+#: ../../../about/removed-features.rst:639
 msgid "``query-cpus`` (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:635
+#: ../../../about/removed-features.rst:641
 msgid ""
 "The ``query-cpus`` command is replaced by the ``query-cpus-fast`` command."
 msgstr ""
 
-#: ../../../about/removed-features.rst:638
+#: ../../../about/removed-features.rst:644
 msgid "``query-cpus-fast`` ``arch`` output member (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:640
+#: ../../../about/removed-features.rst:646
 msgid ""
 "The ``arch`` output member of the ``query-cpus-fast`` command is replaced by "
 "the ``target`` output member."
 msgstr ""
 
-#: ../../../about/removed-features.rst:644
+#: ../../../about/removed-features.rst:650
 msgid "chardev client socket with ``wait`` option (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:646
+#: ../../../about/removed-features.rst:652
 msgid ""
 "Character devices creating sockets in client mode should not specify the "
 "'wait' field, which is only applicable to sockets in server mode"
 msgstr ""
 
-#: ../../../about/removed-features.rst:650
+#: ../../../about/removed-features.rst:656
 msgid ""
 "``query-named-block-nodes`` result ``encryption_key_missing`` (removed in "
 "6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:652
-#: ../../../about/removed-features.rst:657
-#: ../../../about/removed-features.rst:733
-#: ../../../about/removed-features.rst:863
+#: ../../../about/removed-features.rst:658
+#: ../../../about/removed-features.rst:663
+#: ../../../about/removed-features.rst:755
+#: ../../../about/removed-features.rst:899
 msgid "Removed with no replacement."
 msgstr ""
 
-#: ../../../about/removed-features.rst:655
+#: ../../../about/removed-features.rst:661
 msgid ""
 "``query-block`` result ``inserted.encryption_key_missing`` (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:660
+#: ../../../about/removed-features.rst:666
 msgid ""
 "``query-named-block-nodes`` and ``query-block`` result dirty-bitmaps[i]."
 "status (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:662
+#: ../../../about/removed-features.rst:668
 msgid ""
 "The ``status`` field of the ``BlockDirtyInfo`` structure, returned by these "
 "commands is removed. Two new boolean fields, ``recording`` and ``busy`` "
 "effectively replace it."
 msgstr ""
 
-#: ../../../about/removed-features.rst:667
+#: ../../../about/removed-features.rst:673
 msgid "``query-block`` result field ``dirty-bitmaps`` (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:669
+#: ../../../about/removed-features.rst:675
 msgid ""
 "The ``dirty-bitmaps`` field of the ``BlockInfo`` structure, returned by the "
 "query-block command is itself now removed. The ``dirty-bitmaps`` field of "
@@ -1071,120 +1081,142 @@ msgid ""
 "items in query-named-block-nodes."
 msgstr ""
 
-#: ../../../about/removed-features.rst:676
+#: ../../../about/removed-features.rst:682
 msgid "``object-add`` option ``props`` (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:678
+#: ../../../about/removed-features.rst:684
 msgid "Specify the properties for the object as top-level arguments instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:681
+#: ../../../about/removed-features.rst:687
 msgid "``query-sgx`` return value member ``section-size`` (removed in 8.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:683
+#: ../../../about/removed-features.rst:689
 msgid ""
 "Member ``section-size`` in the return value of ``query-sgx`` was superseded "
 "by ``sections``."
 msgstr ""
 
-#: ../../../about/removed-features.rst:688
+#: ../../../about/removed-features.rst:694
 msgid ""
 "``query-sgx-capabilities`` return value member ``section-size`` (removed in "
 "8.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:690
+#: ../../../about/removed-features.rst:696
 msgid ""
 "Member ``section-size`` in the return value of ``query-sgx-capabilities`` "
 "was superseded by ``sections``."
 msgstr ""
 
-#: ../../../about/removed-features.rst:694
+#: ../../../about/removed-features.rst:700
 msgid "``query-migrate`` return value member ``skipped`` (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:696
+#: ../../../about/removed-features.rst:702
 msgid ""
 "Member ``skipped`` of the ``MigrationStats`` struct hasn't been used for "
 "more than 10 years. Removed with no replacement."
 msgstr ""
 
-#: ../../../about/removed-features.rst:700
+#: ../../../about/removed-features.rst:706
 msgid "``migrate`` command option ``inc`` (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:702
-#: ../../../about/removed-features.rst:709
-#: ../../../about/removed-features.rst:832
-#: ../../../about/removed-features.rst:839
+#: ../../../about/removed-features.rst:708
+#: ../../../about/removed-features.rst:715
+#: ../../../about/removed-features.rst:868
+#: ../../../about/removed-features.rst:875
 msgid ""
 "Use blockdev-mirror with NBD instead. See \"QMP invocation for live storage "
 "migration with ``blockdev-mirror`` + NBD\" in docs/interop/live-block-"
 "operations.rst for a detailed explanation."
 msgstr ""
 
-#: ../../../about/removed-features.rst:707
+#: ../../../about/removed-features.rst:713
 msgid "``migrate`` command option ``blk`` (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:714
+#: ../../../about/removed-features.rst:720
+msgid "``migrate`` command with file-based ``fd:`` URI (removed in 11.0)"
+msgstr ""
+
+#: ../../../about/removed-features.rst:722
+msgid ""
+"In order to reduce ambiguity, the ``fd:`` URI usage of providing a file "
+"descriptor to a plain file has been removed in favor of explicitly using the "
+"``file:`` URI with the file descriptor being passed as an ``fdset``. Refer "
+"to the ``add-fd`` command documentation for details on the ``fdset`` usage."
+msgstr ""
+
+#: ../../../about/removed-features.rst:729
 msgid "``migrate-set-capabilities`` ``block`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:716
-#: ../../../about/removed-features.rst:846
+#: ../../../about/removed-features.rst:731
+#: ../../../about/removed-features.rst:882
 msgid ""
 "Block migration has been removed. For a replacement, see \"QMP invocation "
 "for live storage migration with ``blockdev-mirror`` + NBD\" in docs/interop/"
 "live-block-operations.rst."
 msgstr ""
 
-#: ../../../about/removed-features.rst:721
+#: ../../../about/removed-features.rst:736
+msgid "``migrate-set-capabilities`` ``zero-blocks`` option (removed in 11.0)"
+msgstr ""
+
+#: ../../../about/removed-features.rst:738
+msgid ""
+"The ``zero-blocks`` capability was accidentally left behind when block "
+"migration capability got removed in 9.1.  Removed with no replacement."
+msgstr ""
+
+#: ../../../about/removed-features.rst:743
 msgid "``migrate-set-parameter`` ``compress-level`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:723
-#: ../../../about/removed-features.rst:853
+#: ../../../about/removed-features.rst:745
+#: ../../../about/removed-features.rst:889
 msgid "Use ``multifd-zlib-level`` or ``multifd-zstd-level`` instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:726
+#: ../../../about/removed-features.rst:748
 msgid "``migrate-set-parameter`` ``compress-threads`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:728
-#: ../../../about/removed-features.rst:738
-#: ../../../about/removed-features.rst:858
-#: ../../../about/removed-features.rst:868
+#: ../../../about/removed-features.rst:750
+#: ../../../about/removed-features.rst:760
+#: ../../../about/removed-features.rst:894
+#: ../../../about/removed-features.rst:904
 msgid "Use ``multifd-channels`` instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:731
+#: ../../../about/removed-features.rst:753
 msgid ""
 "``migrate-set-parameter`` ``compress-wait-thread`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:736
+#: ../../../about/removed-features.rst:758
 msgid ""
 "``migrate-set-parameter`` ``decompress-threads`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:741
+#: ../../../about/removed-features.rst:763
 msgid "``migrate-set-capability`` ``compress`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:743
-#: ../../../about/removed-features.rst:873
+#: ../../../about/removed-features.rst:765
+#: ../../../about/removed-features.rst:909
 msgid "Use ``multifd-compression`` instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:746
+#: ../../../about/removed-features.rst:768
 msgid "Incorrectly typed ``device_add`` arguments (removed in 9.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:748
+#: ../../../about/removed-features.rst:770
 msgid ""
 "Due to shortcomings in the internal implementation of ``device_add``, QEMU "
 "used to incorrectly accept certain invalid arguments. Any object or list "
@@ -1193,162 +1225,182 @@ msgid ""
 "assigned to integer device properties or vice versa."
 msgstr ""
 
-#: ../../../about/removed-features.rst:755
+#: ../../../about/removed-features.rst:777
+msgid "``query-migrationthreads`` (removed in 11.0)"
+msgstr ""
+
+#: ../../../about/removed-features.rst:779
+msgid ""
+"Removed with no replacement, as it reported only a limited set of threads "
+"(for example, it only reported source side of multifd threads, without "
+"reporting any destination threads, or non-multifd source threads).  For "
+"debugging purpose, please use ``-name $VM,debug-threads=on`` instead."
+msgstr ""
+
+#: ../../../about/removed-features.rst:786
+msgid "``migrate`` argument ``detach`` (since 11.0)"
+msgstr ""
+
+#: ../../../about/removed-features.rst:788
+msgid "This argument has always been ignored."
+msgstr ""
+
+#: ../../../about/removed-features.rst:791
 msgid "QEMU Machine Protocol (QMP) events"
 msgstr ""
 
-#: ../../../about/removed-features.rst:758
+#: ../../../about/removed-features.rst:794
 msgid "``MEM_UNPLUG_ERROR`` (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:760
+#: ../../../about/removed-features.rst:796
 msgid ""
 "MEM_UNPLUG_ERROR has been replaced by the more generic "
 "``DEVICE_UNPLUG_GUEST_ERROR`` event."
 msgstr ""
 
-#: ../../../about/removed-features.rst:763
+#: ../../../about/removed-features.rst:799
 msgid "``vcpu`` trace events (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:765
+#: ../../../about/removed-features.rst:801
 msgid ""
 "The ability to instrument QEMU helper functions with vCPU-aware trace points "
 "was removed in 7.0."
 msgstr ""
 
-#: ../../../about/removed-features.rst:770
+#: ../../../about/removed-features.rst:806
 msgid "Human Monitor Protocol (HMP) commands"
 msgstr ""
 
-#: ../../../about/removed-features.rst:773
+#: ../../../about/removed-features.rst:809
 msgid "``usb_add`` and ``usb_remove`` (removed in 2.12)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:775
+#: ../../../about/removed-features.rst:811
 msgid ""
 "Replaced by ``device_add`` and ``device_del`` (use ``device_add help`` for a "
 "list of available devices)."
 msgstr ""
 
-#: ../../../about/removed-features.rst:779
+#: ../../../about/removed-features.rst:815
 msgid "``host_net_add`` and ``host_net_remove`` (removed in 2.12)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:781
+#: ../../../about/removed-features.rst:817
 msgid "Replaced by ``netdev_add`` and ``netdev_del``."
 msgstr ""
 
-#: ../../../about/removed-features.rst:784
+#: ../../../about/removed-features.rst:820
 msgid ""
 "The ``hub_id`` parameter of ``hostfwd_add`` / ``hostfwd_remove`` (removed in "
 "5.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:786
+#: ../../../about/removed-features.rst:822
 msgid ""
 "The ``[hub_id name]`` parameter tuple of the 'hostfwd_add' and "
 "'hostfwd_remove' HMP commands has been replaced by ``netdev_id``."
 msgstr ""
 
-#: ../../../about/removed-features.rst:796
+#: ../../../about/removed-features.rst:832
 msgid "``change vnc TARGET`` (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:798
+#: ../../../about/removed-features.rst:834
 msgid ""
 "No replacement.  The ``change vnc password`` and ``change DEVICE MEDIUM`` "
 "commands are not affected."
 msgstr ""
 
-#: ../../../about/removed-features.rst:802
+#: ../../../about/removed-features.rst:838
 msgid ""
 "``acl_show``, ``acl_reset``, ``acl_policy``, ``acl_add``, ``acl_remove`` "
 "(removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:804
+#: ../../../about/removed-features.rst:840
 msgid ""
 "The ``acl_show``, ``acl_reset``, ``acl_policy``, ``acl_add``, and "
 "``acl_remove`` commands were removed with no replacement. Authorization for "
 "VNC should be performed using the pluggable QAuthZ objects."
 msgstr ""
 
-#: ../../../about/removed-features.rst:809
+#: ../../../about/removed-features.rst:845
 msgid ""
 "``migrate-set-cache-size`` and ``info migrate-cache-size`` (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:811
+#: ../../../about/removed-features.rst:847
 msgid "Use ``migrate-set-parameters`` and ``info migrate-parameters`` instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:816
+#: ../../../about/removed-features.rst:852
 msgid "Use ``migrate-set-parameters`` instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:819
+#: ../../../about/removed-features.rst:855
 msgid "``info cpustats`` (removed in 6.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:821
+#: ../../../about/removed-features.rst:857
 msgid ""
 "This command didn't produce any output already. Removed with no replacement."
 msgstr ""
 
-#: ../../../about/removed-features.rst:824
+#: ../../../about/removed-features.rst:860
 msgid "``singlestep`` (removed in 9.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:826
+#: ../../../about/removed-features.rst:862
 msgid ""
 "The ``singlestep`` command has been replaced by the ``one-insn-per-tb`` "
 "command, which has the same behaviour but a less misleading name."
 msgstr ""
 
-#: ../../../about/removed-features.rst:830
+#: ../../../about/removed-features.rst:866
 msgid "``migrate`` command ``-i`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:837
+#: ../../../about/removed-features.rst:873
 msgid "``migrate`` command ``-b`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:844
+#: ../../../about/removed-features.rst:880
 msgid "``migrate_set_capability`` ``block`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:851
+#: ../../../about/removed-features.rst:887
 msgid "``migrate_set_parameter`` ``compress-level`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:856
+#: ../../../about/removed-features.rst:892
 msgid "``migrate_set_parameter`` ``compress-threads`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:861
+#: ../../../about/removed-features.rst:897
 msgid ""
 "``migrate_set_parameter`` ``compress-wait-thread`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:866
+#: ../../../about/removed-features.rst:902
 msgid ""
 "``migrate_set_parameter`` ``decompress-threads`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:871
+#: ../../../about/removed-features.rst:907
 msgid "``migrate_set_capability`` ``compress`` option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:876
+#: ../../../about/removed-features.rst:912
 msgid "Host Architectures"
 msgstr ""
 
-#: ../../../about/removed-features.rst:879
+#: ../../../about/removed-features.rst:915
 msgid "System emulation on 32-bit Windows hosts (removed in 9.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:881
+#: ../../../about/removed-features.rst:917
 msgid ""
 "Windows 11 has no support for 32-bit host installs, and Windows 10 did not "
 "support new 32-bit installs, only upgrades. 32-bit Windows support has now "
@@ -1359,11 +1411,11 @@ msgid ""
 "corresponding 64-bit OS should be used instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:891
+#: ../../../about/removed-features.rst:927
 msgid "32-bit hosts for 64-bit guests (removed in 10.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:893
+#: ../../../about/removed-features.rst:929
 msgid ""
 "In general, 32-bit hosts cannot support the memory space or atomicity "
 "requirements of 64-bit guests.  Prior to 10.0, QEMU attempted to work around "
@@ -1372,59 +1424,59 @@ msgid ""
 "disabled configuration of 64-bit guests on 32-bit hosts."
 msgstr ""
 
-#: ../../../about/removed-features.rst:900
+#: ../../../about/removed-features.rst:936
 msgid "32-bit MIPS (since 10.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:902
+#: ../../../about/removed-features.rst:938
 msgid ""
 "Debian 12 \"Bookworm\" removed support for 32-bit MIPS, making it hard to "
 "maintain our cross-compilation CI tests of the architecture."
 msgstr ""
 
-#: ../../../about/removed-features.rst:906
+#: ../../../about/removed-features.rst:942
 msgid "32-bit PPC (since 10.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:908
+#: ../../../about/removed-features.rst:944
 msgid "The QEMU project no longer supports 32-bit host builds."
 msgstr ""
 
-#: ../../../about/removed-features.rst:911
+#: ../../../about/removed-features.rst:947
 msgid "Guest Emulator ISAs"
 msgstr ""
 
-#: ../../../about/removed-features.rst:914
+#: ../../../about/removed-features.rst:950
 msgid "RISC-V ISA privilege specification version 1.09.1 (removed in 5.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:916
+#: ../../../about/removed-features.rst:952
 msgid ""
 "The RISC-V ISA privilege specification version 1.09.1 has been removed. QEMU "
 "supports both the newer version 1.10.0 and the ratified version 1.11.0, "
 "these should be used instead of the 1.09.1 version."
 msgstr ""
 
-#: ../../../about/removed-features.rst:921
+#: ../../../about/removed-features.rst:957
 msgid "System emulator CPUS"
 msgstr ""
 
-#: ../../../about/removed-features.rst:924
+#: ../../../about/removed-features.rst:960
 msgid "KVM guest support on 32-bit Arm hosts (removed in 5.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:926
+#: ../../../about/removed-features.rst:962
 msgid ""
 "The Linux kernel has dropped support for allowing 32-bit Arm systems to host "
 "KVM guests as of the 5.7 kernel, and was thus removed from QEMU as well.  "
 "Running 32-bit guests on a 64-bit Arm host remains supported."
 msgstr ""
 
-#: ../../../about/removed-features.rst:931
+#: ../../../about/removed-features.rst:967
 msgid "RISC-V ISA Specific CPUs (removed in 5.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:933
+#: ../../../about/removed-features.rst:969
 msgid ""
 "The RISC-V cpus with the ISA version in the CPU name have been removed. The "
 "four CPUs are: ``rv32gcsu-v1.9.1``, ``rv32gcsu-v1.10.0``, ``rv64gcsu-"
@@ -1432,11 +1484,11 @@ msgid ""
 "the CPU ``priv_spec`` option when using the ``rv32`` or ``rv64`` CPUs."
 msgstr ""
 
-#: ../../../about/removed-features.rst:939
+#: ../../../about/removed-features.rst:975
 msgid "RISC-V no MMU CPUs (removed in 5.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:941
+#: ../../../about/removed-features.rst:977
 msgid ""
 "The RISC-V no MMU cpus have been removed. The two CPUs: ``rv32imacu-nommu`` "
 "and ``rv64imacu-nommu`` can no longer be used. Instead the MMU status can be "
@@ -1444,86 +1496,86 @@ msgid ""
 "CPUs."
 msgstr ""
 
-#: ../../../about/removed-features.rst:946
+#: ../../../about/removed-features.rst:982
 msgid "``compat`` property of server class POWER CPUs (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:948
+#: ../../../about/removed-features.rst:984
 msgid ""
 "The ``max-cpu-compat`` property of the ``pseries`` machine type should be "
 "used instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:952
+#: ../../../about/removed-features.rst:988
 msgid "``moxie`` CPU (removed in 6.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:954
+#: ../../../about/removed-features.rst:990
 msgid ""
 "Nobody was using this CPU emulation in QEMU, and there were no test images "
 "available to make sure that the code is still working, so it has been "
 "removed without replacement."
 msgstr ""
 
-#: ../../../about/removed-features.rst:959
+#: ../../../about/removed-features.rst:995
 msgid "``lm32`` CPUs (removed in 6.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:961
+#: ../../../about/removed-features.rst:997
 msgid ""
 "The only public user of this architecture was the milkymist project, which "
 "has been dead for years; there was never an upstream Linux port.  Removed "
 "without replacement."
 msgstr ""
 
-#: ../../../about/removed-features.rst:966
+#: ../../../about/removed-features.rst:1002
 msgid "``unicore32`` CPUs (removed in 6.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:968
+#: ../../../about/removed-features.rst:1004
 msgid ""
 "Support for this CPU was removed from the upstream Linux kernel, and there "
 "is no available upstream toolchain to build binaries for it. Removed without "
 "replacement."
 msgstr ""
 
-#: ../../../about/removed-features.rst:973
+#: ../../../about/removed-features.rst:1009
 msgid "x86 ``Icelake-Client`` CPU (removed in 7.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:975
+#: ../../../about/removed-features.rst:1011
 msgid ""
 "There isn't ever Icelake Client CPU, it is some wrong and imaginary one. Use "
 "``Icelake-Server`` instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:979
+#: ../../../about/removed-features.rst:1015
 msgid "Nios II CPU (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:981
-#: ../../../about/removed-features.rst:1161
+#: ../../../about/removed-features.rst:1017
+#: ../../../about/removed-features.rst:1205
 msgid ""
 "QEMU Nios II architecture was orphan; Intel has EOL'ed the Nios II processor "
 "IP (see `Intel discontinuance notification`_)."
 msgstr ""
 
-#: ../../../about/removed-features.rst:985
+#: ../../../about/removed-features.rst:1021
 msgid "CRIS CPU architecture (removed in 9.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:987
+#: ../../../about/removed-features.rst:1023
 msgid ""
 "The CRIS architecture was pulled from Linux in 4.17 and the compiler was no "
 "longer packaged in any distro making it harder to run the ``check-tcg`` "
 "tests."
 msgstr ""
 
-#: ../../../about/removed-features.rst:992
+#: ../../../about/removed-features.rst:1028
 msgid "RISC-V 'any' CPU type ``-cpu any`` (removed in 9.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:994
+#: ../../../about/removed-features.rst:1030
 msgid ""
 "The 'any' CPU type was introduced back in 2018 and was around since the "
 "initial RISC-V QEMU port. Its usage was always been unclear: users don't "
@@ -1531,88 +1583,88 @@ msgid ""
 "anything special that isn't already done by the default CPUs rv32/rv64."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1000
+#: ../../../about/removed-features.rst:1036
 msgid "System accelerators"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1003
+#: ../../../about/removed-features.rst:1039
 msgid "Userspace local APIC with KVM (x86, removed in 8.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1005
+#: ../../../about/removed-features.rst:1041
 msgid ""
 "``-M kernel-irqchip=off`` cannot be used on KVM if the CPU model includes a "
 "local APIC.  The ``split`` setting is supported, as is using ``-M kernel-"
 "irqchip=off`` when the CPU does not have a local APIC."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1010
+#: ../../../about/removed-features.rst:1046
 msgid "MIPS \"Trap-and-Emulate\" KVM support (removed in 8.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1012
+#: ../../../about/removed-features.rst:1048
 msgid ""
 "The MIPS \"Trap-and-Emulate\" KVM host and guest support was removed from "
 "Linux in 2021, and is not supported anymore by QEMU either."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1016
+#: ../../../about/removed-features.rst:1052
 msgid "HAXM (``-accel hax``) (removed in 8.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1018
+#: ../../../about/removed-features.rst:1054
 msgid ""
 "The HAXM project has been retired (see https://github.com/intel/"
 "haxm#status). Use \"whpx\" (on Windows) or \"hvf\" (on macOS) instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1022
+#: ../../../about/removed-features.rst:1058
 msgid "System emulator machines"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1025
+#: ../../../about/removed-features.rst:1061
 msgid ""
 "Versioned machine types (aarch64, arm, i386, m68k, ppc64, s390x, x86_64)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1027
+#: ../../../about/removed-features.rst:1063
 msgid ""
 "In accordance with our versioned machine type deprecation policy, all "
 "machine types with version |VER_MACHINE_DELETION_VERSION|, or older, have "
 "been removed."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1032
+#: ../../../about/removed-features.rst:1068
 msgid "``s390-virtio`` (removed in 2.6)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1034
+#: ../../../about/removed-features.rst:1070
 msgid "Use the ``s390-ccw-virtio`` machine instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1037
+#: ../../../about/removed-features.rst:1073
 msgid "The m68k ``dummy`` machine (removed in 2.9)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1039
+#: ../../../about/removed-features.rst:1075
 msgid "Use the ``none`` machine with the ``loader`` device instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1042
+#: ../../../about/removed-features.rst:1078
 msgid "``xlnx-ep108`` (removed in 3.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1044
+#: ../../../about/removed-features.rst:1080
 msgid ""
 "The EP108 was an early access development board that is no longer used. Use "
 "the ``xlnx-zcu102`` machine instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1048
+#: ../../../about/removed-features.rst:1084
 msgid "``spike_v1.9.1`` and ``spike_v1.10`` (removed in 5.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1050
+#: ../../../about/removed-features.rst:1086
 msgid ""
 "The version specific Spike machines have been removed in favour of the "
 "generic ``spike`` machine. If you need to specify an older version of the "
@@ -1620,80 +1672,80 @@ msgid ""
 "argument."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1055
+#: ../../../about/removed-features.rst:1091
 msgid "mips ``r4k`` platform (removed in 5.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1057
+#: ../../../about/removed-features.rst:1093
 msgid ""
 "This machine type was very old and unmaintained. Users should use the "
 "``malta`` machine type instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1061
+#: ../../../about/removed-features.rst:1097
 msgid "mips ``fulong2e`` machine alias (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1063
+#: ../../../about/removed-features.rst:1099
 msgid "This machine has been renamed ``fuloong2e``."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1066
+#: ../../../about/removed-features.rst:1102
 msgid "Raspberry Pi ``raspi2`` and ``raspi3`` machines (removed in 6.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1068
+#: ../../../about/removed-features.rst:1104
 msgid ""
 "The Raspberry Pi machines come in various models (A, A+, B, B+). To be able "
 "to distinguish which model QEMU is implementing, the ``raspi2`` and "
 "``raspi3`` machines have been renamed ``raspi2b`` and ``raspi3b``."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1073
+#: ../../../about/removed-features.rst:1109
 msgid "Aspeed ``swift-bmc`` machine (removed in 7.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1075
+#: ../../../about/removed-features.rst:1111
 msgid ""
 "This machine was removed because it was unused. Alternative AST2500 based "
 "OpenPOWER machines are ``witherspoon-bmc`` and ``romulus-bmc``."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1079
+#: ../../../about/removed-features.rst:1115
 msgid "ppc ``taihu`` machine (removed in 7.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1081
+#: ../../../about/removed-features.rst:1117
 msgid ""
 "This machine was removed because it was partially emulated and 405 machines "
 "are very similar. Use the ``ref405ep`` machine instead."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1085
+#: ../../../about/removed-features.rst:1121
 msgid ""
 "Nios II ``10m50-ghrd`` and ``nios2-generic-nommu`` machines (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1087
+#: ../../../about/removed-features.rst:1123
 msgid "The Nios II architecture was orphan."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1090
+#: ../../../about/removed-features.rst:1126
 msgid "``shix`` (removed in 9.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1092
+#: ../../../about/removed-features.rst:1128
 msgid "The machine was unmaintained."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1095
+#: ../../../about/removed-features.rst:1131
 msgid ""
 "Arm machines ``akita``, ``borzoi``, ``cheetah``, ``connex``, ``mainstone``, "
 "``n800``, ``n810``, ``spitz``, ``terrier``, ``tosa``, ``verdex``, ``z2`` "
 "(removed in 9.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1097
+#: ../../../about/removed-features.rst:1133
 msgid ""
 "QEMU included models of some machine types where the QEMU code that emulates "
 "their SoCs was very old and unmaintained. This code was blocking our ability "
@@ -1706,11 +1758,11 @@ msgid ""
 "test images for it and don't know of anybody who does."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1109
+#: ../../../about/removed-features.rst:1145
 msgid "Aspeed ``tacoma-bmc`` machine (removed in 10.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1111
+#: ../../../about/removed-features.rst:1147
 msgid ""
 "The ``tacoma-bmc`` machine was removed because it didn't bring much compared "
 "to the ``rainier-bmc`` machine. Also, the ``tacoma-bmc`` was a board used "
@@ -1719,24 +1771,24 @@ msgid ""
 "or by the ``ast2600-evb`` with some tweaks."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1119
+#: ../../../about/removed-features.rst:1155
 msgid "ppc ``ref405ep`` machine (removed in 10.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1121
+#: ../../../about/removed-features.rst:1157
 msgid ""
 "This machine was removed because PPC 405 CPU have no known users, firmware "
 "images are not available, OpenWRT dropped support in 2019, U-Boot in 2017, "
 "and Linux in 2024."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1126
+#: ../../../about/removed-features.rst:1162
 msgid ""
 "Big-Endian variants of ``petalogix-ml605`` and ``xlnx-zynqmp-pmu`` machines "
 "(removed in 10.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1128
+#: ../../../about/removed-features.rst:1164
 msgid ""
 "Both the MicroBlaze ``petalogix-ml605`` and ``xlnx-zynqmp-pmu`` machines "
 "were added for little endian CPUs. Big endian support was never tested and "
@@ -1744,25 +1796,37 @@ msgid ""
 "available as little-endian machines."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1134
+#: ../../../about/removed-features.rst:1170
 msgid "Mips ``mipssim`` machine (removed in 10.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1136
+#: ../../../about/removed-features.rst:1172
 msgid ""
 "Linux dropped support for this virtual machine type in kernel v3.7, and "
 "there was also no binary available online to use with that board."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1140
+#: ../../../about/removed-features.rst:1176
+msgid "Arm ``ast2700a0-evb`` machine (since 11.0)"
+msgstr ""
+
+#: ../../../about/removed-features.rst:1178
+msgid ""
+"The ``ast2700a0-evb`` machine represents the first revision of the AST2700 "
+"and serves as the initial engineering sample rather than a production "
+"version. A newer revision, A1, is now supported, and the ``ast2700a1-evb`` "
+"should replace the older A0 version."
+msgstr ""
+
+#: ../../../about/removed-features.rst:1184
 msgid "linux-user mode CPUs"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1143
+#: ../../../about/removed-features.rst:1187
 msgid "``tilegx`` CPUs (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1145
+#: ../../../about/removed-features.rst:1189
 msgid ""
 "The ``tilegx`` guest CPU support has been removed without replacement. It "
 "was only implemented in linux-user mode, but support for this CPU was "
@@ -1772,26 +1836,26 @@ msgid ""
 "QEMU."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1152
+#: ../../../about/removed-features.rst:1196
 msgid "``ppc64abi32`` CPUs (removed in 7.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1154
+#: ../../../about/removed-features.rst:1198
 msgid ""
 "The ``ppc64abi32`` architecture has a number of issues which regularly "
 "tripped up the CI testing and was suspected to be quite broken. For that "
 "reason the maintainers strongly suspected no one actually used it."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1159
+#: ../../../about/removed-features.rst:1203
 msgid "``nios2`` CPU (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1165
+#: ../../../about/removed-features.rst:1209
 msgid "iwMMXt emulation and the ``pxa`` CPUs (removed in 10.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1167
+#: ../../../about/removed-features.rst:1211
 msgid ""
 "The ``pxa`` CPU family (``pxa250``, ``pxa255``, ``pxa260``, ``pxa261``, "
 "``pxa262``, ``pxa270-a0``, ``pxa270-a1``, ``pxa270``, ``pxa270-b0``, "
@@ -1804,15 +1868,15 @@ msgid ""
 "removed in linux-user mode as well."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1179
+#: ../../../about/removed-features.rst:1223
 msgid "TCG introspection features"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1182
+#: ../../../about/removed-features.rst:1226
 msgid "TCG trace-events (removed in 7.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1184
+#: ../../../about/removed-features.rst:1228
 msgid ""
 "The ability to add new TCG trace points had bit rotted and as the feature "
 "can be replicated with TCG plugins it was removed. If any user is currently "
@@ -1820,53 +1884,53 @@ msgid ""
 "should contact the qemu-devel mailing list."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1192
+#: ../../../about/removed-features.rst:1236
 msgid "System emulator devices"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1195
+#: ../../../about/removed-features.rst:1239
 msgid "``spapr-pci-vfio-host-bridge`` (removed in 2.12)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1197
+#: ../../../about/removed-features.rst:1241
 msgid ""
 "The ``spapr-pci-vfio-host-bridge`` device type has been replaced by the "
 "``spapr-pci-host-bridge`` device type."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1201
+#: ../../../about/removed-features.rst:1245
 msgid "``ivshmem`` (removed in 4.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1203
+#: ../../../about/removed-features.rst:1247
 msgid "Replaced by either the ``ivshmem-plain`` or ``ivshmem-doorbell``."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1206
+#: ../../../about/removed-features.rst:1250
 msgid "``ide-drive`` (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1208
+#: ../../../about/removed-features.rst:1252
 msgid ""
 "The 'ide-drive' device has been removed. Users should use 'ide-hd' or 'ide-"
 "cd' as appropriate to get an IDE hard disk or CD-ROM as needed."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1212
+#: ../../../about/removed-features.rst:1256
 msgid "``scsi-disk`` (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1214
+#: ../../../about/removed-features.rst:1258
 msgid ""
 "The 'scsi-disk' device has been removed. Users should use 'scsi-hd' or 'scsi-"
 "cd' as appropriate to get a SCSI hard disk or CD-ROM as needed."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1218
+#: ../../../about/removed-features.rst:1262
 msgid "``sga`` (removed in 8.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1220
+#: ../../../about/removed-features.rst:1264
 msgid ""
 "The ``sga`` device loaded an option ROM for x86 targets which enabled "
 "SeaBIOS to send messages to the serial console. SeaBIOS 1.11.0 onwards "
@@ -1875,31 +1939,31 @@ msgid ""
 "``-machine graphics=off``."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1227
+#: ../../../about/removed-features.rst:1271
 msgid "``pvrdma`` and the RDMA subsystem (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1229
+#: ../../../about/removed-features.rst:1273
 msgid "The 'pvrdma' device and the whole RDMA subsystem have been removed."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1232
+#: ../../../about/removed-features.rst:1276
 msgid "``-device sd-card,spec_version=1`` (since 10.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1234
+#: ../../../about/removed-features.rst:1278
 msgid "SD physical layer specification v2.00 supersedes the v1.10 one."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1237
+#: ../../../about/removed-features.rst:1281
 msgid "Related binaries"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1240
+#: ../../../about/removed-features.rst:1284
 msgid "``qemu-nbd --partition`` (removed in 5.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1242
+#: ../../../about/removed-features.rst:1286
 msgid ""
 "The ``qemu-nbd --partition $digit`` code (also spelled ``-P``) could only "
 "handle MBR partitions, and never correctly handled logical partitions beyond "
@@ -1909,35 +1973,35 @@ msgid ""
 "partition 1 is 100MiB long starting at 1MiB, the old command::"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1250
+#: ../../../about/removed-features.rst:1294
 msgid "qemu-nbd -t -P 1 -f qcow2 file.qcow2"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1252
+#: ../../../about/removed-features.rst:1296
 msgid "can be rewritten as::"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1254
+#: ../../../about/removed-features.rst:1298
 msgid ""
 "qemu-nbd -t --image-opts driver=raw,offset=1M,size=100M,file.driver=qcow2,"
 "file.file.driver=file,file.file.filename=file.qcow2"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1257
+#: ../../../about/removed-features.rst:1301
 msgid "``qemu-img convert -n -o`` (removed in 5.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1259
+#: ../../../about/removed-features.rst:1303
 msgid ""
 "All options specified in ``-o`` are image creation options, so they are now "
 "rejected when used with ``-n`` to skip image creation."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1264
+#: ../../../about/removed-features.rst:1308
 msgid "``qemu-img create -b bad file $size`` (removed in 5.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1266
+#: ../../../about/removed-features.rst:1310
 msgid ""
 "When creating an image with a backing file that could not be opened, ``qemu-"
 "img create`` used to issue a warning about the failure but proceed with the "
@@ -1947,11 +2011,11 @@ msgid ""
 "incorrect format was specified) is an error when ``-u`` is not used."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1275
+#: ../../../about/removed-features.rst:1319
 msgid "``qemu-img amend`` to adjust backing file (removed in 6.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1277
+#: ../../../about/removed-features.rst:1321
 msgid ""
 "The use of ``qemu-img amend`` to modify the name or format of a qcow2 "
 "backing image was never fully documented or tested, and interferes with "
@@ -1962,11 +2026,11 @@ msgid ""
 "changes being performed by amend, as appropriate."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1287
+#: ../../../about/removed-features.rst:1331
 msgid "``qemu-img`` backing file without format (removed in 6.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1289
+#: ../../../about/removed-features.rst:1333
 msgid ""
 "The use of ``qemu-img create``, ``qemu-img rebase``, or ``qemu-img convert`` "
 "to create or modify an image that depends on a backing file now requires "
@@ -1977,7 +2041,7 @@ msgid ""
 "guest writes."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1297
+#: ../../../about/removed-features.rst:1341
 msgid ""
 "To avoid creating unsafe backing chains, you must pass ``-o backing_fmt=`` "
 "(or the shorthand ``-F`` during create) to specify the intended backing "
@@ -1988,38 +2052,38 @@ msgid ""
 "an existing image."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1306
+#: ../../../about/removed-features.rst:1350
 msgid "Block devices"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1309
+#: ../../../about/removed-features.rst:1353
 msgid "VXHS backend (removed in 5.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1311
+#: ../../../about/removed-features.rst:1355
 msgid "The VXHS code did not compile since v2.12.0. It was removed in 5.1."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1314
+#: ../../../about/removed-features.rst:1358
 msgid "``sheepdog`` driver (removed in 6.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1316
+#: ../../../about/removed-features.rst:1360
 msgid ""
 "The corresponding upstream server project is no longer maintained. Users are "
 "recommended to switch to an alternative distributed block device driver such "
 "as RBD."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1321
+#: ../../../about/removed-features.rst:1365
 msgid "VFIO devices"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1324
+#: ../../../about/removed-features.rst:1368
 msgid "``-device vfio-calxeda-xgmac`` (since 10.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1325
+#: ../../../about/removed-features.rst:1369
 msgid ""
 "The vfio-calxeda-xgmac device allows to assign a host Calxeda Highbank 10Gb "
 "XGMAC Ethernet controller device (\"calxeda,hb-xgmac\" compatibility string) "
@@ -2027,22 +2091,22 @@ msgid ""
 "that device."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1331
+#: ../../../about/removed-features.rst:1375
 msgid "``-device vfio-amd-xgbe`` (since 10.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1332
+#: ../../../about/removed-features.rst:1376
 msgid ""
 "The vfio-amd-xgbe device allows to assign a host AMD 10GbE controller to a "
 "guest (\"amd,xgbe-seattle-v1a\" compatibility string). AMD \"Seattle\" is "
 "not supported anymore and there is no point keeping that device."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1337
+#: ../../../about/removed-features.rst:1381
 msgid "``-device vfio-platform`` (since 10.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1338
+#: ../../../about/removed-features.rst:1382
 msgid ""
 "The vfio-platform device allows to assign a host platform device to a guest "
 "in a generic manner. Integrating a new device into the vfio-platform "
@@ -2052,15 +2116,15 @@ msgid ""
 "solution."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1346
+#: ../../../about/removed-features.rst:1390
 msgid "Tools"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1349
+#: ../../../about/removed-features.rst:1393
 msgid "virtiofsd (removed in 8.0)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1351
+#: ../../../about/removed-features.rst:1395
 msgid ""
 "There is a newer Rust implementation of ``virtiofsd`` at ``https://gitlab."
 "com/virtio-fs/virtiofsd``; this has been stable for some time and is now "
@@ -2068,15 +2132,15 @@ msgid ""
 "implementation."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1358
+#: ../../../about/removed-features.rst:1402
 msgid "QEMU guest agent"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1361
+#: ../../../about/removed-features.rst:1405
 msgid "``--blacklist`` command line option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1363
+#: ../../../about/removed-features.rst:1407
 msgid ""
 "``--blacklist`` has been replaced by ``--block-rpcs`` (which is a better "
 "wording for what this option does). The short form ``-b`` still stays the "
@@ -2084,39 +2148,39 @@ msgid ""
 "older and future versions of QEMU."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1369
+#: ../../../about/removed-features.rst:1413
 msgid "``blacklist`` config file option (removed in 9.1)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1371
+#: ../../../about/removed-features.rst:1415
 msgid ""
 "The ``blacklist`` config file option has been renamed to ``block-rpcs`` (to "
 "be in sync with the renaming of the corresponding command line option)."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1376
+#: ../../../about/removed-features.rst:1420
 msgid "Device options"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1379
+#: ../../../about/removed-features.rst:1423
 msgid "Character device options"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1382
+#: ../../../about/removed-features.rst:1426
 msgid "``reconnect`` (removed in 10.2)"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1384
-#: ../../../about/removed-features.rst:1393
+#: ../../../about/removed-features.rst:1428
+#: ../../../about/removed-features.rst:1437
 msgid ""
 "The ``reconnect`` has been replaced by ``reconnect-ms``, which provides "
 "better precision."
 msgstr ""
 
-#: ../../../about/removed-features.rst:1388
+#: ../../../about/removed-features.rst:1432
 msgid "Net device options"
 msgstr ""
 
-#: ../../../about/removed-features.rst:1391
+#: ../../../about/removed-features.rst:1435
 msgid "Stream ``reconnect`` (removed in 10.2)"
 msgstr ""
