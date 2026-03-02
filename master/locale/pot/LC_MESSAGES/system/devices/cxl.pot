@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-03-02 09:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -587,11 +587,45 @@ msgstr ""
 
 #: ../../../system/devices/cxl.rst:387
 msgid ""
+"An example of 4 type3 devices with volatile memory below a switch. Two of "
+"the devices use HDM-DB for coherence, which requires operating in Flit mode::"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:390
+msgid ""
+"qemu-system-x86_64 -M q35,cxl=on -m 4G,maxmem=8G,slots=8 -smp 4 \\\n"
+"...\n"
+"-object memory-backend-ram,id=cxl-mem0,share=on,size=256M \\\n"
+"-object memory-backend-ram,id=cxl-mem1,share=on,size=256M \\\n"
+"-object memory-backend-ram,id=cxl-mem2,share=on,size=256M \\\n"
+"-object memory-backend-ram,id=cxl-mem3,share=on,size=256M \\\n"
+"-device pxb-cxl,bus_nr=12,bus=pcie.0,id=cxl.1 \\\n"
+"-device cxl-rp,port=0,bus=cxl.1,id=root_port0,chassis=0,slot=0 \\\n"
+"-device cxl-rp,port=1,bus=cxl.1,id=root_port1,chassis=0,slot=1 \\\n"
+"-device cxl-upstream,bus=root_port0,id=us0,x-256b-flit=on \\\n"
+"-device cxl-downstream,port=0,bus=us0,id=swport0,chassis=0,slot=4 \\\n"
+"-device cxl-type3,bus=swport0,volatile-memdev=cxl-mem0,id=cxl-mem0,sn=0x1,"
+"x-256b-flit=on,hdm-db=on \\\n"
+"-device cxl-downstream,port=1,bus=us0,id=swport1,chassis=0,slot=5 \\\n"
+"-device cxl-type3,bus=swport1,volatile-memdev=cxl-mem1,id=cxl-mem1,sn=0x2,"
+"x-256b-flit=on,hdm-db=on \\\n"
+"-device cxl-downstream,port=2,bus=us0,id=swport2,chassis=0,slot=6 \\\n"
+"-device cxl-type3,bus=swport2,volatile-memdev=cxl-mem2,id=cxl-mem2,sn=0x3 "
+"\\\n"
+"-device cxl-downstream,port=3,bus=us0,id=swport3,chassis=0,slot=7 \\\n"
+"-device cxl-type3,bus=swport3,volatile-memdev=cxl-mem3,id=cxl-mem3,sn=0x4 "
+"\\\n"
+"-M cxl-fmw.0.targets.0=cxl.1,cxl-fmw.0.size=4G,cxl-fmw.0.interleave-"
+"granularity=4k"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:410
+msgid ""
 "A simple arm/virt example featuring a single direct connected CXL Type 3 "
 "Volatile Memory device::"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:390
+#: ../../../system/devices/cxl.rst:413
 msgid ""
 "qemu-system-aarch64 -M virt,gic-version=3,cxl=on -m 4g,maxmem=8g,slots=4 -"
 "cpu max -smp 4 \\\n"
@@ -603,11 +637,11 @@ msgid ""
 "-M cxl-fmw.0.targets.0=cxl.1,cxl-fmw.0.size=4G"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:399
+#: ../../../system/devices/cxl.rst:422
 msgid "Deprecations"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:401
+#: ../../../system/devices/cxl.rst:424
 msgid ""
 "The Type 3 device [memdev] attribute has been deprecated in favor of the "
 "[persistent-memdev] attributes. [memdev] will default to a persistent memory "
@@ -615,53 +649,53 @@ msgid ""
 "combination with [persistent-memdev]."
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:407
+#: ../../../system/devices/cxl.rst:430
 msgid "Kernel Configuration Options"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:409
+#: ../../../system/devices/cxl.rst:432
 msgid ""
 "In Linux 5.18 the following options are necessary to make use of OS "
 "management of CXL memory devices as described here."
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:412
+#: ../../../system/devices/cxl.rst:435
 msgid "CONFIG_CXL_BUS"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:413
+#: ../../../system/devices/cxl.rst:436
 msgid "CONFIG_CXL_PCI"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:414
+#: ../../../system/devices/cxl.rst:437
 msgid "CONFIG_CXL_ACPI"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:415
+#: ../../../system/devices/cxl.rst:438
 msgid "CONFIG_CXL_PMEM"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:416
+#: ../../../system/devices/cxl.rst:439
 msgid "CONFIG_CXL_MEM"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:417
+#: ../../../system/devices/cxl.rst:440
 msgid "CONFIG_CXL_PORT"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:418
+#: ../../../system/devices/cxl.rst:441
 msgid "CONFIG_CXL_REGION"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:421
+#: ../../../system/devices/cxl.rst:444
 msgid "References"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:423
+#: ../../../system/devices/cxl.rst:446
 msgid ""
 "Consortium website for specifications etc: http://www.computeexpresslink.org"
 msgstr ""
 
-#: ../../../system/devices/cxl.rst:425
+#: ../../../system/devices/cxl.rst:448
 msgid "Compute Express Link (CXL) Specification, Revision 3.1, August 2023"
 msgstr ""
