@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-03-02 09:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,4 +133,56 @@ msgstr ""
 msgid ""
 "The vhost-user-scsi daemon can proxy iSCSI devices onto a virtualized SCSI "
 "controller."
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:92
+msgid "vhost-user-bridge - Network bridge"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:94
+msgid ""
+"The vhost-user-bridge daemon serves as a development tool for testing real "
+"internet traffic by providing a networking backend, i.e. server, for the "
+"vhost-user protocol."
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:99
+msgid "Example"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:100
+msgid ""
+"For a single QEMU instance that both runs the user-mode net stack (slirp) "
+"and serves as a vhost-user protocol frontend, i.e. client, simultaneously:"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:103
+msgid "First, start vhost-user-bridge:"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:107
+msgid ""
+"$ vhost-user-bridge -u /tmp/vubr.sock \\\n"
+"                    -l 127.0.0.1:4444 \\\n"
+"                    -r 127.0.0.1:5555"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:111
+msgid "Then, invoke QEMU:"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user-contrib.rst:115
+msgid ""
+"$ qemu-system-x86_64 \\\n"
+"      -m 4G \\\n"
+"      -object memory-backend-memfd,id=mem0,size=4G,share=on,prealloc=on \\\n"
+"      -numa node,memdev=mem0 \\\n"
+"      -chardev socket,id=char0,path=/tmp/vubr.sock \\\n"
+"      -netdev vhost-user,id=vhost0,chardev=char0,vhostforce=on \\\n"
+"      -device virtio-net-pci,netdev=vhost0 \\\n"
+"      -netdev socket,id=udp0,udp=localhost:4444,localaddr=localhost:5555 \\\n"
+"      -netdev user,id=user0 \\\n"
+"      -netdev hubport,id=hub0,hubid=0,netdev=udp0 \\\n"
+"      -netdev hubport,id=hub1,hubid=0,netdev=user0 \\\n"
+"      ..."
 msgstr ""

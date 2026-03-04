@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-23 09:05+0000\n"
+"POT-Creation-Date: 2026-03-02 09:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -326,50 +326,72 @@ msgid ""
 "behavior and/or be exposed to the guest userspace."
 msgstr ""
 
+#: ../../../system/arm/cpu-features.rst:207
+msgid "``kvm-psci-version``"
+msgstr ""
+
 #: ../../../system/arm/cpu-features.rst:208
+msgid ""
+"Set the Power State Coordination Interface (PSCI) firmware ABI version that "
+"KVM provides to the guest. By default KVM will use the newest version that "
+"it knows about (which is PSCI v1.3 in Linux v6.13)."
+msgstr ""
+
+#: ../../../system/arm/cpu-features.rst:212
+msgid ""
+"You only need to set this if you want to be able to migrate this VM to a "
+"host machine running an older kernel that does not recognize the PSCI "
+"version that this host's kernel defaults to."
+msgstr ""
+
+#: ../../../system/arm/cpu-features.rst:216
+msgid "Current valid values are: 0.1, 0.2, 1.0, 1.1, 1.2, and 1.3."
+msgstr ""
+
+#: ../../../system/arm/cpu-features.rst:219
 msgid "TCG VCPU Features"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:210
+#: ../../../system/arm/cpu-features.rst:221
 msgid ""
 "TCG VCPU features are CPU features that are specific to TCG. Below is the "
 "list of TCG VCPU features and their descriptions."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:213
+#: ../../../system/arm/cpu-features.rst:224
 msgid "``pauth``"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:214
+#: ../../../system/arm/cpu-features.rst:225
 msgid "Enable or disable ``FEAT_Pauth`` entirely."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:216
+#: ../../../system/arm/cpu-features.rst:227
 msgid "``pauth-impdef``"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:217
+#: ../../../system/arm/cpu-features.rst:228
 msgid ""
 "When ``pauth`` is enabled, select the QEMU implementation defined algorithm."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:219
+#: ../../../system/arm/cpu-features.rst:230
 msgid "``pauth-qarma3``"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:220
+#: ../../../system/arm/cpu-features.rst:231
 msgid "When ``pauth`` is enabled, select the architected QARMA3 algorithm."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:222
+#: ../../../system/arm/cpu-features.rst:233
 msgid "``pauth-qarma5``"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:223
+#: ../../../system/arm/cpu-features.rst:234
 msgid "When ``pauth`` is enabled, select the architected QARMA5 algorithm."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:225
+#: ../../../system/arm/cpu-features.rst:236
 msgid ""
 "Without ``pauth-impdef``, ``pauth-qarma3`` or ``pauth-qarma5`` enabled, the "
 "QEMU impdef algorithm is used.  The architected QARMA5 and QARMA3 algorithms "
@@ -377,11 +399,11 @@ msgid ""
 "impdef algorithm used by QEMU is non-cryptographic but significantly faster."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:232
+#: ../../../system/arm/cpu-features.rst:243
 msgid "SVE CPU Properties"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:234
+#: ../../../system/arm/cpu-features.rst:245
 msgid ""
 "There are two types of SVE CPU properties: ``sve`` and ``sve<N>``.  The "
 "first is used to enable or disable the entire SVE feature, just as the "
@@ -396,15 +418,15 @@ msgid ""
 "Parsing Semantics\"."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:247
+#: ../../../system/arm/cpu-features.rst:258
 msgid "SVE CPU Property Dependencies and Constraints"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:249
+#: ../../../system/arm/cpu-features.rst:260
 msgid "At least one vector length must be enabled when ``sve`` is enabled."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:251
+#: ../../../system/arm/cpu-features.rst:262
 msgid ""
 "If a vector length ``N`` is enabled, then, when KVM is enabled, all smaller, "
 "host supported vector lengths must also be enabled.  If KVM is not enabled, "
@@ -415,18 +437,18 @@ msgid ""
 "Without KVM, the 384-bit vector length would not be required."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:260
+#: ../../../system/arm/cpu-features.rst:271
 msgid ""
 "If KVM is enabled then only vector lengths that the host CPU type support "
 "may be enabled.  If SVE is not supported by the host, then no ``sve*`` "
 "properties may be enabled."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:265
+#: ../../../system/arm/cpu-features.rst:276
 msgid "SVE CPU Property Parsing Semantics"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:267
+#: ../../../system/arm/cpu-features.rst:278
 msgid ""
 "If SVE is disabled (``sve=off``), then which SVE vector lengths are enabled "
 "or disabled is irrelevant to the guest, as the entire SVE feature is "
@@ -437,7 +459,7 @@ msgid ""
 "vector lengths, then an error is generated."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:276
+#: ../../../system/arm/cpu-features.rst:287
 msgid ""
 "If SVE is enabled (``sve=on``), but no ``sve<N>`` CPU properties are "
 "provided, then all supported vector lengths are enabled, which when KVM is "
@@ -445,14 +467,14 @@ msgid ""
 "use, it means all vector lengths supported by the host processor."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:282
+#: ../../../system/arm/cpu-features.rst:293
 msgid ""
 "If SVE is enabled, then an error is generated when attempting to disable the "
 "last enabled vector length (see constraint (1) of \"SVE CPU Property "
 "Dependencies and Constraints\")."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:286
+#: ../../../system/arm/cpu-features.rst:297
 msgid ""
 "If one or more vector lengths have been explicitly enabled and at least one "
 "of the dependency lengths of the maximum enabled length has been explicitly "
@@ -460,14 +482,14 @@ msgid ""
 "Property Dependencies and Constraints\")."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:291
+#: ../../../system/arm/cpu-features.rst:302
 msgid ""
 "When KVM is enabled, if the host does not support SVE, then an error is "
 "generated when attempting to enable any ``sve*`` properties (see constraint "
 "(3) of \"SVE CPU Property Dependencies and Constraints\")."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:295
+#: ../../../system/arm/cpu-features.rst:306
 msgid ""
 "When KVM is enabled, if the host does support SVE, then an error is "
 "generated when attempting to enable any vector lengths not supported by the "
@@ -475,7 +497,7 @@ msgid ""
 "Constraints\")."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:300
+#: ../../../system/arm/cpu-features.rst:311
 msgid ""
 "If one or more ``sve<N>`` CPU properties are set ``off``, but no ``sve<N>``, "
 "CPU properties are set ``on``, then the specified vector lengths are "
@@ -487,7 +509,7 @@ msgid ""
 "Constraints\")."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:309
+#: ../../../system/arm/cpu-features.rst:320
 msgid ""
 "If one or more ``sve<N>`` CPU properties are set to ``on``, then they are "
 "enabled and all unspecified lengths default to disabled, except for the "
@@ -496,7 +518,7 @@ msgid ""
 "enabled."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:315
+#: ../../../system/arm/cpu-features.rst:326
 msgid ""
 "If SVE was disabled (``sve=off``), allowing all vector lengths to be "
 "explicitly disabled (i.e. avoiding the error specified in (3) of \"SVE CPU "
@@ -505,7 +527,7 @@ msgid ""
 "vector length prior to enabling SVE."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:321
+#: ../../../system/arm/cpu-features.rst:332
 msgid ""
 "Enabling SVE (with ``sve=on`` or by default) enables all the SVE sub-"
 "features that the CPU supports (for example, it may also enable SVE2). There "
@@ -513,7 +535,7 @@ msgid ""
 "features."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:326
+#: ../../../system/arm/cpu-features.rst:337
 msgid ""
 "Disabling SVE does not automatically disable SME. If you want to disable "
 "both you must use ``sve=off,sme=off``. In particular, for the ``max`` CPU, "
@@ -522,101 +544,101 @@ msgid ""
 "once."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:333
+#: ../../../system/arm/cpu-features.rst:344
 msgid "SVE CPU Property Examples"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:335
+#: ../../../system/arm/cpu-features.rst:346
 msgid "Disable SVE and SME::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:337
+#: ../../../system/arm/cpu-features.rst:348
 msgid "$ qemu-system-aarch64 -M virt -cpu max,sve=off,sme=off"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:339
-#: ../../../system/arm/cpu-features.rst:393
+#: ../../../system/arm/cpu-features.rst:350
+#: ../../../system/arm/cpu-features.rst:404
 msgid "Implicitly enable all vector lengths for the ``max`` CPU type::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:341
-#: ../../../system/arm/cpu-features.rst:395
+#: ../../../system/arm/cpu-features.rst:352
+#: ../../../system/arm/cpu-features.rst:406
 msgid "$ qemu-system-aarch64 -M virt -cpu max"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:343
+#: ../../../system/arm/cpu-features.rst:354
 msgid ""
 "When KVM is enabled, implicitly enable all host CPU supported vector lengths "
 "with the ``host`` CPU type::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:346
+#: ../../../system/arm/cpu-features.rst:357
 msgid "$ qemu-system-aarch64 -M virt,accel=kvm -cpu host"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:348
+#: ../../../system/arm/cpu-features.rst:359
 msgid "Only enable the 128-bit vector length::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:350
+#: ../../../system/arm/cpu-features.rst:361
 msgid "$ qemu-system-aarch64 -M virt -cpu max,sve128=on"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:352
+#: ../../../system/arm/cpu-features.rst:363
 msgid ""
 "Disable the 512-bit vector length and all larger vector lengths, since 512 "
 "is a power-of-two.  This results in all the smaller, uninitialized lengths "
 "(128, 256, and 384) defaulting to enabled::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:356
-#: ../../../system/arm/cpu-features.rst:409
+#: ../../../system/arm/cpu-features.rst:367
+#: ../../../system/arm/cpu-features.rst:420
 msgid "$ qemu-system-aarch64 -M virt -cpu max,sve512=off"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:358
+#: ../../../system/arm/cpu-features.rst:369
 msgid "Enable the 128-bit, 256-bit, and 512-bit vector lengths::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:360
+#: ../../../system/arm/cpu-features.rst:371
 msgid "$ qemu-system-aarch64 -M virt -cpu max,sve128=on,sve256=on,sve512=on"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:362
+#: ../../../system/arm/cpu-features.rst:373
 msgid ""
 "The same as (6), but since the 128-bit and 256-bit vector lengths are "
 "required for the 512-bit vector length to be enabled, then allow them to be "
 "auto-enabled::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:366
+#: ../../../system/arm/cpu-features.rst:377
 msgid "$ qemu-system-aarch64 -M virt -cpu max,sve512=on"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:368
+#: ../../../system/arm/cpu-features.rst:379
 msgid ""
 "Do the same as (7), but by first disabling SVE and then re-enabling it::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:370
+#: ../../../system/arm/cpu-features.rst:381
 msgid "$ qemu-system-aarch64 -M virt -cpu max,sve=off,sve512=on,sve=on"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:372
+#: ../../../system/arm/cpu-features.rst:383
 msgid "Force errors regarding the last vector length::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:374
+#: ../../../system/arm/cpu-features.rst:385
 msgid ""
 "$ qemu-system-aarch64 -M virt -cpu max,sve128=off\n"
 "$ qemu-system-aarch64 -M virt -cpu max,sve=off,sve128=off,sve=on"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:378
+#: ../../../system/arm/cpu-features.rst:389
 msgid "SVE CPU Property Recommendations"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:380
+#: ../../../system/arm/cpu-features.rst:391
 msgid ""
 "The examples in \"SVE CPU Property Examples\" exhibit many ways to select "
 "vector lengths which developers may find useful in order to avoid overly "
@@ -625,45 +647,45 @@ msgid ""
 "example's (1), (4), and (6) exhibit recommended uses of the properties."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:387
+#: ../../../system/arm/cpu-features.rst:398
 msgid "SME CPU Property Examples"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:389
+#: ../../../system/arm/cpu-features.rst:400
 msgid "Disable SME::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:391
+#: ../../../system/arm/cpu-features.rst:402
 msgid "$ qemu-system-aarch64 -M virt -cpu max,sme=off"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:397
+#: ../../../system/arm/cpu-features.rst:408
 msgid "Only enable the 256-bit vector length::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:399
+#: ../../../system/arm/cpu-features.rst:410
 msgid "$ qemu-system-aarch64 -M virt -cpu max,sme256=on"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:401
+#: ../../../system/arm/cpu-features.rst:412
 msgid "Enable the 256-bit and 1024-bit vector lengths::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:403
+#: ../../../system/arm/cpu-features.rst:414
 msgid "$ qemu-system-aarch64 -M virt -cpu max,sme256=on,sme1024=on"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:405
+#: ../../../system/arm/cpu-features.rst:416
 msgid ""
 "Disable the 512-bit vector length.  This results in all the other lengths "
 "supported by ``max`` defaulting to enabled (128, 256, 1024 and 2048)::"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:412
+#: ../../../system/arm/cpu-features.rst:423
 msgid "SVE User-mode Default Vector Length Property"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:414
+#: ../../../system/arm/cpu-features.rst:425
 msgid ""
 "For qemu-aarch64, the cpu property ``sve-default-vector-length=N`` is "
 "defined to mirror the Linux kernel parameter file ``/proc/sys/abi/"
@@ -672,24 +694,24 @@ msgid ""
 "length is 64."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:420
+#: ../../../system/arm/cpu-features.rst:431
 msgid ""
 "If the default length is larger than the maximum vector length enabled, the "
 "actual vector length will be reduced.  Note that the maximum vector length "
 "supported by QEMU is 256."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:424
+#: ../../../system/arm/cpu-features.rst:435
 msgid ""
 "If this property is set to ``-1`` then the default vector length is set to "
 "the maximum possible length."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:428
+#: ../../../system/arm/cpu-features.rst:439
 msgid "SME CPU Properties"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:430
+#: ../../../system/arm/cpu-features.rst:441
 msgid ""
 "The SME CPU properties are much like the SVE properties: ``sme`` is used to "
 "enable or disable the entire SME feature, and ``sme<N>`` is used to enable "
@@ -698,11 +720,11 @@ msgid ""
 "instruction set while Streaming SVE mode is enabled."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:437
+#: ../../../system/arm/cpu-features.rst:448
 msgid "SME is not supported by KVM at this time."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:439
+#: ../../../system/arm/cpu-features.rst:450
 msgid ""
 "At least one vector length must be enabled when ``sme`` is enabled, and all "
 "vector lengths must be powers of 2.  The maximum vector length supported by "
@@ -710,18 +732,18 @@ msgid ""
 "set of vector lengths supported by SME."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:444
+#: ../../../system/arm/cpu-features.rst:455
 msgid ""
 "As with SVE, ``sme=on`` enables all the SME sub-features the CPU supports "
 "(for example, it may also enable SME2), and there are no lower-level "
 "controls for fine-grained disabling of specific SME sub-features."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:450
+#: ../../../system/arm/cpu-features.rst:461
 msgid "SME User-mode Default Vector Length Property"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:452
+#: ../../../system/arm/cpu-features.rst:463
 msgid ""
 "For qemu-aarch64, the cpu property ``sme-default-vector-length=N`` is "
 "defined to mirror the Linux kernel parameter file ``/proc/sys/abi/"
@@ -730,7 +752,7 @@ msgid ""
 "length is 32."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:458
+#: ../../../system/arm/cpu-features.rst:469
 msgid ""
 "As with ``sve-default-vector-length``, if the default length is larger than "
 "the maximum vector length enabled, the actual vector length will be "
@@ -738,11 +760,11 @@ msgid ""
 "is set to the maximum possible length."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:464
+#: ../../../system/arm/cpu-features.rst:475
 msgid "RME CPU Properties"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:466
+#: ../../../system/arm/cpu-features.rst:477
 msgid ""
 "The status of RME support with QEMU is experimental.  At this time we only "
 "support RME within the CPU proper, not within the SMMU or GIC. The feature "
@@ -750,17 +772,17 @@ msgid ""
 "a reminder of the experimental status, and defaults off."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:471
+#: ../../../system/arm/cpu-features.rst:482
 msgid ""
 "The method for enabling RME will change in some future QEMU release without "
 "notice or backward compatibility."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:475
+#: ../../../system/arm/cpu-features.rst:486
 msgid "RME Level 0 GPT Size Property"
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:477
+#: ../../../system/arm/cpu-features.rst:488
 msgid ""
 "To aid firmware developers in testing different possible CPU configurations, "
 "``x-l0gptsz=S`` may be used to specify the value to encode into ``GPCCR_EL3."
@@ -769,7 +791,7 @@ msgid ""
 "is 30."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:483
+#: ../../../system/arm/cpu-features.rst:494
 msgid ""
 "As with ``x-rme``, the ``x-l0gptsz`` property may be renamed or removed in "
 "some future QEMU release."
