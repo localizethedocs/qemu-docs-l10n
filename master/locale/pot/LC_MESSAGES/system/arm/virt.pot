@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-23 09:05+0000\n"
+"POT-Creation-Date: 2026-03-02 09:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -567,51 +567,62 @@ msgid "A deprecated synonym for dtb-randomness."
 msgstr ""
 
 #: ../../../system/arm/virt.rst:229
-msgid "x-oem-id"
+msgid "virtio-mmio-transports"
 msgstr ""
 
 #: ../../../system/arm/virt.rst:230
+msgid ""
+"Set the number of virtio-mmio transports to create (between 0 and 32; the "
+"default is 32).  Unused transports are harmless, but you can use this "
+"property to avoid exposing them to the guest if you wish."
+msgstr ""
+
+#: ../../../system/arm/virt.rst:234
+msgid "x-oem-id"
+msgstr ""
+
+#: ../../../system/arm/virt.rst:235
 msgid ""
 "Set string (up to 6 bytes) to override the default value of field OEMID in "
 "ACPI table header."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:233
+#: ../../../system/arm/virt.rst:238
 msgid "x-oem-table-id"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:234
+#: ../../../system/arm/virt.rst:239
 msgid ""
 "Set string (up to 8 bytes) to override the default value of field OEM Table "
 "ID in ACPI table header."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:238
+#: ../../../system/arm/virt.rst:243
 msgid "SMMU configuration"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:240
+#: ../../../system/arm/virt.rst:245
 msgid "Machine-wide SMMUv3 IOMMU"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:241
+#: ../../../system/arm/virt.rst:246
 msgid ""
 "Setting the machine-specific option ``iommu=smmuv3`` causes QEMU to create a "
 "single, machine-wide SMMUv3 instance that applies to all devices in the PCIe "
 "topology."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:245
+#: ../../../system/arm/virt.rst:250
 msgid ""
 "For information about selectively bypassing devices, refer to ``docs/bypass-"
 "iommu.txt``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:248
+#: ../../../system/arm/virt.rst:253
 msgid "User-creatable SMMUv3 devices"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:249
+#: ../../../system/arm/virt.rst:254
 msgid ""
 "You can use the ``-device arm-smmuv3`` option to create multiple user-"
 "defined SMMUv3 devices, each associated with a separate PCIe root complex. "
@@ -620,18 +631,18 @@ msgid ""
 "to specify which PCIe root complex it is associated with."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:256
+#: ../../../system/arm/virt.rst:261
 msgid ""
 "This model is useful when you want to mirror a host configuration where each "
 "NUMA node typically has its own SMMU, allowing the VM topology to align more "
 "closely with the host’s hardware layout."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:260
+#: ../../../system/arm/virt.rst:265
 msgid "Example::"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:262
+#: ../../../system/arm/virt.rst:267
 msgid ""
 "-device arm-smmuv3,primary-bus=pcie.0,id=smmuv3.0\n"
 "...\n"
@@ -639,11 +650,11 @@ msgid ""
 "-device arm-smmuv3,primary-bus=pcie.1,id=smmuv3.1"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:268
+#: ../../../system/arm/virt.rst:273
 msgid "Linux guest kernel configuration"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:270
+#: ../../../system/arm/virt.rst:275
 msgid ""
 "The 'defconfig' for Linux arm and arm64 kernels should include the right "
 "device drivers for virtio and the PCI controller; however some older kernel "
@@ -652,30 +663,30 @@ msgid ""
 "your guest config has::"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:276
+#: ../../../system/arm/virt.rst:281
 msgid ""
 "CONFIG_PCI=y\n"
 "CONFIG_VIRTIO_PCI=y\n"
 "CONFIG_PCI_HOST_GENERIC=y"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:280
+#: ../../../system/arm/virt.rst:285
 msgid ""
 "If you want to use the ``virtio-gpu-pci`` graphics device you will also "
 "need::"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:283
+#: ../../../system/arm/virt.rst:288
 msgid ""
 "CONFIG_DRM=y\n"
 "CONFIG_DRM_VIRTIO_GPU=y"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:287
+#: ../../../system/arm/virt.rst:292
 msgid "Hardware configuration information for bare-metal programming"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:289
+#: ../../../system/arm/virt.rst:294
 msgid ""
 "The ``virt`` board automatically generates a device tree blob (\"dtb\") "
 "which it passes to the guest. This provides information about the addresses, "
@@ -683,34 +694,34 @@ msgid ""
 "system. Guest code can rely on and hard-code the following addresses:"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:295
+#: ../../../system/arm/virt.rst:300
 msgid "Flash memory starts at address 0x0000_0000"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:297
+#: ../../../system/arm/virt.rst:302
 msgid "RAM starts at 0x4000_0000"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:299
+#: ../../../system/arm/virt.rst:304
 msgid ""
 "All other information about device locations may change between QEMU "
 "versions, so guest code must look in the DTB."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:302
+#: ../../../system/arm/virt.rst:307
 msgid ""
 "QEMU supports two types of guest image boot for ``virt``, and the way for "
 "the guest code to locate the dtb binary differs:"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:305
+#: ../../../system/arm/virt.rst:310
 msgid ""
 "For guests using the Linux kernel boot protocol (this means any non-ELF file "
 "passed to the QEMU ``-kernel`` option) the address of the DTB is passed in a "
 "register (``r2`` for 32-bit guests, or ``x0`` for 64-bit guests)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:310
+#: ../../../system/arm/virt.rst:315
 msgid ""
 "For guests booting as \"bare-metal\" (any other kind of boot), the DTB is at "
 "the start of RAM (0x4000_0000)"
