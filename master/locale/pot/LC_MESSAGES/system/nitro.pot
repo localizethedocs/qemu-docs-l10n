@@ -1,0 +1,265 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-09 09:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/nitro.rst:2
+msgid "AWS Nitro Enclaves"
+msgstr ""
+
+#: ../../../system/nitro.rst:4
+msgid ""
+"`AWS Nitro Enclaves <https://aws.amazon.com/ec2/nitro/nitro-enclaves/>`_ are "
+"isolated compute environments that run alongside EC2 instances. They are "
+"created by partitioning CPU and memory resources from a parent instance and "
+"launching a signed Enclave Image Format (EIF) file inside a confidential VM "
+"managed by the Nitro Hypervisor."
+msgstr ""
+
+#: ../../../system/nitro.rst:10
+msgid ""
+"QEMU supports launching Nitro Enclaves on EC2 instances that have enclave "
+"support enabled, using the ``nitro`` accelerator and the ``nitro`` machine "
+"type."
+msgstr ""
+
+#: ../../../system/nitro.rst:15
+msgid "Prerequisites"
+msgstr ""
+
+#: ../../../system/nitro.rst:17
+msgid "An EC2 instance with Nitro Enclaves enabled"
+msgstr ""
+
+#: ../../../system/nitro.rst:18
+msgid ""
+"The ``nitro_enclaves`` kernel module loaded (provides ``/dev/"
+"nitro_enclaves``)"
+msgstr ""
+
+#: ../../../system/nitro.rst:19
+msgid ""
+"CPU cores allocated to the Nitro Enclaves pool via ``nitro-enclaves-"
+"allocator``"
+msgstr ""
+
+#: ../../../system/nitro.rst:20
+msgid ""
+"Huge pages allocated for Nitro Enclaves via ``nitro-enclaves-allocator``"
+msgstr ""
+
+#: ../../../system/nitro.rst:23
+msgid "Quick Start"
+msgstr ""
+
+#: ../../../system/nitro.rst:25
+msgid "Launch a Nitro Enclave from a pre-built EIF file::"
+msgstr ""
+
+#: ../../../system/nitro.rst:27
+msgid ""
+"$ qemu-system-x86_64 -accel nitro,debug-mode=on -M nitro -nographic \\\n"
+"    -smp 2 -m 512M -kernel enclave.eif"
+msgstr ""
+
+#: ../../../system/nitro.rst:30
+msgid "Launch an enclave from individual kernel and initrd files::"
+msgstr ""
+
+#: ../../../system/nitro.rst:32
+msgid ""
+"$ qemu-system-x86_64 -accel nitro,debug-mode=on -M nitro -nographic \\\n"
+"    -smp 2 -m 512M -kernel vmlinuz -initrd initrd.cpio \\\n"
+"    -append \"console=ttyS0\""
+msgstr ""
+
+#: ../../../system/nitro.rst:36
+msgid ""
+"The same commands work with ``qemu-system-aarch64`` on Graviton based EC2 "
+"instances."
+msgstr ""
+
+#: ../../../system/nitro.rst:40
+msgid "Accelerator"
+msgstr ""
+
+#: ../../../system/nitro.rst:42
+msgid ""
+"The ``nitro`` accelerator (``-accel nitro``) drives the ``/dev/"
+"nitro_enclaves`` device to create and manage a Nitro Enclave. It handles:"
+msgstr ""
+
+#: ../../../system/nitro.rst:46
+msgid "Creating the enclave VM slot"
+msgstr ""
+
+#: ../../../system/nitro.rst:47
+msgid "Donating memory regions (must be huge page backed)"
+msgstr ""
+
+#: ../../../system/nitro.rst:48
+msgid "Adding vCPUs (must be full physical cores)"
+msgstr ""
+
+#: ../../../system/nitro.rst:49
+msgid "Starting the enclave"
+msgstr ""
+
+#: ../../../system/nitro.rst:50
+msgid "Notifying vsock bus devices of the enclave CID"
+msgstr ""
+
+#: ../../../system/nitro.rst:52
+msgid "Accelerator options:"
+msgstr ""
+
+#: ../../../system/nitro.rst:54
+msgid "``debug-mode=on|off``"
+msgstr ""
+
+#: ../../../system/nitro.rst:55
+msgid ""
+"Enable debug mode. When enabled, the Nitro Hypervisor exposes the enclave's "
+"serial console output via a vsock port that the machine model automatically "
+"connects to. In debug mode, PCR values are zero. Default is ``off``."
+msgstr ""
+
+#: ../../../system/nitro.rst:61
+msgid "Machine"
+msgstr ""
+
+#: ../../../system/nitro.rst:63
+msgid ""
+"The ``nitro`` machine (``-M nitro``) is a minimal, architecture-independent "
+"machine that provides only what a Nitro Enclave needs:"
+msgstr ""
+
+#: ../../../system/nitro.rst:66
+msgid "RAM (huge page backed via memfd)"
+msgstr ""
+
+#: ../../../system/nitro.rst:67
+msgid "vCPUs (defaults to ``host`` CPU type)"
+msgstr ""
+
+#: ../../../system/nitro.rst:68
+msgid "A Nitro vsock bus with:"
+msgstr ""
+
+#: ../../../system/nitro.rst:70
+msgid "A heartbeat device (vsock server on port 9000)"
+msgstr ""
+
+#: ../../../system/nitro.rst:71
+msgid "A serial console bridge (vsock client, debug mode only)"
+msgstr ""
+
+#: ../../../system/nitro.rst:73
+msgid ""
+"Communication to the Nitro Enclave is limited to virtio-vsock. The Enclave "
+"is allocated a CID at launch at which it is reachable. A specific CID can be "
+"requested with ``-accel nitro,enclave-cid=<N>`` (0 lets the hypervisor "
+"choose). The assigned CID is readable from the vsock bridge device::"
+msgstr ""
+
+#: ../../../system/nitro.rst:78
+msgid "(qemu) qom-get /machine/peripheral/nitro-vsock enclave-cid"
+msgstr ""
+
+#: ../../../system/nitro.rst:81
+msgid "EIF Image Format"
+msgstr ""
+
+#: ../../../system/nitro.rst:83
+msgid ""
+"Nitro Enclaves boot from EIF (Enclave Image Format) files. When ``-kernel`` "
+"points to an EIF file (detected by the ``.eif`` magic bytes), it is loaded "
+"directly into guest memory."
+msgstr ""
+
+#: ../../../system/nitro.rst:87
+msgid ""
+"When ``-kernel`` points to a regular kernel image (e.g. a bzImage or Image), "
+"the machine automatically assembles a minimal EIF on the fly from ``-"
+"kernel``, ``-initrd``, and ``-append``. This allows standard direct kernel "
+"boot without external EIF tooling."
+msgstr ""
+
+#: ../../../system/nitro.rst:93
+msgid "CPU Requirements"
+msgstr ""
+
+#: ../../../system/nitro.rst:95
+msgid ""
+"Nitro Enclaves require full physical CPU cores. On hyperthreaded systems, "
+"this means ``-smp`` must be a multiple of the threads per core (typically 2)."
+msgstr ""
+
+#: ../../../system/nitro.rst:99
+msgid ""
+"Nitro Enclaves can only consume cores that are donated to the Nitro Enclave "
+"CPU pool. You can configure the CPU pool using the ``nitro-enclaves-"
+"allocator`` tool or manually by writing to the nitro_enclaves cpu pool "
+"parameter. To allocate vCPUs 1, 2 and 3, you can call::"
+msgstr ""
+
+#: ../../../system/nitro.rst:104
+msgid "$ echo 1,2,3 | sudo tee /sys/module/nitro_enclaves/parameters/ne_cpus"
+msgstr ""
+
+#: ../../../system/nitro.rst:106
+msgid ""
+"Beware that on x86-64 systems, hyperthread siblings are not consecutive and "
+"must be added in pairs to the pool. Consult tools like ``lstopo`` or "
+"``lscpu`` for details about your instance's CPU topology."
+msgstr ""
+
+#: ../../../system/nitro.rst:111
+msgid "Memory Requirements"
+msgstr ""
+
+#: ../../../system/nitro.rst:113
+msgid ""
+"Enclave memory must be huge page backed. The machine automatically creates a "
+"memfd memory backend with huge pages enabled. To make the huge page "
+"allocation work, ensure that huge pages are reserved in the system. To "
+"reserve 1 GiB of memory on a 4 KiB PAGE_SIZE system, you can call::"
+msgstr ""
+
+#: ../../../system/nitro.rst:119
+msgid "$ echo 512 | sudo tee /proc/sys/vm/nr_hugepages"
+msgstr ""
+
+#: ../../../system/nitro.rst:122
+msgid "Emulated Nitro Enclaves"
+msgstr ""
+
+#: ../../../system/nitro.rst:124
+msgid ""
+"In addition to the native Nitro Enclaves invocation, you can also use the "
+"emulated nitro-enclave machine target (see :doc:`i386/nitro-enclave`) which "
+"implements the x86 Nitro Enclave device model. While -M nitro delegates "
+"virtual machine device emulation to the Nitro Hypervisor, -M nitro-enclave "
+"implements all devices itself, which means it also works on non-EC2 "
+"instances."
+msgstr ""
+
+#: ../../../system/nitro.rst:131
+msgid ""
+"If you require NSM based attestation backed by valid AWS certificates, you "
+"must use -M nitro. The -M nitro-enclave model does not provide you with an "
+"AWS signed attestation document."
+msgstr ""
