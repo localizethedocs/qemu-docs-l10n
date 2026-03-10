@@ -1,0 +1,213 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/vm-templating.rst:2
+msgid "QEMU VM templating"
+msgstr ""
+
+#: ../../../system/vm-templating.rst:4
+msgid "This document explains how to use VM templating in QEMU."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:6
+msgid ""
+"For now, the focus is on VM memory aspects, and not about how to save and "
+"restore other VM state (i.e., migrate-to-file with ``x-ignore-shared``)."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:10
+msgid "Overview"
+msgstr ""
+
+#: ../../../system/vm-templating.rst:12
+msgid ""
+"With VM templating, a single template VM serves as the starting point for "
+"new VMs. This allows for fast and efficient replication of VMs, resulting in "
+"fast startup times and reduced memory consumption."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:16
+msgid ""
+"Conceptually, the VM state is frozen, to then be used as a basis for new "
+"VMs. The Copy-On-Write mechanism in the operating systems makes sure that "
+"new VMs are able to read template VM memory; however, any modifications stay "
+"private and don't modify the original template VM or any other created VM."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:23
+msgid "!!! Security Alert !!!"
+msgstr ""
+
+#: ../../../system/vm-templating.rst:25
+msgid ""
+"When effectively cloning VMs by VM templating, hardware identifiers (such as "
+"UUIDs and NIC MAC addresses), and similar data in the guest OS (such as "
+"machine IDs, SSH keys, certificates) that are supposed to be *unique* are no "
+"longer unique, which can be a security concern."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:30
+msgid ""
+"Please be aware of these implications and how to mitigate them for your use "
+"case, which might involve vmgenid, hot(un)plug of NIC, etc.."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:34
+msgid "Memory configuration"
+msgstr ""
+
+#: ../../../system/vm-templating.rst:36
+msgid ""
+"In order to create the template VM, we have to make sure that VM memory ends "
+"up in a file, from where it can be reused for the new VMs:"
+msgstr ""
+
+#: ../../../system/vm-templating.rst:39
+msgid ""
+"Supply VM RAM via memory-backend-file, with ``share=on`` (modifications go "
+"to the file) and ``readonly=off`` (open the file writable). Note that "
+"``readonly=off`` is implicit."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:43
+msgid ""
+"In the following command-line example, a 2GB VM is created, whereby VM RAM "
+"is to be stored in the ``template`` file."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:48
+msgid ""
+"|qemu_system| [...] -m 2g \\\\\n"
+"    -object memory-backend-file,id=pc.ram,mem-path=template,size=2g,"
+"share=on,... \\\\\n"
+"    -machine q35,memory-backend=pc.ram"
+msgstr ""
+
+#: ../../../system/vm-templating.rst:52 ../../../system/vm-templating.rst:76
+msgid ""
+"If multiple memory backends are used (vNUMA, DIMMs), configure all memory "
+"backends accordingly."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:55
+msgid ""
+"Once the VM is in the desired state, stop the VM and save other VM state, "
+"leaving the current state of VM RAM reside in the file."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:58
+msgid ""
+"In order to have a new VM be based on a template VM, we have to configure VM "
+"RAM to be based on a template VM RAM file; however, the VM should not be "
+"able to modify file content."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:62
+msgid ""
+"Supply VM RAM via memory-backend-file, with ``share=off`` (modifications "
+"stay private), ``readonly=on`` (open the file readonly) and ``rom=off`` "
+"(don't make the memory readonly for the VM). Note that ``share=off`` is "
+"implicit and that other VM state has to be restored separately."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:67
+msgid ""
+"In the following command-line example, a 2GB VM is created based on the "
+"existing 2GB file ``template``."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:72
+msgid ""
+"|qemu_system| [...] -m 2g \\\\\n"
+"    -object memory-backend-file,id=pc.ram,mem-path=template,size=2g,"
+"readonly=on,rom=off,... \\\\\n"
+"    -machine q35,memory-backend=pc.ram"
+msgstr ""
+
+#: ../../../system/vm-templating.rst:79
+msgid ""
+"Note that ``-mem-path`` cannot be used for VM templating when creating the "
+"template VM or when starting new VMs based on a template VM."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:83
+msgid "Incompatible features"
+msgstr ""
+
+#: ../../../system/vm-templating.rst:85
+msgid ""
+"Some features are incompatible with VM templating, as the underlying file "
+"cannot be modified to discard VM RAM, or to actually share memory with "
+"another process."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:90
+msgid "vhost-user and multi-process QEMU"
+msgstr ""
+
+#: ../../../system/vm-templating.rst:92
+msgid ""
+"vhost-user and multi-process QEMU are incompatible with VM templating. These "
+"technologies rely on shared memory, however, the template VMs don't actually "
+"share memory (``share=off``), even though they are file-based."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:98
+msgid "virtio-balloon"
+msgstr ""
+
+#: ../../../system/vm-templating.rst:100
+msgid ""
+"virtio-balloon inflation and \"free page reporting\" cannot discard VM RAM "
+"and will repeatedly report errors. While virtio-balloon can be used for "
+"template VMs (e.g., report VM RAM stats), \"free page reporting\" should be "
+"disabled and the balloon should not be inflated."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:106
+msgid "virtio-mem"
+msgstr ""
+
+#: ../../../system/vm-templating.rst:108
+msgid ""
+"virtio-mem cannot discard VM RAM that is managed by the virtio-mem device. "
+"virtio-mem will fail early when realizing the device. To use VM templating "
+"with virtio-mem, either hotplug virtio-mem devices to the new VM, or don't "
+"supply any memory to the template VM using virtio-mem (requested-size=0), "
+"not using a template VM file as memory backend for the virtio-mem device."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:116
+msgid "VM migration"
+msgstr ""
+
+#: ../../../system/vm-templating.rst:118
+msgid ""
+"For VM migration, \"x-release-ram\" similarly relies on discarding of VM RAM "
+"on the migration source to free up migrated RAM, and will repeatedly report "
+"errors."
+msgstr ""
+
+#: ../../../system/vm-templating.rst:122
+msgid ""
+"Postcopy live migration fails discarding VM RAM on the migration destination "
+"early and refuses to activate postcopy live migration. Note that postcopy "
+"live migration usually only works on selected filesystems (shmem/tmpfs, "
+"hugetlbfs) either way."
+msgstr ""
