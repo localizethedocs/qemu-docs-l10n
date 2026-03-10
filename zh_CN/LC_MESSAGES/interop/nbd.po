@@ -1,0 +1,221 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../interop/nbd.rst:2
+msgid "QEMU NBD protocol support"
+msgstr ""
+
+#: ../../../interop/nbd.rst:4
+msgid ""
+"QEMU supports the NBD protocol, and has an internal NBD client (see ``block/"
+"nbd.c``), an internal NBD server (see ``blockdev-nbd.c``), and an external "
+"NBD server tool (see ``qemu-nbd.c``). The common code is placed in ``nbd/*``."
+msgstr ""
+
+#: ../../../interop/nbd.rst:9
+msgid ""
+"The NBD protocol is specified here: https://github.com/NetworkBlockDevice/"
+"nbd/blob/master/doc/proto.md"
+msgstr ""
+
+#: ../../../interop/nbd.rst:12
+msgid ""
+"The following paragraphs describe some specific properties of NBD protocol "
+"realization in QEMU."
+msgstr ""
+
+#: ../../../interop/nbd.rst:16
+msgid "Metadata namespaces"
+msgstr ""
+
+#: ../../../interop/nbd.rst:18
+msgid ""
+"QEMU supports the ``base:allocation`` metadata context as defined in the NBD "
+"protocol specification, and also defines an additional metadata namespace "
+"``qemu``."
+msgstr ""
+
+#: ../../../interop/nbd.rst:23
+msgid "``qemu`` namespace"
+msgstr ""
+
+#: ../../../interop/nbd.rst:25
+msgid ""
+"The ``qemu`` namespace currently contains two available metadata context "
+"types.  The first is related to exposing the contents of a dirty bitmap "
+"alongside the associated disk contents.  That metadata context is named with "
+"the following form::"
+msgstr ""
+
+#: ../../../interop/nbd.rst:30
+msgid "qemu:dirty-bitmap:<dirty-bitmap-export-name>"
+msgstr ""
+
+#: ../../../interop/nbd.rst:32
+msgid ""
+"Each dirty-bitmap metadata context defines only one flag for extents in "
+"reply for ``NBD_CMD_BLOCK_STATUS``:"
+msgstr ""
+
+#: ../../../interop/nbd.rst:35
+msgid "bit 0:"
+msgstr ""
+
+#: ../../../interop/nbd.rst:36
+msgid "``NBD_STATE_DIRTY``, set when the extent is \"dirty\""
+msgstr ""
+
+#: ../../../interop/nbd.rst:38
+msgid ""
+"The second is related to exposing the source of various extents within the "
+"image, with a single metadata context named::"
+msgstr ""
+
+#: ../../../interop/nbd.rst:41
+msgid "qemu:allocation-depth"
+msgstr ""
+
+#: ../../../interop/nbd.rst:43
+msgid ""
+"In the allocation depth context, the entire 32-bit value represents a depth "
+"of which layer in a thin-provisioned backing chain provided the data (0 for "
+"unallocated, 1 for the active layer, 2 for the first backing layer, and so "
+"forth)."
+msgstr ""
+
+#: ../../../interop/nbd.rst:48
+msgid ""
+"For ``NBD_OPT_LIST_META_CONTEXT`` the following queries are supported in "
+"addition to the specific ``qemu:allocation-depth`` and ``qemu:dirty-bitmap:"
+"<dirty-bitmap-export-name>``:"
+msgstr ""
+
+#: ../../../interop/nbd.rst:52
+msgid "``qemu:``"
+msgstr ""
+
+#: ../../../interop/nbd.rst:53
+msgid "returns list of all available metadata contexts in the namespace"
+msgstr ""
+
+#: ../../../interop/nbd.rst:54
+msgid "``qemu:dirty-bitmap:``"
+msgstr ""
+
+#: ../../../interop/nbd.rst:55
+msgid "returns list of all available dirty-bitmap metadata contexts"
+msgstr ""
+
+#: ../../../interop/nbd.rst:58
+msgid "Features by version"
+msgstr ""
+
+#: ../../../interop/nbd.rst:60
+msgid ""
+"The following list documents which qemu version first implemented various "
+"features (both as a server exposing the feature, and as a client taking "
+"advantage of the feature when present), to make it easier to plan for cross-"
+"version interoperability.  Note that in several cases, the initial release "
+"containing a feature may require additional patches from the corresponding "
+"stable branch to fix bugs in the operation of that feature."
+msgstr ""
+
+#: ../../../interop/nbd.rst:68
+msgid "2.6"
+msgstr ""
+
+#: ../../../interop/nbd.rst:69
+msgid "``NBD_OPT_STARTTLS`` with TLS X.509 Certificates"
+msgstr ""
+
+#: ../../../interop/nbd.rst:70
+msgid "2.8"
+msgstr ""
+
+#: ../../../interop/nbd.rst:71
+msgid "``NBD_CMD_WRITE_ZEROES``"
+msgstr ""
+
+#: ../../../interop/nbd.rst:72
+msgid "2.10"
+msgstr ""
+
+#: ../../../interop/nbd.rst:73
+msgid "``NBD_OPT_GO``, ``NBD_INFO_BLOCK``"
+msgstr ""
+
+#: ../../../interop/nbd.rst:74
+msgid "2.11"
+msgstr ""
+
+#: ../../../interop/nbd.rst:75
+msgid "``NBD_OPT_STRUCTURED_REPLY``"
+msgstr ""
+
+#: ../../../interop/nbd.rst:76
+msgid "2.12"
+msgstr ""
+
+#: ../../../interop/nbd.rst:77
+msgid "``NBD_CMD_BLOCK_STATUS`` for ``base:allocation``"
+msgstr ""
+
+#: ../../../interop/nbd.rst:78
+msgid "3.0"
+msgstr ""
+
+#: ../../../interop/nbd.rst:79
+msgid ""
+"``NBD_OPT_STARTTLS`` with TLS Pre-Shared Keys (PSK), "
+"``NBD_CMD_BLOCK_STATUS`` for ``qemu:dirty-bitmap:``, ``NBD_CMD_CACHE``"
+msgstr ""
+
+#: ../../../interop/nbd.rst:81
+msgid "4.2"
+msgstr ""
+
+#: ../../../interop/nbd.rst:82
+msgid ""
+"``NBD_FLAG_CAN_MULTI_CONN`` for shareable read-only exports, "
+"``NBD_CMD_FLAG_FAST_ZERO``"
+msgstr ""
+
+#: ../../../interop/nbd.rst:84
+msgid "5.2"
+msgstr ""
+
+#: ../../../interop/nbd.rst:85
+msgid "``NBD_CMD_BLOCK_STATUS`` for ``qemu:allocation-depth``"
+msgstr ""
+
+#: ../../../interop/nbd.rst:86
+msgid "7.1"
+msgstr ""
+
+#: ../../../interop/nbd.rst:87
+msgid "``NBD_FLAG_CAN_MULTI_CONN`` for shareable writable exports"
+msgstr ""
+
+#: ../../../interop/nbd.rst:88
+msgid "8.2"
+msgstr ""
+
+#: ../../../interop/nbd.rst:89
+msgid "``NBD_OPT_EXTENDED_HEADERS``, ``NBD_FLAG_BLOCK_STATUS_PAYLOAD``"
+msgstr ""
