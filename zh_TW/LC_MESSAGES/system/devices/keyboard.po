@@ -1,0 +1,428 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 9.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/devices/keyboard.rst:4
+msgid "Sparc32 keyboard"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:5
+msgid ""
+"SUN Type 4, 5 and 5c keyboards have dip switches to choose the language "
+"layout of the keyboard. Solaris makes an ioctl to query the value of the "
+"dipswitches and uses that value to select keyboard layout. Also the SUN bios "
+"like the one in the file ss5.bin uses this value to support at least some "
+"keyboard layouts. However, the OpenBIOS provided with qemu is hardcoded to "
+"always use an US keyboard layout."
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:12
+msgid ""
+"With the escc.chnA-sunkbd-layout driver property it is possible to select "
+"keyboard layout. Example:"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:15
+msgid "-global escc.chnA-sunkbd-layout=de"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:17
+msgid ""
+"Depending on type of keyboard, the keyboard can have 6 or 5 dip-switches to "
+"select keyboard layout, giving up to 64 different layouts. Not all "
+"combinations are supported by Solaris and even less by Sun OpenBoot BIOS."
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:21
+msgid ""
+"The dip switch settings can be given as hexadecimal number, decimal number "
+"or in some cases as a language string. Examples:"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:24
+msgid "-global escc.chnA-sunkbd-layout=0x2b"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:26
+msgid "-global escc.chnA-sunkbd-layout=43"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:28
+msgid "-global escc.chnA-sunkbd-layout=sv"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:30
+msgid ""
+"The above 3 examples all select a swedish keyboard layout. Table 3-15 at "
+"https://docs.oracle.com/cd/E19683-01/806-6642/new-43/index.html explains "
+"which keytable file is used for different dip switch settings. The "
+"information in that table can be summarized in this table:"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:35
+msgid "Language selection values for escc.chnA-sunkbd-layout"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:39
+msgid "Hexadecimal value"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:40
+msgid "Decimal value"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:41
+msgid "Language code"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:42
+msgid "0x21"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:43
+msgid "33"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:44
+msgid "en-us"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:45
+msgid "0x23"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:46
+msgid "35"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:47
+msgid "fr"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:48
+msgid "0x24"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:49
+msgid "36"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:50
+msgid "da"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:51
+msgid "0x25"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:52
+msgid "37"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:53
+msgid "de"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:54
+msgid "0x26"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:55
+msgid "38"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:56
+msgid "it"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:57
+msgid "0x27"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:58
+msgid "39"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:59
+msgid "nl"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:60
+msgid "0x28"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:61
+msgid "40"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:62
+msgid "no"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:63
+msgid "0x29"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:64
+msgid "41"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:65
+msgid "pt"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:66
+msgid "0x2a"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:67
+msgid "42"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:68
+msgid "es"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:69
+msgid "0x2b"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:70
+msgid "43"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:71
+msgid "sv"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:72
+msgid "0x2c"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:73
+msgid "44"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:74
+msgid "fr-ch"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:75
+msgid "0x2d"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:76
+msgid "45"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:77
+msgid "de-ch"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:78
+msgid "0x2e"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:79
+msgid "46"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:80
+msgid "en-gb"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:81
+msgid "0x2f"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:82
+msgid "47"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:83
+msgid "ko"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:84
+msgid "0x30"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:85
+msgid "48"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:86
+msgid "tw"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:87
+msgid "0x31"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:88
+msgid "49"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:89
+msgid "ja"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:90
+msgid "0x32"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:91
+msgid "50"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:92
+msgid "fr-ca"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:93
+msgid "0x33"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:94
+msgid "51"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:95
+msgid "hu"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:96
+msgid "0x34"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:97
+msgid "52"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:98
+msgid "pl"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:99
+msgid "0x35"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:100
+msgid "53"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:101
+msgid "cz"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:102
+msgid "0x36"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:103
+msgid "54"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:104
+msgid "ru"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:105
+msgid "0x37"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:106
+msgid "55"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:107
+msgid "lv"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:108
+msgid "0x38"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:109
+msgid "56"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:110
+msgid "tr"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:111
+msgid "0x39"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:112
+msgid "57"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:113
+msgid "gr"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:114
+msgid "0x3a"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:115
+msgid "58"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:116
+msgid "ar"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:117
+msgid "0x3b"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:118
+msgid "59"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:119
+msgid "lt"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:120
+#: ../../../system/devices/keyboard.rst:123
+msgid "0x3c"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:121
+#: ../../../system/devices/keyboard.rst:124
+msgid "60"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:122
+msgid "nl-be"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:125
+msgid "be"
+msgstr ""
+
+#: ../../../system/devices/keyboard.rst:127
+msgid ""
+"Not all dip switch values have a corresponding language code and both \"be\" "
+"and \"nl-be\" correspond to the same dip switch value. By default, if no "
+"value is given to escc.chnA-sunkbd-layout 0x21 (en-us) will be used."
+msgstr ""
