@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU 10.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-23 10:37+0000\n"
+"POT-Creation-Date: 2026-03-24 12:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -535,6 +535,7 @@ msgstr ""
 
 #: ../../../about/emulation.rst:260 ../../../about/emulation.rst:325
 #: ../../../about/emulation.rst:371 ../../../about/emulation.rst:419
+#: ../../../about/emulation.rst:466
 msgid "Behaviour can be tweaked with the following arguments:"
 msgstr ""
 
@@ -544,26 +545,27 @@ msgstr ""
 
 #: ../../../about/emulation.rst:266 ../../../about/emulation.rst:285
 #: ../../../about/emulation.rst:331 ../../../about/emulation.rst:377
-#: ../../../about/emulation.rst:425 ../../../about/emulation.rst:491
-#: ../../../about/emulation.rst:613 ../../../about/emulation.rst:731
-#: ../../../about/emulation.rst:809
+#: ../../../about/emulation.rst:425 ../../../about/emulation.rst:472
+#: ../../../about/emulation.rst:501 ../../../about/emulation.rst:623
+#: ../../../about/emulation.rst:741 ../../../about/emulation.rst:819
 msgid "Option"
 msgstr ""
 
 #: ../../../about/emulation.rst:267 ../../../about/emulation.rst:286
 #: ../../../about/emulation.rst:332 ../../../about/emulation.rst:378
-#: ../../../about/emulation.rst:426 ../../../about/emulation.rst:492
-#: ../../../about/emulation.rst:614 ../../../about/emulation.rst:732
-#: ../../../about/emulation.rst:810
+#: ../../../about/emulation.rst:426 ../../../about/emulation.rst:473
+#: ../../../about/emulation.rst:502 ../../../about/emulation.rst:624
+#: ../../../about/emulation.rst:742 ../../../about/emulation.rst:820
 msgid "Description"
 msgstr ""
 
 #: ../../../about/emulation.rst:268 ../../../about/emulation.rst:333
-#: ../../../about/emulation.rst:379
+#: ../../../about/emulation.rst:379 ../../../about/emulation.rst:474
 msgid "inline=true|false"
 msgstr ""
 
 #: ../../../about/emulation.rst:269 ../../../about/emulation.rst:334
+#: ../../../about/emulation.rst:475
 msgid "Use faster inline addition of a single counter."
 msgstr ""
 
@@ -863,18 +865,22 @@ msgid ""
 msgstr ""
 
 #: ../../../about/emulation.rst:468
+msgid "Hot Blocks plugin arguments"
+msgstr ""
+
+#: ../../../about/emulation.rst:478
 msgid "Hot Pages"
 msgstr ""
 
-#: ../../../about/emulation.rst:470
+#: ../../../about/emulation.rst:480
 msgid "``contrib/plugins/hotpages.c``"
 msgstr ""
 
-#: ../../../about/emulation.rst:472
+#: ../../../about/emulation.rst:482
 msgid "Similar to hotblocks but this time tracks memory accesses::"
 msgstr ""
 
-#: ../../../about/emulation.rst:474
+#: ../../../about/emulation.rst:484
 msgid ""
 "$ qemu-aarch64 \\\n"
 "  -plugin contrib/plugins/libhotpages.so -d plugin \\\n"
@@ -888,50 +894,50 @@ msgid ""
 "0x0000000048a000, 0x0001, 1826, 0x0001, 11"
 msgstr ""
 
-#: ../../../about/emulation.rst:485
+#: ../../../about/emulation.rst:495
 msgid "The hotpages plugin can be configured using the following arguments:"
 msgstr ""
 
-#: ../../../about/emulation.rst:487
+#: ../../../about/emulation.rst:497
 msgid "Hot pages arguments"
 msgstr ""
 
-#: ../../../about/emulation.rst:493
+#: ../../../about/emulation.rst:503
 msgid "sortby=reads|writes|address"
 msgstr ""
 
-#: ../../../about/emulation.rst:494
+#: ../../../about/emulation.rst:504
 msgid ""
 "Log the data sorted by either the number of reads, the number of writes, or "
 "memory address. (Default: entries are sorted by the sum of reads and writes)"
 msgstr ""
 
-#: ../../../about/emulation.rst:496
+#: ../../../about/emulation.rst:506
 msgid "io=on"
 msgstr ""
 
-#: ../../../about/emulation.rst:497
+#: ../../../about/emulation.rst:507
 msgid ""
 "Track IO addresses. Only relevant to full system emulation. (Default: off)"
 msgstr ""
 
-#: ../../../about/emulation.rst:498
+#: ../../../about/emulation.rst:508
 msgid "pagesize=N"
 msgstr ""
 
-#: ../../../about/emulation.rst:499
+#: ../../../about/emulation.rst:509
 msgid "The page size used. (Default: N = 4096)"
 msgstr ""
 
-#: ../../../about/emulation.rst:502
+#: ../../../about/emulation.rst:512
 msgid "Instruction Distribution"
 msgstr ""
 
-#: ../../../about/emulation.rst:504
+#: ../../../about/emulation.rst:514
 msgid "``contrib/plugins/howvec.c``"
 msgstr ""
 
-#: ../../../about/emulation.rst:506
+#: ../../../about/emulation.rst:516
 msgid ""
 "This is an instruction classifier so can be used to count different types of "
 "instructions. It has a number of options to refine which get counted. You "
@@ -940,18 +946,18 @@ msgid ""
 "accesses::"
 msgstr ""
 
-#: ../../../about/emulation.rst:512
+#: ../../../about/emulation.rst:522
 msgid ""
 "$ qemu-system-aarch64 $(QEMU_ARGS) \\\n"
 "  -append \"root=/dev/sda2 systemd.unit=benchmark.service\" \\\n"
 "  -smp 4 -plugin ./contrib/plugins/libhowvec.so,count=sreg -d plugin"
 msgstr ""
 
-#: ../../../about/emulation.rst:516
+#: ../../../about/emulation.rst:526
 msgid "which will lead to a sorted list after the class breakdown::"
 msgstr ""
 
-#: ../../../about/emulation.rst:518
+#: ../../../about/emulation.rst:528
 msgid ""
 "Instruction Classes:\n"
 "Class:   UDEF                   not counted\n"
@@ -1007,22 +1013,22 @@ msgid ""
 "..."
 msgstr ""
 
-#: ../../../about/emulation.rst:561
+#: ../../../about/emulation.rst:571
 msgid ""
 "To find the argument shorthand for the class you need to examine the source "
 "code of the plugin at the moment, specifically the ``*opt`` argument in the "
 "InsnClassExecCount tables."
 msgstr ""
 
-#: ../../../about/emulation.rst:566
+#: ../../../about/emulation.rst:576
 msgid "Lockstep Execution"
 msgstr ""
 
-#: ../../../about/emulation.rst:568
+#: ../../../about/emulation.rst:578
 msgid "``contrib/plugins/lockstep.c``"
 msgstr ""
 
-#: ../../../about/emulation.rst:570
+#: ../../../about/emulation.rst:580
 msgid ""
 "This is a debugging tool for developers who want to find out when and where "
 "execution diverges after a subtle change to TCG code generation. It is not "
@@ -1036,7 +1042,7 @@ msgid ""
 "will communicate over::"
 msgstr ""
 
-#: ../../../about/emulation.rst:583
+#: ../../../about/emulation.rst:593
 msgid ""
 "$ qemu-system-sparc -monitor none -parallel none \\\n"
 "  -net none -M SS-20 -m 256 -kernel day11/zImage.elf \\\n"
@@ -1044,11 +1050,11 @@ msgid ""
 "  -d plugin,nochain"
 msgstr ""
 
-#: ../../../about/emulation.rst:588
+#: ../../../about/emulation.rst:598
 msgid "which will eventually report::"
 msgstr ""
 
-#: ../../../about/emulation.rst:590
+#: ../../../about/emulation.rst:600
 msgid ""
 "qemu-system-sparc: warning: nic lance.0 has no peer\n"
 "@ 0x000000ffd06678 vs 0x000000ffd001e0 (2/1 since last)\n"
@@ -1061,45 +1067,45 @@ msgid ""
 "  previously @ 0x000000ffd080c0/1 (809900588 insns)"
 msgstr ""
 
-#: ../../../about/emulation.rst:602
+#: ../../../about/emulation.rst:612
 msgid "Hardware Profile"
 msgstr ""
 
-#: ../../../about/emulation.rst:604
+#: ../../../about/emulation.rst:614
 msgid "``contrib/plugins/hwprofile.c``"
 msgstr ""
 
-#: ../../../about/emulation.rst:606
+#: ../../../about/emulation.rst:616
 msgid ""
 "The hwprofile tool can only be used with system emulation and allows the "
 "user to see what hardware is accessed how often. It has a number of options:"
 msgstr ""
 
-#: ../../../about/emulation.rst:609
+#: ../../../about/emulation.rst:619
 msgid "Hardware Profile arguments"
 msgstr ""
 
-#: ../../../about/emulation.rst:615
+#: ../../../about/emulation.rst:625
 msgid "track=[read|write]"
 msgstr ""
 
-#: ../../../about/emulation.rst:616
+#: ../../../about/emulation.rst:626
 msgid ""
 "By default the plugin tracks both reads and writes. You can use this option "
 "to limit the tracking to just one class of accesses."
 msgstr ""
 
-#: ../../../about/emulation.rst:618
+#: ../../../about/emulation.rst:628
 msgid "source"
 msgstr ""
 
-#: ../../../about/emulation.rst:619
+#: ../../../about/emulation.rst:629
 msgid ""
 "Will include a detailed break down of what the guest PC that made the access "
 "was. Not compatible with the pattern option. Example output::"
 msgstr ""
 
-#: ../../../about/emulation.rst:622
+#: ../../../about/emulation.rst:632
 msgid ""
 "cirrus-low-memory @ 0xfffffd00000a0000\n"
 " pc:fffffc0000005cdc, 1, 256\n"
@@ -1107,18 +1113,18 @@ msgid ""
 " pc:fffffc0000005cec, 1, 256"
 msgstr ""
 
-#: ../../../about/emulation.rst:627
+#: ../../../about/emulation.rst:637
 msgid "pattern"
 msgstr ""
 
-#: ../../../about/emulation.rst:628
+#: ../../../about/emulation.rst:638
 msgid ""
 "Instead break down the accesses based on the offset into the HW region. This "
 "can be useful for seeing the most used registers of a device. Example "
 "output::"
 msgstr ""
 
-#: ../../../about/emulation.rst:632
+#: ../../../about/emulation.rst:642
 msgid ""
 "pci0-conf @ 0xfffffd01fe000000\n"
 "  off:00000004, 1, 1\n"
@@ -1130,36 +1136,36 @@ msgid ""
 "  ..."
 msgstr ""
 
-#: ../../../about/emulation.rst:643
+#: ../../../about/emulation.rst:653
 msgid "Execution Log"
 msgstr ""
 
-#: ../../../about/emulation.rst:645
+#: ../../../about/emulation.rst:655
 msgid "``contrib/plugins/execlog.c``"
 msgstr ""
 
-#: ../../../about/emulation.rst:647
+#: ../../../about/emulation.rst:657
 msgid ""
 "The execlog tool traces executed instructions with memory access. It can be "
 "used for debugging and security analysis purposes. Please be aware that this "
 "will generate a lot of output."
 msgstr ""
 
-#: ../../../about/emulation.rst:651
+#: ../../../about/emulation.rst:661
 msgid "The plugin needs default argument::"
 msgstr ""
 
-#: ../../../about/emulation.rst:653
+#: ../../../about/emulation.rst:663
 msgid ""
 "$ qemu-system-arm $(QEMU_ARGS) \\\n"
 "  -plugin ./contrib/plugins/libexeclog.so -d plugin"
 msgstr ""
 
-#: ../../../about/emulation.rst:656
+#: ../../../about/emulation.rst:666
 msgid "which will output an execution trace following this structure::"
 msgstr ""
 
-#: ../../../about/emulation.rst:658
+#: ../../../about/emulation.rst:668
 msgid ""
 "# vCPU, vAddr, opcode, disassembly[, load/store, memory addr, device]...\n"
 "0, 0xa12, 0xf8012400, \"movs r4, #0\"\n"
@@ -1174,40 +1180,40 @@ msgid ""
 "0, 0x10c8, 0xfff96c43, \"ldr r3, [r0, #0x44]\", load, 0x200000e4, RAM"
 msgstr ""
 
-#: ../../../about/emulation.rst:669
+#: ../../../about/emulation.rst:679
 msgid ""
 "Please note that you need to configure QEMU with Capstone support to get "
 "disassembly."
 msgstr ""
 
-#: ../../../about/emulation.rst:671
+#: ../../../about/emulation.rst:681
 msgid ""
 "The output can be filtered to only track certain instructions or addresses "
 "using the ``ifilter`` or ``afilter`` options. You can stack the arguments if "
 "required::"
 msgstr ""
 
-#: ../../../about/emulation.rst:675
+#: ../../../about/emulation.rst:685
 msgid ""
 "$ qemu-system-arm $(QEMU_ARGS) \\\n"
 "  -plugin ./contrib/plugins/libexeclog.so,ifilter=st1w,afilter=0x40001808 -d "
 "plugin"
 msgstr ""
 
-#: ../../../about/emulation.rst:678
+#: ../../../about/emulation.rst:688
 msgid ""
 "This plugin can also dump registers when they change value. Specify the name "
 "of the registers with multiple ``reg`` options. You can also use glob style "
 "matching if you wish::"
 msgstr ""
 
-#: ../../../about/emulation.rst:681
+#: ../../../about/emulation.rst:691
 msgid ""
 "$ qemu-system-arm $(QEMU_ARGS) \\\n"
 "  -plugin ./contrib/plugins/libexeclog.so,reg=\\*_el2,reg=sp -d plugin"
 msgstr ""
 
-#: ../../../about/emulation.rst:684
+#: ../../../about/emulation.rst:694
 msgid ""
 "Be aware that each additional register to check will slow down execution "
 "quite considerably. You can optimise the number of register checks done by "
@@ -1217,39 +1223,39 @@ msgid ""
 "catch these cases::"
 msgstr ""
 
-#: ../../../about/emulation.rst:691
+#: ../../../about/emulation.rst:701
 msgid ""
 "$ qemu-system-arm $(QEMU_ARGS) \\\n"
 "  -plugin ./contrib/plugins/libexeclog.so,ifilter=msr,ifilter=blr,reg=x30,"
 "reg=\\*_el1,rdisas=on"
 msgstr ""
 
-#: ../../../about/emulation.rst:695
+#: ../../../about/emulation.rst:705
 msgid "Cache Modelling"
 msgstr ""
 
-#: ../../../about/emulation.rst:697
+#: ../../../about/emulation.rst:707
 msgid "``contrib/plugins/cache.c``"
 msgstr ""
 
-#: ../../../about/emulation.rst:699
+#: ../../../about/emulation.rst:709
 msgid ""
 "Cache modelling plugin that measures the performance of a given L1 cache "
 "configuration, and optionally a unified L2 per-core cache when a given "
 "working set is run::"
 msgstr ""
 
-#: ../../../about/emulation.rst:703
+#: ../../../about/emulation.rst:713
 msgid ""
 "$ qemu-x86_64 -plugin ./contrib/plugins/libcache.so \\\n"
 "    -d plugin -D cache.log ./tests/tcg/x86_64-linux-user/float_convs"
 msgstr ""
 
-#: ../../../about/emulation.rst:706
+#: ../../../about/emulation.rst:716
 msgid "will report the following::"
 msgstr ""
 
-#: ../../../about/emulation.rst:708
+#: ../../../about/emulation.rst:718
 msgid ""
 "core #, data accesses, data misses, dmiss rate, insn accesses, insn misses, "
 "imiss rate\n"
@@ -1271,175 +1277,175 @@ msgid ""
 "..."
 msgstr ""
 
-#: ../../../about/emulation.rst:725
+#: ../../../about/emulation.rst:735
 msgid "The plugin has a number of arguments, all of them are optional:"
 msgstr ""
 
-#: ../../../about/emulation.rst:727
+#: ../../../about/emulation.rst:737
 msgid "Cache modelling arguments"
 msgstr ""
 
-#: ../../../about/emulation.rst:733
+#: ../../../about/emulation.rst:743
 msgid "limit=N"
 msgstr ""
 
-#: ../../../about/emulation.rst:734
+#: ../../../about/emulation.rst:744
 msgid ""
 "Print top N icache and dcache thrashing instructions along with their "
 "address, number of misses, and its disassembly. (default: 32)"
 msgstr ""
 
-#: ../../../about/emulation.rst:736
+#: ../../../about/emulation.rst:746
 msgid "icachesize=N iblksize=B iassoc=A"
 msgstr ""
 
-#: ../../../about/emulation.rst:739
+#: ../../../about/emulation.rst:749
 msgid ""
 "Instruction cache configuration arguments. They specify the cache size, "
 "block size, and associativity of the instruction cache, respectively. "
 "(default: N = 16384, B = 64, A = 8)"
 msgstr ""
 
-#: ../../../about/emulation.rst:742
+#: ../../../about/emulation.rst:752
 msgid "dcachesize=N"
 msgstr ""
 
-#: ../../../about/emulation.rst:743
+#: ../../../about/emulation.rst:753
 msgid "Data cache size (default: 16834)"
 msgstr ""
 
-#: ../../../about/emulation.rst:744
+#: ../../../about/emulation.rst:754
 msgid "dblksize=B"
 msgstr ""
 
-#: ../../../about/emulation.rst:745
+#: ../../../about/emulation.rst:755
 msgid "Data cache block size (default: 64)"
 msgstr ""
 
-#: ../../../about/emulation.rst:746
+#: ../../../about/emulation.rst:756
 msgid "dassoc=A"
 msgstr ""
 
-#: ../../../about/emulation.rst:747
+#: ../../../about/emulation.rst:757
 msgid "Data cache associativity (default: 8)"
 msgstr ""
 
-#: ../../../about/emulation.rst:748
+#: ../../../about/emulation.rst:758
 msgid "evict=POLICY"
 msgstr ""
 
-#: ../../../about/emulation.rst:749
+#: ../../../about/emulation.rst:759
 msgid ""
 "Sets the eviction policy to POLICY. Available policies are: ``lru``, "
 "``fifo``, and ``rand``. The plugin will use the specified policy for both "
 "instruction and data caches. (default: POLICY = ``lru``)"
 msgstr ""
 
-#: ../../../about/emulation.rst:753
+#: ../../../about/emulation.rst:763
 msgid "cores=N"
 msgstr ""
 
-#: ../../../about/emulation.rst:754
+#: ../../../about/emulation.rst:764
 msgid ""
 "Sets the number of cores for which we maintain separate icache and dcache. "
 "(default: for linux-user, N = 1, for full system emulation: N = cores "
 "available to guest)"
 msgstr ""
 
-#: ../../../about/emulation.rst:757
+#: ../../../about/emulation.rst:767
 msgid "l2=on"
 msgstr ""
 
-#: ../../../about/emulation.rst:758
+#: ../../../about/emulation.rst:768
 msgid ""
 "Simulates a unified L2 cache (stores blocks for both instructions and data) "
 "using the default L2 configuration (cache size = 2MB, associativity = 16-"
 "way, block size = 64B)."
 msgstr ""
 
-#: ../../../about/emulation.rst:761
+#: ../../../about/emulation.rst:771
 msgid "l2cachesize=N"
 msgstr ""
 
-#: ../../../about/emulation.rst:762
+#: ../../../about/emulation.rst:772
 msgid "L2 cache size (default: 2097152 (2MB)), implies ``l2=on``"
 msgstr ""
 
-#: ../../../about/emulation.rst:763
+#: ../../../about/emulation.rst:773
 msgid "l2blksize=B"
 msgstr ""
 
-#: ../../../about/emulation.rst:764
+#: ../../../about/emulation.rst:774
 msgid "L2 cache block size (default: 64), implies ``l2=on``"
 msgstr ""
 
-#: ../../../about/emulation.rst:765
+#: ../../../about/emulation.rst:775
 msgid "l2assoc=A"
 msgstr ""
 
-#: ../../../about/emulation.rst:766
+#: ../../../about/emulation.rst:776
 msgid "L2 cache associativity (default: 16), implies ``l2=on``"
 msgstr ""
 
-#: ../../../about/emulation.rst:769
+#: ../../../about/emulation.rst:779
 msgid "Stop on Trigger"
 msgstr ""
 
-#: ../../../about/emulation.rst:771
+#: ../../../about/emulation.rst:781
 msgid "``contrib/plugins/stoptrigger.c``"
 msgstr ""
 
-#: ../../../about/emulation.rst:773
+#: ../../../about/emulation.rst:783
 msgid ""
 "The stoptrigger plugin allows to setup triggers to stop emulation. It can be "
 "used for research purposes to launch some code and precisely stop it and "
 "understand where its execution flow went."
 msgstr ""
 
-#: ../../../about/emulation.rst:777
+#: ../../../about/emulation.rst:787
 msgid ""
 "Two types of triggers can be configured: a count of instructions to stop at, "
 "or an address to stop at. Multiple triggers can be set at once."
 msgstr ""
 
-#: ../../../about/emulation.rst:780
+#: ../../../about/emulation.rst:790
 msgid ""
 "By default, QEMU will exit with return code 0. A custom return code can be "
 "configured for each trigger using ``:CODE`` syntax."
 msgstr ""
 
-#: ../../../about/emulation.rst:783
+#: ../../../about/emulation.rst:793
 msgid ""
 "For example, to stop at the 20-th instruction with return code 41, at "
 "address 0xd4 with return code 0 or at address 0xd8 with return code 42::"
 msgstr ""
 
-#: ../../../about/emulation.rst:786
+#: ../../../about/emulation.rst:796
 msgid ""
 "$ qemu-system-aarch64 $(QEMU_ARGS) \\\n"
 "  -plugin ./contrib/plugins/libstoptrigger.so,icount=20:41,addr=0xd4,"
 "addr=0xd8:42 -d plugin"
 msgstr ""
 
-#: ../../../about/emulation.rst:789
+#: ../../../about/emulation.rst:799
 msgid "The plugin will log the reason of exit, for example::"
 msgstr ""
 
-#: ../../../about/emulation.rst:791
+#: ../../../about/emulation.rst:801
 msgid "0xd4 reached, exiting"
 msgstr ""
 
-#: ../../../about/emulation.rst:794
+#: ../../../about/emulation.rst:804
 msgid "Limit instructions per second"
 msgstr ""
 
-#: ../../../about/emulation.rst:796
+#: ../../../about/emulation.rst:806
 msgid ""
 "This plugin can limit the number of Instructions Per Second that are "
 "executed::"
 msgstr ""
 
-#: ../../../about/emulation.rst:798
+#: ../../../about/emulation.rst:808
 msgid ""
 "# get number of instructions\n"
 "$ num_insn=$(./build/qemu-x86_64 -plugin ./build/tests/plugin/libinsn.so -d "
@@ -1450,36 +1456,36 @@ msgid ""
 "real 10.000s"
 msgstr ""
 
-#: ../../../about/emulation.rst:805
+#: ../../../about/emulation.rst:815
 msgid "IPS arguments"
 msgstr ""
 
-#: ../../../about/emulation.rst:811
+#: ../../../about/emulation.rst:821
 msgid "ips=N"
 msgstr ""
 
-#: ../../../about/emulation.rst:812
+#: ../../../about/emulation.rst:822
 msgid ""
 "Maximum number of instructions per cpu that can be executed in one second. "
 "The plugin will sleep when the given number of instructions is reached."
 msgstr ""
 
-#: ../../../about/emulation.rst:814
+#: ../../../about/emulation.rst:824
 msgid "ipq=N"
 msgstr ""
 
-#: ../../../about/emulation.rst:815
+#: ../../../about/emulation.rst:825
 msgid ""
 "Instructions per quantum. How many instructions before we re-calculate time. "
 "The lower the number the more accurate time will be, but the less efficient "
 "the plugin. Defaults to ips/10"
 msgstr ""
 
-#: ../../../about/emulation.rst:820
+#: ../../../about/emulation.rst:830
 msgid "Other emulation features"
 msgstr ""
 
-#: ../../../about/emulation.rst:822
+#: ../../../about/emulation.rst:832
 msgid ""
 "When running system emulation you can also enable deterministic execution "
 "which allows for repeatable record/replay debugging. See :ref:`Record/"
