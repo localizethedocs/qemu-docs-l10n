@@ -1,0 +1,667 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-23 09:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/qemu-colo.rst:4
+msgid "Qemu COLO Fault Tolerance"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:6
+msgid "This document gives an overview of COLO's design and how to use it."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:9
+msgid "Background"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:10
+msgid ""
+"Virtual machine (VM) replication is a well known technique for providing "
+"application-agnostic software-implemented hardware fault tolerance, also "
+"known as \"non-stop service\"."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:14
+msgid ""
+"COLO (COarse-grained LOck-stepping) is a high availability solution. Both "
+"primary VM (PVM) and secondary VM (SVM) run in parallel. They receive the "
+"same request from client, and generate response in parallel too. If the "
+"response packets from PVM and SVM are identical, they are released "
+"immediately. Otherwise, a VM checkpoint (on demand) is conducted."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:21
+msgid "Architecture"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:22
+msgid ""
+"The architecture of COLO is shown in the diagram below. It consists of a "
+"pair of networked physical nodes: The primary node running the PVM, and the "
+"secondary node running the SVM to maintain a valid replica of the PVM. PVM "
+"and SVM execute in parallel and generate output of response packets for "
+"client requests according to the application semantics."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:29
+msgid ""
+"The incoming packets from the client or external network are received by the "
+"primary node, and then forwarded to the secondary node, so that both the PVM "
+"and the SVM are stimulated with the same requests."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:33
+msgid ""
+"COLO receives the outbound packets from both the PVM and SVM and compares "
+"them before allowing the output to be sent to clients."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:36
+msgid ""
+"The SVM is qualified as a valid replica of the PVM, as long as it generates "
+"identical responses to all client requests. Once the differences in the "
+"outputs are detected between the PVM and SVM, COLO withholds transmission of "
+"the outbound packets until it has successfully synchronized the PVM state to "
+"the SVM."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:41 ../../../system/qemu-colo.rst:118
+msgid "Overview::"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:43
+msgid ""
+"  Primary Node                                                            "
+"Secondary Node\n"
+"+------------+  +-----------------------+       +------------------------+  "
+"+------------+\n"
+"|            |  |       HeartBeat       +<----->+       HeartBeat        |  "
+"|            |\n"
+"| Primary VM |  +-----------+-----------+       +-----------+------------+  |"
+"Secondary VM|\n"
+"|            |              |                               |               "
+"|            |\n"
+"|            |  +-----------|-----------+       +-----------|------------+  "
+"|            |\n"
+"|            |  |QEMU   +---v----+      |       |QEMU  +----v---+        |  "
+"|            |\n"
+"|            |  |       |Failover|      |       |      |Failover|        |  "
+"|            |\n"
+"|            |  |       +--------+      |       |      +--------+        |  "
+"|            |\n"
+"|            |  |   +---------------+   |       |   +---------------+    |  "
+"|            |\n"
+"|            |  |   | VM Checkpoint +-------------->+ VM Checkpoint |    |  "
+"|            |\n"
+"|            |  |   +---------------+   |       |   +---------------+    |  "
+"|            |\n"
+"|Requests<--------------------------\\ /-----------------"
+"\\ /--------------------->Requests|\n"
+"|            |  |                   ^ ^ |       |       | |              |  "
+"|            |\n"
+"|Responses+---------------------\\ /-|-|------------"
+"\\ /-------------------------+Responses|\n"
+"|            |  |               | | | | |       |  | |  | |              |  "
+"|            |\n"
+"|            |  | +-----------+ | | | | |       |  | |  | | +----------+ |  "
+"|            |\n"
+"|            |  | | COLO disk | | | | | |       |  | |  | | | COLO disk| |  "
+"|            |\n"
+"|            |  | |   Manager +---------------------------->| Manager  | |  "
+"|            |\n"
+"|            |  | ++----------+ v v | | |       |  | v  v | +---------++ |  "
+"|            |\n"
+"|            |  |  |+-----------+-+-+-++|       | ++-+--+-+---------+ |  |  "
+"|            |\n"
+"|            |  |  ||   COLO Proxy     ||       | |   COLO Proxy    | |  |  "
+"|            |\n"
+"|            |  |  || (compare packet  ||       | |(adjust sequence | |  |  "
+"|            |\n"
+"|            |  |  ||and mirror packet)||       | |    and ACK)     | |  |  "
+"|            |\n"
+"|            |  |  |+------------+---+-+|       | +-----------------+ |  |  "
+"|            |\n"
+"+------------+  +-----------------------+       +------------------------+  "
+"+------------+\n"
+"+------------+     |             |   |                                |     "
+"+------------+\n"
+"| VM Monitor |     |             |   |                                |     "
+"| VM Monitor |\n"
+"+------------+     |             |   |                                |     "
+"+------------+\n"
+"+---------------------------------------+       "
+"+----------------------------------------+\n"
+"|   Kernel         |             |   |  |       |   Kernel            "
+"|                  |\n"
+"+---------------------------------------+       "
+"+----------------------------------------+\n"
+"                   |             |   |                                |\n"
+"    +--------------v+  +---------v---+--+       +------------------+ "
+"+v-------------+\n"
+"    |   Storage     |  |External Network|       | External Network | |   "
+"Storage    |\n"
+"    +---------------+  +----------------+       +------------------+ "
+"+--------------+"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:81
+msgid "Components"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:82
+msgid ""
+"You can see there are several components in COLO's diagram of architecture. "
+"Their functions are described below."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:86
+msgid "HeartBeat"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:87
+msgid ""
+"Runs on both the primary and secondary nodes, to periodically check platform "
+"availability. When the primary node suffers a hardware fail-stop failure, "
+"the heartbeat stops responding, the secondary node will trigger a failover "
+"as soon as it determines the absence."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:93
+msgid "COLO disk Manager"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:94
+msgid ""
+"When primary VM writes data into image, the colo disk manager captures this "
+"data and sends it to secondary VM's which makes sure the context of "
+"secondary VM's image is consistent with the context of primary VM 's image. "
+"For more details, please refer to docs/block-replication.txt."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:100
+msgid "Checkpoint/Failover Controller"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:101
+msgid ""
+"Modifications of save/restore flow to realize continuous migration, to make "
+"sure the state of VM in Secondary side is always consistent with VM in "
+"Primary side."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:106
+msgid "COLO Proxy"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:107
+msgid ""
+"Delivers packets to Primary and Secondary, and then compare the responses "
+"from both side. Then decide whether to start a checkpoint according to some "
+"rules. Please refer to docs/colo-proxy.txt for more information."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:111
+msgid ""
+"Note: HeartBeat has not been implemented yet, so you need to trigger "
+"failover process by using 'x-colo-lost-heartbeat' command."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:116
+msgid "COLO operation status"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:120
+msgid ""
+"+-----------------+\n"
+"|                 |\n"
+"|    Start COLO   |\n"
+"|                 |\n"
+"+--------+--------+\n"
+"         |\n"
+"         |  Main qmp command:\n"
+"         |  migrate-set-capabilities with x-colo\n"
+"         |  migrate\n"
+"         |\n"
+"         v\n"
+"+--------+--------+\n"
+"|                 |\n"
+"|  COLO running   |\n"
+"|                 |\n"
+"+--------+--------+\n"
+"         |\n"
+"         |  Main qmp command:\n"
+"         |  x-colo-lost-heartbeat\n"
+"         |  or\n"
+"         |  some error happened\n"
+"         v\n"
+"+--------+--------+\n"
+"|                 |  send qmp event:\n"
+"|  COLO failover  |  COLO_EXIT\n"
+"|                 |\n"
+"+-----------------+"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:149
+msgid ""
+"COLO use the qmp command to switch and report operation status. The diagram "
+"just shows the main qmp command, you can get the detail in test procedure."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:154
+msgid "Test procedure"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:157
+msgid "Setup"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:159
+msgid ""
+"Here we are running both instances on the same host for testing, change the "
+"IP Addresses if you want to run it on two hosts. Initially ``127.0.0.1`` is "
+"the Primary Host and ``127.0.0.2`` is the Secondary Host."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:163
+msgid ""
+"COLO uses double the guest ram size on the secondary side. The Qemu version "
+"should be the same on both hosts."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:167
+msgid "Startup qemu"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:168
+msgid ""
+"**1. Primary**: Initially, ``$imagefolder/primary.qcow2`` needs to be copied "
+"to all hosts. You don't need to change any IP's here, because ``0.0.0.0`` "
+"listens on any interface. The chardev's with ``127.0.0.1`` IP's loopback to "
+"the local qemu instance::"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:174
+msgid ""
+"# imagefolder=\"/mnt/vms/colo-test-primary\"\n"
+"\n"
+"# qemu-system-x86_64 -enable-kvm -cpu qemu64,kvmclock=on -m 512 -smp 1 -qmp "
+"stdio \\\n"
+"   -device piix3-usb-uhci -device usb-tablet -name primary \\\n"
+"   -netdev tap,id=hn0,vhost=off,helper=/usr/lib/qemu/qemu-bridge-helper \\\n"
+"   -device rtl8139,id=e0,netdev=hn0 \\\n"
+"   -chardev socket,id=mirror0,host=0.0.0.0,port=9003,server=on,wait=off \\\n"
+"   -chardev socket,id=compare1,host=0.0.0.0,port=9004,server=on,wait=on \\\n"
+"   -chardev socket,id=compare0,host=127.0.0.1,port=9001,server=on,wait=off "
+"\\\n"
+"   -chardev socket,id=compare0-0,host=127.0.0.1,port=9001 \\\n"
+"   -chardev socket,id=compare_out,host=127.0.0.1,port=9005,server=on,"
+"wait=off \\\n"
+"   -chardev socket,id=compare_out0,host=127.0.0.1,port=9005 \\\n"
+"   -object filter-mirror,id=m0,netdev=hn0,queue=tx,outdev=mirror0 \\\n"
+"   -object filter-redirector,netdev=hn0,id=redire0,queue=rx,"
+"indev=compare_out \\\n"
+"   -object filter-redirector,netdev=hn0,id=redire1,queue=rx,outdev=compare0 "
+"\\\n"
+"   -object iothread,id=iothread1 \\\n"
+"   -object colo-compare,id=comp0,primary_in=compare0-0,secondary_in=compare1,"
+"\\\n"
+"outdev=compare_out0,iothread=iothread1 \\\n"
+"   -drive if=ide,id=colo-disk0,driver=quorum,read-pattern=fifo,vote-"
+"threshold=1,\\\n"
+"children.0.file.filename=$imagefolder/primary.qcow2,children.0.driver=qcow2 -"
+"S"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:196
+msgid ""
+"**2. Secondary**: Active and hidden images need to be created only once and "
+"the size should be the same as ``primary.qcow2``. Again, you don't need to "
+"change any IP's here, except for the ``$primary_ip`` variable::"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:201
+msgid ""
+"# imagefolder=\"/mnt/vms/colo-test-secondary\"\n"
+"# primary_ip=127.0.0.1\n"
+"\n"
+"# qemu-img create -f qcow2 $imagefolder/secondary-active.qcow2 10G\n"
+"\n"
+"# qemu-img create -f qcow2 $imagefolder/secondary-hidden.qcow2 10G\n"
+"\n"
+"# qemu-system-x86_64 -enable-kvm -cpu qemu64,kvmclock=on -m 512 -smp 1 -qmp "
+"stdio \\\n"
+"   -device piix3-usb-uhci -device usb-tablet -name secondary \\\n"
+"   -netdev tap,id=hn0,vhost=off,helper=/usr/lib/qemu/qemu-bridge-helper \\\n"
+"   -device rtl8139,id=e0,netdev=hn0 \\\n"
+"   -chardev socket,id=red0,host=$primary_ip,port=9003,reconnect-ms=1000 \\\n"
+"   -chardev socket,id=red1,host=$primary_ip,port=9004,reconnect-ms=1000 \\\n"
+"   -object filter-redirector,id=f1,netdev=hn0,queue=tx,indev=red0 \\\n"
+"   -object filter-redirector,id=f2,netdev=hn0,queue=rx,outdev=red1 \\\n"
+"   -object filter-rewriter,id=rew0,netdev=hn0,queue=all \\\n"
+"   -drive if=none,id=parent0,file.filename=$imagefolder/primary.qcow2,"
+"driver=qcow2 \\\n"
+"   -drive if=none,id=childs0,driver=replication,mode=secondary,file."
+"driver=qcow2,\\\n"
+"top-id=colo-disk0,file.file.filename=$imagefolder/secondary-active.qcow2,\\\n"
+"file.backing.driver=qcow2,file.backing.file.filename=$imagefolder/secondary-"
+"hidden.qcow2,\\\n"
+"file.backing.backing=parent0 \\\n"
+"   -drive if=ide,id=colo-disk0,driver=quorum,read-pattern=fifo,vote-"
+"threshold=1,\\\n"
+"children.0=childs0 \\\n"
+"   -incoming tcp:0.0.0.0:9998"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:227
+msgid "**3.** On Secondary VM's QEMU monitor, issue command::"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:229
+msgid ""
+"{\"execute\":\"qmp_capabilities\"}\n"
+"{\"execute\": \"migrate-set-capabilities\", \"arguments\": "
+"{\"capabilities\": [ {\"capability\": \"return-path\", \"state\": true }, "
+"{\"capability\": \"x-colo\", \"state\": true } ] } }\n"
+"{\"execute\": \"nbd-server-start\", \"arguments\": {\"addr\": {\"type\": "
+"\"inet\", \"data\": {\"host\": \"0.0.0.0\", \"port\": \"9999\"} } } }\n"
+"{\"execute\": \"nbd-server-add\", \"arguments\": {\"device\": \"parent0\", "
+"\"writable\": true } }"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:234 ../../../system/qemu-colo.rst:250
+msgid "Note:"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:235
+msgid ""
+"The qmp command ``nbd-server-start`` and ``nbd-server-add`` must be run "
+"before running the qmp command migrate on primary QEMU"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:237
+msgid "Active disk, hidden disk and nbd target's length should be the same."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:239
+msgid ""
+"It is better to put active disk and hidden disk in ramdisk. They will be "
+"merged into the parent disk on failover."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:242
+msgid "**4.** On Primary VM's QEMU monitor, issue command::"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:244
+msgid ""
+"{\"execute\":\"qmp_capabilities\"}\n"
+"{\"execute\": \"blockdev-add\", \"arguments\": {\"driver\": \"nbd\", \"node-"
+"name\": \"nbd0\", \"server\": {\"type\": \"inet\", \"host\": \"127.0.0.2\", "
+"\"port\": \"9999\"}, \"export\": \"parent0\", \"detect-zeroes\": \"on\"} }\n"
+"{\"execute\": \"x-blockdev-change\", \"arguments\":{\"parent\": \"colo-"
+"disk0\", \"node\": \"nbd0\" } }\n"
+"{\"execute\": \"migrate-set-capabilities\", \"arguments\": "
+"{\"capabilities\": [ {\"capability\": \"return-path\", \"state\": true }, "
+"{\"capability\": \"x-colo\", \"state\": true } ] } }\n"
+"{\"execute\": \"migrate\", \"arguments\": {\"uri\": "
+"\"tcp:127.0.0.2:9998\" } }"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:251
+msgid "There should be only one NBD Client for each primary disk."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:252
+msgid ""
+"The qmp command line must be run after running qmp command line in secondary "
+"qemu."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:255
+msgid ""
+"**5.** After the above steps, you will see, whenever you make changes to "
+"PVM, SVM will be synced. You can issue command ``{ \"execute\": \"migrate-"
+"set-parameters\" , \"arguments\":{ \"x-checkpoint-delay\": 2000 } }`` to "
+"change the idle checkpoint period time"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:260
+msgid "Failover test"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:261
+msgid "You can kill one of the VMs and Failover on the surviving VM:"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:263
+msgid ""
+"If you killed the Secondary, then follow \"Primary Failover\". After that, "
+"if you want to resume the replication, follow \"Primary resume replication\""
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:266
+msgid ""
+"If you killed the Primary, then follow \"Secondary Failover\". After that, "
+"if you want to resume the replication, follow \"Secondary resume "
+"replication\""
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:270
+msgid "Primary Failover"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:271
+msgid "The Secondary died, resume on the Primary::"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:273
+msgid ""
+"{\"execute\": \"x-blockdev-change\", \"arguments\":{ \"parent\": \"colo-"
+"disk0\", \"child\": \"children.1\"} }\n"
+"{\"execute\": \"blockdev-del\", \"arguments\": {\"node-name\": \"nbd0\"} }\n"
+"{\"execute\": \"object-del\", \"arguments\":{ \"id\": \"comp0\" } }\n"
+"{\"execute\": \"object-del\", \"arguments\":{ \"id\": \"iothread1\" } }\n"
+"{\"execute\": \"object-del\", \"arguments\":{ \"id\": \"m0\" } }\n"
+"{\"execute\": \"object-del\", \"arguments\":{ \"id\": \"redire0\" } }\n"
+"{\"execute\": \"object-del\", \"arguments\":{ \"id\": \"redire1\" } }\n"
+"{\"execute\": \"x-colo-lost-heartbeat\" }"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:283
+msgid "Secondary Failover"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:284
+msgid ""
+"The Primary died, resume on the Secondary and prepare to become the new "
+"Primary::"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:286
+msgid ""
+"{\"execute\": \"nbd-server-stop\"}\n"
+"{\"execute\": \"x-colo-lost-heartbeat\"}\n"
+"\n"
+"{\"execute\": \"object-del\", \"arguments\":{ \"id\": \"f2\" } }\n"
+"{\"execute\": \"object-del\", \"arguments\":{ \"id\": \"f1\" } }\n"
+"{\"execute\": \"chardev-remove\", \"arguments\":{ \"id\": \"red1\" } }\n"
+"{\"execute\": \"chardev-remove\", \"arguments\":{ \"id\": \"red0\" } }\n"
+"\n"
+"{\"execute\": \"chardev-add\", \"arguments\":{ \"id\": \"mirror0\", "
+"\"backend\": {\"type\": \"socket\", \"data\": {\"addr\": { \"type\": "
+"\"inet\", \"data\": { \"host\": \"0.0.0.0\", \"port\": \"9003\" } }, "
+"\"server\": true } } } }\n"
+"{\"execute\": \"chardev-add\", \"arguments\":{ \"id\": \"compare1\", "
+"\"backend\": {\"type\": \"socket\", \"data\": {\"addr\": { \"type\": "
+"\"inet\", \"data\": { \"host\": \"0.0.0.0\", \"port\": \"9004\" } }, "
+"\"server\": true } } } }\n"
+"{\"execute\": \"chardev-add\", \"arguments\":{ \"id\": \"compare0\", "
+"\"backend\": {\"type\": \"socket\", \"data\": {\"addr\": { \"type\": "
+"\"inet\", \"data\": { \"host\": \"127.0.0.1\", \"port\": \"9001\" } }, "
+"\"server\": true } } } }\n"
+"{\"execute\": \"chardev-add\", \"arguments\":{ \"id\": \"compare0-0\", "
+"\"backend\": {\"type\": \"socket\", \"data\": {\"addr\": { \"type\": "
+"\"inet\", \"data\": { \"host\": \"127.0.0.1\", \"port\": \"9001\" } }, "
+"\"server\": false } } } }\n"
+"{\"execute\": \"chardev-add\", \"arguments\":{ \"id\": \"compare_out\", "
+"\"backend\": {\"type\": \"socket\", \"data\": {\"addr\": { \"type\": "
+"\"inet\", \"data\": { \"host\": \"127.0.0.1\", \"port\": \"9005\" } }, "
+"\"server\": true } } } }\n"
+"{\"execute\": \"chardev-add\", \"arguments\":{ \"id\": \"compare_out0\", "
+"\"backend\": {\"type\": \"socket\", \"data\": {\"addr\": { \"type\": "
+"\"inet\", \"data\": { \"host\": \"127.0.0.1\", \"port\": \"9005\" } }, "
+"\"server\": false } } } }"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:302
+msgid "Primary resume replication"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:303
+msgid "Resume replication after new Secondary is up."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:305
+msgid "Start the new Secondary (Steps 2 and 3 above), then on the Primary::"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:307
+msgid ""
+"{\"execute\": \"drive-mirror\", \"arguments\":{ \"device\": \"colo-disk0\", "
+"\"job-id\": \"resync\", \"target\": \"nbd://127.0.0.2:9999/parent0\", "
+"\"mode\": \"existing\", \"format\": \"raw\", \"sync\": \"full\"} }"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:309 ../../../system/qemu-colo.rst:341
+msgid "Wait until disk is synced, then::"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:311
+msgid ""
+"{\"execute\": \"stop\"}\n"
+"{\"execute\": \"block-job-cancel\", \"arguments\":{ \"device\": "
+"\"resync\"} }\n"
+"\n"
+"{\"execute\": \"blockdev-add\", \"arguments\": {\"driver\": \"nbd\", \"node-"
+"name\": \"nbd0\", \"server\": {\"type\": \"inet\", \"host\": \"127.0.0.2\", "
+"\"port\": \"9999\"}, \"export\": \"parent0\", \"detect-zeroes\": \"on\"} }\n"
+"{\"execute\": \"x-blockdev-change\", \"arguments\":{ \"parent\": \"colo-"
+"disk0\", \"node\": \"nbd0\" } }\n"
+"\n"
+"{\"execute\": \"object-add\", \"arguments\":{ \"qom-type\": \"filter-"
+"mirror\", \"id\": \"m0\", \"netdev\": \"hn0\", \"queue\": \"tx\", "
+"\"outdev\": \"mirror0\" } }\n"
+"{\"execute\": \"object-add\", \"arguments\":{ \"qom-type\": \"filter-"
+"redirector\", \"id\": \"redire0\", \"netdev\": \"hn0\", \"queue\": \"rx\", "
+"\"indev\": \"compare_out\" } }\n"
+"{\"execute\": \"object-add\", \"arguments\":{ \"qom-type\": \"filter-"
+"redirector\", \"id\": \"redire1\", \"netdev\": \"hn0\", \"queue\": \"rx\", "
+"\"outdev\": \"compare0\" } }\n"
+"{\"execute\": \"object-add\", \"arguments\":{ \"qom-type\": \"iothread\", "
+"\"id\": \"iothread1\" } }\n"
+"{\"execute\": \"object-add\", \"arguments\":{ \"qom-type\": \"colo-"
+"compare\", \"id\": \"comp0\", \"primary_in\": \"compare0-0\", "
+"\"secondary_in\": \"compare1\", \"outdev\": \"compare_out0\", \"iothread\": "
+"\"iothread1\" } }\n"
+"\n"
+"{\"execute\": \"migrate-set-capabilities\", \"arguments\":"
+"{ \"capabilities\": [ {\"capability\": \"x-colo\", \"state\": true } ] } }\n"
+"{\"execute\": \"migrate\", \"arguments\":{ \"uri\": "
+"\"tcp:127.0.0.2:9998\" } }"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:326
+msgid ""
+"Note: If this Primary previously was a Secondary, then we need to insert the "
+"filters before the filter-rewriter by using the \"\"insert\": \"before\", "
+"\"position\": \"id=rew0\"\" Options. See below."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:332
+msgid "Secondary resume replication"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:333
+msgid ""
+"Become Primary and resume replication after new Secondary is up. Note that "
+"now 127.0.0.1 is the Secondary and 127.0.0.2 is the Primary."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:336
+msgid ""
+"Start the new Secondary (Steps 2 and 3 above, but with "
+"primary_ip=127.0.0.2), then on the old Secondary::"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:339
+msgid ""
+"{\"execute\": \"drive-mirror\", \"arguments\":{ \"device\": \"colo-disk0\", "
+"\"job-id\": \"resync\", \"target\": \"nbd://127.0.0.1:9999/parent0\", "
+"\"mode\": \"existing\", \"format\": \"raw\", \"sync\": \"full\"} }"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:343
+msgid ""
+"{\"execute\": \"stop\"}\n"
+"{\"execute\": \"block-job-cancel\", \"arguments\":{ \"device\": "
+"\"resync\" } }\n"
+"\n"
+"{\"execute\": \"blockdev-add\", \"arguments\": {\"driver\": \"nbd\", \"node-"
+"name\": \"nbd0\", \"server\": {\"type\": \"inet\", \"host\": \"127.0.0.1\", "
+"\"port\": \"9999\"}, \"export\": \"parent0\", \"detect-zeroes\": \"on\"} }\n"
+"{\"execute\": \"x-blockdev-change\", \"arguments\":{ \"parent\": \"colo-"
+"disk0\", \"node\": \"nbd0\" } }\n"
+"\n"
+"{\"execute\": \"object-add\", \"arguments\":{ \"qom-type\": \"filter-"
+"mirror\", \"id\": \"m0\", \"insert\": \"before\", \"position\": \"id=rew0\", "
+"\"netdev\": \"hn0\", \"queue\": \"tx\", \"outdev\": \"mirror0\" } }\n"
+"{\"execute\": \"object-add\", \"arguments\":{ \"qom-type\": \"filter-"
+"redirector\", \"id\": \"redire0\", \"insert\": \"before\", \"position\": "
+"\"id=rew0\", \"netdev\": \"hn0\", \"queue\": \"rx\", \"indev\": "
+"\"compare_out\" } }\n"
+"{\"execute\": \"object-add\", \"arguments\":{ \"qom-type\": \"filter-"
+"redirector\", \"id\": \"redire1\", \"insert\": \"before\", \"position\": "
+"\"id=rew0\", \"netdev\": \"hn0\", \"queue\": \"rx\", \"outdev\": "
+"\"compare0\" } }\n"
+"{\"execute\": \"object-add\", \"arguments\":{ \"qom-type\": \"iothread\", "
+"\"id\": \"iothread1\" } }\n"
+"{\"execute\": \"object-add\", \"arguments\":{ \"qom-type\": \"colo-"
+"compare\", \"id\": \"comp0\", \"primary_in\": \"compare0-0\", "
+"\"secondary_in\": \"compare1\", \"outdev\": \"compare_out0\", \"iothread\": "
+"\"iothread1\" } }\n"
+"\n"
+"{\"execute\": \"migrate-set-capabilities\", \"arguments\":"
+"{ \"capabilities\": [ {\"capability\": \"x-colo\", \"state\": true } ] } }\n"
+"{\"execute\": \"migrate\", \"arguments\":{ \"uri\": "
+"\"tcp:127.0.0.1:9998\" } }"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:358
+msgid "Copyright (c) 2016 Intel Corporation"
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:359
+msgid "Copyright (c) 2016 HUAWEI TECHNOLOGIES CO., LTD."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:360
+msgid "Copyright (c) 2016 Fujitsu, Corp."
+msgstr ""
+
+#: ../../../system/qemu-colo.rst:361
+msgid "Copyright (c) 2026 Lukas Straub <lukasstraub2@web.de>"
+msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-03-23 09:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,44 +24,61 @@ msgstr ""
 #: ../../../system/devices/virtio/virtio-gpu.rst:9
 msgid ""
 "This document explains the setup and usage of the virtio-gpu device. The "
-"virtio-gpu device paravirtualizes the GPU and display controller."
-msgstr ""
-
-#: ../../../system/devices/virtio/virtio-gpu.rst:13
-msgid "Linux kernel support"
+"virtio-gpu device provides a GPU and display controller paravirtualized "
+"using VirtIO. It supports a number of different modes from simple 2D "
+"displays to fully accelerated 3D graphics."
 msgstr ""
 
 #: ../../../system/devices/virtio/virtio-gpu.rst:15
+msgid "Linux guest kernel support"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:17
 msgid ""
 "virtio-gpu requires a guest Linux kernel built with the "
 "``CONFIG_DRM_VIRTIO_GPU`` option."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:19
-msgid "QEMU virtio-gpu variants"
-msgstr ""
-
 #: ../../../system/devices/virtio/virtio-gpu.rst:21
-msgid "QEMU virtio-gpu device variants come in the following form:"
+msgid "3D acceleration"
 msgstr ""
 
 #: ../../../system/devices/virtio/virtio-gpu.rst:23
+msgid ""
+"3D acceleration of a virtualized GPU is still an evolving field. Depending "
+"on the 3D mode you are running you may need to override distribution "
+"supplied libraries with more recent versions or enable build options. There "
+"are a number of requirements the host must meet to be able to be able to "
+"support guests. QEMU must be able to access the host's GPU and for the best "
+"performance be able to reliably share GPU memory with the guest. Details of "
+"3D acceleration requirements are described in a further sections."
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:33
+msgid "QEMU virtio-gpu variants"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:35
+msgid "QEMU virtio-gpu device variants come in the following form:"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:37
 msgid "``virtio-vga[-BACKEND]``"
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:24
+#: ../../../system/devices/virtio/virtio-gpu.rst:38
 msgid "``virtio-gpu[-BACKEND][-INTERFACE]``"
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:25
+#: ../../../system/devices/virtio/virtio-gpu.rst:39
 msgid "``vhost-user-vga``"
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:26
+#: ../../../system/devices/virtio/virtio-gpu.rst:40
 msgid "``vhost-user-pci``"
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:28
+#: ../../../system/devices/virtio/virtio-gpu.rst:42
 msgid ""
 "**Backends:** QEMU provides a 2D virtio-gpu backend, and two accelerated "
 "backends: virglrenderer ('gl' device label) and rutabaga_gfx ('rutabaga' "
@@ -69,7 +86,7 @@ msgid ""
 "in a separate process for improved isolation."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:33
+#: ../../../system/devices/virtio/virtio-gpu.rst:47
 msgid ""
 "**Interfaces:** QEMU further categorizes virtio-gpu device variants based on "
 "the interface exposed to the guest. The interfaces can be classified into "
@@ -78,7 +95,7 @@ msgid ""
 "gpu."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:39
+#: ../../../system/devices/virtio/virtio-gpu.rst:53
 msgid ""
 "The VGA ones always use the PCI interface, but for the non-VGA ones, the "
 "user can further pick between MMIO or PCI. For MMIO, the user can suffix the "
@@ -87,45 +104,55 @@ msgid ""
 "default will be chosen."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:46
+#: ../../../system/devices/virtio/virtio-gpu.rst:60
 msgid "virtio-gpu 2d"
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:48
+#: ../../../system/devices/virtio/virtio-gpu.rst:62
 msgid ""
 "The default 2D backend only performs 2D operations. The guest needs to "
 "employ a software renderer for 3D graphics."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:51
+#: ../../../system/devices/virtio/virtio-gpu.rst:65
 msgid ""
 "Typically, the software renderer is provided by `Mesa`_ or `SwiftShader`_. "
 "Mesa's implementations (LLVMpipe, Lavapipe and virgl below) work out of box "
 "on typical modern Linux distributions."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:56
+#: ../../../system/devices/virtio/virtio-gpu.rst:70
 msgid "-device virtio-gpu"
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:62
+#: ../../../system/devices/virtio/virtio-gpu.rst:76
 msgid "virtio-gpu virglrenderer"
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:64
+#: ../../../system/devices/virtio/virtio-gpu.rst:78
 msgid ""
-"When using virgl accelerated graphics mode in the guest, OpenGL API calls "
+"When using `virgl`_ accelerated graphics mode in the guest, OpenGL API calls "
 "are translated into an intermediate representation (see `Gallium3D`_). The "
 "intermediate representation is communicated to the host and the "
 "`virglrenderer`_ library on the host translates the intermediate "
 "representation back to OpenGL API calls."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:71
-msgid "-device virtio-gpu-gl"
+#: ../../../system/devices/virtio/virtio-gpu.rst:84
+msgid ""
+"By default OpenGL version on guest is limited to 4.3. In order to enable "
+"OpenGL 4.6 support, virtio-gpu  host blobs feature (``hostmem`` and ``blob`` "
+"fields) should be enabled.  The ``hostmem`` field specifies the size of "
+"virtio-gpu host memory window. This is typically between 256M and 8G."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:76
+#: ../../../system/devices/virtio/virtio-gpu.rst:90
+msgid ""
+"-device virtio-gpu-gl\n"
+"-device virtio-gpu-gl,hostmem=8G,blob=true"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:97
 msgid ""
 "Translation of Vulkan API calls is supported since release of "
 "`virglrenderer`_ v1.0.0 using `venus`_ protocol. ``Venus`` virtio-gpu "
@@ -135,35 +162,203 @@ msgid ""
 "is typically between 256M and 8G."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:83
+#: ../../../system/devices/virtio/virtio-gpu.rst:104
 msgid "-device virtio-gpu-gl,hostmem=8G,blob=true,venus=true"
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:88
+#: ../../../system/devices/virtio/virtio-gpu.rst:108
+msgid ""
+"DRM native context is supported since release of `virglrenderer`_ v1.0.0 "
+"using `drm`_ protocol.  ``DRM`` virtio-gpu capability set (\"capset\") "
+"requires host blob support (``hostmem`` and ``blob`` fields) and should be "
+"enabled using ``drm_native_context`` field.  The ``hostmem`` field specifies "
+"the size of virtio-gpu host memory window. This is typically between 256M "
+"and 8G."
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:115
+msgid "-device virtio-gpu-gl,hostmem=8G,blob=on,drm_native_context=on"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:119
+#: ../../../system/devices/virtio/virtio-gpu.rst:220
+msgid "Linux Host Requirements"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:122
+#: ../../../system/devices/virtio/virtio-gpu.rst:153
+#: ../../../system/devices/virtio/virtio-gpu.rst:223
+#: ../../../system/devices/virtio/virtio-gpu.rst:231
+msgid "Capability"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:123
+#: ../../../system/devices/virtio/virtio-gpu.rst:154
+#: ../../../system/devices/virtio/virtio-gpu.rst:224
+#: ../../../system/devices/virtio/virtio-gpu.rst:232
+msgid "Kernel Version"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:124
+msgid "Libvirglrenderer Version"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:125
+#: ../../../system/devices/virtio/virtio-gpu.rst:156
+msgid "OpenGL pass-through"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:126
+msgid ""
+"Any Linux version compatible with QEMU if not using host blobs feature, "
+"Linux 6.13+ otherwise"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:128
+msgid "0.8.2+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:129
+#: ../../../system/devices/virtio/virtio-gpu.rst:159
+msgid "Vulkan pass-through"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:130
+#: ../../../system/devices/virtio/virtio-gpu.rst:133
+#: ../../../system/devices/virtio/virtio-gpu.rst:139
+#: ../../../system/devices/virtio/virtio-gpu.rst:145
+#: ../../../system/devices/virtio/virtio-gpu.rst:226
+msgid "Linux 6.13+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:131
+#: ../../../system/devices/virtio/virtio-gpu.rst:137
+msgid "1.0.0+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:132
+#: ../../../system/devices/virtio/virtio-gpu.rst:162
+msgid "AMDGPU DRM native context"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:134
+msgid "1.1.0+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:135
+#: ../../../system/devices/virtio/virtio-gpu.rst:165
+msgid "Freedreno DRM native context"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:136
+msgid "Linux 6.4+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:138
+#: ../../../system/devices/virtio/virtio-gpu.rst:168
+msgid "Intel i915 DRM native context"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:140
+#: ../../../system/devices/virtio/virtio-gpu.rst:146
+msgid "1.3.0+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:141
+#: ../../../system/devices/virtio/virtio-gpu.rst:171
+msgid "Asahi DRM native context"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:142
+msgid "`Downstream version`_ of Asahi Linux kernel"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:143
+msgid "1.2.0+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:144
+#: ../../../system/devices/virtio/virtio-gpu.rst:174
+msgid "Panfrost native context"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:150
+#: ../../../system/devices/virtio/virtio-gpu.rst:228
+msgid "Linux Guest Requirements"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:155
+#: ../../../system/devices/virtio/virtio-gpu.rst:233
+msgid "Mesa Version"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:157
+msgid "Any Linux version supporting virtio-gpu"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:158
+msgid "16.0.0+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:160
+#: ../../../system/devices/virtio/virtio-gpu.rst:235
+msgid "Linux 5.16+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:161
+#: ../../../system/devices/virtio/virtio-gpu.rst:173
+msgid "24.2.0+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:163
+#: ../../../system/devices/virtio/virtio-gpu.rst:166
+#: ../../../system/devices/virtio/virtio-gpu.rst:169
+#: ../../../system/devices/virtio/virtio-gpu.rst:172
+#: ../../../system/devices/virtio/virtio-gpu.rst:175
+msgid "Linux 6.14+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:164
+msgid "25.0.0+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:167
+msgid "23.1.0+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:170
+msgid "26.1.0+"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:176
+msgid "`mr36814`_"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:181
 msgid "virtio-gpu rutabaga"
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:90
+#: ../../../system/devices/virtio/virtio-gpu.rst:183
 msgid ""
 "virtio-gpu can also leverage rutabaga_gfx to provide `gfxstream`_ rendering "
 "and `Wayland display passthrough`_.  With the gfxstream rendering mode, GLES "
 "and Vulkan calls are forwarded to the host with minimal modification."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:95
+#: ../../../system/devices/virtio/virtio-gpu.rst:188
 msgid ""
 "The crosvm book provides directions on how to build a `gfxstream-enabled "
 "rutabaga`_ and launch a `guest Wayland proxy`_."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:98
+#: ../../../system/devices/virtio/virtio-gpu.rst:191
 msgid ""
 "This device does require host blob support (``hostmem`` field below). The "
 "``hostmem`` field specifies the size of virtio-gpu host memory window. This "
 "is typically between 256M and 8G."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:102
+#: ../../../system/devices/virtio/virtio-gpu.rst:195
 msgid ""
 "At least one virtio-gpu capability set (\"capset\") must be specified when "
 "starting the device.  The currently capsets supported are ``gfxstream-"
@@ -172,14 +367,14 @@ msgid ""
 "also supported."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:107
+#: ../../../system/devices/virtio/virtio-gpu.rst:200
 msgid ""
 "The device will try to auto-detect the wayland socket path if the ``cross-"
 "domain`` capset name is set.  The user may optionally specify ``wayland-"
 "socket-path`` for non-standard paths."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:111
+#: ../../../system/devices/virtio/virtio-gpu.rst:204
 msgid ""
 "The ``wsi`` option can be set to ``surfaceless`` or ``headless``. "
 "Surfaceless doesn't create a native window surface, but does copy from the "
@@ -188,9 +383,18 @@ msgid ""
 "Surfaceless is the default if ``wsi`` is not specified."
 msgstr ""
 
-#: ../../../system/devices/virtio/virtio-gpu.rst:118
+#: ../../../system/devices/virtio/virtio-gpu.rst:211
 msgid ""
 "-device virtio-gpu-rutabaga,gfxstream-vulkan=on,cross-domain=on,\n"
 "   hostmem=8G,wayland-socket-path=/tmp/nonstandard/mock_wayland.sock,\n"
 "   wsi=headless"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:225
+#: ../../../system/devices/virtio/virtio-gpu.rst:234
+msgid "Vulkan+Wayland pass-through"
+msgstr ""
+
+#: ../../../system/devices/virtio/virtio-gpu.rst:236
+msgid "24.3.0+"
 msgstr ""
