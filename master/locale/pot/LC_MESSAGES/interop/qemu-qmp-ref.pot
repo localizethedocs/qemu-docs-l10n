@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-23 09:30+0000\n"
+"POT-Creation-Date: 2026-03-30 10:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,8 @@ msgstr ""
 msgid "QEMU error classes"
 msgstr ""
 
-#: ../../../../qapi/ui.json:0 ../../../interop/qemu-qmp-ref.rst:0
+#: ../../../../qapi/misc-arm.json:0 ../../../../qapi/ui.json:0
+#: ../../../interop/qemu-qmp-ref.rst:0
 msgid "Values"
 msgstr ""
 
@@ -2275,7 +2276,7 @@ msgid ""
 "This is supported only for drive mirroring, where it also switches the "
 "device to write to the target path only.  Note that drive mirroring includes "
 "`drive-mirror`, `blockdev-mirror` and `block-commit` job (only in case of "
-"\"active commit\", when the node being commited is used by the guest).  The "
+"\"active commit\", when the node being committed is used by the guest).  The "
 "ability to complete is signaled with a `BLOCK_JOB_READY` event."
 msgstr ""
 
@@ -2666,18 +2667,18 @@ msgstr ""
 #: ../../../../qapi/machine-s390x.json:10 ../../../../qapi/machine.json:16
 #: ../../../../qapi/machine.json:47 ../../../../qapi/machine.json:578
 #: ../../../../qapi/machine.json:611 ../../../../qapi/machine.json:1416
-#: ../../../../qapi/migration.json:797 ../../../../qapi/net.json:106
-#: ../../../../qapi/net.json:829 ../../../../qapi/qom.json:1182
-#: ../../../../qapi/transaction.json:85 ../../../../qapi/transaction.json:93
-#: ../../../../qapi/transaction.json:101 ../../../../qapi/transaction.json:109
-#: ../../../../qapi/transaction.json:117 ../../../../qapi/transaction.json:125
-#: ../../../../qapi/transaction.json:133 ../../../../qapi/transaction.json:141
-#: ../../../../qapi/transaction.json:149 ../../../../qapi/ui.json:14
-#: ../../../../qapi/ui.json:577 ../../../../qapi/ui.json:589
-#: ../../../../qapi/ui.json:851 ../../../../qapi/ui.json:978
-#: ../../../../qapi/ui.json:1051 ../../../../qapi/ui.json:1068
-#: ../../../../qapi/ui.json:1458 ../../../../qapi/virtio.json:992
-#: ../../../../qapi/yank.json:11
+#: ../../../../qapi/migration.json:797 ../../../../qapi/misc-arm.json:49
+#: ../../../../qapi/net.json:106 ../../../../qapi/net.json:829
+#: ../../../../qapi/qom.json:1182 ../../../../qapi/transaction.json:85
+#: ../../../../qapi/transaction.json:93 ../../../../qapi/transaction.json:101
+#: ../../../../qapi/transaction.json:109 ../../../../qapi/transaction.json:117
+#: ../../../../qapi/transaction.json:125 ../../../../qapi/transaction.json:133
+#: ../../../../qapi/transaction.json:141 ../../../../qapi/transaction.json:149
+#: ../../../../qapi/ui.json:14 ../../../../qapi/ui.json:577
+#: ../../../../qapi/ui.json:589 ../../../../qapi/ui.json:851
+#: ../../../../qapi/ui.json:978 ../../../../qapi/ui.json:1051
+#: ../../../../qapi/ui.json:1068 ../../../../qapi/ui.json:1458
+#: ../../../../qapi/virtio.json:992 ../../../../qapi/yank.json:11
 msgid "Not documented"
 msgstr ""
 
@@ -7607,20 +7608,20 @@ msgstr ""
 
 #: ../../../../qapi/block-core.json:5089
 msgid ""
-"Activate or inactivate a block device.  Use this to manage the handover of "
+"Activate or deactivate a block device.  Use this to manage the handover of "
 "block devices on migration with qemu-storage-daemon."
 msgstr ""
 
 #: ../../../../qapi/block-core.json:5092
 msgid ""
 "Activating a node automatically activates all of its child nodes first.  "
-"Inactivating a node automatically inactivates any of its child nodes that "
+"Deactivating a node automatically deactivates any of its child nodes that "
 "are not in use by a still active node."
 msgstr ""
 
 #: ../../../../qapi/block-core.json:5096
 msgid ""
-"Name of the graph node to activate or inactivate.  By default, all nodes are "
+"Name of the graph node to activate or deactivate.  By default, all nodes are "
 "affected by the operation."
 msgstr ""
 
@@ -22372,6 +22373,54 @@ msgid ""
 "                { \"version\": 3, \"emulated\": false, \"kernel\": true } ] }"
 msgstr ""
 
+#: ../../../../qapi/misc-arm.json:52
+msgid "SMMUv3 SubstreamID size configuration mode."
+msgstr ""
+
+#: ../../../../qapi/misc-arm.json:54 ../../../../qapi/misc-arm.json:70
+msgid "derive from host IOMMU capabilities"
+msgstr ""
+
+#: ../../../../qapi/misc-arm.json:56
+msgid "Values 0-20: SSIDSIZE value in bits.  0 disables SubstreamID."
+msgstr ""
+
+#: ../../../../qapi/misc-arm.json:68
+msgid "SMMUv3 Output Address Size configuration mode."
+msgstr ""
+
+#: ../../../../qapi/misc-arm.json:72
+msgid "32-bit output address size"
+msgstr ""
+
+#: ../../../../qapi/misc-arm.json:74
+msgid "36-bit output address size"
+msgstr ""
+
+#: ../../../../qapi/misc-arm.json:76
+msgid "40-bit output address size"
+msgstr ""
+
+#: ../../../../qapi/misc-arm.json:78
+msgid "42-bit output address size"
+msgstr ""
+
+#: ../../../../qapi/misc-arm.json:80
+msgid "44-bit output address size"
+msgstr ""
+
+#: ../../../../qapi/misc-arm.json:82
+msgid "48-bit output address size"
+msgstr ""
+
+#: ../../../../qapi/misc-arm.json:84
+msgid "52-bit output address size"
+msgstr ""
+
+#: ../../../../qapi/misc-arm.json:86
+msgid "56-bit output address size"
+msgstr ""
+
 #: ../../../../qapi/misc-i386.json:9
 msgid ""
 "Reset the RTC interrupt reinjection backlog.  Can be used if another "
@@ -25894,7 +25943,7 @@ msgstr ""
 
 #: ../../../../qapi/uefi.json:21
 msgid ""
-"UEFI Variable.  Check the UEFI specifification for more detailed information "
+"UEFI Variable.  Check the UEFI specification for more detailed information "
 "on the fields."
 msgstr ""
 
