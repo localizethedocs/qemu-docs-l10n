@@ -1,0 +1,607 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 7.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/devices/cxl.rst:2
+msgid "Compute Express Link (CXL)"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:3
+msgid ""
+"From the view of a single host, CXL is an interconnect standard that targets "
+"accelerators and memory devices attached to a CXL host. This description "
+"will focus on those aspects visible either to software running on a QEMU "
+"emulated host or to the internals of functional emulation. As such, it will "
+"skip over many of the electrical and protocol elements that would be more of "
+"interest for real hardware and will dominate more general introductions to "
+"CXL. It will also completely ignore the fabric management aspects of CXL by "
+"considering only a single host and a static configuration."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:13
+msgid ""
+"CXL shares many concepts and much of the infrastructure of PCI Express, with "
+"CXL Host Bridges, which have CXL Root Ports which may be directly attached "
+"to CXL or PCI End Points. Alternatively there may be CXL Switches with CXL "
+"and PCI Endpoints attached below them.  In many cases additional control and "
+"capabilities are exposed via PCI Express interfaces. This sharing of "
+"interfaces and hence emulation code is reflected in how the devices are "
+"emulated in QEMU. In most cases the various CXL elements are built upon an "
+"equivalent PCIe devices."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:22
+msgid "CXL devices support the following interfaces:"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:24
+msgid "Most conventional PCIe interfaces"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:26
+msgid "Configuration space access"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:27
+msgid "BAR mapped memory accesses used for registers and mailboxes."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:28
+msgid "MSI/MSI-X"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:29
+msgid "AER"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:30
+msgid "DOE mailboxes"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:31
+msgid "IDE"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:32
+msgid "Many other PCI express defined interfaces.."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:34
+msgid "Memory operations"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:36
+msgid ""
+"Equivalent of accessing DRAM / NVDIMMs. Any access / feature supported by "
+"the host for normal memory should also work for CXL attached memory devices."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:40
+msgid ""
+"Cache operations. The are mostly irrelevant to QEMU emulation as QEMU is not "
+"emulating a coherency protocol. Any emulation related to these will be "
+"device specific and is out of the scope of this document."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:46
+msgid "CXL 2.0 Device Types"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:47
+msgid "CXL 2.0 End Points are often categorized into three types."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:49
+msgid ""
+"**Type 1:** These support coherent caching of host memory.  Example might be "
+"a crypto accelerators.  May also have device private memory accessible via "
+"means such as PCI memory reads and writes to BARs."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:53
+msgid ""
+"**Type 2:** These support coherent caching of host memory and host managed "
+"device memory (HDM) for which the coherency protocol is managed by the host. "
+"This is a complex topic, so for more information on CXL coherency see the "
+"CXL 2.0 specification."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:58
+msgid ""
+"**Type 3 Memory devices:**  These devices act as a means of attaching "
+"additional memory (HDM) to a CXL host including both volatile and persistent "
+"memory. The CXL topology may support interleaving across a number of Type 3 "
+"memory devices using HDM Decoders in the host, host bridge, switch upstream "
+"port and endpoints."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:65
+msgid "Scope of CXL emulation in QEMU"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:66
+msgid ""
+"The focus of CXL emulation is CXL revision 2.0 and later. Earlier CXL "
+"revisions defined a smaller set of features, leaving much of the control "
+"interface as implementation defined or device specific, making generic "
+"emulation challenging with host specific firmware being responsible for "
+"setup and the Endpoints being presented to operating systems as Root Complex "
+"Integrated End Points. CXL rev 2.0 looks a lot more like PCI Express, with "
+"fully specified discoverability of the CXL topology."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:76
+msgid "CXL System components"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:77
+msgid ""
+"A CXL system is made up a Host with a number of 'standard components' the "
+"control and capabilities of which are discoverable by system software using "
+"means described in the CXL 2.0 specification."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:82
+msgid "CXL Fixed Memory Windows (CFMW)"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:83
+msgid ""
+"A CFMW consists of a particular range of Host Physical Address space which "
+"is routed to particular CXL Host Bridges.  At time of generic software "
+"initialization it will have a particularly interleaving configuration and "
+"associated Quality of Service Throttling Group (QTG). This information is "
+"available to system software, when making decisions about how to configure "
+"interleave across available CXL memory devices.  It is provide as CFMW "
+"Structures (CFMWS) in the CXL Early Discovery Table, an ACPI table."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:92
+msgid "Note: QTG 0 is the only one currently supported in QEMU."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:95
+msgid "CXL Host Bridge (CXL HB)"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:96
+msgid ""
+"A CXL host bridge is similar to the PCIe equivalent, but with a "
+"specification defined register interface called CXL Host Bridge Component "
+"Registers (CHBCR). The location of this CHBCR MMIO space is described to "
+"system software via a CXL Host Bridge Structure (CHBS) in the CEDT ACPI "
+"table.  The actual interfaces are identical to those used for other parts of "
+"the CXL hierarchy as CXL Component Registers in PCI BARs."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:104
+msgid "Interfaces provided include:"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:106
+msgid ""
+"Configuration of HDM Decoders to route CXL Memory accesses with a "
+"particularly Host Physical Address range to the target port below which the "
+"CXL device servicing that address lies.  This may be a mapping to a single "
+"Root Port (RP) or across a set of target RPs."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:113
+msgid "CXL Root Ports (CXL RP)"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:114
+msgid ""
+"A CXL Root Port servers te same purpose as a PCIe Root Port. There are a "
+"number of CXL specific Designated Vendor Specific Extended Capabilities "
+"(DVSEC) in PCIe Configuration Space and associated component register access "
+"via PCI bars."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:120
+msgid "CXL Switch"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:121
+msgid ""
+"Here we consider a simple CXL switch with only a single virtual hierarchy. "
+"Whilst more complex devices exist, their visibility to a particular host is "
+"generally the same as for a simple switch design. Hosts often have no "
+"awareness of complex rerouting and device pooling, they simply see devices "
+"being hot added or hot removed."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:128
+msgid ""
+"A CXL switch has a similar architecture to those in PCIe, with a single "
+"upstream port, internal PCI bus and multiple downstream ports."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:132
+msgid ""
+"Both the CXL upstream and downstream ports have CXL specific DVSECs in "
+"configuration space, and component registers in PCI BARs.  The Upstream Port "
+"has the configuration interfaces for the HDM decoders which route incoming "
+"memory accesses to the appropriate downstream port."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:138
+msgid ""
+"A CXL switch is created in a similar fashion to PCI switches by creating an "
+"upstream port (cxl-upstream) and a number of downstream ports on the "
+"internal switch bus (cxl-downstream)."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:143
+msgid "CXL Memory Devices - Type 3"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:144
+msgid ""
+"CXL type 3 devices use a PCI class code and are intended to be supported by "
+"a generic operating system driver. They have HDM decoders though in these EP "
+"devices, the decoder is responsible not for routing but for translation of "
+"the incoming host physical address (HPA) into a Device Physical Address "
+"(DPA)."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:151
+msgid "CXL Memory Interleave"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:152
+msgid ""
+"To understand the interaction of different CXL hardware components which are "
+"emulated in QEMU, let us consider a memory read in a fully configured CXL "
+"topology.  Note that system software is responsible for configuration of all "
+"components with the exception of the CFMWs. System software is responsible "
+"for allocating appropriate ranges from within the CFMWs and exposing those "
+"via normal memory configurations as would be done for system RAM."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:160
+msgid "Example system Topology. x marks the match in each decoder level::"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:162
+msgid ""
+"|<------------------SYSTEM PHYSICAL ADDRESS MAP (1)----------------->|\n"
+"|    __________   __________________________________   __________    |\n"
+"|   |          | |                                  | |          |   |\n"
+"|   | CFMW 0   | |  CXL Fixed Memory Window 1       | | CFMW 1   |   |\n"
+"|   | HB0 only | |  Configured to interleave memory | | HB1 only |   |\n"
+"|   |          | |  memory accesses across HB0/HB1  | |          |   |\n"
+"|   |__________| |_____x____________________________| |__________|   |\n"
+"         |             |                     |             |\n"
+"         |             |                     |             |\n"
+"         |             |                     |             |\n"
+"         |       Interleave Decoder          |             |\n"
+"         |       Matches this HB             |             |\n"
+"         \\_____________|                     |_____________/\n"
+"             __________|__________      _____|_______________\n"
+"            |                     |    |                     |\n"
+"     (2)    | CXL HB 0            |    | CXL HB 1            |\n"
+"            | HB IntLv Decoders   |    | HB IntLv Decoders   |\n"
+"            | PCI/CXL Root Bus 0c |    | PCI/CXL Root Bus 0d |\n"
+"            |                     |    |                     |\n"
+"            |___x_________________|    |_____________________|\n"
+"                |                |       |               |\n"
+"                |                |       |               |\n"
+"     A HB 0 HDM Decoder          |       |               |\n"
+"     matches this Port           |       |               |\n"
+"                |                |       |               |\n"
+"     ___________|___   __________|__   __|_________   ___|_________\n"
+" (3)|  Root Port 0  | | Root Port 1 | | Root Port 2| | Root Port 3 |\n"
+"    |  Appears in   | | Appears in  | | Appears in | | Appear in   |\n"
+"    |  PCI topology | | PCI Topology| | PCI Topo   | | PCI Topo    |\n"
+"    |  As 0c:00.0   | | as 0c:01.0  | | as de:00.0 | | as de:01.0  |\n"
+"    |_______________| |_____________| |____________| |_____________|\n"
+"          |                  |               |              |\n"
+"          |                  |               |              |\n"
+"     _____|_________   ______|______   ______|_____   ______|_______\n"
+" (4)|     x         | |             | |            | |              |\n"
+"    | CXL Type3 0   | | CXL Type3 1 | | CXL type3 2| | CLX Type 3 3 |\n"
+"    |               | |             | |            | |              |\n"
+"    | PMEM0(Vol LSA)| | PMEM1 (...) | | PMEM2 (...)| | PMEM3 (...)  |\n"
+"    | Decoder to go | |             | |            | |              |\n"
+"    | from host PA  | | PCI 0e:00.0 | | PCI df:00.0| | PCI e0:00.0  |\n"
+"    | to device PA  | |             | |            | |              |\n"
+"    | PCI as 0d:00.0| |             | |            | |              |\n"
+"    |_______________| |_____________| |____________| |______________|"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:206
+msgid "Notes:"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:208
+msgid ""
+"**3 CXL Fixed Memory Windows (CFMW)** corresponding to different ranges of "
+"the system physical address map.  Each CFMW has particular interleave setup "
+"across the CXL Host Bridges (HB) CFMW0 provides uninterleaved access to HB0, "
+"CFW2 provides uninterleaved access to HB1. CFW1 provides interleaved memory "
+"access across HB0 and HB1."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:215
+msgid ""
+"**Two CXL Host Bridges**. Each of these has 2 CXL Root Ports and "
+"programmable HDM decoders to route memory accesses either to a single port "
+"or interleave them across multiple ports. A complex configuration here, "
+"might be to use the following HDM decoders in HB0. HDM0 routes CFMW0 "
+"requests to RP0 and hence part of CXL Type3 0. HDM1 routes CFMW0 requests "
+"from a different region of the CFMW0 PA range to RP2 and hence part of CXL "
+"Type 3 1.  HDM2 routes yet another PA range from within CFMW0 to be "
+"interleaved across RP0 and RP1, providing 2 way interleave of part of the "
+"memory provided by CXL Type3 0 and CXL Type 3 1. HDM3 routes those "
+"interleaved accesses from CFMW1 that target HB0 to RP 0 and another part of "
+"the memory of CXL Type 3 0 (as part of a 2 way interleave at the system "
+"level across for example CXL Type3 0 and CXL Type3 2. HDM4 is used to enable "
+"system wide 4 way interleave across all the present CXL type3 devices, by "
+"interleaving those (interleaved) requests that HB0 receives from from CFMW1 "
+"across RP 0 and RP 1 and hence to yet more regions of the memory of the "
+"attached Type3 devices.  Note this is a representative subset of the full "
+"range of possible HDM decoder configurations in this topology."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:237
+msgid ""
+"**Four CXL Root Ports.** In this case the CXL Type 3 devices are directly "
+"attached to these ports."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:240
+msgid ""
+"**Four CXL Type3 memory expansion devices.**  These will each have HDM "
+"decoders, but in this case rather than performing interleave they will take "
+"the Host Physical Addresses of accesses and map them to their own local "
+"Device Physical Address Space (DPA)."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:245
+msgid "Example topology involving a switch::"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:247
+msgid ""
+"|<------------------SYSTEM PHYSICAL ADDRESS MAP (1)----------------->|\n"
+"|    __________   __________________________________   __________    |\n"
+"|   |          | |                                  | |          |   |\n"
+"|   | CFMW 0   | |  CXL Fixed Memory Window 1       | | CFMW 1   |   |\n"
+"|   | HB0 only | |  Configured to interleave memory | | HB1 only |   |\n"
+"|   |          | |  memory accesses across HB0/HB1  | |          |   |\n"
+"|   |____x_____| |__________________________________| |__________|   |\n"
+"         |             |                     |             |\n"
+"         |             |                     |             |\n"
+"         |             |                     |\n"
+"Interleave Decoder     |                     |             |\n"
+" Matches this HB       |                     |             |\n"
+"         \\_____________|                     |_____________/\n"
+"             __________|__________      _____|_______________\n"
+"            |                     |    |                     |\n"
+"            | CXL HB 0            |    | CXL HB 1            |\n"
+"            | HB IntLv Decoders   |    | HB IntLv Decoders   |\n"
+"            | PCI/CXL Root Bus 0c |    | PCI/CXL Root Bus 0d |\n"
+"            |                     |    |                     |\n"
+"            |___x_________________|    |_____________________|\n"
+"                |              |          |               |\n"
+"                |\n"
+"     A HB 0 HDM Decoder\n"
+"     matches this Port\n"
+"     ___________|___\n"
+"    |  Root Port 0  |\n"
+"    |  Appears in   |\n"
+"    |  PCI topology |\n"
+"    |  As 0c:00.0   |\n"
+"    |___________x___|\n"
+"                |\n"
+"                |\n"
+"                \\_____________________\n"
+"                                      |\n"
+"                                      |\n"
+"          ---------------------------------------------------\n"
+"         |    Switch 0  USP as PCI 0d:00.0                   |\n"
+"         |    USP has HDM decoder which direct traffic to    |\n"
+"         |    appropriate downstream port                    |\n"
+"         |    Switch BUS appears as 0e                       |\n"
+"         |x__________________________________________________|\n"
+"          |                  |               |              |\n"
+"          |                  |               |              |\n"
+"     _____|_________   ______|______   ______|_____   ______|_______\n"
+" (4)|     x         | |             | |            | |              |\n"
+"    | CXL Type3 0   | | CXL Type3 1 | | CXL type3 2| | CLX Type 3 3 |\n"
+"    |               | |             | |            | |              |\n"
+"    | PMEM0(Vol LSA)| | PMEM1 (...) | | PMEM2 (...)| | PMEM3 (...)  |\n"
+"    | Decoder to go | |             | |            | |              |\n"
+"    | from host PA  | | PCI 10:00.0 | | PCI 11:00.0| | PCI 12:00.0  |\n"
+"    | to device PA  | |             | |            | |              |\n"
+"    | PCI as 0f:00.0| |             | |            | |              |\n"
+"    |_______________| |_____________| |____________| |______________|"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:302
+msgid "Example command lines"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:303
+msgid "A very simple setup with just one directly attached CXL Type 3 device::"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:305
+msgid ""
+"qemu-system-aarch64 -M virt,gic-version=3,cxl=on -m 4g,maxmem=8G,slots=8 -"
+"cpu max \\\n"
+"...\n"
+"-object memory-backend-file,id=cxl-mem1,share=on,mem-path=/tmp/cxltest.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-lsa1,share=on,mem-path=/tmp/lsa.raw,"
+"size=256M \\\n"
+"-device pxb-cxl,bus_nr=12,bus=pcie.0,id=cxl.1 \\\n"
+"-device cxl-rp,port=0,bus=cxl.1,id=root_port13,chassis=0,slot=2 \\\n"
+"-device cxl-type3,bus=root_port13,memdev=cxl-mem1,lsa=cxl-lsa1,id=cxl-pmem0 "
+"\\\n"
+"-M cxl-fmw.0.targets.0=cxl.1,cxl-fmw.0.size=4G"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:314
+msgid ""
+"A setup suitable for 4 way interleave. Only one fixed window provided, to "
+"enable 2 way interleave across 2 CXL host bridges.  Each host bridge has 2 "
+"CXL Root Ports, with the CXL Type3 device directly attached (no switches).::"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:318
+msgid ""
+"qemu-system-aarch64 -M virt,gic-version=3,cxl=on -m 4g,maxmem=8G,slots=8 -"
+"cpu max \\\n"
+"...\n"
+"-object memory-backend-file,id=cxl-mem1,share=on,mem-path=/tmp/cxltest.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-mem2,share=on,mem-path=/tmp/cxltest2.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-mem3,share=on,mem-path=/tmp/cxltest3.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-mem4,share=on,mem-path=/tmp/cxltest4.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-lsa1,share=on,mem-path=/tmp/lsa.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-lsa2,share=on,mem-path=/tmp/lsa2.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-lsa3,share=on,mem-path=/tmp/lsa3.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-lsa4,share=on,mem-path=/tmp/lsa4.raw,"
+"size=256M \\\n"
+"-device pxb-cxl,bus_nr=12,bus=pcie.0,id=cxl.1 \\\n"
+"-device pxb-cxl,bus_nr=222,bus=pcie.0,id=cxl.2 \\\n"
+"-device cxl-rp,port=0,bus=cxl.1,id=root_port13,chassis=0,slot=2 \\\n"
+"-device cxl-type3,bus=root_port13,memdev=cxl-mem1,lsa=cxl-lsa1,id=cxl-pmem0 "
+"\\\n"
+"-device cxl-rp,port=1,bus=cxl.1,id=root_port14,chassis=0,slot=3 \\\n"
+"-device cxl-type3,bus=root_port14,memdev=cxl-mem2,lsa=cxl-lsa2,id=cxl-pmem1 "
+"\\\n"
+"-device cxl-rp,port=0,bus=cxl.2,id=root_port15,chassis=0,slot=5 \\\n"
+"-device cxl-type3,bus=root_port15,memdev=cxl-mem3,lsa=cxl-lsa3,id=cxl-pmem2 "
+"\\\n"
+"-device cxl-rp,port=1,bus=cxl.2,id=root_port16,chassis=0,slot=6 \\\n"
+"-device cxl-type3,bus=root_port16,memdev=cxl-mem4,lsa=cxl-lsa4,id=cxl-pmem3 "
+"\\\n"
+"-M cxl-fmw.0.targets.0=cxl.1,cxl-fmw.0.targets.1=cxl.2,cxl-fmw.0.size=4G,cxl-"
+"fmw.0.interleave-granularity=8k"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:340
+msgid ""
+"An example of 4 devices below a switch suitable for 1, 2 or 4 way "
+"interleave::"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:342
+msgid ""
+"qemu-system-aarch64 -M virt,gic-version=3,cxl=on -m 4g,maxmem=8G,slots=8 -"
+"cpu max \\\n"
+"...\n"
+"-object memory-backend-file,id=cxl-mem0,share=on,mem-path=/tmp/cxltest.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-mem1,share=on,mem-path=/tmp/cxltest1.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-mem2,share=on,mem-path=/tmp/cxltest2.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-mem3,share=on,mem-path=/tmp/cxltest3.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-lsa0,share=on,mem-path=/tmp/lsa0.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-lsa1,share=on,mem-path=/tmp/lsa1.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-lsa2,share=on,mem-path=/tmp/lsa2.raw,"
+"size=256M \\\n"
+"-object memory-backend-file,id=cxl-lsa3,share=on,mem-path=/tmp/lsa3.raw,"
+"size=256M \\\n"
+"-device pxb-cxl,bus_nr=12,bus=pcie.0,id=cxl.1 \\\n"
+"-device cxl-rp,port=0,bus=cxl.1,id=root_port0,chassis=0,slot=0 \\\n"
+"-device cxl-rp,port=1,bus=cxl.1,id=root_port1,chassis=0,slot=1 \\\n"
+"-device cxl-upstream,bus=root_port0,id=us0 \\\n"
+"-device cxl-downstream,port=0,bus=us0,id=swport0,chassis=0,slot=4 \\\n"
+"-device cxl-type3,bus=swport0,memdev=cxl-mem0,lsa=cxl-lsa0,id=cxl-pmem0,"
+"size=256M \\\n"
+"-device cxl-downstream,port=1,bus=us0,id=swport1,chassis=0,slot=5 \\\n"
+"-device cxl-type3,bus=swport1,memdev=cxl-mem1,lsa=cxl-lsa1,id=cxl-pmem1,"
+"size=256M \\\n"
+"-device cxl-downstream,port=2,bus=us0,id=swport2,chassis=0,slot=6 \\\n"
+"-device cxl-type3,bus=swport2,memdev=cxl-mem2,lsa=cxl-lsa2,id=cxl-pmem2,"
+"size=256M \\\n"
+"-device cxl-downstream,port=3,bus=us0,id=swport3,chassis=0,slot=7 \\\n"
+"-device cxl-type3,bus=swport3,memdev=cxl-mem3,lsa=cxl-lsa3,id=cxl-pmem3,"
+"size=256M \\\n"
+"-M cxl-fmw.0.targets.0=cxl.1,cxl-fmw.0.size=4G,cxl-fmw.0.interleave-"
+"granularity=4k"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:367
+msgid "Kernel Configuration Options"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:369
+msgid ""
+"In Linux 5.18 the following options are necessary to make use of OS "
+"management of CXL memory devices as described here."
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:372
+msgid "CONFIG_CXL_BUS"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:373
+msgid "CONFIG_CXL_PCI"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:374
+msgid "CONFIG_CXL_ACPI"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:375
+msgid "CONFIG_CXL_PMEM"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:376
+msgid "CONFIG_CXL_MEM"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:377
+msgid "CONFIG_CXL_PORT"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:378
+msgid "CONFIG_CXL_REGION"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:381
+msgid "References"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:383
+msgid ""
+"Consortium website for specifications etc: http://www.computeexpresslink.org"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:385
+msgid "Compute Express link Revision 2 specification, October 2020"
+msgstr ""
+
+#: ../../../system/devices/cxl.rst:386
+msgid "CEDT CFMWS & QTG _DSM ECN May 2021"
+msgstr ""
