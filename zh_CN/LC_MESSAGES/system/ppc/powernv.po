@@ -1,0 +1,351 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/ppc/powernv.rst:2
+msgid "PowerNV family boards (``powernv8``, ``powernv9``, ``powernv10``)"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:4
+msgid ""
+"PowerNV (as Non-Virtualized) is the \"bare metal\" platform using the OPAL "
+"firmware. It runs Linux on IBM and OpenPOWER systems and it can be used as "
+"an hypervisor OS, running KVM guests, or simply as a host OS."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:9
+msgid ""
+"The PowerNV QEMU machine tries to emulate a PowerNV system at the level of "
+"the skiboot firmware, which loads the OS and provides some runtime services. "
+"Power Systems have a lower firmware (HostBoot) that does low level system "
+"initialization, like DRAM training. This is beyond the scope of what QEMU "
+"addresses today."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:16
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:18
+msgid "Multi processor support for POWER8, POWER8NVL and POWER9."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:19
+msgid "XSCOM, serial communication sideband bus to configure chiplets."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:20
+msgid "Simple LPC Controller."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:21
+msgid "Processor Service Interface (PSI) Controller."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:22
+msgid ""
+"Interrupt Controller, XICS (POWER8) and XIVE (POWER9) and XIVE2 (Power10)."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:23
+msgid "POWER8 PHB3 PCIe Host bridge and POWER9 PHB4 PCIe Host bridge."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:24
+msgid ""
+"Simple OCC is an on-chip micro-controller used for power management tasks."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:25
+msgid ""
+"iBT device to handle BMC communication, with the internal BMC simulator "
+"provided by QEMU or an external BMC such as an Aspeed QEMU machine."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:27
+msgid "PNOR containing the different firmware partitions."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:30
+msgid "Missing devices"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:32
+msgid "A lot is missing, among which :"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:34
+msgid "I2C controllers (yet to be merged)."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:35
+msgid "NPU/NPU2/NPU3 controllers."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:36
+msgid "EEH support for PCIe Host bridge controllers."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:37
+msgid "NX controller."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:38
+msgid "VAS controller."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:39
+msgid "chipTOD (Time Of Day)."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:40
+msgid "Self Boot Engine (SBE)."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:41
+msgid "FSI bus."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:44
+msgid "Firmware"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:46
+msgid ""
+"The OPAL firmware (OpenPower Abstraction Layer) for OpenPower systems "
+"includes the runtime services ``skiboot`` and the bootloader kernel and "
+"initramfs ``skiroot``. Source code can be found on the `OpenPOWER account at "
+"GitHub <https://github.com/open-power>`_."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:51
+msgid ""
+"Prebuilt images of ``skiboot`` and ``skiroot`` are made available on the "
+"`OpenPOWER <https://github.com/open-power/op-build/releases/>`__ site."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:54
+msgid ""
+"QEMU includes a prebuilt image of ``skiboot`` which is updated when a more "
+"recent version is required by the models."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:58
+msgid "Current acceleration status"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:60
+msgid ""
+"KVM acceleration in Linux Power hosts is provided by the kvm-hv and kvm-pr "
+"modules. kvm-hv is adherent to PAPR and it's not compliant with powernv. kvm-"
+"pr in theory could be used as a valid accel option but this isn't supported "
+"by kvm-pr at this moment."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:65
+msgid ""
+"To spare users from dealing with not so informative errors when attempting "
+"to use accel=kvm, the powernv machine will throw an error informing that KVM "
+"is not supported. This can be revisited in the future if kvm-pr (or any "
+"other KVM alternative) is usable as KVM accel for this machine."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:71
+msgid "Boot options"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:73
+msgid "Here is a simple setup with one e1000e NIC :"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:75
+msgid ""
+"$ qemu-system-ppc64 -m 2G -machine powernv9 -smp 2,cores=2,threads=1 \\\n"
+"-accel tcg,thread=single \\\n"
+"-device e1000e,netdev=net0,mac=C0:FF:EE:00:00:02,bus=pcie.0,addr=0x0 \\\n"
+"-netdev user,id=net0,hostfwd=::20022-:22,hostname=pnv \\\n"
+"-kernel ./zImage.epapr  \\\n"
+"-initrd ./rootfs.cpio.xz \\\n"
+"-nographic"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:85
+msgid "and a SATA disk :"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:87
+msgid ""
+"-device ich9-ahci,id=sata0,bus=pcie.1,addr=0x0 \\\n"
+"-drive file=./ubuntu-ppc64le.qcow2,if=none,id=drive0,format=qcow2,cache=none "
+"\\\n"
+"-device ide-hd,bus=sata0.0,unit=0,drive=drive0,id=ide,bootindex=1 \\"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:94
+msgid "Complex PCIe configuration"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:96
+msgid ""
+"Six PHBs are defined per chip (POWER9) but no default PCI layout is provided "
+"(to be compatible with libvirt). One PCI device can be added on any of the "
+"available PCIe slots using command line options such as:"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:100
+msgid ""
+"-device e1000e,netdev=net0,mac=C0:FF:EE:00:00:02,bus=pcie.0,addr=0x0\n"
+"-netdev bridge,id=net0,helper=/usr/libexec/qemu-bridge-helper,br=virbr0,"
+"id=hostnet0\n"
+"\n"
+"-device megasas,id=scsi0,bus=pcie.0,addr=0x0\n"
+"-drive file=./ubuntu-ppc64le.qcow2,if=none,id=drive-scsi0-0-0-0,format=qcow2,"
+"cache=none\n"
+"-device scsi-hd,bus=scsi0.0,channel=0,scsi-id=0,lun=0,drive=drive-"
+"scsi0-0-0-0,id=scsi0-0-0-0,bootindex=2"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:109
+msgid ""
+"Here is a full example with two different storage controllers on different "
+"PHBs, each with a disk, the second PHB is empty :"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:112
+msgid ""
+"$ qemu-system-ppc64 -m 2G -machine powernv9 -smp 2,cores=2,threads=1 -accel "
+"tcg,thread=single \\\n"
+"-kernel ./zImage.epapr -initrd ./rootfs.cpio.xz -bios ./skiboot.lid \\\n"
+"\\\n"
+"-device megasas,id=scsi0,bus=pcie.0,addr=0x0 \\\n"
+"-drive file=./rhel7-ppc64le.qcow2,if=none,id=drive-scsi0-0-0-0,format=qcow2,"
+"cache=none \\\n"
+"-device scsi-hd,bus=scsi0.0,channel=0,scsi-id=0,lun=0,drive=drive-"
+"scsi0-0-0-0,id=scsi0-0-0-0,bootindex=2 \\\n"
+"\\\n"
+"-device pcie-pci-bridge,id=bridge1,bus=pcie.1,addr=0x0 \\\n"
+"\\\n"
+"-device ich9-ahci,id=sata0,bus=bridge1,addr=0x1 \\\n"
+"-drive file=./ubuntu-ppc64le.qcow2,if=none,id=drive0,format=qcow2,cache=none "
+"\\\n"
+"-device ide-hd,bus=sata0.0,unit=0,drive=drive0,id=ide,bootindex=1 \\\n"
+"-device e1000e,netdev=net0,mac=C0:FF:EE:00:00:02,bus=bridge1,addr=0x2 \\\n"
+"-netdev bridge,helper=/usr/libexec/qemu-bridge-helper,br=virbr0,id=net0 \\\n"
+"-device nec-usb-xhci,bus=bridge1,addr=0x7 \\\n"
+"\\\n"
+"-serial mon:stdio -nographic"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:132
+msgid "You can also use VIRTIO devices :"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:134
+msgid ""
+"-drive file=./fedora-ppc64le.qcow2,if=none,snapshot=on,id=drive0 \\\n"
+"-device virtio-blk-pci,drive=drive0,id=blk0,bus=pcie.0 \\\n"
+"\\\n"
+"-netdev tap,helper=/usr/lib/qemu/qemu-bridge-helper,br=virbr0,id=netdev0 \\\n"
+"-device virtio-net-pci,netdev=netdev0,id=net0,bus=pcie.1 \\\n"
+"\\\n"
+"-fsdev local,id=fsdev0,path=$HOME,security_model=passthrough \\\n"
+"-device virtio-9p-pci,fsdev=fsdev0,mount_tag=host,bus=pcie.2"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:146
+msgid "Multi sockets"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:148
+msgid ""
+"The number of sockets is deduced from the number of CPUs and the number of "
+"cores. ``-smp 2,cores=1`` will define a machine with 2 sockets of 1 core, "
+"whereas ``-smp 2,cores=2`` will define a machine with 1 socket of 2 cores. "
+"``-smp 8,cores=2``, 4 sockets of 2 cores."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:154
+msgid "BMC configuration"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:156
+msgid ""
+"OpenPOWER systems negotiate the shutdown and reboot with their BMC. The QEMU "
+"PowerNV machine embeds an IPMI BMC simulator using the iBT interface and "
+"should offer the same power features."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:160
+msgid ""
+"If you want to define your own BMC, use ``-nodefaults`` and specify one on "
+"the command line :"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:163
+msgid "-device ipmi-bmc-sim,id=bmc0 -device isa-ipmi-bt,bmc=bmc0,irq=10"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:167
+msgid ""
+"The files `palmetto-SDR.bin <http://www.kaod.org/qemu/powernv/palmetto-SDR."
+"bin>`__ and `palmetto-FRU.bin <http://www.kaod.org/qemu/powernv/palmetto-FRU."
+"bin>`__ define a Sensor Data Record repository and a Field Replaceable Unit "
+"inventory for a Palmetto BMC. They can be used to extend the QEMU BMC "
+"simulator."
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:173
+msgid ""
+"-device ipmi-bmc-sim,sdrfile=./palmetto-SDR.bin,fruareasize=256,"
+"frudatafile=./palmetto-FRU.bin,id=bmc0 \\\n"
+"-device isa-ipmi-bt,bmc=bmc0,irq=10"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:178
+msgid ""
+"The PowerNV machine can also be run with an external IPMI BMC device "
+"connected to a remote QEMU machine acting as BMC, using these options :"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:182
+msgid ""
+"-chardev socket,id=ipmi0,host=localhost,port=9002,reconnect=10 \\\n"
+"-device ipmi-bmc-extern,id=bmc0,chardev=ipmi0 \\\n"
+"-device isa-ipmi-bt,bmc=bmc0,irq=10 \\\n"
+"-nodefaults"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:190
+msgid "NVRAM"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:192
+msgid "Use a MTD drive to add a PNOR to the machine, and get a NVRAM :"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:194
+msgid "-drive file=./witherspoon.pnor,format=raw,if=mtd"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:199
+msgid "Maintainer contact information"
+msgstr ""
+
+#: ../../../system/ppc/powernv.rst:201
+msgid "Cédric Le Goater <clg@kaod.org>"
+msgstr ""
