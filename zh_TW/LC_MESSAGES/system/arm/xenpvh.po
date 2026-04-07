@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/arm/xenpvh.rst:2
+msgid "XENPVH (``xenpvh``)"
+msgstr ""
+
+#: ../../../system/arm/xenpvh.rst:3
+msgid ""
+"This machine creates a IOREQ server to register/connect with Xen Hypervisor."
+msgstr ""
+
+#: ../../../system/arm/xenpvh.rst:5
+msgid ""
+"When TPM is enabled, this machine also creates a tpm-tis-device at a user "
+"input tpm base address, adds a TPM emulator and connects to a swtpm "
+"application running on host machine via chardev socket. This enables xenpvh "
+"to support TPM functionalities for a guest domain."
+msgstr ""
+
+#: ../../../system/arm/xenpvh.rst:10
+msgid ""
+"More information about TPM use and installing swtpm linux application can be "
+"found at: docs/specs/tpm.rst."
+msgstr ""
+
+#: ../../../system/arm/xenpvh.rst:13
+msgid "Example for starting swtpm on host machine: .. code-block:: console"
+msgstr ""
+
+#: ../../../system/arm/xenpvh.rst:16
+msgid ""
+"mkdir /tmp/vtpm2 swtpm socket --tpmstate dir=/tmp/vtpm2 \\ --ctrl "
+"type=unixio,path=/tmp/vtpm2/swtpm-sock &"
+msgstr ""
+
+#: ../../../system/arm/xenpvh.rst:20
+msgid ""
+"Sample QEMU xenpvh commands for running and connecting with Xen: .. code-"
+"block:: console"
+msgstr ""
+
+#: ../../../system/arm/xenpvh.rst:23
+msgid ""
+"qemu-system-aarch64 -xen-domid 1 \\ -chardev socket,id=libxl-cmd,path=qmp-"
+"libxl-1,server=on,wait=off \\ -mon chardev=libxl-cmd,mode=control \\ -"
+"chardev socket,id=libxenstat-cmd,path=qmp-libxenstat-1,server=on,wait=off \\ "
+"-mon chardev=libxenstat-cmd,mode=control \\ -xen-attach -name guest0 -vnc "
+"none -display none -nographic \\ -machine xenpvh -m 1301 \\ -chardev socket,"
+"id=chrtpm,path=tmp/vtpm2/swtpm-sock \\ -tpmdev emulator,id=tpm0,"
+"chardev=chrtpm -machine tpm-base-addr=0x0C000000"
+msgstr ""
+
+#: ../../../system/arm/xenpvh.rst:33
+msgid ""
+"In above QEMU command, last two lines are for connecting xenpvh QEMU to "
+"swtpm via chardev socket."
+msgstr ""

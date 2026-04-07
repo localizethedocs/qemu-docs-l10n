@@ -1,0 +1,1604 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/qgraph.rst:4
+msgid "Qtest Driver Framework"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:6
+msgid ""
+"In order to test a specific driver, plain libqos tests need to take care of "
+"booting QEMU with the right machine and devices. This makes each test "
+"\"hardcoded\" for a specific configuration, reducing the possible coverage "
+"that it can reach."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:11
+msgid ""
+"For example, the sdhci device is supported on both x86_64 and ARM boards, "
+"therefore a generic sdhci test should test all machines and drivers that "
+"support that device. Using only libqos APIs, the test has to manually take "
+"care of covering all the setups, and build the correct command line."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:17
+msgid ""
+"This also introduces backward compatibility issues: if a device/driver "
+"command line name is changed, all tests that use that will not work properly "
+"anymore and need to be adjusted."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:21
+msgid ""
+"The aim of qgraph is to create a graph of drivers, machines and tests such "
+"that a test aimed to a certain driver does not have to care of booting the "
+"right QEMU machine, pick the right device, build the command line and so on. "
+"Instead, it only defines what type of device it is testing (interface in "
+"qgraph terms) and the framework takes care of covering all supported types "
+"of devices and machine architectures."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:28
+msgid ""
+"Following the above example, an interface would be ``sdhci``, so the sdhci-"
+"test should only care of linking its qgraph node with that interface. In "
+"this way, if the command line of a sdhci driver is changed, only the "
+"respective qgraph driver node has to be adjusted."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:34
+msgid "QGraph concepts"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:36
+msgid ""
+"The graph is composed by nodes that represent machines, drivers, tests and "
+"edges that define the relationships between them (``CONSUMES``, "
+"``PRODUCES``, and ``CONTAINS``)."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:41
+msgid "Nodes"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:43
+msgid "A node can be of four types:"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:45
+msgid "**QNODE_MACHINE**:   for example ``arm/raspi2b``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:46
+msgid "**QNODE_DRIVER**:    for example ``generic-sdhci``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:47
+msgid ""
+"**QNODE_INTERFACE**: for example ``sdhci`` (interface for all ``-sdhci`` "
+"drivers). An interface is not explicitly created, it will be automatically "
+"instantiated when a node consumes or produces it. An interface is simply a "
+"struct that abstracts the various drivers for the same type of device, and "
+"offers an API to the nodes that use it (\"consume\" relation in qgraph "
+"terms) that is implemented/backed up by the drivers that implement it "
+"(\"produce\" relation in qgraph terms)."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:54
+msgid ""
+"**QNODE_TEST**:      for example ``sdhci-test``. A test consumes an "
+"interface and tests the functions provided by it."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:57
+msgid "Notes for the nodes:"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:59
+msgid ""
+"QNODE_MACHINE: each machine struct must have a ``QGuestAllocator`` and "
+"implement ``get_driver()`` to return the allocator mapped to the interface "
+"\"memory\". The function can also return ``NULL`` if the allocator is not "
+"set."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:63
+msgid ""
+"QNODE_DRIVER:  driver names must be unique, and machines and nodes planned "
+"to be \"consumed\" by other nodes must match QEMU drivers name, otherwise "
+"they won't be discovered"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:68
+msgid "Edges"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:70
+msgid ""
+"An edge relation between two nodes (drivers or machines) ``X`` and ``Y`` can "
+"be:"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:72
+msgid "``X CONSUMES Y``: ``Y`` can be plugged into ``X``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:73
+msgid "``X PRODUCES Y``: ``X`` provides the interface ``Y``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:74
+msgid "``X CONTAINS Y``: ``Y`` is part of ``X`` component"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:77
+msgid "Execution steps"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:79
+msgid "The basic framework steps are the following:"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:81
+msgid ""
+"All nodes and edges are created in their respective machine/driver/test files"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:83
+msgid ""
+"The framework starts QEMU and asks for a list of available devices and "
+"machines (note that only machines and \"consumed\" nodes are mapped 1:1 with "
+"QEMU devices)"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:86
+msgid ""
+"The framework walks the graph starting from the available machines and "
+"performs a Depth First Search for tests"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:88
+msgid ""
+"Once a test is found, the path is walked again and all drivers are allocated "
+"accordingly and the final interface is passed to the test"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:90
+msgid "The test is executed"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:91
+msgid "Unused objects are cleaned and the path discovery is continued"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:93
+msgid ""
+"Depending on the QEMU binary used, only some drivers/machines will be "
+"available and only test that are reached by them will be executed."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:97
+msgid "Command line"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:99
+msgid ""
+"Command line is built by using node names and optional arguments passed by "
+"the user when building the edges."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:102
+msgid "There are three types of command line arguments:"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:104
+msgid ""
+"``in node``      : created from the node name. For example, machines will "
+"have ``-M <machine>`` to its command line, while devices ``-device "
+"<device>``. It is automatically done by the framework."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:107
+msgid ""
+"``after node``   : added as additional argument to the node name. This "
+"argument is added optionally when creating edges, by setting the parameter "
+"``after_cmd_line`` and ``extra_edge_opts`` in ``QOSGraphEdgeOptions``. The "
+"framework automatically adds a comma before ``extra_edge_opts``, because it "
+"is going to add attributes after the destination node pointed by the edge "
+"containing these options, and automatically adds a space before "
+"``after_cmd_line``, because it adds an additional device, not an attribute."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:118
+msgid ""
+"``before node``  : added as additional argument to the node name. This "
+"argument is added optionally when creating edges, by setting the parameter "
+"``before_cmd_line`` in ``QOSGraphEdgeOptions``. This attribute is going to "
+"add attributes before the destination node pointed by the edge containing "
+"these options. It is helpful to commands that are not node-representable, "
+"such as ``-fdsev`` or ``-netdev``."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:127
+msgid ""
+"While adding command line in edges is always used, not all nodes names are "
+"used in every path walk: this is because the contained or produced ones are "
+"already added by QEMU, so only nodes that \"consumes\" will be used to build "
+"the command line. Also, nodes that will have ``{ \"abstract\" : true }`` as "
+"QMP attribute will loose their command line, since they are not proper "
+"devices to be added in QEMU."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:134
+msgid "Example::"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:136
+msgid ""
+"QOSGraphEdgeOptions opts = {\n"
+"    .before_cmd_line = \"-drive id=drv0,if=none,file=null-co://,\"\n"
+"                       \"file.read-zeroes=on,format=raw\",\n"
+"    .after_cmd_line = \"-device scsi-hd,bus=vs0.0,drive=drv0\",\n"
+"\n"
+"    opts.extra_device_opts = \"id=vs0\";\n"
+"};\n"
+"\n"
+"qos_node_create_driver(\"virtio-scsi-device\",\n"
+"                        virtio_scsi_device_create);\n"
+"qos_node_consumes(\"virtio-scsi-device\", \"virtio-bus\", &opts);"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:148
+msgid ""
+"Will produce the following command line: ``-drive id=drv0,if=none,file=null-"
+"co://, -device virtio-scsi-device,id=vs0 -device scsi-hd,bus=vs0.0,"
+"drive=drv0``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:152
+msgid "Troubleshooting unavailable tests"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:154
+msgid ""
+"If there is no path from an available machine to a test then that test will "
+"be unavailable and won't execute. This can happen if a test or driver did "
+"not set up its qgraph node correctly. It can also happen if the necessary "
+"machine type or device is missing from the QEMU binary because it was "
+"compiled out or otherwise."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:160
+msgid "It is possible to troubleshoot unavailable tests by running::"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:162
+msgid ""
+"$ QTEST_QEMU_BINARY=build/qemu-system-x86_64 build/tests/qtest/qos-test --"
+"verbose\n"
+"# ALL QGRAPH EDGES: {\n"
+"#   src='virtio-net'\n"
+"#      |-> dest='virtio-net-tests/vhost-user/multiqueue' type=2 "
+"(node=0x559142109e30)\n"
+"#      |-> dest='virtio-net-tests/vhost-user/migrate' type=2 "
+"(node=0x559142109d00)\n"
+"#   src='virtio-net-pci'\n"
+"#      |-> dest='virtio-net' type=1 (node=0x55914210d740)\n"
+"#   src='pci-bus'\n"
+"#      |-> dest='virtio-net-pci' type=2 (node=0x55914210d880)\n"
+"#   src='pci-bus-pc'\n"
+"#      |-> dest='pci-bus' type=1 (node=0x559142103f40)\n"
+"#   src='i440FX-pcihost'\n"
+"#      |-> dest='pci-bus-pc' type=0 (node=0x55914210ac70)\n"
+"#   src='x86_64/pc'\n"
+"#      |-> dest='i440FX-pcihost' type=0 (node=0x5591421117f0)\n"
+"#   src=''\n"
+"#      |-> dest='x86_64/pc' type=0 (node=0x559142111600)\n"
+"#      |-> dest='arm/raspi2b' type=0 (node=0x559142110740)\n"
+"...\n"
+"# }\n"
+"# ALL QGRAPH NODES: {\n"
+"#   name='virtio-net-tests/announce-self' type=3 "
+"cmd_line='(null)' [available]\n"
+"#   name='arm/raspi2b' type=0 cmd_line='-M raspi2b ' [UNAVAILABLE]\n"
+"...\n"
+"# }"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:188
+msgid ""
+"The ``virtio-net-tests/announce-self`` test is listed as \"available\" in "
+"the \"ALL QGRAPH NODES\" output. This means the test will execute. We can "
+"follow the qgraph path in the \"ALL QGRAPH EDGES\" output as follows: '' -> "
+"'x86_64/pc' -> 'i440FX-pcihost' -> 'pci-bus-pc' -> 'pci-bus' -> 'virtio-net-"
+"pci' -> 'virtio-net'. The root of the qgraph is '' and the depth first "
+"search begins there."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:195
+msgid ""
+"The ``arm/raspi2b`` machine node is listed as \"UNAVAILABLE\". Although it "
+"is reachable from the root via '' -> 'arm/raspi2b' the node is unavailable "
+"because the QEMU binary did not list it when queried by the framework. This "
+"is expected because we used the ``qemu-system-x86_64`` binary which does not "
+"support ARM machine types."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:201
+msgid ""
+"If a test is unexpectedly listed as \"UNAVAILABLE\", first check that the "
+"\"ALL QGRAPH EDGES\" output reports edge connectivity from the root ('') to "
+"the test. If there is no connectivity then the qgraph nodes were not set up "
+"correctly and the driver or test code is incorrect. If there is "
+"connectivity, check the availability of each node in the path in the \"ALL "
+"QGRAPH NODES\" output. The first unavailable node in the path is the reason "
+"why the test is unavailable. Typically this is because the QEMU binary lacks "
+"support for the necessary machine type or device."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:211
+msgid "Creating a new driver and its interface"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:213
+msgid "Here we continue the ``sdhci`` use case, with the following scenario:"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:215
+msgid ""
+"``sdhci-test`` aims to test the ``read[q,w], writeq`` functions offered by "
+"the ``sdhci`` drivers."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:217
+msgid ""
+"The current ``sdhci`` device is supported by both ``x86_64/pc`` and ``ARM`` "
+"(in this example we focus on the ``arm-raspi2b``) machines."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:219
+msgid ""
+"QEMU offers 2 types of drivers: ``QSDHCI_MemoryMapped`` for ``ARM`` and "
+"``QSDHCI_PCI`` for ``x86_64/pc``. Both implement the ``read[q,w], writeq`` "
+"functions."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:223
+msgid ""
+"In order to implement such scenario in qgraph, the test developer needs to:"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:225
+msgid ""
+"Create the ``x86_64/pc`` machine node. This machine uses the ``pci-bus`` "
+"architecture so it ``contains`` a PCI driver, ``pci-bus-pc``. The actual "
+"path is"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:229
+msgid ""
+"``x86_64/pc --contains--> 1440FX-pcihost --contains--> pci-bus-pc --"
+"produces--> pci-bus``."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:232
+msgid ""
+"For the sake of this example, we do not focus on the PCI interface "
+"implementation."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:234
+msgid ""
+"Create the ``sdhci-pci`` driver node, representing ``QSDHCI_PCI``. The "
+"driver uses the PCI bus (and its API), so it must ``consume`` the ``pci-"
+"bus`` generic interface (which abstracts all the pci drivers available)"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:239
+msgid "``sdhci-pci --consumes--> pci-bus``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:240
+msgid ""
+"Create an ``arm/raspi2b`` machine node. This machine ``contains`` a "
+"``generic-sdhci`` memory mapped ``sdhci`` driver node, representing "
+"``QSDHCI_MemoryMapped``."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:244
+msgid "``arm/raspi2b --contains--> generic-sdhci``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:245
+msgid ""
+"Create the ``sdhci`` interface node. This interface offers the functions "
+"that are shared by all ``sdhci`` devices. The interface is produced by "
+"``sdhci-pci`` and ``generic-sdhci``, the available architecture-specific "
+"drivers."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:250
+msgid "``sdhci-pci --produces--> sdhci``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:252
+msgid "``generic-sdhci --produces--> sdhci``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:253
+msgid ""
+"Create the ``sdhci-test`` test node. The test ``consumes`` the ``sdhci`` "
+"interface, using its API. It doesn't need to look at the supported machines "
+"or drivers."
+msgstr ""
+
+#: ../../../devel/qgraph.rst:257
+msgid "``sdhci-test --consumes--> sdhci``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:259
+msgid ""
+"``arm-raspi2b`` machine, simplified from ``tests/qtest/libqos/arm-raspi2-"
+"machine.c``::"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:262
+msgid ""
+"#include \"qgraph.h\"\n"
+"\n"
+"struct QRaspi2Machine {\n"
+"    QOSGraphObject obj;\n"
+"    QGuestAllocator alloc;\n"
+"    QSDHCI_MemoryMapped sdhci;\n"
+"};\n"
+"\n"
+"static void *raspi2_get_driver(void *object, const char *interface)\n"
+"{\n"
+"    QRaspi2Machine *machine = object;\n"
+"    if (!g_strcmp0(interface, \"memory\")) {\n"
+"        return &machine->alloc;\n"
+"    }\n"
+"\n"
+"    fprintf(stderr, \"%s not present in arm/raspi2b\\n\", interface);\n"
+"    g_assert_not_reached();\n"
+"}\n"
+"\n"
+"static QOSGraphObject *raspi2_get_device(void *obj,\n"
+"                                            const char *device)\n"
+"{\n"
+"    QRaspi2Machine *machine = obj;\n"
+"    if (!g_strcmp0(device, \"generic-sdhci\")) {\n"
+"        return &machine->sdhci.obj;\n"
+"    }\n"
+"\n"
+"    fprintf(stderr, \"%s not present in arm/raspi2b\\n\", device);\n"
+"    g_assert_not_reached();\n"
+"}\n"
+"\n"
+"static void *qos_create_machine_arm_raspi2(QTestState *qts)\n"
+"{\n"
+"    QRaspi2Machine *machine = g_new0(QRaspi2Machine, 1);\n"
+"\n"
+"    alloc_init(&machine->alloc, ...);\n"
+"\n"
+"    /* Get node(s) contained inside (CONTAINS) */\n"
+"    machine->obj.get_device = raspi2_get_device;\n"
+"\n"
+"    /* Get node(s) produced (PRODUCES) */\n"
+"    machine->obj.get_driver = raspi2_get_driver;\n"
+"\n"
+"    /* free the object */\n"
+"    machine->obj.destructor = raspi2_destructor;\n"
+"    qos_init_sdhci_mm(&machine->sdhci, ...);\n"
+"    return &machine->obj;\n"
+"}\n"
+"\n"
+"static void raspi2_register_nodes(void)\n"
+"{\n"
+"    /* arm/raspi2b --contains--> generic-sdhci */\n"
+"    qos_node_create_machine(\"arm/raspi2b\",\n"
+"                             qos_create_machine_arm_raspi2);\n"
+"    qos_node_contains(\"arm/raspi2b\", \"generic-sdhci\", NULL);\n"
+"}\n"
+"\n"
+"libqos_init(raspi2_register_nodes);"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:321
+msgid ""
+"``x86_64/pc`` machine, simplified from ``tests/qtest/libqos/x86_64_pc-"
+"machine.c``::"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:324
+msgid ""
+"#include \"qgraph.h\"\n"
+"\n"
+"struct i440FX_pcihost {\n"
+"    QOSGraphObject obj;\n"
+"    QPCIBusPC pci;\n"
+"};\n"
+"\n"
+"struct QX86PCMachine {\n"
+"    QOSGraphObject obj;\n"
+"    QGuestAllocator alloc;\n"
+"    i440FX_pcihost bridge;\n"
+"};\n"
+"\n"
+"/* i440FX_pcihost */\n"
+"\n"
+"static QOSGraphObject *i440FX_host_get_device(void *obj,\n"
+"                                            const char *device)\n"
+"{\n"
+"    i440FX_pcihost *host = obj;\n"
+"    if (!g_strcmp0(device, \"pci-bus-pc\")) {\n"
+"        return &host->pci.obj;\n"
+"    }\n"
+"    fprintf(stderr, \"%s not present in i440FX-pcihost\\n\", device);\n"
+"    g_assert_not_reached();\n"
+"}\n"
+"\n"
+"/* x86_64/pc machine */\n"
+"\n"
+"static void *pc_get_driver(void *object, const char *interface)\n"
+"{\n"
+"    QX86PCMachine *machine = object;\n"
+"    if (!g_strcmp0(interface, \"memory\")) {\n"
+"        return &machine->alloc;\n"
+"    }\n"
+"\n"
+"    fprintf(stderr, \"%s not present in x86_64/pc\\n\", interface);\n"
+"    g_assert_not_reached();\n"
+"}\n"
+"\n"
+"static QOSGraphObject *pc_get_device(void *obj, const char *device)\n"
+"{\n"
+"    QX86PCMachine *machine = obj;\n"
+"    if (!g_strcmp0(device, \"i440FX-pcihost\")) {\n"
+"        return &machine->bridge.obj;\n"
+"    }\n"
+"\n"
+"    fprintf(stderr, \"%s not present in x86_64/pc\\n\", device);\n"
+"    g_assert_not_reached();\n"
+"}\n"
+"\n"
+"static void *qos_create_machine_pc(QTestState *qts)\n"
+"{\n"
+"    QX86PCMachine *machine = g_new0(QX86PCMachine, 1);\n"
+"\n"
+"    /* Get node(s) contained inside (CONTAINS) */\n"
+"    machine->obj.get_device = pc_get_device;\n"
+"\n"
+"    /* Get node(s) produced (PRODUCES) */\n"
+"    machine->obj.get_driver = pc_get_driver;\n"
+"\n"
+"    /* free the object */\n"
+"    machine->obj.destructor = pc_destructor;\n"
+"    pc_alloc_init(&machine->alloc, qts, ALLOC_NO_FLAGS);\n"
+"\n"
+"    /* Get node(s) contained inside (CONTAINS) */\n"
+"    machine->bridge.obj.get_device = i440FX_host_get_device;\n"
+"\n"
+"    return &machine->obj;\n"
+"}\n"
+"\n"
+"static void pc_machine_register_nodes(void)\n"
+"{\n"
+"    /* x86_64/pc --contains--> 1440FX-pcihost --contains-->\n"
+"     * pci-bus-pc [--produces--> pci-bus (in pci.h)] */\n"
+"    qos_node_create_machine(\"x86_64/pc\", qos_create_machine_pc);\n"
+"    qos_node_contains(\"x86_64/pc\", \"i440FX-pcihost\", NULL);\n"
+"\n"
+"    /* contained drivers don't need a constructor,\n"
+"     * they will be init by the parent */\n"
+"    qos_node_create_driver(\"i440FX-pcihost\", NULL);\n"
+"    qos_node_contains(\"i440FX-pcihost\", \"pci-bus-pc\", NULL);\n"
+"}\n"
+"\n"
+"libqos_init(pc_machine_register_nodes);"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:409
+msgid "``sdhci`` taken from ``tests/qtest/libqos/sdhci.c``::"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:411
+msgid ""
+"/* Interface node, offers the sdhci API */\n"
+"struct QSDHCI {\n"
+"    uint16_t (*readw)(QSDHCI *s, uint32_t reg);\n"
+"    uint64_t (*readq)(QSDHCI *s, uint32_t reg);\n"
+"    void (*writeq)(QSDHCI *s, uint32_t reg, uint64_t val);\n"
+"    /* other fields */\n"
+"};\n"
+"\n"
+"/* Memory Mapped implementation of QSDHCI */\n"
+"struct QSDHCI_MemoryMapped {\n"
+"    QOSGraphObject obj;\n"
+"    QSDHCI sdhci;\n"
+"    /* other driver-specific fields */\n"
+"};\n"
+"\n"
+"/* PCI implementation of QSDHCI */\n"
+"struct QSDHCI_PCI {\n"
+"    QOSGraphObject obj;\n"
+"    QSDHCI sdhci;\n"
+"    /* other driver-specific fields */\n"
+"};\n"
+"\n"
+"/* Memory mapped implementation of QSDHCI */\n"
+"\n"
+"static void *sdhci_mm_get_driver(void *obj, const char *interface)\n"
+"{\n"
+"    QSDHCI_MemoryMapped *smm = obj;\n"
+"    if (!g_strcmp0(interface, \"sdhci\")) {\n"
+"        return &smm->sdhci;\n"
+"    }\n"
+"    fprintf(stderr, \"%s not present in generic-sdhci\\n\", interface);\n"
+"    g_assert_not_reached();\n"
+"}\n"
+"\n"
+"void qos_init_sdhci_mm(QSDHCI_MemoryMapped *sdhci, QTestState *qts,\n"
+"                    uint32_t addr, QSDHCIProperties *common)\n"
+"{\n"
+"    /* Get node contained inside (CONTAINS) */\n"
+"    sdhci->obj.get_driver = sdhci_mm_get_driver;\n"
+"\n"
+"    /* SDHCI interface API */\n"
+"    sdhci->sdhci.readw = sdhci_mm_readw;\n"
+"    sdhci->sdhci.readq = sdhci_mm_readq;\n"
+"    sdhci->sdhci.writeq = sdhci_mm_writeq;\n"
+"    sdhci->qts = qts;\n"
+"}\n"
+"\n"
+"/* PCI implementation of QSDHCI */\n"
+"\n"
+"static void *sdhci_pci_get_driver(void *object,\n"
+"                                  const char *interface)\n"
+"{\n"
+"    QSDHCI_PCI *spci = object;\n"
+"    if (!g_strcmp0(interface, \"sdhci\")) {\n"
+"        return &spci->sdhci;\n"
+"    }\n"
+"\n"
+"    fprintf(stderr, \"%s not present in sdhci-pci\\n\", interface);\n"
+"    g_assert_not_reached();\n"
+"}\n"
+"\n"
+"static void *sdhci_pci_create(void *pci_bus,\n"
+"                              QGuestAllocator *alloc,\n"
+"                              void *addr)\n"
+"{\n"
+"    QSDHCI_PCI *spci = g_new0(QSDHCI_PCI, 1);\n"
+"    QPCIBus *bus = pci_bus;\n"
+"    uint64_t barsize;\n"
+"\n"
+"    qpci_device_init(&spci->dev, bus, addr);\n"
+"\n"
+"    /* SDHCI interface API */\n"
+"    spci->sdhci.readw = sdhci_pci_readw;\n"
+"    spci->sdhci.readq = sdhci_pci_readq;\n"
+"    spci->sdhci.writeq = sdhci_pci_writeq;\n"
+"\n"
+"    /* Get node(s) produced (PRODUCES) */\n"
+"    spci->obj.get_driver = sdhci_pci_get_driver;\n"
+"\n"
+"    spci->obj.start_hw = sdhci_pci_start_hw;\n"
+"    spci->obj.destructor = sdhci_destructor;\n"
+"    return &spci->obj;\n"
+"}\n"
+"\n"
+"static void qsdhci_register_nodes(void)\n"
+"{\n"
+"    QOSGraphEdgeOptions opts = {\n"
+"        .extra_device_opts = \"addr=04.0\",\n"
+"    };\n"
+"\n"
+"    /* generic-sdhci */\n"
+"    /* generic-sdhci --produces--> sdhci */\n"
+"    qos_node_create_driver(\"generic-sdhci\", NULL);\n"
+"    qos_node_produces(\"generic-sdhci\", \"sdhci\");\n"
+"\n"
+"    /* sdhci-pci */\n"
+"    /* sdhci-pci --produces--> sdhci\n"
+"     * sdhci-pci --consumes--> pci-bus */\n"
+"    qos_node_create_driver(\"sdhci-pci\", sdhci_pci_create);\n"
+"    qos_node_produces(\"sdhci-pci\", \"sdhci\");\n"
+"    qos_node_consumes(\"sdhci-pci\", \"pci-bus\", &opts);\n"
+"}\n"
+"\n"
+"libqos_init(qsdhci_register_nodes);"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:516
+msgid "In the above example, all possible types of relations are created::"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:518
+msgid ""
+"x86_64/pc --contains--> 1440FX-pcihost --contains--> pci-bus-pc\n"
+"                                                          |\n"
+"             sdhci-pci --consumes--> pci-bus <--produces--+\n"
+"                |\n"
+"                +--produces--+\n"
+"                             |\n"
+"                             v\n"
+"                           sdhci\n"
+"                             ^\n"
+"                             |\n"
+"                             +--produces-- +\n"
+"                                           |\n"
+"             arm/raspi2b --contains--> generic-sdhci"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:532 ../../../devel/qgraph.rst:598
+msgid "or inverting the consumes edge in consumed_by::"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:534
+msgid ""
+"x86_64/pc --contains--> 1440FX-pcihost --contains--> pci-bus-pc\n"
+"                                                          |\n"
+"          sdhci-pci <--consumed by-- pci-bus <--produces--+\n"
+"              |\n"
+"              +--produces--+\n"
+"                           |\n"
+"                           v\n"
+"                          sdhci\n"
+"                           ^\n"
+"                           |\n"
+"                           +--produces-- +\n"
+"                                         |\n"
+"          arm/raspi2b --contains--> generic-sdhci"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:549
+msgid "Adding a new test"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:551
+msgid ""
+"Given the above setup, adding a new test is very simple. ``sdhci-test``, "
+"taken from ``tests/qtest/sdhci-test.c``::"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:554
+msgid ""
+"static void check_capab_sdma(QSDHCI *s, bool supported)\n"
+"{\n"
+"    uint64_t capab, capab_sdma;\n"
+"\n"
+"    capab = s->readq(s, SDHC_CAPAB);\n"
+"    capab_sdma = FIELD_EX64(capab, SDHC_CAPAB, SDMA);\n"
+"    g_assert_cmpuint(capab_sdma, ==, supported);\n"
+"}\n"
+"\n"
+"static void test_registers(void *obj, void *data,\n"
+"                            QGuestAllocator *alloc)\n"
+"{\n"
+"    QSDHCI *s = obj;\n"
+"\n"
+"    /* example test */\n"
+"    check_capab_sdma(s, s->props.capab.sdma);\n"
+"}\n"
+"\n"
+"static void register_sdhci_test(void)\n"
+"{\n"
+"    /* sdhci-test --consumes--> sdhci */\n"
+"    qos_add_test(\"registers\", \"sdhci\", test_registers, NULL);\n"
+"}\n"
+"\n"
+"libqos_init(register_sdhci_test);"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:580
+msgid ""
+"Here a new test is created, consuming ``sdhci`` interface node and creating "
+"a valid path from both machines to a test. Final graph will be like this::"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:584
+msgid ""
+"x86_64/pc --contains--> 1440FX-pcihost --contains--> pci-bus-pc\n"
+"                                                          |\n"
+"             sdhci-pci --consumes--> pci-bus <--produces--+\n"
+"                |\n"
+"                +--produces--+\n"
+"                             |\n"
+"                             v\n"
+"                           sdhci <--consumes-- sdhci-test\n"
+"                             ^\n"
+"                             |\n"
+"                             +--produces-- +\n"
+"                                           |\n"
+"             arm/raspi2b --contains--> generic-sdhci"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:600
+msgid ""
+"x86_64/pc --contains--> 1440FX-pcihost --contains--> pci-bus-pc\n"
+"                                                          |\n"
+"          sdhci-pci <--consumed by-- pci-bus <--produces--+\n"
+"              |\n"
+"              +--produces--+\n"
+"                           |\n"
+"                           v\n"
+"                          sdhci --consumed by--> sdhci-test\n"
+"                           ^\n"
+"                           |\n"
+"                           +--produces-- +\n"
+"                                         |\n"
+"          arm/raspi2b --contains--> generic-sdhci"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:614
+msgid ""
+"Assuming there the binary is ``QTEST_QEMU_BINARY=./qemu-system-x86_64`` a "
+"valid test path will be: ``/x86_64/pc/1440FX-pcihost/pci-bus-pc/pci-bus/"
+"sdhci-pc/sdhci/sdhci-test``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:619
+msgid "and for the binary ``QTEST_QEMU_BINARY=./qemu-system-arm``:"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:621
+msgid "``/arm/raspi2b/generic-sdhci/sdhci/sdhci-test``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:623
+msgid "Additional examples are also in ``test-qgraph.c``"
+msgstr ""
+
+#: ../../../devel/qgraph.rst:626
+msgid "Qgraph API reference"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:51
+msgid "Edge options to be passed to the contains/consumes \\*_args function."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:53
+#: ../../../../tests/qtest/libqos/qgraph.h:85
+#: ../../../../tests/qtest/libqos/qgraph.h:106
+msgid "**Definition**"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:57
+msgid ""
+"struct QOSGraphEdgeOptions {\n"
+"  void *arg;\n"
+"  uint32_t size_arg;\n"
+"  const char *extra_device_opts;\n"
+"  const char *before_cmd_line;\n"
+"  const char *after_cmd_line;\n"
+"  const char *edge_name;\n"
+"};"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:66
+#: ../../../../tests/qtest/libqos/qgraph.h:96
+#: ../../../../tests/qtest/libqos/qgraph.h:118
+msgid "**Members**"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:53
+#: ../../../../tests/qtest/libqos/qgraph.h:89
+msgid "``arg``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:54
+msgid "optional arg that will be used by dest edge"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:54
+msgid "``size_arg``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:55
+msgid "**arg** size that will be used by dest edge"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:55
+msgid "``extra_device_opts``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:56
+msgid ""
+"optional additional command line for dest edge, used to add additional "
+"attributes *after* the node command line, the framework automatically "
+"prepends \",\" to this argument."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:60
+msgid "``before_cmd_line``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:61
+msgid ""
+"optional additional command line for dest edge, used to add additional "
+"attributes *before* the node command line, usually other non-node "
+"represented commands, like \"-fdsev synt\""
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:65
+msgid "``after_cmd_line``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:66
+msgid ""
+"optional extra command line to be added after the device command. This "
+"option is used to add other devices command line that depend on current "
+"node. Automatically prepends \" \" to this argument"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:70
+msgid "``edge_name``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:71
+msgid "optional edge to differentiate multiple devices with same node name"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:83
+msgid "Test options to be passed to the test functions."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:89
+msgid ""
+"struct QOSGraphTestOptions {\n"
+"  QOSGraphEdgeOptions edge;\n"
+"  void *arg;\n"
+"  QOSBeforeTest before;\n"
+"  bool subprocess;\n"
+"};"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:85
+msgid "``edge``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:86
+msgid ""
+"edge arguments that will be used by test. Note that test *does not* use "
+"edge_name, and uses instead arg and size_arg as data arg for its test "
+"function."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:90
+msgid ""
+"if **before** is non-NULL, pass **arg** there. Otherwise pass it to the test "
+"function."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:91
+msgid "``before``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:92
+msgid ""
+"executed before the test. Used to add additional parameters to the command "
+"line and modify the argument to the test function."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:94
+msgid "``subprocess``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:95
+msgid "run the test in a subprocess."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:104
+msgid ""
+"Each driver, test or machine of this framework will have a QOSGraphObject as "
+"first field."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:110
+msgid ""
+"struct QOSGraphObject {\n"
+"  QOSGetDriver get_driver;\n"
+"  QOSGetDevice get_device;\n"
+"  QOSStartFunct start_hw;\n"
+"  QOSDestructorFunc destructor;\n"
+"  GDestroyNotify free;\n"
+"};"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:110
+msgid "``get_driver``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:111
+msgid "see **get_device**"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:111
+msgid "``get_device``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:112
+msgid ""
+"Once a machine-to-test path has been found, the framework traverses it again "
+"and allocates all the nodes, using the provided constructor. To satisfy "
+"their relations, i.e. for produces or contains, where a struct constructor "
+"needs an external parameter represented by the previous node, the framework "
+"will call **get_device** (for contains) or **get_driver** (for produces), "
+"depending on the edge type, passing them the name of the next node to be "
+"taken and getting from them the corresponding pointer to the actual "
+"structure of the next node to be used in the path."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:122
+msgid "``start_hw``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:123
+msgid ""
+"This function is executed after all the path objects have been allocated, "
+"but before the test is run. It starts the hw, setting the initial "
+"configurations (\\*_device_enable) and making it ready for the test."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:126
+msgid "``destructor``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:127
+msgid ""
+"Opposite to the node constructor, destroys the object. This function is "
+"called after the test has been executed, and performs a complete cleanup of "
+"each node allocated field. In case no constructor is provided, no destructor "
+"will be called."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:131
+msgid "``free``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:132
+msgid ""
+"free the memory associated to the QOSGraphObject and its contained children"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:136
+#: ../../../../tests/qtest/libqos/qgraph.h:175
+#: ../../../../tests/qtest/libqos/qgraph.h:193
+#: ../../../../tests/qtest/libqos/qgraph.h:216
+#: ../../../../tests/qtest/libqos/qgraph.h:230
+#: ../../../../tests/qtest/libqos/qgraph.h:248
+#: ../../../../tests/qtest/libqos/qgraph.h:283
+#: ../../../../tests/qtest/libqos/qgraph.h:295
+#: ../../../../tests/qtest/libqos/qgraph.h:321
+#: ../../../../tests/qtest/libqos/qgraph.h:353
+#: ../../../../tests/qtest/libqos/qgraph.h:364
+#: ../../../../tests/qtest/libqos/qgraph.h:377
+msgid "**Description**"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:106
+msgid ""
+"This set of functions offered by QOSGraphObject are executed in different "
+"stages of the framework:"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:143
+msgid ""
+"initialize the framework, creates two hash tables: one for the nodes and "
+"another for the edges."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:145
+#: ../../../../tests/qtest/libqos/qgraph.h:151
+#: ../../../../tests/qtest/libqos/qgraph.h:157
+#: ../../../../tests/qtest/libqos/qgraph.h:164
+#: ../../../../tests/qtest/libqos/qgraph.h:171
+#: ../../../../tests/qtest/libqos/qgraph.h:190
+#: ../../../../tests/qtest/libqos/qgraph.h:201
+#: ../../../../tests/qtest/libqos/qgraph.h:213
+#: ../../../../tests/qtest/libqos/qgraph.h:224
+#: ../../../../tests/qtest/libqos/qgraph.h:240
+#: ../../../../tests/qtest/libqos/qgraph.h:279
+#: ../../../../tests/qtest/libqos/qgraph.h:290
+#: ../../../../tests/qtest/libqos/qgraph.h:305
+#: ../../../../tests/qtest/libqos/qgraph.h:312
+#: ../../../../tests/qtest/libqos/qgraph.h:318
+#: ../../../../tests/qtest/libqos/qgraph.h:332
+#: ../../../../tests/qtest/libqos/qgraph.h:338
+#: ../../../../tests/qtest/libqos/qgraph.h:345
+#: ../../../../tests/qtest/libqos/qgraph.h:351
+#: ../../../../tests/qtest/libqos/qgraph.h:360
+#: ../../../../tests/qtest/libqos/qgraph.h:372
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:147
+#: ../../../../tests/qtest/libqos/qgraph.h:153
+#: ../../../../tests/qtest/libqos/qgraph.h:307
+#: ../../../../tests/qtest/libqos/qgraph.h:314
+#: ../../../../tests/qtest/libqos/qgraph.h:374
+msgid "``void``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:148
+#: ../../../../tests/qtest/libqos/qgraph.h:154
+#: ../../../../tests/qtest/libqos/qgraph.h:308
+#: ../../../../tests/qtest/libqos/qgraph.h:315
+#: ../../../../tests/qtest/libqos/qgraph.h:375
+msgid "no arguments"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:149
+msgid "deallocates all the hash tables, freeing all nodes and edges."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:155
+msgid "removes and frees a node from the nodes hash table."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:159
+#: ../../../../tests/qtest/libqos/qgraph.h:166
+msgid "``void *key``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:157
+#: ../../../../tests/qtest/libqos/qgraph.h:164
+msgid "Name of the node"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:162
+msgid "removes and frees an edge from the edges hash table."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:169
+msgid "adds a test node **name** to the nodes hash table."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:173
+#: ../../../../tests/qtest/libqos/qgraph.h:192
+#: ../../../../tests/qtest/libqos/qgraph.h:203
+#: ../../../../tests/qtest/libqos/qgraph.h:215
+#: ../../../../tests/qtest/libqos/qgraph.h:226
+msgid "``const char *name``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:170
+msgid "Name of the test"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:172
+#: ../../../../tests/qtest/libqos/qgraph.h:282
+#: ../../../../tests/qtest/libqos/qgraph.h:293
+msgid "``const char *interface``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:171
+msgid "Name of the interface node it consumes"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:173
+msgid "``QOSTestFunc test_func``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:172
+msgid "Actual test to perform"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:174
+msgid "``QOSGraphTestOptions *opts``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:173
+msgid "Facultative options (see ``QOSGraphTestOptions``)"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:175
+msgid ""
+"The test will consume a **interface** node, and once the graph walking "
+"algorithm has found it, the **test_func** will be executed. It also has the "
+"possibility to add an optional **opts** (see ``QOSGraphTestOptions``)."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:180
+msgid ""
+"For tests, opts->edge.arg and size_arg represent the arg to pass to "
+"**test_func**"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:188
+msgid "creates the machine **name** and adds it to the node hash table."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:190
+#: ../../../../tests/qtest/libqos/qgraph.h:202
+msgid "Name of the machine"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:192
+#: ../../../../tests/qtest/libqos/qgraph.h:204
+msgid "``QOSCreateMachineFunc function``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:191
+#: ../../../../tests/qtest/libqos/qgraph.h:203
+msgid "Machine constructor"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:193
+msgid ""
+"This node will be of type QNODE_MACHINE and have **function** as constructor"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:199
+msgid ""
+"same as qos_node_create_machine, but with the possibility to add an optional "
+"\", **opts**\" after -M machine command line."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:205
+msgid "``const char *opts``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:204
+msgid "Optional additional command line"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:211
+msgid "creates the driver **name** and adds it to the node hash table."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:213
+msgid "Name of the driver"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:215
+#: ../../../../tests/qtest/libqos/qgraph.h:229
+msgid "``QOSCreateDriverFunc function``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:214
+#: ../../../../tests/qtest/libqos/qgraph.h:228
+msgid "Driver constructor"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:216
+msgid ""
+"This node will be of type QNODE_DRIVER and have **function** as constructor"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:222
+msgid ""
+"behaves as qos_node_create_driver() with the extension of allowing to "
+"specify a different node name vs. associated QEMU device name."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:225
+msgid "Custom, unique name of the node to be created"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:227
+msgid "``const char *qemu_name``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:226
+msgid "Actual (official) QEMU driver name the node shall be associated with"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:230
+msgid ""
+"Use this function instead of qos_node_create_driver() if you need to create "
+"several instances of the same QEMU device. You are free to choose a custom "
+"node name, however the chosen node name must always be unique."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:238
+msgid ""
+"creates one or more edges of type QEDGE_CONTAINS and adds them to the edge "
+"list mapped to **container** in the edge hash table."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:242
+msgid "``const char *container``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:241
+msgid "Source node that \"contains\""
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:243
+msgid "``const char *contained``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:242
+msgid "Destination node that \"is contained\""
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:244
+#: ../../../../tests/qtest/libqos/qgraph.h:294
+msgid "``QOSGraphEdgeOptions *opts``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:243
+#: ../../../../tests/qtest/libqos/qgraph.h:293
+msgid "Facultative options (see ``QOSGraphEdgeOptions``)"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:245
+msgid "``...``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:246
+msgid "variable arguments"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:245
+msgid ""
+"The edges will have **container** as source and **contained** as destination."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:247
+msgid ""
+"If **opts** is NULL, a single edge will be added with no options. If "
+"**opts** is non-NULL, the arguments after **contained** represent a NULL-"
+"terminated list of ``QOSGraphEdgeOptions`` structs, and an edge will be "
+"added for each of them."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:252
+msgid ""
+"This function can be useful when there are multiple devices with the same "
+"node name contained in a machine/other node"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:255
+msgid ""
+"For example, if ``arm/raspi2b`` contains 2 ``generic-sdhci`` devices, the "
+"right commands will be:"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:258
+msgid ""
+"qos_node_create_machine(\"arm/raspi2b\");\n"
+"qos_node_create_driver(\"generic-sdhci\", constructor);\n"
+"// assume rest of the fields are set NULL\n"
+"QOSGraphEdgeOptions op1 = { .edge_name = \"emmc\" };\n"
+"QOSGraphEdgeOptions op2 = { .edge_name = \"sdcard\" };\n"
+"qos_node_contains(\"arm/raspi2b\", \"generic-sdhci\", &op1, &op2, NULL);"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:267
+msgid ""
+"Of course this also requires that the **container**'s get_device function "
+"should implement a case for \"emmc\" and \"sdcard\"."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:270
+msgid ""
+"For contains, op1.arg and op1.size_arg represent the arg to pass to "
+"**contained** constructor to properly initialize it."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:277
+msgid ""
+"creates an edge of type QEDGE_PRODUCES and adds it to the edge list mapped "
+"to **producer** in the edge hash table."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:281
+msgid "``const char *producer``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:280
+msgid "Source node that \"produces\""
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:281
+msgid "Interface node that \"is produced\""
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:283
+msgid ""
+"This edge will have **producer** as source and **interface** as destination."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:288
+msgid ""
+"creates an edge of type QEDGE_CONSUMED_BY and adds it to the edge list "
+"mapped to **interface** in the edge hash table."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:292
+msgid "``const char *consumer``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:291
+msgid "Node that \"consumes\""
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:292
+msgid "Interface node that \"is consumed by\""
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:295
+msgid ""
+"This edge will have **interface** as source and **consumer** as destination. "
+"It also has the possibility to add an optional **opts** (see "
+"``QOSGraphEdgeOptions``)"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:303
+msgid ""
+"invalidates current command line, so that qgraph framework cannot try to "
+"cache the current command line and forces QEMU to restart."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:310
+msgid ""
+"return the command line required by the machine and driver objects. This is "
+"the same string that was passed to the test's \"before\" callback, if any."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:320
+#: ../../../../tests/qtest/libqos/qgraph.h:352
+msgid "``QTestState *qts``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:318
+msgid ""
+"The :c:type:`QTestState <QTestState>` that will be referred to by the "
+"machine object."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:320
+msgid "``QGuestAllocator **p_alloc``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:319
+msgid "Where to store the allocator for the machine object, or ``NULL``."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:321
+msgid ""
+"Allocate driver objects for the current test path, but relative to the "
+"QTestState **qts**."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:324
+msgid ""
+"Returns a test object just like the one that was passed to the test "
+"function, but relative to **qts**."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:330
+msgid "calls the destructor for **obj**"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:334
+#: ../../../../tests/qtest/libqos/qgraph.h:340
+#: ../../../../tests/qtest/libqos/qgraph.h:347
+msgid "``QOSGraphObject *obj``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:331
+#: ../../../../tests/qtest/libqos/qgraph.h:338
+msgid "A :c:type:`QOSGraphObject <QOSGraphObject>` to destroy"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:336
+msgid ""
+"queue the destructor for **obj** so that it is called at the end of the test"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:343
+msgid "calls the start_hw function for **obj**"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:344
+msgid ""
+"A :c:type:`QOSGraphObject <QOSGraphObject>` containing the start_hw function"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:349
+msgid "instantiate a new machine node"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:353
+#: ../../../../tests/qtest/libqos/qgraph.h:362
+msgid "``QOSGraphNode *node``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:350
+msgid "Machine node to be instantiated"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:351
+msgid ""
+"A :c:type:`QTestState <QTestState>` that will be referred to by the machine "
+"object."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:353
+msgid "Returns a machine object."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:358
+msgid "instantiate a new driver node"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:359
+msgid "A driver node to be instantiated"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:361
+msgid "``QOSGraphObject *parent``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:360
+msgid ""
+"A :c:type:`QOSGraphObject <QOSGraphObject>` to be consumed by the new driver "
+"node"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:362
+msgid "``QGuestAllocator *alloc``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:361
+msgid "An allocator to be used by the new driver node."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:363
+msgid "``void *arg``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:362
+msgid "The argument for the consumed-by edge to **node**."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:364
+msgid "Calls the constructor for the driver object."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:370
+msgid ""
+"prints all currently existing nodes and edges to stdout. Just for debugging "
+"purposes."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:372
+msgid ""
+"All qtests add themselves to the overall qos graph by calling qgraph "
+"functions that add device nodes and edges between the individual graph nodes "
+"for tests. As the actual graph is assmbled at runtime by the qos subsystem, "
+"it is sometimes not obvious how the overall graph looks like. E.g. when "
+"writing new tests it may happen that those new tests are simply ignored by "
+"the qtest framework."
+msgstr ""
+
+#: ../../../../tests/qtest/libqos/qgraph.h:379
+msgid ""
+"This function allows to identify problems in the created qgraph. Keep in "
+"mind: only tests with a path down from the actual test case node (leaf) up "
+"to the graph's root node are actually executed by the qtest framework. And "
+"the qtest framework uses QMP to automatically check which QEMU drivers are "
+"actually currently available, and accordingly qos marks certain paths as "
+"'unavailable' in such cases (e.g. when QEMU was compiled without support for "
+"a certain feature)."
+msgstr ""
