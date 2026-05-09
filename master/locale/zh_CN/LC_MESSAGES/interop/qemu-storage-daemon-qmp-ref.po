@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-30 10:00+0000\n"
+"POT-Creation-Date: 2026-05-04 11:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1657,7 +1657,7 @@ msgstr ""
 #: ../../../../qapi/block-core.json:4218 ../../../../qapi/block-core.json:4228
 #: ../../../../qapi/block-core.json:4281 ../../../../qapi/block-core.json:4289
 #: ../../../../qapi/block-core.json:5006 ../../../../qapi/block-core.json:5405
-#: ../../../../qapi/block-core.json:6330 ../../../../qapi/qom.json:1182
+#: ../../../../qapi/block-core.json:6330 ../../../../qapi/qom.json:1190
 #: ../../../../qapi/transaction.json:85 ../../../../qapi/transaction.json:93
 #: ../../../../qapi/transaction.json:101 ../../../../qapi/transaction.json:109
 #: ../../../../qapi/transaction.json:117 ../../../../qapi/transaction.json:125
@@ -2444,8 +2444,8 @@ msgstr ""
 #: ../../../../qapi/char.json:885 ../../../../qapi/control.json:26
 #: ../../../../qapi/control.json:114 ../../../../qapi/control.json:153
 #: ../../../../qapi/control.json:173 ../../../../qapi/qom.json:97
-#: ../../../../qapi/qom.json:197 ../../../../qapi/qom.json:1348
-#: ../../../../qapi/qom.json:1368 ../../../../qapi/transaction.json:268
+#: ../../../../qapi/qom.json:197 ../../../../qapi/qom.json:1356
+#: ../../../../qapi/qom.json:1376 ../../../../qapi/transaction.json:268
 msgid "Example:"
 msgstr ""
 
@@ -10566,80 +10566,89 @@ msgid ""
 "default behaviour (default: 0)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:613 ../../../../qapi/qom.json:626
+#: ../../../../qapi/qom.json:609
+msgid ""
+"the weight factor for adaptive polling.  Determines how much the most recent "
+"event interval affects the next polling duration calculation.  If set to 0, "
+"the system default value of 3 is used.  Typical values: 1 (high weight on "
+"recent interval), 2-4 (moderate weight on recent interval). (default: 0) "
+"(since 11.1)"
+msgstr ""
+
+#: ../../../../qapi/qom.json:620 ../../../../qapi/qom.json:634
 msgid "The members of :qapi:type:`EventLoopBaseProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:609
+#: ../../../../qapi/qom.json:616
 msgid "The ``aio-max-batch`` option is available since 6.1."
 msgstr ""
 
-#: ../../../../qapi/qom.json:622
+#: ../../../../qapi/qom.json:630
 msgid "Properties for the main-loop object."
 msgstr ""
 
-#: ../../../../qapi/qom.json:633
+#: ../../../../qapi/qom.json:641
 msgid "Properties for objects of classes derived from memory-backend."
 msgstr ""
 
-#: ../../../../qapi/qom.json:635
+#: ../../../../qapi/qom.json:643
 msgid ""
 "if true, mark the memory as mergeable (default depends on the machine type)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:638
+#: ../../../../qapi/qom.json:646
 msgid ""
 "if true, include the memory in core dumps (default depends on the machine "
 "type)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:641
+#: ../../../../qapi/qom.json:649
 msgid "the list of NUMA host nodes to bind the memory to"
 msgstr ""
 
-#: ../../../../qapi/qom.json:643
+#: ../../../../qapi/qom.json:651
 msgid "the NUMA policy (default: 'default')"
 msgstr ""
 
-#: ../../../../qapi/qom.json:645
+#: ../../../../qapi/qom.json:653
 msgid "if true, preallocate memory (default: false)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:647
+#: ../../../../qapi/qom.json:655
 msgid "number of CPU threads to use for prealloc (default: 1)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:650
+#: ../../../../qapi/qom.json:658
 msgid ""
 "thread context to use for creation of preallocation threads (default: none) "
 "(since 7.2)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:653
+#: ../../../../qapi/qom.json:661
 msgid ""
 "if false, the memory is private to QEMU; if true, it is shared (default "
 "false for backends memory-backend-file and memory-backend-ram, true for "
 "backends memory-backend-epc, memory-backend-memfd, and memory-backend-shm)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:658
+#: ../../../../qapi/qom.json:666
 msgid ""
 "if true, reserve swap space (or huge pages) if applicable (default: true) "
 "(since 6.1)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:661
+#: ../../../../qapi/qom.json:669
 msgid "size of the memory region in bytes"
 msgstr ""
 
-#: ../../../../qapi/qom.json:663
+#: ../../../../qapi/qom.json:671
 msgid ""
 "if true, the canonical path is used for ramblock-id.  Disable this for 4.0 "
 "machine types or older to allow migration with newer QEMU versions. "
 "(default: false generally, but true for machine types <= 4.0)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:668
+#: ../../../../qapi/qom.json:676
 msgid ""
 "prealloc=true and reserve=false cannot be set at the same time.  With "
 "reserve=true, the behavior depends on the operating system: for example, "
@@ -10648,11 +10657,11 @@ msgid ""
 "configured accordingly."
 msgstr ""
 
-#: ../../../../qapi/qom.json:692
+#: ../../../../qapi/qom.json:700
 msgid "Properties for memory-backend-file objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:694
+#: ../../../../qapi/qom.json:702
 msgid ""
 "the base address alignment when QEMU mmap(2)s ``mem-path``. Some backend "
 "stores specified by ``mem-path`` require an alignment different than the "
@@ -10662,14 +10671,14 @@ msgid ""
 "size). (default: 0)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:702
+#: ../../../../qapi/qom.json:710
 msgid ""
 "the offset into the target file that the region starts at. You can use this "
 "option to back multiple regions with a single file.  Must be a multiple of "
 "the page size. (default: 0) (since 8.1)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:707
+#: ../../../../qapi/qom.json:715
 msgid ""
 "if true, the file contents can be destroyed when QEMU exits, to avoid "
 "unnecessarily flushing data to the backing file. Note that ``discard-data`` "
@@ -10677,24 +10686,24 @@ msgid ""
 "aborts unexpectedly or is terminated using SIGKILL.  (default: false)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:713
+#: ../../../../qapi/qom.json:721
 msgid "the path to either a shared memory or huge page filesystem mount"
 msgstr ""
 
-#: ../../../../qapi/qom.json:716
+#: ../../../../qapi/qom.json:724
 msgid ""
 "specifies whether the backing file specified by ``mem-path`` is in host "
 "persistent memory that can be accessed using the SNIA NVM programming model "
 "(e.g. Intel NVDIMM)."
 msgstr ""
 
-#: ../../../../qapi/qom.json:720
+#: ../../../../qapi/qom.json:728
 msgid ""
 "if true, the backing file is opened read-only; if false, it is opened read-"
 "write.  (default: false)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:723
+#: ../../../../qapi/qom.json:731
 msgid ""
 "whether to create Read Only Memory (ROM) that cannot be modified by the VM.  "
 "Any write attempts to such ROM will be denied.  Most use cases want writable "
@@ -10709,22 +10718,22 @@ msgid ""
 "of ROM, and want to set this property to 'off'.  (default: auto, since 8.2)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:740 ../../../../qapi/qom.json:768
-#: ../../../../qapi/qom.json:785 ../../../../qapi/qom.json:801
+#: ../../../../qapi/qom.json:748 ../../../../qapi/qom.json:776
+#: ../../../../qapi/qom.json:793 ../../../../qapi/qom.json:809
 msgid "The members of :qapi:type:`MemoryBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:753
+#: ../../../../qapi/qom.json:761
 msgid "Properties for memory-backend-memfd objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:755
+#: ../../../../qapi/qom.json:763
 msgid ""
 "if true, the file to be created resides in the hugetlbfs filesystem "
 "(default: false)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:758
+#: ../../../../qapi/qom.json:766
 msgid ""
 "the hugetlb page size on systems that support multiple hugetlb page sizes "
 "(it must be a power of 2 value supported by the system).  0 selects a "
@@ -10732,81 +10741,81 @@ msgid ""
 "(default: 0)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:763
+#: ../../../../qapi/qom.json:771
 msgid ""
 "if true, create a sealed-file, which will block further resizing of the "
 "memory (default: true)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:778
+#: ../../../../qapi/qom.json:786
 msgid "Properties for memory-backend-shm objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:780
+#: ../../../../qapi/qom.json:788
 msgid "This memory backend supports only shared memory, which is the default."
 msgstr ""
 
-#: ../../../../qapi/qom.json:793
+#: ../../../../qapi/qom.json:801
 msgid "Properties for memory-backend-epc objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:795
+#: ../../../../qapi/qom.json:803
 msgid "The ``merge`` boolean option is false by default with epc"
 msgstr ""
 
-#: ../../../../qapi/qom.json:797
+#: ../../../../qapi/qom.json:805
 msgid "The ``dump`` boolean option is false by default with epc"
 msgstr ""
 
-#: ../../../../qapi/qom.json:809
+#: ../../../../qapi/qom.json:817
 msgid "Properties for pr-manager-helper objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:811
+#: ../../../../qapi/qom.json:819
 msgid "the path to a Unix domain socket for connecting to the external helper"
 msgstr ""
 
-#: ../../../../qapi/qom.json:823
+#: ../../../../qapi/qom.json:831
 msgid "Properties for qtest objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:825
+#: ../../../../qapi/qom.json:833
 msgid "the chardev to be used to receive qtest commands on."
 msgstr ""
 
-#: ../../../../qapi/qom.json:827
+#: ../../../../qapi/qom.json:835
 msgid "the path to a log file"
 msgstr ""
 
-#: ../../../../qapi/qom.json:838
+#: ../../../../qapi/qom.json:846
 msgid "Properties for x-remote-object objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:840
+#: ../../../../qapi/qom.json:848
 msgid "file descriptor name previously passed via `getfd` command"
 msgstr ""
 
-#: ../../../../qapi/qom.json:842
+#: ../../../../qapi/qom.json:850
 msgid "the id of the device to be associated with the file descriptor"
 msgstr ""
 
-#: ../../../../qapi/qom.json:853
+#: ../../../../qapi/qom.json:861
 msgid "Properties for x-vfio-user-server objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:855
+#: ../../../../qapi/qom.json:863
 msgid "socket to be used by the libvfio-user library"
 msgstr ""
 
-#: ../../../../qapi/qom.json:857
+#: ../../../../qapi/qom.json:865
 msgid "the ID of the device to be emulated at the server"
 msgstr ""
 
-#: ../../../../qapi/qom.json:867
+#: ../../../../qapi/qom.json:875
 msgid "Properties for iommufd objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:869
+#: ../../../../qapi/qom.json:877
 msgid ""
 "file descriptor name previously passed via `getfd` command, which represents "
 "a pre-opened /dev/iommu.  This allows the iommufd object to be shared across "
@@ -10814,23 +10823,23 @@ msgid ""
 "with other process, e.g. DPDK.  (default: QEMU opens /dev/iommu by itself)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:883
+#: ../../../../qapi/qom.json:891
 msgid "Properties for acpi-generic-initiator objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:885
+#: ../../../../qapi/qom.json:893
 msgid "PCI device ID to be associated with the node"
 msgstr ""
 
-#: ../../../../qapi/qom.json:887
+#: ../../../../qapi/qom.json:895
 msgid "NUMA node associated with the PCI device"
 msgstr ""
 
-#: ../../../../qapi/qom.json:898
+#: ../../../../qapi/qom.json:906
 msgid "Properties for acpi-generic-port objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:900
+#: ../../../../qapi/qom.json:908
 msgid ""
 "QOM path of the PCI bus of the hostbridge associated with this SRAT Generic "
 "Port Affinity Structure.  This is the same as the bus parameter for the root "
@@ -10840,7 +10849,7 @@ msgid ""
 "5.2.16.7 for more information."
 msgstr ""
 
-#: ../../../../qapi/qom.json:908
+#: ../../../../qapi/qom.json:916
 msgid ""
 "Similar to a NUMA node ID, but instead of providing a reference point used "
 "for defining NUMA distances and access characteristics to memory or from an "
@@ -10860,105 +10869,105 @@ msgid ""
 "links in the path."
 msgstr ""
 
-#: ../../../../qapi/qom.json:937
+#: ../../../../qapi/qom.json:945
 msgid "Properties for objects of classes derived from rng."
 msgstr ""
 
-#: ../../../../qapi/qom.json:939
+#: ../../../../qapi/qom.json:947
 msgid ""
 "if true, the device is opened immediately when applying this option and will "
 "probably fail when processing the next option.  Don't use; only provided for "
 "compatibility. (default: false)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:946
+#: ../../../../qapi/qom.json:954
 msgid ""
 "Member ``opened`` is deprecated.  Setting true doesn't make sense, and false "
 "is already the default."
 msgstr ""
 
-#: ../../../../qapi/qom.json:957
+#: ../../../../qapi/qom.json:965
 msgid "Properties for rng-egd objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:959
+#: ../../../../qapi/qom.json:967
 msgid ""
 "the name of a character device backend that provides the connection to the "
 "RNG daemon"
 msgstr ""
 
-#: ../../../../qapi/qom.json:964 ../../../../qapi/qom.json:978
+#: ../../../../qapi/qom.json:972 ../../../../qapi/qom.json:986
 msgid "The members of :qapi:type:`RngProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:971
+#: ../../../../qapi/qom.json:979
 msgid "Properties for rng-random objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:973
+#: ../../../../qapi/qom.json:981
 msgid ""
 "the filename of the device on the host to obtain entropy from (default: \"/"
 "dev/urandom\")"
 msgstr ""
 
-#: ../../../../qapi/qom.json:986
+#: ../../../../qapi/qom.json:994
 msgid "Properties common to objects that handle IGVM files."
 msgstr ""
 
-#: ../../../../qapi/qom.json:988
+#: ../../../../qapi/qom.json:996
 msgid "IGVM file to use to configure guest"
 msgstr ""
 
-#: ../../../../qapi/qom.json:999
+#: ../../../../qapi/qom.json:1007
 msgid "Properties common to objects that are derivatives of sev-common."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1001
+#: ../../../../qapi/qom.json:1009
 msgid "SEV device to use (default: \"/dev/sev\")"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1003
+#: ../../../../qapi/qom.json:1011
 msgid "C-bit location in page table entry (default: 0)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1005
+#: ../../../../qapi/qom.json:1013
 msgid ""
 "number of bits in physical addresses that become unavailable when SEV is "
 "enabled"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1008
+#: ../../../../qapi/qom.json:1016
 msgid ""
 "if true, add hashes of kernel/initrd/cmdline to a designated guest firmware "
 "page for measured boot with -kernel (default: false) (since 6.2)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1014 ../../../../qapi/qom.json:1147
+#: ../../../../qapi/qom.json:1022 ../../../../qapi/qom.json:1155
 msgid ""
 "If present, the hypervisor supports confidential guest resets (since 11.0)."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1029
+#: ../../../../qapi/qom.json:1037
 msgid "Properties for sev-guest objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1031
+#: ../../../../qapi/qom.json:1039
 msgid "guest owners DH certificate (encoded with base64)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1033
+#: ../../../../qapi/qom.json:1041
 msgid "guest owners session parameters (encoded with base64)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1035
+#: ../../../../qapi/qom.json:1043
 msgid "SEV policy value (default: 0x1)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1037
+#: ../../../../qapi/qom.json:1045
 msgid "SEV firmware handle (default: 0)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1039
+#: ../../../../qapi/qom.json:1047
 msgid ""
 "Use legacy KVM_SEV_INIT KVM interface for creating the VM.  The newer "
 "KVM_SEV_INIT2 interface, from Linux >= 6.10, syncs additional vCPU state "
@@ -10971,11 +10980,11 @@ msgid ""
 "off) (since 9.1)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1052 ../../../../qapi/qom.json:1105
+#: ../../../../qapi/qom.json:1060 ../../../../qapi/qom.json:1113
 msgid "The members of :qapi:type:`SevCommonProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1063
+#: ../../../../qapi/qom.json:1071
 msgid ""
 "Properties for sev-snp-guest objects.  Most of these are direct arguments "
 "for the KVM_SNP_* interfaces documented in the Linux kernel source under "
@@ -10984,53 +10993,53 @@ msgid ""
 "SEV-SNP Firmware ABI Specification (Rev 0.9)."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1070
+#: ../../../../qapi/qom.json:1078
 msgid ""
 "More usage information is also available in the QEMU source tree under docs/"
 "amd-memory-encryption."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1073
+#: ../../../../qapi/qom.json:1081
 msgid ""
 "the 'POLICY' parameter to the SNP_LAUNCH_START command, as defined in the "
 "SEV-SNP firmware ABI (default: 0x30000)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1076
+#: ../../../../qapi/qom.json:1084
 msgid ""
 "16-byte, base64-encoded blob to report hypervisor-defined workarounds, "
 "corresponding to the 'GOSVW' parameter of the SNP_LAUNCH_START command "
 "defined in the SEV-SNP firmware ABI (default: all-zero)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1081
+#: ../../../../qapi/qom.json:1089
 msgid ""
 "96-byte, base64-encoded blob to provide the 'ID Block' structure for the "
 "SNP_LAUNCH_FINISH command defined in the SEV-SNP firmware ABI (default: all-"
 "zero)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1085
+#: ../../../../qapi/qom.json:1093
 msgid ""
 "4096-byte, base64-encoded blob to provide the 'ID Authentication Information "
 "Structure' for the SNP_LAUNCH_FINISH command defined in the SEV-SNP firmware "
 "ABI (default: all-zero)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1089
+#: ../../../../qapi/qom.json:1097
 msgid ""
 "true if 'id-auth' blob contains the 'AUTHOR_KEY' field defined SEV-SNP "
 "firmware ABI (default: false)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1092
+#: ../../../../qapi/qom.json:1100
 msgid ""
 "32-byte, base64-encoded, user-defined blob to provide to the guest, as "
 "documented for the 'HOST_DATA' parameter of the SNP_LAUNCH_FINISH command in "
 "the SEV-SNP firmware ABI (default: all-zero)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1097
+#: ../../../../qapi/qom.json:1105
 msgid ""
 "Guests are by default allowed to choose between VLEK (Versioned Loaded "
 "Endorsement Key) or VCEK (Versioned Chip Endorsement Key) when requesting "
@@ -11038,58 +11047,58 @@ msgid ""
 "VCEK. (default: false) (since: 9.1)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1119
+#: ../../../../qapi/qom.json:1127
 msgid "Properties for tdx-guest objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1121
+#: ../../../../qapi/qom.json:1129
 msgid "The 'attributes' of a TD guest that is passed to KVM_TDX_INIT_VM"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1124
+#: ../../../../qapi/qom.json:1132
 msgid ""
 "toggle bit 28 of TD attributes to control disabling of EPT violation "
 "conversion to #VE on guest TD access of PENDING pages.  Some guest OS (e.g., "
 "Linux TD guest) may require this to be set, otherwise they refuse to boot."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1129
+#: ../../../../qapi/qom.json:1137
 msgid ""
 "ID for non-owner-defined configuration of the guest TD, e.g., run-time or OS "
 "configuration (base64 encoded SHA384 digest).  Defaults to all zeros."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1133
+#: ../../../../qapi/qom.json:1141
 msgid ""
 "ID for the guest TD’s owner (base64 encoded SHA384 digest).  Defaults to all "
 "zeros."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1136
+#: ../../../../qapi/qom.json:1144
 msgid ""
 "ID for owner-defined configuration of the guest TD, e.g., specific to the "
 "workload rather than the run-time or OS (base64 encoded SHA384 digest).  "
 "Defaults to all zeros."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1140
+#: ../../../../qapi/qom.json:1148
 msgid ""
 "socket address for Quote Generation Service (QGS).  QGS is a daemon running "
 "on the host.  Without it, the guest will not be able to get a TD quote for "
 "attestation."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1164
+#: ../../../../qapi/qom.json:1172
 msgid "Properties for thread context objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1166
+#: ../../../../qapi/qom.json:1174
 msgid ""
 "the list of host CPU numbers used as CPU affinity for all threads created in "
 "the thread context (default: QEMU main thread CPU affinity)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1170
+#: ../../../../qapi/qom.json:1178
 msgid ""
 "the list of host node numbers that will be resolved to a list of host CPU "
 "numbers used as CPU affinity.  This is a shortcut for specifying the list of "
@@ -11097,327 +11106,327 @@ msgid ""
 "affinity``. (default: QEMU main thread affinity)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1187
+#: ../../../../qapi/qom.json:1195
 msgid ""
 "Members ``x-remote-object`` and ``x-vfio-user-server`` are experimental."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1260
+#: ../../../../qapi/qom.json:1268
 msgid "Describes the options of a user creatable QOM object."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1262
+#: ../../../../qapi/qom.json:1270
 msgid "the class name for the object to be created"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1264
+#: ../../../../qapi/qom.json:1272
 msgid "the name of the new object"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``acpi-generic-initiator``: The members of :qapi:type:"
 "`AcpiGenericInitiatorProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``acpi-generic-port``: The members of :qapi:type:"
 "`AcpiGenericPortProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``authz-list``: The members of :qapi:type:"
 "`AuthZListProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``authz-listfile``: The members of :qapi:type:"
 "`AuthZListFileProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``authz-pam``: The members of :qapi:type:"
 "`AuthZPAMProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``authz-simple``: The members of :qapi:type:"
 "`AuthZSimpleProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``can-host-socketcan``: The members of :qapi:type:"
 "`CanHostSocketcanProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``colo-compare``: The members of :qapi:type:"
 "`ColoCompareProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``cryptodev-backend``: The members of :qapi:type:"
 "`CryptodevBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``cryptodev-backend-builtin``: The members of :qapi:"
 "type:`CryptodevBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``cryptodev-backend-lkcf``: The members of :qapi:type:"
 "`CryptodevBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``cryptodev-vhost-user``: The members of :qapi:type:"
 "`CryptodevVhostUserProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``dbus-vmstate``: The members of :qapi:type:"
 "`DBusVMStateProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``filter-buffer``: The members of :qapi:type:"
 "`FilterBufferProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``filter-dump``: The members of :qapi:type:"
 "`FilterDumpProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``filter-mirror``: The members of :qapi:type:"
 "`FilterMirrorProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``filter-redirector``: The members of :qapi:type:"
 "`FilterRedirectorProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``filter-replay``: The members of :qapi:type:"
 "`NetfilterProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``filter-rewriter``: The members of :qapi:type:"
 "`FilterRewriterProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``igvm-cfg``: The members of :qapi:type:"
 "`IgvmCfgProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``input-barrier``: The members of :qapi:type:"
 "`InputBarrierProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``input-linux``: The members of :qapi:type:"
 "`InputLinuxProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``iommufd``: The members of :qapi:type:"
 "`IOMMUFDProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``iothread``: The members of :qapi:type:"
 "`IothreadProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``main-loop``: The members of :qapi:type:"
 "`MainLoopProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``memory-backend-epc``: The members of :qapi:type:"
 "`MemoryBackendEpcProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``memory-backend-file``: The members of :qapi:type:"
 "`MemoryBackendFileProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``memory-backend-memfd``: The members of :qapi:type:"
 "`MemoryBackendMemfdProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``memory-backend-ram``: The members of :qapi:type:"
 "`MemoryBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``memory-backend-shm``: The members of :qapi:type:"
 "`MemoryBackendShmProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``pr-manager-helper``: The members of :qapi:type:"
 "`PrManagerHelperProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``qtest``: The members of :qapi:type:`QtestProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``rng-builtin``: The members of :qapi:type:"
 "`RngProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``rng-egd``: The members of :qapi:type:"
 "`RngEgdProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``rng-random``: The members of :qapi:type:"
 "`RngRandomProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``secret``: The members of :qapi:type:"
 "`SecretProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``secret_keyring``: The members of :qapi:type:"
 "`SecretKeyringProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``sev-guest``: The members of :qapi:type:"
 "`SevGuestProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``sev-snp-guest``: The members of :qapi:type:"
 "`SevSnpGuestProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``tdx-guest``: The members of :qapi:type:"
 "`TdxGuestProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``thread-context``: The members of :qapi:type:"
 "`ThreadContextProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``throttle-group``: The members of :qapi:type:"
 "`ThrottleGroupProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``tls-creds-anon``: The members of :qapi:type:"
 "`TlsCredsAnonProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``tls-creds-psk``: The members of :qapi:type:"
 "`TlsCredsPskProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``tls-creds-x509``: The members of :qapi:type:"
 "`TlsCredsX509Properties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``tls-cipher-suites``: The members of :qapi:type:"
 "`TlsCredsProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``x-remote-object``: The members of :qapi:type:"
 "`RemoteObjectProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1276
 msgid ""
 "When ``qom-type`` is ``x-vfio-user-server``: The members of :qapi:type:"
 "`VfioUserServerProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1336
+#: ../../../../qapi/qom.json:1344
 msgid "Create a QOM object."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1350
+#: ../../../../qapi/qom.json:1358
 msgid "The members of :qapi:type:`ObjectOptions`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1338
+#: ../../../../qapi/qom.json:1346
 msgid "- If ``qom-type`` is not a valid class name"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1339
+#: ../../../../qapi/qom.json:1347
 msgid "If ``qom-type`` is not a valid class name"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1343
+#: ../../../../qapi/qom.json:1351
 msgid ""
 "-> { \"execute\": \"object-add\",\n"
 "     \"arguments\": { \"qom-type\": \"rng-random\", \"id\": \"rng1\",\n"
@@ -11425,23 +11434,23 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1356
+#: ../../../../qapi/qom.json:1364
 msgid "Remove a QOM object."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1358
+#: ../../../../qapi/qom.json:1366
 msgid "the name of the QOM object to remove"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1360
+#: ../../../../qapi/qom.json:1368
 msgid "- If ``id`` is not a valid id for a QOM object"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1361
+#: ../../../../qapi/qom.json:1369
 msgid "If ``id`` is not a valid id for a QOM object"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1365
+#: ../../../../qapi/qom.json:1373
 msgid ""
 "-> { \"execute\": \"object-del\", \"arguments\": { \"id\": \"rng1\" } }\n"
 "<- { \"return\": {} }"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-23 09:30+0000\n"
+"POT-Creation-Date: 2026-05-04 11:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -328,57 +328,55 @@ msgstr ""
 #: ../../../system/introduction.rst:167
 msgid ""
 "We then define the 4 vCPUs using the ``max`` option which gives us all the "
-"Arm features QEMU is capable of emulating. We enable a more emulation "
-"friendly implementation of Arm's pointer authentication algorithm. We "
-"explicitly specify TCG acceleration even though QEMU would default to it "
-"anyway."
+"Arm features QEMU is capable of emulating. We explicitly specify TCG "
+"acceleration even though QEMU would default to it anyway."
 msgstr ""
 
-#: ../../../system/introduction.rst:173
+#: ../../../system/introduction.rst:171
 msgid ""
 "-cpu max \\\n"
 "-smp 4 \\\n"
 "-accel tcg \\"
 msgstr ""
 
-#: ../../../system/introduction.rst:179
+#: ../../../system/introduction.rst:177
 msgid ""
 "As the ``virt`` platform doesn't have any default network or storage devices "
 "we need to define them. We give them ids so we can link them with the "
 "backend later on."
 msgstr ""
 
-#: ../../../system/introduction.rst:183
+#: ../../../system/introduction.rst:181
 msgid ""
 "-device virtio-net-pci,netdev=unet \\\n"
 "-device virtio-scsi-pci \\\n"
 "-device scsi-hd,drive=hd \\"
 msgstr ""
 
-#: ../../../system/introduction.rst:189
+#: ../../../system/introduction.rst:187
 msgid ""
 "We connect the user-mode networking to our network device. As user-mode "
 "networking isn't directly accessible from the outside world we forward "
 "localhost port 2222 to the ssh port on the guest."
 msgstr ""
 
-#: ../../../system/introduction.rst:193
+#: ../../../system/introduction.rst:191
 msgid "-netdev user,id=unet,hostfwd=tcp::2222-:22 \\"
 msgstr ""
 
-#: ../../../system/introduction.rst:197
+#: ../../../system/introduction.rst:195
 msgid ""
 "We connect the guest visible block device to an LVM partition we have set "
 "aside for our guest."
 msgstr ""
 
-#: ../../../system/introduction.rst:200
+#: ../../../system/introduction.rst:198
 msgid ""
 "-blockdev driver=raw,node-name=hd,file.driver=host_device,file.filename=/dev/"
 "lvm-disk/debian-bullseye-arm64 \\"
 msgstr ""
 
-#: ../../../system/introduction.rst:204
+#: ../../../system/introduction.rst:202
 msgid ""
 "We then tell QEMU to multiplex the :ref:`QEMU monitor` with the serial port "
 "output (we can switch between the two using :ref:`keys in the character "
@@ -386,20 +384,20 @@ msgid ""
 "the display as we can work entirely in the terminal."
 msgstr ""
 
-#: ../../../system/introduction.rst:209
+#: ../../../system/introduction.rst:207
 msgid ""
 "-serial mon:stdio \\\n"
 "-display none \\"
 msgstr ""
 
-#: ../../../system/introduction.rst:214
+#: ../../../system/introduction.rst:212
 msgid ""
 "Finally we override the default firmware to ensure we have some storage for "
 "EFI to persist its configuration. That firmware is responsible for finding "
 "the disk, booting grub and eventually running our system."
 msgstr ""
 
-#: ../../../system/introduction.rst:219
+#: ../../../system/introduction.rst:217
 msgid ""
 "-blockdev node-name=rom,driver=file,filename=(pwd)/pc-bios/edk2-aarch64-code."
 "fd,read-only=true \\\n"

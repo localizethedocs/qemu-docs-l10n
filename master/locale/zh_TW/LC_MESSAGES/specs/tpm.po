@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-05-04 11:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -447,23 +447,66 @@ msgid ""
 "room for future updates."
 msgstr ""
 
-#: ../../../specs/tpm.rst:190
+#: ../../../specs/tpm.rst:191
+msgid "PPI on ARM64 virt"
+msgstr ""
+
+#: ../../../specs/tpm.rst:193
+msgid ""
+"The ARM virt machine supports PPI for ``tpm-tis-device`` as defined in the "
+"`PPI specification`_."
+msgstr ""
+
+#: ../../../specs/tpm.rst:196
+msgid ""
+"Unlike the x86 TIS device where the PPI memory region is mapped at the fixed "
+"address ``0xFED45000`` (within the TIS MMIO range), the ARM64 sysbus device "
+"registers PPI memory as a second MMIO region on the platform bus. The "
+"platform bus assigns the guest physical address dynamically at device plug "
+"time. The ACPI ``_DSM`` method and PPI operation regions reference this "
+"dynamically resolved address."
+msgstr ""
+
+#: ../../../specs/tpm.rst:204
+msgid "PPI is controlled by the ``ppi`` property (default ``on``)::"
+msgstr ""
+
+#: ../../../specs/tpm.rst:206
+msgid "-device tpm-tis-device,tpmdev=tpm0,ppi=on"
+msgstr ""
+
+#: ../../../specs/tpm.rst:208
+msgid ""
+"Without PPI, guest operating systems such as Windows 11 ARM64 will log "
+"errors when attempting to query TPM Physical Presence capabilities via the "
+"ACPI ``_DSM`` method."
+msgstr ""
+
+#: ../../../specs/tpm.rst:212
 msgid "QEMU files related to TPM ACPI tables:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:191
+#: ../../../specs/tpm.rst:213
 msgid "``hw/i386/acpi-build.c``"
 msgstr ""
 
-#: ../../../specs/tpm.rst:192
+#: ../../../specs/tpm.rst:214
+msgid "``hw/arm/virt-acpi-build.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:215
+msgid "``hw/acpi/tpm.c``"
+msgstr ""
+
+#: ../../../specs/tpm.rst:216
 msgid "``include/hw/acpi/tpm.h``"
 msgstr ""
 
-#: ../../../specs/tpm.rst:195
+#: ../../../specs/tpm.rst:219
 msgid "TPM backend devices"
 msgstr ""
 
-#: ../../../specs/tpm.rst:197
+#: ../../../specs/tpm.rst:221
 msgid ""
 "The TPM implementation is split into two parts, frontend and backend. The "
 "frontend part is the hardware interface, such as the TPM TIS interface "
@@ -475,27 +518,27 @@ msgid ""
 "swtpm backend."
 msgstr ""
 
-#: ../../../specs/tpm.rst:206
+#: ../../../specs/tpm.rst:230
 msgid "QEMU files related to TPM backends:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:207
+#: ../../../specs/tpm.rst:231
 msgid "``backends/tpm.c``"
 msgstr ""
 
-#: ../../../specs/tpm.rst:208
+#: ../../../specs/tpm.rst:232
 msgid "``include/system/tpm.h``"
 msgstr ""
 
-#: ../../../specs/tpm.rst:209
+#: ../../../specs/tpm.rst:233
 msgid "``include/system/tpm_backend.h``"
 msgstr ""
 
-#: ../../../specs/tpm.rst:212
+#: ../../../specs/tpm.rst:236
 msgid "The QEMU TPM passthrough device"
 msgstr ""
 
-#: ../../../specs/tpm.rst:214
+#: ../../../specs/tpm.rst:238
 msgid ""
 "In case QEMU is run on Linux as the host operating system it is possible to "
 "make the hardware TPM device available to a single QEMU guest. In this case "
@@ -503,7 +546,7 @@ msgid ""
 "dev/tpm0, before trying to start QEMU with it."
 msgstr ""
 
-#: ../../../specs/tpm.rst:220
+#: ../../../specs/tpm.rst:244
 msgid ""
 "The passthrough driver uses the host's TPM device for sending TPM commands "
 "and receiving responses from. Besides that it accesses the TPM device's "
@@ -512,7 +555,7 @@ msgid ""
 "disabled when the TPM passthrough driver is used."
 msgstr ""
 
-#: ../../../specs/tpm.rst:227
+#: ../../../specs/tpm.rst:251
 msgid ""
 "Since the host's TPM device will already be initialized by the host's "
 "firmware, certain commands, e.g. ``TPM_Startup()``, sent by the virtual "
@@ -520,7 +563,7 @@ msgid ""
 "should not use the TPM."
 msgstr ""
 
-#: ../../../specs/tpm.rst:232
+#: ../../../specs/tpm.rst:256
 msgid ""
 "Sharing the device with the host is generally not a recommended usage "
 "scenario for a TPM device. The primary reason for this is that two operating "
@@ -530,29 +573,29 @@ msgid ""
 "not expecting to share PCRs."
 msgstr ""
 
-#: ../../../specs/tpm.rst:240
+#: ../../../specs/tpm.rst:264
 msgid "QEMU files related to the TPM passthrough device:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:241
+#: ../../../specs/tpm.rst:265
 msgid "``backends/tpm/tpm_passthrough.c``"
 msgstr "``backends/tpm/tpm_passthrough.c``"
 
-#: ../../../specs/tpm.rst:242 ../../../specs/tpm.rst:303
+#: ../../../specs/tpm.rst:266 ../../../specs/tpm.rst:327
 msgid "``backends/tpm/tpm_util.c``"
 msgstr "``backends/tpm/tpm_util.c``"
 
-#: ../../../specs/tpm.rst:243 ../../../specs/tpm.rst:304
+#: ../../../specs/tpm.rst:267 ../../../specs/tpm.rst:328
 msgid "``include/system/tpm_util.h``"
 msgstr "``include/system/tpm_util.h``"
 
-#: ../../../specs/tpm.rst:246
+#: ../../../specs/tpm.rst:270
 msgid ""
 "Command line to start QEMU with the TPM passthrough device using the host's "
 "hardware TPM ``/dev/tpm0``:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:249
+#: ../../../specs/tpm.rst:273
 msgid ""
 "qemu-system-x86_64 -display sdl -accel kvm \\\n"
 "-m 1024 -boot d -bios bios-256k.bin -boot menu=on \\\n"
@@ -560,14 +603,14 @@ msgid ""
 "-device tpm-tis,tpmdev=tpm0 test.img"
 msgstr ""
 
-#: ../../../specs/tpm.rst:257
+#: ../../../specs/tpm.rst:281
 msgid ""
 "The following commands should result in similar output inside the VM with a "
 "Linux kernel that either has the TPM TIS driver built-in or available as a "
 "module (assuming a TPM 2 is passed through):"
 msgstr ""
 
-#: ../../../specs/tpm.rst:261 ../../../specs/tpm.rst:390
+#: ../../../specs/tpm.rst:285 ../../../specs/tpm.rst:414
 msgid ""
 "# dmesg | grep -i tpm\n"
 "[    0.012560] ACPI: TPM2 0x000000000BFFD1900 00004C (v04 BOCHS  \\\n"
@@ -586,11 +629,11 @@ msgid ""
 "..."
 msgstr ""
 
-#: ../../../specs/tpm.rst:280
+#: ../../../specs/tpm.rst:304
 msgid "The QEMU TPM emulator device"
 msgstr ""
 
-#: ../../../specs/tpm.rst:282
+#: ../../../specs/tpm.rst:306
 msgid ""
 "The TPM emulator device uses an external TPM emulator called 'swtpm' for "
 "sending TPM commands to and receiving responses from. The swtpm program must "
@@ -598,20 +641,20 @@ msgid ""
 "QEMU."
 msgstr ""
 
-#: ../../../specs/tpm.rst:287
+#: ../../../specs/tpm.rst:311
 msgid ""
 "The TPM emulator implements a command channel for transferring TPM commands "
 "and responses as well as a control channel over which control commands can "
 "be sent. (see the `SWTPM protocol`_ specification)"
 msgstr ""
 
-#: ../../../specs/tpm.rst:291
+#: ../../../specs/tpm.rst:315
 msgid ""
 "The control channel serves the purpose of resetting, initializing, and "
 "migrating the TPM state, among other things."
 msgstr ""
 
-#: ../../../specs/tpm.rst:294
+#: ../../../specs/tpm.rst:318
 msgid ""
 "The swtpm program behaves like a hardware TPM and therefore needs to be "
 "initialized by the firmware running inside the QEMU virtual machine.  One "
@@ -620,21 +663,21 @@ msgid ""
 "TPM 1.2 or TPM 2 device using this command."
 msgstr ""
 
-#: ../../../specs/tpm.rst:301
+#: ../../../specs/tpm.rst:325
 msgid "QEMU files related to the TPM emulator device:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:302
+#: ../../../specs/tpm.rst:326
 msgid "``backends/tpm/tpm_emulator.c``"
 msgstr ""
 
-#: ../../../specs/tpm.rst:306
+#: ../../../specs/tpm.rst:330
 msgid ""
 "The following commands start the swtpm with a UnixIO control channel over a "
 "socket interface. They do not need to be run as root."
 msgstr ""
 
-#: ../../../specs/tpm.rst:309 ../../../specs/tpm.rst:422
+#: ../../../specs/tpm.rst:333 ../../../specs/tpm.rst:446
 msgid ""
 "mkdir /tmp/mytpm1\n"
 "swtpm socket --tpmstate dir=/tmp/mytpm1 \\\n"
@@ -643,13 +686,13 @@ msgid ""
 "  --log level=20"
 msgstr ""
 
-#: ../../../specs/tpm.rst:317
+#: ../../../specs/tpm.rst:341
 msgid ""
 "Command line to start QEMU with the TPM emulator device communicating with "
 "the swtpm (x86):"
 msgstr ""
 
-#: ../../../specs/tpm.rst:320
+#: ../../../specs/tpm.rst:344
 msgid ""
 "qemu-system-x86_64 -display sdl -accel kvm \\\n"
 "  -m 1024 -boot d -bios bios-256k.bin -boot menu=on \\\n"
@@ -658,11 +701,11 @@ msgid ""
 "  -device tpm-tis,tpmdev=tpm0 test.img"
 msgstr ""
 
-#: ../../../specs/tpm.rst:328
+#: ../../../specs/tpm.rst:352
 msgid "In case a pSeries machine is emulated, use the following command line:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:330
+#: ../../../specs/tpm.rst:354
 msgid ""
 "qemu-system-ppc64 -display sdl -machine pseries,accel=kvm \\\n"
 "  -m 1024 -bios slof.bin -boot menu=on \\\n"
@@ -676,12 +719,12 @@ msgid ""
 "  -drive file=test.img,format=raw,if=none,id=drive-virtio-disk0"
 msgstr ""
 
-#: ../../../specs/tpm.rst:342
+#: ../../../specs/tpm.rst:366
 msgid ""
 "In case an Arm virt machine is emulated, use the following command line:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:344
+#: ../../../specs/tpm.rst:368
 msgid ""
 "qemu-system-aarch64 -machine virt,gic-version=3,acpi=off \\\n"
 "  -cpu host -m 4G \\\n"
@@ -695,13 +738,13 @@ msgid ""
 "  -drive if=pflash,format=raw,file=flash1.img"
 msgstr ""
 
-#: ../../../specs/tpm.rst:357
+#: ../../../specs/tpm.rst:381
 msgid ""
 "In case a ast2600-evb bmc machine is emulated and you want to use a TPM "
 "device attached to I2C bus, use the following command line:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:360
+#: ../../../specs/tpm.rst:384
 msgid ""
 "qemu-system-arm -M ast2600-evb -nographic \\\n"
 "  -kernel arch/arm/boot/zImage \\\n"
@@ -716,13 +759,13 @@ msgid ""
 "echo tpm_tis_i2c 0x2e > /sys/bus/i2c/devices/i2c-12/new_device"
 msgstr ""
 
-#: ../../../specs/tpm.rst:374
+#: ../../../specs/tpm.rst:398
 msgid ""
 "In case SeaBIOS is used as firmware, it should show the TPM menu item after "
 "entering the menu with 'ESC'."
 msgstr ""
 
-#: ../../../specs/tpm.rst:377
+#: ../../../specs/tpm.rst:401
 msgid ""
 "Select boot device:\n"
 "1. DVD/CD [ata1-0: QEMU DVD-ROM ATAPI-4 DVD/CD]\n"
@@ -732,48 +775,48 @@ msgid ""
 "t. TPM Configuration"
 msgstr ""
 
-#: ../../../specs/tpm.rst:386
+#: ../../../specs/tpm.rst:410
 msgid ""
 "The following commands should result in similar output inside the VM with a "
 "Linux kernel that either has the TPM TIS driver built-in or available as a "
 "module:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:409
+#: ../../../specs/tpm.rst:433
 msgid "Migration with the TPM emulator"
 msgstr ""
 
-#: ../../../specs/tpm.rst:411
+#: ../../../specs/tpm.rst:435
 msgid ""
 "The TPM emulator supports the following types of virtual machine migration:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:414
+#: ../../../specs/tpm.rst:438
 msgid "VM save / restore (migration into a file)"
 msgstr ""
 
-#: ../../../specs/tpm.rst:415
+#: ../../../specs/tpm.rst:439
 msgid "Network migration"
 msgstr ""
 
-#: ../../../specs/tpm.rst:416
+#: ../../../specs/tpm.rst:440
 msgid "Snapshotting (migration into storage like QoW2 or QED)"
 msgstr ""
 
-#: ../../../specs/tpm.rst:418
+#: ../../../specs/tpm.rst:442
 msgid "The following command sequences can be used to test VM save / restore."
 msgstr ""
 
-#: ../../../specs/tpm.rst:420
+#: ../../../specs/tpm.rst:444
 msgid ""
 "In a 1st terminal start an instance of a swtpm using the following command:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:430
+#: ../../../specs/tpm.rst:454
 msgid "In a 2nd terminal start the VM:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:432
+#: ../../../specs/tpm.rst:456
 msgid ""
 "qemu-system-x86_64 -display sdl -accel kvm \\\n"
 "  -m 1024 -boot d -bios bios-256k.bin -boot menu=on \\\n"
@@ -784,56 +827,56 @@ msgid ""
 "  test.img"
 msgstr ""
 
-#: ../../../specs/tpm.rst:442
+#: ../../../specs/tpm.rst:466
 msgid ""
 "Verify that the attached TPM is working as expected using applications "
 "inside the VM."
 msgstr ""
 
-#: ../../../specs/tpm.rst:445
+#: ../../../specs/tpm.rst:469
 msgid ""
 "To store the state of the VM use the following command in the QEMU monitor "
 "in the 2nd terminal:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:448
+#: ../../../specs/tpm.rst:472
 msgid ""
 "(qemu) migrate \"exec:cat > testvm.bin\"\n"
 "(qemu) quit"
 msgstr ""
 
-#: ../../../specs/tpm.rst:453
+#: ../../../specs/tpm.rst:477
 msgid ""
 "At this point a file called ``testvm.bin`` should exists and the swtpm and "
 "QEMU processes should have ended."
 msgstr ""
 
-#: ../../../specs/tpm.rst:456
+#: ../../../specs/tpm.rst:480
 msgid ""
 "To test 'VM restore' you have to start the swtpm with the same parameters as "
 "before. If previously a TPM 2 [--tpm2] was saved, --tpm2 must now be passed "
 "again on the command line."
 msgstr ""
 
-#: ../../../specs/tpm.rst:460
+#: ../../../specs/tpm.rst:484
 msgid ""
 "In the 1st terminal restart the swtpm with the same command line as before:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:463
+#: ../../../specs/tpm.rst:487
 msgid ""
 "swtpm socket --tpmstate dir=/tmp/mytpm1 \\\n"
 "  --ctrl type=unixio,path=/tmp/mytpm1/swtpm-sock \\\n"
 "  --log level=20 --tpm2"
 msgstr ""
 
-#: ../../../specs/tpm.rst:469
+#: ../../../specs/tpm.rst:493
 msgid ""
 "In the 2nd terminal restore the state of the VM using the additional '-"
 "incoming' option."
 msgstr ""
 
-#: ../../../specs/tpm.rst:472
+#: ../../../specs/tpm.rst:496
 msgid ""
 "qemu-system-x86_64 -display sdl -accel kvm \\\n"
 "  -m 1024 -boot d -bios bios-256k.bin -boot menu=on \\\n"
@@ -844,84 +887,84 @@ msgid ""
 "  test.img"
 msgstr ""
 
-#: ../../../specs/tpm.rst:483
+#: ../../../specs/tpm.rst:507
 msgid "Troubleshooting migration"
 msgstr ""
 
-#: ../../../specs/tpm.rst:485
+#: ../../../specs/tpm.rst:509
 msgid ""
 "There are several reasons why migration may fail. In case of problems, "
 "please ensure that the command lines adhere to the following rules and, if "
 "possible, that identical versions of QEMU and swtpm are used at all times."
 msgstr ""
 
-#: ../../../specs/tpm.rst:490
+#: ../../../specs/tpm.rst:514
 msgid "VM save and restore:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:492
+#: ../../../specs/tpm.rst:516
 msgid ""
 "QEMU command line parameters should be identical apart from the '-incoming' "
 "option on VM restore"
 msgstr ""
 
-#: ../../../specs/tpm.rst:495 ../../../specs/tpm.rst:512
-#: ../../../specs/tpm.rst:517
+#: ../../../specs/tpm.rst:519 ../../../specs/tpm.rst:536
+#: ../../../specs/tpm.rst:541
 msgid "swtpm command line parameters should be identical"
 msgstr ""
 
-#: ../../../specs/tpm.rst:497
+#: ../../../specs/tpm.rst:521
 msgid "VM migration to 'localhost':"
 msgstr ""
 
-#: ../../../specs/tpm.rst:499 ../../../specs/tpm.rst:509
+#: ../../../specs/tpm.rst:523 ../../../specs/tpm.rst:533
 msgid ""
 "QEMU command line parameters should be identical apart from the '-incoming' "
 "option on the destination side"
 msgstr ""
 
-#: ../../../specs/tpm.rst:502
+#: ../../../specs/tpm.rst:526
 msgid ""
 "swtpm command line parameters should point to two different directories on "
 "the source and destination swtpm (--tpmstate dir=...) (especially if "
 "different versions of libtpms were to be used on the same machine)."
 msgstr ""
 
-#: ../../../specs/tpm.rst:507
+#: ../../../specs/tpm.rst:531
 msgid "VM migration across the network:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:514
+#: ../../../specs/tpm.rst:538
 msgid "VM Snapshotting:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:515
+#: ../../../specs/tpm.rst:539
 msgid "QEMU command line parameters should be identical"
 msgstr ""
 
-#: ../../../specs/tpm.rst:520
+#: ../../../specs/tpm.rst:544
 msgid ""
 "Besides that, migration failure reasons on the swtpm level may include the "
 "following:"
 msgstr ""
 
-#: ../../../specs/tpm.rst:523
+#: ../../../specs/tpm.rst:547
 msgid ""
 "the versions of the swtpm on the source and destination sides are "
 "incompatible"
 msgstr ""
 
-#: ../../../specs/tpm.rst:526
+#: ../../../specs/tpm.rst:550
 msgid "downgrading of TPM state may not be supported"
 msgstr ""
 
-#: ../../../specs/tpm.rst:528
+#: ../../../specs/tpm.rst:552
 msgid ""
 "the source and destination libtpms were compiled with different compile-time "
 "options and the destination side refuses to accept the state"
 msgstr ""
 
-#: ../../../specs/tpm.rst:532
+#: ../../../specs/tpm.rst:556
 msgid ""
 "different migration keys are used on the source and destination side and the "
 "destination side cannot decrypt the migrated state (swtpm ... --migration-"
