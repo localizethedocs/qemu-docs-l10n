@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-23 09:30+0000\n"
+"POT-Creation-Date: 2026-05-04 11:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -715,14 +715,48 @@ msgid ""
 msgstr ""
 
 #: ../../../about/deprecated.rst:456
-msgid "Backwards compatibility"
+msgid "linux-user mode CPUs"
 msgstr ""
 
 #: ../../../about/deprecated.rst:459
-msgid "Runnability guarantee of CPU models (since 4.1)"
+msgid "OABI and NWFPE support for Arm CPUs"
 msgstr ""
 
 #: ../../../about/deprecated.rst:461
+msgid ""
+"Linux for 32-bit Arm has had two major ABIs: the original OABI and the more "
+"modern EABI. OABI support was marked as obsolete in GCC 4.7 and dropped in "
+"GCC 4.8 (released in 2013). In the Linux kernel, compatibility handling for "
+"OABI (OABI_COMPAT) is not generally enabled by default and is not compatible "
+"with building a Thumb2 kernel. Distros dropped OABI support fifteen years or "
+"more ago."
+msgstr ""
+
+#: ../../../about/deprecated.rst:468
+msgid ""
+"The original floating-point coprocessor for 32-bit Arm was the FPA11. This "
+"was not present in many CPUs but did get baked into the OABI for how to pass "
+"floating point arguments, and so the Linux kernel has support for emulating "
+"it via the config option FPE_NWFPE; QEMU follows that. FPA11 support was "
+"also removed from GCC in GCC 4.8."
+msgstr ""
+
+#: ../../../about/deprecated.rst:474
+msgid ""
+"QEMU's NWFPE code is old and untested and not thread-safe; the OABI ABI is "
+"long-obsolete. We are therefore deprecating both OABI support and NWFPE "
+"emulation, and they will be removed in a future QEMU release."
+msgstr ""
+
+#: ../../../about/deprecated.rst:481
+msgid "Backwards compatibility"
+msgstr ""
+
+#: ../../../about/deprecated.rst:484
+msgid "Runnability guarantee of CPU models (since 4.1)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:486
 msgid ""
 "Previous versions of QEMU never changed existing CPU models in ways that "
 "introduced additional host software or hardware requirements to the VM.  "
@@ -733,7 +767,7 @@ msgid ""
 "configuration."
 msgstr ""
 
-#: ../../../about/deprecated.rst:470
+#: ../../../about/deprecated.rst:495
 msgid ""
 "The CPU model runnability guarantee won't apply anymore to existing CPU "
 "models.  Management software that needs runnability guarantees must resolve "
@@ -741,7 +775,7 @@ msgid ""
 "cpu-definitions`` QMP command."
 msgstr ""
 
-#: ../../../about/deprecated.rst:476
+#: ../../../about/deprecated.rst:501
 msgid ""
 "While those guarantees are kept, the return value of ``query-cpu-"
 "definitions`` will have existing CPU model aliases point to a version that "
@@ -751,11 +785,11 @@ msgid ""
 "CPU model aliases before starting a virtual machine."
 msgstr ""
 
-#: ../../../about/deprecated.rst:485
+#: ../../../about/deprecated.rst:510
 msgid "x86 \"isapc\" board use of modern x86 CPUs (since 10.2)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:487
+#: ../../../about/deprecated.rst:512
 msgid ""
 "The \"isapc\" board represents a historical x86 ISA PC and is intended for "
 "older 32-bit x86 CPU models, defaulting to a 486 CPU model.  Previously it "
@@ -764,7 +798,7 @@ msgid ""
 "many of the intended guest OSs."
 msgstr ""
 
-#: ../../../about/deprecated.rst:493
+#: ../../../about/deprecated.rst:518
 msgid ""
 "If the user requests a modern x86 CPU model (i.e. not one of ``486``, "
 "``athlon``, ``kvm32``, ``pentium``, ``pentium2``, ``pentium3``or ``qemu32``) "
