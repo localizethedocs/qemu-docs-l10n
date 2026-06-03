@@ -1,0 +1,354 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-01 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tools/qemu-vnc.rst:5
+msgid "QEMU standalone VNC server"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:8
+msgid "Synopsis"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:10
+msgid "**qemu-vnc** [*OPTION*]..."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:13
+msgid "Description"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:15
+msgid ""
+"``qemu-vnc`` is a standalone VNC server that connects to a running QEMU "
+"instance via the D-Bus display interface (:ref:`dbus-display`). It serves "
+"the guest display, input, audio, clipboard, and serial console chardevs over "
+"the VNC protocol, allowing VNC clients to interact with the virtual machine "
+"without QEMU itself binding a VNC socket."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:22
+msgid "Options"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:28
+msgid "Display help and exit."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:32
+msgid "Print version information and exit."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:36
+msgid ""
+"D-Bus address to connect to. When not specified, ``qemu-vnc`` connects to "
+"the session bus."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:41
+msgid ""
+"File descriptor of an inherited Unix socket for a peer-to-peer D-Bus "
+"connection to QEMU. This is mutually exclusive with ``--dbus-address`` and "
+"``--bus-name``."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:47
+msgid ""
+"D-Bus bus name of the QEMU instance to connect to. The default is ``org."
+"qemu``. When a custom ``--dbus-address`` is given without a bus name, peer-"
+"to-peer D-Bus is used."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:53
+msgid "Wait for the D-Bus bus name to appear. Only for bus connections."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:57
+msgid ""
+"Require VNC password authentication from connecting clients. The password is "
+"set at runtime via the D-Bus ``SetPassword`` method (see :doc:`/interop/dbus-"
+"vnc`). Clients will not be able to connect until a password has been set."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:62
+msgid ""
+"This option is ignored when a systemd credential password is present, since "
+"password authentication is already enabled via ``password-secret`` in that "
+"case."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:68
+msgid ""
+"VNC listen address in the same format as the QEMU ``-vnc`` option (default "
+"``localhost:0``, i.e. TCP port 5900)."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:73
+msgid ""
+"Enable WebSocket transport on the given address. *ADDR* can be a port number "
+"or an *address:port* pair."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:78
+msgid ""
+"Create a QEMU user-creatable object. *OBJDEF* uses the same key=value syntax "
+"as the QEMU ``-object`` option. This option may be given multiple times. It "
+"is needed, for example, to create authorization objects referenced by ``--"
+"tls-authz``."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:85
+msgid ""
+"Directory containing TLS x509 credentials (``ca-cert.pem``, ``server-cert."
+"pem``, ``server-key.pem``). When specified, the VNC server requires TLS from "
+"connecting clients."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:91
+msgid ""
+"ID of a ``QAuthZ`` object previously created with ``--object`` for TLS "
+"client certificate authorization. When specified, the TLS credentials are "
+"created with ``verify-peer=yes`` so connecting clients must present a valid "
+"certificate. After the TLS handshake, the client certificate Distinguished "
+"Name is checked against the authorization object. This option requires ``--"
+"tls-creds``."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:100
+msgid ""
+"Require that the client use SASL to authenticate with the VNC server. The "
+"exact choice of authentication method used is controlled from the system / "
+"user's SASL configuration file for the 'qemu' service. This is typically "
+"found in ``/etc/sasl2/qemu.conf``. If running QEMU as an unprivileged user, "
+"an environment variable ``SASL_CONF_PATH`` can be used to make it search "
+"alternate locations for the service config. While some SASL auth methods can "
+"also provide data encryption (eg GSSAPI), it is recommended that SASL always "
+"be combined with the 'tls' and 'x509' settings to enable use of SSL and "
+"server certificates. This ensures a data encryption preventing compromise of "
+"authentication credentials. See the :ref:`VNC security` section in the "
+"System Emulation Users Guide for details on using SASL authentication."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:114
+msgid ""
+"ID of a ``QAuthZ`` object previously created with ``--object`` for SASL "
+"username authorization. After successful SASL authentication, the "
+"authenticated username is checked against the authorization object. If the "
+"check fails, the client is disconnected. This option requires ``--sasl``."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:121
+msgid ""
+"Set display sharing policy. *POLICY* is one of ``allow-exclusive``, ``force-"
+"shared``, or ``ignore``."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:124
+msgid ""
+"``allow-exclusive`` allows clients to ask for exclusive access. As suggested "
+"by the RFB spec this is implemented by dropping other connections. "
+"Connecting multiple clients in parallel requires all clients asking for a "
+"shared session (vncviewer: -shared switch). This is the default."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:129
+msgid ""
+"``force-shared`` disables exclusive client access. Useful for shared desktop "
+"sessions, where you don't want someone forgetting to specify -shared "
+"disconnect everybody else."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:133
+msgid ""
+"``ignore`` completely ignores the shared flag and allows everybody to "
+"connect unconditionally. Doesn't conform to the RFB spec but is traditional "
+"QEMU behavior."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:139
+msgid ""
+"Chardev type name to expose as a VNC text console. This option may be given "
+"multiple times to expose several chardevs. When not specified, the defaults "
+"``org.qemu.console.serial.0`` and ``org.qemu.monitor.hmp.0`` are used."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:145
+msgid ""
+"Do not expose any chardevs as text consoles. This overrides the default "
+"chardev list and any ``--vt-chardev`` options."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:150
+msgid ""
+"Keyboard layout (e.g. ``en-us``). Passed through to the VNC server for key-"
+"code translation."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:155
+msgid ""
+"Enable lossy compression methods (gradient, JPEG, ...). If this option is "
+"set, VNC client may receive lossy framebuffer updates depending on its "
+"encoding settings. Enabling this option can save a lot of bandwidth at the "
+"expense of quality."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:162
+msgid ""
+"Disable adaptive encodings. Adaptive encodings are enabled by default. An "
+"adaptive encoding will try to detect frequently updated screen regions, and "
+"send updates in these regions using a lossy encoding (like JPEG). This can "
+"be really helpful to save bandwidth when playing videos. Disabling adaptive "
+"encodings restores the original static behavior of encodings like Tight."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:2
+msgid "Specify tracing options."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:4
+msgid "``[enable=]PATTERN``"
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:6
+msgid ""
+"Immediately enable events matching *PATTERN* (either event name or a "
+"globbing pattern).  This option is only available if QEMU has been compiled "
+"with the ``simple``, ``log`` or ``ftrace`` tracing backend.  To specify "
+"multiple events or patterns, specify the :option:`-trace` option multiple "
+"times."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:12
+msgid "Use :option:`-trace help` to print a list of names of trace points."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:14
+msgid "``events=FILE``"
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:16
+msgid ""
+"Immediately enable events listed in *FILE*. The file must contain one event "
+"name (as listed in the ``trace-events-all`` file) per line; globbing "
+"patterns are accepted too.  This option is only available if QEMU has been "
+"compiled with the ``simple``, ``log`` or ``ftrace`` tracing backend."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:22
+msgid "``file=FILE``"
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:24
+msgid ""
+"Log output traces to *FILE*. This option is only available if QEMU has been "
+"compiled with the ``simple`` tracing backend."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:173
+msgid "Examples"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:175
+msgid "Start QEMU with the D-Bus display backend::"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:177
+msgid "qemu-system-x86_64 -display dbus ..."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:179
+msgid "Then attach ``qemu-vnc``::"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:181
+msgid "qemu-vnc"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:183
+msgid "A VNC client can now connect to ``localhost:5900``."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:185
+msgid "To listen on a different port with TLS::"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:187
+msgid "qemu-vnc --vnc-addr localhost:1 --tls-creds /etc/pki/qemu-vnc"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:189
+msgid "To require TLS with client certificate authorization::"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:191
+msgid ""
+"qemu-vnc --object authz-list-file,id=auth0,filename=/etc/qemu/vnc.acl,"
+"refresh=on \\\n"
+"         --tls-creds /etc/pki/qemu-vnc --tls-authz auth0"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:194
+msgid "To enable SASL authentication with TLS::"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:196
+msgid "qemu-vnc --tls-creds /etc/pki/qemu-vnc --sasl"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:199
+msgid "VNC password authentication"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:201
+msgid "There are two ways to enable VNC password authentication:"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:203
+msgid ""
+"``--password`` flag -- start ``qemu-vnc`` with ``--password`` and then set "
+"the password at runtime using the D-Bus ``SetPassword`` method.  Clients "
+"will be rejected until a password is set."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:207
+msgid ""
+"systemd credentials -- if the ``CREDENTIALS_DIRECTORY`` environment variable "
+"is set (see :manpage:`systemd.exec(5)`) and contains a file named ``vnc-"
+"password``, the VNC server will use that file's contents as the password "
+"automatically.  The ``--password`` flag is not needed in this case."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:214
+msgid "D-Bus interface"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:216
+msgid ""
+"``qemu-vnc`` exposes a D-Bus interface for management and monitoring of VNC "
+"connections.  See :doc:`/interop/dbus-vnc` for the full interface reference."
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:221
+msgid "See also"
+msgstr ""
+
+#: ../../../tools/qemu-vnc.rst:223
+msgid ""
+":manpage:`qemu(1)`, :doc:`/interop/dbus-display`, :doc:`/interop/dbus-vnc`, "
+"`The RFB Protocol <https://github.com/rfbproto/rfbproto>`_"
+msgstr ""

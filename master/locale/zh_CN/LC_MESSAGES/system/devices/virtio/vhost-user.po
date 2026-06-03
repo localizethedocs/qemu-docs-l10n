@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-23 09:05+0000\n"
+"POT-Creation-Date: 2026-06-01 14:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -223,46 +223,60 @@ msgid ""
 "device-spi>`_"
 msgstr ""
 
+#: ../../../system/devices/virtio/vhost-user.rst:64
+msgid "vhost-user-rtc"
+msgstr ""
+
 #: ../../../system/devices/virtio/vhost-user.rst:65
+msgid "Real time clock"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user.rst:66
+msgid ""
+"`vhost-device-rtc <https://github.com/rust-vmm/vhost-device/tree/main/vhost-"
+"device-rtc>`_"
+msgstr ""
+
+#: ../../../system/devices/virtio/vhost-user.rst:68
 msgid ""
 "The referenced *daemons* are not exhaustive, any conforming backend "
 "implementing the device and using the vhost-user protocol should work."
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:69
+#: ../../../system/devices/virtio/vhost-user.rst:72
 msgid "vhost-user-test-device"
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:71
+#: ../../../system/devices/virtio/vhost-user.rst:74
 msgid ""
 "The vhost-user-test-device is a generic development device intended for "
 "expert use while developing new backends. The user needs to specify all the "
 "required parameters including:"
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:75
+#: ../../../system/devices/virtio/vhost-user.rst:78
 msgid "Device ``virtio-id``"
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:76
+#: ../../../system/devices/virtio/vhost-user.rst:79
 msgid "The ``num_vqs`` it needs and their ``vq_size``"
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:77
+#: ../../../system/devices/virtio/vhost-user.rst:80
 msgid "The ``config_size`` if needed"
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:80
+#: ../../../system/devices/virtio/vhost-user.rst:83
 msgid ""
 "While this is a useful device for development it is not recommended for "
 "production use."
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:84
+#: ../../../system/devices/virtio/vhost-user.rst:87
 msgid "vhost-user daemon"
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:86
+#: ../../../system/devices/virtio/vhost-user.rst:89
 msgid ""
 "This is a separate process that is connected to by QEMU via a socket "
 "following the :ref:`vhost_user_proto`. There are a number of daemons that "
@@ -270,11 +284,11 @@ msgid ""
 "specification for a given device can be used."
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:94
+#: ../../../system/devices/virtio/vhost-user.rst:97
 msgid "Shared memory object"
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:96
+#: ../../../system/devices/virtio/vhost-user.rst:99
 msgid ""
 "In order for the daemon to access the VirtIO queues to process the requests "
 "it needs access to the guest's address space. This is achieved via the "
@@ -283,31 +297,31 @@ msgid ""
 "be passed via the socket as part of the protocol negotiation."
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:103
+#: ../../../system/devices/virtio/vhost-user.rst:106
 msgid ""
 "Currently the shared memory object needs to match the size of the main "
 "system memory as defined by the ``-m`` argument."
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:107
+#: ../../../system/devices/virtio/vhost-user.rst:110
 msgid "Example"
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:109
+#: ../../../system/devices/virtio/vhost-user.rst:112
 msgid "First start your daemon."
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:113
+#: ../../../system/devices/virtio/vhost-user.rst:116
 msgid "$ virtio-foo --socket-path=/var/run/foo.sock $OTHER_ARGS"
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:115
+#: ../../../system/devices/virtio/vhost-user.rst:118
 msgid ""
 "Then you start your QEMU instance specifying the device, chardev and memory "
 "objects."
 msgstr ""
 
-#: ../../../system/devices/virtio/vhost-user.rst:120
+#: ../../../system/devices/virtio/vhost-user.rst:123
 msgid ""
 "$ |qemu_system| \\\\\n"
 "    -m 4096 \\\\\n"

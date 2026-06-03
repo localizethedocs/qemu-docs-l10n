@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-06-01 14:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,11 +107,31 @@ msgid ""
 "cannot find them."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:58
+#: ../../../devel/testing/main.rst:55
+msgid ""
+"The timeouts for QEMU tests are set conservatively so you should not in "
+"general find that tests time out. However, if you are running on a "
+"particularly slow host or with a slow configuration (such as a build with "
+"the clang address-sanitizer enabled) you can globally raise all the "
+"timeouts, by setting the ``TIMEOUT_MULTIPLIER`` environment variable. For "
+"instance:"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:62
+msgid "TIMEOUT_MULTIPLIER=3 make check"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:66
+msgid ""
+"will run with all the default timeouts multiplied by three. You can also "
+"disable timeouts entirely by setting the environment variable to ``0``."
+msgstr ""
+
+#: ../../../devel/testing/main.rst:73
 msgid "Unit tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:60
+#: ../../../devel/testing/main.rst:75
 msgid ""
 "A unit test is responsible for exercising individual software components as "
 "a unit, like interfaces, data structures, and functionality, uncovering "
@@ -122,25 +142,25 @@ msgid ""
 "control flow [2]_."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:68
+#: ../../../devel/testing/main.rst:83
 msgid ""
 "In QEMU, unit tests can be invoked with ``make check-unit``. They are simple "
 "C tests that typically link to individual QEMU object files and exercise "
 "them by calling exported functions."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:72
+#: ../../../devel/testing/main.rst:87
 msgid ""
 "If you are writing new code in QEMU, consider adding a unit test, especially "
 "for utility modules that are relatively stateless or have few dependencies. "
 "To add a new unit test:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:76
+#: ../../../devel/testing/main.rst:91
 msgid "Create a new source file. For example, ``tests/unit/foo-test.c``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:78
+#: ../../../devel/testing/main.rst:93
 msgid ""
 "Write the test. Normally you would include the header file which exports the "
 "module API, then verify the interface behaves as expected from your test. "
@@ -148,7 +168,7 @@ msgid ""
 "and modifying an existing test is usually a good idea."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:83
+#: ../../../devel/testing/main.rst:98
 msgid ""
 "Add the test to ``tests/unit/meson.build``. The unit tests are listed in a "
 "dictionary called ``tests``.  The values are any additional sources and "
@@ -156,7 +176,7 @@ msgid ""
 "in ``tests/unit/foo-test.c``, it is enough to add an entry like::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:88
+#: ../../../devel/testing/main.rst:103
 msgid ""
 "{\n"
 "  ...\n"
@@ -165,7 +185,7 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:94
+#: ../../../devel/testing/main.rst:109
 msgid ""
 "Since unit tests don't require environment variables, the simplest way to "
 "debug a unit test failure is often directly invoking it or even running it "
@@ -175,21 +195,21 @@ msgid ""
 "pointers better) and gtester options. If necessary, you can run"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:101
+#: ../../../devel/testing/main.rst:116
 msgid "make check-unit V=1"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:105
+#: ../../../devel/testing/main.rst:120
 msgid ""
 "and copy the actual command line which executes the unit test, then run it "
 "from the command line."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:109
+#: ../../../devel/testing/main.rst:124
 msgid "QTest"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:111
+#: ../../../devel/testing/main.rst:126
 msgid ""
 "QTest is a device emulation testing framework.  It can be very useful to "
 "test device models; it could also control certain aspects of QEMU (such as "
@@ -197,19 +217,19 @@ msgid ""
 "to :doc:`qtest` for more details."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:116
+#: ../../../devel/testing/main.rst:131
 msgid "QTest cases can be executed with"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:118
+#: ../../../devel/testing/main.rst:133
 msgid "make check-qtest"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:123
+#: ../../../devel/testing/main.rst:138
 msgid "Writing portable test cases"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:124
+#: ../../../devel/testing/main.rst:139
 msgid ""
 "Both unit tests and qtests can run on POSIX hosts as well as Windows hosts. "
 "Care must be taken when writing portable test cases that can be built and "
@@ -217,19 +237,19 @@ msgid ""
 "practices:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:128
+#: ../../../devel/testing/main.rst:143
 msgid ""
 "Use portable APIs from glib whenever necessary, e.g.: g_setenv(), "
 "g_mkdtemp(), g_mkdir()."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:130
+#: ../../../devel/testing/main.rst:145
 msgid ""
 "Avoid using hardcoded /tmp for temporary file directory. Use g_get_tmp_dir() "
 "instead."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:132
+#: ../../../devel/testing/main.rst:147
 msgid ""
 "Bear in mind that Windows has different special string representation for "
 "stdin/stdout/stderr and null devices. For example if your test case uses \"/"
@@ -238,21 +258,21 @@ msgid ""
 "using \"2>nul\" whenever necessary."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:137
+#: ../../../devel/testing/main.rst:152
 msgid ""
 "If your test cases uses the blkdebug feature, use relative path to pass the "
 "config and image file paths in the command line as Windows absolute path "
 "contains the delimiter \":\" which will confuse the blkdebug parser."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:140
+#: ../../../devel/testing/main.rst:155
 msgid ""
 "Use double quotes in your extra QEMU command line in your test cases instead "
 "of single quotes, as Windows does not drop single quotes when passing the "
 "command line to QEMU."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:143
+#: ../../../devel/testing/main.rst:158
 msgid ""
 "Windows opens a file in text mode by default, while a POSIX compliant "
 "implementation treats text files and binary files the same. So if your test "
@@ -261,96 +281,96 @@ msgid ""
 "mode string to fopen(), or O_BINARY flag for the open() call."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:148
+#: ../../../devel/testing/main.rst:163
 msgid ""
 "If a certain test case can only run on POSIX or Linux hosts, use a proper "
 "#ifdef in the codes. If the whole test suite cannot run on Windows, disable "
 "the build in the meson.build file."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:155
+#: ../../../devel/testing/main.rst:170
 msgid "QAPI schema tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:157
+#: ../../../devel/testing/main.rst:172
 msgid ""
 "The QAPI schema tests validate the QAPI parser used by QMP, by feeding "
 "predefined input to the parser and comparing the result with the reference "
 "output."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:161
+#: ../../../devel/testing/main.rst:176
 msgid ""
 "The input/output data is managed under the ``tests/qapi-schema`` directory. "
 "Each test case includes four files that have a common base name:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:164
+#: ../../../devel/testing/main.rst:179
 msgid ""
 "``${casename}.json`` - the file contains the JSON input for feeding the "
 "parser"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:166
+#: ../../../devel/testing/main.rst:181
 msgid ""
 "``${casename}.out`` - the file contains the expected stdout from the parser"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:167
+#: ../../../devel/testing/main.rst:182
 msgid ""
 "``${casename}.err`` - the file contains the expected stderr from the parser"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:168
+#: ../../../devel/testing/main.rst:183
 msgid "``${casename}.exit`` - the expected error code"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:170
+#: ../../../devel/testing/main.rst:185
 msgid ""
 "Consider adding a new QAPI schema test when you are making a change on the "
 "QAPI parser (either fixing a bug or extending/modifying the syntax). To do "
 "this:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:173
+#: ../../../devel/testing/main.rst:188
 msgid "Add four files for the new case as explained above. For example:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:175
+#: ../../../devel/testing/main.rst:190
 msgid "``$EDITOR tests/qapi-schema/foo.{json,out,err,exit}``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:177
+#: ../../../devel/testing/main.rst:192
 msgid "Add the new test in ``tests/Makefile.include``. For example:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:179
+#: ../../../devel/testing/main.rst:194
 msgid "``qapi-schema += foo.json``"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:181
+#: ../../../devel/testing/main.rst:196
 msgid ""
 "The reference output can be automatically updated to match the latest QAPI "
 "code generator by running the tests with the QEMU_TEST_REGENERATE "
 "environment variable set."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:185
+#: ../../../devel/testing/main.rst:200
 msgid "QEMU_TEST_REGENERATE=1 make check-qapi-schema"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:189
+#: ../../../devel/testing/main.rst:204
 msgid ""
 "The resulting changes must be reviewed by the author to ensure they match "
 "the intended results before adding the updated reference output to the same "
 "commit that alters the generator code."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:196
+#: ../../../devel/testing/main.rst:211
 msgid "Tracetool tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:198
+#: ../../../devel/testing/main.rst:213
 msgid ""
 "The tracetool tests validate the generated source files used for defining "
 "probes for various tracing backends and source formats. The test operates by "
@@ -359,11 +379,11 @@ msgid ""
 "tests can be run with:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:204
+#: ../../../devel/testing/main.rst:219
 msgid "make check-tracetool"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:208
+#: ../../../devel/testing/main.rst:223
 msgid ""
 "The reference output is stored in files under tests/tracetool, and when the "
 "tracetool backend/format output is intentionally changed, the reference "
@@ -371,33 +391,63 @@ msgid ""
 "QEMU_TEST_REGENERATE=1 environment variable:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:213
+#: ../../../devel/testing/main.rst:228
 msgid "QEMU_TEST_REGENERATE=1 make check-tracetool"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:217
+#: ../../../devel/testing/main.rst:232
 msgid ""
 "The resulting changes must be reviewed by the author to ensure they match "
 "the intended results, before adding the updated reference output to the same "
 "commit that alters the generator code."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:222
+#: ../../../devel/testing/main.rst:237
 msgid "check-block"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:224
+#: ../../../devel/testing/main.rst:239
 msgid ""
-"``make check-block`` runs a subset of the block layer iotests (the tests "
-"that are in the \"auto\" group). See the \"QEMU iotests\" section below for "
-"more information."
+"There are a variety of ways to exercise the block layer I/O tests via make "
+"targets for a selection of formats / protocols (collectively referred to as "
+"``drivers`` below)."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:231
+#: ../../../devel/testing/main.rst:243
+msgid ""
+"A default ``make check`` or ``make check-block`` command will exercise the "
+"``qcow2`` format, using the tests tagged into the ``auto`` group only."
+msgstr ""
+
+#: ../../../devel/testing/main.rst:247
+msgid ""
+"These targets accept the ``SPEED`` variable to augment the set of tests to "
+"run. A slightly more comprehensive test plan can be run by defining "
+"``SPEED=slow``, which enables all tests for the ``qcow2`` and ``raw`` "
+"drivers. The most comprehensive test plan can be run by defining "
+"``SPEED=thorough``, which enables all available tests for the drivers "
+"``luks``, ``nbd``, ``parallels``, ``qcow2``, ``qed``, ``raw``, ``vdi``, "
+"``vhdx``, ``vmdk``, and ``vpc``."
+msgstr ""
+
+#: ../../../devel/testing/main.rst:255
+msgid ""
+"Each of drivers also has its own dedicated make target, named ``make check-"
+"block-$DRIVER`` which will run all available tests for the designated driver "
+"and does not require the ``SPEED`` variable to be set."
+msgstr ""
+
+#: ../../../devel/testing/main.rst:260
+msgid ""
+"See the \"QEMU iotests\" section below for more information on the block I/O "
+"test framework that is leveraged by these ``make`` targets."
+msgstr ""
+
+#: ../../../devel/testing/main.rst:266
 msgid "QEMU iotests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:233
+#: ../../../devel/testing/main.rst:268
 msgid ""
 "QEMU iotests, under the directory ``tests/qemu-iotests``, is the testing "
 "framework widely used to test block layer related features. It is higher "
@@ -406,21 +456,21 @@ msgid ""
 "and the test files are named with numbers."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:239
+#: ../../../devel/testing/main.rst:274
 msgid ""
 "To run iotests, make sure QEMU is built successfully, then switch to the "
 "``tests/qemu-iotests`` directory under the build directory, and run ``./"
 "check`` with desired arguments from there."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:243
+#: ../../../devel/testing/main.rst:278
 msgid ""
 "By default, \"raw\" format and \"file\" protocol is used; all tests will be "
 "executed, except the unsupported ones. You can override the format and "
 "protocol with arguments:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:247
+#: ../../../devel/testing/main.rst:282
 msgid ""
 "# test with qcow2 format\n"
 "./check -qcow2\n"
@@ -428,33 +478,33 @@ msgid ""
 "./check -nbd"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:254
+#: ../../../devel/testing/main.rst:289
 msgid "It's also possible to list test numbers explicitly:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:256
+#: ../../../devel/testing/main.rst:291
 msgid ""
 "# run selected cases with qcow2 format\n"
 "./check -qcow2 001 030 153"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:261
+#: ../../../devel/testing/main.rst:296
 msgid ""
 "Cache mode can be selected with the \"-c\" option, which may help reveal "
 "bugs that are specific to certain cache mode."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:264
+#: ../../../devel/testing/main.rst:299
 msgid ""
 "More options are supported by the ``./check`` script, run ``./check -h`` for "
 "help."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:268
+#: ../../../devel/testing/main.rst:303
 msgid "Writing a new test case"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:270
+#: ../../../devel/testing/main.rst:305
 msgid ""
 "Consider writing a tests case when you are making any changes to the block "
 "layer. An iotest case is usually the choice for that. There are already many "
@@ -464,7 +514,7 @@ msgid ""
 "approach is using ``git grep``.)"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:277
+#: ../../../devel/testing/main.rst:312
 msgid ""
 "Usually an iotest case consists of two files. One is an executable that "
 "produces output to stdout and stderr, the other is the expected reference "
@@ -472,7 +522,7 @@ msgid ""
 "``055`` and reference output ``055.out``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:282
+#: ../../../devel/testing/main.rst:317
 msgid ""
 "In rare cases, when outputs differ between cache mode ``none`` and others, a "
 "``.out.nocache`` file is added. In other cases, when outputs differ between "
@@ -480,21 +530,21 @@ msgid ""
 "respective format names, e.g. ``178.out.qcow2`` and ``178.out.raw``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:287
+#: ../../../devel/testing/main.rst:322
 msgid ""
 "There isn't a hard rule about how to write a test script, but a new test is "
 "usually a (copy and) modification of an existing case.  There are a few "
 "commonly used ways to create a test:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:291
+#: ../../../devel/testing/main.rst:326
 msgid ""
 "A Bash script. It will make use of several environmental variables related "
 "to the testing procedure, and could source a group of ``common.*`` libraries "
 "for some common helper routines."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:295
+#: ../../../devel/testing/main.rst:330
 msgid ""
 "A Python unittest script. Import ``iotests`` and create a subclass of "
 "``iotests.QMPTestCase``, then call ``iotests.main`` method. The downside of "
@@ -502,7 +552,7 @@ msgid ""
 "harder to debug."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:300
+#: ../../../devel/testing/main.rst:335
 msgid ""
 "A simple Python script without using unittest module. This could also import "
 "``iotests`` for launching QEMU and utilities etc, but it doesn't inherit "
@@ -510,7 +560,7 @@ msgid ""
 "execution. This is a combination of 1 and 2."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:305
+#: ../../../devel/testing/main.rst:340
 msgid ""
 "Pick the language per your preference since both Bash and Python have "
 "comparable library support for invoking and interacting with QEMU programs. "
@@ -518,7 +568,7 @@ msgid ""
 "compatible code."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:310
+#: ../../../devel/testing/main.rst:345
 msgid ""
 "Both Python and Bash frameworks in iotests provide helpers to manage test "
 "images. They can be used to create and clean up images under the test "
@@ -532,17 +582,17 @@ msgid ""
 "consider adding ``locking=off`` option to disable image locking."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:322
+#: ../../../devel/testing/main.rst:357
 msgid "Debugging a test case"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:324
+#: ../../../devel/testing/main.rst:359
 msgid ""
 "The following options to the ``check`` script can be useful when debugging a "
 "failing test:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:327
+#: ../../../devel/testing/main.rst:362
 msgid ""
 "``-gdb`` wraps every QEMU invocation in a ``gdbserver``, which waits for a "
 "connection from a gdb client.  The options given to ``gdbserver`` (e.g. the "
@@ -554,7 +604,7 @@ msgid ""
 "``$GDB_OPTIONS`` is ignored, regardless of whether it is set or not."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:338
+#: ../../../devel/testing/main.rst:373
 msgid ""
 "``-valgrind`` attaches a valgrind instance to QEMU. If it detects warnings, "
 "it will print and save the log in ``$TEST_DIR/<valgrind_pid>.valgrind``. The "
@@ -562,31 +612,31 @@ msgid ""
 "valgrind --error-exitcode=99 $QEMU ...``"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:344
+#: ../../../devel/testing/main.rst:379
 msgid ""
 "``-d`` (debug) just increases the logging verbosity, showing for example the "
 "QMP commands and answers."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:347
+#: ../../../devel/testing/main.rst:382
 msgid ""
 "``-p`` (print) redirects QEMU’s stdout and stderr to the test output, "
 "instead of saving it into a log file in ``$TEST_DIR/qemu-machine-"
 "<random_string>``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:352
+#: ../../../devel/testing/main.rst:387
 msgid "Test case groups"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:354
+#: ../../../devel/testing/main.rst:389
 msgid ""
 "\"Tests may belong to one or more test groups, which are defined in the form "
 "of a comment in the test source file. By convention, test groups are listed "
 "in the second line of the test file, after the \"#!/...\" line, like this:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:358
+#: ../../../devel/testing/main.rst:393
 msgid ""
 "#!/usr/bin/env python3\n"
 "# group: auto quick\n"
@@ -594,7 +644,7 @@ msgid ""
 "..."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:365
+#: ../../../devel/testing/main.rst:400
 msgid ""
 "Another way of defining groups is creating the tests/qemu-iotests/group."
 "local file. This should be used only for downstream (this file should never "
@@ -602,7 +652,7 @@ msgid ""
 "groups or for temporarily disabling tests, like this:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:370
+#: ../../../devel/testing/main.rst:405
 msgid ""
 "# groups for some company downstream process\n"
 "#\n"
@@ -618,15 +668,15 @@ msgid ""
 "our-ugly-workaround-test down ci"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:385
+#: ../../../devel/testing/main.rst:420
 msgid "Note that the following group names have a special meaning:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:387
+#: ../../../devel/testing/main.rst:422
 msgid "quick: Tests in this group should finish within a few seconds."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:389
+#: ../../../devel/testing/main.rst:424
 msgid ""
 "auto: Tests in this group are used during \"make check\" and should be "
 "runnable in any case. That means they should run with every QEMU binary "
@@ -637,19 +687,19 @@ msgid ""
 "and disk space (since CI pipelines tend to fail otherwise)."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:397
+#: ../../../devel/testing/main.rst:432
 msgid "disabled: Tests in this group are disabled and ignored by check."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:402
+#: ../../../devel/testing/main.rst:437
 msgid "Container based tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:405
+#: ../../../devel/testing/main.rst:440
 msgid "Introduction"
 msgstr "介紹"
 
-#: ../../../devel/testing/main.rst:407
+#: ../../../devel/testing/main.rst:442
 msgid ""
 "The container testing framework in QEMU utilizes public images to build and "
 "test QEMU in predefined and widely accessible Linux environments. This makes "
@@ -660,17 +710,17 @@ msgid ""
 "automatically run on whichever is configured."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:416
+#: ../../../devel/testing/main.rst:451
 msgid ""
 "The container images are also used to augment the generation of tests for "
 "testing TCG. See :ref:`checktcg-ref` for more details."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:420
+#: ../../../devel/testing/main.rst:455
 msgid "Docker Prerequisites"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:422
+#: ../../../devel/testing/main.rst:457
 msgid ""
 "Install \"docker\" with the system package manager and start the Docker "
 "service on your development machine, then make sure you have the privilege "
@@ -678,7 +728,7 @@ msgid ""
 "docker`` command or login as root. For example:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:427
+#: ../../../devel/testing/main.rst:462
 msgid ""
 "$ sudo yum install docker\n"
 "$ # or `apt-get install docker` for Ubuntu, etc.\n"
@@ -686,73 +736,73 @@ msgid ""
 "$ sudo docker ps"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:434 ../../../devel/testing/main.rst:460
+#: ../../../devel/testing/main.rst:469 ../../../devel/testing/main.rst:495
 msgid ""
 "The last command should print an empty table, to verify the system is ready."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:436
+#: ../../../devel/testing/main.rst:471
 msgid ""
 "An alternative method to set up permissions is by adding the current user to "
 "\"docker\" group and making the docker daemon socket file (by default ``/var/"
 "run/docker.sock``) accessible to the group:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:440
+#: ../../../devel/testing/main.rst:475
 msgid ""
 "$ sudo groupadd docker\n"
 "$ sudo usermod $USER -a -G docker\n"
 "$ sudo chown :docker /var/run/docker.sock"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:446
+#: ../../../devel/testing/main.rst:481
 msgid ""
 "Note that any one of above configurations makes it possible for the user to "
 "exploit the whole host with Docker bind mounting or other privileged "
 "operations.  So only do it on development machines."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:451
+#: ../../../devel/testing/main.rst:486
 msgid "Podman Prerequisites"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:453
+#: ../../../devel/testing/main.rst:488
 msgid "Install \"podman\" with the system package manager."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:455
+#: ../../../devel/testing/main.rst:490
 msgid ""
 "$ sudo dnf install podman\n"
 "$ podman ps"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:463 ../../../devel/testing/main.rst:840
+#: ../../../devel/testing/main.rst:498 ../../../devel/testing/main.rst:875
 msgid "Quickstart"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:465
+#: ../../../devel/testing/main.rst:500
 msgid ""
 "From source tree, type ``make docker-help`` to see the help. Testing can be "
 "started without configuring or building QEMU (``configure`` and ``make`` are "
 "done in the container, with parameters defined by the make target):"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:470
+#: ../../../devel/testing/main.rst:505
 msgid "make docker-test-build@debian"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:474
+#: ../../../devel/testing/main.rst:509
 msgid ""
 "This will create a container instance using the ``debian`` image (the image "
 "is downloaded and initialized automatically), in which the ``test-build`` "
 "job is executed."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:479
+#: ../../../devel/testing/main.rst:514
 msgid "Registry"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:481
+#: ../../../devel/testing/main.rst:516
 msgid ""
 "The QEMU project has a container registry hosted by GitLab at ``registry."
 "gitlab.com/qemu-project/qemu`` which will automatically be used to pull in "
@@ -762,22 +812,22 @@ msgid ""
 "build option:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:488
+#: ../../../devel/testing/main.rst:523
 msgid "make docker-image-debian-arm64-cross NOCACHE=1"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:493
+#: ../../../devel/testing/main.rst:528
 msgid "Images"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:495
+#: ../../../devel/testing/main.rst:530
 msgid ""
 "Along with many other images, the ``debian`` image is defined in a "
 "Dockerfile in ``tests/docker/dockerfiles/``, called ``debian.docker``. "
 "``make docker-help`` command will list all the available images."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:499
+#: ../../../devel/testing/main.rst:534
 msgid ""
 "A ``.pre`` script can be added beside the ``.docker`` file, which will be "
 "executed before building the image under the build context directory. This "
@@ -786,7 +836,7 @@ msgid ""
 "containers work."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:504
+#: ../../../devel/testing/main.rst:539
 msgid ""
 "Most of the existing Dockerfiles were written by hand, simply by creating a "
 "a new ``.docker`` file under the ``tests/docker/dockerfiles/`` directory. "
@@ -794,17 +844,17 @@ msgid ""
 "different containers."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:509
+#: ../../../devel/testing/main.rst:544
 msgid ""
 "Thus going forward, QEMU is aiming to automatically generate the Dockerfiles "
 "using the ``lcitool`` program provided by the ``libvirt-ci`` project:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:512
+#: ../../../devel/testing/main.rst:547
 msgid "https://gitlab.com/libvirt/libvirt-ci"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:514
+#: ../../../devel/testing/main.rst:549
 msgid ""
 "``libvirt-ci`` contains an ``lcitool`` program as well as a list of mappings "
 "to distribution package names for a wide variety of third party projects.  "
@@ -815,45 +865,45 @@ msgid ""
 "across OS distribution."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:524
+#: ../../../devel/testing/main.rst:559
 msgid "Adding new build pre-requisites"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:526
+#: ../../../devel/testing/main.rst:561
 msgid ""
 "When preparing a patch series that adds a new build pre-requisite to QEMU, "
 "the prerequisites should to be added to ``tests/lcitool/projects/qemu.yml`` "
 "in order to make the dependency available in the CI build environments."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:531
+#: ../../../devel/testing/main.rst:566
 msgid ""
 "In the simple case where the pre-requisite is already known to ``libvirt-"
 "ci`` the following steps are needed:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:534
+#: ../../../devel/testing/main.rst:569
 msgid "Edit ``tests/lcitool/projects/qemu.yml`` and add the pre-requisite"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:536
+#: ../../../devel/testing/main.rst:571
 msgid ""
 "Run ``make lcitool-refresh`` to re-generate all relevant build environment "
 "manifests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:539
+#: ../../../devel/testing/main.rst:574
 msgid ""
 "It may be that ``libvirt-ci`` does not know about the new pre-requisite. If "
 "that is the case, some extra preparation steps will be required first to "
 "contribute the mapping to the ``libvirt-ci`` project:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:543 ../../../devel/testing/main.rst:599
+#: ../../../devel/testing/main.rst:578 ../../../devel/testing/main.rst:634
 msgid "Fork the ``libvirt-ci`` project on gitlab"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:545
+#: ../../../devel/testing/main.rst:580
 msgid ""
 "Add an entry for the new build prerequisite to ``lcitool/facts/mappings."
 "yml``, listing its native package name on as many OS distros as practical.  "
@@ -861,21 +911,21 @@ msgid ""
 "correct."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:550
+#: ../../../devel/testing/main.rst:585
 msgid ""
 "Commit the ``mappings.yml`` change together with the regenerated test files, "
 "and submit a merge request to the ``libvirt-ci`` project. Please note in the "
 "description that this is a new build pre-requisite desired for use with QEMU."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:555 ../../../devel/testing/main.rst:616
+#: ../../../devel/testing/main.rst:590 ../../../devel/testing/main.rst:651
 msgid ""
 "CI pipeline will run to validate that the changes to ``mappings.yml`` are "
 "correct, by attempting to install the newly listed package on all OS "
 "distributions supported by ``libvirt-ci``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:559
+#: ../../../devel/testing/main.rst:594
 msgid ""
 "Once the merge request is accepted, go back to QEMU and update the ``tests/"
 "lcitool/libvirt-ci`` submodule to point to a commit that contains the "
@@ -883,7 +933,7 @@ msgid ""
 "refresh``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:564
+#: ../../../devel/testing/main.rst:599
 msgid ""
 "Please also trigger gitlab container generation pipelines on your change for "
 "as many OS distros as practical to make sure that there are no obvious "
@@ -892,7 +942,7 @@ msgid ""
 "gitlab CI pipelines on your change."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:570
+#: ../../../devel/testing/main.rst:605
 msgid ""
 "For enterprise distros that default to old, end-of-life versions of the "
 "Python runtime, QEMU uses a separate set of mappings that work with more "
@@ -901,47 +951,47 @@ msgid ""
 "a Python library or tool."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:578
+#: ../../../devel/testing/main.rst:613
 msgid "Adding new OS distros"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:580
+#: ../../../devel/testing/main.rst:615
 msgid ""
 "In some cases ``libvirt-ci`` will not know about the OS distro that is "
 "desired to be tested. Before adding a new OS distro, discuss the proposed "
 "addition:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:584
+#: ../../../devel/testing/main.rst:619
 msgid ""
 "Send a mail to qemu-devel, copying people listed in the MAINTAINERS file for "
 "``Build and test automation``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:587
+#: ../../../devel/testing/main.rst:622
 msgid ""
 "There are limited CI compute resources available to QEMU, so the cost/"
 "benefit tradeoff of adding new OS distros needs to be considered."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:590
+#: ../../../devel/testing/main.rst:625
 msgid ""
 "File an issue at https://gitlab.com/libvirt/libvirt-ci/-/issues pointing to "
 "the qemu-devel mail thread in the archives."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:593
+#: ../../../devel/testing/main.rst:628
 msgid ""
 "This alerts other people who might be interested in the work to avoid "
 "duplication, as well as to get feedback from libvirt-ci maintainers on any "
 "tips to ease the addition"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:597
+#: ../../../devel/testing/main.rst:632
 msgid "Assuming there is agreement to add a new OS distro then"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:601
+#: ../../../devel/testing/main.rst:636
 msgid ""
 "Add metadata under ``lcitool/facts/targets/`` for the new OS distro. There "
 "might be code changes required if the OS distro uses a package format not "
@@ -949,7 +999,7 @@ msgid ""
 "issue is filed."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:606
+#: ../../../devel/testing/main.rst:641
 msgid ""
 "Edit the ``lcitool/facts/mappings.yml`` change to add entries for the new "
 "OS, listing the native package names for as many packages as practical.  Run "
@@ -957,25 +1007,25 @@ msgid ""
 "correct."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:611
+#: ../../../devel/testing/main.rst:646
 msgid ""
 "Commit the changes to ``lcitool/facts`` and the regenerated test files, and "
 "submit a merge request to the ``libvirt-ci`` project. Please note in the "
 "description that this is a new build pre-requisite desired for use with QEMU"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:620
+#: ../../../devel/testing/main.rst:655
 msgid ""
 "Once the merge request is accepted, go back to QEMU and update the ``libvirt-"
 "ci`` submodule to point to a commit that contains the ``mappings.yml`` "
 "update."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:626
+#: ../../../devel/testing/main.rst:661
 msgid "Tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:628
+#: ../../../devel/testing/main.rst:663
 msgid ""
 "Different tests are added to cover various configurations to build and test "
 "QEMU.  Docker tests are the executables under ``tests/docker`` named ``test-"
@@ -984,31 +1034,31 @@ msgid ""
 "source and build it."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:634
+#: ../../../devel/testing/main.rst:669
 msgid "The full list of tests is printed in the ``make docker-help`` help."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:637
+#: ../../../devel/testing/main.rst:672
 msgid "Debugging a Docker test failure"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:639
+#: ../../../devel/testing/main.rst:674
 msgid ""
 "When CI tasks, maintainers or yourself report a Docker test failure, follow "
 "the below steps to debug it:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:642
+#: ../../../devel/testing/main.rst:677
 msgid ""
 "Locally reproduce the failure with the reported command line. E.g. run "
 "``make docker-test-mingw@fedora-win64-cross J=8``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:644
+#: ../../../devel/testing/main.rst:679
 msgid "Add \"V=1\" to the command line, try again, to see the verbose output."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:645
+#: ../../../devel/testing/main.rst:680
 msgid ""
 "Further add \"DEBUG=1\" to the command line. This will pause in a shell "
 "prompt in the container right before testing starts. You could either "
@@ -1016,97 +1066,97 @@ msgid ""
 "the Docker testing continue."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:649
+#: ../../../devel/testing/main.rst:684
 msgid ""
 "If you press :kbd:`Ctrl+d`, the same building and testing procedure will "
 "begin, and will hopefully run into the error again. After that, you will be "
 "dropped to the prompt for debug."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:654
+#: ../../../devel/testing/main.rst:689
 msgid "Options"
 msgstr "選項"
 
-#: ../../../devel/testing/main.rst:656
+#: ../../../devel/testing/main.rst:691
 msgid ""
 "Various options can be used to affect how Docker tests are done. The full "
 "list is in the ``make docker`` help text. The frequently used ones are:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:659
+#: ../../../devel/testing/main.rst:694
 msgid ""
 "``V=1``: the same as in top level ``make``. It will be propagated to the "
 "container and enable verbose output."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:661
+#: ../../../devel/testing/main.rst:696
 msgid ""
 "``J=$N``: the number of parallel tasks in make commands in the container, "
 "similar to the ``-j $N`` option in top level ``make``. (The ``-j`` option in "
 "top level ``make`` will not be propagated into the container.)"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:664
+#: ../../../devel/testing/main.rst:699
 msgid ""
 "``DEBUG=1``: enables debug. See the previous \"Debugging a Docker test "
 "failure\" section."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:668
+#: ../../../devel/testing/main.rst:703
 msgid "Thread Sanitizer"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:670
+#: ../../../devel/testing/main.rst:705
 msgid ""
 "Thread Sanitizer (TSan) is a tool which can detect data races.  QEMU "
 "supports building and testing with this tool."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:673
+#: ../../../devel/testing/main.rst:708
 msgid "For more information on TSan:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:675
+#: ../../../devel/testing/main.rst:710
 msgid "https://github.com/google/sanitizers/wiki/ThreadSanitizerCppManual"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:678
+#: ../../../devel/testing/main.rst:713
 msgid "Thread Sanitizer in Docker"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:679
+#: ../../../devel/testing/main.rst:714
 msgid "TSan is currently supported in the ubuntu2204 docker."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:681
+#: ../../../devel/testing/main.rst:716
 msgid "The test-tsan test will build using TSan and then run make check."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:683
+#: ../../../devel/testing/main.rst:718
 msgid "make docker-test-tsan@ubuntu2204"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:687
+#: ../../../devel/testing/main.rst:722
 msgid "TSan warnings under docker are placed in files located at build/tsan/."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:689
+#: ../../../devel/testing/main.rst:724
 msgid ""
 "We recommend using DEBUG=1 to allow launching the test from inside the "
 "docker, and to allow review of the warnings generated by TSan."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:693
+#: ../../../devel/testing/main.rst:728
 msgid "Building and Testing with TSan"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:695
+#: ../../../devel/testing/main.rst:730
 msgid ""
 "It is possible to build and test with TSan, with a few additional steps. "
 "These steps are normally done automatically in the docker."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:698
+#: ../../../devel/testing/main.rst:733
 msgid ""
 "TSan is supported for clang and gcc. One particularity of sanitizers is that "
 "all the code, including shared objects dependencies, should be built with "
@@ -1114,11 +1164,11 @@ msgid ""
 "instance) will not be recognized, and will lead to false positives."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:704
+#: ../../../devel/testing/main.rst:739
 msgid "To build a tsan version of glib:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:706
+#: ../../../devel/testing/main.rst:741
 msgid ""
 "$ git clone --depth=1 --branch=2.81.0 https://github.com/GNOME/glib.git\n"
 "$ cd glib\n"
@@ -1126,21 +1176,21 @@ msgid ""
 "$ ninja -C build"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:713
+#: ../../../devel/testing/main.rst:748
 msgid "To configure the build for TSan:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:715
+#: ../../../devel/testing/main.rst:750
 msgid ""
 "../configure --enable-tsan \\\n"
 "             --disable-werror --extra-cflags=\"-O0\""
 msgstr ""
 
-#: ../../../devel/testing/main.rst:720
+#: ../../../devel/testing/main.rst:755
 msgid "When executing qemu, don't forget to point to tsan glib:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:722
+#: ../../../devel/testing/main.rst:757
 msgid ""
 "$ glib_dir=/path/to/glib\n"
 "$ export LD_LIBRARY_PATH=$glib_dir/build/gio:$glib_dir/build/glib:$glib_dir/"
@@ -1150,25 +1200,25 @@ msgid ""
 "$ qemu-system-x86_64 ..."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:730
+#: ../../../devel/testing/main.rst:765
 msgid ""
 "The runtime behavior of TSAN is controlled by the TSAN_OPTIONS environment "
 "variable."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:733
+#: ../../../devel/testing/main.rst:768
 msgid "More information on the TSAN_OPTIONS can be found here:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:735 ../../../devel/testing/main.rst:775
+#: ../../../devel/testing/main.rst:770 ../../../devel/testing/main.rst:810
 msgid "https://github.com/google/sanitizers/wiki/ThreadSanitizerFlags"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:737
+#: ../../../devel/testing/main.rst:772
 msgid "For example:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:739
+#: ../../../devel/testing/main.rst:774
 msgid ""
 "export TSAN_OPTIONS=suppressions=<path to qemu>/tests/tsan/suppressions.tsan "
 "\\\n"
@@ -1176,7 +1226,7 @@ msgid ""
 "                    log_path=<build path>/tsan/tsan_warning"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:745
+#: ../../../devel/testing/main.rst:780
 msgid ""
 "The above exitcode=0 has TSan continue without error if any warnings are "
 "found. This allows for running the test and then checking the warnings "
@@ -1184,11 +1234,11 @@ msgid ""
 "exitcode=66."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:752
+#: ../../../devel/testing/main.rst:787
 msgid "TSan Suppressions"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:753
+#: ../../../devel/testing/main.rst:788
 msgid ""
 "Keep in mind that for any data race warning, although there might be a data "
 "race detected by TSan, there might be no actual bug here.  TSan provides "
@@ -1197,43 +1247,43 @@ msgid ""
 "than suppress the warning."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:759
+#: ../../../devel/testing/main.rst:794
 msgid "A few important files for suppressing warnings are:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:761
+#: ../../../devel/testing/main.rst:796
 msgid ""
 "tests/tsan/suppressions.tsan - Has TSan warnings we wish to suppress at "
 "runtime. The comment on each suppression will typically indicate why we are "
 "suppressing it.  More information on the file format can be found here:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:765
+#: ../../../devel/testing/main.rst:800
 msgid "https://github.com/google/sanitizers/wiki/ThreadSanitizerSuppressions"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:767
+#: ../../../devel/testing/main.rst:802
 msgid ""
 "tests/tsan/ignore.tsan - Has TSan warnings we wish to disable at compile "
 "time for test or debug. Add flags to configure to enable:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:771
+#: ../../../devel/testing/main.rst:806
 msgid ""
 "\"--extra-cflags=-fsanitize-blacklist=<src path>/tests/tsan/ignore.tsan\""
 msgstr ""
 
-#: ../../../devel/testing/main.rst:773
+#: ../../../devel/testing/main.rst:808
 msgid ""
 "More information on the file format can be found here under \"Blacklist "
 "Format\":"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:778
+#: ../../../devel/testing/main.rst:813
 msgid "TSan Annotations"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:779
+#: ../../../devel/testing/main.rst:814
 msgid ""
 "include/qemu/tsan.h defines annotations.  See this file for more "
 "descriptions of the annotations themselves.  Annotations can be used to "
@@ -1241,34 +1291,34 @@ msgid ""
 "proper relationships between accesses of data."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:784
+#: ../../../devel/testing/main.rst:819
 msgid "Annotation examples can be found here:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:786
+#: ../../../devel/testing/main.rst:821
 msgid "https://github.com/llvm/llvm-project/tree/master/compiler-rt/test/tsan/"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:788
+#: ../../../devel/testing/main.rst:823
 msgid ""
 "Good files to start with are: annotate_happens_before.cpp and ignore_race.cpp"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:790
+#: ../../../devel/testing/main.rst:825
 msgid "The full set of annotations can be found here:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:792
+#: ../../../devel/testing/main.rst:827
 msgid ""
 "https://github.com/llvm/llvm-project/blob/master/compiler-rt/lib/tsan/rtl/"
 "tsan_interface_ann.cpp"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:795
+#: ../../../devel/testing/main.rst:830
 msgid "docker-binfmt-image-debian-% targets"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:797
+#: ../../../devel/testing/main.rst:832
 msgid ""
 "It is possible to combine Debian's bootstrap scripts with a configured "
 "``binfmt_misc`` to bootstrap a number of Debian's distros including "
@@ -1277,11 +1327,11 @@ msgid ""
 "than manually invoking chroot."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:804
+#: ../../../devel/testing/main.rst:839
 msgid "Setting up ``binfmt_misc``"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:806
+#: ../../../devel/testing/main.rst:841
 msgid ""
 "You can use the script ``qemu-binfmt-conf.sh`` to configure a QEMU user "
 "binary to automatically run binaries for the foreign architecture. While the "
@@ -1293,15 +1343,15 @@ msgid ""
 "persistent`` flag."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:816
+#: ../../../devel/testing/main.rst:851
 msgid "Example invocation"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:818
+#: ../../../devel/testing/main.rst:853
 msgid "For example to setup the HPPA ports builds of Debian::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:820
+#: ../../../devel/testing/main.rst:855
 msgid ""
 "make docker-binfmt-image-debian-sid-hppa \\\n"
 "  DEB_TYPE=sid DEB_ARCH=hppa \\\n"
@@ -1310,7 +1360,7 @@ msgid ""
 "  EXECUTABLE=(pwd)/qemu-hppa V=1"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:826
+#: ../../../devel/testing/main.rst:861
 msgid ""
 "The ``DEB_`` variables are substitutions used by ``debian-bootstrap.pre`` "
 "which is called to do the initial debootstrap of the rootfs before it is "
@@ -1318,18 +1368,18 @@ msgid ""
 "final image will be tagged as ``qemu/debian-sid-hppa``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:833
+#: ../../../devel/testing/main.rst:868
 msgid "VM testing"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:835
+#: ../../../devel/testing/main.rst:870
 msgid ""
 "This test suite contains scripts that bootstrap various guest images that "
 "have necessary packages to build QEMU. The basic usage is documented in "
 "``Makefile`` help which is displayed with ``make vm-help``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:842
+#: ../../../devel/testing/main.rst:877
 msgid ""
 "Run ``make vm-help`` to list available make targets. Invoke a specific make "
 "command to run build test in an image. For example, ``make vm-build-"
@@ -1339,7 +1389,7 @@ msgid ""
 "``./tests/vm/`` under the working directory."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:849
+#: ../../../devel/testing/main.rst:884
 msgid ""
 "Note: images created by the scripts accept a well-known RSA key pair for SSH "
 "access, so they SHOULD NOT be exposed to external interfaces if you are "
@@ -1347,56 +1397,56 @@ msgid ""
 "exploiting a QEMU security bug to compromise the host."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:855
+#: ../../../devel/testing/main.rst:890
 msgid "QEMU binaries"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:857
+#: ../../../devel/testing/main.rst:892
 msgid ""
 "By default, ``qemu-system-x86_64`` is searched in $PATH to run the guest. If "
 "there isn't one, or if it is older than 2.10, the test won't work. In this "
 "case, provide the QEMU binary in env var: ``QEMU=/path/to/qemu-2.10+``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:861
+#: ../../../devel/testing/main.rst:896
 msgid ""
 "Likewise the path to ``qemu-img`` can be set in QEMU_IMG environment "
 "variable."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:864
+#: ../../../devel/testing/main.rst:899
 msgid "Make jobs"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:866
+#: ../../../devel/testing/main.rst:901
 msgid ""
 "The ``-j$X`` option in the make command line is not propagated into the VM, "
 "specify ``J=$X`` to control the make jobs in the guest."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:870
+#: ../../../devel/testing/main.rst:905
 msgid "Debugging"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:872
+#: ../../../devel/testing/main.rst:907
 msgid ""
 "Add ``DEBUG=1`` and/or ``V=1`` to the make command to allow interactive "
 "debugging and verbose output. If this is not enough, see the next section. "
 "``V=1`` will be propagated down into the make jobs in the guest."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:877
+#: ../../../devel/testing/main.rst:912
 msgid "Manual invocation"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:879
+#: ../../../devel/testing/main.rst:914
 msgid ""
 "Each guest script is an executable script with the same command line "
 "options. For example to work with the netbsd guest, use ``$QEMU_SRC/tests/vm/"
 "netbsd``:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:882
+#: ../../../devel/testing/main.rst:917
 msgid ""
 "$ cd $QEMU_SRC/tests/vm\n"
 "\n"
@@ -1416,64 +1466,64 @@ msgid ""
 "$ ./netbsd --interactive --image /var/tmp/netbsd.img sh"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:901
+#: ../../../devel/testing/main.rst:936
 msgid "Adding new guests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:903
+#: ../../../devel/testing/main.rst:938
 msgid "Please look at existing guest scripts for how to add new guests."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:905
+#: ../../../devel/testing/main.rst:940
 msgid ""
 "Most importantly, create a subclass of BaseVM and implement "
 "``build_image()`` method and define ``BUILD_SCRIPT``, then finally call "
 "``basevm.main()`` from the script's ``main()``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:909
+#: ../../../devel/testing/main.rst:944
 msgid ""
 "Usually in ``build_image()``, a template image is downloaded from a "
 "predefined URL. ``BaseVM._download_with_cache()`` takes care of the cache "
 "and the checksum, so consider using it."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:913
+#: ../../../devel/testing/main.rst:948
 msgid ""
 "Once the image is downloaded, users, SSH server and QEMU build deps should "
 "be set up:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:916
+#: ../../../devel/testing/main.rst:951
 msgid "Root password set to ``BaseVM.ROOT_PASS``"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:917
+#: ../../../devel/testing/main.rst:952
 msgid ""
 "User ``BaseVM.GUEST_USER`` is created, and password set to ``BaseVM."
 "GUEST_PASS``"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:919
+#: ../../../devel/testing/main.rst:954
 msgid ""
 "SSH service is enabled and started on boot, ``$QEMU_SRC/tests/keys/id_rsa."
 "pub`` is added to ssh's ``authorized_keys`` file of both root and the normal "
 "user"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:922
+#: ../../../devel/testing/main.rst:957
 msgid ""
 "DHCP client service is enabled and started on boot, so that it can "
 "automatically configure the virtio-net-pci NIC and communicate with QEMU "
 "user net (10.0.2.2)"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:925
+#: ../../../devel/testing/main.rst:960
 msgid ""
 "Necessary packages are installed to untar the source tarball and build QEMU"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:928
+#: ../../../devel/testing/main.rst:963
 msgid ""
 "Write a proper ``BUILD_SCRIPT`` template, which should be a shell script "
 "that untars a raw virtio-blk block device, which is the tarball data blob of "
@@ -1481,58 +1531,64 @@ msgid ""
 "also recommended."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:934
+#: ../../../devel/testing/main.rst:969
 msgid "Image fuzzer testing"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:936
+#: ../../../devel/testing/main.rst:971
 msgid ""
 "An image fuzzer was added to exercise format drivers. Currently only qcow2 "
 "is supported. To start the fuzzer, run"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:939
+#: ../../../devel/testing/main.rst:974
 msgid ""
 "tests/image-fuzzer/runner.py -c '[[\"qemu-img\", \"info\", \"$test_img\"]]' /"
 "tmp/test qcow2"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:943
+#: ../../../devel/testing/main.rst:978
 msgid ""
 "Alternatively, some command different from ``qemu-img info`` can be tested, "
 "by changing the ``-c`` option."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:947
+#: ../../../devel/testing/main.rst:982
 msgid "Functional tests using Python"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:949
+#: ../../../devel/testing/main.rst:984
 msgid ""
 "A functional test focuses on the functional requirement of the software, "
 "attempting to find errors like incorrect functions, interface errors, "
 "behavior errors, and initialization and termination errors [3]_."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:953
+#: ../../../devel/testing/main.rst:988
 msgid ""
 "The ``tests/functional`` directory hosts functional tests written in Python. "
 "You can run the functional tests simply by executing:"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:956
+#: ../../../devel/testing/main.rst:991
 msgid "make check-functional"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:960
+#: ../../../devel/testing/main.rst:995
 msgid "See :ref:`checkfunctional-ref` for more details."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:965
+#: ../../../devel/testing/main.rst:997
+msgid ""
+"The harness for the functional tests also honours the ``TIMEOUT_MULTIPLIER`` "
+"environment variable."
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1003
 msgid "Testing with \"make check-tcg\""
 msgstr ""
 
-#: ../../../devel/testing/main.rst:967
+#: ../../../devel/testing/main.rst:1005
 msgid ""
 "The check-tcg tests are intended for simple smoke tests of both linux-user "
 "and softmmu TCG functionality. However to build test programs for guest "
@@ -1540,11 +1596,11 @@ msgid ""
 "supports cross compilers you can do something as simple as::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:973
+#: ../../../devel/testing/main.rst:1011
 msgid "apt install gcc-aarch64-linux-gnu"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:975
+#: ../../../devel/testing/main.rst:1013
 msgid ""
 "The configure script will automatically pick up their presence. Sometimes "
 "compilers have slightly odd names so the availability of them can be "
@@ -1552,17 +1608,17 @@ msgid ""
 "in question, for example::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:980
+#: ../../../devel/testing/main.rst:1018
 msgid "$(configure) --cross-cc-aarch64=aarch64-cc"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:982
+#: ../../../devel/testing/main.rst:1020
 msgid ""
 "There is also a ``--cross-cc-cflags-ARCH`` flag in case additional compiler "
 "flags are needed to build for a given target."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:985
+#: ../../../devel/testing/main.rst:1023
 msgid ""
 "If you have the ability to run containers as the user the build system will "
 "automatically use them where no system compiler is available. For "
@@ -1574,41 +1630,41 @@ msgid ""
 "the LTS distros we support for QEMU itself."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:995
+#: ../../../devel/testing/main.rst:1033
 msgid "See :ref:`container-ref` for more details."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:998
+#: ../../../devel/testing/main.rst:1036
 msgid "Running subset of tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1000
+#: ../../../devel/testing/main.rst:1038
 msgid "You can build the tests for one architecture::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1002
+#: ../../../devel/testing/main.rst:1040
 msgid "make build-tcg-tests-$TARGET"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1004
+#: ../../../devel/testing/main.rst:1042
 msgid "And run with::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1006
+#: ../../../devel/testing/main.rst:1044
 msgid "make run-tcg-tests-$TARGET"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1008
+#: ../../../devel/testing/main.rst:1046
 msgid ""
 "Adding ``V=1`` to the invocation will show the details of how to invoke QEMU "
 "for the test which is useful for debugging tests."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1012
+#: ../../../devel/testing/main.rst:1050
 msgid "Running individual tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1014
+#: ../../../devel/testing/main.rst:1052
 msgid ""
 "Tests can also be run directly from the test build directory. If you run "
 "``make help`` from the test build directory you will get a list of all the "
@@ -1616,21 +1672,21 @@ msgid ""
 "tests, for example::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1019
+#: ../../../devel/testing/main.rst:1057
 msgid "make run-plugin-test-mmap-with-libinline.so"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1021
+#: ../../../devel/testing/main.rst:1059
 msgid ""
 "will run the mmap test with the ``libinline.so`` TCG plugin. The gdbstub "
 "tests also re-use the test binaries but while exercising gdb."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1025
+#: ../../../devel/testing/main.rst:1063
 msgid "TCG test dependencies"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1027
+#: ../../../devel/testing/main.rst:1065
 msgid ""
 "The TCG tests are deliberately very light on dependencies and are either "
 "totally bare with minimal gcc lib support (for system-mode tests) or just "
@@ -1638,21 +1694,21 @@ msgid ""
 "work with additional libraries can be challenging."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1033
+#: ../../../devel/testing/main.rst:1071
 msgid "Other TCG Tests"
 msgstr "其他 TCG 測試"
 
-#: ../../../devel/testing/main.rst:1035
+#: ../../../devel/testing/main.rst:1073
 msgid ""
 "There are a number of out-of-tree test suites that are used for more "
 "extensive testing of processor features."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1039
+#: ../../../devel/testing/main.rst:1077
 msgid "KVM Unit Tests"
 msgstr "KVM 單元測試"
 
-#: ../../../devel/testing/main.rst:1041
+#: ../../../devel/testing/main.rst:1079
 msgid ""
 "The KVM unit tests are designed to run as a Guest OS under KVM but there is "
 "no reason why they can't exercise the TCG as well. It provides a minimal OS "
@@ -1660,15 +1716,15 @@ msgid ""
 "a special device::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1046
+#: ../../../devel/testing/main.rst:1084
 msgid "https://git.kernel.org/pub/scm/virt/kvm/kvm-unit-tests.git"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1049
+#: ../../../devel/testing/main.rst:1087
 msgid "Linux Test Project"
 msgstr "Linux 測試專案"
 
-#: ../../../devel/testing/main.rst:1051
+#: ../../../devel/testing/main.rst:1089
 msgid ""
 "The LTP is focused on exercising the syscall interface of a Linux kernel. It "
 "checks that syscalls behave as documented and strives to exercise as many "
@@ -1676,46 +1732,46 @@ msgid ""
 "QEMU's linux-user code::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1056
+#: ../../../devel/testing/main.rst:1094
 msgid "https://linux-test-project.github.io/"
 msgstr "https://linux-test-project.github.io/"
 
-#: ../../../devel/testing/main.rst:1059
+#: ../../../devel/testing/main.rst:1097
 msgid "GCC gcov support"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1061
+#: ../../../devel/testing/main.rst:1099
 msgid ""
 "``gcov`` is a GCC tool to analyze the testing coverage by instrumenting the "
 "tested code. To use it, configure QEMU with ``--enable-gcov`` option and "
 "build. Then run the tests as usual."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1065
+#: ../../../devel/testing/main.rst:1103
 msgid ""
 "If you want to gather coverage information on a single test the ``make clean-"
 "gcda`` target can be used to delete any existing coverage information before "
 "running a single test."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1069
+#: ../../../devel/testing/main.rst:1107
 msgid ""
 "You can generate a HTML coverage report by executing ``make coverage-html`` "
 "which will create ``meson-logs/coveragereport/index.html``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1073
+#: ../../../devel/testing/main.rst:1111
 msgid ""
 "Further analysis can be conducted by running the ``gcov`` command directly "
 "on the various .gcda output files. Please read the ``gcov`` documentation "
 "for more information."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1078
+#: ../../../devel/testing/main.rst:1116
 msgid "Flaky tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1080
+#: ../../../devel/testing/main.rst:1118
 msgid ""
 "A flaky test is defined as a test that exhibits both a passing and a failing "
 "result with the same code on different runs. Some usual reasons for an "
@@ -1723,34 +1779,34 @@ msgid ""
 "dependency [4]_."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1085
+#: ../../../devel/testing/main.rst:1123
 msgid ""
 "In QEMU, tests that are identified to be flaky are normally disabled by "
 "default. Set the QEMU_TEST_FLAKY_TESTS environment variable before running "
 "the tests to enable them."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1090
+#: ../../../devel/testing/main.rst:1128
 msgid "References"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1092
+#: ../../../devel/testing/main.rst:1130
 msgid "Sommerville, Ian (2016). Software Engineering. p. 233."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1093
+#: ../../../devel/testing/main.rst:1131
 msgid ""
 "Pressman, Roger S. & Maxim, Bruce R. (2020). Software Engineering, A "
 "Practitioner’s Approach. p. 48, 376, 378, 381."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1095
+#: ../../../devel/testing/main.rst:1133
 msgid ""
 "Pressman, Roger S. & Maxim, Bruce R. (2020). Software Engineering, A "
 "Practitioner’s Approach. p. 388."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1097
+#: ../../../devel/testing/main.rst:1135
 msgid ""
 "Luo, Qingzhou, et al. An empirical analysis of flaky tests. Proceedings of "
 "the 22nd ACM SIGSOFT International Symposium on Foundations of Software "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-06-01 14:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,7 +70,7 @@ msgstr ""
 #: ../../../system/qemu-block-drivers.rst.inc:305
 #: ../../../system/qemu-block-drivers.rst.inc:335
 #: ../../../system/qemu-block-drivers.rst.inc:348
-#: ../../../system/qemu-block-drivers.rst.inc:928
+#: ../../../system/qemu-block-drivers.rst.inc:844
 msgid "Supported options:"
 msgstr ""
 
@@ -881,196 +881,60 @@ msgid ""
 msgstr ""
 
 #: ../../../system/qemu-block-drivers.rst.inc:669
-msgid "GlusterFS disk images"
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:671
-msgid "GlusterFS is a user space distributed file system."
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:673
-msgid "You can boot from the GlusterFS disk image with the command:"
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:675
-msgid "URI:"
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:698
-msgid ""
-"|qemu_system| -drive file=gluster[+TYPE]://[HOST}[:PORT]]/VOLUME/PATH\n"
-"                             [?socket=...][,file.debug=9][,file.logfile=...]"
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:682
-msgid "JSON:"
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:705
-msgid ""
-"|qemu_system| 'json:{\"driver\":\"qcow2\",\n"
-"                         \"file\":{\"driver\":\"gluster\",\n"
-"                                  \"volume\":\"testvol\",\"path\":\"a.img\","
-"\"debug\":9,\"logfile\":\"...\",\n"
-"                                  \"server\":[{\"type\":\"tcp\",\"host\":"
-"\"...\",\"port\":\"...\"},\n"
-"                                            {\"type\":\"unix\",\"socket\":"
-"\"...\"}]}}'"
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:692
-msgid "*gluster* is the protocol."
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:694
-msgid ""
-"*TYPE* specifies the transport type used to connect to gluster management "
-"daemon (glusterd). Valid transport types are tcp and unix. In the URI form, "
-"if a transport type isn't specified, then tcp type is assumed."
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:699
-msgid ""
-"*HOST* specifies the server where the volume file specification for the "
-"given volume resides. This can be either a hostname or an ipv4 address. If "
-"transport type is unix, then *HOST* field should not be specified. Instead "
-"*socket* field needs to be populated with the path to unix domain socket."
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:705
-msgid ""
-"*PORT* is the port number on which glusterd is listening. This is optional "
-"and if not specified, it defaults to port 24007. If the transport type is "
-"unix, then *PORT* should not be specified."
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:709
-msgid ""
-"*VOLUME* is the name of the gluster volume which contains the disk image."
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:711
-msgid ""
-"*PATH* is the path to the actual disk image that resides on gluster volume."
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:713
-msgid ""
-"*debug* is the logging level of the gluster protocol driver. Debug levels "
-"are 0-9, with 9 being the most verbose, and 0 representing no debugging "
-"output. The default level is 4. The current logging levels defined in the "
-"gluster source are 0 - None, 1 - Emergency, 2 - Alert, 3 - Critical, 4 - "
-"Error, 5 - Warning, 6 - Notice, 7 - Info, 8 - Debug, 9 - Trace"
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:719
-msgid ""
-"*logfile* is a commandline option to mention log file path which helps in "
-"logging to the specified file and also help in persisting the gfapi logs. "
-"The default is stderr."
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:723
-msgid "You can create a GlusterFS disk image with the command:"
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:746
-msgid "qemu-img create gluster://HOST/VOLUME/PATH SIZE"
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:729
-msgid "Examples"
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:752
-msgid ""
-"|qemu_system| -drive file=gluster://1.2.3.4/testvol/a.img\n"
-"|qemu_system| -drive file=gluster+tcp://1.2.3.4/testvol/a.img\n"
-"|qemu_system| -drive file=gluster+tcp://1.2.3.4:24007/testvol/dir/a.img\n"
-"|qemu_system| -drive file=gluster+tcp://[1:2:3:4:5:6:7:8]/testvol/dir/a.img\n"
-"|qemu_system| -drive file=gluster+tcp://[1:2:3:4:5:6:7:8]:24007/testvol/dir/"
-"a.img\n"
-"|qemu_system| -drive file=gluster+tcp://server.domain.com:24007/testvol/dir/"
-"a.img\n"
-"|qemu_system| -drive file=gluster+unix:///testvol/dir/a.img?socket=/tmp/"
-"glusterd.socket\n"
-"|qemu_system| -drive file=gluster://1.2.3.4/testvol/a.img,file.debug=9,file."
-"logfile=/var/log/qemu-gluster.log\n"
-"|qemu_system| 'json:{\"driver\":\"qcow2\",\n"
-"                         \"file\":{\"driver\":\"gluster\",\n"
-"                                  \"volume\":\"testvol\",\"path\":\"a."
-"img\",\n"
-"                                  \"debug\":9,\"logfile\":\"/var/log/qemu-"
-"gluster.log\",\n"
-"                                  \"server\":[{\"type\":\"tcp\",\"host\":"
-"\"1.2.3.4\",\"port\":24007},\n"
-"                                            {\"type\":\"unix\",\"socket\":\"/"
-"var/run/glusterd.socket\"}]}}'\n"
-"|qemu_system| -drive driver=qcow2,file.driver=gluster,file.volume=testvol,"
-"file.path=/path/a.img,\n"
-"                                     file.debug=9,file.logfile=/var/log/qemu-"
-"gluster.log,\n"
-"                                     file.server.0.type=tcp,file.server.0."
-"host=1.2.3.4,file.server.0.port=24007,\n"
-"                                     file.server.1.type=unix,file.server.1."
-"socket=/var/run/glusterd.socket"
-msgstr ""
-
-#: ../../../system/qemu-block-drivers.rst.inc:753
 msgid "Secure Shell (ssh) disk images"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:755
+#: ../../../system/qemu-block-drivers.rst.inc:671
 msgid ""
 "You can access disk images located on a remote ssh server by using the ssh "
 "protocol:"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:779
+#: ../../../system/qemu-block-drivers.rst.inc:695
 msgid ""
 "|qemu_system| -drive file=ssh://[USER@]SERVER[:PORT]/PATH[?"
 "host_key_check=HOST_KEY_CHECK]"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:762
-#: ../../../system/qemu-block-drivers.rst.inc:855
+#: ../../../system/qemu-block-drivers.rst.inc:678
+#: ../../../system/qemu-block-drivers.rst.inc:771
 msgid "Alternative syntax using properties:"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:785
+#: ../../../system/qemu-block-drivers.rst.inc:701
 msgid ""
 "|qemu_system| -drive file.driver=ssh[,file.user=USER],file.host=SERVER[,file."
 "port=PORT],file.path=PATH[,file.host_key_check=HOST_KEY_CHECK]"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:768
+#: ../../../system/qemu-block-drivers.rst.inc:684
 msgid "*ssh* is the protocol."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:770
+#: ../../../system/qemu-block-drivers.rst.inc:686
 msgid ""
 "*USER* is the remote user.  If not specified, then the local username is "
 "tried."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:773
+#: ../../../system/qemu-block-drivers.rst.inc:689
 msgid ""
 "*SERVER* specifies the remote ssh server.  Any ssh server can be used, but "
 "it must implement the sftp-server protocol.  Most Unix/Linux systems should "
 "work without requiring any extra configuration."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:777
+#: ../../../system/qemu-block-drivers.rst.inc:693
 msgid ""
 "*PORT* is the port number on which sshd is listening.  By default the "
 "standard ssh port (22) is used."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:780
+#: ../../../system/qemu-block-drivers.rst.inc:696
 msgid "*PATH* is the path to the disk image."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:782
+#: ../../../system/qemu-block-drivers.rst.inc:698
 msgid ""
 "The optional *HOST_KEY_CHECK* parameter controls how the remote host's key "
 "is checked.  The default is ``yes`` which means to use the local ``.ssh/"
@@ -1082,24 +946,24 @@ msgid ""
 "must be given as a hex encoded string::"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:792
+#: ../../../system/qemu-block-drivers.rst.inc:708
 msgid "host_key_check=sha256:04ce2ae89ff4295a6b9c4111640bdcb3297858ee55cb434d9dd88796e93aa795"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:794
+#: ../../../system/qemu-block-drivers.rst.inc:710
 msgid ""
 "The key string may optionally contain \":\" separators between each pair of "
 "hex digits."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:797
+#: ../../../system/qemu-block-drivers.rst.inc:713
 msgid ""
 "The ``$HOME/.ssh/known_hosts`` file contains the base64 encoded host keys. "
 "These can be converted into the format needed for QEMU using a command such "
 "as::"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:801
+#: ../../../system/qemu-block-drivers.rst.inc:717
 msgid ""
 "$ for key in `grep 10.33.8.112 known_hosts | awk '{print $3}'`\n"
 "  do\n"
@@ -1110,20 +974,20 @@ msgid ""
 "  d36420137bcbd101209ef70c3b15dc07362fbe0fa53c5b135eba6e6afa82f0ce  -"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:809
+#: ../../../system/qemu-block-drivers.rst.inc:725
 msgid ""
 "Note that there can be multiple keys present per host, each with different "
 "key ciphers. Care is needed to pick the key fingerprint that matches the "
 "cipher QEMU will negotiate with the remote server."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:813
+#: ../../../system/qemu-block-drivers.rst.inc:729
 msgid ""
 "Currently authentication must be done using ssh-agent.  Other authentication "
 "methods may be supported in future."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:816
+#: ../../../system/qemu-block-drivers.rst.inc:732
 msgid ""
 "Note: Many ssh servers do not support an ``fsync``-style operation. The ssh "
 "driver cannot guarantee that disk flush requests are obeyed, and this causes "
@@ -1131,20 +995,20 @@ msgid ""
 "writes.  The driver will print a warning when ``fsync`` is not supported:"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:824
+#: ../../../system/qemu-block-drivers.rst.inc:740
 msgid "warning: ssh server ssh.example.com:22 does not support fsync"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:826
+#: ../../../system/qemu-block-drivers.rst.inc:742
 msgid ""
 "With sufficiently new versions of libssh and OpenSSH, ``fsync`` is supported."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:830
+#: ../../../system/qemu-block-drivers.rst.inc:746
 msgid "NVMe disk images"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:832
+#: ../../../system/qemu-block-drivers.rst.inc:748
 msgid ""
 "NVM Express (NVMe) storage controllers can be accessed directly by a "
 "userspace driver in QEMU.  This bypasses the host kernel file system and "
@@ -1154,20 +1018,20 @@ msgid ""
 "aio."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:838
+#: ../../../system/qemu-block-drivers.rst.inc:754
 msgid ""
 "The controller will be exclusively used by the QEMU process once started. To "
 "be able to share storage between multiple VMs and other applications on the "
 "host, please use the file based protocols."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:842
+#: ../../../system/qemu-block-drivers.rst.inc:758
 msgid ""
 "Before starting QEMU, bind the host NVMe controller to the host vfio-pci "
 "driver.  For example:"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:866
+#: ../../../system/qemu-block-drivers.rst.inc:782
 msgid ""
 "# modprobe vfio-pci\n"
 "# lspci -n -s 0000:06:0d.0\n"
@@ -1178,27 +1042,27 @@ msgid ""
 "# |qemu_system| -drive file=nvme://HOST:BUS:SLOT.FUNC/NAMESPACE"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:878
+#: ../../../system/qemu-block-drivers.rst.inc:794
 msgid ""
 "|qemu_system| -drive file.driver=nvme,file.device=HOST:BUS:SLOT.FUNC,file."
 "namespace=NAMESPACE"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:861
+#: ../../../system/qemu-block-drivers.rst.inc:777
 msgid ""
 "*HOST*:*BUS*:*SLOT*.\\ *FUNC* is the NVMe controller's PCI device address on "
 "the host."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:864
+#: ../../../system/qemu-block-drivers.rst.inc:780
 msgid "*NAMESPACE* is the NVMe namespace number, starting from 1."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:867
+#: ../../../system/qemu-block-drivers.rst.inc:783
 msgid "Disk image file locking"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:869
+#: ../../../system/qemu-block-drivers.rst.inc:785
 msgid ""
 "By default, QEMU tries to protect image files from unexpected concurrent "
 "access, as long as it's supported by the block protocol driver and host "
@@ -1207,14 +1071,14 @@ msgid ""
 "but the first one will get an error."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:875
+#: ../../../system/qemu-block-drivers.rst.inc:791
 msgid ""
 "This feature is currently supported by the file protocol on Linux with the "
 "Open File Descriptor (OFD) locking API, and can be configured to fall back "
 "to POSIX locking if the POSIX host doesn't support Linux OFD locking."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:879
+#: ../../../system/qemu-block-drivers.rst.inc:795
 msgid ""
 "To explicitly enable image locking, specify \"locking=on\" in the file "
 "protocol driver options. If OFD locking is not possible, a warning will be "
@@ -1223,14 +1087,14 @@ msgid ""
 "due to the shortcomings of the POSIX locking API."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:885
+#: ../../../system/qemu-block-drivers.rst.inc:801
 msgid ""
 "QEMU transparently handles lock handover during shared storage migration.  "
 "For shared virtual disk images between multiple VMs, the \"share-rw\" device "
 "option should be used."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:889
+#: ../../../system/qemu-block-drivers.rst.inc:805
 msgid ""
 "By default, the guest has exclusive write access to its disk image. If the "
 "guest can safely share the disk image with other writers the ``-device ...,"
@@ -1239,14 +1103,14 @@ msgid ""
 "accesses to avoid corruption."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:895
+#: ../../../system/qemu-block-drivers.rst.inc:811
 msgid ""
 "Note that share-rw=on only declares the guest's ability to share the disk. "
 "Some QEMU features, such as image file formats, require exclusive write "
 "access to the disk image and this is unaffected by the share-rw=on option."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:899
+#: ../../../system/qemu-block-drivers.rst.inc:815
 msgid ""
 "Alternatively, locking can be fully disabled by \"locking=off\" block device "
 "option. In the command line, the option is usually in the form of \"file."
@@ -1254,13 +1118,13 @@ msgid ""
 "under a format driver. For example:"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:906
+#: ../../../system/qemu-block-drivers.rst.inc:822
 msgid ""
 "-blockdev driver=qcow2,file.filename=/path/to/image,file.locking=off,file."
 "driver=file"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:908
+#: ../../../system/qemu-block-drivers.rst.inc:824
 msgid ""
 "To check if image locking is active, check the output of the \"lslocks\" "
 "command on host and see if there are locks held by the QEMU process on the "
@@ -1269,17 +1133,17 @@ msgid ""
 "by the running block driver."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:915
+#: ../../../system/qemu-block-drivers.rst.inc:831
 msgid "Filter drivers"
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:917
+#: ../../../system/qemu-block-drivers.rst.inc:833
 msgid ""
 "QEMU supports several filter drivers, which don't store any data, but "
 "perform some additional tasks, hooking io requests."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:923
+#: ../../../system/qemu-block-drivers.rst.inc:839
 msgid ""
 "The preallocate filter driver is intended to be inserted between format and "
 "protocol nodes and preallocates some additional space (expanding the "
@@ -1287,12 +1151,12 @@ msgid ""
 "systems with slow allocation."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:933
+#: ../../../system/qemu-block-drivers.rst.inc:849
 msgid ""
 "On preallocation, align the file length to this value (in bytes), default 1M."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:938
+#: ../../../system/qemu-block-drivers.rst.inc:854
 msgid "How much to preallocate (in bytes), default 128M."
 msgstr ""
 

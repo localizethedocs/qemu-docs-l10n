@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-23 09:30+0000\n"
+"POT-Creation-Date: 2026-06-01 14:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -473,6 +473,7 @@ msgstr ""
 #: ../../../../tests/qtest/libqtest.h:1158
 #: ../../../../tests/qtest/libqtest.h:1166
 #: ../../../../tests/qtest/libqtest.h:1173
+#: ../../../../tests/qtest/libqtest.h:1186
 msgid "**Parameters**"
 msgstr ""
 
@@ -593,6 +594,7 @@ msgstr ""
 #: ../../../../tests/qtest/libqtest.h:1122
 #: ../../../../tests/qtest/libqtest.h:1138
 #: ../../../../tests/qtest/libqtest.h:1174
+#: ../../../../tests/qtest/libqtest.h:1185
 msgid "**Description**"
 msgstr ""
 
@@ -2042,4 +2044,116 @@ msgstr ""
 
 #: ../../../../tests/qtest/libqtest.h:1177
 msgid "true if the image has been created successfully."
+msgstr ""
+
+#: ../../../../tests/qtest/libqtest.h:1188
+msgid "``const char *domain``"
+msgstr ""
+
+#: ../../../../tests/qtest/libqtest.h:1183
+msgid "The logging domain"
+msgstr ""
+
+#: ../../../../tests/qtest/libqtest.h:1184
+msgid ""
+"Read the QTEST_LOG environment variable and return whether the specified "
+"domain is enabled for verbose logging. Enable specific logging domains with "
+"QTEST_LOG=<domain> or use QTEST_LOG=-<domain> to enable all domains except "
+"for the specific one."
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:97
+msgid "QTest valid environment variables"
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:99
+msgid ""
+"A few environment variables are used to point QTest at artifacts to be used "
+"in the tests, mostly QEMU binaries or to control the behavior of the tests. "
+"Environment variables are set automatically by the build system, but it can "
+"be useful to alter them when running tests manually. The following are the "
+"environment variables recognized by QTest, not including test-specific ones:"
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:106
+msgid "``QTEST_QEMU_BINARY``"
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:107
+msgid "The QEMU binary itself (generally a ``qemu-system-<arch>`` binary)."
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:109
+msgid "``QTEST_QEMU_ARGS``"
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:110
+msgid "Extra arguments for the QEMU command line."
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:112
+msgid "``QTEST_QEMU_IMG``"
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:113
+msgid "The ``qemu-img`` binary."
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:115
+msgid "``QTEST_QEMU_STORAGE_DAEMON_BINARY``"
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:116
+msgid "The ``qemu-storage-daemon`` binary."
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:118
+msgid "``QTEST_STOP``"
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:119
+msgid ""
+"Instruct QTest to stop the QEMU process with SIGSTOP before continuing "
+"execution."
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:122
+msgid "``QTEST_LOG``"
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:123
+msgid ""
+"Comma-separated list of log domains to allow verbose logging. The currently-"
+"defined log domains are:"
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:126
+msgid "``qmp``"
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:127
+msgid "controls verbose output of QMP command invocations."
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:129
+msgid "``qtest``"
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:130
+msgid "controls verbose output of QTest operations."
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:132
+msgid "``test``"
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:133
+msgid "controls verbose output of tests."
+msgstr ""
+
+#: ../../../devel/testing/qtest.rst:135
+msgid ""
+"A dash ``-`` used in front of a log domain name has the effect of enabling "
+"verbose logging for all other domains while keeping it disabled for the "
+"specified domain."
 msgstr ""
