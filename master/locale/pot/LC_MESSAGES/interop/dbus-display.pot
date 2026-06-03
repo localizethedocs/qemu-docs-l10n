@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-06-01 14:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,24 +17,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../../interop/dbus-display.rst:2
+#: ../../../interop/dbus-display.rst:4
 msgid "D-Bus display"
 msgstr ""
 
-#: ../../../interop/dbus-display.rst:4
+#: ../../../interop/dbus-display.rst:6
 msgid ""
 "QEMU can export the VM display through D-Bus (when started with ``-display "
 "dbus``), to allow out-of-process UIs, remote protocol servers or other "
 "interactive display usages."
 msgstr ""
 
-#: ../../../interop/dbus-display.rst:8
+#: ../../../interop/dbus-display.rst:10
 msgid ""
 "Various specialized D-Bus interfaces are available on different object paths "
 "under ``/org/qemu/Display1/``, depending on the VM configuration."
 msgstr ""
 
-#: ../../../interop/dbus-display.rst:11
+#: ../../../interop/dbus-display.rst:13
 msgid ""
 "QEMU also implements the standard interfaces, such as `org.freedesktop.DBus."
 "Introspectable <https://dbus.freedesktop.org/doc/dbus-specification."
@@ -993,15 +993,31 @@ msgid ""
 "they are communicating."
 msgstr ""
 
-#: ../../../interop/dbus-display.rst:26
-msgid "Sphinx 4 is required to build D-Bus documentation."
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Provides encoding information for virtual console chardevs."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This interface is present on chardev objects that are virtual consoles, and "
+"exposes the character encoding used by the guest."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"The character encoding used by the virtual console (matching "
+"``ChardevVCEncoding``): ``cp437`` or ``utf8``."
 msgstr ""
 
 #: ../../../interop/dbus-display.rst:28
-msgid "This is the content of ``ui/dbus-display1.xml``:"
+msgid "Sphinx 4 is required to build D-Bus documentation."
 msgstr ""
 
 #: ../../../interop/dbus-display.rst:30
+msgid "This is the content of ``ui/dbus-display1.xml``:"
+msgstr ""
+
+#: ../../../interop/dbus-display.rst:32
 msgid ""
 "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
 "<node>\n"
@@ -2193,6 +2209,24 @@ msgid ""
 "property)\n"
 "    -->\n"
 "    <property name=\"Interfaces\" type=\"as\" access=\"read\"/>\n"
+"  </interface>\n"
+"\n"
+"  <!--\n"
+"      org.qemu.Display1.Chardev.VCEncoding:\n"
+"\n"
+"      Provides encoding information for virtual console chardevs.\n"
+"\n"
+"      This interface is present on chardev objects that are virtual\n"
+"      consoles, and exposes the character encoding used by the guest.\n"
+"  -->\n"
+"  <interface name=\"org.qemu.Display1.Chardev.VCEncoding\">\n"
+"    <!--\n"
+"        Encoding:\n"
+"\n"
+"        The character encoding used by the virtual console\n"
+"        (matching ``ChardevVCEncoding``): ``cp437`` or ``utf8``.\n"
+"    -->\n"
+"    <property name=\"Encoding\" type=\"s\" access=\"read\"/>\n"
 "  </interface>\n"
 "</node>\n"
 msgstr ""
