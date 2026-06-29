@@ -1,0 +1,592 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/migration/CPR.rst:2
+msgid "CheckPoint and Restart (CPR)"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:4
+msgid ""
+"CPR is the umbrella name for a set of migration modes in which the VM is "
+"migrated to a new QEMU instance on the same host.  It is intended for use "
+"when the goal is to update host software components that run the VM, such as "
+"QEMU or even the host kernel.  At this time, the cpr-reboot, cpr-transfer, "
+"and cpr-exec modes are available."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:10
+msgid ""
+"Because QEMU is restarted on the same host, with access to the same local "
+"devices, CPR is allowed in certain cases where normal migration would be "
+"blocked.  However, the user must not modify the contents of guest block "
+"devices between quitting old QEMU and starting new QEMU."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:15
+msgid ""
+"CPR unconditionally stops VM execution before memory is saved, and thus does "
+"not depend on any form of dirty page tracking."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:19
+msgid "cpr-reboot mode"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:21
+msgid ""
+"In this mode, QEMU stops the VM, and writes VM state to the migration URI, "
+"which will typically be a file.  After quitting QEMU, the user resumes by "
+"running QEMU with the ``-incoming`` option.  Because the old and new QEMU "
+"instances are not active concurrently, the URI cannot be a type that streams "
+"data from one instance to the other."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:27
+msgid ""
+"Guest RAM can be saved in place if backed by shared memory, or can be copied "
+"to a file.  The former is more efficient and is therefore preferred."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:31
+msgid ""
+"After state and memory are saved, the user may update userland host software "
+"before restarting QEMU and resuming the VM.  Further, if the RAM is backed "
+"by persistent shared memory, such as a DAX device, then the user may reboot "
+"to a new host kernel before restarting QEMU."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:36
+msgid ""
+"This mode supports VFIO devices provided the user first puts the guest in "
+"the suspended runstate, such as by issuing the ``guest-suspend-ram`` command "
+"to the QEMU guest agent.  The agent must be pre-installed in the guest, and "
+"the guest must support suspend to RAM.  Beware that suspension can take a "
+"few seconds, so the user should poll to see the suspended state before "
+"proceeding with the CPR operation."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:45 ../../../devel/migration/CPR.rst:176
+#: ../../../devel/migration/CPR.rst:354
+msgid "Usage"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:47
+msgid ""
+"It is recommended that guest RAM be backed with some type of shared memory, "
+"such as ``memory-backend-file,share=on``, and that the ``x-ignore-shared`` "
+"capability be set.  This combination allows memory to be saved in place.  "
+"Otherwise, after QEMU stops the VM, all guest RAM is copied to the migration "
+"URI."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:53 ../../../devel/migration/CPR.rst:185
+#: ../../../devel/migration/CPR.rst:365
+msgid "Outgoing:"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:54 ../../../devel/migration/CPR.rst:64
+msgid "Set the migration mode parameter to ``cpr-reboot``."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:55 ../../../devel/migration/CPR.rst:65
+msgid "Set the ``x-ignore-shared`` capability if desired."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:56
+msgid ""
+"Issue the ``migrate`` command.  It is recommended the URI be a ``file`` "
+"type, but one can use other types such as ``exec``, provided the command "
+"captures all the data from the outgoing side, and provides all the data to "
+"the incoming side."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:60
+msgid "Quit when QEMU reaches the postmigrate state."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:62 ../../../devel/migration/CPR.rst:190
+#: ../../../devel/migration/CPR.rst:373
+msgid "Incoming:"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:63
+msgid "Start QEMU with the ``-incoming defer`` option."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:66
+msgid "Issue the ``migrate-incoming`` command."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:67 ../../../devel/migration/CPR.rst:192
+#: ../../../devel/migration/CPR.rst:376
+msgid ""
+"If the VM was running when the outgoing ``migrate`` command was issued, then "
+"QEMU automatically resumes VM execution."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:71
+msgid "Example 1"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:74
+msgid ""
+"# qemu-kvm -monitor stdio\n"
+"-object memory-backend-file,id=ram0,size=4G,mem-path=/dev/dax0.0,align=2M,"
+"share=on -m 4G\n"
+"...\n"
+"\n"
+"(qemu) info status\n"
+"VM status: running\n"
+"(qemu) migrate_set_parameter mode cpr-reboot\n"
+"(qemu) migrate_set_capability x-ignore-shared on\n"
+"(qemu) migrate -d file:vm.state\n"
+"(qemu) info status\n"
+"VM status: paused (postmigrate)\n"
+"(qemu) quit\n"
+"\n"
+"### optionally update kernel and reboot\n"
+"# systemctl kexec\n"
+"kexec_core: Starting new kernel\n"
+"...\n"
+"\n"
+"# qemu-kvm ... -incoming defer\n"
+"(qemu) info status\n"
+"VM status: paused (inmigrate)\n"
+"(qemu) migrate_set_parameter mode cpr-reboot\n"
+"(qemu) migrate_set_capability x-ignore-shared on\n"
+"(qemu) migrate_incoming file:vm.state\n"
+"(qemu) info status\n"
+"VM status: running"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:102
+msgid "Example 2: VFIO"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:105
+msgid ""
+"# qemu-kvm -monitor stdio\n"
+"-object memory-backend-file,id=ram0,size=4G,mem-path=/dev/dax0.0,align=2M,"
+"share=on -m 4G\n"
+"-device vfio-pci, ...\n"
+"-chardev socket,id=qga0,path=qga.sock,server=on,wait=off\n"
+"-device virtserialport,chardev=qga0,name=org.qemu.guest_agent.0\n"
+"...\n"
+"\n"
+"(qemu) info status\n"
+"VM status: running\n"
+"\n"
+"# echo '{\"execute\":\"guest-suspend-ram\"}' | ncat --send-only -U qga.sock\n"
+"\n"
+"(qemu) info status\n"
+"VM status: paused (suspended)\n"
+"(qemu) migrate_set_parameter mode cpr-reboot\n"
+"(qemu) migrate_set_capability x-ignore-shared on\n"
+"(qemu) migrate -d file:vm.state\n"
+"(qemu) info status\n"
+"VM status: paused (postmigrate)\n"
+"(qemu) quit\n"
+"\n"
+"### optionally update kernel and reboot\n"
+"# systemctl kexec\n"
+"kexec_core: Starting new kernel\n"
+"...\n"
+"\n"
+"# qemu-kvm ... -incoming defer\n"
+"(qemu) info status\n"
+"VM status: paused (inmigrate)\n"
+"(qemu) migrate_set_parameter mode cpr-reboot\n"
+"(qemu) migrate_set_capability x-ignore-shared on\n"
+"(qemu) migrate_incoming file:vm.state\n"
+"(qemu) info status\n"
+"VM status: paused (suspended)\n"
+"(qemu) system_wakeup\n"
+"(qemu) info status\n"
+"VM status: running"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:144 ../../../devel/migration/CPR.rst:196
+#: ../../../devel/migration/CPR.rst:428
+msgid "Caveats"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:146
+msgid ""
+"cpr-reboot mode may not be used with postcopy, background-snapshot, or COLO."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:150
+msgid "cpr-transfer mode"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:152
+msgid ""
+"This mode allows the user to transfer a guest to a new QEMU instance on the "
+"same host with minimal guest pause time, by preserving guest RAM in place, "
+"albeit with new virtual addresses in new QEMU.  Devices and their pinned "
+"memory pages are also preserved for VFIO and IOMMUFD."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:157
+msgid ""
+"The user starts new QEMU on the same host as old QEMU, with command- line "
+"arguments to create the same machine, plus the ``-incoming`` option for the "
+"main migration channel, like normal live migration. In addition, the user "
+"adds a second -incoming option with channel type ``cpr``.  This CPR channel "
+"must support file descriptor transfer with SCM_RIGHTS, i.e. it must be a "
+"UNIX domain socket."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:164
+msgid ""
+"To initiate CPR, the user issues a migrate command to old QEMU, adding a "
+"second migration channel of type ``cpr`` in the channels argument.  Old QEMU "
+"stops the VM, saves state to the migration channels, and enters the "
+"postmigrate state.  Execution resumes in new QEMU."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:170
+msgid ""
+"New QEMU reads the CPR channel before opening a monitor, hence the CPR "
+"channel cannot be specified in the list of channels for a migrate-incoming "
+"command.  It may only be specified on the command line."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:178
+msgid "Memory backend objects must have the ``share=on`` attribute."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:180
+msgid ""
+"The VM must be started with the ``-machine aux-ram-share=on`` option.  This "
+"causes implicit RAM blocks (those not described by a memory-backend object) "
+"to be allocated by mmap'ing a memfd. Examples include VGA and ROM."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:186
+msgid "Set the migration mode parameter to ``cpr-transfer``."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:187
+msgid ""
+"Issue the ``migrate`` command, containing a main channel and a cpr channel."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:191
+msgid "Start new QEMU with two ``-incoming`` options."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:198
+msgid ""
+"cpr-transfer mode may not be used with postcopy, background-snapshot, or "
+"COLO."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:201
+msgid "memory-backend-epc is not supported."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:203
+msgid "The main incoming migration channel address cannot be a file type."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:205
+msgid ""
+"If the main incoming channel address is an inet socket, then the port cannot "
+"be 0 (meaning dynamically choose a port)."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:208
+msgid ""
+"When using ``-incoming defer``, you must issue the migrate command to old "
+"QEMU before issuing any monitor commands to new QEMU, because new QEMU "
+"blocks waiting to read from the cpr channel before starting its monitor, and "
+"old QEMU does not write to the channel until the migrate command is issued.  "
+"However, new QEMU does not open and read the main migration channel until "
+"you issue the migrate incoming command."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:216
+msgid "Example 1: incoming channel"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:218
+msgid ""
+"In these examples, we simply restart the same version of QEMU, but in a real "
+"scenario one would start new QEMU on the incoming side. Note that new QEMU "
+"does not print the monitor prompt until old QEMU has issued the migrate "
+"command.  The outgoing side uses QMP because HMP cannot specify a CPR "
+"channel.  Some QMP responses are omitted for brevity."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:227
+msgid ""
+"Outgoing:                             Incoming:\n"
+"\n"
+"# qemu-kvm -qmp stdio\n"
+"-object memory-backend-file,id=ram0,size=4G,\n"
+"mem-path=/dev/shm/ram0,share=on -m 4G\n"
+"-machine memory-backend=ram0\n"
+"-machine aux-ram-share=on\n"
+"...\n"
+"                                      # qemu-kvm -monitor stdio\n"
+"                                      -incoming tcp:0:44444\n"
+"                                      -incoming '{\"channel-type\": "
+"\"cpr\",\n"
+"                                        \"addr\": { \"transport\": "
+"\"socket\",\n"
+"                                        \"type\": \"unix\", \"path\": \"cpr."
+"sock\"}}'\n"
+"                                      ...\n"
+"{\"execute\":\"qmp_capabilities\"}\n"
+"\n"
+"{\"execute\": \"query-status\"}\n"
+"{\"return\": {\"status\": \"running\",\n"
+"            \"running\": true}}\n"
+"\n"
+"{\"execute\":\"migrate-set-parameters\",\n"
+" \"arguments\":{\"mode\":\"cpr-transfer\"}}\n"
+"\n"
+"{\"execute\": \"migrate\", \"arguments\": { \"channels\": [\n"
+"  {\"channel-type\": \"main\",\n"
+"   \"addr\": { \"transport\": \"socket\", \"type\": \"inet\",\n"
+"             \"host\": \"0\", \"port\": \"44444\" }},\n"
+"  {\"channel-type\": \"cpr\",\n"
+"   \"addr\": { \"transport\": \"socket\", \"type\": \"unix\",\n"
+"             \"path\": \"cpr.sock\" }}]}}\n"
+"\n"
+"                                      QEMU 10.0.50 monitor\n"
+"                                      (qemu) info status\n"
+"                                      VM status: running\n"
+"\n"
+"{\"execute\": \"query-status\"}\n"
+"{\"return\": {\"status\": \"postmigrate\",\n"
+"            \"running\": false}}"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:267 ../../../devel/migration/CPR.rst:405
+msgid "Example 2: incoming defer"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:269
+msgid ""
+"This example uses ``-incoming defer`` to hot plug a device before accepting "
+"the main migration channel.  Again note you must issue the migrate command "
+"to old QEMU before you can issue any monitor commands to new QEMU."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:277
+msgid ""
+"Outgoing:                             Incoming:\n"
+"\n"
+"# qemu-kvm -monitor stdio\n"
+"-object memory-backend-file,id=ram0,size=4G,\n"
+"mem-path=/dev/shm/ram0,share=on -m 4G\n"
+"-machine memory-backend=ram0\n"
+"-machine aux-ram-share=on\n"
+"...\n"
+"                                      # qemu-kvm -monitor stdio\n"
+"                                      -incoming defer\n"
+"                                      -incoming '{\"channel-type\": "
+"\"cpr\",\n"
+"                                        \"addr\": { \"transport\": "
+"\"socket\",\n"
+"                                        \"type\": \"unix\", \"path\": \"cpr."
+"sock\"}}'\n"
+"                                      ...\n"
+"{\"execute\":\"qmp_capabilities\"}\n"
+"\n"
+"{\"execute\": \"device_add\",\n"
+" \"arguments\": {\"driver\": \"pcie-root-port\"}}\n"
+"\n"
+"{\"execute\":\"migrate-set-parameters\",\n"
+" \"arguments\":{\"mode\":\"cpr-transfer\"}}\n"
+"\n"
+"{\"execute\": \"migrate\", \"arguments\": { \"channels\": [\n"
+"  {\"channel-type\": \"main\",\n"
+"   \"addr\": { \"transport\": \"socket\", \"type\": \"inet\",\n"
+"             \"host\": \"0\", \"port\": \"44444\" }},\n"
+"  {\"channel-type\": \"cpr\",\n"
+"   \"addr\": { \"transport\": \"socket\", \"type\": \"unix\",\n"
+"             \"path\": \"cpr.sock\" }}]}}\n"
+"\n"
+"                                      QEMU 10.0.50 monitor\n"
+"                                      (qemu) info status\n"
+"                                      VM status: paused (inmigrate)\n"
+"                                      (qemu) device_add pcie-root-port\n"
+"                                      (qemu) migrate_incoming tcp:0:44444\n"
+"                                      (qemu) info status\n"
+"                                      VM status: running\n"
+"\n"
+"{\"execute\": \"query-status\"}\n"
+"{\"return\": {\"status\": \"postmigrate\",\n"
+"            \"running\": false}}"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:320
+msgid "Futures"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:322
+msgid ""
+"cpr-transfer mode is based on a capability to transfer open file descriptors "
+"from old to new QEMU.  In the future, descriptors for vhost, and char "
+"devices could be transferred, preserving those devices and their kernel "
+"state without interruption, even if they do not explicitly support live "
+"migration."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:329
+msgid "cpr-exec mode"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:331
+msgid ""
+"In this mode, QEMU stops the VM, writes VM state to the migration URI, and "
+"directly exec's a new version of QEMU on the same host, replacing the "
+"original process while retaining its PID.  Guest RAM is preserved in place, "
+"albeit with new virtual addresses.  The user completes the migration by "
+"specifying the ``-incoming`` option, and by issuing the ``migrate-incoming`` "
+"command if necessary; see details below."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:339
+msgid ""
+"This mode supports VFIO/IOMMUFD devices by preserving device descriptors and "
+"hence kernel state across the exec, even for devices that do not support "
+"live migration."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:343
+msgid ""
+"Because the old and new QEMU instances are not active concurrently, the URI "
+"cannot be a type that streams data from one instance to the other."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:347
+msgid ""
+"This mode does not require a channel of type ``cpr``.  The information that "
+"is passed over that channel for cpr-transfer mode is instead serialized to a "
+"memfd, the number of the fd is saved in the QEMU_CPR_EXEC_STATE environment "
+"variable during the exec of new QEMU. and new QEMU mmaps the memfd."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:356
+msgid ""
+"Arguments for the new QEMU process are taken from the @cpr-exec-command "
+"parameter.  The first argument should be the path of a new QEMU binary, or a "
+"prefix command that exec's the new QEMU binary, and the arguments should "
+"include the ''-incoming'' option."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:362
+msgid ""
+"Memory backend objects must have the ``share=on`` attribute. The VM must be "
+"started with the ``-machine aux-ram-share=on`` option."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:366
+msgid "Set the migration mode parameter to ``cpr-exec``."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:367
+msgid "Set the ``cpr-exec-command`` parameter."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:368
+msgid ""
+"Issue the ``migrate`` command.  It is recommended that the URI be a ``file`` "
+"type, but one can use other types such as ``exec``, provided the command "
+"captures all the data from the outgoing side, and provides all the data to "
+"the incoming side."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:374
+msgid ""
+"You do not need to explicitly start new QEMU.  It is started as a side "
+"effect of the migrate command above."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:380
+msgid "Example 1: incoming URI"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:382
+msgid ""
+"In these examples, we simply restart the same version of QEMU, but in a real "
+"scenario one would set a new QEMU binary path in cpr-exec-command."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:388
+msgid ""
+"# qemu-kvm -monitor stdio\n"
+"-object memory-backend-memfd,id=ram0,size=4G\n"
+"-machine memory-backend=ram0\n"
+"-machine aux-ram-share=on\n"
+"...\n"
+"\n"
+"QEMU 10.2.50 monitor - type 'help' for more information\n"
+"(qemu) info status\n"
+"VM status: running\n"
+"(qemu) migrate_set_parameter mode cpr-exec\n"
+"(qemu) migrate_set_parameter cpr-exec-command qemu-kvm ... -incoming file:vm."
+"state\n"
+"(qemu) migrate -d file:vm.state\n"
+"(qemu) QEMU 10.2.50 monitor - type 'help' for more information\n"
+"(qemu) info status\n"
+"VM status: running"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:408
+msgid ""
+"# qemu-kvm -monitor stdio\n"
+"-object memory-backend-memfd,id=ram0,size=4G\n"
+"-machine memory-backend=ram0\n"
+"-machine aux-ram-share=on\n"
+"...\n"
+"\n"
+"QEMU 10.2.50 monitor - type 'help' for more information\n"
+"(qemu) info status\n"
+"VM status: running\n"
+"(qemu) migrate_set_parameter mode cpr-exec\n"
+"(qemu) migrate_set_parameter cpr-exec-command qemu-kvm ... -incoming defer\n"
+"(qemu) migrate -d file:vm.state\n"
+"(qemu) QEMU 10.2.50 monitor - type 'help' for more information\n"
+"(qemu) info status\n"
+"status: paused (inmigrate)\n"
+"(qemu) migrate_incoming file:vm.state\n"
+"(qemu) info status\n"
+"VM status: running"
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:430
+msgid ""
+"cpr-exec mode may not be used with postcopy, background-snapshot, or COLO."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:433
+msgid ""
+"cpr-exec mode requires permission to use the exec system call, which is "
+"denied by certain sandbox options, such as spawn."
+msgstr ""
+
+#: ../../../devel/migration/CPR.rst:436
+msgid ""
+"The guest pause time increases for large guest RAM backed by small pages."
+msgstr ""

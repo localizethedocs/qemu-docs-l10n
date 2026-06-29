@@ -1,0 +1,808 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-23 09:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/pci.rst:3
+msgid "PCI subsystem"
+msgstr ""
+
+#: ../../../devel/pci.rst:6
+msgid "API Reference"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:412
+msgid "callbacks structure for specific IOMMU handlers of a PCIBus"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:416
+msgid "**Definition**::"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:418
+msgid ""
+"struct PCIIOMMUOps {\n"
+"    bool (*supports_address_space)(PCIBus *bus, void *opaque, int devfn, "
+"Error **errp);\n"
+"    AddressSpace * (*get_address_space)(PCIBus *bus, void *opaque, int "
+"devfn);\n"
+"    bool (*set_iommu_device)(PCIBus *bus, void *opaque, int devfn, "
+"HostIOMMUDevice *dev, Error **errp);\n"
+"    void (*unset_iommu_device)(PCIBus *bus, void *opaque, int devfn);\n"
+"    uint64_t (*get_viommu_flags)(void *opaque);\n"
+"    uint64_t (*get_host_iommu_quirks)(uint32_t type, void *caps, uint32_t "
+"size);\n"
+"    void (*get_iotlb_info)(void *opaque, uint8_t *addr_width, uint32_t "
+"*min_page_size);\n"
+"    void (*init_iotlb_notifier)(PCIBus *bus, void *opaque, int devfn, "
+"IOMMUNotifier *n, IOMMUNotify fn, void *user_opaque);\n"
+"    void (*register_iotlb_notifier)(PCIBus *bus, void *opaque, int devfn, "
+"uint32_t pasid, IOMMUNotifier *n);\n"
+"    void (*unregister_iotlb_notifier)(PCIBus *bus, void *opaque, int devfn, "
+"uint32_t pasid, IOMMUNotifier *n);\n"
+"    ssize_t (*ats_request_translation)(PCIBus *bus, void *opaque, int devfn, "
+"uint32_t pasid, bool priv_req, bool exec_req, hwaddr addr, size_t length, "
+"bool no_write, IOMMUTLBEntry *result, size_t result_length, uint32_t "
+"*err_count);\n"
+"    void (*pri_register_notifier)(PCIBus *bus, void *opaque, int devfn, "
+"uint32_t pasid, IOMMUPRINotifier *notifier);\n"
+"    void (*pri_unregister_notifier)(PCIBus *bus, void *opaque, int devfn, "
+"uint32_t pasid);\n"
+"    int (*pri_request_page)(PCIBus *bus, void *opaque, int devfn, uint32_t "
+"pasid, bool priv_req, bool exec_req, hwaddr addr, bool lpig, uint16_t prgi, "
+"bool is_read, bool is_write);\n"
+"    uint64_t (*get_msi_direct_gpa)(PCIBus *bus, void *opaque, int devfn);\n"
+"};"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:436
+msgid "**Members**"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:420
+msgid "``supports_address_space``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:421
+msgid ""
+"Optional pre-check to determine whether a PCI device can be associated with "
+"an IOMMU. If this callback returns true, the IOMMU accepts the device "
+"association and get_address_space() can be called to obtain the "
+"address_space to be used."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:426 ../../../../include/hw/pci/pci.h:445
+#: ../../../../include/hw/pci/pci.h:693
+msgid "**bus**: the :c:type:`PCIBus <PCIBus>` being accessed."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:428 ../../../../include/hw/pci/pci.h:447
+#: ../../../../include/hw/pci/pci.h:460 ../../../../include/hw/pci/pci.h:479
+#: ../../../../include/hw/pci/pci.h:490 ../../../../include/hw/pci/pci.h:518
+#: ../../../../include/hw/pci/pci.h:533 ../../../../include/hw/pci/pci.h:553
+#: ../../../../include/hw/pci/pci.h:570 ../../../../include/hw/pci/pci.h:588
+#: ../../../../include/hw/pci/pci.h:628 ../../../../include/hw/pci/pci.h:646
+#: ../../../../include/hw/pci/pci.h:662 ../../../../include/hw/pci/pci.h:695
+msgid "**opaque**: the data passed to pci_setup_iommu()."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:430
+msgid "**devfn**: device and function number."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:432 ../../../../include/hw/pci/pci.h:466
+msgid "**errp**: pass an Error out only when return false"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:434
+msgid ""
+"Returns: true if the device can be associated with an IOMMU, false otherwise "
+"with errp set."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:439
+msgid "``get_address_space``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:440
+msgid "get the address space for a set of devices on a PCI bus."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:443
+msgid ""
+"Mandatory callback which returns a pointer to an :c:type:`AddressSpace "
+"<AddressSpace>`"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:449 ../../../../include/hw/pci/pci.h:697
+msgid "**devfn**: device and function number"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:452
+msgid "``set_iommu_device``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:453
+msgid "attach a HostIOMMUDevice to a vIOMMU"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:455
+msgid ""
+"Optional callback, if not implemented in vIOMMU, then vIOMMU can't retrieve "
+"host information from the associated HostIOMMUDevice."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:458 ../../../../include/hw/pci/pci.h:477
+#: ../../../../include/hw/pci/pci.h:531 ../../../../include/hw/pci/pci.h:551
+#: ../../../../include/hw/pci/pci.h:568 ../../../../include/hw/pci/pci.h:586
+#: ../../../../include/hw/pci/pci.h:626 ../../../../include/hw/pci/pci.h:644
+#: ../../../../include/hw/pci/pci.h:660
+msgid "**bus**: the :c:type:`PCIBus <PCIBus>` of the PCI device."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:462 ../../../../include/hw/pci/pci.h:481
+#: ../../../../include/hw/pci/pci.h:535 ../../../../include/hw/pci/pci.h:555
+#: ../../../../include/hw/pci/pci.h:572 ../../../../include/hw/pci/pci.h:590
+#: ../../../../include/hw/pci/pci.h:630 ../../../../include/hw/pci/pci.h:648
+#: ../../../../include/hw/pci/pci.h:664
+msgid "**devfn**: device and function number of the PCI device."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:464
+msgid "**dev**: the :c:type:`HostIOMMUDevice <HostIOMMUDevice>` to attach."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:468
+msgid ""
+"Returns: true if HostIOMMUDevice is attached or else false with errp set."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:472
+msgid "``unset_iommu_device``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:473
+msgid "detach a HostIOMMUDevice from a vIOMMU"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:475 ../../../../include/hw/pci/pci.h:529
+msgid "Optional callback."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:484
+msgid "``get_viommu_flags``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:485
+msgid "get vIOMMU flags"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:487
+msgid ""
+"Optional callback, if not implemented, then vIOMMU doesn't support exposing "
+"flags to other sub-system, e.g., VFIO."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:492
+msgid ""
+"Returns: bitmap with each bit representing a vIOMMU flag defined in enum "
+"viommu_flags."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:496
+msgid "``get_host_iommu_quirks``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:497
+msgid "get host IOMMU quirks"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:499
+msgid ""
+"Optional callback, if not implemented, then vIOMMU doesn't support "
+"converting **type** specific hardware information data into a standard "
+"bitmap format."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:503
+msgid "**type**: IOMMU hardware info type"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:505
+msgid "**caps**: IOMMU **type** specific hardware information data"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:507
+msgid "**size**: size of **caps**"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:509
+msgid ""
+"Returns: bitmap with each bit representing a host IOMMU quirk defined in "
+"enum host_iommu_quirks"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:513
+msgid "``get_iotlb_info``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:514 ../../../../include/hw/pci/pci.h:736
+msgid "get properties required to initialize a device IOTLB."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:516 ../../../../include/hw/pci/pci.h:549
+#: ../../../../include/hw/pci/pci.h:566
+msgid "Callback required if devices are allowed to cache translations."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:520
+msgid "**addr_width**: the address width of the IOMMU (output parameter)."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:522
+msgid "**min_page_size**: the page size of the IOMMU (output parameter)."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:526
+msgid "``init_iotlb_notifier``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:527 ../../../../include/hw/pci/pci.h:749
+msgid "initialize an IOMMU notifier."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:537
+msgid "**n**: the notifier to be initialized."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:539
+msgid "**fn**: the callback to be installed."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:541
+msgid "**user_opaque**: a user pointer that can be used to track a state."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:546
+msgid "``register_iotlb_notifier``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:547
+msgid "setup an IOTLB invalidation notifier."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:557
+msgid "**pasid**: the pasid of the address space to watch."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:559
+msgid "**n**: the notifier to register."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:563
+msgid "``unregister_iotlb_notifier``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:564
+msgid "remove an IOTLB invalidation notifier."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:574
+msgid "**pasid**: the pasid of the address space to stop watching."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:576
+msgid "**n**: the notifier to unregister."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:580
+msgid "``ats_request_translation``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:581
+msgid "issue an ATS request."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:583
+msgid ""
+"Callback required if devices are allowed to use the address translation "
+"service."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:592 ../../../../include/hw/pci/pci.h:666
+msgid "**pasid**: the pasid of the address space to use for the request."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:594 ../../../../include/hw/pci/pci.h:668
+msgid "**priv_req**: privileged mode bit (PASID TLP)."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:596 ../../../../include/hw/pci/pci.h:670
+msgid "**exec_req**: execute request bit (PASID TLP)."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:598
+msgid "**addr**: start address of the memory range to be translated."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:600
+msgid "**length**: length of the memory range in bytes."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:602
+msgid "**no_write**: request a read-only translation (if supported)."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:604
+msgid "**result**: buffer in which the TLB entries will be stored."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:606
+msgid "**result_length**: result buffer length."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:608
+msgid "**err_count**: number of untranslated subregions."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:610
+msgid ""
+"Returns: the number of translations stored in the result buffer, or -ENOMEM "
+"if the buffer is not large enough."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:620
+msgid "``pri_register_notifier``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:621
+msgid "setup the PRI completion callback."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:623 ../../../../include/hw/pci/pci.h:641
+#: ../../../../include/hw/pci/pci.h:657
+msgid ""
+"Callback required if devices are allowed to use the page request interface."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:632
+msgid "**pasid**: the pasid of the address space to track."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:634
+msgid "**notifier**: the notifier to register."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:638
+msgid "``pri_unregister_notifier``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:639
+msgid "remove the PRI completion callback."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:650
+msgid "**pasid**: the pasid of the address space to stop tracking."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:654
+msgid "``pri_request_page``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:655
+msgid "issue a PRI request."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:672
+msgid "**addr**: untranslated address of the requested page."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:674
+msgid "**lpig**: last page in group."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:676
+msgid "**prgi**: page request group index."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:678
+msgid "**is_read**: request read access."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:680
+msgid "**is_write**: request write access."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:686
+msgid "``get_msi_direct_gpa``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:687
+msgid ""
+"get the guest physical address of MSI doorbell for the device on a PCI bus."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:690
+msgid ""
+"Optional callback. If implemented, it must return a valid guest physical "
+"address for the MSI doorbell"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:699
+msgid "Returns: the guest physical address of the MSI doorbell."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:702 ../../../../include/hw/pci/pci.h:745
+#: ../../../../include/hw/pci/pci.h:758 ../../../../include/hw/pci/pci.h:780
+#: ../../../../include/hw/pci/pci.h:803 ../../../../include/hw/pci/pci.h:817
+#: ../../../../include/hw/pci/pci.h:839 ../../../../include/hw/pci/pci.h:852
+#: ../../../../include/hw/pci/pci.h:864
+msgid "**Description**"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:413
+msgid ""
+"Allows to modify the behavior of some IOMMU operations of the PCI framework "
+"for a set of devices on a PCI bus."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:712
+msgid "get vIOMMU flags."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:716 ../../../../include/hw/pci/pci.h:726
+#: ../../../../include/hw/pci/pci.h:740 ../../../../include/hw/pci/pci.h:753
+#: ../../../../include/hw/pci/pci.h:766 ../../../../include/hw/pci/pci.h:792
+#: ../../../../include/hw/pci/pci.h:812 ../../../../include/hw/pci/pci.h:825
+#: ../../../../include/hw/pci/pci.h:834 ../../../../include/hw/pci/pci.h:847
+#: ../../../../include/hw/pci/pci.h:860
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:718 ../../../../include/hw/pci/pci.h:728
+#: ../../../../include/hw/pci/pci.h:742 ../../../../include/hw/pci/pci.h:755
+#: ../../../../include/hw/pci/pci.h:768 ../../../../include/hw/pci/pci.h:794
+#: ../../../../include/hw/pci/pci.h:814 ../../../../include/hw/pci/pci.h:827
+#: ../../../../include/hw/pci/pci.h:836 ../../../../include/hw/pci/pci.h:849
+msgid "``PCIDevice *dev``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:717 ../../../../include/hw/pci/pci.h:727
+msgid "PCI device pointer."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:719 ../../../../include/hw/pci/pci.h:732
+msgid "**Return**"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:714
+msgid ""
+"bitmap with each bit representing a vIOMMU flag defined in enum "
+"viommu_flags. Or 0 if vIOMMU doesn't report any."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:722
+msgid "get host IOMMU quirks."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:729
+msgid "``uint32_t type``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:728
+msgid "IOMMU hardware info type"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:730
+msgid "``void *caps``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:729
+msgid "IOMMU **type** specific hardware information data"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:731
+msgid "``uint32_t size``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:730
+msgid "size of **caps**"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:724
+msgid ""
+"bitmap with each bit representing a host IOMMU quirk defined in enum "
+"host_iommu_quirks. Or 0 if vIOMMU doesn't convert any."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:741
+msgid "the device that wants to get the information."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:743
+msgid "``uint8_t *addr_width``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:742
+msgid "the address width of the IOMMU (output parameter)."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:744
+msgid "``uint32_t *min_page_size``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:743
+msgid "the page size of the IOMMU (output parameter)."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:737 ../../../../include/hw/pci/pci.h:831
+#: ../../../../include/hw/pci/pci.h:844
+msgid "Returns 0 on success, or a negative errno otherwise."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:753
+msgid "the device."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:755 ../../../../include/hw/pci/pci.h:838
+#: ../../../../include/hw/pci/pci.h:851
+msgid "``IOMMUNotifier *n``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:754
+msgid "the notifier to be initialized."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:756
+msgid "``IOMMUNotify fn``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:755
+msgid "the callback to be installed."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:757 ../../../../include/hw/pci/pci.h:863
+msgid "``void *opaque``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:756
+msgid "a user pointer that can be used to track a state."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:750
+msgid "This function is used by devices before registering an IOTLB notifier."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:762
+msgid "perform an ATS request."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:769
+msgid "the ATS-capable PCI device."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:771 ../../../../include/hw/pci/pci.h:795
+#: ../../../../include/hw/pci/pci.h:815 ../../../../include/hw/pci/pci.h:826
+#: ../../../../include/hw/pci/pci.h:837 ../../../../include/hw/pci/pci.h:850
+msgid "``uint32_t pasid``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:770 ../../../../include/hw/pci/pci.h:794
+msgid "the pasid of the address space in which the translation will be done."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:772 ../../../../include/hw/pci/pci.h:796
+msgid "``bool priv_req``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:771 ../../../../include/hw/pci/pci.h:795
+msgid "privileged mode bit (PASID TLP)."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:773 ../../../../include/hw/pci/pci.h:797
+msgid "``bool exec_req``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:772 ../../../../include/hw/pci/pci.h:796
+msgid "execute request bit (PASID TLP)."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:774 ../../../../include/hw/pci/pci.h:798
+msgid "``hwaddr addr``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:773
+msgid "start address of the memory range to be translated."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:775
+msgid "``size_t length``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:774
+msgid "length of the memory range in bytes."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:776
+msgid "``bool no_write``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:775
+msgid "request a read-only translation (if supported)."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:777
+msgid "``IOMMUTLBEntry *result``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:776
+msgid "buffer in which the TLB entries will be stored."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:778
+msgid "``size_t result_length``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:777
+msgid "result buffer length."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:779
+msgid "``uint32_t *err_count``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:778
+msgid "number of untranslated subregions."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:763
+msgid ""
+"Returns the number of translations stored in **result** in case of success, "
+"a negative error code otherwise. -ENOMEM is returned when the result buffer "
+"is not large enough to store all the translations."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:788
+msgid "perform a PRI request."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:793 ../../../../include/hw/pci/pci.h:813
+#: ../../../../include/hw/pci/pci.h:824
+msgid "the PRI-capable PCI device."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:797
+msgid "untranslated address of the requested page."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:799
+msgid "``bool lpig``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:798
+msgid "last page in group."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:800
+msgid "``uint16_t prgi``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:799
+msgid "page request group index."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:801
+msgid "``bool is_read``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:800
+msgid "request read access."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:802
+msgid "``bool is_write``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:801
+msgid "request write access."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:789
+msgid ""
+"Returns 0 if the PRI request has been sent to the guest OS, an error code "
+"otherwise."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:808
+msgid "register the PRI callback for a given address space."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:814 ../../../../include/hw/pci/pci.h:836
+msgid "the pasid of the address space to track."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:816
+msgid "``IOMMUPRINotifier *notifier``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:815 ../../../../include/hw/pci/pci.h:837
+msgid "the notifier to register."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:809
+msgid "Returns 0 on success, an error code otherwise."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:821
+msgid "remove the PRI callback from a given address space."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:825 ../../../../include/hw/pci/pci.h:849
+msgid "the pasid of the address space to stop tracking."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:830
+msgid ""
+"register a notifier for changes to IOMMU translation entries in a specific "
+"address space."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:835
+msgid "the device that wants to get notified."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:843
+msgid ""
+"unregister a notifier that has been registered with "
+"pci_iommu_register_iotlb_notifier."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:848
+msgid "the device that wants to stop notifications."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:850
+msgid "the notifier to unregister."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:856
+msgid "Initialize specific IOMMU handlers for a PCIBus"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:862
+msgid "``PCIBus *bus``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:860
+msgid "the :c:type:`PCIBus <PCIBus>` being updated."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:862
+msgid "``const PCIIOMMUOps *ops``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:861
+msgid "the :c:type:`PCIIOMMUOps <PCIIOMMUOps>`"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:862
+msgid "passed to callbacks of the **ops** structure."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:857
+msgid "Let PCI host bridges define specific operations."
+msgstr ""

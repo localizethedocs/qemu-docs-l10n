@@ -1,0 +1,405 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-01 14:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../interop/dbus-vnc.rst:2
+msgid "D-Bus VNC"
+msgstr ""
+
+#: ../../../interop/dbus-vnc.rst:4
+msgid ""
+"The ``qemu-vnc`` standalone VNC server exposes a D-Bus interface for "
+"management and monitoring of VNC connections."
+msgstr ""
+
+#: ../../../interop/dbus-vnc.rst:7
+msgid ""
+"The service is available on the bus under the well-known name ``org.qemu."
+"vnc``. Objects are exported under ``/org/qemu/Vnc1/``."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid ""
+"This interface is implemented on ``/org/qemu/Vnc1/Server``. It provides "
+"management and monitoring of the VNC server."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:0
+msgid "Arguments"
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "The new VNC password."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Change the VNC password.  Existing clients are unaffected."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Expiry specification."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid ""
+"Set password expiry.  Values: ``\"now\"``, ``\"never\"``, ``\"+N\"`` "
+"(seconds from now), ``\"N\"`` (absolute epoch seconds)."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Reload TLS certificates from disk."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "file descriptor of a connected socket."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "whether to skip VNC authentication."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Add a VNC client from an already-connected socket."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Object path of the new client."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid ""
+"Emitted when a VNC client TCP connection is established (before "
+"authentication)."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Object path of the client."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Emitted when a VNC client has completed authentication and is active."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Emitted when a VNC client disconnects."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid ""
+"A human-readable reason for shutting down (e.g.  \"D-Bus peer org.qemu "
+"vanished\")."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "A human-readable reason for shutting down (e.g."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "\"D-Bus peer org.qemu vanished\")."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid ""
+"Emitted when the VNC server is shutting down cleanly. Clients should expect "
+"the connection to close shortly after."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:0
+msgid "Access"
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:0
+msgid "Emits Changed"
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "The VM name."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Primary authentication method (none, vnc, vencrypt, sasl, etc.)."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid ""
+"VEncrypt sub-authentication method, if applicable. Empty string otherwise."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Object paths of connected VNC clients."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid ""
+"List of listening sockets. Each entry is a dictionary with keys: ``Host`` "
+"(s), ``Service`` (s), ``Family`` (s), ``WebSocket`` (b), ``Auth`` (s), "
+"``VencryptSubAuth`` (s)."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid ""
+"This interface is implemented on ``/org/qemu/Vnc1/Client_$id``. It exposes "
+"information about a connected VNC client."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Emitted when the VNC client requests a guest shutdown."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Emitted when the VNC client requests a guest reset."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Client IP address."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid ""
+"Client port or service name. This may depend on the host system’s service "
+"database so symbolic names should not be relied on."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Address family (ipv4, ipv6, unix)."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "Whether this is a WebSocket connection."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "X.509 distinguished name (empty if not applicable)."
+msgstr ""
+
+#: ../../../../tools/qemu-vnc/qemu-vnc1.xml:1
+msgid "SASL username (empty if not applicable)."
+msgstr ""
+
+#: ../../../interop/dbus-vnc.rst:21
+msgid "Sphinx 4 is required to build D-Bus documentation."
+msgstr ""
+
+#: ../../../interop/dbus-vnc.rst:23
+msgid "This is the content of ``tools/qemu-vnc/qemu-vnc1.xml``:"
+msgstr ""
+
+#: ../../../interop/dbus-vnc.rst:25
+msgid ""
+"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+"<!--\n"
+" SPDX-License-Identifier: GPL-2.0-or-later\n"
+" -->\n"
+"<node>\n"
+"  <!--\n"
+"      org.qemu.Vnc1.Server:\n"
+"\n"
+"      This interface is implemented on ``/org/qemu/Vnc1/Server``.\n"
+"      It provides management and monitoring of the VNC server.\n"
+"  -->\n"
+"  <interface name=\"org.qemu.Vnc1.Server\">\n"
+"    <!--\n"
+"        Name:\n"
+"\n"
+"        The VM name.\n"
+"    -->\n"
+"    <property name=\"Name\" type=\"s\" access=\"read\"/>\n"
+"\n"
+"    <!--\n"
+"        Auth:\n"
+"\n"
+"        Primary authentication method (none, vnc, vencrypt, sasl, etc.).\n"
+"    -->\n"
+"    <property name=\"Auth\" type=\"s\" access=\"read\"/>\n"
+"\n"
+"    <!--\n"
+"        VencryptSubAuth:\n"
+"\n"
+"        VEncrypt sub-authentication method, if applicable.\n"
+"        Empty string otherwise.\n"
+"    -->\n"
+"    <property name=\"VencryptSubAuth\" type=\"s\" access=\"read\"/>\n"
+"\n"
+"    <!--\n"
+"        Clients:\n"
+"\n"
+"        Object paths of connected VNC clients.\n"
+"    -->\n"
+"    <property name=\"Clients\" type=\"ao\" access=\"read\"/>\n"
+"\n"
+"    <!--\n"
+"        Listeners:\n"
+"\n"
+"        List of listening sockets. Each entry is a dictionary with keys:\n"
+"        ``Host`` (s), ``Service`` (s), ``Family`` (s),\n"
+"        ``WebSocket`` (b), ``Auth`` (s), ``VencryptSubAuth`` (s).\n"
+"    -->\n"
+"    <property name=\"Listeners\" type=\"aa{sv}\" access=\"read\"/>\n"
+"\n"
+"    <!--\n"
+"        SetPassword:\n"
+"        @password: The new VNC password.\n"
+"\n"
+"        Change the VNC password.  Existing clients are unaffected.\n"
+"    -->\n"
+"    <method name=\"SetPassword\">\n"
+"      <arg type=\"s\" name=\"password\" direction=\"in\"/>\n"
+"    </method>\n"
+"\n"
+"    <!--\n"
+"        ExpirePassword:\n"
+"        @time: Expiry specification.\n"
+"\n"
+"        Set password expiry.  Values: ``\"now\"``, ``\"never\"``,\n"
+"        ``\"+N\"`` (seconds from now), ``\"N\"`` (absolute epoch seconds).\n"
+"    -->\n"
+"    <method name=\"ExpirePassword\">\n"
+"      <arg type=\"s\" name=\"time\" direction=\"in\"/>\n"
+"    </method>\n"
+"\n"
+"    <!--\n"
+"        ReloadCertificates:\n"
+"\n"
+"        Reload TLS certificates from disk.\n"
+"    -->\n"
+"    <method name=\"ReloadCertificates\"/>\n"
+"\n"
+"    <!--\n"
+"        AddClient:\n"
+"        @socket: file descriptor of a connected socket.\n"
+"        @skipauth: whether to skip VNC authentication.\n"
+"\n"
+"        Add a VNC client from an already-connected socket.\n"
+"    -->\n"
+"    <method name=\"AddClient\">\n"
+"      <arg type=\"h\" name=\"socket\" direction=\"in\"/>\n"
+"      <arg type=\"b\" name=\"skipauth\" direction=\"in\"/>\n"
+"    </method>\n"
+"\n"
+"    <!--\n"
+"        ClientConnected:\n"
+"        @client: Object path of the new client.\n"
+"\n"
+"        Emitted when a VNC client TCP connection is established\n"
+"        (before authentication).\n"
+"    -->\n"
+"    <signal name=\"ClientConnected\">\n"
+"      <arg type=\"o\" name=\"client\"/>\n"
+"    </signal>\n"
+"\n"
+"    <!--\n"
+"        ClientInitialized:\n"
+"        @client: Object path of the client.\n"
+"\n"
+"        Emitted when a VNC client has completed authentication\n"
+"        and is active.\n"
+"    -->\n"
+"    <signal name=\"ClientInitialized\">\n"
+"      <arg type=\"o\" name=\"client\"/>\n"
+"    </signal>\n"
+"\n"
+"    <!--\n"
+"        ClientDisconnected:\n"
+"        @client: Object path of the client.\n"
+"\n"
+"        Emitted when a VNC client disconnects.\n"
+"    -->\n"
+"    <signal name=\"ClientDisconnected\">\n"
+"      <arg type=\"o\" name=\"client\"/>\n"
+"    </signal>\n"
+"\n"
+"    <!--\n"
+"        Leaving:\n"
+"        @reason: A human-readable reason for shutting down (e.g.\n"
+"                 \"D-Bus peer org.qemu vanished\").\n"
+"\n"
+"        Emitted when the VNC server is shutting down cleanly.\n"
+"        Clients should expect the connection to close shortly after.\n"
+"    -->\n"
+"    <signal name=\"Leaving\">\n"
+"      <arg type=\"s\" name=\"reason\"/>\n"
+"    </signal>\n"
+"  </interface>\n"
+"\n"
+"  <!--\n"
+"      org.qemu.Vnc1.Client:\n"
+"\n"
+"      This interface is implemented on ``/org/qemu/Vnc1/Client_$id``.\n"
+"      It exposes information about a connected VNC client.\n"
+"  -->\n"
+"  <interface name=\"org.qemu.Vnc1.Client\">\n"
+"    <!--\n"
+"        Host:\n"
+"\n"
+"        Client IP address.\n"
+"    -->\n"
+"    <property name=\"Host\" type=\"s\" access=\"read\"/>\n"
+"\n"
+"    <!--\n"
+"        Service:\n"
+"\n"
+"        Client port or service name. This may depend on the host system’s\n"
+"        service database so symbolic names should not be relied on.\n"
+"    -->\n"
+"    <property name=\"Service\" type=\"s\" access=\"read\"/>\n"
+"\n"
+"    <!--\n"
+"        Family:\n"
+"\n"
+"        Address family (ipv4, ipv6, unix).\n"
+"    -->\n"
+"    <property name=\"Family\" type=\"s\" access=\"read\"/>\n"
+"\n"
+"    <!--\n"
+"        WebSocket:\n"
+"\n"
+"        Whether this is a WebSocket connection.\n"
+"    -->\n"
+"    <property name=\"WebSocket\" type=\"b\" access=\"read\"/>\n"
+"\n"
+"    <!--\n"
+"        X509Dname:\n"
+"\n"
+"        X.509 distinguished name (empty if not applicable).\n"
+"    -->\n"
+"    <property name=\"X509Dname\" type=\"s\" access=\"read\"/>\n"
+"\n"
+"    <!--\n"
+"        SaslUsername:\n"
+"\n"
+"        SASL username (empty if not applicable).\n"
+"    -->\n"
+"    <property name=\"SaslUsername\" type=\"s\" access=\"read\"/>\n"
+"\n"
+"    <!--\n"
+"        ShutdownRequest:\n"
+"\n"
+"        Emitted when the VNC client requests a guest shutdown.\n"
+"    -->\n"
+"    <signal name=\"ShutdownRequest\"/>\n"
+"\n"
+"    <!--\n"
+"        ResetRequest:\n"
+"\n"
+"        Emitted when the VNC client requests a guest reset.\n"
+"    -->\n"
+"    <signal name=\"ResetRequest\"/>\n"
+"  </interface>\n"
+"\n"
+"</node>\n"
+msgstr ""
