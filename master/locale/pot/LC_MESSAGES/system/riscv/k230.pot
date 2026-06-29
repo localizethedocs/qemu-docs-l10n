@@ -1,0 +1,192 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-29 13:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/riscv/k230.rst:2
+msgid "Kendryte K230 virt reference platform (``k230``)"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:3
+msgid "The ``k230`` machine is compatible with the Kendryte K230 SDK."
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:5
+msgid ""
+"The K230 is a chip from the AIoT SoC series made by Kendryte ® — a part of "
+"Canaan Inc. It uses a brand-new multi-heterogeneous unit accelerated "
+"computing structure."
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:9
+msgid ""
+"This chip has 2 RISC-V computing cores and a new-generation KPU (Knowledge "
+"Process Unit) smart computing unit."
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:12
+msgid "For more information, see <https://www.kendryte.com/en/proDetail/230>"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:15
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:16
+msgid "The ``k230`` machine supports the following devices:"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:18
+msgid "1 c908 cores (little core)"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:19
+msgid "Core Local Interruptor (CLINT)"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:20
+msgid "Platform-Level Interrupt Controller (PLIC)"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:21
+msgid "2 K230 Watchdog Timer"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:22
+msgid "5 UART"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:25
+msgid "Boot options"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:26
+msgid ""
+"The ``k230`` machine supports K230 SDK boot through M-mode U-Boot, which "
+"then starts OpenSBI/Linux with ``bootm``. It also supports direct Linux boot."
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:29
+msgid ""
+"K230 SDK Linux kernels use T-HEAD C9xx private MAEE page table attributes. "
+"QEMU does not implement MAEE in the generic RISC-V MMU, so such kernels need "
+"to be built with standard RISC-V PTE bits before they can boot under QEMU."
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:34
+msgid "Running"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:37
+msgid "Direct Linux boot"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:39
+msgid ""
+"This flow lets QEMU load OpenSBI, Linux, initrd, and DTB directly, without "
+"running SDK U-Boot. The Linux Image must be rebuilt with standard RISC-V PTE "
+"bits before running under QEMU."
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:43
+msgid ""
+"$ SDK=k230_sdk/output/k230_canmv_defconfig\n"
+"$ qemu-system-riscv64 -machine k230 \\\n"
+"   -kernel \"$SDK/images/little-core/Image\" \\\n"
+"   -dtb \"/tmp/user-k230-qemu.dtb\" \\\n"
+"   -initrd \"$SDK/images/little-core/rootfs.cpio.gz\" \\\n"
+"   -append \"console=ttyS0,115200 earlycon=sbi cma=0\" \\\n"
+"   -nographic"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:53
+msgid ""
+"Direct boot uses the SDK little-core RAM layout for OpenSBI at "
+"``0x08000000``, Linux at ``0x08200000``, and the DTB at ``0x0a000000``. The "
+"initrd is placed by QEMU's generic RISC-V boot helper, and QEMU writes the "
+"initrd range and kernel command line into ``/chosen``. The DTB passed with "
+"``-dtb`` should be derived from ``$SDK/images/little-core/k230.dtb`` and "
+"must describe that initrd location as usable memory and disable any devices "
+"that are not emulated by this machine."
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:62
+msgid "U-Boot boot"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:64
+msgid ""
+"This flow starts SDK U-Boot in M-mode with ``-bios``. Until the SDK storage "
+"path is modeled, place OpenSBI, Linux, initrd, and DTB in RAM with loader "
+"devices and run ``bootm`` manually. The Linux Image must be rebuilt with "
+"standard RISC-V PTE bits before running under QEMU."
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:69
+msgid ""
+"$ SDK=k230_sdk/output/k230_canmv_defconfig\n"
+"$ IMAGE=$SDK/images/little-core/Image\n"
+"$ INITRD=$SDK/images/little-core/rootfs.cpio.gz\n"
+"$ DTB=$SDK/images/little-core/k230.dtb\n"
+"$ FWJUMP_UIMAGE=/tmp/k230-fw-jump.uImage\n"
+"$ INITRD_END=$(printf \"0x%x\" $((0x0a100000 + $(stat -c %s \"$INITRD\"))))\n"
+"$ \"$SDK/little/buildroot-ext/host/bin/mkimage\" \\\n"
+"   -A riscv -O linux -T kernel -C none \\\n"
+"   -a 0x8000000 -e 0x8000000 -n opensbi \\\n"
+"   -d \"$SDK/images/little-core/fw_jump.bin\" \"$FWJUMP_UIMAGE\"\n"
+"$ qemu-system-riscv64 -machine k230 \\\n"
+"   -bios \"$SDK/little/uboot/u-boot\" \\\n"
+"   -device loader,file=\"$FWJUMP_UIMAGE\",addr=0xc100000,force-raw=on \\\n"
+"   -device loader,file=\"$IMAGE\",addr=0x8200000,force-raw=on \\\n"
+"   -device loader,file=\"$INITRD\",addr=0xa100000,force-raw=on \\\n"
+"   -device loader,file=\"$DTB\",addr=0xa000000,force-raw=on \\\n"
+"   -nographic"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:89
+msgid ""
+"The loader addresses mirror the SDK ``k230_canmv_defconfig`` output. Read "
+"the U-Boot addresses from the generated environment, and read the Linux RAM "
+"base from the generated ``hw/k230.dts.txt``. This replaces the SDK storage "
+"and decompression steps."
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:94
+msgid "Press Enter to stop autoboot. At the U-Boot prompt, run these commands:"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:96
+msgid ""
+"K230# setenv bootargs console=ttyS0,115200 earlycon=sbi cma=0\n"
+"K230# fdt addr 0xa000000\n"
+"K230# fdt resize 8192\n"
+"K230# fdt set /chosen linux,initrd-start <0x0 0xa100000>\n"
+"K230# fdt set /chosen linux,initrd-end <0x0 ${INITRD_END}>\n"
+"K230# fdt set /soc/sdhci0@91580000 status disabled\n"
+"K230# fdt set /soc/sdhci1@91581000 status disabled\n"
+"K230# bootm 0xc100000 - 0xa000000"
+msgstr ""
+
+#: ../../../system/riscv/k230.rst:107
+msgid ""
+"Use ``setenv`` so ``bootm`` writes the kernel command line into ``/chosen/"
+"bootargs``. The ``fdt`` commands select the loaded DTB, add space for edits, "
+"describe the initrd range in ``/chosen``, and disable SDHCI nodes because "
+"this machine does not emulate those controllers yet. Replace ``${INITRD_END}"
+"`` with the host-calculated value above when typing the command. ``cma=0`` "
+"avoids the SDK kernel reserving too much of the little-core memory window "
+"for initramfs boot."
+msgstr ""

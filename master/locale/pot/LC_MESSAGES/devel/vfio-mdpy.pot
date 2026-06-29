@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-29 13:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/vfio-mdpy.rst:5
+msgid "Testing VFIO display with mdev mdpy"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:7
+msgid "Table of Contents"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:9
+msgid ""
+"The kernel provides a sample mediated device driver, ``mdpy`` (``samples/"
+"vfio-mdev/mdpy.c``), that exposes a fake framebuffer through the VFIO "
+"display region interface. It can be used to test VFIO display support, "
+"including hotplug, without any real GPU hardware."
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:15
+msgid "The kernel modules"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:17
+msgid ""
+"The ``mdpy`` driver depends on the ``mdev`` subsystem. Enable, build and "
+"load the modules."
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:20
+msgid "The minimal set is::"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:22
+msgid ""
+"CONFIG_SAMPLE_VFIO_MDEV_MDPY=m\n"
+"CONFIG_SAMPLE_VFIO_MDEV_MDPY_FB=m   # guest framebuffer driver"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:25
+msgid "CONFIG_VFIO_MDEV is selected automatically."
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:27
+msgid "Verify that the driver registered successfully:"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:29
+msgid "ls /sys/devices/virtual/mdpy/mdpy/mdev_supported_types/"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:34
+msgid "Creating an mdev instance"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:36
+msgid ""
+"Available types correspond to different resolutions (e.g. ``mdpy-vga`` for "
+"640x480, ``mdpy-xga`` for 1024x768, ``mdpy-hd`` for 1920x1080)."
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:39
+msgid "Each mdev instance is identified by a UUID:"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:41
+msgid ""
+"uuid=$(uuidgen)\n"
+"echo \"$uuid\" > /sys/devices/virtual/mdpy/mdpy/mdev_supported_types/mdpy-"
+"xga/create"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:46
+msgid "To remove the instance later:"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:48
+msgid "echo 1 > /sys/bus/mdev/devices/$uuid/remove"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:52
+msgid ""
+"Make sure your user has the necessary permissions to access the vfio group. "
+"(ex: chmod 666 /dev/vfio/16)"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:56
+msgid "Starting QEMU"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:59
+msgid "Boot-time attachment"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:61
+msgid ""
+"qemu-system-x86_64 -machine q35 -m 1G \\\n"
+"    -device vfio-pci,sysfsdev=/sys/bus/mdev/devices/$uuid,display=on \\\n"
+"    -display gtk,gl=on"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:68
+msgid "Hotplug via HMP"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:70
+msgid ""
+"Start QEMU with a PCIe root port (required for PCIe hotplug) and a monitor:"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:73
+msgid ""
+"qemu-system-x86_64 -machine q35 -m 1G \\\n"
+"    -device pcie-root-port,id=rp0,slot=1 \\\n"
+"    -display gtk,gl=on \\\n"
+"    -monitor stdio"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:80
+msgid "Then at the ``(qemu)`` prompt:"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:82
+msgid ""
+"device_add vfio-pci,sysfsdev=/sys/bus/mdev/devices/<uuid>,display=on,bus=rp0,"
+"id=mdpy0"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:86
+msgid "To hot-unplug:"
+msgstr ""
+
+#: ../../../devel/vfio-mdpy.rst:88
+msgid "device_del mdpy0"
+msgstr ""

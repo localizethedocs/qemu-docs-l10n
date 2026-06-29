@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-01 14:32+0000\n"
+"POT-Creation-Date: 2026-06-29 13:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -823,55 +823,54 @@ msgstr ""
 #: ../../../devel/style.rst:518
 msgid ""
 "int strstart(const char *str, const char *val, const char **ptr)\n"
-"int stristart(const char *str, const char *val, const char **ptr)\n"
-"int qemu_strnlen(const char *s, int max_len)"
+"int stristart(const char *str, const char *val, const char **ptr)"
 msgstr ""
 
-#: ../../../devel/style.rst:524
+#: ../../../devel/style.rst:523
 msgid ""
 "There are also replacement character processing macros for isxyz and toxyz, "
 "so instead of e.g. isalnum you should use qemu_isalnum."
 msgstr ""
 
-#: ../../../devel/style.rst:527
+#: ../../../devel/style.rst:526
 msgid ""
 "Because of the memory management rules, you must use g_strdup/g_strndup "
 "instead of plain strdup/strndup."
 msgstr ""
 
-#: ../../../devel/style.rst:531
+#: ../../../devel/style.rst:530
 msgid "Printf-style functions"
 msgstr ""
 
-#: ../../../devel/style.rst:533
+#: ../../../devel/style.rst:532
 msgid ""
 "Whenever you add a new printf-style function, i.e., one with a format string "
 "argument and following \"...\" in its prototype, be sure to use gcc's printf "
 "attribute directive in the prototype."
 msgstr ""
 
-#: ../../../devel/style.rst:537
+#: ../../../devel/style.rst:536
 msgid ""
 "This makes it so gcc's -Wformat and -Wformat-security options can do their "
 "jobs and cross-check format strings with the number and types of arguments."
 msgstr ""
 
-#: ../../../devel/style.rst:542
+#: ../../../devel/style.rst:541
 msgid "C standard, implementation defined and undefined behaviors"
 msgstr ""
 
-#: ../../../devel/style.rst:544
+#: ../../../devel/style.rst:543
 msgid ""
 "C code in QEMU should be written to the C11 language specification. A copy "
 "of the final version of the C11 standard formatted as a draft, can be "
 "downloaded from:"
 msgstr ""
 
-#: ../../../devel/style.rst:548
+#: ../../../devel/style.rst:547
 msgid "`<http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1548.pdf>`_"
 msgstr ""
 
-#: ../../../devel/style.rst:550
+#: ../../../devel/style.rst:549
 msgid ""
 "The C language specification defines regions of undefined behavior and "
 "implementation defined behavior (to give compiler authors enough leeway to "
@@ -884,28 +883,28 @@ msgid ""
 "painful. These are:"
 msgstr ""
 
-#: ../../../devel/style.rst:560
+#: ../../../devel/style.rst:559
 msgid "you may assume that integers are 2s complement representation"
 msgstr ""
 
-#: ../../../devel/style.rst:561
+#: ../../../devel/style.rst:560
 msgid ""
 "you may assume that right shift of a signed integer duplicates the sign bit "
 "(ie it is an arithmetic shift, not a logical shift)"
 msgstr ""
 
-#: ../../../devel/style.rst:564
+#: ../../../devel/style.rst:563
 msgid ""
 "In addition, QEMU assumes that the compiler does not use the latitude given "
 "in C99 and C11 to treat aspects of signed '<<' as undefined, as documented "
 "in the GNU Compiler Collection manual starting at version 4.0."
 msgstr ""
 
-#: ../../../devel/style.rst:571
+#: ../../../devel/style.rst:570
 msgid "Automatic memory deallocation"
 msgstr ""
 
-#: ../../../devel/style.rst:573
+#: ../../../devel/style.rst:572
 msgid ""
 "QEMU has a mandatory dependency on either the GCC or the Clang compiler. As "
 "such it has the freedom to make use of a C language extension for "
@@ -914,37 +913,37 @@ msgid ""
 "many goto jumps to be eliminated, through automatic free'ing of memory."
 msgstr ""
 
-#: ../../../devel/style.rst:580
+#: ../../../devel/style.rst:579
 msgid ""
 "The GLib2 library provides a number of functions/macros for enabling "
 "automatic cleanup:"
 msgstr ""
 
-#: ../../../devel/style.rst:583
+#: ../../../devel/style.rst:582
 msgid ""
 "`<https://developer.gnome.org/glib/stable/glib-Miscellaneous-Macros.html>`_"
 msgstr ""
 
-#: ../../../devel/style.rst:585
+#: ../../../devel/style.rst:584
 msgid "Most notably:"
 msgstr ""
 
-#: ../../../devel/style.rst:587
+#: ../../../devel/style.rst:586
 msgid "g_autofree - will invoke g_free() on the variable going out of scope"
 msgstr ""
 
-#: ../../../devel/style.rst:589
+#: ../../../devel/style.rst:588
 msgid ""
 "g_autoptr - for structs / objects, will invoke the cleanup func created by a "
 "previous use of G_DEFINE_AUTOPTR_CLEANUP_FUNC. This is supported for most "
 "GLib data types and GObjects"
 msgstr ""
 
-#: ../../../devel/style.rst:593
+#: ../../../devel/style.rst:592
 msgid "For example, instead of"
 msgstr ""
 
-#: ../../../devel/style.rst:595
+#: ../../../devel/style.rst:594
 msgid ""
 "int somefunc(void)\n"
 "{\n"
@@ -965,11 +964,11 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../devel/style.rst:615
+#: ../../../devel/style.rst:614
 msgid "Using g_autofree/g_autoptr enables the code to be written as:"
 msgstr ""
 
-#: ../../../devel/style.rst:617
+#: ../../../devel/style.rst:616
 msgid ""
 "int somefunc(void)\n"
 "{\n"
@@ -984,26 +983,26 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../devel/style.rst:631
+#: ../../../devel/style.rst:630
 msgid ""
 "While this generally results in simpler, less leak-prone code, there are "
 "still some caveats to beware of"
 msgstr ""
 
-#: ../../../devel/style.rst:634
+#: ../../../devel/style.rst:633
 msgid ""
 "Variables declared with g_auto* MUST always be initialized, otherwise the "
 "cleanup function will use uninitialized stack memory"
 msgstr ""
 
-#: ../../../devel/style.rst:637
+#: ../../../devel/style.rst:636
 msgid ""
 "If a variable declared with g_auto* holds a value which must live beyond the "
 "life of the function, that value must be saved and the original variable "
 "NULL'd out. This can be simpler using g_steal_pointer"
 msgstr ""
 
-#: ../../../devel/style.rst:643
+#: ../../../devel/style.rst:642
 msgid ""
 "char *somefunc(void)\n"
 "{\n"
@@ -1018,15 +1017,15 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../devel/style.rst:659
+#: ../../../devel/style.rst:658
 msgid "QEMU Specific Idioms"
 msgstr ""
 
-#: ../../../devel/style.rst:662
+#: ../../../devel/style.rst:661
 msgid "QEMU Object Model Declarations"
 msgstr ""
 
-#: ../../../devel/style.rst:664
+#: ../../../devel/style.rst:663
 msgid ""
 "The QEMU Object Model (QOM) provides a framework for handling objects in the "
 "base C language. The first declaration of a storage or class structure "
@@ -1036,14 +1035,14 @@ msgid ""
 "navigation easier."
 msgstr ""
 
-#: ../../../devel/style.rst:671
+#: ../../../devel/style.rst:670
 msgid ""
 "For a storage structure the first declaration should always be called "
 "\"parent_obj\" and for a class structure the first member should always be "
 "called \"parent_class\" as below:"
 msgstr ""
 
-#: ../../../devel/style.rst:675
+#: ../../../devel/style.rst:674
 msgid ""
 "struct MyDeviceState {\n"
 "    DeviceState parent_obj;\n"
@@ -1063,25 +1062,25 @@ msgid ""
 "};"
 msgstr ""
 
-#: ../../../devel/style.rst:694
+#: ../../../devel/style.rst:693
 msgid ""
 "Note that there is no need to provide typedefs for QOM structures since "
 "these are generated automatically by the QOM declaration macros. See :ref:"
 "`qom` for more details."
 msgstr ""
 
-#: ../../../devel/style.rst:699
+#: ../../../devel/style.rst:698
 msgid "QEMU GUARD macros"
 msgstr ""
 
-#: ../../../devel/style.rst:701
+#: ../../../devel/style.rst:700
 msgid ""
 "QEMU provides a number of ``_GUARD`` macros intended to make the handling of "
 "multiple exit paths easier. For example using ``QEMU_LOCK_GUARD`` to take a "
 "lock will ensure the lock is released on exit from the function."
 msgstr ""
 
-#: ../../../devel/style.rst:706
+#: ../../../devel/style.rst:705
 msgid ""
 "static int my_critical_function(SomeState *s, void *data)\n"
 "{\n"
@@ -1095,14 +1094,14 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../devel/style.rst:719
+#: ../../../devel/style.rst:718
 msgid ""
 "will ensure s->lock is released however the function is exited. The "
 "equivalent code without _GUARD macro makes us to carefully put "
 "qemu_mutex_unlock() on all exit points:"
 msgstr ""
 
-#: ../../../devel/style.rst:723
+#: ../../../devel/style.rst:722
 msgid ""
 "static int my_critical_function(SomeState *s, void *data)\n"
 "{\n"
@@ -1118,13 +1117,13 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../devel/style.rst:738
+#: ../../../devel/style.rst:737
 msgid ""
 "There are often ``WITH_`` forms of macros which more easily wrap around a "
 "block inside a function."
 msgstr ""
 
-#: ../../../devel/style.rst:741
+#: ../../../devel/style.rst:740
 msgid ""
 "WITH_RCU_READ_LOCK_GUARD() {\n"
 "    QTAILQ_FOREACH_RCU(kid, &bus->children, sibling) {\n"
@@ -1136,15 +1135,15 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../devel/style.rst:753
+#: ../../../devel/style.rst:752
 msgid "Error handling and reporting"
 msgstr ""
 
-#: ../../../devel/style.rst:756
+#: ../../../devel/style.rst:755
 msgid "Reporting errors to the human user"
 msgstr ""
 
-#: ../../../devel/style.rst:758
+#: ../../../devel/style.rst:757
 msgid ""
 "Do not use printf(), fprintf() or monitor_printf().  Instead, use "
 "error_report() or error_vreport() from error-report.h.  This ensures the "
@@ -1152,41 +1151,41 @@ msgid ""
 "uniform format."
 msgstr ""
 
-#: ../../../devel/style.rst:763
+#: ../../../devel/style.rst:762
 msgid "Use error_printf() & friends to print additional information."
 msgstr ""
 
-#: ../../../devel/style.rst:765
+#: ../../../devel/style.rst:764
 msgid ""
 "error_report() prints the current location.  In certain common cases like "
 "command line parsing, the current location is tracked automatically.  To "
 "manipulate it manually, use the loc_``*``() from error-report.h."
 msgstr ""
 
-#: ../../../devel/style.rst:771
+#: ../../../devel/style.rst:770
 msgid "Propagating errors"
 msgstr ""
 
-#: ../../../devel/style.rst:773
+#: ../../../devel/style.rst:772
 msgid ""
 "An error can't always be reported to the user right where it's detected, but "
 "often needs to be propagated up the call chain to a place that can handle "
 "it.  This can be done in various ways."
 msgstr ""
 
-#: ../../../devel/style.rst:777
+#: ../../../devel/style.rst:776
 msgid ""
 "The most flexible one is Error objects.  See error.h for usage information."
 msgstr ""
 
-#: ../../../devel/style.rst:780
+#: ../../../devel/style.rst:779
 msgid ""
 "Use the simplest suitable method to communicate success / failure to "
 "callers.  Stick to common methods: non-negative on success / -1 on error, "
 "non-negative / -errno, non-null / null, or Error objects."
 msgstr ""
 
-#: ../../../devel/style.rst:784
+#: ../../../devel/style.rst:783
 msgid ""
 "Example: when a function returns a non-null pointer on success, and it can "
 "fail only in one way (as far as the caller is concerned), returning null on "
@@ -1194,83 +1193,83 @@ msgid ""
 "than propagating an Error object through an ``Error **`` parameter."
 msgstr ""
 
-#: ../../../devel/style.rst:789
+#: ../../../devel/style.rst:788
 msgid ""
 "Example: when a function's callers need to report details on failure only "
 "the function really knows, use ``Error **``, and set suitable errors."
 msgstr ""
 
-#: ../../../devel/style.rst:792
+#: ../../../devel/style.rst:791
 msgid ""
 "Do not report an error to the user when you're also returning an error for "
 "somebody else to handle.  Leave the reporting to the place that consumes the "
 "error returned."
 msgstr ""
 
-#: ../../../devel/style.rst:797
+#: ../../../devel/style.rst:796
 msgid "Handling errors"
 msgstr ""
 
-#: ../../../devel/style.rst:799
+#: ../../../devel/style.rst:798
 msgid ""
 "Calling exit() is fine when handling configuration errors during startup.  "
 "It's problematic during normal operation.  In particular, monitor commands "
 "should never exit()."
 msgstr ""
 
-#: ../../../devel/style.rst:803
+#: ../../../devel/style.rst:802
 msgid ""
 "Do not call exit() or abort() to handle an error that can be triggered by "
 "the guest (e.g., some unimplemented corner case in guest code translation or "
 "device emulation).  Guests should not be able to terminate QEMU."
 msgstr ""
 
-#: ../../../devel/style.rst:808
+#: ../../../devel/style.rst:807
 msgid ""
 "Note that &error_fatal is just another way to exit(1), and &error_abort is "
 "just another way to abort()."
 msgstr ""
 
-#: ../../../devel/style.rst:813
+#: ../../../devel/style.rst:812
 msgid "trace-events style"
 msgstr ""
 
-#: ../../../devel/style.rst:816
+#: ../../../devel/style.rst:815
 msgid "0x prefix"
 msgstr ""
 
-#: ../../../devel/style.rst:818
+#: ../../../devel/style.rst:817
 msgid "In trace-events files, use a '0x' prefix to specify hex numbers, as in:"
 msgstr ""
 
-#: ../../../devel/style.rst:820
+#: ../../../devel/style.rst:819
 msgid "some_trace(unsigned x, uint64_t y) \"x 0x%x y 0x\" PRIx64"
 msgstr ""
 
-#: ../../../devel/style.rst:824
+#: ../../../devel/style.rst:823
 msgid ""
 "An exception is made for groups of numbers that are hexadecimal by "
 "convention and separated by the symbols '.', '/', ':', or ' ' (such as PCI "
 "bus id):"
 msgstr ""
 
-#: ../../../devel/style.rst:828
+#: ../../../devel/style.rst:827
 msgid "another_trace(int cssid, int ssid, int dev_num) \"bus id: %x.%x.%04x\""
 msgstr ""
 
-#: ../../../devel/style.rst:832
+#: ../../../devel/style.rst:831
 msgid ""
 "However, you can use '0x' for such groups if you want. Anyway, be sure that "
 "it is obvious that numbers are in hex, ex.:"
 msgstr ""
 
-#: ../../../devel/style.rst:835
+#: ../../../devel/style.rst:834
 msgid ""
 "data_dump(uint8_t c1, uint8_t c2, uint8_t c3) \"bytes (in hex): %02x %02x "
 "%02x\""
 msgstr ""
 
-#: ../../../devel/style.rst:839
+#: ../../../devel/style.rst:838
 msgid ""
 "Rationale: hex numbers are hard to read in logs when there is no 0x prefix, "
 "especially when (occasionally) the representation doesn't contain any "
@@ -1280,25 +1279,25 @@ msgid ""
 "readable."
 msgstr ""
 
-#: ../../../devel/style.rst:846
+#: ../../../devel/style.rst:845
 msgid "'#' printf flag"
 msgstr ""
 
-#: ../../../devel/style.rst:848
+#: ../../../devel/style.rst:847
 msgid "Do not use printf flag '#', like '%#x'."
 msgstr ""
 
-#: ../../../devel/style.rst:850
+#: ../../../devel/style.rst:849
 msgid ""
 "Rationale: there are two ways to add a '0x' prefix to printed number: "
 "'0x%...' and '%#...'. For consistency the only one way should be used. "
 "Arguments for '0x%' are:"
 msgstr ""
 
-#: ../../../devel/style.rst:854
+#: ../../../devel/style.rst:853
 msgid "it is more popular"
 msgstr ""
 
-#: ../../../devel/style.rst:855
+#: ../../../devel/style.rst:854
 msgid "'%#' omits the 0x for the value 0 which makes output inconsistent"
 msgstr ""
