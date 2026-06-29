@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>QEMU virtio pmem &#8212; QEMU 4.2.1 文档</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=088878c3"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=beaddf03"></script>
+    <link rel="canonical" href="https://projects.localizethedocs.org/qemu-docs-l10n/virtio-pmem.html" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+<script type="text/javascript" src="ltd-provenance.js"></script>
+<script type="text/javascript" src="ltd-current.js"></script>
+<script type="text/javascript" src="../../ltd-config.js"></script>
+<script type="text/javascript" src="../../ltd-flyout.js"></script>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="qemu-virtio-pmem">
+<h1>QEMU virtio pmem<a class="headerlink" href="#qemu-virtio-pmem" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><p>This document explains the setup and usage of the virtio pmem device
+which is available since QEMU v4.1.0.</p>
+<p>The virtio pmem device is a paravirtualized persistent memory device
+on regular (i.e non-NVDIMM) storage.</p>
+</div></blockquote>
+<section id="usecase">
+<h2>Usecase<a class="headerlink" href="#usecase" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Virtio pmem allows to bypass the guest page cache and directly use
+host page cache. This reduces guest memory footprint as the host can
+make efficient memory reclaim decisions under memory pressure.</p>
+</div></blockquote>
+<p>o How does virtio-pmem compare to the nvdimm emulation supported by QEMU?</p>
+<blockquote>
+<div><p>NVDIMM emulation on regular (i.e. non-NVDIMM) host storage does not
+persist the guest writes as there are no defined semantics in the device
+specification. The virtio pmem device provides guest write persistence
+on non-NVDIMM host storage.</p>
+</div></blockquote>
+</section>
+<section id="virtio-pmem-usage">
+<h2>virtio pmem usage<a class="headerlink" href="#virtio-pmem-usage" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>A virtio pmem device backed by a memory-backend-file can be created on
+the QEMU command line as in the following example:</p>
+<p>-object memory-backend-file,id=mem1,share,mem-path=./virtio_pmem.img,size=4G
+-device virtio-pmem-pci,memdev=mem1,id=nv1</p>
+<blockquote>
+<div><p>where:
+- &quot;object memory-backend-file,id=mem1,share,mem-path=&lt;image&gt;, size=&lt;image size&gt;&quot;</p>
+<blockquote>
+<div><p>creates a backend file with the specified size.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>&quot;device virtio-pmem-pci,id=nvdimm1,memdev=mem1&quot; creates a virtio pmem
+pci device whose storage is provided by above memory backend device.</p></li>
+</ul>
+</div></blockquote>
+<p>Multiple virtio pmem devices can be created if multiple pairs of &quot;-object&quot;
+and &quot;-device&quot; are provided.</p>
+</div></blockquote>
+</section>
+<section id="hotplug">
+<h2>Hotplug<a class="headerlink" href="#hotplug" title="Link to this heading">¶</a></h2>
+<p>Virtio pmem devices can be hotplugged via the QEMU monitor. First, the
+memory backing has to be added via 'object_add'; afterwards, the virtio
+pmem device can be added via 'device_add'.</p>
+<p>For example, the following commands add another 4GB virtio pmem device to
+the guest:</p>
+<blockquote>
+<div><p>(qemu) object_add memory-backend-file,id=mem2,share=on,mem-path=virtio_pmem2.img,size=4G
+(qemu) device_add virtio-pmem-pci,id=virtio_pmem2,memdev=mem2</p>
+</div></blockquote>
+</section>
+<section id="guest-data-persistence">
+<h2>Guest Data Persistence<a class="headerlink" href="#guest-data-persistence" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Guest data persistence on non-NVDIMM requires guest userspace applications
+to perform fsync/msync. This is different from a real nvdimm backend where
+no additional fsync/msync is required. This is to persist guest writes in
+host backing file which otherwise remains in host page cache and there is
+risk of losing the data in case of power failure.</p>
+<p>With virtio pmem device, MAP_SYNC mmap flag is not supported. This provides
+a hint to application to perform fsync for write persistence.</p>
+</div></blockquote>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Real nvdimm device backend is not supported.</p></li>
+<li><p>virtio pmem hotunplug is not supported.</p></li>
+<li><p>ACPI NVDIMM features like regions/namespaces are not supported.</p></li>
+<li><p>ndctl command is not supported.</p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="interop/index.html">QEMU System Emulation Management and Interoperability Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devel/index.html">QEMU Developer's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specs/index.html">QEMU System Emulation Guest Hardware Specifications</a></li>
+</ul>
+
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2019, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
