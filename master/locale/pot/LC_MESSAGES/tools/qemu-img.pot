@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-06-29 13:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -426,53 +426,59 @@ msgstr ""
 
 #: ../../../tools/qemu-img.rst:306
 msgid ""
-"Perform one or more modifications of the persistent bitmap *BITMAP* in the "
-"disk image *FILENAME*.  The various modifications are:"
-msgstr ""
-
-#: ../../../tools/qemu-img.rst:309
-msgid "``--add`` to create *BITMAP*, enabled to record future edits."
+"Perform one or more modifications of persistent bitmaps in the disk image "
+"*FILENAME*.  Most operations require *BITMAP* to be specified; ``--remove-"
+"all`` operates on all bitmaps and does not take *BITMAP*. The various "
+"modifications are:"
 msgstr ""
 
 #: ../../../tools/qemu-img.rst:311
-msgid "``--remove`` to remove *BITMAP*."
+msgid "``--add`` to create *BITMAP*, enabled to record future edits."
 msgstr ""
 
 #: ../../../tools/qemu-img.rst:313
-msgid "``--clear`` to clear *BITMAP*."
+msgid "``--remove`` to remove *BITMAP*."
 msgstr ""
 
 #: ../../../tools/qemu-img.rst:315
-msgid "``--enable`` to change *BITMAP* to start recording future edits."
+msgid "``--remove-all`` to remove all bitmaps."
 msgstr ""
 
 #: ../../../tools/qemu-img.rst:317
-msgid "``--disable`` to change *BITMAP* to stop recording future edits."
+msgid "``--clear`` to clear *BITMAP*."
 msgstr ""
 
 #: ../../../tools/qemu-img.rst:319
-msgid "``--merge`` to merge the contents of the *SOURCE* bitmap into *BITMAP*."
+msgid "``--enable`` to change *BITMAP* to start recording future edits."
 msgstr ""
 
 #: ../../../tools/qemu-img.rst:321
+msgid "``--disable`` to change *BITMAP* to stop recording future edits."
+msgstr ""
+
+#: ../../../tools/qemu-img.rst:323
+msgid "``--merge`` to merge the contents of the *SOURCE* bitmap into *BITMAP*."
+msgstr ""
+
+#: ../../../tools/qemu-img.rst:325
 msgid ""
 "Additional options include ``-g`` which sets a non-default *GRANULARITY* for "
 "``--add``, and ``-b`` and ``-F`` which select an alternative source file for "
 "all *SOURCE* bitmaps used by ``--merge``."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:326
+#: ../../../tools/qemu-img.rst:330
 msgid "To see what bitmaps are present in an image, use ``qemu-img info``."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:330
+#: ../../../tools/qemu-img.rst:334
 msgid ""
 "Perform a consistency check on the disk image *FILENAME*. The command can "
 "output in the format *OFMT* which is either ``human`` or ``json``. The JSON "
 "output is an object of QAPI type ``ImageCheck``."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:334
+#: ../../../tools/qemu-img.rst:338
 msgid ""
 "If ``-r`` is specified, qemu-img tries to repair any inconsistencies found "
 "during the check. ``-r leaks`` repairs only cluster leaks, whereas ``-r "
@@ -480,13 +486,13 @@ msgid ""
 "fix or hiding corruption that has already occurred."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:339
+#: ../../../tools/qemu-img.rst:343
 msgid ""
 "Only the formats ``qcow2``, ``qed``, ``parallels``, ``vhdx``, ``vmdk`` and "
 "``vdi`` support consistency checks."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:342
+#: ../../../tools/qemu-img.rst:346
 msgid ""
 "In case the image does not have any inconsistencies, check exits with ``0``. "
 "Other exit codes indicate the kind of inconsistency found or if another "
@@ -494,54 +500,54 @@ msgid ""
 "subcommand:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:346 ../../../tools/qemu-img.rst:411
+#: ../../../tools/qemu-img.rst:350 ../../../tools/qemu-img.rst:415
 msgid "0"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:347
+#: ../../../tools/qemu-img.rst:351
 msgid "Check completed, the image is (now) consistent"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:348 ../../../tools/qemu-img.rst:413
+#: ../../../tools/qemu-img.rst:352 ../../../tools/qemu-img.rst:417
 msgid "1"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:349
+#: ../../../tools/qemu-img.rst:353
 msgid "Check not completed because of internal errors"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:350 ../../../tools/qemu-img.rst:415
+#: ../../../tools/qemu-img.rst:354 ../../../tools/qemu-img.rst:419
 msgid "2"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:351
+#: ../../../tools/qemu-img.rst:355
 msgid "Check completed, image is corrupted"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:352 ../../../tools/qemu-img.rst:417
+#: ../../../tools/qemu-img.rst:356 ../../../tools/qemu-img.rst:421
 msgid "3"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:353
+#: ../../../tools/qemu-img.rst:357
 msgid "Check completed, image has leaked clusters, but is not corrupted"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:354
+#: ../../../tools/qemu-img.rst:358
 msgid "63"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:355
+#: ../../../tools/qemu-img.rst:359
 msgid "Checks are not supported by the image format"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:357
+#: ../../../tools/qemu-img.rst:361
 msgid ""
 "If ``-r`` is specified, exit codes representing the image state refer to the "
 "state after (the attempt at) repairing it. That is, a successful ``-r all`` "
 "will yield the exit code 0, independently of the image state before."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:363
+#: ../../../tools/qemu-img.rst:367
 msgid ""
 "Commit the changes recorded in *FILENAME* in its base image or backing file. "
 "If the backing file is smaller than the snapshot, then the backing file will "
@@ -551,14 +557,14 @@ msgid ""
 "truncate it yourself once the commit operation successfully completes."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:370
+#: ../../../tools/qemu-img.rst:374
 msgid ""
 "The image *FILENAME* is emptied after the operation has succeeded. If you do "
 "not need *FILENAME* afterwards and intend to drop it, you may skip emptying "
 "*FILENAME* by specifying the ``-d`` flag."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:374
+#: ../../../tools/qemu-img.rst:378
 msgid ""
 "If the backing chain of the given image file *FILENAME* has more than one "
 "layer, the backing file into which the changes will be committed may be "
@@ -570,23 +576,23 @@ msgid ""
 "stays valid)."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:383
+#: ../../../tools/qemu-img.rst:387
 msgid "The rate limit for the commit process is specified by ``-r``."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:387
+#: ../../../tools/qemu-img.rst:391
 msgid ""
 "Check if two images have the same content. You can compare images with "
 "different format or settings."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:390
+#: ../../../tools/qemu-img.rst:394
 msgid ""
 "The format is probed unless you specify it by ``-f`` (used for *FILENAME1*) "
 "and/or ``-F`` (used for *FILENAME2*) option."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:393
+#: ../../../tools/qemu-img.rst:397
 msgid ""
 "By default, images with different size are considered identical if the "
 "larger image contains only unallocated and/or zeroed sectors in the area "
@@ -597,7 +603,7 @@ msgid ""
 "sector is allocated in one image and is not allocated in the second one."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:401
+#: ../../../tools/qemu-img.rst:405
 msgid ""
 "By default, compare prints out a result message. This message displays "
 "information that both images are same or the position of the first different "
@@ -605,7 +611,7 @@ msgid ""
 "Strict mode is used."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:406
+#: ../../../tools/qemu-img.rst:410
 msgid ""
 "Compare exits with ``0`` in case the images are equal and with ``1`` in case "
 "the images differ. Other exit codes mean an error occurred during execution "
@@ -613,31 +619,31 @@ msgid ""
 "table summarizes all exit codes of the compare subcommand:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:412
+#: ../../../tools/qemu-img.rst:416
 msgid "Images are identical (or requested help was printed)"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:414
+#: ../../../tools/qemu-img.rst:418
 msgid "Images differ"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:416
+#: ../../../tools/qemu-img.rst:420
 msgid "Error on opening an image"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:418
+#: ../../../tools/qemu-img.rst:422
 msgid "Error on checking a sector allocation"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:419
+#: ../../../tools/qemu-img.rst:423
 msgid "4"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:420
+#: ../../../tools/qemu-img.rst:424
 msgid "Error on reading data"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:424
+#: ../../../tools/qemu-img.rst:428
 msgid ""
 "Convert the disk image *FILENAME* or a snapshot *SNAPSHOT_PARAM* to disk "
 "image *OUTPUT_FILENAME* using format *OUTPUT_FMT*. It can be optionally "
@@ -645,21 +651,21 @@ msgid ""
 "encryption (``-o`` option)."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:429
+#: ../../../tools/qemu-img.rst:433
 msgid ""
 "Only the formats ``qcow`` and ``qcow2`` support compression. The compression "
 "is read-only. It means that if a compressed sector is rewritten, then it is "
 "rewritten as uncompressed data."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:433
+#: ../../../tools/qemu-img.rst:437
 msgid ""
 "Image conversion is also useful to get smaller image when using a growable "
 "format such as ``qcow``: the empty sectors are detected and suppressed from "
 "the destination image."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:437
+#: ../../../tools/qemu-img.rst:441
 msgid ""
 "*SPARSE_SIZE* indicates the consecutive number of bytes (defaults to 4k) "
 "that must contain only zeros for ``qemu-img`` to create a sparse image "
@@ -668,7 +674,7 @@ msgid ""
 "allocated."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:443
+#: ../../../tools/qemu-img.rst:447
 msgid ""
 "You can use the *BACKING_FILE* option to force the output image to be "
 "created as a copy on write image of the specified base image; the "
@@ -676,13 +682,13 @@ msgid ""
 "however the path, image format (as given by *BACKING_FMT*), etc may differ."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:448
+#: ../../../tools/qemu-img.rst:452
 msgid ""
 "If a relative path name is given, the backing file is looked up relative to "
 "the directory containing *OUTPUT_FILENAME*."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:451
+#: ../../../tools/qemu-img.rst:455
 msgid ""
 "If the ``-n`` option is specified, the target volume creation will be "
 "skipped. This is useful for formats such as ``rbd`` if the target volume has "
@@ -690,7 +696,7 @@ msgid ""
 "through ``qemu-img``."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:456
+#: ../../../tools/qemu-img.rst:460
 msgid ""
 "Out of order writes can be enabled with ``-W`` to improve performance. This "
 "is only recommended for preallocated devices like host devices or other raw "
@@ -698,13 +704,13 @@ msgid ""
 "compressed images."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:461
+#: ../../../tools/qemu-img.rst:465
 msgid ""
 "*NUM_COROUTINES* specifies how many coroutines work in parallel during the "
 "convert process (defaults to 8)."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:464
+#: ../../../tools/qemu-img.rst:468
 msgid ""
 "Use of ``--bitmaps`` requests that any persistent bitmaps present in the "
 "original are also copied to the destination.  If any bitmap is inconsistent "
@@ -712,14 +718,14 @@ msgid ""
 "also specified to copy only the consistent bitmaps."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:472
+#: ../../../tools/qemu-img.rst:476
 msgid ""
 "Create the new disk image *FILE* of size *SIZE* and format *FMT*. Depending "
 "on the file format, you can add one or more *FMT_OPTS* options that enable "
 "additional features of this format."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:476
+#: ../../../tools/qemu-img.rst:480
 msgid ""
 "If the option *BACKING_FILE* is specified, then the image will record only "
 "the differences from *BACKING_FILE*. No size needs to be specified in this "
@@ -727,13 +733,13 @@ msgid ""
 "monitor command (or ``qemu-img commit``)."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:481
+#: ../../../tools/qemu-img.rst:485
 msgid ""
 "If a relative path name is given, the backing file is looked up relative to "
 "the directory containing *FILE*."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:484
+#: ../../../tools/qemu-img.rst:488
 msgid ""
 "Note that a given backing file will be opened to check that it is valid. Use "
 "the ``-u`` option to enable unsafe backing file mode, which means that the "
@@ -743,181 +749,181 @@ msgid ""
 "created this way."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:491
+#: ../../../tools/qemu-img.rst:495
 msgid ""
 "The size can also be specified using the *SIZE* option with ``-o``, it "
 "doesn't need to be specified separately in this case."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:497
+#: ../../../tools/qemu-img.rst:501
 msgid ""
 "dd copies from *INPUT* file to *OUTPUT* file converting it from *FMT* format "
 "to *OUTPUT_FMT* format."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:500
+#: ../../../tools/qemu-img.rst:504
 msgid ""
 "The data is by default read and written using blocks of 512 bytes but can be "
 "modified by specifying *BLOCK_SIZE*. If count=\\ *BLOCKS* is specified dd "
 "will stop reading input after reading *BLOCKS* input blocks."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:504
+#: ../../../tools/qemu-img.rst:508
 msgid "The size syntax is similar to :manpage:`dd(1)`'s size syntax."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:508
+#: ../../../tools/qemu-img.rst:512
 msgid ""
 "Give information about the disk image *FILENAME*. Use it in particular to "
 "know the size reserved on disk which can be different from the displayed "
 "size. If VM snapshots are stored in the disk image, they are displayed too."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:513
+#: ../../../tools/qemu-img.rst:517
 msgid ""
 "If a disk image has a backing file chain, information about each disk image "
 "in the chain can be recursively enumerated by using the option ``--backing-"
 "chain``."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:516
+#: ../../../tools/qemu-img.rst:520
 msgid "For instance, if you have an image chain like:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:520
+#: ../../../tools/qemu-img.rst:524
 msgid "base.qcow2 <- snap1.qcow2 <- snap2.qcow2"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:522
+#: ../../../tools/qemu-img.rst:526
 msgid ""
 "To enumerate information about each disk image in the above chain, starting "
 "from top to base, do:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:526
+#: ../../../tools/qemu-img.rst:530
 msgid "qemu-img info --backing-chain snap2.qcow2"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:528
+#: ../../../tools/qemu-img.rst:532
 msgid ""
 "The command can output in the format *OFMT* which is either ``human`` or "
 "``json``.  The JSON output is an object of QAPI type ``ImageInfo``; with ``--"
 "backing-chain``, it is an array of ``ImageInfo`` objects."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:532
+#: ../../../tools/qemu-img.rst:536
 msgid ""
 "``--output=human`` reports the following information (for every image in the "
 "chain):"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:535
+#: ../../../tools/qemu-img.rst:539
 msgid "*image*"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:536
+#: ../../../tools/qemu-img.rst:540
 msgid "The image file name"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:538
+#: ../../../tools/qemu-img.rst:542
 msgid "*file format*"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:539
+#: ../../../tools/qemu-img.rst:543
 msgid "The image format"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:541
+#: ../../../tools/qemu-img.rst:545
 msgid "*virtual size*"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:542
+#: ../../../tools/qemu-img.rst:546
 msgid "The size of the guest disk"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:544
+#: ../../../tools/qemu-img.rst:548
 msgid "*disk size*"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:545
+#: ../../../tools/qemu-img.rst:549
 msgid ""
 "How much space the image file occupies on the host file system (may be shown "
 "as 0 if this information is unavailable, e.g. because there is no file "
 "system)"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:549
+#: ../../../tools/qemu-img.rst:553
 msgid "*cluster_size*"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:550
+#: ../../../tools/qemu-img.rst:554
 msgid "Cluster size of the image format, if applicable"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:552
+#: ../../../tools/qemu-img.rst:556
 msgid "*encrypted*"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:553
+#: ../../../tools/qemu-img.rst:557
 msgid "Whether the image is encrypted (only present if so)"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:555
+#: ../../../tools/qemu-img.rst:559
 msgid "*cleanly shut down*"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:556
+#: ../../../tools/qemu-img.rst:560
 msgid ""
 "This is shown as ``no`` if the image is dirty and will have to be auto-"
 "repaired the next time it is opened in qemu."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:559
+#: ../../../tools/qemu-img.rst:563
 msgid "*backing file*"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:560
+#: ../../../tools/qemu-img.rst:564
 msgid "The backing file name, if present"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:562
+#: ../../../tools/qemu-img.rst:566
 msgid "*backing file format*"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:563
+#: ../../../tools/qemu-img.rst:567
 msgid "The format of the backing file, if the image enforces it"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:565
+#: ../../../tools/qemu-img.rst:569
 msgid "*Snapshot list*"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:566
+#: ../../../tools/qemu-img.rst:570
 msgid "A list of all internal snapshots"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:568
+#: ../../../tools/qemu-img.rst:572
 msgid "*Format specific information*"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:569
+#: ../../../tools/qemu-img.rst:573
 msgid ""
 "Further information whose structure depends on the image format.  This "
 "section is a textual representation of the respective ``ImageInfoSpecific*`` "
 "QAPI object (e.g. ``ImageInfoSpecificQCow2`` for qcow2 images)."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:574
+#: ../../../tools/qemu-img.rst:578
 msgid "*Block limits*"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:575
+#: ../../../tools/qemu-img.rst:579
 msgid ""
 "The block limits for I/O that QEMU detected for the image. This information "
 "is only shown if the ``--limits`` option was specified."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:580
+#: ../../../tools/qemu-img.rst:584
 msgid ""
 "Dump the metadata of image *FILENAME* and its backing file chain. In "
 "particular, this commands dumps the allocation state of every sector of "
@@ -925,7 +931,7 @@ msgid ""
 "file chain."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:585
+#: ../../../tools/qemu-img.rst:589
 msgid ""
 "Two option formats are possible.  The default format (``human``) only dumps "
 "known-nonzero areas of the file.  Known-zero parts of the file are omitted "
@@ -935,14 +941,14 @@ msgid ""
 "first three of which are hexadecimal numbers.  For example the first line of:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:595
+#: ../../../tools/qemu-img.rst:599
 msgid ""
 "Offset          Length          Mapped to       File\n"
 "0               0x20000         0x50000         /tmp/overlay.qcow2\n"
 "0x100000        0x10000         0x95380000      /tmp/backing.qcow2"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:599
+#: ../../../tools/qemu-img.rst:603
 msgid ""
 "means that 0x20000 (131072) bytes starting at offset 0 in the image are "
 "available in /tmp/overlay.qcow2 (opened in ``raw`` format) starting at "
@@ -952,38 +958,38 @@ msgid ""
 "parse this output format in scripts."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:606
+#: ../../../tools/qemu-img.rst:610
 msgid ""
 "The alternative format ``json`` will return an array of dictionaries in JSON "
 "format.  It will include similar information in the ``start``, ``length``, "
 "``offset`` fields; it will also include other more specific information:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:611
+#: ../../../tools/qemu-img.rst:615
 msgid ""
 "boolean field ``data``: true if the sectors contain actual data, false if "
 "the sectors are either unallocated or stored as optimized all-zero clusters"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:614
+#: ../../../tools/qemu-img.rst:618
 msgid "boolean field ``zero``: true if the data is known to read as zero"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:615
+#: ../../../tools/qemu-img.rst:619
 msgid ""
 "boolean field ``present``: true if the data belongs to the backing chain, "
 "false if rebasing the backing chain onto a deeper file would pick up data "
 "from the deeper file;"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:618
+#: ../../../tools/qemu-img.rst:622
 msgid ""
 "integer field ``depth``: the depth within the backing chain at which the "
 "data was resolved; for example, a depth of 2 refers to the backing file of "
 "the backing file of *FILENAME*."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:622
+#: ../../../tools/qemu-img.rst:626
 msgid ""
 "In JSON format, the ``offset`` field is optional; it is absent in cases "
 "where ``human`` format would omit the entry or exit with an error. If "
@@ -991,13 +997,13 @@ msgid ""
 "sectors in the file are not yet in use, but they are preallocated."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:628
+#: ../../../tools/qemu-img.rst:632
 msgid ""
 "For more information, consult ``include/block/block.h`` in QEMU's source "
 "code."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:633
+#: ../../../tools/qemu-img.rst:637
 msgid ""
 "Calculate the file size required for a new image.  This information can be "
 "used to size logical volumes or SAN LUNs appropriately for the image that "
@@ -1007,7 +1013,7 @@ msgid ""
 "``BlockMeasureInfo``."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:640
+#: ../../../tools/qemu-img.rst:644
 msgid ""
 "If the size *N* is given then act as if creating a new empty image file "
 "using ``qemu-img create``.  If *FILENAME* is given then act as if converting "
@@ -1016,30 +1022,30 @@ msgid ""
 "by *FMT*."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:646
+#: ../../../tools/qemu-img.rst:650
 msgid ""
 "A snapshot in an existing image can be specified using *SNAPSHOT_PARAM*."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:648
+#: ../../../tools/qemu-img.rst:652
 msgid "The following fields are reported:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:652
+#: ../../../tools/qemu-img.rst:656
 msgid ""
 "required size: 524288\n"
 "fully allocated size: 1074069504\n"
 "bitmaps size: 0"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:656
+#: ../../../tools/qemu-img.rst:660
 msgid ""
 "The ``required size`` is the file size of the new image.  It may be smaller "
 "than the virtual disk size if the image format supports compact "
 "representation."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:659
+#: ../../../tools/qemu-img.rst:663
 msgid ""
 "The ``fully allocated size`` is the file size of the new image once data has "
 "been written to all sectors.  This is the maximum size that the image file "
@@ -1047,7 +1053,7 @@ msgid ""
 "data, and other advanced image format features."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:664
+#: ../../../tools/qemu-img.rst:668
 msgid ""
 "The ``bitmaps size`` is the additional size required in order to copy "
 "bitmaps from a source image in addition to the guest-visible data; the line "
@@ -1055,17 +1061,17 @@ msgid ""
 "bitmaps are supported but there is nothing to copy."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:672
+#: ../../../tools/qemu-img.rst:676
 msgid "List, apply, create or delete snapshots in image *FILENAME*."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:676
+#: ../../../tools/qemu-img.rst:680
 msgid ""
 "Changes the backing file of an image. Only the formats ``qcow2`` and ``qed`` "
 "support changing the backing file."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:679
+#: ../../../tools/qemu-img.rst:683
 msgid ""
 "The backing file is changed to *BACKING_FILE* and (if the image format of "
 "*FILENAME* supports this) the backing file format is changed to "
@@ -1074,34 +1080,34 @@ msgid ""
 "independently of any backing file)."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:685
+#: ../../../tools/qemu-img.rst:689
 msgid ""
 "If a relative path name is given, the backing file is looked up relative to "
 "the directory containing *FILENAME*."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:688
+#: ../../../tools/qemu-img.rst:692
 msgid ""
 "*CACHE* specifies the cache mode to be used for *FILENAME*, whereas "
 "*SRC_CACHE* specifies the cache mode for reading backing files."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:691
+#: ../../../tools/qemu-img.rst:695
 msgid "There are two different modes in which ``rebase`` can operate:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:693
+#: ../../../tools/qemu-img.rst:697
 msgid "Safe mode"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:694
+#: ../../../tools/qemu-img.rst:698
 msgid ""
 "This is the default mode and performs a real rebase operation. The new "
 "backing file may differ from the old one and ``qemu-img rebase`` will take "
 "care of keeping the guest-visible content of *FILENAME* unchanged."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:699
+#: ../../../tools/qemu-img.rst:703
 msgid ""
 "In order to achieve this, any clusters that differ between *BACKING_FILE* "
 "and the old backing file of *FILENAME* are merged into *FILENAME* before "
@@ -1110,17 +1116,17 @@ msgid ""
 "compressed when written."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:705
+#: ../../../tools/qemu-img.rst:709
 msgid ""
 "Note that the safe mode is an expensive operation, comparable to converting "
 "an image. It only works if the old backing file still exists."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:709
+#: ../../../tools/qemu-img.rst:713
 msgid "Unsafe mode"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:710
+#: ../../../tools/qemu-img.rst:714
 msgid ""
 "``qemu-img`` uses the unsafe mode if ``-u`` is specified. In this mode, only "
 "the backing file name and format of *FILENAME* is changed without any checks "
@@ -1128,21 +1134,21 @@ msgid ""
 "backing file, or the guest-visible content of the image will be corrupted."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:716
+#: ../../../tools/qemu-img.rst:720
 msgid ""
 "This mode is useful for renaming or moving the backing file to somewhere "
 "else.  It can be used without an accessible old backing file, i.e. you can "
 "use it to fix an image whose backing file has already been moved/renamed."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:721
+#: ../../../tools/qemu-img.rst:725
 msgid ""
 "You can use ``rebase`` to perform a \"diff\" operation on two disk images.  "
 "This can be useful when you have copied or cloned a guest, and you want to "
 "get back to a thin image on top of a template or base image."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:726
+#: ../../../tools/qemu-img.rst:730
 msgid ""
 "Say that ``base.img`` has been cloned as ``modified.img`` by copying it, and "
 "that the ``modified.img`` guest has run so there are now some changes "
@@ -1150,44 +1156,44 @@ msgid ""
 "that contains just the differences, do:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:733
+#: ../../../tools/qemu-img.rst:737
 msgid ""
 "qemu-img create -f qcow2 -b modified.img diff.qcow2\n"
 "qemu-img rebase -b base.img diff.qcow2"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:736
+#: ../../../tools/qemu-img.rst:740
 msgid ""
 "At this point, ``modified.img`` can be discarded, since ``base.img + diff."
 "qcow2`` contains the same information."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:741
+#: ../../../tools/qemu-img.rst:745
 msgid "Change the disk image as if it had been created with *SIZE*."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:743
+#: ../../../tools/qemu-img.rst:747
 msgid ""
 "Before using this command to shrink a disk image, you MUST use file system "
 "and partitioning tools inside the VM to reduce allocated file systems and "
 "partition sizes accordingly.  Failure to do so will result in data loss!"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:747
+#: ../../../tools/qemu-img.rst:751
 msgid ""
 "When shrinking images, the ``--shrink`` option must be given. This informs "
 "``qemu-img`` that the user acknowledges all loss of data beyond the "
 "truncated image's end."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:751
+#: ../../../tools/qemu-img.rst:755
 msgid ""
 "After using this command to grow a disk image, you must use file system and "
 "partitioning tools inside the VM to actually begin using the new space on "
 "the device."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:755
+#: ../../../tools/qemu-img.rst:759
 msgid ""
 "When growing an image, the ``--preallocation`` option may be used to specify "
 "how the additional image area should be allocated on the host.  See the "
@@ -1196,19 +1202,19 @@ msgid ""
 "necessary."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:763
+#: ../../../tools/qemu-img.rst:767
 msgid "Notes"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:765
+#: ../../../tools/qemu-img.rst:769
 msgid "Supported image file formats:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:767
+#: ../../../tools/qemu-img.rst:771
 msgid "``raw``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:769
+#: ../../../tools/qemu-img.rst:773
 msgid ""
 "Raw disk image format (default). This format has the advantage of being "
 "simple and easily exportable to all other emulators. If your file system "
@@ -1217,15 +1223,15 @@ msgid ""
 "know the real size used by the image or ``ls -ls`` on Unix/Linux."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:776 ../../../tools/qemu-img.rst:792
+#: ../../../tools/qemu-img.rst:780 ../../../tools/qemu-img.rst:796
 msgid "Supported options:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:778 ../../../tools/qemu-img.rst:862
+#: ../../../tools/qemu-img.rst:782 ../../../tools/qemu-img.rst:866
 msgid "``preallocation``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:779
+#: ../../../tools/qemu-img.rst:783
 msgid ""
 "Preallocation mode (allowed values: ``off``, ``falloc``, ``full``).  "
 "``falloc`` mode preallocates space for image by calling "
@@ -1234,11 +1240,11 @@ msgid ""
 "depending on the storage location."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:785
+#: ../../../tools/qemu-img.rst:789
 msgid "``qcow2``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:787
+#: ../../../tools/qemu-img.rst:791
 msgid ""
 "QEMU image format, the most versatile format. Use it to have smaller images "
 "(useful if your filesystem does not supports holes, for example on Windows), "
@@ -1246,11 +1252,11 @@ msgid ""
 "multiple VM snapshots."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:794
+#: ../../../tools/qemu-img.rst:798
 msgid "``compat``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:795
+#: ../../../tools/qemu-img.rst:799
 msgid ""
 "Determines the qcow2 version to use. ``compat=0.10`` uses the traditional "
 "image format that can be read by any QEMU since 0.10. ``compat=1.1`` enables "
@@ -1259,27 +1265,27 @@ msgid ""
 "copy-on-read for sparse images."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:801
+#: ../../../tools/qemu-img.rst:805
 msgid "``backing_file``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:802
+#: ../../../tools/qemu-img.rst:806
 msgid "File name of a base image (see ``create`` subcommand)"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:804
+#: ../../../tools/qemu-img.rst:808
 msgid "``backing_fmt``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:805
+#: ../../../tools/qemu-img.rst:809
 msgid "Image format of the base image"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:807
+#: ../../../tools/qemu-img.rst:811
 msgid "``compression_type``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:808
+#: ../../../tools/qemu-img.rst:812
 msgid ""
 "This option configures which compression algorithm will be used for "
 "compressed clusters on the image. Note that setting this option doesn't yet "
@@ -1289,41 +1295,41 @@ msgid ""
 "enabled."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:815
+#: ../../../tools/qemu-img.rst:819
 msgid ""
 "Valid values are ``zlib`` and ``zstd``. For images that use ``compat=0.10``, "
 "only ``zlib`` compression is available."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:818
+#: ../../../tools/qemu-img.rst:822
 msgid "``encryption``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:819
+#: ../../../tools/qemu-img.rst:823
 msgid ""
 "If this option is set to ``on``, the image is encrypted with 128-bit AES-CBC."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:822
+#: ../../../tools/qemu-img.rst:826
 msgid ""
 "The use of encryption in qcow and qcow2 images is considered to be flawed by "
 "modern cryptography standards, suffering from a number of design problems:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:826
+#: ../../../tools/qemu-img.rst:830
 msgid ""
 "The AES-CBC cipher is used with predictable initialization vectors based on "
 "the sector number. This makes it vulnerable to chosen plaintext attacks "
 "which can reveal the existence of encrypted data."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:831
+#: ../../../tools/qemu-img.rst:835
 msgid ""
 "The user passphrase is directly used as the encryption key. A poorly chosen "
 "or short passphrase will compromise the security of the encryption."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:835
+#: ../../../tools/qemu-img.rst:839
 msgid ""
 "In the event of the passphrase being compromised there is no way to change "
 "the passphrase to protect data in any qcow images. The files must be cloned, "
@@ -1332,7 +1338,7 @@ msgid ""
 "ineffective with many modern storage technologies."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:842
+#: ../../../tools/qemu-img.rst:846
 msgid ""
 "Initialization vectors used to encrypt sectors are based on the guest "
 "virtual sector number, instead of the host physical sector. When a disk "
@@ -1344,25 +1350,25 @@ msgid ""
 "this weakness since the passphrase is directly used as the key."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:853
+#: ../../../tools/qemu-img.rst:857
 msgid ""
 "Use of qcow / qcow2 encryption is thus strongly discouraged. Users are "
 "recommended to use an alternative encryption technology such as the Linux dm-"
 "crypt / LUKS system."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:857
+#: ../../../tools/qemu-img.rst:861
 msgid "``cluster_size``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:858
+#: ../../../tools/qemu-img.rst:862
 msgid ""
 "Changes the qcow2 cluster size (must be between 512 and 2M). Smaller cluster "
 "sizes can improve the image file size whereas larger cluster sizes generally "
 "provide better performance."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:863
+#: ../../../tools/qemu-img.rst:867
 msgid ""
 "Preallocation mode (allowed values: ``off``, ``metadata``, ``falloc``, "
 "``full``). An image with preallocated metadata is initially larger but can "
@@ -1371,11 +1377,11 @@ msgid ""
 "metadata also."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:869
+#: ../../../tools/qemu-img.rst:873
 msgid "``lazy_refcounts``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:870
+#: ../../../tools/qemu-img.rst:874
 msgid ""
 "If this option is set to ``on``, reference count updates are postponed with "
 "the goal of avoiding metadata I/O and improving performance. This is "
@@ -1385,21 +1391,21 @@ msgid ""
 "img check -r all`` is required, which may take some time."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:878
+#: ../../../tools/qemu-img.rst:882
 msgid "This option can only be enabled if ``compat=1.1`` is specified."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:880
+#: ../../../tools/qemu-img.rst:884
 msgid "``nocow``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:881
+#: ../../../tools/qemu-img.rst:885
 msgid ""
 "If this option is set to ``on``, it will turn off COW of the file. It's only "
 "valid on btrfs, no effect on other file systems."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:884
+#: ../../../tools/qemu-img.rst:888
 msgid ""
 "Btrfs has low performance when hosting a VM image file, even more when the "
 "guest on the VM also using btrfs as file system. Turning off COW is a way to "
@@ -1407,19 +1413,19 @@ msgid ""
 "on btrfs:"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:889
+#: ../../../tools/qemu-img.rst:893
 msgid ""
 "Disable it by mounting with nodatacow, then all newly created files will be "
 "NOCOW"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:891
+#: ../../../tools/qemu-img.rst:895
 msgid ""
 "For an empty file, add the NOCOW file attribute. That's what this option "
 "does."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:894
+#: ../../../tools/qemu-img.rst:898
 msgid ""
 "Note: this option is only valid to new or empty files. If there is an "
 "existing file which is COW and has data blocks already, it couldn't be "
@@ -1427,17 +1433,17 @@ msgid ""
 "to check if the NOCOW flag is set or not (Capital 'C' is NOCOW flag)."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:900
+#: ../../../tools/qemu-img.rst:904
 msgid "``data_file``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:901
+#: ../../../tools/qemu-img.rst:905
 msgid ""
 "Filename where all guest data will be stored. If this option is used, the "
 "qcow2 file will only contain the image's metadata."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:904
+#: ../../../tools/qemu-img.rst:908
 msgid ""
 "Note: Data loss will occur if the given filename already exists when using "
 "this option with ``qemu-img create`` since ``qemu-img`` will create the data "
@@ -1445,17 +1451,17 @@ msgid ""
 "reference to point to the given pre-existing file, use ``qemu-img amend``."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:910
+#: ../../../tools/qemu-img.rst:914
 msgid "``data_file_raw``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:911
+#: ../../../tools/qemu-img.rst:915
 msgid ""
 "If this option is set to ``on``, QEMU will always keep the external data "
 "file consistent as a standalone read-only raw image."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:914
+#: ../../../tools/qemu-img.rst:918
 msgid ""
 "It does this by forwarding all write accesses to the qcow2 file through to "
 "the raw data file, including their offsets. Therefore, data that is visible "
@@ -1466,7 +1472,7 @@ msgid ""
 "raw image."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:922
+#: ../../../tools/qemu-img.rst:926
 msgid ""
 "If this option is ``off``, QEMU will use the data file to store data in an "
 "arbitrary manner. The file’s content will not make sense without the "
@@ -1476,15 +1482,15 @@ msgid ""
 "modifying qcow2 metadata."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:929
+#: ../../../tools/qemu-img.rst:933
 msgid "This option can only be enabled if ``data_file`` is set."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:931
+#: ../../../tools/qemu-img.rst:935
 msgid "``Other``"
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:933
+#: ../../../tools/qemu-img.rst:937
 msgid ""
 "QEMU also supports various other image file formats for compatibility with "
 "older QEMU versions or other hypervisors, including VMDK, VDI, VHD (vpc), "
@@ -1493,7 +1499,7 @@ msgid ""
 "block drivers reference documentation."
 msgstr ""
 
-#: ../../../tools/qemu-img.rst:940
+#: ../../../tools/qemu-img.rst:944
 msgid ""
 "The main purpose of the block drivers for these formats is image "
 "conversion.  For running VMs, it is recommended to convert the disk images "

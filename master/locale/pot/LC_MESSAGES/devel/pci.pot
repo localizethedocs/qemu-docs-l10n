@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-23 09:30+0000\n"
+"POT-Creation-Date: 2026-06-29 13:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -450,7 +450,7 @@ msgstr ""
 #: ../../../../include/hw/pci/pci.h:758 ../../../../include/hw/pci/pci.h:780
 #: ../../../../include/hw/pci/pci.h:803 ../../../../include/hw/pci/pci.h:817
 #: ../../../../include/hw/pci/pci.h:839 ../../../../include/hw/pci/pci.h:852
-#: ../../../../include/hw/pci/pci.h:864
+#: ../../../../include/hw/pci/pci.h:864 ../../../../include/hw/pci/pci.h:877
 msgid "**Description**"
 msgstr ""
 
@@ -469,7 +469,7 @@ msgstr ""
 #: ../../../../include/hw/pci/pci.h:766 ../../../../include/hw/pci/pci.h:792
 #: ../../../../include/hw/pci/pci.h:812 ../../../../include/hw/pci/pci.h:825
 #: ../../../../include/hw/pci/pci.h:834 ../../../../include/hw/pci/pci.h:847
-#: ../../../../include/hw/pci/pci.h:860
+#: ../../../../include/hw/pci/pci.h:860 ../../../../include/hw/pci/pci.h:871
 msgid "**Parameters**"
 msgstr ""
 
@@ -576,6 +576,7 @@ msgid "the callback to be installed."
 msgstr ""
 
 #: ../../../../include/hw/pci/pci.h:757 ../../../../include/hw/pci/pci.h:863
+#: ../../../../include/hw/pci/pci.h:875
 msgid "``void *opaque``"
 msgstr ""
 
@@ -779,30 +780,48 @@ msgstr ""
 msgid "the notifier to unregister."
 msgstr ""
 
-#: ../../../../include/hw/pci/pci.h:856
+#: ../../../../include/hw/pci/pci.h:856 ../../../../include/hw/pci/pci.h:867
 msgid "Initialize specific IOMMU handlers for a PCIBus"
 msgstr ""
 
-#: ../../../../include/hw/pci/pci.h:862
+#: ../../../../include/hw/pci/pci.h:862 ../../../../include/hw/pci/pci.h:873
 msgid "``PCIBus *bus``"
 msgstr ""
 
-#: ../../../../include/hw/pci/pci.h:860
+#: ../../../../include/hw/pci/pci.h:860 ../../../../include/hw/pci/pci.h:872
 msgid "the :c:type:`PCIBus <PCIBus>` being updated."
 msgstr ""
 
-#: ../../../../include/hw/pci/pci.h:862
+#: ../../../../include/hw/pci/pci.h:862 ../../../../include/hw/pci/pci.h:874
 msgid "``const PCIIOMMUOps *ops``"
 msgstr ""
 
-#: ../../../../include/hw/pci/pci.h:861
+#: ../../../../include/hw/pci/pci.h:861 ../../../../include/hw/pci/pci.h:873
 msgid "the :c:type:`PCIIOMMUOps <PCIIOMMUOps>`"
 msgstr ""
 
-#: ../../../../include/hw/pci/pci.h:862
+#: ../../../../include/hw/pci/pci.h:862 ../../../../include/hw/pci/pci.h:874
 msgid "passed to callbacks of the **ops** structure."
 msgstr ""
 
 #: ../../../../include/hw/pci/pci.h:857
 msgid "Let PCI host bridges define specific operations."
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:876
+msgid "``Error **errp``"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:875
+msgid "error handle"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:868
+msgid ""
+"Similar to pci_setup_iommu but enforces that the iommu only protects **bus** "
+"downstream end points and no other bus hierarchy"
+msgstr ""
+
+#: ../../../../include/hw/pci/pci.h:872
+msgid "Returns false on failure with **errp** set, true on success"
 msgstr ""

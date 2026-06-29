@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-10 09:02+0000\n"
+"POT-Creation-Date: 2026-06-29 13:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -506,9 +506,9 @@ msgstr ""
 #: ../../../devel/qapi-code-gen.rst:219 ../../../devel/qapi-code-gen.rst:293
 #: ../../../devel/qapi-code-gen.rst:304 ../../../devel/qapi-code-gen.rst:365
 #: ../../../devel/qapi-code-gen.rst:417 ../../../devel/qapi-code-gen.rst:704
-#: ../../../devel/qapi-code-gen.rst:955 ../../../devel/qapi-code-gen.rst:1532
-#: ../../../devel/qapi-code-gen.rst:1636 ../../../devel/qapi-code-gen.rst:1788
-#: ../../../devel/qapi-code-gen.rst:1919 ../../../devel/qapi-code-gen.rst:1999
+#: ../../../devel/qapi-code-gen.rst:955 ../../../devel/qapi-code-gen.rst:1530
+#: ../../../devel/qapi-code-gen.rst:1634 ../../../devel/qapi-code-gen.rst:1786
+#: ../../../devel/qapi-code-gen.rst:1917 ../../../devel/qapi-code-gen.rst:1997
 msgid "Example::"
 msgstr ""
 
@@ -1667,11 +1667,11 @@ msgstr ""
 
 #: ../../../devel/qapi-code-gen.rst:987
 msgid ""
-"Definition documentation starts with a line naming the definition, followed "
-"by an optional overview, a description of each argument (for commands and "
-"events), member (for structs and unions), branch (for alternates), or value "
-"(for enums), a description of each feature (if any), and finally optional "
-"tagged sections."
+"Definition documentation starts with a description naming the definition "
+"with an optional indented overview, a description of each argument (for "
+"commands and events), member (for structs and unions), branch (for "
+"alternates), or value (for enums), a description of each feature (if any), "
+"and finally optional tagged sections."
 msgstr ""
 
 #: ../../../devel/qapi-code-gen.rst:993
@@ -1835,8 +1835,7 @@ msgstr ""
 msgid ""
 "##\n"
 "# @BlockStats:\n"
-"#\n"
-"# Statistics of a virtual block device or a block backing device.\n"
+"#     Statistics of a virtual block device or a block backing device.\n"
 "#\n"
 "# @device: If the stats are for a virtual block device, the name\n"
 "#     corresponding to the virtual block device.\n"
@@ -1853,8 +1852,7 @@ msgid ""
 "\n"
 "##\n"
 "# @query-blockstats:\n"
-"#\n"
-"# Query the @BlockStats for all virtual block devices.\n"
+"#     Query the @BlockStats for all virtual block devices.\n"
 "#\n"
 "# @query-nodes: If true, the command will query all the block nodes\n"
 "#     ... explain, explain ...\n"
@@ -1876,17 +1874,17 @@ msgid ""
 "  'returns': ['BlockStats'] }"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1138
+#: ../../../devel/qapi-code-gen.rst:1136
 msgid "Markup pitfalls"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1140
+#: ../../../devel/qapi-code-gen.rst:1138
 msgid ""
 "A blank line is required between list items and paragraphs.  Without it, the "
 "list may not be recognized, resulting in garbled output.  Good example::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1144
+#: ../../../devel/qapi-code-gen.rst:1142
 msgid ""
 "# An event's state is modified if:\n"
 "#\n"
@@ -1894,51 +1892,51 @@ msgid ""
 "# - if @vcpu is given, the event has the \"vcpu\" property."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1149
+#: ../../../devel/qapi-code-gen.rst:1147
 msgid "Without the blank line this would be a single paragraph."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1151
+#: ../../../devel/qapi-code-gen.rst:1149
 msgid "Indentation matters.  Bad example::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1153
+#: ../../../devel/qapi-code-gen.rst:1151
 msgid ""
 "# @none: None (no memory side cache in this proximity domain,\n"
 "#              or cache associativity unknown)\n"
 "#     (since 5.0)"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1157
+#: ../../../devel/qapi-code-gen.rst:1155
 msgid ""
 "The last line's de-indent is wrong.  The second and subsequent lines need to "
 "line up with each other, like this::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1160
+#: ../../../devel/qapi-code-gen.rst:1158
 msgid ""
 "# @none: None (no memory side cache in this proximity domain,\n"
 "#     or cache associativity unknown)\n"
 "#     (since 5.0)"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1164
+#: ../../../devel/qapi-code-gen.rst:1162
 msgid ""
 "Section tags are case-sensitive and end with a colon.  They are only "
 "recognized after a blank line.  Good example::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1167
+#: ../../../devel/qapi-code-gen.rst:1165
 msgid ""
 "#\n"
 "# Since: 7.1"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1170 ../../../devel/qapi-code-gen.rst:1182
+#: ../../../devel/qapi-code-gen.rst:1168 ../../../devel/qapi-code-gen.rst:1180
 msgid "Bad examples (all ordinary paragraphs)::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1172
+#: ../../../devel/qapi-code-gen.rst:1170
 msgid ""
 "# since: 7.1\n"
 "\n"
@@ -1947,51 +1945,51 @@ msgid ""
 "# Since : 7.1"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1178
+#: ../../../devel/qapi-code-gen.rst:1176
 msgid "Likewise, member descriptions require a colon.  Good example::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1180
+#: ../../../devel/qapi-code-gen.rst:1178
 msgid "# @interface-id: Interface ID"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1184
+#: ../../../devel/qapi-code-gen.rst:1182
 msgid ""
 "# @interface-id   Interface ID\n"
 "\n"
 "# @interface-id : Interface ID"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1188
+#: ../../../devel/qapi-code-gen.rst:1186
 msgid ""
 "Undocumented members are not flagged, yet.  Instead, the generated "
 "documentation describes them as \"Not documented\".  Think twice before "
 "adding more undocumented members."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1192
+#: ../../../devel/qapi-code-gen.rst:1190
 msgid ""
 "When you change documentation comments, please check the generated "
 "documentation comes out as intended!"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1197
+#: ../../../devel/qapi-code-gen.rst:1195
 msgid "Client JSON Protocol introspection"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1199
+#: ../../../devel/qapi-code-gen.rst:1197
 msgid ""
 "Clients of a Client JSON Protocol commonly need to figure out what exactly "
 "the server (QEMU) supports."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1202
+#: ../../../devel/qapi-code-gen.rst:1200
 msgid ""
 "For this purpose, QMP provides introspection via command query-qmp-schema.  "
 "QGA currently doesn't support introspection."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1205
+#: ../../../devel/qapi-code-gen.rst:1203
 msgid ""
 "While Client JSON Protocol wire compatibility should be maintained between "
 "qemu versions, we cannot make the same guarantees for introspection "
@@ -2004,7 +2002,7 @@ msgid ""
 "choice between the original type and something else."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1216
+#: ../../../devel/qapi-code-gen.rst:1214
 msgid ""
 "query-qmp-schema returns a JSON array of SchemaInfo objects.  These objects "
 "together describe the wire ABI, as defined in the QAPI schema. There is no "
@@ -2014,7 +2012,7 @@ msgid ""
 "command, and event names."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1223
+#: ../../../devel/qapi-code-gen.rst:1221
 msgid ""
 "However, the SchemaInfo can't reflect all the rules and restrictions that "
 "apply to QMP.  It's interface introspection (figuring out what's there), not "
@@ -2022,32 +2020,32 @@ msgid ""
 "understand how QMP is to be used, you need to study the QAPI schema."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1229
+#: ../../../devel/qapi-code-gen.rst:1227
 msgid ""
 "Like any other command, query-qmp-schema is itself defined in the QAPI "
 "schema, along with the SchemaInfo type.  This text attempts to give an "
 "overview how things work.  For details you need to consult the QAPI schema."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1234
+#: ../../../devel/qapi-code-gen.rst:1232
 msgid ""
 "SchemaInfo objects have common members \"name\", \"meta-type\", "
 "\"features\", and additional variant members depending on the value of meta-"
 "type."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1238
+#: ../../../devel/qapi-code-gen.rst:1236
 msgid ""
 "Each SchemaInfo object describes a wire ABI entity of a certain meta-type: a "
 "command, event or one of several kinds of type."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1241
+#: ../../../devel/qapi-code-gen.rst:1239
 msgid ""
 "SchemaInfo for commands and events have the same name as in the QAPI schema."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1244
+#: ../../../devel/qapi-code-gen.rst:1242
 msgid ""
 "Command and event names are part of the wire ABI, but type names are not.  "
 "Therefore, the SchemaInfo for types have auto-generated meaningless names.  "
@@ -2055,23 +2053,23 @@ msgid ""
 "instead."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1249
+#: ../../../devel/qapi-code-gen.rst:1247
 msgid ""
 "Optional member \"features\" exposes the entity's feature strings as a JSON "
 "array of strings."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1252
+#: ../../../devel/qapi-code-gen.rst:1250
 msgid ""
 "To examine a type, start with a command or event using it, then follow "
 "references by name."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1255
+#: ../../../devel/qapi-code-gen.rst:1253
 msgid "QAPI schema definitions not reachable that way are omitted."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1257
+#: ../../../devel/qapi-code-gen.rst:1255
 msgid ""
 "The SchemaInfo for a command has meta-type \"command\", and variant members "
 "\"arg-type\", \"ret-type\" and \"allow-oob\".  On the wire, the "
@@ -2082,18 +2080,18 @@ msgid ""
 "execution.  It defaults to false."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1265
+#: ../../../devel/qapi-code-gen.rst:1263
 msgid ""
 "If the command takes no arguments, \"arg-type\" names an object type without "
 "members.  Likewise, if the command returns nothing, \"ret-type\" names an "
 "object type without members."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1269
+#: ../../../devel/qapi-code-gen.rst:1267
 msgid "Example: the SchemaInfo for command query-qmp-schema ::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1271
+#: ../../../devel/qapi-code-gen.rst:1269
 msgid ""
 "{ \"name\": \"query-qmp-schema\", \"meta-type\": \"command\",\n"
 "  \"arg-type\": \"q_empty\", \"ret-type\": \"SchemaInfoList\" }\n"
@@ -2102,30 +2100,30 @@ msgid ""
 "  \"SchemaInfoList\" is the array of SchemaInfo type."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1277
+#: ../../../devel/qapi-code-gen.rst:1275
 msgid ""
 "The SchemaInfo for an event has meta-type \"event\", and variant member "
 "\"arg-type\".  On the wire, a \"data\" member that the server passes in an "
 "event conforms to the object type named by \"arg-type\"."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1281
+#: ../../../devel/qapi-code-gen.rst:1279
 msgid ""
 "If the event carries no additional information, \"arg-type\" names an object "
 "type without members.  The event may not have a data member on the wire then."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1285
+#: ../../../devel/qapi-code-gen.rst:1283
 msgid ""
 "Each command or event defined with 'data' as MEMBERS object in the QAPI "
 "schema implicitly defines an object type."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1288
+#: ../../../devel/qapi-code-gen.rst:1286
 msgid "Example: the SchemaInfo for EVENT_C from section Events_ ::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1290
+#: ../../../devel/qapi-code-gen.rst:1288
 msgid ""
 "{ \"name\": \"EVENT_C\", \"meta-type\": \"event\",\n"
 "  \"arg-type\": \"q_obj-EVENT_C-arg\" }\n"
@@ -2134,19 +2132,19 @@ msgid ""
 "the two members from the event's definition."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1296
+#: ../../../devel/qapi-code-gen.rst:1294
 msgid ""
 "The SchemaInfo for struct and union types has meta-type \"object\" and "
 "variant member \"members\"."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1299
+#: ../../../devel/qapi-code-gen.rst:1297
 msgid ""
 "The SchemaInfo for a union type additionally has variant members \"tag\" and "
 "\"variants\"."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1302
+#: ../../../devel/qapi-code-gen.rst:1300
 msgid ""
 "\"members\" is a JSON array describing the object's common members, if any.  "
 "Each element is a JSON object with members \"name\" (the member's name), "
@@ -2158,11 +2156,11 @@ msgid ""
 "object when learning whether a particular member is supported."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1312
+#: ../../../devel/qapi-code-gen.rst:1310
 msgid "Example: the SchemaInfo for MyType from section `Struct types`_ ::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1314
+#: ../../../devel/qapi-code-gen.rst:1312
 msgid ""
 "{ \"name\": \"MyType\", \"meta-type\": \"object\",\n"
 "  \"members\": [\n"
@@ -2171,17 +2169,17 @@ msgid ""
 "      { \"name\": \"member3\", \"type\": \"str\", \"default\": null } ] }"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1320
+#: ../../../devel/qapi-code-gen.rst:1318
 msgid ""
 "\"features\" exposes the command's feature strings as a JSON array of "
 "strings."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1323
+#: ../../../devel/qapi-code-gen.rst:1321
 msgid "Example: the SchemaInfo for TestType from section Features_::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1325
+#: ../../../devel/qapi-code-gen.rst:1323
 msgid ""
 "{ \"name\": \"TestType\", \"meta-type\": \"object\",\n"
 "  \"members\": [\n"
@@ -2189,7 +2187,7 @@ msgid ""
 "  \"features\": [\"allow-negative-numbers\"] }"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1330
+#: ../../../devel/qapi-code-gen.rst:1328
 msgid ""
 "\"tag\" is the name of the common member serving as type tag. \"variants\" "
 "is a JSON array describing the object's variant members. Each element is a "
@@ -2200,13 +2198,13 @@ msgid ""
 "the corresponding \"tag\" enum type."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1338
+#: ../../../devel/qapi-code-gen.rst:1336
 msgid ""
 "Example: the SchemaInfo for union BlockdevOptions from section `Union "
 "types`_ ::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1341
+#: ../../../devel/qapi-code-gen.rst:1339
 msgid ""
 "{ \"name\": \"BlockdevOptions\", \"meta-type\": \"object\",\n"
 "  \"members\": [\n"
@@ -2218,13 +2216,13 @@ msgid ""
 "      { \"case\": \"qcow2\", \"type\": \"BlockdevOptionsQcow2\" } ] }"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1350
+#: ../../../devel/qapi-code-gen.rst:1348
 msgid ""
 "Note that base types are \"flattened\": its members are included in the "
 "\"members\" array."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1353
+#: ../../../devel/qapi-code-gen.rst:1351
 msgid ""
 "The SchemaInfo for an alternate type has meta-type \"alternate\", and "
 "variant member \"members\".  \"members\" is a JSON array.  Each element is a "
@@ -2233,12 +2231,12 @@ msgid ""
 "guarantee on the order in which \"members\" will be listed."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1359
+#: ../../../devel/qapi-code-gen.rst:1357
 msgid ""
 "Example: the SchemaInfo for BlockdevRef from section `Alternate types`_ ::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1361
+#: ../../../devel/qapi-code-gen.rst:1359
 msgid ""
 "{ \"name\": \"BlockdevRef\", \"meta-type\": \"alternate\",\n"
 "  \"members\": [\n"
@@ -2246,7 +2244,7 @@ msgid ""
 "      { \"type\": \"str\" } ] }"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1366
+#: ../../../devel/qapi-code-gen.rst:1364
 msgid ""
 "The SchemaInfo for an array type has meta-type \"array\", and variant member "
 "\"element-type\", which names the array's element type.  Array types are "
@@ -2255,23 +2253,23 @@ msgid ""
 "instead of making assumptions based on parsing member \"name\"."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1373
+#: ../../../devel/qapi-code-gen.rst:1371
 msgid "Example: the SchemaInfo for ['str'] ::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1375
+#: ../../../devel/qapi-code-gen.rst:1373
 msgid ""
 "{ \"name\": \"[str]\", \"meta-type\": \"array\",\n"
 "  \"element-type\": \"str\" }"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1378
+#: ../../../devel/qapi-code-gen.rst:1376
 msgid ""
 "The SchemaInfo for an enumeration type has meta-type \"enum\" and variant "
 "member \"members\"."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1381
+#: ../../../devel/qapi-code-gen.rst:1379
 msgid ""
 "\"members\" is a JSON array describing the enumeration values.  Each element "
 "is a JSON object with member \"name\" (the member's name), and optionally "
@@ -2280,11 +2278,11 @@ msgid ""
 "whether a particular value is supported."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1387
+#: ../../../devel/qapi-code-gen.rst:1385
 msgid "Example: the SchemaInfo for MyEnum from section `Enumeration types`_ ::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1389
+#: ../../../devel/qapi-code-gen.rst:1387
 msgid ""
 "{ \"name\": \"MyEnum\", \"meta-type\": \"enum\",\n"
 "  \"members\": [\n"
@@ -2294,7 +2292,7 @@ msgid ""
 "  ] }"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1396
+#: ../../../devel/qapi-code-gen.rst:1394
 msgid ""
 "The SchemaInfo for a built-in type has the same name as the type in the QAPI "
 "schema (see section `Built-in Types`_), with one exception detailed below.  "
@@ -2302,34 +2300,34 @@ msgid ""
 "encoded on the wire."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1401
+#: ../../../devel/qapi-code-gen.rst:1399
 msgid "Example: the SchemaInfo for str ::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1403
+#: ../../../devel/qapi-code-gen.rst:1401
 msgid ""
 "{ \"name\": \"str\", \"meta-type\": \"builtin\", \"json-type\": \"string\" }"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1405
+#: ../../../devel/qapi-code-gen.rst:1403
 msgid ""
 "The QAPI schema supports a number of integer types that only differ in how "
 "they map to C.  They are identical as far as SchemaInfo is concerned.  "
 "Therefore, they get all mapped to a single type \"int\" in SchemaInfo."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1410
+#: ../../../devel/qapi-code-gen.rst:1408
 msgid ""
 "As explained above, type names are not part of the wire ABI.  Not even the "
 "names of built-in types.  Clients should examine member \"json-type\" "
 "instead of hard-coding names of built-in types."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1416
+#: ../../../devel/qapi-code-gen.rst:1414
 msgid "Compatibility considerations"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1418
+#: ../../../devel/qapi-code-gen.rst:1416
 msgid ""
 "Maintaining backward compatibility at the Client JSON Protocol level while "
 "evolving the schema requires some care.  This section is about syntactic "
@@ -2337,13 +2335,13 @@ msgid ""
 "compatibility."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1423
+#: ../../../devel/qapi-code-gen.rst:1421
 msgid ""
 "Clients send commands with argument data, and receive command responses with "
 "return data and events with event data."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1426
+#: ../../../devel/qapi-code-gen.rst:1424
 msgid ""
 "Adding opt-in functionality to the send direction is backwards compatible: "
 "adding commands, optional arguments, enumeration values, union and alternate "
@@ -2352,14 +2350,14 @@ msgid ""
 "continue to work."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1432
+#: ../../../devel/qapi-code-gen.rst:1430
 msgid ""
 "Incompatible changes include removing commands, command arguments, "
 "enumeration values, union and alternate branches, adding mandatory command "
 "arguments, and making optional arguments mandatory."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1436
+#: ../../../devel/qapi-code-gen.rst:1434
 msgid ""
 "The specified behavior of an absent optional argument should remain the "
 "same.  With proper documentation, this policy still allows some flexibility; "
@@ -2369,14 +2367,14 @@ msgid ""
 "that the default size is sensible."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1443
+#: ../../../devel/qapi-code-gen.rst:1441
 msgid ""
 "Adding functionality to the receive direction is generally backwards "
 "compatible: adding events, adding return and event data members. Clients are "
 "expected to ignore the ones they don't know."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1447
+#: ../../../devel/qapi-code-gen.rst:1445
 msgid ""
 "Removing \"unreachable\" stuff like events that can't be triggered anymore, "
 "optional return or event data members that can't be sent anymore, and return "
@@ -2385,28 +2383,28 @@ msgid ""
 "conceivably confuse clients, so tread carefully."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1454
+#: ../../../devel/qapi-code-gen.rst:1452
 msgid "Incompatible changes include removing return and event data members."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1456
+#: ../../../devel/qapi-code-gen.rst:1454
 msgid ""
 "Any change to a command definition's 'data' or one of the types used there "
 "(recursively) needs to consider send direction compatibility."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1459
+#: ../../../devel/qapi-code-gen.rst:1457
 msgid ""
 "Any change to a command definition's 'return', an event definition's 'data', "
 "or one of the types used there (recursively) needs to consider receive "
 "direction compatibility."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1463
+#: ../../../devel/qapi-code-gen.rst:1461
 msgid "Any change to types used in both contexts need to consider both."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1465
+#: ../../../devel/qapi-code-gen.rst:1463
 msgid ""
 "Enumeration type values and complex and alternate type members may be "
 "reordered freely.  For enumerations and alternate types, this doesn't affect "
@@ -2415,18 +2413,18 @@ msgid ""
 "Protocol permits."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1471
+#: ../../../devel/qapi-code-gen.rst:1469
 msgid ""
 "Since type names are not visible in the Client JSON Protocol, types may be "
 "freely renamed.  Even certain refactorings are invisible, such as splitting "
 "members from one type into a common base type."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1477
+#: ../../../devel/qapi-code-gen.rst:1475
 msgid "Code generation"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1479
+#: ../../../devel/qapi-code-gen.rst:1477
 msgid ""
 "The QAPI code generator qapi-gen.py generates code and documentation from "
 "the schema.  Together with the core QAPI libraries, this code provides "
@@ -2436,7 +2434,7 @@ msgid ""
 "response to be returned to the user, and introspect the commands."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1487
+#: ../../../devel/qapi-code-gen.rst:1485
 msgid ""
 "As an example, we'll use the following schema, which describes a single "
 "complex user-defined type, along with command which takes a list of that "
@@ -2445,7 +2443,7 @@ msgid ""
 "else is produced by the generator."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1495
+#: ../../../devel/qapi-code-gen.rst:1493
 msgid ""
 "$ cat example-schema.json\n"
 "{ 'struct': 'UserDefOne',\n"
@@ -2458,17 +2456,17 @@ msgid ""
 "{ 'event': 'MY_EVENT' }"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1505
+#: ../../../devel/qapi-code-gen.rst:1503
 msgid "We run qapi-gen.py like this::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1507
+#: ../../../devel/qapi-code-gen.rst:1505
 msgid ""
 "$ python scripts/qapi-gen.py --output-dir=\"qapi-generated\" \\\n"
 "--prefix=\"example-\" example-schema.json"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1510
+#: ../../../devel/qapi-code-gen.rst:1508
 msgid ""
 "For a more thorough look at generated code, the testsuite includes tests/"
 "qapi-schema/qapi-schema-tests.json that covers more examples of what the "
@@ -2476,32 +2474,32 @@ msgid ""
 "check-unit'."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1517
+#: ../../../devel/qapi-code-gen.rst:1515
 msgid "Code generated for QAPI types"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1519 ../../../devel/qapi-code-gen.rst:1905
-#: ../../../devel/qapi-code-gen.rst:1991
+#: ../../../devel/qapi-code-gen.rst:1517 ../../../devel/qapi-code-gen.rst:1903
+#: ../../../devel/qapi-code-gen.rst:1989
 msgid "The following files are created:"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1521
+#: ../../../devel/qapi-code-gen.rst:1519
 msgid "``$(prefix)qapi-types.h``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1522
+#: ../../../devel/qapi-code-gen.rst:1520
 msgid "C types corresponding to types defined in the schema"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1524
+#: ../../../devel/qapi-code-gen.rst:1522
 msgid "``$(prefix)qapi-types.c``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1525 ../../../devel/qapi-code-gen.rst:1615
+#: ../../../devel/qapi-code-gen.rst:1523 ../../../devel/qapi-code-gen.rst:1613
 msgid "Cleanup functions for the above C types"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1527
+#: ../../../devel/qapi-code-gen.rst:1525
 msgid ""
 "The $(prefix) is an optional parameter used as a namespace to keep the "
 "generated code from one schema/code-generation separated from others so code "
@@ -2509,7 +2507,7 @@ msgid ""
 "created code."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1534
+#: ../../../devel/qapi-code-gen.rst:1532
 msgid ""
 "$ cat qapi-generated/example-qapi-types.h\n"
 "[Uninteresting stuff omitted...]\n"
@@ -2580,71 +2578,71 @@ msgid ""
 "[Uninteresting stuff omitted...]"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1602 ../../../devel/qapi-code-gen.rst:1747
-#: ../../../devel/qapi-code-gen.rst:1981
+#: ../../../devel/qapi-code-gen.rst:1600 ../../../devel/qapi-code-gen.rst:1745
+#: ../../../devel/qapi-code-gen.rst:1979
 msgid ""
 "For a modular QAPI schema (see section `Include directives`_), code for each "
 "sub-module SUBDIR/SUBMODULE.json is actually generated into ::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1605
+#: ../../../devel/qapi-code-gen.rst:1603
 msgid ""
 "SUBDIR/$(prefix)qapi-types-SUBMODULE.h\n"
 "SUBDIR/$(prefix)qapi-types-SUBMODULE.c"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1608 ../../../devel/qapi-code-gen.rst:1753
+#: ../../../devel/qapi-code-gen.rst:1606 ../../../devel/qapi-code-gen.rst:1751
 msgid ""
 "If qapi-gen.py is run with option --builtins, additional files are created:"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1611
+#: ../../../devel/qapi-code-gen.rst:1609
 msgid "``qapi-builtin-types.h``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1612
+#: ../../../devel/qapi-code-gen.rst:1610
 msgid "C types corresponding to built-in types"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1614
+#: ../../../devel/qapi-code-gen.rst:1612
 msgid "``qapi-builtin-types.c``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1619
+#: ../../../devel/qapi-code-gen.rst:1617
 msgid "Code generated for visiting QAPI types"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1621
+#: ../../../devel/qapi-code-gen.rst:1619
 msgid ""
 "These are the visitor functions used to walk through and convert between a "
 "native QAPI C data structure and some other format (such as QObject); the "
 "generated functions are named visit_type_FOO() and visit_type_FOO_members()."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1626 ../../../devel/qapi-code-gen.rst:1770
+#: ../../../devel/qapi-code-gen.rst:1624 ../../../devel/qapi-code-gen.rst:1768
 msgid "The following files are generated:"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1628
+#: ../../../devel/qapi-code-gen.rst:1626
 msgid "``$(prefix)qapi-visit.c``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1629
+#: ../../../devel/qapi-code-gen.rst:1627
 msgid ""
 "Visitor function for a particular C type, used to automagically convert "
 "QObjects into the corresponding C type and vice-versa, as well as for "
 "deallocating memory for an existing C type"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1633
+#: ../../../devel/qapi-code-gen.rst:1631
 msgid "``$(prefix)qapi-visit.h``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1634
+#: ../../../devel/qapi-code-gen.rst:1632
 msgid "Declarations for previously mentioned visitor functions"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1638
+#: ../../../devel/qapi-code-gen.rst:1636
 msgid ""
 "$ cat qapi-generated/example-qapi-visit.h\n"
 "[Uninteresting stuff omitted...]\n"
@@ -2762,81 +2760,81 @@ msgid ""
 "[Uninteresting stuff omitted...]"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1750
+#: ../../../devel/qapi-code-gen.rst:1748
 msgid ""
 "SUBDIR/$(prefix)qapi-visit-SUBMODULE.h\n"
 "SUBDIR/$(prefix)qapi-visit-SUBMODULE.c"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1756
+#: ../../../devel/qapi-code-gen.rst:1754
 msgid "``qapi-builtin-visit.h``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1757
+#: ../../../devel/qapi-code-gen.rst:1755
 msgid "Visitor functions for built-in types"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1759
+#: ../../../devel/qapi-code-gen.rst:1757
 msgid "``qapi-builtin-visit.c``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1760
+#: ../../../devel/qapi-code-gen.rst:1758
 msgid "Declarations for these visitor functions"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1764
+#: ../../../devel/qapi-code-gen.rst:1762
 msgid "Code generated for commands"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1766
+#: ../../../devel/qapi-code-gen.rst:1764
 msgid ""
 "These are the marshaling/dispatch functions for the commands defined in the "
 "schema.  The generated code provides qmp_marshal_COMMAND(), and declares "
 "qmp_COMMAND() that the user must implement."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1772
+#: ../../../devel/qapi-code-gen.rst:1770
 msgid "``$(prefix)qapi-commands.c``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1773
+#: ../../../devel/qapi-code-gen.rst:1771
 msgid ""
 "Command marshal/dispatch functions for each QMP command defined in the schema"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1776
+#: ../../../devel/qapi-code-gen.rst:1774
 msgid "``$(prefix)qapi-commands.h``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1777
+#: ../../../devel/qapi-code-gen.rst:1775
 msgid "Function prototypes for the QMP commands specified in the schema"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1779
+#: ../../../devel/qapi-code-gen.rst:1777
 msgid "``$(prefix)qapi-commands.trace-events``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1780
+#: ../../../devel/qapi-code-gen.rst:1778
 msgid "Trace event declarations, see :ref:`tracing`."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1782
+#: ../../../devel/qapi-code-gen.rst:1780
 msgid "``$(prefix)qapi-init-commands.h``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1783
+#: ../../../devel/qapi-code-gen.rst:1781
 msgid "Command initialization prototype"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1785
+#: ../../../devel/qapi-code-gen.rst:1783
 msgid "``$(prefix)qapi-init-commands.c``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1786
+#: ../../../devel/qapi-code-gen.rst:1784
 msgid "Command initialization code"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1790
+#: ../../../devel/qapi-code-gen.rst:1788
 msgid ""
 "$ cat qapi-generated/example-qapi-commands.h\n"
 "[Uninteresting stuff omitted...]\n"
@@ -2941,61 +2939,61 @@ msgid ""
 "[Uninteresting stuff omitted...]"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1892
+#: ../../../devel/qapi-code-gen.rst:1890
 msgid ""
 "For a modular QAPI schema (see section `Include directives`_), code for each "
 "sub-module SUBDIR/SUBMODULE.json is actually generated into::"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1895
+#: ../../../devel/qapi-code-gen.rst:1893
 msgid ""
 "SUBDIR/$(prefix)qapi-commands-SUBMODULE.h\n"
 "SUBDIR/$(prefix)qapi-commands-SUBMODULE.c"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1900
+#: ../../../devel/qapi-code-gen.rst:1898
 msgid "Code generated for events"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1902
+#: ../../../devel/qapi-code-gen.rst:1900
 msgid ""
 "This is the code related to events defined in the schema, providing "
 "qapi_event_send_EVENT()."
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1907
+#: ../../../devel/qapi-code-gen.rst:1905
 msgid "``$(prefix)qapi-events.h``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1908
+#: ../../../devel/qapi-code-gen.rst:1906
 msgid "Function prototypes for each event type"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1910
+#: ../../../devel/qapi-code-gen.rst:1908
 msgid "``$(prefix)qapi-events.c``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1911
+#: ../../../devel/qapi-code-gen.rst:1909
 msgid "Implementation of functions to send an event"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1913
+#: ../../../devel/qapi-code-gen.rst:1911
 msgid "``$(prefix)qapi-emit-events.h``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1914
+#: ../../../devel/qapi-code-gen.rst:1912
 msgid "Enumeration of all event names, and common event code declarations"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1916
+#: ../../../devel/qapi-code-gen.rst:1914
 msgid "``$(prefix)qapi-emit-events.c``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1917
+#: ../../../devel/qapi-code-gen.rst:1915
 msgid "Common event code definitions"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1921
+#: ../../../devel/qapi-code-gen.rst:1919
 msgid ""
 "$ cat qapi-generated/example-qapi-events.h\n"
 "[Uninteresting stuff omitted...]\n"
@@ -3058,33 +3056,33 @@ msgid ""
 "[Uninteresting stuff omitted...]"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1984
+#: ../../../devel/qapi-code-gen.rst:1982
 msgid ""
 "SUBDIR/$(prefix)qapi-events-SUBMODULE.h\n"
 "SUBDIR/$(prefix)qapi-events-SUBMODULE.c"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1989
+#: ../../../devel/qapi-code-gen.rst:1987
 msgid "Code generated for introspection"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1993
+#: ../../../devel/qapi-code-gen.rst:1991
 msgid "``$(prefix)qapi-introspect.c``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1994
+#: ../../../devel/qapi-code-gen.rst:1992
 msgid "Defines a string holding a JSON description of the schema"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1996
+#: ../../../devel/qapi-code-gen.rst:1994
 msgid "``$(prefix)qapi-introspect.h``"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:1997
+#: ../../../devel/qapi-code-gen.rst:1995
 msgid "Declares the above string"
 msgstr ""
 
-#: ../../../devel/qapi-code-gen.rst:2001
+#: ../../../devel/qapi-code-gen.rst:1999
 msgid ""
 "$ cat qapi-generated/example-qapi-introspect.h\n"
 "[Uninteresting stuff omitted...]\n"
