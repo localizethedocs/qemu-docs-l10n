@@ -1,0 +1,757 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 5.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/loads-stores.rst:7
+msgid "Load and Store APIs"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:9
+msgid ""
+"QEMU internally has multiple families of functions for performing loads and "
+"stores. This document attempts to enumerate them all and indicate when to "
+"use them. It does not provide detailed documentation of each API -- for that "
+"you should look at the documentation comments in the relevant header files."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:17
+msgid "``ld*_p and st*_p``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:19
+msgid ""
+"These functions operate on a host pointer, and should be used when you "
+"already have a pointer into host memory (corresponding to guest ram or a "
+"local buffer). They deal with doing accesses with the desired endianness and "
+"with correctly handling potentially unaligned pointer values."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:25 ../../../devel/loads-stores.rst:98
+#: ../../../devel/loads-stores.rst:135 ../../../devel/loads-stores.rst:174
+#: ../../../devel/loads-stores.rst:215 ../../../devel/loads-stores.rst:244
+msgid "Function names follow the pattern:"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:27
+msgid "load: ``ld{type}{sign}{size}_{endian}_p(ptr)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:29
+msgid "store: ``st{type}{size}_{endian}_p(ptr, val)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:31
+msgid "``type``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:32
+msgid "(empty) : integer access"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:33
+msgid "``f`` : float access"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:35 ../../../devel/loads-stores.rst:104
+#: ../../../devel/loads-stores.rst:141 ../../../devel/loads-stores.rst:180
+#: ../../../devel/loads-stores.rst:219 ../../../devel/loads-stores.rst:250
+#: ../../../devel/loads-stores.rst:290 ../../../devel/loads-stores.rst:345
+#: ../../../devel/loads-stores.rst:401 ../../../devel/loads-stores.rst:499
+msgid "``sign``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:36
+msgid "(empty) : for 32 or 64 bit sizes (including floats and doubles)"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:37 ../../../devel/loads-stores.rst:106
+#: ../../../devel/loads-stores.rst:143 ../../../devel/loads-stores.rst:182
+#: ../../../devel/loads-stores.rst:221 ../../../devel/loads-stores.rst:252
+#: ../../../devel/loads-stores.rst:292 ../../../devel/loads-stores.rst:347
+#: ../../../devel/loads-stores.rst:403 ../../../devel/loads-stores.rst:501
+msgid "``u`` : unsigned"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:38 ../../../devel/loads-stores.rst:107
+#: ../../../devel/loads-stores.rst:144 ../../../devel/loads-stores.rst:183
+#: ../../../devel/loads-stores.rst:222 ../../../devel/loads-stores.rst:253
+#: ../../../devel/loads-stores.rst:293
+msgid "``s`` : signed"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:40 ../../../devel/loads-stores.rst:109
+#: ../../../devel/loads-stores.rst:146 ../../../devel/loads-stores.rst:185
+#: ../../../devel/loads-stores.rst:224 ../../../devel/loads-stores.rst:255
+#: ../../../devel/loads-stores.rst:295 ../../../devel/loads-stores.rst:351
+#: ../../../devel/loads-stores.rst:407 ../../../devel/loads-stores.rst:505
+msgid "``size``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:41 ../../../devel/loads-stores.rst:110
+#: ../../../devel/loads-stores.rst:147 ../../../devel/loads-stores.rst:186
+#: ../../../devel/loads-stores.rst:225 ../../../devel/loads-stores.rst:256
+#: ../../../devel/loads-stores.rst:296 ../../../devel/loads-stores.rst:352
+#: ../../../devel/loads-stores.rst:408 ../../../devel/loads-stores.rst:506
+msgid "``b`` : 8 bits"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:42 ../../../devel/loads-stores.rst:111
+#: ../../../devel/loads-stores.rst:148 ../../../devel/loads-stores.rst:187
+#: ../../../devel/loads-stores.rst:226 ../../../devel/loads-stores.rst:257
+#: ../../../devel/loads-stores.rst:297 ../../../devel/loads-stores.rst:353
+#: ../../../devel/loads-stores.rst:409 ../../../devel/loads-stores.rst:507
+msgid "``w`` : 16 bits"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:43 ../../../devel/loads-stores.rst:112
+#: ../../../devel/loads-stores.rst:149 ../../../devel/loads-stores.rst:188
+#: ../../../devel/loads-stores.rst:227 ../../../devel/loads-stores.rst:258
+#: ../../../devel/loads-stores.rst:298 ../../../devel/loads-stores.rst:354
+#: ../../../devel/loads-stores.rst:410 ../../../devel/loads-stores.rst:508
+msgid "``l`` : 32 bits"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:44 ../../../devel/loads-stores.rst:113
+#: ../../../devel/loads-stores.rst:150 ../../../devel/loads-stores.rst:189
+#: ../../../devel/loads-stores.rst:228 ../../../devel/loads-stores.rst:259
+#: ../../../devel/loads-stores.rst:299 ../../../devel/loads-stores.rst:355
+#: ../../../devel/loads-stores.rst:411 ../../../devel/loads-stores.rst:509
+msgid "``q`` : 64 bits"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:46 ../../../devel/loads-stores.rst:301
+#: ../../../devel/loads-stores.rst:357 ../../../devel/loads-stores.rst:413
+#: ../../../devel/loads-stores.rst:511
+msgid "``endian``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:47
+msgid "``he`` : host endian"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:48 ../../../devel/loads-stores.rst:303
+#: ../../../devel/loads-stores.rst:359 ../../../devel/loads-stores.rst:415
+#: ../../../devel/loads-stores.rst:513
+msgid "``be`` : big endian"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:49 ../../../devel/loads-stores.rst:302
+#: ../../../devel/loads-stores.rst:358 ../../../devel/loads-stores.rst:414
+#: ../../../devel/loads-stores.rst:512
+msgid "``le`` : little endian"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:51
+msgid "The ``_{endian}`` infix is omitted for target-endian accesses."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:53
+msgid ""
+"The target endian accessors are only available to source files which are "
+"built per-target."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:56
+msgid "There are also functions which take the size as an argument:"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:58
+msgid "load: ``ldn{endian}_p(ptr, sz)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:60
+msgid ""
+"which performs an unsigned load of ``sz`` bytes from ``ptr`` as an ``{endian}"
+"`` order value and returns it in a uint64_t."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:63
+msgid "store: ``stn{endian}_p(ptr, sz, val)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:65
+msgid ""
+"which stores ``val`` to ``ptr`` as an ``{endian}`` order value of size "
+"``sz`` bytes."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:69 ../../../devel/loads-stores.rst:196
+#: ../../../devel/loads-stores.rst:261 ../../../devel/loads-stores.rst:306
+#: ../../../devel/loads-stores.rst:363 ../../../devel/loads-stores.rst:381
+#: ../../../devel/loads-stores.rst:419 ../../../devel/loads-stores.rst:443
+#: ../../../devel/loads-stores.rst:478 ../../../devel/loads-stores.rst:517
+msgid "Regexes for git grep"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:70
+msgid "``\\<ldf\\?[us]\\?[bwlq]\\(_[hbl]e\\)\\?_p\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:71
+msgid "``\\<stf\\?[bwlq]\\(_[hbl]e\\)\\?_p\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:72
+msgid "``\\<ldn_\\([hbl]e\\)?_p\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:73
+msgid "``\\<stn_\\([hbl]e\\)?_p\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:76
+msgid "``cpu_{ld,st}*_mmuidx_ra``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:78
+msgid ""
+"These functions operate on a guest virtual address plus a context, known as "
+"a \"mmu index\" or ``mmuidx``, which controls how that virtual address is "
+"translated.  The meaning of the indexes are target specific, but specifying "
+"a particular index might be necessary if, for instance, the helper requires "
+"an \"always as non-privileged\" access rather that the default access for "
+"the current state of the guest CPU."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:85
+msgid ""
+"These functions may cause a guest CPU exception to be taken (e.g. for an "
+"alignment fault or MMU fault) which will result in guest CPU state being "
+"updated and control longjmp'ing out of the function call.  They should "
+"therefore only be used in code that is implementing emulation of the guest "
+"CPU."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:91
+msgid ""
+"The ``retaddr`` parameter is used to control unwinding of the guest CPU "
+"state in case of a guest CPU exception.  This is passed to "
+"``cpu_restore_state()``.  Therefore the value should either be 0, to "
+"indicate that the guest CPU state is already synchronized, or the result of "
+"``GETPC()`` from the top level ``HELPER(foo)`` function, which is a return "
+"address into the generated code."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:100
+msgid "load: ``cpu_ld{sign}{size}{end}_mmuidx_ra(env, ptr, mmuidx, retaddr)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:102
+msgid "store: ``cpu_st{size}{end}_mmuidx_ra(env, ptr, val, mmuidx, retaddr)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:105 ../../../devel/loads-stores.rst:142
+#: ../../../devel/loads-stores.rst:181 ../../../devel/loads-stores.rst:220
+#: ../../../devel/loads-stores.rst:251 ../../../devel/loads-stores.rst:291
+#: ../../../devel/loads-stores.rst:346 ../../../devel/loads-stores.rst:402
+#: ../../../devel/loads-stores.rst:500
+msgid "(empty) : for 32 or 64 bit sizes"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:115 ../../../devel/loads-stores.rst:152
+#: ../../../devel/loads-stores.rst:191
+msgid "``end``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:116 ../../../devel/loads-stores.rst:153
+#: ../../../devel/loads-stores.rst:192
+msgid "(empty) : for target endian, or 8 bit sizes"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:117 ../../../devel/loads-stores.rst:154
+#: ../../../devel/loads-stores.rst:193
+msgid "``_be`` : big endian"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:118 ../../../devel/loads-stores.rst:155
+#: ../../../devel/loads-stores.rst:194
+msgid "``_le`` : little endian"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:120 ../../../devel/loads-stores.rst:157
+#: ../../../devel/loads-stores.rst:230
+msgid "Regexes for git grep:"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:121
+msgid "``\\<cpu_ld[us]\\?[bwlq](_[bl]e)\\?_mmuidx_ra\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:122
+msgid "``\\<cpu_st[bwlq](_[bl]e)\\?_mmuidx_ra\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:125
+msgid "``cpu_{ld,st}*_data_ra``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:127
+msgid ""
+"These functions work like the ``cpu_{ld,st}_mmuidx_ra`` functions except "
+"that the ``mmuidx`` parameter is taken from the current mode of the guest "
+"CPU, as determined by ``cpu_mmu_index(env, false)``."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:131
+msgid ""
+"These are generally the preferred way to do accesses by guest virtual "
+"address from helper functions, unless the access should be performed with a "
+"context other than the default."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:137
+msgid "load: ``cpu_ld{sign}{size}{end}_data_ra(env, ptr, ra)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:139
+msgid "store: ``cpu_st{size}{end}_data_ra(env, ptr, val, ra)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:158
+msgid "``\\<cpu_ld[us]\\?[bwlq](_[bl]e)\\?_data_ra\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:159
+msgid "``\\<cpu_st[bwlq](_[bl]e)\\?_data_ra\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:162
+msgid "``cpu_{ld,st}*_data``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:164
+msgid ""
+"These functions work like the ``cpu_{ld,st}_data_ra`` functions except that "
+"the ``retaddr`` parameter is 0, and thus does not unwind guest CPU state."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:168
+msgid ""
+"This means they must only be used from helper functions where the translator "
+"has saved all necessary CPU state.  These functions are the right choice for "
+"calls made from hooks like the CPU ``do_interrupt`` hook or when you know "
+"for certain that the translator had to save all the CPU state anyway."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:176
+msgid "load: ``cpu_ld{sign}{size}{end}_data(env, ptr)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:178
+msgid "store: ``cpu_st{size}{end}_data(env, ptr, val)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:197
+msgid "``\\<cpu_ld[us]\\?[bwlq](_[bl]e)\\?_data\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:198
+msgid "``\\<cpu_st[bwlq](_[bl]e)\\?_data\\+\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:201
+msgid "``cpu_ld*_code``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:203
+msgid ""
+"These functions perform a read for instruction execution.  The ``mmuidx`` "
+"parameter is taken from the current mode of the guest CPU, as determined by "
+"``cpu_mmu_index(env, true)``.  The ``retaddr`` parameter is 0, and thus does "
+"not unwind guest CPU state, because CPU state is always synchronized while "
+"translating instructions.  Any guest CPU exception that is raised will "
+"indicate an instruction execution fault rather than a data read fault."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:211
+msgid ""
+"In general these functions should not be used directly during translation. "
+"There are wrapper functions that are to be used which also take care of "
+"plugins for tracing."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:217
+msgid "load: ``cpu_ld{sign}{size}_code(env, ptr)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:231
+msgid "``\\<cpu_ld[us]\\?[bwlq]_code\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:234
+msgid "``translator_ld*``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:236
+msgid ""
+"These functions are a wrapper for ``cpu_ld*_code`` which also perform any "
+"actions required by any tracing plugins.  They are only to be called during "
+"the translator callback ``translate_insn``."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:240
+msgid ""
+"There is a set of functions ending in ``_swap`` which, if the parameter is "
+"true, returns the value in the endianness that is the reverse of the guest "
+"native endianness, as determined by ``TARGET_WORDS_BIGENDIAN``."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:246
+msgid "load: ``translator_ld{sign}{size}(env, ptr)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:248
+msgid "swap: ``translator_ld{sign}{size}_swap(env, ptr, swap)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:262
+msgid "``\\<translator_ld[us]\\?[bwlq]\\(_swap\\)\\?\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:265
+msgid "``helper_*_{ld,st}*_mmu``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:267
+msgid ""
+"These functions are intended primarily to be called by the code generated by "
+"the TCG backend. They may also be called by target CPU helper function code. "
+"Like the ``cpu_{ld,st}_mmuidx_ra`` functions they perform accesses by guest "
+"virtual address, with a given ``mmuidx``."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:272
+msgid ""
+"These functions specify an ``opindex`` parameter which encodes (among other "
+"things) the mmu index to use for the access.  This parameter should be "
+"created by calling ``make_memop_idx()``."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:276
+msgid ""
+"The ``retaddr`` parameter should be the result of GETPC() called directly "
+"from the top level HELPER(foo) function (or 0 if no guest CPU state "
+"unwinding is required)."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:280
+msgid ""
+"**TODO** The names of these functions are a bit odd for historical reasons "
+"because they were originally expected to be called only from within "
+"generated code. We should rename them to bring them more in line with the "
+"other memory access functions. The explicit endianness is the only feature "
+"they have beyond ``*_mmuidx_ra``."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:286
+msgid ""
+"load: ``helper_{endian}_ld{sign}{size}_mmu(env, addr, opindex, retaddr)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:288
+msgid ""
+"store: ``helper_{endian}_st{size}_mmu(env, addr, val, opindex, retaddr)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:304
+msgid "``ret`` : target endianness"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:307
+msgid "``\\<helper_\\(le\\|be\\|ret\\)_ld[us]\\?[bwlq]_mmu\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:308
+msgid "``\\<helper_\\(le\\|be\\|ret\\)_st[bwlq]_mmu\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:311
+msgid "``address_space_*``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:313
+msgid ""
+"These functions are the primary ones to use when emulating CPU or device "
+"memory accesses. They take an AddressSpace, which is the way QEMU defines "
+"the view of memory that a device or CPU has. (They generally correspond to "
+"being the \"master\" end of a hardware bus or bus fabric.)"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:319
+msgid ""
+"Each CPU has an AddressSpace. Some kinds of CPU have more than one "
+"AddressSpace (for instance Arm guest CPUs have an AddressSpace for the "
+"Secure world and one for NonSecure if they implement TrustZone). Devices "
+"which can do DMA-type operations should generally have an AddressSpace. "
+"There is also a \"system address space\" which typically has all the devices "
+"and memory that all CPUs can see. (Some older device models use the \"system "
+"address space\" rather than properly modelling that they have an "
+"AddressSpace of their own.)"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:328
+msgid ""
+"Functions are provided for doing byte-buffer reads and writes, and also for "
+"doing one-data-item loads and stores."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:331
+msgid ""
+"In all cases the caller provides a MemTxAttrs to specify bus transaction "
+"attributes, and can check whether the memory transaction succeeded using a "
+"MemTxResult return code."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:335
+msgid "``address_space_read(address_space, addr, attrs, buf, len)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:337
+msgid "``address_space_write(address_space, addr, attrs, buf, len)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:339
+msgid "``address_space_rw(address_space, addr, attrs, buf, len, is_write)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:341
+msgid ""
+"``address_space_ld{sign}{size}_{endian}(address_space, addr, attrs, "
+"txresult)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:343
+msgid ""
+"``address_space_st{size}_{endian}(address_space, addr, val, attrs, "
+"txresult)``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:349 ../../../devel/loads-stores.rst:405
+#: ../../../devel/loads-stores.rst:503
+msgid "(No signed load operations are provided.)"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:361
+msgid "The ``_{endian}`` suffix is omitted for byte accesses."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:364
+msgid "``\\<address_space_\\(read\\|write\\|rw\\)\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:365
+msgid "``\\<address_space_ldu\\?[bwql]\\(_[lb]e\\)\\?\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:366
+msgid "``\\<address_space_st[bwql]\\(_[lb]e\\)\\?\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:369 ../../../devel/loads-stores.rst:382
+msgid "``address_space_write_rom``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:371
+msgid ""
+"This function performs a write by physical address like "
+"``address_space_write``, except that if the write is to a ROM then the ROM "
+"contents will be modified, even though a write by the guest CPU to the ROM "
+"would be ignored. This is used for non-guest writes like writes from the gdb "
+"debug stub or initial loading of ROM contents."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:377
+msgid ""
+"Note that portions of the write which attempt to write data to a device will "
+"be silently ignored -- only real RAM and ROM will be written to."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:385
+msgid "``{ld,st}*_phys``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:387
+msgid ""
+"These are functions which are identical to ``address_space_{ld,st}*``, "
+"except that they always pass ``MEMTXATTRS_UNSPECIFIED`` for the transaction "
+"attributes, and ignore whether the transaction succeeded or failed."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:392
+msgid ""
+"The fact that they ignore whether the transaction succeeded means they "
+"should not be used in new code, unless you know for certain that your code "
+"will only be used in a context where the CPU or device doing the access has "
+"no way to report such an error."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:397
+msgid "``load: ld{sign}{size}_{endian}_phys``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:399
+msgid "``store: st{size}_{endian}_phys``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:417 ../../../devel/loads-stores.rst:515
+msgid "The ``_{endian}_`` infix is omitted for byte accesses."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:420
+msgid "``\\<ldu\\?[bwlq]\\(_[bl]e\\)\\?_phys\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:421
+msgid "``\\<st[bwlq]\\(_[bl]e\\)\\?_phys\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:424
+msgid "``cpu_physical_memory_*``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:426
+msgid ""
+"These are convenience functions which are identical to ``address_space_*`` "
+"but operate specifically on the system address space, always pass a "
+"``MEMTXATTRS_UNSPECIFIED`` set of memory attributes and ignore whether the "
+"memory transaction succeeded or failed. For new code they are better avoided:"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:432
+msgid ""
+"there is likely to be behaviour you need to model correctly for a failed "
+"read or write operation"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:434
+msgid ""
+"a device should usually perform operations on its own AddressSpace rather "
+"than using the system address space"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:437
+msgid "``cpu_physical_memory_read``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:439
+msgid "``cpu_physical_memory_write``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:441
+msgid "``cpu_physical_memory_rw``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:444
+msgid "``\\<cpu_physical_memory_\\(read\\|write\\|rw\\)\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:447 ../../../devel/loads-stores.rst:460
+msgid "``cpu_memory_rw_debug``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:449
+msgid "Access CPU memory by virtual address for debug purposes."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:451
+msgid ""
+"This function is intended for use by the GDB stub and similar code. It takes "
+"a virtual address, converts it to a physical address via an MMU lookup using "
+"the current settings of the specified CPU, and then performs the access "
+"(using ``address_space_rw`` for reads or ``cpu_physical_memory_write_rom`` "
+"for writes). This means that if the access is a write to a ROM then this "
+"function will modify the contents (whereas a normal guest CPU access would "
+"ignore the write attempt)."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:463
+msgid "``dma_memory_*``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:465
+msgid ""
+"These behave like ``address_space_*``, except that they perform a DMA "
+"barrier operation first."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:468
+msgid ""
+"**TODO**: We should provide guidance on when you need the DMA barrier "
+"operation and when it's OK to use ``address_space_*``, and make sure our "
+"existing code is doing things correctly."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:472
+msgid "``dma_memory_read``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:474
+msgid "``dma_memory_write``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:476
+msgid "``dma_memory_rw``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:479
+msgid "``\\<dma_memory_\\(read\\|write\\|rw\\)\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:482
+msgid "``pci_dma_*`` and ``{ld,st}*_pci_dma``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:484
+msgid ""
+"These functions are specifically for PCI device models which need to perform "
+"accesses where the PCI device is a bus master. You pass them a ``PCIDevice "
+"*`` and they will do ``dma_memory_*`` operations on the correct address "
+"space for that device."
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:489
+msgid "``pci_dma_read``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:491
+msgid "``pci_dma_write``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:493
+msgid "``pci_dma_rw``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:495
+msgid "``load: ld{sign}{size}_{endian}_pci_dma``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:497
+msgid "``store: st{size}_{endian}_pci_dma``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:518
+msgid "``\\<pci_dma_\\(read\\|write\\|rw\\)\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:519
+msgid "``\\<ldu\\?[bwlq]\\(_[bl]e\\)\\?_pci_dma\\>``"
+msgstr ""
+
+#: ../../../devel/loads-stores.rst:520
+msgid "``\\<st[bwlq]\\(_[bl]e\\)\\?_pci_dma\\>``"
+msgstr ""
