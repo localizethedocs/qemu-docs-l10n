@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/arm/fby35.rst:2
+msgid "Facebook Yosemite v3.5 Platform and CraterLake Server (``fby35``)"
+msgstr ""
+
+#: ../../../system/arm/fby35.rst:4
+msgid ""
+"Facebook has a series of multi-node compute server designs named Yosemite. "
+"The most recent version released was `Yosemite v3 <https://www.opencompute."
+"org/documents/ocp-yosemite-v3-platform-design-specification-1v16-pdf>`__."
+msgstr ""
+
+#: ../../../system/arm/fby35.rst:8
+msgid ""
+"Yosemite v3.5 is an iteration on this design, and is very similar: there's a "
+"baseboard with a BMC, and 4 server slots. The new server board design termed "
+"\"CraterLake\" includes a Bridge IC (BIC), with room for expansion boards to "
+"include various compute accelerators (video, inferencing, etc). At the "
+"moment, only the first server slot's BIC is included."
+msgstr ""
+
+#: ../../../system/arm/fby35.rst:14
+msgid ""
+"Yosemite v3.5 is itself a sled which fits into a 40U chassis, and 3 sleds "
+"can be fit into a chassis. See `here <https://www.opencompute.org/products-"
+"chiplets/237/wiwynn-yosemite-v3-server>`__ for an example."
+msgstr ""
+
+#: ../../../system/arm/fby35.rst:18
+msgid ""
+"In this generation, the BMC is an AST2600 and each BIC is an AST1030. The "
+"BMC runs `OpenBMC <https://github.com/facebook/openbmc>`__, and the BIC runs "
+"`OpenBIC <https://github.com/facebook/openbic>`__."
+msgstr ""
+
+#: ../../../system/arm/fby35.rst:22
+msgid ""
+"Firmware images can be retrieved from the Github releases or built from the "
+"source code, see the README's for instructions on that. This image uses the "
+"\"fby35\" machine recipe from OpenBMC, and the \"yv35-cl\" target from "
+"OpenBIC. Some reference images can also be found here:"
+msgstr ""
+
+#: ../../../system/arm/fby35.rst:27
+msgid ""
+"$ wget https://github.com/facebook/openbmc/releases/download/openbmc-"
+"e2294ff5d31d/fby35.mtd\n"
+"$ wget https://github.com/peterdelevoryas/OpenBIC/releases/download/oby35-"
+"cl-2022.13.01/Y35BCL.elf"
+msgstr ""
+
+#: ../../../system/arm/fby35.rst:32
+msgid ""
+"Since this machine has multiple SoC's, each with their own serial console, "
+"the recommended way to run it is to allocate a pseudoterminal for each "
+"serial console and let the monitor use stdio. Also, starting in a paused "
+"state is useful because it allows you to attach to the pseudoterminals "
+"before the boot process starts."
+msgstr ""
+
+#: ../../../system/arm/fby35.rst:38
+msgid ""
+"$ qemu-system-arm -machine fby35 \\\n"
+"    -drive file=fby35.mtd,format=raw,if=mtd \\\n"
+"    -device loader,file=Y35BCL.elf,addr=0,cpu-num=2 \\\n"
+"    -serial pty -serial pty -serial mon:stdio \\\n"
+"    -display none -S\n"
+"$ screen /dev/tty0 # In a separate TMUX pane, terminal window, etc.\n"
+"$ screen /dev/tty1\n"
+"$ (qemu) c             # Start the boot process once screen is setup."
+msgstr ""
+
+#: ../../../system/arm/fby35.rst:49
+msgid ""
+"This machine model supports emulation of the boot from the CE0 flash device "
+"by setting option ``execute-in-place``. When using this option, the CPU "
+"fetches instructions to execute by reading CE0 and not from a preloaded ROM "
+"initialized at machine init time. As a result, execution will be slower."
+msgstr ""
