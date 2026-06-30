@@ -1,0 +1,446 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 5.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/fuzzing.rst:3
+msgid "Fuzzing"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:5
+msgid ""
+"This document describes the virtual-device fuzzing infrastructure in QEMU "
+"and how to use it to implement additional fuzzers."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:9
+msgid "Basics"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:11
+msgid ""
+"Fuzzing operates by passing inputs to an entry point/target function. The "
+"fuzzer tracks the code coverage triggered by the input. Based on these "
+"findings, the fuzzer mutates the input and repeats the fuzzing."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:15
+msgid ""
+"To fuzz QEMU, we rely on libfuzzer. Unlike other fuzzers such as AFL, "
+"libfuzzer is an *in-process* fuzzer. For the developer, this means that it "
+"is their responsibility to ensure that state is reset between fuzzing-runs."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:20
+msgid "Building the fuzzers"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:22
+msgid ""
+"*NOTE*: If possible, build a 32-bit binary. When forking, the 32-bit fuzzer "
+"is much faster, since the page-map has a smaller size. This is due to the "
+"fact that AddressSanitizer maps ~20TB of memory, as part of its detection. "
+"This results in a large page-map, and a much slower ``fork()``."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:27
+msgid ""
+"To build the fuzzers, install a recent version of clang: Configure with "
+"(substitute the clang binaries with the version you installed). Here, enable-"
+"sanitizers, is optional but it allows us to reliably detect bugs such as out-"
+"of-bounds accesses, use-after-frees, double-frees etc.::"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:32
+msgid ""
+"CC=clang-8 CXX=clang++-8 /path/to/configure --enable-fuzzing \\\n"
+"                                            --enable-sanitizers"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:35
+msgid "Fuzz targets are built similarly to system targets::"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:37
+msgid "make qemu-fuzz-i386"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:39
+msgid "This builds ``./qemu-fuzz-i386``"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:41
+msgid ""
+"The first option to this command is: ``--fuzz-target=FUZZ_NAME`` To list all "
+"of the available fuzzers run ``qemu-fuzz-i386`` with no arguments."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:44
+msgid "For example::"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:46
+msgid "./qemu-fuzz-i386 --fuzz-target=virtio-scsi-fuzz"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:48
+msgid ""
+"Internally, libfuzzer parses all arguments that do not begin with ``\"--"
+"\"``. Information about these is available by passing ``-help=1``"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:51
+msgid ""
+"Now the only thing left to do is wait for the fuzzer to trigger potential "
+"crashes."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:55
+msgid "Useful libFuzzer flags"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:57
+msgid ""
+"As mentioned above, libFuzzer accepts some arguments. Passing ``-help=1`` "
+"will list the available arguments. In particular, these arguments might be "
+"helpful:"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:60
+msgid ""
+"``CORPUS_DIR/`` : Specify a directory as the last argument to libFuzzer. "
+"libFuzzer stores each \"interesting\" input in this corpus directory. The "
+"next time you run libFuzzer, it will read all of the inputs from the corpus, "
+"and continue fuzzing from there. You can also specify multiple directories. "
+"libFuzzer loads existing inputs from all specified directories, but will "
+"only write new ones to the first one specified."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:67
+msgid ""
+"``-max_len=4096`` : specify the maximum byte-length of the inputs libFuzzer "
+"will generate."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:70
+msgid ""
+"``-close_fd_mask={1,2,3}`` : close, stderr, or both. Useful for targets that "
+"trigger many debug/error messages, or create output on the serial console."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:73
+msgid ""
+"``-jobs=4 -workers=4`` : These arguments configure libFuzzer to run 4 "
+"fuzzers in parallel (4 fuzzing jobs in 4 worker processes). Alternatively, "
+"with only ``-jobs=N``, libFuzzer automatically spawns a number of workers "
+"less than or equal to half the available CPU cores. Replace 4 with a number "
+"appropriate for your machine. Make sure to specify a ``CORPUS_DIR``, which "
+"will allow the parallel fuzzers to share information about the interesting "
+"inputs they find."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:80
+msgid ""
+"``-use_value_profile=1`` : For each comparison operation, libFuzzer computes "
+"``(caller_pc&4095) | (popcnt(Arg1 ^ Arg2) << 12)`` and places this in the "
+"coverage table. Useful for targets with \"magic\" constants. If Arg1 came "
+"from the fuzzer's input and Arg2 is a magic constant, then each time the "
+"Hamming distance between Arg1 and Arg2 decreases, libFuzzer adds the input "
+"to the corpus."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:87
+msgid ""
+"``-shrink=1`` : Tries to make elements of the corpus \"smaller\". Might lead "
+"to better coverage performance, depending on the target."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:90
+msgid ""
+"Note that libFuzzer's exact behavior will depend on the version of clang and "
+"libFuzzer used to build the device fuzzers."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:94
+msgid "Generating Coverage Reports"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:96
+msgid ""
+"Code coverage is a crucial metric for evaluating a fuzzer's performance. "
+"libFuzzer's output provides a \"cov: \" column that provides a total number "
+"of unique blocks/edges covered. To examine coverage on a line-by-line basis "
+"we can use Clang coverage:"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:101
+msgid ""
+"Configure libFuzzer to store a corpus of all interesting inputs (see "
+"CORPUS_DIR above)"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:103
+msgid "``./configure`` the QEMU build with ::"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:105
+msgid ""
+"--enable-fuzzing \\\n"
+"--extra-cflags=\"-fprofile-instr-generate -fcoverage-mapping\""
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:108
+msgid ""
+"Re-run the fuzzer. Specify $CORPUS_DIR/* as an argument, telling libfuzzer "
+"to execute all of the inputs in $CORPUS_DIR and exit. Once the process "
+"exits, you should find a file, \"default.profraw\" in the working directory."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:111
+msgid "Execute these commands to generate a detailed HTML coverage-report::"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:113
+msgid ""
+"llvm-profdata merge -output=default.profdata default.profraw\n"
+"llvm-cov show ./path/to/qemu-fuzz-i386 -instr-profile=default.profdata \\\n"
+"--format html -output-dir=/path/to/output/report"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:118
+msgid "Adding a new fuzzer"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:120
+msgid ""
+"Coverage over virtual devices can be improved by adding additional fuzzers. "
+"Fuzzers are kept in ``tests/qtest/fuzz/`` and should be added to ``tests/"
+"qtest/fuzz/Makefile.include``"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:124
+msgid ""
+"Fuzzers can rely on both qtest and libqos to communicate with virtual "
+"devices."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:126
+msgid ""
+"Create a new source file. For example ``tests/qtest/fuzz/foo-device-fuzz.c``."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:128
+msgid ""
+"Write the fuzzing code using the libqtest/libqos API. See existing fuzzers "
+"for reference."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:131
+msgid ""
+"Register the fuzzer in ``tests/fuzz/Makefile.include`` by appending the "
+"corresponding object to fuzz-obj-y"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:134
+msgid ""
+"Fuzzers can be more-or-less thought of as special qtest programs which can "
+"modify the qtest commands and/or qtest command arguments based on inputs "
+"provided by libfuzzer. Libfuzzer passes a byte array and length. Commonly "
+"the fuzzer loops over the byte-array interpreting it as a list of qtest "
+"commands, addresses, or values."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:141
+msgid "The Generic Fuzzer"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:143
+msgid ""
+"Writing a fuzz target can be a lot of effort (especially if a device driver "
+"has not be built-out within libqos). Many devices can be fuzzed to some "
+"degree, without any device-specific code, using the generic-fuzz target."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:147
+msgid ""
+"The generic-fuzz target is capable of fuzzing devices over their PIO, MMIO, "
+"and DMA input-spaces. To apply the generic-fuzz to a device, we need to "
+"define two env-variables, at minimum:"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:151
+msgid ""
+"``QEMU_FUZZ_ARGS=`` is the set of QEMU arguments used to configure a "
+"machine, with the device attached. For example, if we want to fuzz the "
+"virtio-net device attached to a pc-i440fx machine, we can specify::"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:155
+msgid ""
+"QEMU_FUZZ_ARGS=\"-M pc -nodefaults -netdev user,id=user0 \\\n"
+"-device virtio-net,netdev=user0\""
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:158
+msgid ""
+"``QEMU_FUZZ_OBJECTS=`` is a set of space-delimited strings used to identify "
+"the MemoryRegions that will be fuzzed. These strings are compared against "
+"MemoryRegion names and MemoryRegion owner names, to decide whether each "
+"MemoryRegion should be fuzzed. These strings support globbing. For the "
+"virtio-net example, we could use one of ::"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:164
+msgid ""
+"QEMU_FUZZ_OBJECTS='virtio-net'\n"
+"QEMU_FUZZ_OBJECTS='virtio*'\n"
+"QEMU_FUZZ_OBJECTS='virtio* pcspk' # Fuzz the virtio devices and the speaker\n"
+"QEMU_FUZZ_OBJECTS='*' # Fuzz the whole machine``"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:169
+msgid ""
+"The ``\"info mtree\"`` and ``\"info qom-tree\"`` monitor commands can be "
+"especially useful for identifying the ``MemoryRegion`` and ``Object`` names "
+"used for matching."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:173
+msgid ""
+"As a generic rule-of-thumb, the more ``MemoryRegions``/Devices we match, the "
+"greater the input-space, and the smaller the probability of finding crashing "
+"inputs for individual devices. As such, it is usually a good idea to limit "
+"the fuzzer to only a few ``MemoryRegions``."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:178
+msgid ""
+"To ensure that these env variables have been configured correctly, we can "
+"use::"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:180
+msgid "./qemu-fuzz-i386 --fuzz-target=generic-fuzz -runs=0"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:182
+msgid "The output should contain a complete list of matched MemoryRegions."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:185
+msgid "Implementation Details / Fuzzer Lifecycle"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:187
+msgid ""
+"The fuzzer has two entrypoints that libfuzzer calls. libfuzzer provides it's "
+"own ``main()``, which performs some setup, and calls the entrypoints:"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:190
+msgid ""
+"``LLVMFuzzerInitialize``: called prior to fuzzing. Used to initialize all of "
+"the necessary state"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:193
+msgid ""
+"``LLVMFuzzerTestOneInput``: called for each fuzzing run. Processes the input "
+"and resets the state at the end of each run."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:196
+msgid "In more detail:"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:198
+msgid ""
+"``LLVMFuzzerInitialize`` parses the arguments to the fuzzer (must start with "
+"two dashes, so they are ignored by libfuzzer ``main()``). Currently, the "
+"arguments select the fuzz target. Then, the qtest client is initialized. If "
+"the target requires qos, qgraph is set up and the QOM/LIBQOS modules are "
+"initialized. Then the QGraph is walked and the QEMU cmd_line is determined "
+"and saved."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:204
+msgid ""
+"After this, the ``vl.c:qemu_main`` is called to set up the guest. There are "
+"target-specific hooks that can be called before and after qemu_main, for "
+"additional setup(e.g. PCI setup, or VM snapshotting)."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:208
+msgid ""
+"``LLVMFuzzerTestOneInput``: Uses qtest/qos functions to act based on the "
+"fuzz input. It is also responsible for manually calling ``main_loop_wait`` "
+"to ensure that bottom halves are executed and any cleanup required before "
+"the next input."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:212
+msgid ""
+"Since the same process is reused for many fuzzing runs, QEMU state needs to "
+"be reset at the end of each run. There are currently two implemented options "
+"for resetting state:"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:216
+msgid ""
+"Reboot the guest between runs. - *Pros*: Straightforward and fast for simple "
+"fuzz targets."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:219
+msgid ""
+"*Cons*: Depending on the device, does not reset all device state. If the "
+"device requires some initialization prior to being ready for fuzzing (common "
+"for QOS-based targets), this initialization needs to be done after each "
+"reboot."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:224
+msgid "*Example target*: ``i440fx-qtest-reboot-fuzz``"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:226
+msgid "Run each test case in a separate forked process and copy the coverage"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:227
+msgid ""
+"information back to the parent. This is fairly similar to AFL's \"deferred\" "
+"fork-server mode [3]"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:230
+msgid ""
+"*Pros*: Relatively fast. Devices only need to be initialized once. No need "
+"to do slow reboots or vmloads."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:233
+msgid "*Cons*: Not officially supported by libfuzzer. Does not work well for"
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:234
+msgid "devices that rely on dedicated threads."
+msgstr ""
+
+#: ../../../devel/fuzzing.rst:236
+msgid "*Example target*: ``virtio-net-fork-fuzz``"
+msgstr ""
