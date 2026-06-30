@@ -1,0 +1,478 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/arm/orangepi.rst:2
+msgid "Orange Pi PC (``orangepi-pc``)"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:4
+msgid ""
+"The Xunlong Orange Pi PC is an Allwinner H3 System on Chip based embedded "
+"computer with mainline support in both U-Boot and Linux. The board comes "
+"with a Quad Core Cortex-A7 @ 1.3GHz, 1GiB RAM, 100Mbit ethernet, USB, SD/"
+"MMC, USB, HDMI and various other I/O."
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:11
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:13
+msgid "The Orange Pi PC machine supports the following devices:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:15
+msgid "SMP (Quad Core Cortex-A7)"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:16
+msgid "Generic Interrupt Controller configuration"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:17
+msgid "SRAM mappings"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:18
+msgid "SDRAM controller"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:19
+msgid "Real Time Clock"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:20
+msgid "Timer device (re-used from Allwinner A10)"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:21
+msgid "UART"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:22
+msgid "SD/MMC storage controller"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:23
+msgid "EMAC ethernet"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:24
+msgid "USB 2.0 interfaces"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:25
+msgid "Clock Control Unit"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:26
+msgid "System Control module"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:27
+msgid "Security Identifier device"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:28
+msgid "TWI (I2C)"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:29
+msgid "Watchdog timer"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:32
+msgid "Limitations"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:34
+msgid "Currently, Orange Pi PC does *not* support the following features:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:36
+msgid "Graphical output via HDMI, GPU and/or the Display Engine"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:37
+msgid "Audio output"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:38
+msgid "Hardware Watchdog"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:40
+msgid ""
+"Also see the 'unimplemented' array in the Allwinner H3 SoC module for a "
+"complete list of unimplemented I/O devices: ``./hw/arm/allwinner-h3.c``"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:44
+msgid "Boot options"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:46
+msgid ""
+"The Orange Pi PC machine can start using the standard -kernel functionality "
+"for loading a Linux kernel or ELF executable. Additionally, the Orange Pi PC "
+"machine can also emulate the BootROM which is present on an actual Allwinner "
+"H3 based SoC, which loads the bootloader from a SD card, specified via the -"
+"sd argument to qemu-system-arm."
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:53
+msgid "Machine-specific options"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:55
+msgid "The following machine-specific options are supported:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:57
+msgid "allwinner-rtc.base-year=YYYY"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:59
+msgid ""
+"The Allwinner RTC device is automatically created by the Orange Pi PC "
+"machine and uses a default base year value which can be overridden using the "
+"'base-year' property. The base year is the actual represented year when the "
+"RTC year value is zero. This option can be used in case the target operating "
+"system driver uses a different base year value. The minimum value for the "
+"base year is 1900."
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:65
+msgid "allwinner-sid.identifier=abcd1122-a000-b000-c000-12345678ffff"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:67
+msgid ""
+"The Security Identifier value can be read by the guest. For example, U-Boot "
+"uses it to determine a unique MAC address."
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:70
+msgid ""
+"The above machine-specific options can be specified in qemu-system-arm via "
+"the '-global' argument, for example:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:73
+msgid ""
+"$ qemu-system-arm -M orangepi-pc -sd mycard.img \\\n"
+"     -global allwinner-rtc.base-year=2000"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:79
+msgid "Running mainline Linux"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:81
+msgid ""
+"Mainline Linux kernels from 4.19 up to latest master are known to work. To "
+"build a Linux mainline kernel that can be booted by the Orange Pi PC "
+"machine, simply configure the kernel using the sunxi_defconfig configuration:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:85
+msgid ""
+"$ ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make mrproper\n"
+"$ ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make sunxi_defconfig"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:90
+msgid ""
+"To be able to use USB storage, you need to manually enable the corresponding "
+"configuration item. Start the kconfig configuration tool:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:93
+msgid "$ ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make menuconfig"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:97
+msgid "Navigate to the following item, enable it and save your configuration:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:99
+msgid "Device Drivers > USB support > USB Mass Storage support"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:101
+msgid "Build the Linux kernel with:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:103
+msgid "$ ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- make"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:107
+msgid ""
+"To boot the newly build linux kernel in QEMU with the Orange Pi PC machine, "
+"use:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:109
+msgid ""
+"$ qemu-system-arm -M orangepi-pc -nic user -nographic \\\n"
+"    -kernel /path/to/linux/arch/arm/boot/zImage \\\n"
+"    -append 'console=ttyS0,115200' \\\n"
+"    -dtb /path/to/linux/arch/arm/boot/dts/sun8i-h3-orangepi-pc.dtb"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:117
+msgid "Orange Pi PC images"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:119
+msgid ""
+"Note that the mainline kernel does not have a root filesystem. You may "
+"provide it with an official Orange Pi PC image from the official website:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:122
+msgid "http://www.orangepi.org/downloadresources/"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:124
+msgid ""
+"Another possibility is to run an Armbian image for Orange Pi PC which can be "
+"downloaded from:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:127
+msgid "https://www.armbian.com/orange-pi-pc/"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:129
+msgid ""
+"Alternatively, you can also choose to build you own image with buildroot "
+"using the orangepi_pc_defconfig. Also see https://buildroot.org for more "
+"information."
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:132
+msgid ""
+"When using an image as an SD card, it must be resized to a power of two. "
+"This can be done with the ``qemu-img`` command. It is recommended to only "
+"increase the image size instead of shrinking it to a power of two, to avoid "
+"loss of data. For example, to prepare a downloaded Armbian image, first "
+"extract it and then increase its size to one gigabyte as follows:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:138
+msgid ""
+"$ qemu-img resize Armbian_19.11.3_Orangepipc_bionic_current_5.3.9.img 1G"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:142
+msgid ""
+"You can choose to attach the selected image either as an SD card or as USB "
+"mass storage. For example, to boot using the Orange Pi PC Debian image on SD "
+"card, simply add the -sd argument and provide the proper root= kernel "
+"parameter:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:146
+msgid ""
+"$ qemu-system-arm -M orangepi-pc -nic user -nographic \\\n"
+"    -kernel /path/to/linux/arch/arm/boot/zImage \\\n"
+"    -append 'console=ttyS0,115200 root=/dev/mmcblk0p2' \\\n"
+"    -dtb /path/to/linux/arch/arm/boot/dts/sun8i-h3-orangepi-pc.dtb \\\n"
+"    -sd OrangePi_pc_debian_stretch_server_linux5.3.5_v1.0.img"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:154
+msgid ""
+"To attach the image as an USB mass storage device to the machine, simply "
+"append to the command:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:157
+msgid ""
+"-drive if=none,id=stick,file=myimage.img \\\n"
+"-device usb-storage,bus=usb-bus.0,drive=stick"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:162
+msgid ""
+"Instead of providing a custom Linux kernel via the -kernel command you may "
+"also choose to let the Orange Pi PC machine load the bootloader from SD "
+"card, just like a real board would do using the BootROM. Simply pass the "
+"selected image via the -sd argument and remove the -kernel, -append, -dbt "
+"and -initrd arguments:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:167
+msgid ""
+"$ qemu-system-arm -M orangepi-pc -nic user -nographic \\\n"
+"     -sd Armbian_19.11.3_Orangepipc_buster_current_5.3.9.img"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:172
+msgid ""
+"Note that both the official Orange Pi PC images and Armbian images start a "
+"lot of userland programs via systemd. Depending on the host hardware and OS, "
+"they may be slow to emulate, especially due to emulating the 4 cores. To "
+"help reduce the performance slow down due to emulating the 4 cores, you can "
+"give the following kernel parameters via U-Boot (or via -append):"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:178
+msgid ""
+"=> setenv extraargs 'systemd.default_timeout_start_sec=9000 loglevel=7 nosmp "
+"console=ttyS0,115200'"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:183
+msgid "Running U-Boot"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:185
+msgid ""
+"U-Boot mainline can be build and configured using the orangepi_pc_defconfig "
+"using similar commands as describe above for Linux. Note that it is "
+"recommended for development/testing to select the following configuration "
+"setting in U-Boot:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:189
+msgid "Device Tree Control > Provider for DTB for DT Control > Embedded DTB"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:191
+msgid ""
+"To start U-Boot using the Orange Pi PC machine, provide the u-boot binary to "
+"the -kernel argument:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:194
+msgid ""
+"$ qemu-system-arm -M orangepi-pc -nic user -nographic \\\n"
+"    -kernel /path/to/uboot/u-boot -sd disk.img"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:199
+msgid ""
+"Use the following U-boot commands to load and boot a Linux kernel from SD "
+"card:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:201
+msgid ""
+"=> setenv bootargs console=ttyS0,115200\n"
+"=> ext2load mmc 0 0x42000000 zImage\n"
+"=> ext2load mmc 0 0x43000000 sun8i-h3-orangepi-pc.dtb\n"
+"=> bootz 0x42000000 - 0x43000000"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:209
+msgid "Running NetBSD"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:211
+msgid ""
+"The NetBSD operating system also includes support for Allwinner H3 based "
+"boards, including the Orange Pi PC. NetBSD 9.0 is known to work best for the "
+"Orange Pi PC board and provides a fully working system with serial console, "
+"networking and storage. For the Orange Pi PC machine, get the 'evbarm-"
+"earmv7hf' based image from:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:216
+msgid ""
+"https://cdn.netbsd.org/pub/NetBSD/NetBSD-9.0/evbarm-earmv7hf/binary/gzimg/"
+"armv7.img.gz"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:218
+msgid ""
+"The image requires manually installing U-Boot in the image. Build U-Boot "
+"with the orangepi_pc_defconfig configuration as described in the previous "
+"section. Next, unzip the NetBSD image and write the U-Boot binary including "
+"SPL using:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:222
+msgid ""
+"$ gunzip armv7.img.gz\n"
+"$ dd if=/path/to/u-boot-sunxi-with-spl.bin of=armv7.img bs=1024 seek=8 "
+"conv=notrunc"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:227
+msgid ""
+"Finally, before starting the machine the SD image must be extended such that "
+"the size of the SD image is a power of two and that the NetBSD kernel will "
+"not conclude the NetBSD partition is larger than the emulated SD card:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:231
+msgid "$ qemu-img resize armv7.img 2G"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:235
+msgid "Start the machine using the following command:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:237
+msgid ""
+"$ qemu-system-arm -M orangepi-pc -nic user -nographic \\\n"
+"      -sd armv7.img -global allwinner-rtc.base-year=2000"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:242
+msgid ""
+"At the U-Boot stage, interrupt the automatic boot process by pressing a key "
+"and set the following environment variables before booting:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:245
+msgid ""
+"=> setenv bootargs root=ld0a\n"
+"=> setenv kernel netbsd-GENERIC.ub\n"
+"=> setenv fdtfile dtb/sun8i-h3-orangepi-pc.dtb\n"
+"=> setenv bootcmd 'fatload mmc 0:1 ${kernel_addr_r} ${kernel}; fatload mmc "
+"0:1 ${fdt_addr_r} ${fdtfile}; fdt addr ${fdt_addr_r}; bootm ${kernel_addr_r} "
+"- ${fdt_addr_r}'"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:252
+msgid ""
+"Optionally you may save the environment variables to SD card with 'saveenv'. "
+"To continue booting simply give the 'boot' command and NetBSD boots."
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:256
+msgid "Orange Pi PC integration tests"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:258
+msgid ""
+"The Orange Pi PC machine has several integration tests included. To run the "
+"whole set of tests, build QEMU from source and simply provide the following "
+"command:"
+msgstr ""
+
+#: ../../../system/arm/orangepi.rst:262
+msgid ""
+"$ AVOCADO_ALLOW_LARGE_STORAGE=yes avocado --show=app,console run \\\n"
+"   -t machine:orangepi-pc tests/avocado/boot_linux_console.py"
+msgstr ""
