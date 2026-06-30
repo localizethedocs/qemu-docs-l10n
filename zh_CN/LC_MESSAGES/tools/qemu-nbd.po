@@ -1,0 +1,394 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tools/qemu-nbd.rst:3
+msgid "QEMU Disk Network Block Device Server"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:6
+msgid "Synopsis"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:8
+msgid "**qemu-nbd** [*OPTION*]... *filename*"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:10
+msgid "**qemu-nbd** -L [*OPTION*]..."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:12
+msgid "**qemu-nbd** -d *dev*"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:15
+msgid "Description"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:17
+msgid "Export a QEMU disk image using the NBD protocol."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:19
+msgid "Other uses:"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:21
+msgid "Bind a /dev/nbdX block device to a QEMU server (on Linux)."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:22
+msgid "As a client to query exports of a remote NBD server."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:25
+msgid "Options"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:29
+msgid ""
+"*filename* is a disk image filename, or a set of block driver options if :"
+"option:`--image-opts` is specified."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:32
+msgid "*dev* is an NBD device."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:36
+msgid ""
+"Define a new instance of the *type* object class identified by *ID*. See "
+"the :manpage:`qemu(1)` manual page for full details of the properties "
+"supported. The common object types that it makes sense to define are the "
+"``secret`` object, which is used to supply passwords and/or encryption keys, "
+"and the ``tls-creds`` object, which is used to supply TLS credentials for "
+"the ``qemu-nbd`` server or client."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:45
+msgid ""
+"TCP port to listen on as a server, or connect to as a client (default "
+"``10809``)."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:50
+msgid "The offset into the image."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:54
+msgid ""
+"The interface to bind to as a server, or connect to as a client (default "
+"``0.0.0.0``)."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:59
+msgid "Use a unix socket with path *PATH*."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:63
+msgid ""
+"Treat *filename* as a set of image options, instead of a plain filename. If "
+"this flag is specified, the ``-f`` flag should not be used, instead the :"
+"option:`format=` option should be set."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:69
+msgid ""
+"Force the use of the block driver for format *FMT* instead of auto-detecting."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:74
+msgid "Export the disk as read-only."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:78
+msgid ""
+"Expose allocation depth information via the ``qemu:allocation-depth`` "
+"metadata context accessible through NBD_OPT_SET_META_CONTEXT."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:84
+msgid ""
+"If *filename* has a qcow2 persistent bitmap *NAME*, expose that bitmap via "
+"the ``qemu:dirty-bitmap:NAME`` metadata context accessible through "
+"NBD_OPT_SET_META_CONTEXT."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:90
+msgid ""
+"Use *filename* as an external snapshot, create a temporary file with "
+"``backing_file=``\\ *filename*, redirect the write to the temporary one."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:96
+msgid ""
+"Load an internal snapshot inside *filename* and export it as an read-only "
+"device, SNAPSHOT_PARAM format is ``snapshot.id=[ID],snapshot.name=[NAME]`` "
+"or ``[ID_OR_NAME]``"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:102
+msgid ""
+"The cache mode to be used with the file. Valid values are: ``none``, "
+"``writeback`` (the default), ``writethrough``, ``directsync`` and "
+"``unsafe``. See the documentation of the emulator's ``-drive cache=...`` "
+"option for more info."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:109
+msgid "Equivalent to :option:`--cache=none`."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:113
+msgid ""
+"Set the asynchronous I/O mode between ``threads`` (the default), ``native`` "
+"(Linux only), and ``io_uring`` (Linux 5.1+)."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:118
+msgid ""
+"Control whether ``discard`` (also known as ``trim`` or ``unmap``) requests "
+"are ignored or passed to the filesystem. *DISCARD* is one of ``ignore`` (or "
+"``off``), ``unmap`` (or ``on``).  The default is ``ignore``."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:125
+msgid ""
+"Control the automatic conversion of plain zero writes by the OS to driver-"
+"specific optimized zero write commands.  *DETECT_ZEROES* is one of ``off``, "
+"``on``, or ``unmap``.  ``unmap`` converts a zero write to an unmap operation "
+"and can only be used if *DISCARD* is set to ``unmap``.  The default is "
+"``off``."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:133
+msgid "Connect *filename* to NBD device *DEV* (Linux only)."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:137
+msgid "Disconnect the device *DEV* (Linux only)."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:141
+msgid ""
+"Allow up to *NUM* clients to share the device (default ``1``), 0 for "
+"unlimited."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:146
+msgid "Don't exit on the last connection."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:150
+msgid "Set the NBD volume export name (default of a zero-length string)."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:154
+msgid "Set the NBD volume export description, as a human-readable string."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:159
+msgid ""
+"Connect as a client and list all details about the exports exposed by a "
+"remote NBD server.  This enables list mode, and is incompatible with options "
+"that change behavior related to a specific export (such as :option:`--export-"
+"name`, :option:`--offset`, ...)."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:166
+msgid ""
+"Enable mandatory TLS encryption for the server by setting the ID of the TLS "
+"credentials object previously created with the :option:`--object` option; or "
+"provide the credentials needed for connecting as a client in list mode."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:173
+msgid ""
+"When validating an x509 certificate received over a TLS connection, the "
+"hostname that the NBD client used to connect will be checked against "
+"information in the server provided certificate. Sometimes it might be "
+"required to override the hostname used to perform this check. For example, "
+"if the NBD client is using a tunnel from localhost to connect to the remote "
+"server, the :option:`--tls-hostname` option should be used to set the "
+"officially expected hostname of the remote NBD server. This can also be used "
+"if accessing NBD over a UNIX socket where there is no inherent hostname "
+"available. This is only permitted when acting as a NBD client with the :"
+"option:`--list` option."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:186
+msgid ""
+"Fork off the server process and exit the parent once the server is running."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:190
+msgid "Store the server's process ID in the given file."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:194
+msgid ""
+"Specify the ID of a qauthz object previously created with the :option:`--"
+"object` option. This will be used to authorize connecting users against "
+"their x509 distinguished name."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:200
+msgid ""
+"Display extra debugging information. This option also keeps the original "
+"*STDERR* stream open if the ``qemu-nbd`` process is daemonized due to other "
+"options like :option:`--fork` or :option:`-c`."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:206
+msgid "Display this help and exit."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:210
+msgid "Display version information and exit."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:2
+msgid "Specify tracing options."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:4
+msgid "``[enable=]PATTERN``"
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:6
+msgid ""
+"Immediately enable events matching *PATTERN* (either event name or a "
+"globbing pattern).  This option is only available if QEMU has been compiled "
+"with the ``simple``, ``log`` or ``ftrace`` tracing backend.  To specify "
+"multiple events or patterns, specify the :option:`-trace` option multiple "
+"times."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:12
+msgid "Use :option:`-trace help` to print a list of names of trace points."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:14
+msgid "``events=FILE``"
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:16
+msgid ""
+"Immediately enable events listed in *FILE*. The file must contain one event "
+"name (as listed in the ``trace-events-all`` file) per line; globbing "
+"patterns are accepted too.  This option is only available if QEMU has been "
+"compiled with the ``simple``, ``log`` or ``ftrace`` tracing backend."
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:22
+msgid "``file=FILE``"
+msgstr ""
+
+#: ../../../qemu-option-trace.rst.inc:24
+msgid ""
+"Log output traces to *FILE*. This option is only available if QEMU has been "
+"compiled with the ``simple`` tracing backend."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:217
+msgid "Examples"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:219
+msgid ""
+"Start a server listening on port 10809 that exposes only the guest-visible "
+"contents of a qcow2 file, with no TLS encryption, and with the default "
+"export name (an empty string). The command is one-shot, and will block until "
+"the first successful client disconnects:"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:227
+msgid "qemu-nbd -f qcow2 file.qcow2"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:229
+msgid ""
+"Start a long-running server listening with encryption on port 10810, and "
+"allow clients with a specific X.509 certificate to connect to a 1 megabyte "
+"subset of a raw file, using the export name 'subset':"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:235
+msgid ""
+"qemu-nbd \\\n"
+"  --object tls-creds-x509,id=tls0,endpoint=server,dir=/path/to/qemutls \\\n"
+"  --object 'authz-simple,id=auth0,identity=CN=laptop.example.com,,\\\n"
+"            O=Example Org,,L=London,,ST=London,,C=GB' \\\n"
+"  --tls-creds tls0 --tls-authz auth0 \\\n"
+"  -t -x subset -p 10810 \\\n"
+"  --image-opts driver=raw,offset=1M,size=1M,file.driver=file,file."
+"filename=file.raw"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:243
+msgid ""
+"Serve a read-only copy of a guest image over a Unix socket with as many as 5 "
+"simultaneous readers, with a persistent process forked as a daemon:"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:249
+msgid ""
+"qemu-nbd --fork --persistent --shared=5 --socket=/path/to/sock \\\n"
+"  --read-only --format=qcow2 file.qcow2"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:252
+msgid ""
+"Expose the guest-visible contents of a qcow2 file via a block device /dev/"
+"nbd0 (and possibly creating /dev/nbd0p1 and friends for partitions found "
+"within), then disconnect the device when done. Access to bind ``qemu-nbd`` "
+"to a /dev/nbd device generally requires root privileges, and may also "
+"require the execution of ``modprobe nbd`` to enable the kernel NBD client "
+"module.  *CAUTION*: Do not use this method to mount filesystems from an "
+"untrusted guest image - a malicious guest may have prepared the image to "
+"attempt to trigger kernel bugs in partition probing or file system mounting."
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:264
+msgid ""
+"qemu-nbd -c /dev/nbd0 -f qcow2 file.qcow2\n"
+"qemu-nbd -d /dev/nbd0"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:267
+msgid ""
+"Query a remote server to see details about what export(s) it is serving on "
+"port 10809, and authenticating via PSK:"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:272
+msgid ""
+"qemu-nbd \\\n"
+"  --object tls-creds-psk,id=tls0,dir=/tmp/keys,username=eblake,"
+"endpoint=client \\\n"
+"  --tls-creds tls0 -L -b remote.example.com"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:277
+msgid "See also"
+msgstr ""
+
+#: ../../../tools/qemu-nbd.rst:279
+msgid ":manpage:`qemu(1)`, :manpage:`qemu-img(1)`"
+msgstr ""

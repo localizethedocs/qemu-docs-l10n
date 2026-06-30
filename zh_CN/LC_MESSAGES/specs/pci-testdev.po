@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/pci-testdev.rst:3
+msgid "QEMU PCI test device"
+msgstr ""
+
+#: ../../../specs/pci-testdev.rst:5
+msgid "``pci-testdev`` is a device used for testing low level IO."
+msgstr ""
+
+#: ../../../specs/pci-testdev.rst:7
+msgid ""
+"The device implements up to three BARs: BAR0, BAR1 and BAR2. Each of BAR 0+1 "
+"can be memory or IO. Guests must detect BAR types and act accordingly."
+msgstr ""
+
+#: ../../../specs/pci-testdev.rst:11
+msgid ""
+"BAR 0+1 size is up to 4K bytes each. BAR 0+1 starts with the following "
+"header:"
+msgstr ""
+
+#: ../../../specs/pci-testdev.rst:14
+msgid ""
+"typedef struct PCITestDevHdr {\n"
+"    uint8_t test;        /* write-only, starts a given test number */\n"
+"    uint8_t width_type;  /*\n"
+"                          * read-only, type and width of access for a given "
+"test.\n"
+"                          * 1,2,4 for byte,word or long write.\n"
+"                          * any other value if test not supported on this "
+"BAR\n"
+"                          */\n"
+"    uint8_t pad0[2];\n"
+"    uint32_t offset;     /* read-only, offset in this BAR for a given test "
+"*/\n"
+"    uint32_t data;       /* read-only, data to use for a given test */\n"
+"    uint32_t count;      /* for debugging. number of writes detected. */\n"
+"    uint8_t name[];      /* for debugging. 0-terminated ASCII string. */\n"
+"} PCITestDevHdr;"
+msgstr ""
+
+#: ../../../specs/pci-testdev.rst:30
+msgid "All registers are little endian."
+msgstr ""
+
+#: ../../../specs/pci-testdev.rst:32
+msgid ""
+"The device is expected to always implement tests 0 to N on each BAR, and to "
+"add new tests with higher numbers.  In this way a guest can scan test "
+"numbers until it detects an access type that it does not support on this "
+"BAR, then stop."
+msgstr ""
+
+#: ../../../specs/pci-testdev.rst:36
+msgid ""
+"BAR2 is a 64bit memory BAR, without backing storage.  It is disabled by "
+"default and can be enabled using the ``membar=<size>`` property.  This can "
+"be used to test whether guests handle PCI BARs of a specific (possibly quite "
+"large) size correctly."
+msgstr ""
