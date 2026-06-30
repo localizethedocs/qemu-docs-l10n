@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/confidential-guest-support.rst:2
+msgid "Confidential Guest Support"
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:4
+msgid ""
+"Traditionally, hypervisors such as QEMU have complete access to a guest's "
+"memory and other state, meaning that a compromised hypervisor can compromise "
+"any of its guests.  A number of platforms have added mechanisms in hardware "
+"and/or firmware which give guests at least some protection from a "
+"compromised hypervisor.  This is obviously especially desirable for public "
+"cloud environments."
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:11
+msgid ""
+"These mechanisms have different names and different modes of operation, but "
+"are often referred to as Secure Guests or Confidential Guests.  We use the "
+"term \"Confidential Guest Support\" to distinguish this from other aspects "
+"of guest security (such as security against attacks from other guests, or "
+"from network sources)."
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:18
+msgid "Running a Confidential Guest"
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:20
+msgid ""
+"To run a confidential guest you need to add two command line parameters:"
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:22
+msgid ""
+"Use ``-object`` to create a \"confidential guest support\" object.  The type "
+"and parameters will vary with the specific mechanism to be used"
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:25
+msgid ""
+"Set the ``confidential-guest-support`` machine parameter to the ID of the "
+"object from (1)."
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:28
+msgid "Example (for AMD SEV)::"
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:30
+msgid ""
+"qemu-system-x86_64 \\\n"
+"    <other parameters> \\\n"
+"    -machine ...,confidential-guest-support=sev0 \\\n"
+"    -object sev-guest,id=sev0,cbitpos=47,reduced-phys-bits=1"
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:36
+msgid "Supported mechanisms"
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:38
+msgid "Currently supported confidential guest mechanisms are:"
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:40
+msgid ""
+"AMD Secure Encrypted Virtualization (SEV) (see :doc:`i386/amd-memory-"
+"encryption`)"
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:41
+msgid ""
+"POWER Protected Execution Facility (PEF) (see :ref:`power-papr-protected-"
+"execution-facility-pef`)"
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:42
+msgid "s390x Protected Virtualization (PV) (see :doc:`s390x/protvirt`)"
+msgstr ""
+
+#: ../../../system/confidential-guest-support.rst:44
+msgid "Other mechanisms may be supported in future."
+msgstr ""

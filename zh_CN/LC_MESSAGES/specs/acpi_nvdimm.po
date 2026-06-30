@@ -1,0 +1,467 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 10:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/acpi_nvdimm.rst:2
+msgid "QEMU<->ACPI BIOS NVDIMM interface"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:4
+msgid ""
+"QEMU supports NVDIMM via ACPI. This document describes the basic concepts of "
+"NVDIMM ACPI and the interface between QEMU and the ACPI BIOS."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:8
+msgid "NVDIMM ACPI Background"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:10
+msgid ""
+"NVDIMM is introduced in ACPI 6.0 which defines an NVDIMM root device under "
+"_SB scope with a _HID of \"ACPI0012\". For each NVDIMM present or intended "
+"to be supported by platform, platform firmware also exposes an ACPI "
+"Namespace Device under the root device."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:15
+msgid ""
+"The NVDIMM child devices under the NVDIMM root device are defined with _ADR "
+"corresponding to the NFIT device handle. The NVDIMM root device and the "
+"NVDIMM devices can have device specific methods (_DSM) to provide additional "
+"functions specific to a particular NVDIMM implementation."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:20
+msgid "This is an example from ACPI 6.0, a platform contains one NVDIMM::"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:22
+msgid ""
+"Scope (\\_SB){\n"
+"   Device (NVDR) // Root device\n"
+"   {\n"
+"      Name (_HID, \"ACPI0012\")\n"
+"      Method (_STA) {...}\n"
+"      Method (_FIT) {...}\n"
+"      Method (_DSM, ...) {...}\n"
+"      Device (NVD)\n"
+"      {\n"
+"         Name(_ADR, h) //where h is NFIT Device Handle for this NVDIMM\n"
+"         Method (_DSM, ...) {...}\n"
+"      }\n"
+"   }\n"
+"}"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:38
+msgid "Methods supported on both NVDIMM root device and NVDIMM device"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:40
+msgid "_DSM (Device Specific Method)"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:41
+msgid ""
+"It is a control method that enables devices to provide device specific "
+"control functions that are consumed by the device driver. The NVDIMM DSM "
+"specification can be found at http://pmem.io/documents/"
+"NVDIMM_DSM_Interface_Example.pdf"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:46
+msgid "Arguments:"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:48 ../../../specs/acpi_nvdimm.rst:186
+msgid "Arg0"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:49
+msgid "A Buffer containing a UUID (16 Bytes)"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:50 ../../../specs/acpi_nvdimm.rst:188
+msgid "Arg1"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:51
+msgid "An Integer containing the Revision ID (4 Bytes)"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:52 ../../../specs/acpi_nvdimm.rst:190
+msgid "Arg2"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:53
+msgid "An Integer containing the Function Index (4 Bytes)"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:54 ../../../specs/acpi_nvdimm.rst:192
+msgid "Arg3"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:55
+msgid ""
+"A package containing parameters for the function specified by the UUID, "
+"Revision ID, and Function Index"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:58
+msgid "Return Value:"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:60
+msgid ""
+"If Function Index = 0, a Buffer containing a function index bitfield. "
+"Otherwise, the return value and type depends on the UUID, revision ID and "
+"function index which are described in the DSM specification."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:65
+msgid "Methods on NVDIMM ROOT Device"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:67
+msgid "_FIT(Firmware Interface Table)"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:68
+msgid ""
+"It evaluates to a buffer returning data in the format of a series of NFIT "
+"Type Structure."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:71
+msgid "Arguments: None"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:73
+msgid ""
+"Return Value: A Buffer containing a list of NFIT Type structure entries."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:76
+msgid ""
+"The detailed definition of the structure can be found at ACPI 6.0: 5.2.25 "
+"NVDIMM Firmware Interface Table (NFIT)."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:80
+msgid "QEMU NVDIMM Implementation"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:82
+msgid ""
+"QEMU uses 4 bytes IO Port starting from 0x0a18 and a RAM-based memory page "
+"for NVDIMM ACPI."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:85
+msgid "Memory:"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:86
+msgid ""
+"QEMU uses BIOS Linker/loader feature to ask BIOS to allocate a memory page "
+"and dynamically patch its address into an int32 object named \"MEMA\" in "
+"ACPI."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:90
+msgid ""
+"This page is RAM-based and it is used to transfer data between _DSM method "
+"and QEMU. If ACPI has control, this pages is owned by ACPI which writes _DSM "
+"input data to it, otherwise, it is owned by QEMU which emulates _DSM access "
+"and writes the output data to it."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:95
+msgid "ACPI writes _DSM Input Data (based on the offset in the page):"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:97 ../../../specs/acpi_nvdimm.rst:121
+msgid "[0x0 - 0x3]"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:98
+msgid "4 bytes, NVDIMM Device Handle."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:100
+msgid ""
+"The handle is completely QEMU internal thing, the values in range [1, "
+"0xFFFF] indicate nvdimm device. Other values are reserved for other purposes."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:104
+msgid "Reserved handles:"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:106
+msgid "0 is reserved for nvdimm root device named NVDR."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:107
+msgid ""
+"0x10000 is reserved for QEMU internal DSM function called on the root device."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:110
+msgid "[0x4 - 0x7]"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:111
+msgid "4 bytes, Revision ID, that is the Arg1 of _DSM method."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:113
+msgid "[0x8 - 0xB]"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:114
+msgid "4 bytes. Function Index, that is the Arg2 of _DSM method."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:116
+msgid "[0xC - 0xFFF]"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:117
+msgid "4084 bytes, the Arg3 of _DSM method."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:119
+msgid "QEMU writes Output Data (based on the offset in the page):"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:122
+msgid "4 bytes, the length of result"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:124
+msgid "[0x4 - 0xFFF]"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:125
+msgid "4092 bytes, the DSM result filled by QEMU"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:127
+msgid "IO Port 0x0a18 - 0xa1b:"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:128
+msgid ""
+"ACPI writes the address of the memory page allocated by BIOS to this port "
+"then QEMU gets the control and fills the result in the memory page."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:131
+msgid "Write Access:"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:133
+msgid "[0x0a18 - 0xa1b]"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:134
+msgid "4 bytes, the address of the memory page allocated by BIOS."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:137
+msgid "_DSM process diagram"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:139
+msgid "\"MEMA\" indicates the address of memory page allocated by BIOS."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:143
+msgid ""
+"+----------------------+      +-----------------------+\n"
+"|    1. OSPM           |      |    2. OSPM            |\n"
+"| save _DSM input data |      |  write \"MEMA\" to      | Exit to QEMU\n"
+"| to the page          +----->|  IO port 0x0a18       +------------+\n"
+"| indicated by \"MEMA\"  |      |                       |            |\n"
+"+----------------------+      +-----------------------+            |\n"
+"                                                                   |\n"
+"                                                                   v\n"
+"+--------------------+       +-----------+      +------------------+--------"
+"+\n"
+"|      5 QEMU        |       | 4 QEMU    |      |        3. QEMU            "
+"|\n"
+"| write _DSM result  |       |  emulate  |      | get _DSM input data from  "
+"|\n"
+"| to the page        +<------+ _DSM      +<-----+ the page indicated by the "
+"|\n"
+"|                    |       |           |      | value from the IO port    "
+"|\n"
+"+--------+-----------+       +-----------+      +---------------------------"
+"+\n"
+"         |\n"
+"         | Enter Guest\n"
+"         |\n"
+"         v\n"
+"+--------------------------+      +--------------+\n"
+"|     6 OSPM               |      |   7 OSPM     |\n"
+"| result size is returned  |      |  _DSM return |\n"
+"| by reading  DSM          +----->+              |\n"
+"| result from the page     |      |              |\n"
+"+--------------------------+      +--------------+"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:169
+msgid "NVDIMM hotplug"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:171
+msgid ""
+"ACPI BIOS GPE.4 handler is dedicated for notifying OS about nvdimm device "
+"hot-add event."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:175
+msgid "QEMU internal use only _DSM functions"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:178
+msgid "Read FIT"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:180
+msgid ""
+"_FIT method uses _DSM method to fetch NFIT structures blob from QEMU in 1 "
+"page sized increments which are then concatenated and returned as _FIT "
+"method result."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:184
+msgid "Input parameters:"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:187
+msgid "UUID {set to 648B9CF2-CDA1-4312-8AD9-49C4AF32BD62}"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:189
+msgid "Revision ID (set to 1)"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:191
+msgid "Function Index, 0x1"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:193
+msgid "A package containing a buffer whose layout is as follows:"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:196 ../../../specs/acpi_nvdimm.rst:205
+msgid "Field"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:196 ../../../specs/acpi_nvdimm.rst:205
+msgid "Length"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:196 ../../../specs/acpi_nvdimm.rst:205
+msgid "Offset"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:196 ../../../specs/acpi_nvdimm.rst:205
+msgid "Description"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:198
+msgid "offset"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:198 ../../../specs/acpi_nvdimm.rst:207
+#: ../../../specs/acpi_nvdimm.rst:214
+msgid "4"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:198 ../../../specs/acpi_nvdimm.rst:207
+msgid "0"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:198
+msgid "offset in QEMU's NFIT structures blob to read from"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:202
+msgid "Output layout in the dsm memory page:"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:207
+msgid "length"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:207
+msgid "length of entire returned data (including this header)"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:214
+msgid "status"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:210
+msgid "return status codes"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:212
+msgid "0x0 - success"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:213
+msgid "0x100 - error caused by NFIT update while read by _FIT wasn't completed"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:215
+msgid "other codes follow Chapter 3 in DSM Spec Rev1"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:218
+msgid "fit data"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:218
+msgid "Varies"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:218
+msgid "8"
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:218
+msgid "contains FIT data. This field is present if status field is 0."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:222
+msgid ""
+"The FIT offset is maintained by the OSPM itself, current offset plus the "
+"size of the fit data returned by the function is the next offset OSPM should "
+"read. When all FIT data has been read out, zero fit data size is returned."
+msgstr ""
+
+#: ../../../specs/acpi_nvdimm.rst:227
+msgid ""
+"If it returns status code 0x100, OSPM should restart to read FIT (read from "
+"offset 0 again)."
+msgstr ""
