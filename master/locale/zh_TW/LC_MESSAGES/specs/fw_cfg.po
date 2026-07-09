@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-07-09 04:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -162,42 +162,85 @@ msgid "Register Locations"
 msgstr ""
 
 #: ../../../specs/fw_cfg.rst:87
-msgid "x86, x86_64"
-msgstr ""
-
-#: ../../../specs/fw_cfg.rst:88
-msgid "Selector Register IOport: 0x510"
+msgid "For a memory-mapped fw_cfg device, the standard register layout is:"
 msgstr ""
 
 #: ../../../specs/fw_cfg.rst:89
-msgid "Data Register IOport:     0x511"
+msgid "base address : Data Register (64 bit)"
 msgstr ""
 
 #: ../../../specs/fw_cfg.rst:90
-msgid "DMA Address IOport:       0x514"
+msgid "base address + 8 : Selector Register (16 bit)"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:92
-msgid "Arm"
+#: ../../../specs/fw_cfg.rst:91
+msgid "base address + 16 : DMA Address Register (64 bit)"
 msgstr ""
 
 #: ../../../specs/fw_cfg.rst:93
-msgid "Selector Register address: Base + 8 (2 bytes)"
-msgstr ""
-
-#: ../../../specs/fw_cfg.rst:94
-msgid "Data Register address:     Base + 0 (8 bytes)"
+msgid ""
+"Some architectures or machines have a different layout for historical "
+"reasons:"
 msgstr ""
 
 #: ../../../specs/fw_cfg.rst:95
-msgid "DMA Address address:       Base + 16 (8 bytes)"
+msgid "x86, x86_64"
+msgstr ""
+
+#: ../../../specs/fw_cfg.rst:96
+msgid "Selector Register IOport: 0x510"
+msgstr ""
+
+#: ../../../specs/fw_cfg.rst:97
+msgid "Data Register IOport:     0x511"
 msgstr ""
 
 #: ../../../specs/fw_cfg.rst:98
-msgid "ACPI Interface"
+msgid "DMA Address IOport:       0x514"
 msgstr ""
 
 #: ../../../specs/fw_cfg.rst:100
+msgid "PA-RISC:"
+msgstr ""
+
+#: ../../../specs/fw_cfg.rst:101 ../../../specs/fw_cfg.rst:105
+#: ../../../specs/fw_cfg.rst:109 ../../../specs/fw_cfg.rst:113
+msgid "base address : Selector Register (16 bit)"
+msgstr ""
+
+#: ../../../specs/fw_cfg.rst:102
+msgid "base address + 4 : Data Register (8 bit)"
+msgstr ""
+
+#: ../../../specs/fw_cfg.rst:104
+msgid "32-bit SPARC, PPC ``g3beige``, ``mac99``, ``prep``:"
+msgstr ""
+
+#: ../../../specs/fw_cfg.rst:106
+msgid "base address + 2 : Data Register (8 bit)"
+msgstr ""
+
+#: ../../../specs/fw_cfg.rst:108
+msgid "64-bit SPARC:"
+msgstr ""
+
+#: ../../../specs/fw_cfg.rst:110
+msgid "base address + 1 : Data Register (8 bit)"
+msgstr ""
+
+#: ../../../specs/fw_cfg.rst:112
+msgid "MIPS ``loongson3-virt`` machine:"
+msgstr ""
+
+#: ../../../specs/fw_cfg.rst:114
+msgid "base address + 8 : Data Register (64 bit)"
+msgstr ""
+
+#: ../../../specs/fw_cfg.rst:118
+msgid "ACPI Interface"
+msgstr ""
+
+#: ../../../specs/fw_cfg.rst:120
 msgid ""
 "The fw_cfg device is defined with ACPI ID ``QEMU0002``. Since we expect ACPI "
 "tables to be passed into the guest through the fw_cfg device itself, the "
@@ -207,15 +250,15 @@ msgid ""
 "inventory of in-use IOport or MMIO regions."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:108
+#: ../../../specs/fw_cfg.rst:128
 msgid "Firmware Configuration Items"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:111
+#: ../../../specs/fw_cfg.rst:131
 msgid "Signature (Key 0x0000, ``FW_CFG_SIGNATURE``)"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:113
+#: ../../../specs/fw_cfg.rst:133
 msgid ""
 "The presence of the fw_cfg selector and data registers can be verified by "
 "selecting the \"signature\" item using key 0x0000 (``FW_CFG_SIGNATURE``), "
@@ -223,35 +266,35 @@ msgid ""
 "present, the four bytes read will contain the characters ``QEMU``."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:118
+#: ../../../specs/fw_cfg.rst:138
 msgid ""
 "If the DMA interface is available, then reading the DMA Address Register "
 "returns 0x51454d5520434647 (``QEMU CFG`` in big-endian format)."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:122
+#: ../../../specs/fw_cfg.rst:142
 msgid "Revision / feature bitmap (Key 0x0001, ``FW_CFG_ID``)"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:124
+#: ../../../specs/fw_cfg.rst:144
 msgid ""
 "A 32-bit little-endian unsigned int, this item is used to check for enabled "
 "features."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:127
+#: ../../../specs/fw_cfg.rst:147
 msgid "Bit 0: traditional interface. Always set."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:128
+#: ../../../specs/fw_cfg.rst:148
 msgid "Bit 1: DMA interface."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:131
+#: ../../../specs/fw_cfg.rst:151
 msgid "File Directory (Key 0x0019, ``FW_CFG_FILE_DIR``)"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:135
+#: ../../../specs/fw_cfg.rst:155
 msgid ""
 "Firmware configuration items stored at selector keys 0x0020 or higher "
 "(``FW_CFG_FILE_FIRST`` or higher) have an associated entry in a directory "
@@ -260,7 +303,7 @@ msgid ""
 "QEMU source tree) is shown here, slightly annotated for clarity::"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:141
+#: ../../../specs/fw_cfg.rst:161
 msgid ""
 "struct FWCfgFiles {         /* the entire file directory fw_cfg item */\n"
 "    uint32_t count;         /* number of entries, in big-endian format */\n"
@@ -276,89 +319,89 @@ msgid ""
 "};"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:154
+#: ../../../specs/fw_cfg.rst:174
 msgid "All Other Data Items"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:156
+#: ../../../specs/fw_cfg.rst:176
 msgid ""
 "Please consult the QEMU source for the most up-to-date and authoritative "
 "list of selector keys and their respective items' purpose, format and "
 "writeability."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:160
+#: ../../../specs/fw_cfg.rst:180
 msgid "Ranges"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:162
+#: ../../../specs/fw_cfg.rst:182
 msgid ""
 "Theoretically, there may be up to 0x4000 generic firmware configuration "
 "items, and up to 0x4000 architecturally specific ones."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:166
+#: ../../../specs/fw_cfg.rst:186
 msgid "Selector Reg."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:166
+#: ../../../specs/fw_cfg.rst:186
 msgid "Range Usage"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:168
+#: ../../../specs/fw_cfg.rst:188
 msgid "0x0000 - 0x3fff"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:168
+#: ../../../specs/fw_cfg.rst:188
 msgid ""
 "Generic (0x0000 - 0x3fff, generally RO, possibly RW through the DMA "
 "interface in QEMU v2.9+)"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:170
+#: ../../../specs/fw_cfg.rst:190
 msgid "0x4000 - 0x7fff"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:170
+#: ../../../specs/fw_cfg.rst:190
 msgid "Generic (0x0000 - 0x3fff, RW, ignored in QEMU v2.4+)"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:171
+#: ../../../specs/fw_cfg.rst:191
 msgid "0x8000 - 0xbfff"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:171
+#: ../../../specs/fw_cfg.rst:191
 msgid ""
 "Arch. Specific (0x0000 - 0x3fff, generally RO, possibly RW through the DMA "
 "interface in QEMU v2.9+)"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:173
+#: ../../../specs/fw_cfg.rst:193
 msgid "0xc000 - 0xffff"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:173
+#: ../../../specs/fw_cfg.rst:193
 msgid "Arch. Specific (0x0000 - 0x3fff, RW, ignored in v2.4+)"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:176
+#: ../../../specs/fw_cfg.rst:196
 msgid ""
 "In practice, the number of allowed firmware configuration items depends on "
 "the machine type/version."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:180
+#: ../../../specs/fw_cfg.rst:200
 msgid "Guest-side DMA Interface"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:182
+#: ../../../specs/fw_cfg.rst:202
 msgid ""
 "If bit 1 of the feature bitmap is set, the DMA interface is present. This "
 "does not replace the existing fw_cfg interface, it is an add-on. This "
 "interface can be used through the 64-bit wide address register."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:186
+#: ../../../specs/fw_cfg.rst:206
 msgid ""
 "The address register is in big-endian format. The value for the register is "
 "0 at startup and after an operation. A write to the least significant half "
@@ -368,14 +411,14 @@ msgid ""
 "starting with the most significant half (at offset 0)."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:193
+#: ../../../specs/fw_cfg.rst:213
 msgid ""
 "In this register, the physical address of a ``FWCfgDmaAccess`` structure in "
 "RAM should be written. This is the format of the ``FWCfgDmaAccess`` "
 "structure::"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:196
+#: ../../../specs/fw_cfg.rst:216
 msgid ""
 "typedef struct FWCfgDmaAccess {\n"
 "    uint32_t control;\n"
@@ -384,51 +427,51 @@ msgid ""
 "} FWCfgDmaAccess;"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:202
+#: ../../../specs/fw_cfg.rst:222
 msgid ""
 "The fields of the structure are in big endian mode, and the field at the "
 "lowest address is the ``control`` field."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:205
+#: ../../../specs/fw_cfg.rst:225
 msgid "The ``control`` field has the following bits:"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:207
+#: ../../../specs/fw_cfg.rst:227
 msgid "Bit 0: Error"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:208
+#: ../../../specs/fw_cfg.rst:228
 msgid "Bit 1: Read"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:209
+#: ../../../specs/fw_cfg.rst:229
 msgid "Bit 2: Skip"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:210
+#: ../../../specs/fw_cfg.rst:230
 msgid "Bit 3: Select. The upper 16 bits are the selected index."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:211
+#: ../../../specs/fw_cfg.rst:231
 msgid "Bit 4: Write"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:213
+#: ../../../specs/fw_cfg.rst:233
 msgid ""
 "When an operation is triggered, if the ``control`` field has bit 3 set, the "
 "upper 16 bits are interpreted as an index of a firmware configuration item. "
 "This has the same effect as writing the selector register."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:217
+#: ../../../specs/fw_cfg.rst:237
 msgid ""
 "If the ``control`` field has bit 1 set, a read operation will be performed. "
 "``length`` bytes for the current selector and offset will be copied into the "
 "physical RAM address specified by the ``address`` field."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:221
+#: ../../../specs/fw_cfg.rst:241
 msgid ""
 "If the ``control`` field has bit 4 set (and not bit 1), a write operation "
 "will be performed. ``length`` bytes will be copied from the physical RAM "
@@ -440,48 +483,48 @@ msgid ""
 "the ``control`` field."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:229
+#: ../../../specs/fw_cfg.rst:249
 msgid ""
 "If the ``control`` field has bit 2 set (and neither bit 1 nor bit 4), a skip "
 "operation will be performed. The offset for the current selector will be "
 "advanced ``length`` bytes."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:233
+#: ../../../specs/fw_cfg.rst:253
 msgid "To check the result, read the ``control`` field:"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:235
+#: ../../../specs/fw_cfg.rst:255
 msgid "Error bit set"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:236
+#: ../../../specs/fw_cfg.rst:256
 msgid "Something went wrong."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:237
+#: ../../../specs/fw_cfg.rst:257
 msgid "All bits cleared"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:238
+#: ../../../specs/fw_cfg.rst:258
 msgid "Transfer finished successfully."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:239
+#: ../../../specs/fw_cfg.rst:259
 msgid "Otherwise"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:240
+#: ../../../specs/fw_cfg.rst:260
 msgid ""
 "Transfer still in progress (doesn't happen today due to implementation not "
 "being async, but may in the future)."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:245
+#: ../../../specs/fw_cfg.rst:265
 msgid "Externally Provided Items"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:247
+#: ../../../specs/fw_cfg.rst:267
 msgid ""
 "Since v2.4, \"file\" fw_cfg items (i.e., items with selector keys above "
 "``FW_CFG_FILE_FIRST``, and with a corresponding entry in the fw_cfg file "
@@ -489,46 +532,46 @@ msgid ""
 "following syntax::"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:252
+#: ../../../specs/fw_cfg.rst:272
 msgid "-fw_cfg [name=]<item_name>,file=<path>"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:254
+#: ../../../specs/fw_cfg.rst:274
 msgid "Or::"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:256
+#: ../../../specs/fw_cfg.rst:276
 msgid "-fw_cfg [name=]<item_name>,string=<string>"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:258
+#: ../../../specs/fw_cfg.rst:278
 msgid ""
 "Since v5.1, QEMU allows some objects to generate fw_cfg-specific content, "
 "the content is then associated with a \"file\" item using the 'gen_id' "
 "option in the command line, using the following syntax::"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:262
+#: ../../../specs/fw_cfg.rst:282
 msgid ""
 "-object <generator-type>,id=<generated_id>,[generator-specific-options] \\\n"
 "-fw_cfg [name=]<item_name>,gen_id=<generated_id>"
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:265
+#: ../../../specs/fw_cfg.rst:285
 msgid "See QEMU man page for more documentation."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:267
+#: ../../../specs/fw_cfg.rst:287
 msgid "Using item_name with plain ASCII characters only is recommended."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:269
+#: ../../../specs/fw_cfg.rst:289
 msgid ""
 "Item names beginning with ``opt/`` are reserved for users.  QEMU will never "
 "create entries with such names unless explicitly ordered by the user."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:273
+#: ../../../specs/fw_cfg.rst:293
 msgid ""
 "To avoid clashes among different users, it is strongly recommended that you "
 "use names beginning with ``opt/RFQDN/``, where RFQDN is a reverse fully "
@@ -537,26 +580,26 @@ msgid ""
 "appropriate."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:279
+#: ../../../specs/fw_cfg.rst:299
 msgid "For historical reasons, ``opt/ovmf/`` is reserved for OVMF firmware."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:281
+#: ../../../specs/fw_cfg.rst:301
 msgid "Prefix ``opt/org.qemu/`` is reserved for QEMU itself."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:283
+#: ../../../specs/fw_cfg.rst:303
 msgid ""
 "Use of names not beginning with ``opt/`` is potentially dangerous and "
 "entirely unsupported.  QEMU will warn if you try."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:286
+#: ../../../specs/fw_cfg.rst:306
 msgid ""
 "Use of names not beginning with ``opt/`` is tolerated with 'gen_id' (that "
 "is, the warning is suppressed), but you must know exactly what you're doing."
 msgstr ""
 
-#: ../../../specs/fw_cfg.rst:290
+#: ../../../specs/fw_cfg.rst:310
 msgid "All externally provided fw_cfg items are read-only to the guest."
 msgstr ""

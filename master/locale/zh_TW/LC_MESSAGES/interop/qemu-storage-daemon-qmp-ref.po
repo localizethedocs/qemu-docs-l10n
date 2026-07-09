@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-01 14:32+0000\n"
+"POT-Creation-Date: 2026-07-09 04:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1657,7 +1657,7 @@ msgstr ""
 #: ../../../../qapi/block-core.json:4192 ../../../../qapi/block-core.json:4202
 #: ../../../../qapi/block-core.json:4255 ../../../../qapi/block-core.json:4263
 #: ../../../../qapi/block-core.json:4979 ../../../../qapi/block-core.json:5358
-#: ../../../../qapi/block-core.json:6282 ../../../../qapi/qom.json:1190
+#: ../../../../qapi/block-core.json:6282 ../../../../qapi/qom.json:1249
 #: ../../../../qapi/transaction.json:85 ../../../../qapi/transaction.json:93
 #: ../../../../qapi/transaction.json:101 ../../../../qapi/transaction.json:109
 #: ../../../../qapi/transaction.json:117 ../../../../qapi/transaction.json:125
@@ -2444,8 +2444,8 @@ msgstr ""
 #: ../../../../qapi/char.json:911 ../../../../qapi/control.json:26
 #: ../../../../qapi/control.json:114 ../../../../qapi/control.json:153
 #: ../../../../qapi/control.json:173 ../../../../qapi/qom.json:97
-#: ../../../../qapi/qom.json:197 ../../../../qapi/qom.json:1356
-#: ../../../../qapi/qom.json:1376 ../../../../qapi/transaction.json:268
+#: ../../../../qapi/qom.json:197 ../../../../qapi/qom.json:1419
+#: ../../../../qapi/qom.json:1439 ../../../../qapi/transaction.json:268
 msgid "Example:"
 msgstr ""
 
@@ -9007,7 +9007,7 @@ msgid "Change a character device backend"
 msgstr ""
 
 #: ../../../../qapi/char.json:824 ../../../../qapi/char.json:882
-msgid "the chardev's ID, must exist"
+msgid "the chardev's ID"
 msgstr ""
 
 #: ../../../../qapi/char.json:826
@@ -9047,7 +9047,7 @@ msgid "Remove a character device backend"
 msgstr ""
 
 #: ../../../../qapi/char.json:865
-msgid "the chardev's ID, must exist and not be in use"
+msgid "the chardev's ID, must not be in use"
 msgstr ""
 
 #: ../../../../qapi/char.json:869
@@ -11081,327 +11081,386 @@ msgid ""
 "affinity``. (default: QEMU main thread affinity)"
 msgstr ""
 
+#: ../../../../qapi/qom.json:1193
+msgid "Properties for all monitors"
+msgstr ""
+
 #: ../../../../qapi/qom.json:1195
+msgid "ID of the character device providing the monitor transport"
+msgstr ""
+
+#: ../../../../qapi/qom.json:1205
+msgid "Properties for the HMP monitor"
+msgstr ""
+
+#: ../../../../qapi/qom.json:1207
+msgid "whether to enable readline for line editing (default: true)"
+msgstr ""
+
+#: ../../../../qapi/qom.json:1212 ../../../../qapi/qom.json:1244
+msgid "The members of :qapi:type:`MonitorProperties`."
+msgstr ""
+
+#: ../../../../qapi/qom.json:1220
+msgid "Action to take when the character device backend is closed."
+msgstr ""
+
+#: ../../../../qapi/qom.json:1222
+msgid "take no action"
+msgstr ""
+
+#: ../../../../qapi/qom.json:1224
+msgid ""
+"delete both the 'monitor-qmp' object and its associated character device "
+"backend object"
+msgstr ""
+
+#: ../../../../qapi/qom.json:1235
+msgid "Properties for the QMP monitor"
+msgstr ""
+
+#: ../../../../qapi/qom.json:1237
+msgid "whether to pretty print JSON responses (default: false)"
+msgstr ""
+
+#: ../../../../qapi/qom.json:1239
+msgid ""
+"action to take when the character device backend is closed (default: none)"
+msgstr ""
+
+#: ../../../../qapi/qom.json:1254
 msgid ""
 "Members ``x-remote-object`` and ``x-vfio-user-server`` are experimental."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1268
+#: ../../../../qapi/qom.json:1329
 msgid "Describes the options of a user creatable QOM object."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1270
+#: ../../../../qapi/qom.json:1331
 msgid "the class name for the object to be created"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1272
+#: ../../../../qapi/qom.json:1333
 msgid "the name of the new object"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``acpi-generic-initiator``: The members of :qapi:type:"
 "`AcpiGenericInitiatorProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``acpi-generic-port``: The members of :qapi:type:"
 "`AcpiGenericPortProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``authz-list``: The members of :qapi:type:"
 "`AuthZListProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``authz-listfile``: The members of :qapi:type:"
 "`AuthZListFileProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``authz-pam``: The members of :qapi:type:"
 "`AuthZPAMProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``authz-simple``: The members of :qapi:type:"
 "`AuthZSimpleProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``can-host-socketcan``: The members of :qapi:type:"
 "`CanHostSocketcanProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``colo-compare``: The members of :qapi:type:"
 "`ColoCompareProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``cryptodev-backend``: The members of :qapi:type:"
 "`CryptodevBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``cryptodev-backend-builtin``: The members of :qapi:"
 "type:`CryptodevBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``cryptodev-backend-lkcf``: The members of :qapi:type:"
 "`CryptodevBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``cryptodev-vhost-user``: The members of :qapi:type:"
 "`CryptodevVhostUserProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``dbus-vmstate``: The members of :qapi:type:"
 "`DBusVMStateProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``filter-buffer``: The members of :qapi:type:"
 "`FilterBufferProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``filter-dump``: The members of :qapi:type:"
 "`FilterDumpProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``filter-mirror``: The members of :qapi:type:"
 "`FilterMirrorProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``filter-redirector``: The members of :qapi:type:"
 "`FilterRedirectorProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``filter-replay``: The members of :qapi:type:"
 "`NetfilterProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``filter-rewriter``: The members of :qapi:type:"
 "`FilterRewriterProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``igvm-cfg``: The members of :qapi:type:"
 "`IgvmCfgProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``input-barrier``: The members of :qapi:type:"
 "`InputBarrierProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``input-linux``: The members of :qapi:type:"
 "`InputLinuxProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``iommufd``: The members of :qapi:type:"
 "`IOMMUFDProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``iothread``: The members of :qapi:type:"
 "`IothreadProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``main-loop``: The members of :qapi:type:"
 "`MainLoopProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``memory-backend-epc``: The members of :qapi:type:"
 "`MemoryBackendEpcProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``memory-backend-file``: The members of :qapi:type:"
 "`MemoryBackendFileProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``memory-backend-memfd``: The members of :qapi:type:"
 "`MemoryBackendMemfdProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``memory-backend-ram``: The members of :qapi:type:"
 "`MemoryBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``memory-backend-shm``: The members of :qapi:type:"
 "`MemoryBackendShmProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
+msgid ""
+"When ``qom-type`` is ``monitor-hmp``: The members of :qapi:type:"
+"`MonitorHMPProperties`."
+msgstr ""
+
+#: ../../../../qapi/qom.json:1337
+msgid ""
+"When ``qom-type`` is ``monitor-qmp``: The members of :qapi:type:"
+"`MonitorQMPProperties`."
+msgstr ""
+
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``pr-manager-helper``: The members of :qapi:type:"
 "`PrManagerHelperProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``qtest``: The members of :qapi:type:`QtestProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``rng-builtin``: The members of :qapi:type:"
 "`RngProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``rng-egd``: The members of :qapi:type:"
 "`RngEgdProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``rng-random``: The members of :qapi:type:"
 "`RngRandomProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``secret``: The members of :qapi:type:"
 "`SecretProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``secret_keyring``: The members of :qapi:type:"
 "`SecretKeyringProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``sev-guest``: The members of :qapi:type:"
 "`SevGuestProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``sev-snp-guest``: The members of :qapi:type:"
 "`SevSnpGuestProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``tdx-guest``: The members of :qapi:type:"
 "`TdxGuestProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``thread-context``: The members of :qapi:type:"
 "`ThreadContextProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``throttle-group``: The members of :qapi:type:"
 "`ThrottleGroupProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``tls-creds-anon``: The members of :qapi:type:"
 "`TlsCredsAnonProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``tls-creds-psk``: The members of :qapi:type:"
 "`TlsCredsPskProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``tls-creds-x509``: The members of :qapi:type:"
 "`TlsCredsX509Properties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``tls-cipher-suites``: The members of :qapi:type:"
 "`TlsCredsProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``x-remote-object``: The members of :qapi:type:"
 "`RemoteObjectProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1276
+#: ../../../../qapi/qom.json:1337
 msgid ""
 "When ``qom-type`` is ``x-vfio-user-server``: The members of :qapi:type:"
 "`VfioUserServerProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1344
+#: ../../../../qapi/qom.json:1407
 msgid "Create a QOM object."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1358
+#: ../../../../qapi/qom.json:1421
 msgid "The members of :qapi:type:`ObjectOptions`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1346
+#: ../../../../qapi/qom.json:1409
 msgid "- If ``qom-type`` is not a valid class name"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1347
+#: ../../../../qapi/qom.json:1410
 msgid "If ``qom-type`` is not a valid class name"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1351
+#: ../../../../qapi/qom.json:1414
 msgid ""
 "-> { \"execute\": \"object-add\",\n"
 "     \"arguments\": { \"qom-type\": \"rng-random\", \"id\": \"rng1\",\n"
@@ -11409,23 +11468,23 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1364
+#: ../../../../qapi/qom.json:1427
 msgid "Remove a QOM object."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1366
+#: ../../../../qapi/qom.json:1429
 msgid "the name of the QOM object to remove"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1368
+#: ../../../../qapi/qom.json:1431
 msgid "- If ``id`` is not a valid id for a QOM object"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1369
+#: ../../../../qapi/qom.json:1432
 msgid "If ``id`` is not a valid id for a QOM object"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1373
+#: ../../../../qapi/qom.json:1436
 msgid ""
 "-> { \"execute\": \"object-del\", \"arguments\": { \"id\": \"rng1\" } }\n"
 "<- { \"return\": {} }"

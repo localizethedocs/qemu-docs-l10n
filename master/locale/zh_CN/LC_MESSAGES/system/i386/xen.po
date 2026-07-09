@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-07-09 04:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,24 +148,25 @@ msgstr ""
 
 #: ../../../system/i386/xen.rst:82
 msgid ""
-"-chardev stdio,mux=on,id=char0,signal=off -mon char0 \\\\\n"
+"-chardev stdio,mux=on,id=char0,signal=off \\\\\n"
+"-object monitor-hmp,chardev=char0,id=hmp0 \\\\\n"
 "-device xen-console,chardev=char0"
 msgstr ""
 
-#: ../../../system/i386/xen.rst:85
+#: ../../../system/i386/xen.rst:86
 msgid ""
 "The Xen network device is ``xen-net-device``, which becomes the default NIC "
 "model for emulated Xen guests, meaning that just the default NIC provided by "
 "QEMU should automatically work and present a Xen network device to the guest."
 msgstr ""
 
-#: ../../../system/i386/xen.rst:90
+#: ../../../system/i386/xen.rst:91
 msgid ""
 "Disks can be configured with '``-drive file=${GUEST_IMAGE},if=xen``' and "
 "will appear to the guest as ``xvda`` onwards."
 msgstr ""
 
-#: ../../../system/i386/xen.rst:93
+#: ../../../system/i386/xen.rst:94
 msgid ""
 "Under Xen, the boot disk is typically available both via IDE emulation, and "
 "as a PV block device. Guest bootloaders typically use IDE to load the guest "
@@ -173,42 +174,42 @@ msgid ""
 "device."
 msgstr ""
 
-#: ../../../system/i386/xen.rst:97
+#: ../../../system/i386/xen.rst:98
 msgid "This configuration can be achieved as follows:"
 msgstr ""
 
-#: ../../../system/i386/xen.rst:101
+#: ../../../system/i386/xen.rst:102
 msgid ""
 "|qemu_system| --accel kvm,xen-version=0x40011,kernel-irqchip=split \\\\\n"
 "     -drive file=${GUEST_IMAGE},if=xen \\\\\n"
 "     -drive file=${GUEST_IMAGE},file.locking=off,if=ide"
 msgstr ""
 
-#: ../../../system/i386/xen.rst:105
+#: ../../../system/i386/xen.rst:106
 msgid ""
 "VirtIO devices can also be used; Linux guests may need to be dissuaded from "
 "umplugging them by adding '``xen_emul_unplug=never``' on their command line."
 msgstr ""
 
-#: ../../../system/i386/xen.rst:109
+#: ../../../system/i386/xen.rst:110
 msgid "Booting Xen PV guests"
 msgstr ""
 
-#: ../../../system/i386/xen.rst:111
+#: ../../../system/i386/xen.rst:112
 msgid ""
 "Booting PV guest kernels is possible by using the Xen PV shim (a version of "
 "Xen itself, designed to run inside a Xen HVM guest and provide memory "
 "management services for one guest alone)."
 msgstr ""
 
-#: ../../../system/i386/xen.rst:115
+#: ../../../system/i386/xen.rst:116
 msgid ""
 "The Xen binary is provided as the ``-kernel`` and the guest kernel itself "
 "(or PV Grub image) as the ``-initrd`` image, which actually just means the "
 "first multiboot \"module\". For example:"
 msgstr ""
 
-#: ../../../system/i386/xen.rst:121
+#: ../../../system/i386/xen.rst:122
 msgid ""
 "|qemu_system| --accel kvm,xen-version=0x40011,kernel-irqchip=split \\\\\n"
 "     -chardev stdio,id=char0 -device xen-console,chardev=char0 \\\\\n"
@@ -218,14 +219,14 @@ msgid ""
 "     -drive file=${GUEST_IMAGE},if=xen"
 msgstr ""
 
-#: ../../../system/i386/xen.rst:127
+#: ../../../system/i386/xen.rst:128
 msgid ""
 "The Xen image must be built with the ``CONFIG_XEN_GUEST`` and "
 "``CONFIG_PV_SHIM`` options, and as of Xen 4.17, Xen's PV shim mode does not "
 "support using a serial port; it must have a Xen console or it will panic."
 msgstr ""
 
-#: ../../../system/i386/xen.rst:131
+#: ../../../system/i386/xen.rst:132
 msgid ""
 "The example above provides the guest kernel command line after a separator "
 "(\" ``--`` \") on the Xen command line, and does not provide the guest "
@@ -235,11 +236,11 @@ msgid ""
 "initrd`` option."
 msgstr ""
 
-#: ../../../system/i386/xen.rst:139
+#: ../../../system/i386/xen.rst:140
 msgid "Host OS requirements"
 msgstr ""
 
-#: ../../../system/i386/xen.rst:141
+#: ../../../system/i386/xen.rst:142
 msgid ""
 "The minimal Xen support in the KVM accelerator requires the host to be "
 "running Linux v5.12 or newer. Later versions add optimisations: Linux v5.17 "

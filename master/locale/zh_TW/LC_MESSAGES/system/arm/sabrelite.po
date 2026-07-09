@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-07-09 04:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,10 +93,14 @@ msgid "5 ECSPI controllers"
 msgstr ""
 
 #: ../../../system/arm/sabrelite.rst:27
+msgid "2 FlexCAN CAN controllers"
+msgstr ""
+
+#: ../../../system/arm/sabrelite.rst:28
 msgid "1 SST 25VF016B flash"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:29
+#: ../../../system/arm/sabrelite.rst:30
 msgid ""
 "Please note above list is a complete superset the QEMU SABRE Lite machine "
 "can support. For a normal use case, a device tree blob that represents a "
@@ -104,28 +108,28 @@ msgid ""
 "software."
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:34
+#: ../../../system/arm/sabrelite.rst:35
 msgid "Boot options"
 msgstr "開機選項"
 
-#: ../../../system/arm/sabrelite.rst:36
+#: ../../../system/arm/sabrelite.rst:37
 msgid ""
 "The SABRE Lite machine can start using the standard -kernel functionality "
 "for loading a Linux kernel, U-Boot bootloader or ELF executable."
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:40
+#: ../../../system/arm/sabrelite.rst:41
 msgid "Running Linux kernel"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:42
+#: ../../../system/arm/sabrelite.rst:43
 msgid ""
 "Linux mainline v5.10 release is tested at the time of writing. To build a "
 "Linux mainline kernel that can be booted by the SABRE Lite machine, simply "
 "configure the kernel using the imx_v6_v7_defconfig configuration:"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:46
+#: ../../../system/arm/sabrelite.rst:47
 msgid ""
 "$ export ARCH=arm\n"
 "$ export CROSS_COMPILE=arm-linux-gnueabihf-\n"
@@ -133,13 +137,13 @@ msgid ""
 "$ make"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:53
+#: ../../../system/arm/sabrelite.rst:54
 msgid ""
 "To boot the newly built Linux kernel in QEMU with the SABRE Lite machine, "
 "use:"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:55
+#: ../../../system/arm/sabrelite.rst:56
 msgid ""
 "$ qemu-system-arm -M sabrelite -smp 4 -m 1G \\\n"
 "    -display none -serial null -serial stdio \\\n"
@@ -149,11 +153,11 @@ msgid ""
 "    -append \"root=/dev/ram\""
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:65
+#: ../../../system/arm/sabrelite.rst:66
 msgid "Running U-Boot"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:67
+#: ../../../system/arm/sabrelite.rst:68
 msgid ""
 "U-Boot mainline v2020.10 release is tested at the time of writing. To build "
 "a U-Boot mainline bootloader that can be booted by the SABRE Lite machine, "
@@ -161,55 +165,55 @@ msgid ""
 "Linux:"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:71
+#: ../../../system/arm/sabrelite.rst:72
 msgid ""
 "$ export CROSS_COMPILE=arm-linux-gnueabihf-\n"
 "$ make mx6qsabrelite_defconfig"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:76
+#: ../../../system/arm/sabrelite.rst:77
 msgid "Note we need to adjust settings by:"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:78
+#: ../../../system/arm/sabrelite.rst:79
 msgid "$ make menuconfig"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:82
+#: ../../../system/arm/sabrelite.rst:83
 msgid "then manually select the following configuration in U-Boot:"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:84
+#: ../../../system/arm/sabrelite.rst:85
 msgid "Device Tree Control > Provider of DTB for DT Control > Embedded DTB"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:86
+#: ../../../system/arm/sabrelite.rst:87
 msgid ""
 "To start U-Boot using the SABRE Lite machine, provide the u-boot binary to "
 "the -kernel argument, along with an SD card image with rootfs:"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:89
+#: ../../../system/arm/sabrelite.rst:90
 msgid ""
 "$ qemu-system-arm -M sabrelite -smp 4 -m 1G \\\n"
 "    -display none -serial null -serial stdio \\\n"
 "    -kernel u-boot"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:95
+#: ../../../system/arm/sabrelite.rst:96
 msgid ""
 "The following example shows booting Linux kernel from dhcp, and uses the "
 "rootfs on an SD card. This requires some additional command line parameters "
 "for QEMU:"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:99
+#: ../../../system/arm/sabrelite.rst:100
 msgid ""
 "-nic user,tftp=/path/to/kernel/zImage \\\n"
 "-drive file=sdcard.img,id=rootfs -device sd-card,drive=rootfs"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:104
+#: ../../../system/arm/sabrelite.rst:105
 msgid ""
 "The directory for the built-in TFTP server should also contain the device "
 "tree blob of the SABRE Lite board. The sample SD card image was populated "
@@ -217,13 +221,13 @@ msgid ""
 "kernel \"root=\" boot parameter accordingly."
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:109
+#: ../../../system/arm/sabrelite.rst:110
 msgid ""
 "After U-Boot boots, type the following commands in the U-Boot command shell "
 "to boot the Linux kernel:"
 msgstr ""
 
-#: ../../../system/arm/sabrelite.rst:112
+#: ../../../system/arm/sabrelite.rst:113
 msgid ""
 "=> setenv ethaddr 00:11:22:33:44:55\n"
 "=> setenv bootfile zImage\n"

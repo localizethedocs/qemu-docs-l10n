@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-01 14:32+0000\n"
+"POT-Creation-Date: 2026-07-09 04:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,6 +53,26 @@ msgstr ""
 
 #: ../../../devel/migration/vfio.rst:26
 msgid ""
+"For example, in mlx5 devices, the initial bytes hold metadata used for time "
+"consuming pre-allocations of resources on the destination. Although init "
+"bytes may be small in size and sending them may take little time, loading "
+"them in the destination can take a significant amount of time. Switchover-"
+"ack guarantees that this pre-allocation doesn't happen during downtime."
+msgstr ""
+
+#: ../../../devel/migration/vfio.rst:32
+msgid ""
+"Initial bytes was originally defined to be monotonically decreasing, however "
+"there are cases where a new chunk of initial bytes should be transferred "
+"during precopy, e.g., due to a device reconfiguration, etc. The "
+"VFIO_PRECOPY_INFO_REINIT feature addresses this and when supported, allows "
+"to report a new initial bytes value regardless of any previously reported "
+"values. In this case, a new switchover ACK will be requested to make sure "
+"the new initial bytes are loaded in the destination before switching over."
+msgstr ""
+
+#: ../../../devel/migration/vfio.rst:40
+msgid ""
 "To support migration of multiple devices that might do P2P transactions "
 "between themselves, VFIO migration uAPI defines an intermediate P2P "
 "quiescent state. While in the P2P quiescent state, P2P DMA transactions "
@@ -61,7 +81,7 @@ msgid ""
 "been completed by the time the device enters this state."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:33
+#: ../../../devel/migration/vfio.rst:47
 msgid ""
 "All the devices that support P2P migration are first transitioned to the P2P "
 "quiescent state and only then are they stopped or started. This makes "
@@ -69,73 +89,67 @@ msgid ""
 "atomically for all the devices together."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:38
+#: ../../../devel/migration/vfio.rst:52
 msgid ""
 "Thus, multiple VFIO devices migration is allowed only if all the devices "
 "support P2P migration. Single VFIO device migration is allowed regardless of "
 "P2P migration support."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:42
+#: ../../../devel/migration/vfio.rst:56
 msgid ""
 "A detailed description of the UAPI for VFIO device migration can be found in "
 "the comment for the ``vfio_device_mig_state`` structure in the header file "
 "linux-headers/linux/vfio.h."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:46
+#: ../../../devel/migration/vfio.rst:60
 msgid "VFIO implements the device hooks for the iterative approach as follows:"
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:48
+#: ../../../devel/migration/vfio.rst:62
 msgid "A ``save_setup`` function that sets up migration on the source."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:50
+#: ../../../devel/migration/vfio.rst:64
 msgid ""
 "A ``load_setup`` function that sets the VFIO device on the destination in "
 "_RESUMING state."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:53
+#: ../../../devel/migration/vfio.rst:67
 msgid ""
 "A ``save_query_pending`` function that reports the remaining data that the "
 "vendor driver has yet to save for the VFIO device."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:56
+#: ../../../devel/migration/vfio.rst:70
 msgid ""
 "An ``is_active_iterate`` function that indicates ``save_live_iterate`` is "
 "active only when the VFIO device is in pre-copy states."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:59
+#: ../../../devel/migration/vfio.rst:73
 msgid ""
 "A ``save_live_iterate`` function that reads the VFIO device's data from the "
 "vendor driver during iterative pre-copy phase."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:62
-msgid ""
-"A ``switchover_ack_needed`` function that checks if the VFIO device uses "
-"\"switchover-ack\" migration capability when this capability is enabled."
-msgstr ""
-
-#: ../../../devel/migration/vfio.rst:65
+#: ../../../devel/migration/vfio.rst:76
 msgid ""
 "A ``switchover_start`` function that in the multifd mode starts a thread "
 "that reassembles the multifd received data and loads it in-order into the "
 "device. In the non-multifd mode this function is a NOP."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:69
+#: ../../../devel/migration/vfio.rst:80
 msgid ""
 "A ``save_state`` function to save the device config space if it is present "
 "in the non-multifd mode. In the multifd mode it just emits either a dummy "
 "EOS marker."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:73
+#: ../../../devel/migration/vfio.rst:84
 msgid ""
 "A ``save_complete`` function that sets the VFIO device in _STOP_COPY state "
 "and iteratively copies the data for the VFIO device until the vendor driver "
@@ -143,7 +157,7 @@ msgid ""
 "EOS marker."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:78
+#: ../../../devel/migration/vfio.rst:89
 msgid ""
 "A ``save_complete_precopy_thread`` function that in the multifd mode "
 "provides thread handler performing multifd device state transfer. It sets "
@@ -154,32 +168,32 @@ msgid ""
 "is a NOP."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:87
+#: ../../../devel/migration/vfio.rst:98
 msgid ""
 "A ``load_state`` function that loads the config section and the data "
 "sections that are generated by the save functions above."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:90
+#: ../../../devel/migration/vfio.rst:101
 msgid ""
 "A ``load_state_buffer`` function that loads the device state and the device "
 "config that arrived via multifd channels. It's used only in the multifd mode."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:94
+#: ../../../devel/migration/vfio.rst:105
 msgid ""
 "``cleanup`` functions for both save and load that perform any migration "
 "related cleanup."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:98
+#: ../../../devel/migration/vfio.rst:109
 msgid ""
 "The VFIO migration code uses a VM state change handler to change the VFIO "
 "device state when the VM state changes from running to not-running, and vice "
 "versa."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:102
+#: ../../../devel/migration/vfio.rst:113
 msgid ""
 "Similarly, a migration state change handler is used to trigger a transition "
 "of the VFIO device state when certain changes of the migration state occur. "
@@ -187,11 +201,11 @@ msgid ""
 "a migration failed or was canceled."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:108
+#: ../../../devel/migration/vfio.rst:119
 msgid "System memory dirty pages tracking"
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:110
+#: ../../../devel/migration/vfio.rst:121
 msgid ""
 "A ``log_global_start`` and ``log_global_stop`` memory listener callback "
 "informs the VFIO dirty tracking module to start and stop dirty page "
@@ -201,7 +215,7 @@ msgid ""
 "per container."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:116
+#: ../../../devel/migration/vfio.rst:127
 msgid ""
 "Currently there are two ways dirty page tracking can be done: (1) Device "
 "dirty tracking: In this method the device is responsible to log and report "
@@ -214,7 +228,7 @@ msgid ""
 "linux-headers/linux/vfio.h."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:127
+#: ../../../devel/migration/vfio.rst:138
 msgid ""
 "(2) VFIO IOMMU module: In this method dirty tracking is done by IOMMU. "
 "However, there is currently no IOMMU support for dirty page tracking. For "
@@ -223,13 +237,13 @@ msgid ""
 "pages are perpetually marked dirty."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:133
+#: ../../../devel/migration/vfio.rst:144
 msgid ""
 "If the above two methods are not supported, all pages are perpetually marked "
 "dirty by QEMU."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:136
+#: ../../../devel/migration/vfio.rst:147
 msgid ""
 "By default, dirty pages are tracked during pre-copy as well as stop-and-copy "
 "phase. So, a page marked as dirty will be copied to the destination in both "
@@ -240,7 +254,7 @@ msgid ""
 "accordingly."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:143
+#: ../../../devel/migration/vfio.rst:154
 msgid ""
 "QEMU also provides a per device opt-out option ``pre-copy-dirty-page-"
 "tracking`` which disables querying the dirty bitmap during pre-copy phase. "
@@ -248,11 +262,11 @@ msgid ""
 "stop-and-copy phase only."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:149
+#: ../../../devel/migration/vfio.rst:160
 msgid "System memory dirty pages tracking when vIOMMU is enabled"
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:151
+#: ../../../devel/migration/vfio.rst:162
 msgid ""
 "With vIOMMU, an IO virtual address range can get unmapped while in pre-copy "
 "phase of migration. In that case, the unmap ioctl returns any dirty pages in "
@@ -263,11 +277,11 @@ msgid ""
 "migration will be blocked."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:160
+#: ../../../devel/migration/vfio.rst:171
 msgid "Flow of state changes during Live migration"
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:162
+#: ../../../devel/migration/vfio.rst:173
 msgid ""
 "Below is the state change flow during live migration for a VFIO device that "
 "supports both precopy and P2P migration. The flow for devices that don't "
@@ -276,11 +290,11 @@ msgid ""
 "migration state, and the VFIO device state, respectively."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:170
+#: ../../../devel/migration/vfio.rst:181
 msgid "Live migration save path"
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:174
+#: ../../../devel/migration/vfio.rst:185
 msgid ""
 "                         QEMU normal running state\n"
 "                         (RUNNING, _NONE, _RUNNING)\n"
@@ -315,11 +329,11 @@ msgid ""
 "                      (POSTMIGRATE, _COMPLETED, _STOP)"
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:207
+#: ../../../devel/migration/vfio.rst:218
 msgid "Live migration resume path"
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:211
+#: ../../../devel/migration/vfio.rst:222
 msgid ""
 "           Incoming migration calls .load_setup() for each device\n"
 "                        (RESTORE_VM, _ACTIVE, _STOP)\n"
@@ -337,19 +351,19 @@ msgid ""
 "                         (RUNNING, _NONE, _RUNNING)"
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:227
+#: ../../../devel/migration/vfio.rst:238
 msgid "Postcopy"
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:229
+#: ../../../devel/migration/vfio.rst:240
 msgid "Postcopy migration is currently not supported for VFIO devices."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:232
+#: ../../../devel/migration/vfio.rst:243
 msgid "Multifd"
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:234
+#: ../../../devel/migration/vfio.rst:245
 msgid ""
 "Starting from QEMU version 10.0 there's a possibility to transfer VFIO "
 "device _STOP_COPY state via multifd channels. This helps reduce downtime - "
@@ -359,7 +373,7 @@ msgid ""
 "separate thread) in such migration mode."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:241
+#: ../../../devel/migration/vfio.rst:252
 msgid ""
 "The multifd VFIO device state transfer is controlled by \"x-migration-"
 "multifd-transfer\" VFIO device property. This property defaults to AUTO, "
@@ -367,7 +381,7 @@ msgid ""
 "attempted in configurations that otherwise support it."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:246
+#: ../../../devel/migration/vfio.rst:257
 msgid ""
 "Since the target QEMU needs to load device state buffers in-order it needs "
 "to queue incoming buffers until they can be loaded into the device. This "
@@ -375,13 +389,13 @@ msgid ""
 "to allocate unlimited amounts of memory for such buffers-in-flight."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:251
+#: ../../../devel/migration/vfio.rst:262
 msgid ""
 "The \"x-migration-max-queued-buffers-size\" property allows capping the "
 "total size of these VFIO device state buffers queued at the destination."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:254
+#: ../../../devel/migration/vfio.rst:265
 msgid ""
 "Because a malicious QEMU source causing OOM on the target is not expected to "
 "be a realistic threat in most of VFIO live migration use cases and the right "
@@ -389,7 +403,7 @@ msgid ""
 "limit is disabled by setting it to UINT64_MAX."
 msgstr ""
 
-#: ../../../devel/migration/vfio.rst:259
+#: ../../../devel/migration/vfio.rst:270
 msgid ""
 "Some host platforms (like ARM64) require that VFIO device config is loaded "
 "only after all iterables were loaded, during non-iterables loading phase. "

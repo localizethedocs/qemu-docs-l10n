@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-07-09 04:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -308,69 +308,115 @@ msgid ""
 msgstr ""
 
 #: ../../../system/devices/can.rst:177
+msgid "Examples on how to use CAN emulation for FlexCAN on SabreLite board"
+msgstr ""
+
+#: ../../../system/devices/can.rst:178
+msgid ""
+"FlexCANs are connected to QEMU CAN buses by passing the bus IDs as machine "
+"properties:"
+msgstr ""
+
+#: ../../../system/devices/can.rst:181
+msgid "property ``canbus0`` for connecting ``flexcan1``"
+msgstr ""
+
+#: ../../../system/devices/can.rst:182
+msgid "property ``canbus1`` for connecting ``flexcan2``"
+msgstr ""
+
+#: ../../../system/devices/can.rst:184
+msgid ""
+"Note that upstream Linux SabreLite DTs have only a single FlexCAN "
+"(``flexcan1``) enabled."
+msgstr ""
+
+#: ../../../system/devices/can.rst:187
+msgid ""
+"An example command to run QEMU emulating a Sabrelite development board with "
+"both FlexCANs connected to a single QEMU CAN bus (called ``qcan0``), bridged "
+"to host system ``can0`` interface::"
+msgstr ""
+
+#: ../../../system/devices/can.rst:191
+msgid ""
+"qemu-system-arm -M sabrelite -smp 4 -m 1G \\\n"
+"  -object can-bus,id=qcan0 \\\n"
+"  -machine canbus0=qcan0 -machine canbus1=qcan0 \\\n"
+"  -object can-host-socketcan,if=can0,canbus=qcan0,id=qcan0-socketcan \\\n"
+"  -kernel ... -dtb ... -initrd ..."
+msgstr ""
+
+#: ../../../system/devices/can.rst:197
+msgid ""
+"Note that in the Linux guest, bitrate for the FlexCAN device is ignored, but "
+"needs to be set via the ``ip`` command."
+msgstr ""
+
+#: ../../../system/devices/can.rst:201
 msgid "Links to other resources"
 msgstr ""
 
-#: ../../../system/devices/can.rst:179
+#: ../../../system/devices/can.rst:203
 msgid ""
 "`CAN related projects at Czech Technical University, Faculty of Electrical "
 "Engineering <http://canbus.pages.fel.cvut.cz>`_"
 msgstr ""
 
-#: ../../../system/devices/can.rst:180
+#: ../../../system/devices/can.rst:204
 msgid ""
 "`Repository with development can-pci branch at Czech Technical University "
 "<https://gitlab.fel.cvut.cz/canbus/qemu-canbus>`_"
 msgstr ""
 
-#: ../../../system/devices/can.rst:181
+#: ../../../system/devices/can.rst:205
 msgid ""
 "`RTEMS page describing project <https://devel.rtems.org/wiki/Developer/"
 "Simulators/QEMU/CANEmulation>`_"
 msgstr ""
 
-#: ../../../system/devices/can.rst:182
+#: ../../../system/devices/can.rst:206
 msgid ""
 "`RTLWS 2015 article about the project and its use with CANopen emulation "
 "<http://cmp.felk.cvut.cz/~pisa/can/doc/rtlws-17-pisa-qemu-can.pdf>`_"
 msgstr ""
 
-#: ../../../system/devices/can.rst:183
+#: ../../../system/devices/can.rst:207
 msgid ""
 "`GNU/Linux, CAN and CANopen in Real-time Control Applications Slides from "
 "LinuxDays 2017 (include updated RTLWS 2015 content) <https://www.linuxdays."
 "cz/2017/video/Pavel_Pisa-CAN_canopen.pdf>`_"
 msgstr ""
 
-#: ../../../system/devices/can.rst:184
+#: ../../../system/devices/can.rst:208
 msgid "`Linux SocketCAN utilities <https://github.com/linux-can/can-utils>`_"
 msgstr ""
 
-#: ../../../system/devices/can.rst:185
+#: ../../../system/devices/can.rst:209
 msgid ""
 "`CTU CAN FD project including core VHDL design, Linux driver, test utilities "
 "etc. <https://gitlab.fel.cvut.cz/canbus/ctucanfd_ip_core>`_"
 msgstr ""
 
-#: ../../../system/devices/can.rst:186
+#: ../../../system/devices/can.rst:210
 msgid ""
 "`CTU CAN FD Core Datasheet Documentation <http://canbus.pages.fel.cvut.cz/"
 "ctucanfd_ip_core/doc/Datasheet.pdf>`_"
 msgstr ""
 
-#: ../../../system/devices/can.rst:187
+#: ../../../system/devices/can.rst:211
 msgid ""
 "`CTU CAN FD Core System Architecture Documentation <http://canbus.pages.fel."
 "cvut.cz/ctucanfd_ip_core/doc/System_Architecture.pdf>`_"
 msgstr ""
 
-#: ../../../system/devices/can.rst:188
+#: ../../../system/devices/can.rst:212
 msgid ""
 "`CTU CAN FD Driver Documentation <https://canbus.pages.fel.cvut.cz/"
 "ctucanfd_ip_core/doc/linux_driver/build/ctucanfd-driver.html>`_"
 msgstr ""
 
-#: ../../../system/devices/can.rst:189
+#: ../../../system/devices/can.rst:213
 msgid ""
 "`Integration with PCIe interfacing for Intel/Altera Cyclone IV based board "
 "<https://gitlab.fel.cvut.cz/canbus/pcie-ctu_can_fd>`_"

@@ -1,0 +1,243 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-09 04:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/hexagon-sys.rst:6
+msgid "Hexagon System Architecture"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:8
+msgid ""
+"The hexagon architecture has some unique elements which are described here."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:11
+msgid "Interrupts"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:12
+msgid ""
+"When interrupts arrive at a Hexagon DSP core, they are priority-steered to "
+"be handled by an eligible hardware thread with the lowest priority."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:16
+msgid "Memory"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:17
+msgid ""
+"Each hardware thread has an ``SSR.ASID`` field that contains its Address "
+"Space Identifier.  This value is catenated with a 32-bit virtual address - "
+"the MMU can then resolve this extended virtual address to a physical address."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:22
+msgid "TLBs"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:23
+msgid "The format of a TLB entry is shown below."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:26
+msgid ""
+"The Small Core DSPs have a different TLB format which is not yet supported."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:29
+msgid "Diagram"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:31
+msgid ""
+"       6                   5                   4               3\n"
+" 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2\n"
+"+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"
+"|v|g|x|A|A|             |                                       |\n"
+"|a|l|P|1|0|     ASID    |             Virtual Page              |\n"
+"|l|b| | | |             |                                       |\n"
+"+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"
+"\n"
+"   3                   2                   1                   0\n"
+" 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0\n"
+"+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"
+"| | | | |       |                                             | |\n"
+"|x|w|r|u|Cacheab|               Physical Page                 |S|\n"
+"| | | | |       |                                             | |\n"
+"+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:50
+msgid "ASID: the address-space identifier"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:51
+msgid ""
+"A1, A0: the behavior of these cache line attributes are not modeled by QEMU."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:52
+msgid ""
+"xP: the extra-physical bit is the most significant physical address bit."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:53
+msgid "S: the S bit and the LSBs of the physical page indicate the page size"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:54
+msgid ""
+"val: this is the 'valid' bit, when set it indicates that page matching "
+"should consider this entry."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:57
+msgid "Page sizes"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:61
+msgid "S-bit"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:62
+msgid "Phys page LSBs"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:63
+msgid "Page size"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:64
+msgid "1"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:65
+msgid "N/A"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:66
+msgid "4kb"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:67 ../../../devel/hexagon-sys.rst:70
+#: ../../../devel/hexagon-sys.rst:73 ../../../devel/hexagon-sys.rst:76
+#: ../../../devel/hexagon-sys.rst:79 ../../../devel/hexagon-sys.rst:82
+msgid "0"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:68
+msgid "0b1"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:69
+msgid "16kb"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:71
+msgid "0b10"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:72
+msgid "64kb"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:74
+msgid "0b100"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:75
+msgid "256kb"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:77
+msgid "0b1000"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:78
+msgid "1MB"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:80
+msgid "0b10000"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:81
+msgid "4MB"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:83
+msgid "0b100000"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:84
+msgid "16MB"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:86
+msgid ""
+"glb: if the global bit is set, the ASID is not considered when matching TLBs."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:88
+msgid ""
+"Cacheab: the cacheability attributes of TLBs are not modeled, these bits are "
+"ignored."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:90
+msgid ""
+"RWX: read-, write-, execute-, enable bits.  Indicates if user programs are "
+"permitted to read/write/execute the given page."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:92
+msgid "U: indicates if user programs can access this page."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:95
+msgid "Scheduler"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:96
+msgid ""
+"The Hexagon system architecture has a feature to assist the guest OS task "
+"scheduler.  The guest OS can enable this feature by setting ``SCHEDCFG."
+"EN``.  The ``BESTWAIT`` register is programmed by the guest OS to indicate "
+"the priority of the highest priority task waiting to run on a hardware "
+"thread.  The reschedule interrupt is triggered when any hardware thread's "
+"priority in ``STID.PRIO`` is worse than the ``BESTWAIT``.  When it is "
+"triggered, the ``BESTWAIT.PRIO`` value is reset to 0x1ff."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:105
+msgid "HVX Coprocessor"
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:106
+msgid ""
+"The Supervisor Status Register field ``SSR.XA`` binds a DSP hardware thread "
+"to one of the eight possible HVX contexts.  The guest OS is responsible for "
+"managing this resource."
+msgstr ""
+
+#: ../../../devel/hexagon-sys.rst:112
+msgid ""
+"``target/hexagon/README`` in the QEMU source tree for more info about "
+"Hexagon."
+msgstr ""
