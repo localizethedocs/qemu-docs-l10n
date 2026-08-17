@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../../devel/build-system.rst:3
 msgid "The QEMU build system architecture"
-msgstr ""
+msgstr "QEMU 建置系統架構"
 
 #: ../../../devel/build-system.rst:5
 msgid ""
@@ -47,6 +47,11 @@ msgid ""
 "../qemu/configure\n"
 "make"
 msgstr ""
+"cd ../\n"
+"mkdir build\n"
+"cd build\n"
+"../qemu/configure\n"
+"make"
 
 #: ../../../devel/build-system.rst:22
 msgid "build artifacts in a subdir of QEMU source tree::"
@@ -59,6 +64,10 @@ msgid ""
 "../configure\n"
 "make"
 msgstr ""
+"mkdir build\n"
+"cd build\n"
+"../configure\n"
+"make"
 
 #: ../../../devel/build-system.rst:29
 msgid ""
@@ -118,7 +127,7 @@ msgstr ""
 
 #: ../../../devel/build-system.rst:64
 msgid "Modifying ``configure``"
-msgstr ""
+msgstr "修改 ``configure``"
 
 #: ../../../devel/build-system.rst:66
 msgid ""
@@ -137,7 +146,7 @@ msgstr ""
 
 #: ../../../devel/build-system.rst:75
 msgid "``error_exit $MESSAGE $MORE...``"
-msgstr ""
+msgstr "``error_exit $MESSAGE $MORE...``"
 
 #: ../../../devel/build-system.rst:76
 msgid ""
@@ -147,7 +156,7 @@ msgstr ""
 
 #: ../../../devel/build-system.rst:79
 msgid "``has $COMMAND``"
-msgstr ""
+msgstr "``has $COMMAND``"
 
 #: ../../../devel/build-system.rst:80
 msgid ""
@@ -158,7 +167,7 @@ msgstr ""
 
 #: ../../../devel/build-system.rst:84
 msgid "``probe_target_compiler $TARGET``"
-msgstr ""
+msgstr "``probe_target_compiler $TARGET``"
 
 #: ../../../devel/build-system.rst:85
 msgid ""
@@ -188,7 +197,7 @@ msgstr ""
 
 #: ../../../devel/build-system.rst:100
 msgid "``compile_object $CFLAGS``"
-msgstr ""
+msgstr "``compile_object $CFLAGS``"
 
 #: ../../../devel/build-system.rst:101
 msgid ""
@@ -198,7 +207,7 @@ msgstr ""
 
 #: ../../../devel/build-system.rst:105
 msgid "``compile_prog $CFLAGS $LDFLAGS``"
-msgstr ""
+msgstr "``compile_prog $CFLAGS $LDFLAGS``"
 
 #: ../../../devel/build-system.rst:106
 msgid ""
@@ -349,7 +358,7 @@ msgstr ""
 
 #: ../../../devel/build-system.rst:204
 msgid "Userspace emulators - ``qemu-$ARCH``"
-msgstr ""
+msgstr "使用者空間仿真器 - ``qemu-$ARCH``"
 
 #: ../../../devel/build-system.rst:206
 msgid "Unit tests"
@@ -408,6 +417,12 @@ msgid ""
 "extract_all_objects(recursive: false),\n"
 "                             dependencies: chardev_ss.dependencies())"
 msgstr ""
+"libchardev = static_library('chardev', chardev_ss.sources(),\n"
+"                            build_by_default: false)\n"
+"\n"
+"chardev = declare_dependency(objects: libchardev."
+"extract_all_objects(recursive: false),\n"
+"                             dependencies: chardev_ss.dependencies())"
 
 #: ../../../devel/build-system.rst:239
 msgid "Target-independent emulator sourcesets:"
@@ -462,6 +477,10 @@ msgid ""
 "...\n"
 "hw_arch += {'arm': arm_ss}"
 msgstr ""
+"arm_ss = ss.source_set()\n"
+"arm_ss.add(files('boot.c'), fdt)\n"
+"...\n"
+"hw_arch += {'arm': arm_ss}"
 
 #: ../../../devel/build-system.rst:269
 msgid "The sourceset is only used for system emulators."
@@ -482,6 +501,11 @@ msgid ""
 "target_arch += {'arm': arm_ss}\n"
 "target_system_arch += {'arm': arm_system_ss}"
 msgstr ""
+"arm_ss = ss.source_set()\n"
+"arm_system_ss = ss.source_set()\n"
+"...\n"
+"target_arch += {'arm': arm_ss}\n"
+"target_system_arch += {'arm': arm_system_ss}"
 
 #: ../../../devel/build-system.rst:281
 msgid "Module sourcesets:"
@@ -542,7 +566,7 @@ msgstr ""
 
 #: ../../../devel/build-system.rst:316
 msgid "``configs/devices/*.mak``"
-msgstr ""
+msgstr "``configs/devices/*.mak``"
 
 #: ../../../devel/build-system.rst:317
 msgid ""
@@ -641,6 +665,8 @@ msgid ""
 "option('sdl_image', type : 'feature', value : 'auto',\n"
 "       description: 'SDL Image support for icons')"
 msgstr ""
+"option('sdl_image', type : 'feature', value : 'auto',\n"
+"       description: 'SDL Image support for icons')"
 
 #: ../../../devel/build-system.rst:369
 msgid ""
