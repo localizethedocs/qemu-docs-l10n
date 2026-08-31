@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-30 10:00+0000\n"
+"POT-Creation-Date: 2026-08-31 17:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -549,6 +549,7 @@ msgstr ""
 #: ../../../about/emulation.rst:503 ../../../about/emulation.rst:625
 #: ../../../about/emulation.rst:743 ../../../about/emulation.rst:821
 #: ../../../about/emulation.rst:871 ../../../about/emulation.rst:881
+#: ../../../about/emulation.rst:1210
 msgid "Option"
 msgstr ""
 
@@ -558,6 +559,7 @@ msgstr ""
 #: ../../../about/emulation.rst:504 ../../../about/emulation.rst:626
 #: ../../../about/emulation.rst:744 ../../../about/emulation.rst:822
 #: ../../../about/emulation.rst:872 ../../../about/emulation.rst:882
+#: ../../../about/emulation.rst:1211
 msgid "Description"
 msgstr ""
 
@@ -1790,10 +1792,242 @@ msgid ""
 msgstr ""
 
 #: ../../../about/emulation.rst:1050
-msgid "Other emulation features"
+msgid "Dynamic Linking Call"
 msgstr ""
 
 #: ../../../about/emulation.rst:1052
+msgid "``contrib/plugins/dlcall.c``"
+msgstr ""
+
+#: ../../../about/emulation.rst:1054
+msgid ""
+"This plugin provides a dynamic linking function call interception mechanism "
+"for linux-user guests: the guest hands a call off to the host, where the "
+"plugin runs native code in its place instead of the guest emulating it. "
+"Interception alone enables several uses, for instance tracing or auditing "
+"guest calls. One use is acceleration by leveraging the host's native shared "
+"libraries. For example, a thunk layer can run the stock zlib ``minizip`` "
+"utility under emulation while forwarding its ``deflate`` calls to the host's "
+"native zlib library (libz). This avoids emulating those selected library "
+"calls instruction by instruction."
+msgstr ""
+
+#: ../../../about/emulation.rst:1064
+msgid ""
+"The guest issues a reserved \"magic\" system call (4096 by default, "
+"configurable with ``syscall_num=N``) whose first argument selects a pass-"
+"through operation: dlopen/dlclose a host library, dlsym a symbol, and invoke "
+"a resolved host function. The plugin performs the operation on the host and "
+"consumes the syscall, so the real kernel never sees it."
+msgstr ""
+
+#: ../../../about/emulation.rst:1072
+msgid ""
+"Trusted guests only. The guest can load arbitrary host libraries and run "
+"arbitrary code in the QEMU host process. The plugin is not a sandbox and "
+"provides no isolation. It also requires ``guest_base == 0`` (qemu-user's "
+"default) and a guest whose pointer width and endianness match the host's, as "
+"guest pointers are dereferenced as host addresses with no translation."
+msgstr ""
+
+#: ../../../about/emulation.rst:1078
+msgid ""
+"The plugin intentionally keeps the QEMU side lightweight and knows nothing "
+"about any particular library or its calling convention. Producing the thunks "
+"for a real library is done entirely in userspace, and any toolchain can "
+"implement the interface."
+msgstr ""
+
+#: ../../../about/emulation.rst:1083
+msgid "Loading the plugin is all that is required from QEMU's side:"
+msgstr ""
+
+#: ../../../about/emulation.rst:1085
+msgid "qemu-x86_64 -plugin contrib/plugins/libdlcall.so <guest-program> ..."
+msgstr ""
+
+#: ../../../about/emulation.rst:1089
+msgid ""
+"If the default number does not suit the guest ABI, pick another one, and "
+"build the userspace side to issue the same one:"
+msgstr ""
+
+#: ../../../about/emulation.rst:1092
+msgid ""
+"qemu-x86_64 -plugin contrib/plugins/libdlcall.so,syscall_num=8192 \\\n"
+"    <guest-program> ..."
+msgstr ""
+
+#: ../../../about/emulation.rst:1097
+msgid ""
+"`Lorelei <https://github.com/rover2024/lorelei>`_ is one end-to-end "
+"userspace implementation of this: it provides the guest and host runtimes "
+"and an automated toolchain that generates the thunks from a library's "
+"headers, so guest library calls run on the host's native libraries. How it "
+"handles the parts the plugin leaves out, including argument marshalling, "
+"callbacks and variadic functions, can serve as a reference. It supports an "
+"x86_64 guest running on an x86_64, aarch64 or riscv64 host."
+msgstr ""
+
+#: ../../../about/emulation.rst:1105
+msgid ""
+"A minimal end-to-end example uses a one-function library, ``libhello.so``, "
+"built two ways: the guest build tags its output ``(from the guest)`` and the "
+"host build ``(from the host)``. An unmodified guest program ``main`` calls "
+"``hello(\"World\", 7)``, and the thunk makes that same binary reach the host "
+"build in place of its own. The sources live under ``src/``:"
+msgstr ""
+
+#: ../../../about/emulation.rst:1111
+msgid ""
+"/* src/hello.h */\n"
+"void hello(const char *name, int lucky);"
+msgstr ""
+
+#: ../../../about/emulation.rst:1116
+msgid ""
+"/* src/hello_guest.c */\n"
+"#include \"hello.h\"\n"
+"#include <stdio.h>\n"
+"\n"
+"void hello(const char *name, int lucky)\n"
+"{\n"
+"    printf(\"Hello, %s! Your lucky number is %d. (from the guest)\\n\", "
+"name, lucky);\n"
+"}"
+msgstr ""
+
+#: ../../../about/emulation.rst:1127
+msgid ""
+"/* src/hello_host.c */\n"
+"#include \"hello.h\"\n"
+"#include <stdio.h>\n"
+"\n"
+"void hello(const char *name, int lucky)\n"
+"{\n"
+"    printf(\"Hello, %s! Your lucky number is %d. (from the host)\\n\", name, "
+"lucky);\n"
+"}"
+msgstr ""
+
+#: ../../../about/emulation.rst:1138
+msgid ""
+"/* src/main.c */\n"
+"#include \"hello.h\"\n"
+"\n"
+"int main(void)\n"
+"{\n"
+"    hello(\"World\", 7);\n"
+"    return 0;\n"
+"}"
+msgstr ""
+
+#: ../../../about/emulation.rst:1149
+msgid ""
+"Lorelei ships a prebuilt toolchain (a \"devkit\") in its releases. Download "
+"the one for your host and unpack it:"
+msgstr ""
+
+#: ../../../about/emulation.rst:1152
+msgid ""
+"# ARCH is your host's architecture: x86_64, aarch64 or riscv64. This example "
+"uses aarch64.\n"
+"# See https://github.com/rover2024/lorelei/releases\n"
+"ARCH=aarch64\n"
+"VERSION=$(curl -fsSL -o /dev/null -w '%{url_effective}' \\\n"
+"      https://github.com/rover2024/lorelei/releases/latest | sed 's|.*/tag/"
+"v||')\n"
+"wget \"https://github.com/rover2024/lorelei/releases/download/v$VERSION/"
+"lorelei-devkit-$ARCH-$VERSION.tar.xz\"\n"
+"tar -xf lorelei-devkit-$ARCH-$VERSION.tar.xz\n"
+"DEVKIT=lorelei-devkit-$ARCH"
+msgstr ""
+
+#: ../../../about/emulation.rst:1163
+msgid ""
+"Build the guest ``libhello.so`` (x86_64) and the host ``libhello.so`` (this "
+"host's architecture), then the guest program:"
+msgstr ""
+
+#: ../../../about/emulation.rst:1166
+msgid ""
+"mkdir -p build/guest build/host\n"
+"$DEVKIT/bin/x86_64-linux-gnu-clang -shared -fPIC src/hello_guest.c -o build/"
+"guest/libhello.so\n"
+"cc -shared -fPIC src/hello_host.c -o build/host/libhello.so\n"
+"$DEVKIT/bin/x86_64-linux-gnu-clang src/main.c -Isrc -Lbuild/guest -lhello -o "
+"build/guest/main"
+msgstr ""
+
+#: ../../../about/emulation.rst:1173
+msgid "Run it under qemu:"
+msgstr ""
+
+#: ../../../about/emulation.rst:1175
+msgid ""
+"qemu-x86_64 -L /usr/x86_64-linux-gnu/ -E LD_LIBRARY_PATH=build/guest build/"
+"guest/main"
+msgstr ""
+
+#: ../../../about/emulation.rst:1179 ../../../about/emulation.rst:1202
+msgid "which prints::"
+msgstr ""
+
+#: ../../../about/emulation.rst:1181
+msgid "Hello, World! Your lucky number is 7. (from the guest)"
+msgstr ""
+
+#: ../../../about/emulation.rst:1183
+msgid ""
+"Now generate the thunk from the host ``libhello.so``. This produces a guest-"
+"side ``libhello.so`` that stands in for the guest build, and a host-side "
+"thunk library that dispatches to the host build:"
+msgstr ""
+
+#: ../../../about/emulation.rst:1187
+msgid ""
+"$DEVKIT/bin/LoreMakeThunk.py --name hello --lib build/host/libhello.so \\\n"
+"    --header hello.h -o thunks -- -Isrc"
+msgstr ""
+
+#: ../../../about/emulation.rst:1192
+msgid ""
+"Run the same ``main`` under the plugin. The call reaches the host build now:"
+msgstr ""
+
+#: ../../../about/emulation.rst:1194
+msgid ""
+"LD_LIBRARY_PATH=$DEVKIT/lib:build/host \\\n"
+"    qemu-x86_64 -plugin contrib/plugins/libdlcall.so \\\n"
+"    -E LD_LIBRARY_PATH=$DEVKIT/x86_64/lib:thunks/x86_64 \\\n"
+"    -L /usr/x86_64-linux-gnu/ \\\n"
+"    build/guest/main"
+msgstr ""
+
+#: ../../../about/emulation.rst:1204
+msgid "Hello, World! Your lucky number is 7. (from the host)"
+msgstr ""
+
+#: ../../../about/emulation.rst:1206
+msgid "Dynamic Linking Call arguments"
+msgstr ""
+
+#: ../../../about/emulation.rst:1212
+msgid "syscall_num=N"
+msgstr ""
+
+#: ../../../about/emulation.rst:1213
+msgid ""
+"The magic syscall number the guest issues (default 4096). It must be a "
+"number the guest ABI does not use for a real syscall, and does not reject "
+"before the plugin sees it, which bounds the choice from both sides."
+msgstr ""
+
+#: ../../../about/emulation.rst:1219
+msgid "Other emulation features"
+msgstr ""
+
+#: ../../../about/emulation.rst:1221
 msgid ""
 "When running system emulation you can also enable deterministic execution "
 "which allows for repeatable record/replay debugging. See :ref:`Record/"

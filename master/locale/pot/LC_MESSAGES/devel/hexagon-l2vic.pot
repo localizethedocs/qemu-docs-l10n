@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-31 17:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/hexagon-l2vic.rst:4
+msgid "Hexagon L2 Vectored Interrupt Controller"
+msgstr ""
+
+#: ../../../devel/hexagon-l2vic.rst:7
+msgid ""
+"            +-------------+                  +----------------------+\n"
+"            |    l2vic    |                  |     hexagon core     |\n"
+"            |             |                  |                      |\n"
+"IRQ in ---->|             |                  |                      |\n"
+"IRQ in ---->|    VID0    -|----------------->| irq2                 |\n"
+"  ...  ---->|             |                  |   |                  |\n"
+"IRQ in ---->|             |                  |   v                  |\n"
+"            |     ...     |                  | <int steering>       |\n"
+"            |             |                  |  /   |    |    \\     |\n"
+"IRQ in ---->|             |                  | t0   t1   t2   t3 ...|\n"
+"IRQ in ---->|    VIDN    -|                  |                      |\n"
+"  ...  ---->|             |                  |                      |\n"
+"IRQ in ---->|             |                  | Global SREG File     |\n"
+"            |             |                  |                      |\n"
+"            |    State    |                  |                      |\n"
+"            | [      ] <--|==================|==> [ VID  ]          |\n"
+"            | [      ] <--|==================|==> [ VID1 ]          |\n"
+"            |             |                  |                      |\n"
+"            +-------------+                  +----------------------+"
+msgstr ""
+
+#: ../../../devel/hexagon-l2vic.rst:30
+msgid "L2VIC/Core Integration"
+msgstr ""
+
+#: ../../../devel/hexagon-l2vic.rst:32
+msgid "hexagon core supports 8 external interrupt sources"
+msgstr ""
+
+#: ../../../devel/hexagon-l2vic.rst:33
+msgid "l2vic supports 1024 input interrupts mapped among 4 output interrupts"
+msgstr ""
+
+#: ../../../devel/hexagon-l2vic.rst:34
+msgid "l2vic has four output signals: { VID0, VID1, VID2, VID3 }"
+msgstr ""
+
+#: ../../../devel/hexagon-l2vic.rst:35
+msgid ""
+"l2vic device has a bank of registers per-VID that can be used to query the "
+"status or assert new interrupts."
+msgstr ""
+
+#: ../../../devel/hexagon-l2vic.rst:37
+msgid ""
+"Interrupts are 'steered' to threads based on { thread priority, 'EX' state, "
+"thread interrupt mask, thread interrupt enable, global interrupt enable, "
+"etc. }."
+msgstr ""
+
+#: ../../../devel/hexagon-l2vic.rst:40
+msgid ""
+"Any hardware thread could conceivably handle any input interrupt, dependent "
+"on state."
+msgstr ""
+
+#: ../../../devel/hexagon-l2vic.rst:42
+msgid ""
+"The system register transfer instruction can read the VID0-VID3 values from "
+"the l2vic when reading from hexagon core system registers \"VID\" and "
+"\"VID1\"."
+msgstr ""
+
+#: ../../../devel/hexagon-l2vic.rst:44
+msgid ""
+"When l2vic VID0 has multiple active interrupts, it pulses the VID0 output "
+"IRQ and stores the IRQ number for the VID0 register field.  Only after this "
+"interrupt is cleared can the l2vic pulse the VID0 output IRQ again and "
+"provide the next interrupt number on the VID0 register."
+msgstr ""
+
+#: ../../../devel/hexagon-l2vic.rst:48
+msgid ""
+"The ``ciad`` instruction clears the l2vic input interrupt and un-disables "
+"the core interrupt.  If some/an l2vic VID0 interrupt is pending when this "
+"occurs, the next interrupt should fire and any subsequent reads of the VID "
+"register should reflect the newly raised interrupt."
+msgstr ""
+
+#: ../../../devel/hexagon-l2vic.rst:52
+msgid ""
+"In QEMU, on an external interrupt or an unmasked-pending interrupt, all "
+"vCPUs are triggered (has_work==true) and each will grab the IO lock while "
+"considering the steering logic to determine whether they're the thread that "
+"must handle the interrupt."
+msgstr ""

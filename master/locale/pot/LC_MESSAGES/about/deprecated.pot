@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-09 04:01+0000\n"
+"POT-Creation-Date: 2026-08-31 17:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -430,18 +430,43 @@ msgid ""
 msgstr ""
 
 #: ../../../about/deprecated.rst:280
-msgid "Device options"
+msgid "Devices"
 msgstr ""
 
 #: ../../../about/deprecated.rst:283
+msgid "``virtio-crypto`` and cryptodev backends (since 11.2)"
+msgstr ""
+
+#: ../../../about/deprecated.rst:285
+msgid ""
+"The ``virtio-crypto`` device emulation is quite complex code with a number "
+"of known flaws. It has never been migratable, so it is unlikely to be used "
+"in any serious virtualization setting. Modern ISAs provide on-CPU "
+"cryptography instructions (e.g. AES-NI/VAES, armv8 crypto extensions), and "
+"the Linux kernel deprecated AF_ALG and dropped its off-CPU accelerator "
+"support in Linux 7.2, removing the primary userspace path for off-CPU crypto "
+"acceleration. The time for this sort of off-load has passed."
+msgstr ""
+
+#: ../../../about/deprecated.rst:294
+msgid ""
+"As this is the only device that uses the cryptodev backends these will be "
+"removed at the same time the ``virtio-crypto`` device is."
+msgstr ""
+
+#: ../../../about/deprecated.rst:298
+msgid "Device options"
+msgstr ""
+
+#: ../../../about/deprecated.rst:301
 msgid "Emulated device options"
 msgstr ""
 
-#: ../../../about/deprecated.rst:286
+#: ../../../about/deprecated.rst:304
 msgid "``-device nvme-ns,eui64-default=on|off`` (since 7.1)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:288
+#: ../../../about/deprecated.rst:306
 msgid ""
 "In QEMU versions 6.1, 6.2 and 7.0, the ``nvme-ns`` generates an EUI-64 "
 "identifier that is not globally unique. If an EUI-64 identifier is required, "
@@ -449,11 +474,11 @@ msgid ""
 "``eui64``."
 msgstr ""
 
-#: ../../../about/deprecated.rst:293
+#: ../../../about/deprecated.rst:311
 msgid "``-device nvme,use-intel-id=on|off`` (since 7.1)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:295
+#: ../../../about/deprecated.rst:313
 msgid ""
 "The ``nvme`` device originally used a PCI Vendor/Device Identifier "
 "combination from Intel that was not properly allocated. Since version 5.2, "
@@ -461,11 +486,11 @@ msgid ""
 "intel-id`` machine compatibility parameter."
 msgstr ""
 
-#: ../../../about/deprecated.rst:301
+#: ../../../about/deprecated.rst:319
 msgid "``-device cxl-type3,memdev=xxxx`` (since 8.0)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:303
+#: ../../../about/deprecated.rst:321
 msgid ""
 "The ``cxl-type3`` device initially only used a single memory backend.  With "
 "the addition of volatile memory support, it is now necessary to distinguish "
@@ -473,11 +498,11 @@ msgid ""
 "deprecated in favor of persistent-memdev."
 msgstr ""
 
-#: ../../../about/deprecated.rst:310
+#: ../../../about/deprecated.rst:328
 msgid "RISC-V CPU properties which start with capital 'Z' (since 8.2)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:312
+#: ../../../about/deprecated.rst:330
 msgid ""
 "All RISC-V CPU properties which start with capital 'Z' are being deprecated "
 "starting in 8.2. The reason is that they were wrongly added with capital 'Z' "
@@ -485,75 +510,75 @@ msgid ""
 "the format we want to use from now on."
 msgstr ""
 
-#: ../../../about/deprecated.rst:317
+#: ../../../about/deprecated.rst:335
 msgid ""
 "Users which try to use these deprecated properties will receive a warning "
 "recommending to switch to their stable counterparts:"
 msgstr ""
 
-#: ../../../about/deprecated.rst:320
+#: ../../../about/deprecated.rst:338
 msgid "\"Zifencei\" should be replaced with \"zifencei\""
 msgstr ""
 
-#: ../../../about/deprecated.rst:321
+#: ../../../about/deprecated.rst:339
 msgid "\"Zicsr\" should be replaced with \"zicsr\""
 msgstr ""
 
-#: ../../../about/deprecated.rst:322
+#: ../../../about/deprecated.rst:340
 msgid "\"Zihintntl\" should be replaced with \"zihintntl\""
 msgstr ""
 
-#: ../../../about/deprecated.rst:323
+#: ../../../about/deprecated.rst:341
 msgid "\"Zihintpause\" should be replaced with \"zihintpause\""
 msgstr ""
 
-#: ../../../about/deprecated.rst:324
+#: ../../../about/deprecated.rst:342
 msgid "\"Zawrs\" should be replaced with \"zawrs\""
 msgstr ""
 
-#: ../../../about/deprecated.rst:325
+#: ../../../about/deprecated.rst:343
 msgid "\"Zfa\" should be replaced with \"zfa\""
 msgstr ""
 
-#: ../../../about/deprecated.rst:326
+#: ../../../about/deprecated.rst:344
 msgid "\"Zfh\" should be replaced with \"zfh\""
 msgstr ""
 
-#: ../../../about/deprecated.rst:327
+#: ../../../about/deprecated.rst:345
 msgid "\"Zfhmin\" should be replaced with \"zfhmin\""
 msgstr ""
 
-#: ../../../about/deprecated.rst:328
+#: ../../../about/deprecated.rst:346
 msgid "\"Zve32f\" should be replaced with \"zve32f\""
 msgstr ""
 
-#: ../../../about/deprecated.rst:329
+#: ../../../about/deprecated.rst:347
 msgid "\"Zve64f\" should be replaced with \"zve64f\""
 msgstr ""
 
-#: ../../../about/deprecated.rst:330
+#: ../../../about/deprecated.rst:348
 msgid "\"Zve64d\" should be replaced with \"zve64d\""
 msgstr ""
 
-#: ../../../about/deprecated.rst:333
+#: ../../../about/deprecated.rst:351
 msgid "Block device options"
 msgstr ""
 
-#: ../../../about/deprecated.rst:336
+#: ../../../about/deprecated.rst:354
 msgid "``\"backing\": \"\"`` (since 2.12)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:338
+#: ../../../about/deprecated.rst:356
 msgid ""
 "In order to prevent QEMU from automatically opening an image's backing "
 "chain, use ``\"backing\": null`` instead."
 msgstr ""
 
-#: ../../../about/deprecated.rst:342
+#: ../../../about/deprecated.rst:360
 msgid "``rbd`` keyvalue pair encoded filenames: ``\"\"`` (since 3.1)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:344
+#: ../../../about/deprecated.rst:362
 msgid ""
 "Options for ``rbd`` should be specified according to its runtime options, "
 "like other block drivers.  Legacy parsing of keyvalue pair encoded filenames "
@@ -561,29 +586,29 @@ msgid ""
 "files should be updated to use the current format."
 msgstr ""
 
-#: ../../../about/deprecated.rst:349
+#: ../../../about/deprecated.rst:367
 msgid "Example of legacy encoding::"
 msgstr ""
 
-#: ../../../about/deprecated.rst:351
+#: ../../../about/deprecated.rst:369
 msgid "json:{\"file.driver\":\"rbd\", \"file.filename\":\"rbd:rbd/name\"}"
 msgstr ""
 
-#: ../../../about/deprecated.rst:353
+#: ../../../about/deprecated.rst:371
 msgid "The above, converted to the current supported format::"
 msgstr ""
 
-#: ../../../about/deprecated.rst:355
+#: ../../../about/deprecated.rst:373
 msgid ""
 "json:{\"file.driver\":\"rbd\", \"file.pool\":\"rbd\", \"file.image\":"
 "\"name\"}"
 msgstr ""
 
-#: ../../../about/deprecated.rst:358
+#: ../../../about/deprecated.rst:376
 msgid "``iscsi,password=xxx`` (since 8.0)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:360
+#: ../../../about/deprecated.rst:378
 msgid ""
 "Specifying the iSCSI password in plain text on the command line using the "
 "``password`` option is insecure. The ``password-secret`` option should be "
@@ -591,27 +616,27 @@ msgid ""
 "password via a file, or encrypted."
 msgstr ""
 
-#: ../../../about/deprecated.rst:367
+#: ../../../about/deprecated.rst:385
 msgid "Character device options"
 msgstr ""
 
-#: ../../../about/deprecated.rst:370
+#: ../../../about/deprecated.rst:388
 msgid "Backend ``memory`` (since 9.0)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:372
+#: ../../../about/deprecated.rst:390
 msgid "``memory`` is a deprecated synonym for ``ringbuf``."
 msgstr ""
 
-#: ../../../about/deprecated.rst:376
+#: ../../../about/deprecated.rst:394
 msgid "CPU device properties"
 msgstr ""
 
-#: ../../../about/deprecated.rst:379
+#: ../../../about/deprecated.rst:397
 msgid "``pmu-num=n`` on RISC-V CPUs (since 8.2)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:381
+#: ../../../about/deprecated.rst:399
 msgid ""
 "In order to support more flexible counter configurations this has been "
 "replaced by a ``pmu-mask`` property. If set of counters is continuous then "
@@ -619,26 +644,26 @@ msgid ""
 "significant three bits must be left clear."
 msgstr ""
 
-#: ../../../about/deprecated.rst:388
+#: ../../../about/deprecated.rst:406
 msgid "``pcommit`` on x86 (since 9.1)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:390
+#: ../../../about/deprecated.rst:408
 msgid ""
 "The PCOMMIT instruction was never included in any physical processor. It was "
 "implemented as a no-op instruction in TCG up to QEMU 9.0, but only with ``-"
 "cpu max`` (which does not guarantee migration compatibility across versions)."
 msgstr ""
 
-#: ../../../about/deprecated.rst:396
+#: ../../../about/deprecated.rst:414
 msgid "linux-user mode CPUs"
 msgstr ""
 
-#: ../../../about/deprecated.rst:399
+#: ../../../about/deprecated.rst:417
 msgid "OABI and NWFPE support for Arm CPUs"
 msgstr ""
 
-#: ../../../about/deprecated.rst:401
+#: ../../../about/deprecated.rst:419
 msgid ""
 "Linux for 32-bit Arm has had two major ABIs: the original OABI and the more "
 "modern EABI. OABI support was marked as obsolete in GCC 4.7 and dropped in "
@@ -648,7 +673,7 @@ msgid ""
 "more ago."
 msgstr ""
 
-#: ../../../about/deprecated.rst:408
+#: ../../../about/deprecated.rst:426
 msgid ""
 "The original floating-point coprocessor for 32-bit Arm was the FPA11. This "
 "was not present in many CPUs but did get baked into the OABI for how to pass "
@@ -657,22 +682,22 @@ msgid ""
 "also removed from GCC in GCC 4.8."
 msgstr ""
 
-#: ../../../about/deprecated.rst:414
+#: ../../../about/deprecated.rst:432
 msgid ""
 "QEMU's NWFPE code is old and untested and not thread-safe; the OABI ABI is "
 "long-obsolete. We are therefore deprecating both OABI support and NWFPE "
 "emulation, and they will be removed in a future QEMU release."
 msgstr ""
 
-#: ../../../about/deprecated.rst:421
+#: ../../../about/deprecated.rst:439
 msgid "Backwards compatibility"
 msgstr ""
 
-#: ../../../about/deprecated.rst:424
+#: ../../../about/deprecated.rst:442
 msgid "Runnability guarantee of CPU models (since 4.1)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:426
+#: ../../../about/deprecated.rst:444
 msgid ""
 "Previous versions of QEMU never changed existing CPU models in ways that "
 "introduced additional host software or hardware requirements to the VM.  "
@@ -683,7 +708,7 @@ msgid ""
 "configuration."
 msgstr ""
 
-#: ../../../about/deprecated.rst:435
+#: ../../../about/deprecated.rst:453
 msgid ""
 "The CPU model runnability guarantee won't apply anymore to existing CPU "
 "models.  Management software that needs runnability guarantees must resolve "
@@ -691,7 +716,7 @@ msgid ""
 "cpu-definitions`` QMP command."
 msgstr ""
 
-#: ../../../about/deprecated.rst:441
+#: ../../../about/deprecated.rst:459
 msgid ""
 "While those guarantees are kept, the return value of ``query-cpu-"
 "definitions`` will have existing CPU model aliases point to a version that "
@@ -701,11 +726,11 @@ msgid ""
 "CPU model aliases before starting a virtual machine."
 msgstr ""
 
-#: ../../../about/deprecated.rst:450
+#: ../../../about/deprecated.rst:468
 msgid "x86 \"isapc\" board use of modern x86 CPUs (since 10.2)"
 msgstr ""
 
-#: ../../../about/deprecated.rst:452
+#: ../../../about/deprecated.rst:470
 msgid ""
 "The \"isapc\" board represents a historical x86 ISA PC and is intended for "
 "older 32-bit x86 CPU models, defaulting to a 486 CPU model.  Previously it "
@@ -714,7 +739,7 @@ msgid ""
 "many of the intended guest OSs."
 msgstr ""
 
-#: ../../../about/deprecated.rst:458
+#: ../../../about/deprecated.rst:476
 msgid ""
 "If the user requests a modern x86 CPU model (i.e. not one of ``486``, "
 "``athlon``, ``kvm32``, ``pentium``, ``pentium2``, ``pentium3``or ``qemu32``) "

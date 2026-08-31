@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-09 04:01+0000\n"
+"POT-Creation-Date: 2026-08-31 17:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,11 +61,11 @@ msgstr ""
 msgid "Values"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6113 ../../../../qapi/common.json:15
+#: ../../../../qapi/block-core.json:6115 ../../../../qapi/common.json:15
 msgid "read operation"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6115 ../../../../qapi/common.json:17
+#: ../../../../qapi/block-core.json:6117 ../../../../qapi/common.json:17
 msgid "write operation"
 msgstr ""
 
@@ -77,7 +77,7 @@ msgstr ""
 msgid "QEMU selects the value between on and off"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3272 ../../../../qapi/common.json:31
+#: ../../../../qapi/block-core.json:3274 ../../../../qapi/common.json:31
 #: ../../../../qapi/common.json:45
 msgid "Enabled"
 msgstr ""
@@ -682,7 +682,11 @@ msgstr ""
 msgid "Counter (Since 2.8)"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:132
+#: ../../../../qapi/crypto.json:124
+msgid "Galois/Counter Mode (Since 11.2)"
+msgstr ""
+
+#: ../../../../qapi/crypto.json:134
 msgid ""
 "The supported algorithms for generating initialization vectors for full disk "
 "encryption.  The 'plain' generator should not be used for disks with sector "
@@ -690,245 +694,245 @@ msgid ""
 "dm-crypt volumes is required."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:137
+#: ../../../../qapi/crypto.json:139
 msgid "64-bit sector number truncated to 32-bits"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:139
+#: ../../../../qapi/crypto.json:141
 msgid "64-bit sector number"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:141
+#: ../../../../qapi/crypto.json:143
 msgid "64-bit sector number encrypted with a hash of the encryption key"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:152
+#: ../../../../qapi/crypto.json:154
 msgid "The supported full disk encryption formats"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:154
+#: ../../../../qapi/crypto.json:156
 msgid ""
 "QCow/QCow2 built-in AES-CBC encryption.  Use only for liberating data from "
 "old images."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:157
+#: ../../../../qapi/crypto.json:159
 msgid "LUKS encryption format.  Recommended for new images"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:167
+#: ../../../../qapi/crypto.json:169
 msgid "The common options that apply to all full disk encryption formats"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:169 ../../../../qapi/crypto.json:272
+#: ../../../../qapi/crypto.json:171 ../../../../qapi/crypto.json:274
 msgid "the encryption format"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:179
+#: ../../../../qapi/crypto.json:181
 msgid "The options that apply to QCow/QCow2 AES-CBC encryption format"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:181 ../../../../qapi/crypto.json:195
+#: ../../../../qapi/crypto.json:183 ../../../../qapi/crypto.json:197
 msgid ""
 "the ID of a QCryptoSecret object providing the decryption key.  Mandatory "
 "except when probing image for metadata only."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:193
+#: ../../../../qapi/crypto.json:195
 msgid "The options that apply to LUKS encryption format"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:207
+#: ../../../../qapi/crypto.json:209
 msgid "The options that apply to LUKS encryption format initialization"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:209
+#: ../../../../qapi/crypto.json:211
 msgid ""
 "the cipher algorithm for data encryption.  Currently defaults to 'aes-256'."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:212
+#: ../../../../qapi/crypto.json:214
 msgid "the cipher mode for data encryption.  Currently defaults to 'xts'"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:215
+#: ../../../../qapi/crypto.json:217
 msgid "the initialization vector generator.  Currently defaults to 'plain64'"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:218
+#: ../../../../qapi/crypto.json:220
 msgid ""
 "the initialization vector generator hash. Currently defaults to 'sha256'"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:221
+#: ../../../../qapi/crypto.json:223
 msgid "the master key hash algorithm.  Currently defaults to 'sha256'"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:224
+#: ../../../../qapi/crypto.json:226
 msgid ""
 "number of milliseconds to spend in PBKDF passphrase processing.  Currently "
 "defaults to 2000.  (since 2.8)"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:229
+#: ../../../../qapi/crypto.json:231
 msgid "The members of :qapi:type:`QCryptoBlockOptionsLUKS`."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:241
+#: ../../../../qapi/crypto.json:243
 msgid ""
 "The options that are available for all encryption formats when opening an "
 "existing volume"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:246 ../../../../qapi/crypto.json:260
-#: ../../../../qapi/crypto.json:416
+#: ../../../../qapi/crypto.json:248 ../../../../qapi/crypto.json:262
+#: ../../../../qapi/crypto.json:418
 msgid "The members of :qapi:type:`QCryptoBlockOptionsBase`."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:246 ../../../../qapi/crypto.json:260
+#: ../../../../qapi/crypto.json:248 ../../../../qapi/crypto.json:262
 msgid ""
 "When ``format`` is ``qcow``: The members of :qapi:type:"
 "`QCryptoBlockOptionsQCow`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3663 ../../../../qapi/crypto.json:246
+#: ../../../../qapi/block-core.json:3665 ../../../../qapi/crypto.json:248
 msgid ""
 "When ``format`` is ``luks``: The members of :qapi:type:"
 "`QCryptoBlockOptionsLUKS`."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:255
+#: ../../../../qapi/crypto.json:257
 msgid ""
 "The options that are available for all encryption formats when initializing "
 "a new volume"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:260
+#: ../../../../qapi/crypto.json:262
 msgid ""
 "When ``format`` is ``luks``: The members of :qapi:type:"
 "`QCryptoBlockCreateOptionsLUKS`."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:269
+#: ../../../../qapi/crypto.json:271
 msgid "The common information that applies to all full disk encryption formats"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:282
+#: ../../../../qapi/crypto.json:284
 msgid "Information about the LUKS block encryption key slot options"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:284
+#: ../../../../qapi/crypto.json:286
 msgid "whether the key slot is currently in use"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:286
+#: ../../../../qapi/crypto.json:288
 msgid "offset to the key material in bytes"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:288 ../../../../qapi/crypto.json:319
+#: ../../../../qapi/crypto.json:290 ../../../../qapi/crypto.json:321
 msgid "number of PBKDF2 iterations for key material"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:290
+#: ../../../../qapi/crypto.json:292
 msgid "number of stripes for splitting key material"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:303
+#: ../../../../qapi/crypto.json:305
 msgid "Information about the LUKS block encryption options"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:305
+#: ../../../../qapi/crypto.json:307
 msgid "the cipher algorithm for data encryption"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:307
+#: ../../../../qapi/crypto.json:309
 msgid "the cipher mode for data encryption"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:309
+#: ../../../../qapi/crypto.json:311
 msgid "the initialization vector generator"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:311
+#: ../../../../qapi/crypto.json:313
 msgid "the initialization vector generator hash"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:313
+#: ../../../../qapi/crypto.json:315
 msgid "the master key hash algorithm"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:315
+#: ../../../../qapi/crypto.json:317
 msgid "whether the LUKS header is detached (Since 9.0)"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:317
+#: ../../../../qapi/crypto.json:319
 msgid "offset to the payload data in bytes"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:321
+#: ../../../../qapi/crypto.json:323
 msgid "unique identifier for the volume"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:323
+#: ../../../../qapi/crypto.json:325
 msgid "information about each key slot"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:342
+#: ../../../../qapi/crypto.json:344
 msgid "Information about the block encryption options"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:346
+#: ../../../../qapi/crypto.json:348
 msgid "The members of :qapi:type:`QCryptoBlockInfoBase`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:61 ../../../../qapi/crypto.json:346
+#: ../../../../qapi/block-core.json:61 ../../../../qapi/crypto.json:348
 msgid ""
 "When ``format`` is ``luks``: The members of :qapi:type:"
 "`QCryptoBlockInfoLUKS`."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:354
+#: ../../../../qapi/crypto.json:356
 msgid "Defines state of keyslots that are affected by the update"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:356
+#: ../../../../qapi/crypto.json:358
 msgid "The slots contain the given password and marked as active"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:358
+#: ../../../../qapi/crypto.json:360
 msgid "The slots are erased (contain garbage) and marked as inactive"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:369
+#: ../../../../qapi/crypto.json:371
 msgid ""
 "This struct defines the update parameters that activate/de-activate set of "
 "keyslots"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:372
+#: ../../../../qapi/crypto.json:374
 msgid "the desired state of the keyslots"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:374
+#: ../../../../qapi/crypto.json:376
 msgid ""
 "The ID of a QCryptoSecret object providing the password to be written into "
 "added active keyslots"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:377
+#: ../../../../qapi/crypto.json:379
 msgid ""
 "Optional (for deactivation only).  If given will deactivate all keyslots "
 "that match password located in QCryptoSecret with this ID"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:381
+#: ../../../../qapi/crypto.json:383
 msgid ""
 "Optional (for activation only).  Number of milliseconds to spend in PBKDF "
 "passphrase processing for the newly activated keyslot.  Currently defaults "
 "to 2000."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:385
+#: ../../../../qapi/crypto.json:387
 msgid ""
 "Optional.  ID of the keyslot to activate/deactivate.  For keyslot "
 "activation, keyslot should not be active already (this is unsafe to update "
@@ -937,7 +941,7 @@ msgid ""
 "this parameter specifies the exact keyslot to deactivate"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:385
+#: ../../../../qapi/crypto.json:387
 msgid ""
 "Optional.  ID of the keyslot to activate/deactivate.  For keyslot "
 "activation, keyslot should not be active already (this is unsafe to update "
@@ -945,136 +949,136 @@ msgid ""
 "is not given, first free keyslot will be written."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:391
+#: ../../../../qapi/crypto.json:393
 msgid ""
 "For keyslot deactivation, this parameter specifies the exact keyslot to "
 "deactivate"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:394
+#: ../../../../qapi/crypto.json:396
 msgid ""
 "Optional.  The ID of a QCryptoSecret object providing the password to use to "
 "retrieve current master key.  Defaults to the same secret that was used to "
 "open the image"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:411
+#: ../../../../qapi/crypto.json:413
 msgid ""
 "The options that are available for all encryption formats when amending "
 "encryption settings"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:416
+#: ../../../../qapi/crypto.json:418
 msgid ""
 "When ``format`` is ``luks``: The members of :qapi:type:"
 "`QCryptoBlockAmendOptionsLUKS`."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:425
+#: ../../../../qapi/crypto.json:427
 msgid "Properties for objects of classes derived from secret-common."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:427
+#: ../../../../qapi/crypto.json:429
 msgid "the data format that the secret is provided in (default: raw)"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:430
+#: ../../../../qapi/crypto.json:432
 msgid ""
 "the name of another secret that should be used to decrypt the provided "
 "data.  If not present, the data is assumed to be unencrypted."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:434
+#: ../../../../qapi/crypto.json:436
 msgid ""
 "the random initialization vector used for encryption of this particular "
 "secret.  Should be a base64 encrypted string of the 16-byte IV.  Mandatory "
 "if ``keyid`` is given.  Ignored if ``keyid`` is absent."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:449
+#: ../../../../qapi/crypto.json:451
 msgid "Properties for secret objects."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:451
+#: ../../../../qapi/crypto.json:453
 msgid "Either ``data`` or ``file`` must be provided, but not both."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:453
+#: ../../../../qapi/crypto.json:455
 msgid "the associated with the secret from"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:455
+#: ../../../../qapi/crypto.json:457
 msgid "the filename to load the data associated with the secret from"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:459 ../../../../qapi/crypto.json:473
+#: ../../../../qapi/crypto.json:461 ../../../../qapi/crypto.json:475
 msgid "The members of :qapi:type:`SecretCommonProperties`."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:467
+#: ../../../../qapi/crypto.json:469
 msgid "Properties for secret_keyring objects."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:469
+#: ../../../../qapi/crypto.json:471
 msgid "serial number that identifies a key to get from the kernel"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:481
+#: ../../../../qapi/crypto.json:483
 msgid "Properties for objects of classes derived from tls-creds."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:483
+#: ../../../../qapi/crypto.json:485
 msgid ""
 "if true the peer credentials will be verified once the handshake is "
 "completed.  This is a no-op for anonymous credentials.  (default: true)"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:487
+#: ../../../../qapi/crypto.json:489
 msgid "the path of the directory that contains the credential files"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:489
+#: ../../../../qapi/crypto.json:491
 msgid ""
 "whether the QEMU network backend that uses the credentials will be acting as "
 "a client or as a server (default: client)"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:493
+#: ../../../../qapi/crypto.json:495
 msgid ""
 "a gnutls priority string as described at https://gnutls.org/manual/html_node/"
 "Priority-Strings.html"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:507
+#: ../../../../qapi/crypto.json:509
 msgid "Properties for tls-creds-anon objects."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:511 ../../../../qapi/crypto.json:526
-#: ../../../../qapi/crypto.json:546
+#: ../../../../qapi/crypto.json:513 ../../../../qapi/crypto.json:528
+#: ../../../../qapi/crypto.json:548
 msgid "The members of :qapi:type:`TlsCredsProperties`."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:518
+#: ../../../../qapi/crypto.json:520
 msgid "Properties for tls-creds-psk objects."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:520
+#: ../../../../qapi/crypto.json:522
 msgid ""
 "the username which will be sent to the server.  For clients only.  If "
 "absent, \"qemu\" is sent and the property will read back as an empty string."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:533
+#: ../../../../qapi/crypto.json:535
 msgid "Properties for tls-creds-x509 objects."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:535
+#: ../../../../qapi/crypto.json:537
 msgid ""
 "if true, perform some sanity checks before using the credentials (default: "
 "true)"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:538
+#: ../../../../qapi/crypto.json:540
 msgid ""
 "For the server-key.pem and client-key.pem files which contain sensitive "
 "private keys, it is possible to use an encrypted version by providing the "
@@ -1082,61 +1086,61 @@ msgid ""
 "secret object containing the password for decryption."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:554
+#: ../../../../qapi/crypto.json:556
 msgid "The supported algorithms for asymmetric encryption ciphers"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:556
+#: ../../../../qapi/crypto.json:558
 msgid "RSA algorithm"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:566
+#: ../../../../qapi/crypto.json:568
 msgid "The type of asymmetric keys."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:568
+#: ../../../../qapi/crypto.json:570
 msgid "public key"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:570
+#: ../../../../qapi/crypto.json:572
 msgid "private key"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:580
+#: ../../../../qapi/crypto.json:582
 msgid "The padding algorithm for RSA."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:582
+#: ../../../../qapi/crypto.json:584
 msgid "no padding used"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:584
+#: ../../../../qapi/crypto.json:586
 msgid "pkcs1#v1.5"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:594
+#: ../../../../qapi/crypto.json:596
 msgid "Specific parameters for RSA algorithm."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:596
+#: ../../../../qapi/crypto.json:598
 msgid "`QCryptoHashAlgo`"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:598
+#: ../../../../qapi/crypto.json:600
 msgid "`QCryptoRSAPaddingAlgo`"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:609
+#: ../../../../qapi/crypto.json:611
 msgid ""
 "The options that are available for all asymmetric key algorithms when "
 "creating a new QCryptoAkCipher."
 msgstr ""
 
-#: ../../../../qapi/crypto.json:612
+#: ../../../../qapi/crypto.json:614
 msgid "encryption cipher algorithm"
 msgstr ""
 
-#: ../../../../qapi/crypto.json:616
+#: ../../../../qapi/crypto.json:618
 msgid ""
 "When ``alg`` is ``rsa``: The members of :qapi:type:"
 "`QCryptoAkCipherOptionsRSA`."
@@ -1290,7 +1294,7 @@ msgstr ""
 msgid "Emitted when a job transitions to a different status."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3228 ../../../../qapi/job.json:123
+#: ../../../../qapi/block-core.json:3230 ../../../../qapi/job.json:123
 #: ../../../../qapi/job.json:265
 msgid "The job identifier"
 msgstr ""
@@ -1303,30 +1307,29 @@ msgstr ""
 msgid "Pause an active job."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3058 ../../../../qapi/job.json:138
+#: ../../../../qapi/block-core.json:3060 ../../../../qapi/job.json:138
 msgid ""
 "This command returns immediately after marking the active job for pausing.  "
 "Pausing an already paused job is an error."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3061 ../../../../qapi/job.json:141
+#: ../../../../qapi/block-core.json:3063 ../../../../qapi/job.json:141
 msgid ""
 "The job will pause as soon as possible, which means transitioning into the "
 "PAUSED state if it was RUNNING, or into STANDBY if it was READY.  The "
 "corresponding `JOB_STATUS_CHANGE` event will be emitted."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3065 ../../../../qapi/job.json:145
+#: ../../../../qapi/block-core.json:3067 ../../../../qapi/job.json:145
 msgid "Cancelling a paused job automatically resumes it."
 msgstr ""
 
-#: ../../../../qapi/qom.json:0
 #: ../../../interop/qemu-storage-daemon-qmp-ref.rst:0
 msgid "Arguments"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3171 ../../../../qapi/block-core.json:3199
-#: ../../../../qapi/block-core.json:5914 ../../../../qapi/job.json:147
+#: ../../../../qapi/block-core.json:3173 ../../../../qapi/block-core.json:3201
+#: ../../../../qapi/block-core.json:5916 ../../../../qapi/job.json:147
 #: ../../../../qapi/job.json:164 ../../../../qapi/job.json:183
 #: ../../../../qapi/job.json:210 ../../../../qapi/job.json:232
 msgid "The job identifier."
@@ -1336,7 +1339,7 @@ msgstr ""
 msgid "Resume a paused job."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3091 ../../../../qapi/job.json:158
+#: ../../../../qapi/block-core.json:3093 ../../../../qapi/job.json:158
 msgid ""
 "This command returns immediately after resuming a paused job. Resuming an "
 "already running job is an error."
@@ -1363,13 +1366,13 @@ msgid ""
 "PENDING instead."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3118 ../../../../qapi/job.json:192
+#: ../../../../qapi/block-core.json:3120 ../../../../qapi/job.json:192
 msgid ""
 "Manually trigger completion of an active job in the READY or STANDBY state.  "
 "Completing the job in any other state is an error."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3121 ../../../../qapi/job.json:195
+#: ../../../../qapi/block-core.json:3123 ../../../../qapi/job.json:195
 msgid ""
 "This is supported only for drive mirroring, where it also switches the "
 "device to write to the target path only.  Note that drive mirroring includes "
@@ -1378,7 +1381,7 @@ msgid ""
 "ability to complete is signaled with a `BLOCK_JOB_READY` event."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3128 ../../../../qapi/job.json:202
+#: ../../../../qapi/block-core.json:3130 ../../../../qapi/job.json:202
 msgid ""
 "This command completes an active background block operation synchronously.  "
 "The ordering of this command's return with the `BLOCK_JOB_COMPLETED` event "
@@ -1388,7 +1391,7 @@ msgid ""
 "starting the operation."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3158 ../../../../qapi/job.json:219
+#: ../../../../qapi/block-core.json:3160 ../../../../qapi/job.json:219
 msgid ""
 "Deletes a job that is in the CONCLUDED state.  This command only needs to be "
 "run explicitly for jobs that don't have automatic dismiss enabled.  In turn, "
@@ -1405,7 +1408,7 @@ msgid ""
 "`job-cancel` or `job-complete` will still need to be used as appropriate."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3187 ../../../../qapi/job.json:241
+#: ../../../../qapi/block-core.json:3189 ../../../../qapi/job.json:241
 msgid ""
 "Instructs all jobs in a transaction (or a single job if it is not part of "
 "any transaction) to finalize any graph changes and do any necessary "
@@ -1413,14 +1416,14 @@ msgid ""
 "state."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3192 ../../../../qapi/job.json:246
+#: ../../../../qapi/block-core.json:3194 ../../../../qapi/job.json:246
 msgid ""
 "For jobs in a transaction, instructing one job to finalize will force ALL "
 "jobs in the transaction to finalize, so it is only necessary to instruct a "
 "single member job to finalize."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3196 ../../../../qapi/job.json:250
+#: ../../../../qapi/block-core.json:3198 ../../../../qapi/job.json:250
 msgid ""
 "The command is applicable only to jobs which have ``auto-finalize`` option "
 "and only when this option is set to false."
@@ -1481,7 +1484,7 @@ msgstr ""
 msgid "Return information about jobs."
 msgstr ""
 
-#: ../../../../qapi/control.json:0 ../../../../qapi/qom.json:0
+#: ../../../../qapi/control.json:0
 #: ../../../interop/qemu-storage-daemon-qmp-ref.rst:0
 msgid "Return"
 msgstr ""
@@ -1652,12 +1655,12 @@ msgid "Since 8.0"
 msgstr ""
 
 #: ../../../../qapi/block-core.json:191 ../../../../qapi/block-core.json:2195
-#: ../../../../qapi/block-core.json:2815 ../../../../qapi/block-core.json:3316
-#: ../../../../qapi/block-core.json:3646 ../../../../qapi/block-core.json:3840
-#: ../../../../qapi/block-core.json:4192 ../../../../qapi/block-core.json:4202
-#: ../../../../qapi/block-core.json:4255 ../../../../qapi/block-core.json:4263
-#: ../../../../qapi/block-core.json:4979 ../../../../qapi/block-core.json:5358
-#: ../../../../qapi/block-core.json:6282 ../../../../qapi/qom.json:1249
+#: ../../../../qapi/block-core.json:2817 ../../../../qapi/block-core.json:3318
+#: ../../../../qapi/block-core.json:3648 ../../../../qapi/block-core.json:3842
+#: ../../../../qapi/block-core.json:4194 ../../../../qapi/block-core.json:4204
+#: ../../../../qapi/block-core.json:4257 ../../../../qapi/block-core.json:4265
+#: ../../../../qapi/block-core.json:4981 ../../../../qapi/block-core.json:5360
+#: ../../../../qapi/block-core.json:6284 ../../../../qapi/qom.json:1262
 #: ../../../../qapi/transaction.json:85 ../../../../qapi/transaction.json:93
 #: ../../../../qapi/transaction.json:101 ../../../../qapi/transaction.json:109
 #: ../../../../qapi/transaction.json:117 ../../../../qapi/transaction.json:125
@@ -1691,7 +1694,7 @@ msgid "A discriminated record of image format specific information structures."
 msgstr ""
 
 #: ../../../../qapi/block-core.json:264 ../../../../qapi/block-core.json:1208
-#: ../../../../qapi/block-core.json:4785
+#: ../../../../qapi/block-core.json:4787
 msgid "block driver name"
 msgstr ""
 
@@ -2115,27 +2118,27 @@ msgstr ""
 msgid "the info of image used (since: 1.6)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:602 ../../../../qapi/block-core.json:2684
+#: ../../../../qapi/block-core.json:602 ../../../../qapi/block-core.json:2686
 msgid "total throughput limit during bursts, in bytes (Since 1.7)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:604 ../../../../qapi/block-core.json:2686
+#: ../../../../qapi/block-core.json:604 ../../../../qapi/block-core.json:2688
 msgid "read throughput limit during bursts, in bytes (Since 1.7)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:607 ../../../../qapi/block-core.json:2689
+#: ../../../../qapi/block-core.json:607 ../../../../qapi/block-core.json:2691
 msgid "write throughput limit during bursts, in bytes (Since 1.7)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:610 ../../../../qapi/block-core.json:2692
+#: ../../../../qapi/block-core.json:610 ../../../../qapi/block-core.json:2694
 msgid "total I/O operations per second during bursts, in bytes (Since 1.7)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:613 ../../../../qapi/block-core.json:2695
+#: ../../../../qapi/block-core.json:613 ../../../../qapi/block-core.json:2697
 msgid "read I/O operations per second during bursts, in bytes (Since 1.7)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:616 ../../../../qapi/block-core.json:2698
+#: ../../../../qapi/block-core.json:616 ../../../../qapi/block-core.json:2700
 msgid "write I/O operations per second during bursts, in bytes (Since 1.7)"
 msgstr ""
 
@@ -2168,11 +2171,11 @@ msgid ""
 "maximum length of the ``iops_wr_max`` burst period, in seconds.  (Since 2.6)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:637 ../../../../qapi/block-core.json:2725
+#: ../../../../qapi/block-core.json:637 ../../../../qapi/block-core.json:2727
 msgid "an I/O size in bytes (Since 1.7)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:639 ../../../../qapi/block-core.json:2727
+#: ../../../../qapi/block-core.json:639 ../../../../qapi/block-core.json:2729
 msgid "throttle group name (Since 2.4)"
 msgstr ""
 
@@ -2424,18 +2427,18 @@ msgstr ""
 #: ../../../../qapi/block-core.json:1839 ../../../../qapi/block-core.json:1973
 #: ../../../../qapi/block-core.json:2012 ../../../../qapi/block-core.json:2038
 #: ../../../../qapi/block-core.json:2101 ../../../../qapi/block-core.json:2242
-#: ../../../../qapi/block-core.json:2416 ../../../../qapi/block-core.json:2440
-#: ../../../../qapi/block-core.json:2463 ../../../../qapi/block-core.json:2484
-#: ../../../../qapi/block-core.json:2505 ../../../../qapi/block-core.json:2538
-#: ../../../../qapi/block-core.json:2648 ../../../../qapi/block-core.json:2972
-#: ../../../../qapi/block-core.json:4949 ../../../../qapi/block-core.json:4974
-#: ../../../../qapi/block-core.json:5054 ../../../../qapi/block-core.json:5085
-#: ../../../../qapi/block-core.json:5702 ../../../../qapi/block-core.json:5759
-#: ../../../../qapi/block-core.json:5797 ../../../../qapi/block-core.json:5832
-#: ../../../../qapi/block-core.json:5861 ../../../../qapi/block-core.json:5895
-#: ../../../../qapi/block-core.json:5922 ../../../../qapi/block-core.json:5997
-#: ../../../../qapi/block-core.json:6143 ../../../../qapi/block-core.json:6229
-#: ../../../../qapi/block-core.json:6275 ../../../../qapi/char.json:64
+#: ../../../../qapi/block-core.json:2418 ../../../../qapi/block-core.json:2442
+#: ../../../../qapi/block-core.json:2465 ../../../../qapi/block-core.json:2486
+#: ../../../../qapi/block-core.json:2507 ../../../../qapi/block-core.json:2540
+#: ../../../../qapi/block-core.json:2650 ../../../../qapi/block-core.json:2974
+#: ../../../../qapi/block-core.json:4951 ../../../../qapi/block-core.json:4976
+#: ../../../../qapi/block-core.json:5056 ../../../../qapi/block-core.json:5087
+#: ../../../../qapi/block-core.json:5704 ../../../../qapi/block-core.json:5761
+#: ../../../../qapi/block-core.json:5799 ../../../../qapi/block-core.json:5834
+#: ../../../../qapi/block-core.json:5863 ../../../../qapi/block-core.json:5897
+#: ../../../../qapi/block-core.json:5924 ../../../../qapi/block-core.json:5999
+#: ../../../../qapi/block-core.json:6145 ../../../../qapi/block-core.json:6231
+#: ../../../../qapi/block-core.json:6277 ../../../../qapi/char.json:64
 #: ../../../../qapi/char.json:105 ../../../../qapi/char.json:148
 #: ../../../../qapi/char.json:184 ../../../../qapi/char.json:798
 #: ../../../../qapi/char.json:806 ../../../../qapi/char.json:812
@@ -2444,8 +2447,8 @@ msgstr ""
 #: ../../../../qapi/char.json:911 ../../../../qapi/control.json:26
 #: ../../../../qapi/control.json:114 ../../../../qapi/control.json:153
 #: ../../../../qapi/control.json:173 ../../../../qapi/qom.json:97
-#: ../../../../qapi/qom.json:197 ../../../../qapi/qom.json:1419
-#: ../../../../qapi/qom.json:1439 ../../../../qapi/transaction.json:268
+#: ../../../../qapi/qom.json:197 ../../../../qapi/qom.json:1432
+#: ../../../../qapi/qom.json:1452 ../../../../qapi/transaction.json:268
 msgid "Example:"
 msgstr ""
 
@@ -3126,9 +3129,9 @@ msgstr ""
 msgid "the job type ('stream' for image streaming)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:1489 ../../../../qapi/block-core.json:5774
-#: ../../../../qapi/block-core.json:5814 ../../../../qapi/block-core.json:5846
-#: ../../../../qapi/block-core.json:5875
+#: ../../../../qapi/block-core.json:1489 ../../../../qapi/block-core.json:5776
+#: ../../../../qapi/block-core.json:5816 ../../../../qapi/block-core.json:5848
+#: ../../../../qapi/block-core.json:5877
 msgid ""
 "The job identifier.  Originally the device name but other values are allowed "
 "since QEMU 2.7"
@@ -3224,7 +3227,6 @@ msgstr ""
 msgid "new image size in bytes"
 msgstr ""
 
-#: ../../../../qapi/qom.json:0
 #: ../../../interop/qemu-storage-daemon-qmp-ref.rst:0
 msgid "Errors"
 msgstr ""
@@ -3335,8 +3337,8 @@ msgid ""
 msgstr ""
 
 #: ../../../../qapi/block-core.json:1669 ../../../../qapi/block-core.json:1894
-#: ../../../../qapi/block-core.json:2253 ../../../../qapi/block-core.json:2581
-#: ../../../../qapi/block-core.json:2907
+#: ../../../../qapi/block-core.json:2253 ../../../../qapi/block-core.json:2583
+#: ../../../../qapi/block-core.json:2909
 msgid ""
 "identifier for the newly-created block job.  If omitted, the device name "
 "will be used.  (Since 2.7)"
@@ -3379,7 +3381,7 @@ msgid ""
 msgstr ""
 
 #: ../../../../qapi/block-core.json:1694 ../../../../qapi/block-core.json:2291
-#: ../../../../qapi/block-core.json:2608
+#: ../../../../qapi/block-core.json:2610
 msgid ""
 "the action to take on an error on the source, default 'report'.  'stop' and "
 "'enospc' can only be used if the block device supports io-status (see "
@@ -3387,7 +3389,7 @@ msgid ""
 msgstr ""
 
 #: ../../../../qapi/block-core.json:1698 ../../../../qapi/block-core.json:2295
-#: ../../../../qapi/block-core.json:2612
+#: ../../../../qapi/block-core.json:2614
 msgid ""
 "the action to take on an error on the target, default 'report' (no "
 "limitations, since this applies to a different block device than ``device``)."
@@ -3644,7 +3646,7 @@ msgid ""
 "node-names for the image in question, as filename lookup methods will fail."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:1927 ../../../../qapi/block-core.json:2930
+#: ../../../../qapi/block-core.json:1927 ../../../../qapi/block-core.json:2932
 msgid ""
 "If not specified, QEMU will automatically determine the backing file string "
 "to use, or error out if there is no obvious choice. Care should be taken "
@@ -3652,7 +3654,7 @@ msgid ""
 "2.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:1932 ../../../../qapi/block-core.json:2935
+#: ../../../../qapi/block-core.json:1932 ../../../../qapi/block-core.json:2937
 msgid ""
 "If true, replace any protocol mentioned in the 'backing file format' with "
 "'raw', rather than storing the protocol name as the backing format.  Can be "
@@ -3660,7 +3662,7 @@ msgid ""
 msgstr ""
 
 #: ../../../../qapi/block-core.json:1937 ../../../../qapi/block-core.json:2277
-#: ../../../../qapi/block-core.json:2595 ../../../../qapi/block-core.json:2940
+#: ../../../../qapi/block-core.json:2597 ../../../../qapi/block-core.json:2942
 msgid "the maximum speed, in bytes per second"
 msgstr ""
 
@@ -3678,7 +3680,7 @@ msgid ""
 msgstr ""
 
 #: ../../../../qapi/block-core.json:1947 ../../../../qapi/block-core.json:2308
-#: ../../../../qapi/block-core.json:2624 ../../../../qapi/block-core.json:2951
+#: ../../../../qapi/block-core.json:2626 ../../../../qapi/block-core.json:2953
 msgid ""
 "When false, this job will wait in a PENDING state after it has finished its "
 "work, waiting for `job-finalize` before making any block graph changes.  "
@@ -3687,7 +3689,7 @@ msgid ""
 msgstr ""
 
 #: ../../../../qapi/block-core.json:1953 ../../../../qapi/block-core.json:2314
-#: ../../../../qapi/block-core.json:2630 ../../../../qapi/block-core.json:2957
+#: ../../../../qapi/block-core.json:2632 ../../../../qapi/block-core.json:2959
 msgid ""
 "When false, this job will wait in a CONCLUDED state after it has completely "
 "ceased all work, and awaits `job-dismiss`.  When true, this job will "
@@ -3739,7 +3741,7 @@ msgid "- If ``device`` is not a valid block device, GenericError"
 msgstr ""
 
 #: ../../../../qapi/block-core.json:2002 ../../../../qapi/block-core.json:2231
-#: ../../../../qapi/block-core.json:6212 ../../../../qapi/block-core.json:6251
+#: ../../../../qapi/block-core.json:6214 ../../../../qapi/block-core.json:6253
 msgid "If ``device`` is not a valid block device, GenericError"
 msgstr ""
 
@@ -3929,7 +3931,7 @@ msgstr ""
 msgid "Get the block graph."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2212 ../../../../qapi/block-core.json:2563
+#: ../../../../qapi/block-core.json:2212 ../../../../qapi/block-core.json:2565
 msgid "This command is meant for debugging."
 msgstr ""
 
@@ -3978,7 +3980,7 @@ msgid ""
 "are kept.  (Since 2.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2279 ../../../../qapi/block-core.json:2597
+#: ../../../../qapi/block-core.json:2279 ../../../../qapi/block-core.json:2599
 msgid ""
 "what parts of the disk image should be copied to the destination (all the "
 "disk, only the sectors allocated in the topmost image, or only new I/O)."
@@ -4003,7 +4005,7 @@ msgid ""
 "identical contents. Default is true.  (Since 2.4)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2305 ../../../../qapi/block-core.json:2621
+#: ../../../../qapi/block-core.json:2305 ../../../../qapi/block-core.json:2623
 msgid ""
 "when to copy data to the destination; defaults to 'background' (Since: 3.0)"
 msgstr ""
@@ -4028,154 +4030,156 @@ msgstr ""
 msgid ""
 "the bitmap is persistent, i.e. it will be saved to the corresponding block "
 "device image file on its close.  For now only Qcow2 disks support persistent "
-"bitmaps.  Default is false for `block-dirty-bitmap-add`.  (Since: 2.10)"
+"bitmaps.  Default is false for `block-dirty-bitmap-add`.  This fails if the "
+"node is read-only or inactive, since such a bitmap could never be stored.  "
+"(Since: 2.10)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2358
+#: ../../../../qapi/block-core.json:2360
 msgid ""
 "the bitmap is created in the disabled state, which means that it will not "
 "track drive changes.  The bitmap may be enabled with `block-dirty-bitmap-"
 "enable`.  Default is false. (Since: 4.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2372
+#: ../../../../qapi/block-core.json:2374
 msgid "name of the bitmap, attached to the same node as target bitmap."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2375
+#: ../../../../qapi/block-core.json:2377
 msgid "bitmap with specified node"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2386
+#: ../../../../qapi/block-core.json:2388
 msgid "name of device/node which the ``target`` bitmap is tracking"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2388
+#: ../../../../qapi/block-core.json:2390
 msgid "name of the destination dirty bitmap"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2390
+#: ../../../../qapi/block-core.json:2392
 msgid ""
 "name(s) of the source dirty bitmap(s) at ``node`` and/or fully specified "
 "`BlockDirtyBitmap` elements.  The latter are supported since 4.1."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2403
+#: ../../../../qapi/block-core.json:2405
 msgid ""
 "Create a dirty bitmap with a name on the node, and start tracking the writes."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2418
+#: ../../../../qapi/block-core.json:2420
 msgid "The members of :qapi:type:`BlockDirtyBitmapAdd`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2406
+#: ../../../../qapi/block-core.json:2408
 msgid ""
 "- If ``node`` is not a valid block device or node, DeviceNotFound - If "
 "``name`` is already taken, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2407 ../../../../qapi/block-core.json:2430
+#: ../../../../qapi/block-core.json:2409 ../../../../qapi/block-core.json:2432
 msgid "If ``node`` is not a valid block device or node, DeviceNotFound"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2408
+#: ../../../../qapi/block-core.json:2410
 msgid "If ``name`` is already taken, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2412
+#: ../../../../qapi/block-core.json:2414
 msgid ""
 "-> { \"execute\": \"block-dirty-bitmap-add\",\n"
 "     \"arguments\": { \"node\": \"drive0\", \"name\": \"bitmap0\" } }\n"
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2425
+#: ../../../../qapi/block-core.json:2427
 msgid ""
 "Stop write tracking and remove the dirty bitmap that was created with `block-"
 "dirty-bitmap-add`.  If the bitmap is persistent, remove it from its storage "
 "too."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2442 ../../../../qapi/block-core.json:2465
-#: ../../../../qapi/block-core.json:2486 ../../../../qapi/block-core.json:2507
-#: ../../../../qapi/block-core.json:2571
+#: ../../../../qapi/block-core.json:2444 ../../../../qapi/block-core.json:2467
+#: ../../../../qapi/block-core.json:2488 ../../../../qapi/block-core.json:2509
+#: ../../../../qapi/block-core.json:2573
 msgid "The members of :qapi:type:`BlockDirtyBitmap`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2429
+#: ../../../../qapi/block-core.json:2431
 msgid ""
 "- If ``node`` is not a valid block device or node, DeviceNotFound - If "
 "``name`` is not found, GenericError - if ``name`` is frozen by an operation, "
 "GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2431 ../../../../qapi/block-core.json:2455
-#: ../../../../qapi/block-core.json:2476 ../../../../qapi/block-core.json:2497
+#: ../../../../qapi/block-core.json:2433 ../../../../qapi/block-core.json:2457
+#: ../../../../qapi/block-core.json:2478 ../../../../qapi/block-core.json:2499
 msgid "If ``name`` is not found, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2432
+#: ../../../../qapi/block-core.json:2434
 msgid "if ``name`` is frozen by an operation, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2436
+#: ../../../../qapi/block-core.json:2438
 msgid ""
 "-> { \"execute\": \"block-dirty-bitmap-remove\",\n"
 "     \"arguments\": { \"node\": \"drive0\", \"name\": \"bitmap0\" } }\n"
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2449
+#: ../../../../qapi/block-core.json:2451
 msgid ""
 "Clear (reset) a dirty bitmap on the device, so that an incremental backup "
 "from this point in time forward will only backup clusters modified after "
 "this clear operation."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2453 ../../../../qapi/block-core.json:2474
-#: ../../../../qapi/block-core.json:2495
+#: ../../../../qapi/block-core.json:2455 ../../../../qapi/block-core.json:2476
+#: ../../../../qapi/block-core.json:2497
 msgid ""
 "- If ``node`` is not a valid block device, DeviceNotFound - If ``name`` is "
 "not found, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2454 ../../../../qapi/block-core.json:2475
-#: ../../../../qapi/block-core.json:2496 ../../../../qapi/block-core.json:2525
-#: ../../../../qapi/block-core.json:2566
+#: ../../../../qapi/block-core.json:2456 ../../../../qapi/block-core.json:2477
+#: ../../../../qapi/block-core.json:2498 ../../../../qapi/block-core.json:2527
+#: ../../../../qapi/block-core.json:2568
 msgid "If ``node`` is not a valid block device, DeviceNotFound"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2459
+#: ../../../../qapi/block-core.json:2461
 msgid ""
 "-> { \"execute\": \"block-dirty-bitmap-clear\",\n"
 "     \"arguments\": { \"node\": \"drive0\", \"name\": \"bitmap0\" } }\n"
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2472
+#: ../../../../qapi/block-core.json:2474
 msgid "Enables a dirty bitmap so that it will begin tracking disk changes."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2480
+#: ../../../../qapi/block-core.json:2482
 msgid ""
 "-> { \"execute\": \"block-dirty-bitmap-enable\",\n"
 "     \"arguments\": { \"node\": \"drive0\", \"name\": \"bitmap0\" } }\n"
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2493
+#: ../../../../qapi/block-core.json:2495
 msgid "Disables a dirty bitmap so that it will stop tracking disk changes."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2501
+#: ../../../../qapi/block-core.json:2503
 msgid ""
 "-> { \"execute\": \"block-dirty-bitmap-disable\",\n"
 "     \"arguments\": { \"node\": \"drive0\", \"name\": \"bitmap0\" } }\n"
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2514
+#: ../../../../qapi/block-core.json:2516
 msgid ""
 "Merge dirty bitmaps listed in ``bitmaps`` to the ``target`` dirty bitmap. "
 "Dirty bitmaps in ``bitmaps`` will be unchanged, except if it also appears as "
@@ -4184,34 +4188,34 @@ msgid ""
 "``target`` is unchanged."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2520
+#: ../../../../qapi/block-core.json:2522
 msgid ""
 "The resulting bitmap will count as dirty any clusters that were dirty in any "
 "of the source bitmaps.  This can be used to achieve backup checkpoints, or "
 "in simpler usages, to copy bitmaps."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2540
+#: ../../../../qapi/block-core.json:2542
 msgid "The members of :qapi:type:`BlockDirtyBitmapMerge`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2524
+#: ../../../../qapi/block-core.json:2526
 msgid ""
 "- If ``node`` is not a valid block device, DeviceNotFound - If any bitmap in "
 "``bitmaps`` or ``target`` is not found,   GenericError - If any of the "
 "bitmaps have different sizes or granularities,   GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2526
+#: ../../../../qapi/block-core.json:2528
 msgid "If any bitmap in ``bitmaps`` or ``target`` is not found, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2528
+#: ../../../../qapi/block-core.json:2530
 msgid ""
 "If any of the bitmaps have different sizes or granularities, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2533
+#: ../../../../qapi/block-core.json:2535
 msgid ""
 "-> { \"execute\": \"block-dirty-bitmap-merge\",\n"
 "     \"arguments\": { \"node\": \"drive0\", \"target\": \"bitmap0\",\n"
@@ -4219,44 +4223,44 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2547
+#: ../../../../qapi/block-core.json:2549
 msgid "SHA256 hash of dirty bitmap data"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2549
+#: ../../../../qapi/block-core.json:2551
 msgid "ASCII representation of SHA256 bitmap hash"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2559
+#: ../../../../qapi/block-core.json:2561
 msgid "Get bitmap SHA256."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2565
+#: ../../../../qapi/block-core.json:2567
 msgid ""
 "- If ``node`` is not a valid block device, DeviceNotFound - If ``name`` is "
 "not found or if hashing has failed, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2567
+#: ../../../../qapi/block-core.json:2569
 msgid "If ``name`` is not found or if hashing has failed, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2579
+#: ../../../../qapi/block-core.json:2581
 msgid "Start mirroring a block device's writes to a new destination."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2584
+#: ../../../../qapi/block-core.json:2586
 msgid ""
 "The device name or node-name of a root node whose writes should be mirrored."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2587
+#: ../../../../qapi/block-core.json:2589
 msgid ""
 "the id or node-name of the block device to mirror to.  This mustn't be "
 "attached to guest."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2590
+#: ../../../../qapi/block-core.json:2592
 msgid ""
 "with sync=full graph node name to be replaced by the new image when a whole "
 "image copy is done.  This can be used to repair broken Quorum files.  By "
@@ -4264,25 +4268,25 @@ msgid ""
 "are kept."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2601
+#: ../../../../qapi/block-core.json:2603
 msgid ""
 "granularity of the dirty bitmap, default is 64K if the image format doesn't "
 "have clusters, 4K if the clusters are smaller than that, else the cluster "
 "size.  Must be a power of 2 between 512 and 64M"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2606
+#: ../../../../qapi/block-core.json:2608
 msgid "maximum amount of data in flight from source to target"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2616
+#: ../../../../qapi/block-core.json:2618
 msgid ""
 "the node name that should be assigned to the filter driver that the mirror "
 "job inserts into the graph above ``device``.  If this option is not given, a "
 "node name is autogenerated.  (Since: 2.9)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2635
+#: ../../../../qapi/block-core.json:2637
 msgid ""
 "Assume the destination reads as all zeroes before the mirror started.  "
 "Setting this to true can speed up the mirror.  Setting this to true when the "
@@ -4290,7 +4294,7 @@ msgid ""
 "10.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2642
+#: ../../../../qapi/block-core.json:2644
 msgid ""
 "-> { \"execute\": \"blockdev-mirror\",\n"
 "     \"arguments\": { \"device\": \"ide-hd0\",\n"
@@ -4299,186 +4303,186 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2666
+#: ../../../../qapi/block-core.json:2668
 msgid "A set of parameters describing block throttling."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2668
+#: ../../../../qapi/block-core.json:2670
 msgid "Block device name"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2670
+#: ../../../../qapi/block-core.json:2672
 msgid "The name or QOM path of the guest device (since: 2.8)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2672
+#: ../../../../qapi/block-core.json:2674
 msgid "total throughput limit in bytes per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2674
+#: ../../../../qapi/block-core.json:2676
 msgid "read throughput limit in bytes per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2676
+#: ../../../../qapi/block-core.json:2678
 msgid "write throughput limit in bytes per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2678
+#: ../../../../qapi/block-core.json:2680
 msgid "total I/O operations per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2680
+#: ../../../../qapi/block-core.json:2682
 msgid "read I/O operations per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2682
+#: ../../../../qapi/block-core.json:2684
 msgid "write I/O operations per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2701
+#: ../../../../qapi/block-core.json:2703
 msgid ""
 "maximum length of the ``bps_max`` burst period, in seconds.  It must only be "
 "set if ``bps_max`` is set as well. Defaults to 1.  (Since 2.6)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2705
+#: ../../../../qapi/block-core.json:2707
 msgid ""
 "maximum length of the ``bps_rd_max`` burst period, in seconds.  It must only "
 "be set if ``bps_rd_max`` is set as well. Defaults to 1.  (Since 2.6)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2709
+#: ../../../../qapi/block-core.json:2711
 msgid ""
 "maximum length of the ``bps_wr_max`` burst period, in seconds.  It must only "
 "be set if ``bps_wr_max`` is set as well. Defaults to 1.  (Since 2.6)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2713
+#: ../../../../qapi/block-core.json:2715
 msgid ""
 "maximum length of the ``iops`` burst period, in seconds.  It must only be "
 "set if ``iops_max`` is set as well. Defaults to 1.  (Since 2.6)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2717
+#: ../../../../qapi/block-core.json:2719
 msgid ""
 "maximum length of the ``iops_rd_max`` burst period, in seconds.  It must "
 "only be set if ``iops_rd_max`` is set as well.  Defaults to 1.  (Since 2.6)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2721
+#: ../../../../qapi/block-core.json:2723
 msgid ""
 "maximum length of the ``iops_wr_max`` burst period, in seconds.  It must "
 "only be set if ``iops_wr_max`` is set as well.  Defaults to 1.  (Since 2.6)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2731
+#: ../../../../qapi/block-core.json:2733
 msgid "Member ``device`` is deprecated.  Use ``id`` instead."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2750
+#: ../../../../qapi/block-core.json:2752
 msgid ""
 "Limit parameters for throttling.  Since some limit combinations are illegal, "
 "limits should always be set in one transaction.  All fields are optional.  "
 "When setting limits, if a field is missing the current value is not changed."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2755
+#: ../../../../qapi/block-core.json:2757
 msgid "limit total I/O operations per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2757
+#: ../../../../qapi/block-core.json:2759
 msgid "I/O operations burst"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2759
+#: ../../../../qapi/block-core.json:2761
 msgid ""
 "length of the iops-total-max burst period, in seconds.  It must only be set "
 "if ``iops-total-max`` is set as well."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2763
+#: ../../../../qapi/block-core.json:2765
 msgid "limit read operations per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2765
+#: ../../../../qapi/block-core.json:2767
 msgid "I/O operations read burst"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2767
+#: ../../../../qapi/block-core.json:2769
 msgid ""
 "length of the iops-read-max burst period, in seconds.  It must only be set "
 "if ``iops-read-max`` is set as well."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2770
+#: ../../../../qapi/block-core.json:2772
 msgid "limit write operations per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2772
+#: ../../../../qapi/block-core.json:2774
 msgid "I/O operations write burst"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2774
+#: ../../../../qapi/block-core.json:2776
 msgid ""
 "length of the iops-write-max burst period, in seconds.  It must only be set "
 "if ``iops-write-max`` is set as well."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2778
+#: ../../../../qapi/block-core.json:2780
 msgid "limit total bytes per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2780
+#: ../../../../qapi/block-core.json:2782
 msgid "total bytes burst"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2782
+#: ../../../../qapi/block-core.json:2784
 msgid ""
 "length of the bps-total-max burst period, in seconds.  It must only be set "
 "if ``bps-total-max`` is set as well."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2785
+#: ../../../../qapi/block-core.json:2787
 msgid "limit read bytes per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2787
+#: ../../../../qapi/block-core.json:2789
 msgid "total bytes read burst"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2789
+#: ../../../../qapi/block-core.json:2791
 msgid ""
 "length of the bps-read-max burst period, in seconds.  It must only be set if "
 "``bps-read-max`` is set as well."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2792
+#: ../../../../qapi/block-core.json:2794
 msgid "limit write bytes per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2794
+#: ../../../../qapi/block-core.json:2796
 msgid "total bytes write burst"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2796
+#: ../../../../qapi/block-core.json:2798
 msgid ""
 "length of the bps-write-max burst period, in seconds.  It must only be set "
 "if ``bps-write-max`` is set as well."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2799
+#: ../../../../qapi/block-core.json:2801
 msgid "when limiting by iops max size of an I/O in bytes"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2818
+#: ../../../../qapi/block-core.json:2820
 msgid "Properties for throttle-group objects."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2820
+#: ../../../../qapi/block-core.json:2822
 msgid "limits to apply for this throttle group"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2824
+#: ../../../../qapi/block-core.json:2826
 msgid ""
 "All members starting with x- are aliases for the same key without x- in the "
 "``limits`` object.  This is not a stable interface and may be removed or "
@@ -4486,11 +4490,11 @@ msgid ""
 "interface."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2875
+#: ../../../../qapi/block-core.json:2877
 msgid "Copy data from a backing file into a block device."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2877
+#: ../../../../qapi/block-core.json:2879
 msgid ""
 "The block streaming operation is performed in the background until the "
 "entire backing file has been copied.  This command returns immediately once "
@@ -4499,7 +4503,7 @@ msgid ""
 "has completed using the `job-cancel` or `block-job-cancel` command."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2884
+#: ../../../../qapi/block-core.json:2886
 msgid ""
 "The node that receives the data is called the top image, can be located in "
 "any part of the chain (but always above the base image; see below) and can "
@@ -4509,7 +4513,7 @@ msgid ""
 "semantics of 'device'."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2891
+#: ../../../../qapi/block-core.json:2893
 msgid ""
 "If a base file is specified then sectors are not copied from that base file "
 "and its backing chain.  This can be used to stream a subset of the backing "
@@ -4520,43 +4524,43 @@ msgid ""
 "of the job) will be the new backing file."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2900
+#: ../../../../qapi/block-core.json:2902
 msgid ""
 "On successful completion the image file is updated to drop the backing file "
 "and the `BLOCK_JOB_COMPLETED` event is emitted."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2903
+#: ../../../../qapi/block-core.json:2905
 msgid ""
 "In case ``device`` is a filter node, `block-stream` modifies the first non-"
 "filter overlay node below it to point to the new backing node instead of "
 "modifying ``device`` itself."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2910
+#: ../../../../qapi/block-core.json:2912
 msgid "the device or node name of the top image"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2912
+#: ../../../../qapi/block-core.json:2914
 msgid ""
 "the common backing file name.  It cannot be set if ``base-node`` or "
 "``bottom`` is also set."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2915
+#: ../../../../qapi/block-core.json:2917
 msgid ""
 "the node name of the backing file.  It cannot be set if ``base`` or "
 "``bottom`` is also set.  (Since 2.8)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2918
+#: ../../../../qapi/block-core.json:2920
 msgid ""
 "the last node in the chain that should be streamed into top.  It cannot be "
 "set if ``base`` or ``base-node`` is also set.  It cannot be filter node.  "
 "(Since 6.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2922
+#: ../../../../qapi/block-core.json:2924
 msgid ""
 "The backing file string to write into the top image. This filename is not "
 "validated.  If a pathname string is such that it cannot be resolved by QEMU, "
@@ -4567,42 +4571,42 @@ msgid ""
 "string, to specify a valid filename or protocol.  (Since 2.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2922
+#: ../../../../qapi/block-core.json:2924
 msgid ""
 "The backing file string to write into the top image. This filename is not "
 "validated."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2925
+#: ../../../../qapi/block-core.json:2927
 msgid ""
 "If a pathname string is such that it cannot be resolved by QEMU, that means "
 "that subsequent QMP or HMP commands must use node-names for the image in "
 "question, as filename lookup methods will fail."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2942
+#: ../../../../qapi/block-core.json:2944
 msgid ""
 "the action to take on an error (default report).  'stop' and 'enospc' can "
 "only be used if the block device supports io-status (see `BlockInfo`).  "
 "(Since 1.3)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2946
+#: ../../../../qapi/block-core.json:2948
 msgid ""
 "the node name that should be assigned to the filter driver that the stream "
 "job inserts into the graph above ``device``.  If this option is not given, a "
 "node name is autogenerated.  (Since: 6.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2962
+#: ../../../../qapi/block-core.json:2964
 msgid "- If ``device`` does not exist, DeviceNotFound."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2963
+#: ../../../../qapi/block-core.json:2965
 msgid "If ``device`` does not exist, DeviceNotFound."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2967
+#: ../../../../qapi/block-core.json:2969
 msgid ""
 "-> { \"execute\": \"block-stream\",\n"
 "     \"arguments\": { \"device\": \"virtio0\",\n"
@@ -4610,63 +4614,63 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2987
+#: ../../../../qapi/block-core.json:2989
 msgid "Set maximum speed for a background block operation."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2989
+#: ../../../../qapi/block-core.json:2991
 msgid "This command can only be issued when there is an active block job."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2991
+#: ../../../../qapi/block-core.json:2993
 msgid "Throttling can be disabled by setting the speed to 0."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2993 ../../../../qapi/block-core.json:3035
-#: ../../../../qapi/block-core.json:3067 ../../../../qapi/block-core.json:3096
-#: ../../../../qapi/block-core.json:3136
+#: ../../../../qapi/block-core.json:2995 ../../../../qapi/block-core.json:3037
+#: ../../../../qapi/block-core.json:3069 ../../../../qapi/block-core.json:3098
+#: ../../../../qapi/block-core.json:3138
 msgid ""
 "The job identifier.  This used to be a device name (hence the name of the "
 "parameter), but since QEMU 2.7 it can have other values."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:2997
+#: ../../../../qapi/block-core.json:2999
 msgid ""
 "the maximum speed, in bytes per second, or 0 for unlimited. Defaults to 0."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3000 ../../../../qapi/block-core.json:3044
-#: ../../../../qapi/block-core.json:3076 ../../../../qapi/block-core.json:3105
-#: ../../../../qapi/block-core.json:3145
+#: ../../../../qapi/block-core.json:3002 ../../../../qapi/block-core.json:3046
+#: ../../../../qapi/block-core.json:3078 ../../../../qapi/block-core.json:3107
+#: ../../../../qapi/block-core.json:3147
 msgid ""
 "- If no background operation is active on this device,   DeviceNotActive"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3001 ../../../../qapi/block-core.json:3045
-#: ../../../../qapi/block-core.json:3077 ../../../../qapi/block-core.json:3106
-#: ../../../../qapi/block-core.json:3146
+#: ../../../../qapi/block-core.json:3003 ../../../../qapi/block-core.json:3047
+#: ../../../../qapi/block-core.json:3079 ../../../../qapi/block-core.json:3108
+#: ../../../../qapi/block-core.json:3148
 msgid "If no background operation is active on this device, DeviceNotActive"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3013
+#: ../../../../qapi/block-core.json:3015
 msgid "Stop an active background block operation."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3015
+#: ../../../../qapi/block-core.json:3017
 msgid ""
 "This command returns immediately after marking the active background block "
 "operation for cancellation.  It is an error to call this command if no "
 "operation is in progress."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3019
+#: ../../../../qapi/block-core.json:3021
 msgid ""
 "The operation will cancel as soon as possible and then emit the "
 "`BLOCK_JOB_CANCELLED` event.  Before that happens the job is still visible "
 "when enumerated using `query-block-jobs`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3023
+#: ../../../../qapi/block-core.json:3025
 msgid ""
 "Note that if you issue `block-job-cancel` after `drive-mirror` has indicated "
 "(via the event `BLOCK_JOB_READY`) that the source and destination are "
@@ -4676,7 +4680,7 @@ msgid ""
 "cancellation."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3030
+#: ../../../../qapi/block-core.json:3032
 msgid ""
 "For streaming, the image file retains its backing file unless the streaming "
 "operation happens to complete just as it is being cancelled.  A new "
@@ -4684,38 +4688,38 @@ msgid ""
 "data from the backing file."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3039
+#: ../../../../qapi/block-core.json:3041
 msgid ""
 "If true, and the job has already emitted the event `BLOCK_JOB_READY`, "
 "abandon the job immediately (even if it is paused) instead of waiting for "
 "the destination to complete its final synchronization (since 1.3)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3056
+#: ../../../../qapi/block-core.json:3058
 msgid "Pause an active background block operation."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3073
+#: ../../../../qapi/block-core.json:3075
 msgid "This command is deprecated.  Use `job-pause` instead."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3089
+#: ../../../../qapi/block-core.json:3091
 msgid "Resume an active background block operation."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3094
+#: ../../../../qapi/block-core.json:3096
 msgid "This command also clears the error status of the job."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3102
+#: ../../../../qapi/block-core.json:3104
 msgid "This command is deprecated.  Use `job-resume` instead."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3142
+#: ../../../../qapi/block-core.json:3144
 msgid "This command is deprecated.  Use `job-complete` instead."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3166
+#: ../../../../qapi/block-core.json:3168
 msgid ""
 "This command will refuse to operate on any job that has not yet reached its "
 "terminal state, CONCLUDED.  For jobs that make use of the `BLOCK_JOB_READY` "
@@ -4723,149 +4727,149 @@ msgid ""
 "be used as appropriate."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3175
+#: ../../../../qapi/block-core.json:3177
 msgid "This command is deprecated.  Use `job-dismiss` instead."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3203
+#: ../../../../qapi/block-core.json:3205
 msgid "This command is deprecated.  Use `job-finalize` instead."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3215
+#: ../../../../qapi/block-core.json:3217
 msgid ""
 "Switch to this copy mode.  Currently, only the switch from 'background' to "
 "'write-blocking' is implemented."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3226
+#: ../../../../qapi/block-core.json:3228
 msgid "Block job options that can be changed after job creation."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3230
+#: ../../../../qapi/block-core.json:3232
 msgid "The job type"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3234
+#: ../../../../qapi/block-core.json:3236
 msgid ""
 "When ``type`` is ``mirror``: The members of :qapi:type:"
 "`BlockJobChangeOptionsMirror`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3242
+#: ../../../../qapi/block-core.json:3244
 msgid "Change the block job's options."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3246
+#: ../../../../qapi/block-core.json:3248
 msgid "The members of :qapi:type:`BlockJobChangeOptions`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3252
+#: ../../../../qapi/block-core.json:3254
 msgid "Determines how to handle discard requests."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3254
+#: ../../../../qapi/block-core.json:3256
 msgid "Ignore the request"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3256
+#: ../../../../qapi/block-core.json:3258
 msgid "Forward as an unmap request"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3266
+#: ../../../../qapi/block-core.json:3268
 msgid ""
 "Describes the operation mode for the automatic conversion of plain zero "
 "writes by the OS to driver specific optimized zero write commands."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3270
+#: ../../../../qapi/block-core.json:3272
 msgid "Disabled (default)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3274
+#: ../../../../qapi/block-core.json:3276
 msgid ""
 "Enabled and even try to unmap blocks if possible.  This requires also that "
 "`BlockdevDiscardOptions` is set to unmap for this device."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3286
+#: ../../../../qapi/block-core.json:3288
 msgid "Selects the AIO backend to handle I/O requests"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3288
+#: ../../../../qapi/block-core.json:3290
 msgid "Use QEMU's thread pool"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3290
+#: ../../../../qapi/block-core.json:3292
 msgid "Use native AIO backend (only Linux and Windows)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3292
+#: ../../../../qapi/block-core.json:3294
 msgid "Use linux io_uring (since 5.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3303
+#: ../../../../qapi/block-core.json:3305
 msgid "Includes cache-related options for block devices"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3305
+#: ../../../../qapi/block-core.json:3307
 msgid "enables use of O_DIRECT (bypass the host page cache; default: false)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3308
+#: ../../../../qapi/block-core.json:3310
 msgid "ignore any flush requests for the device (default: false)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3319
+#: ../../../../qapi/block-core.json:3321
 msgid "Drivers that are supported in block device operations."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3321
+#: ../../../../qapi/block-core.json:3323
 msgid "Since 2.11"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3323
+#: ../../../../qapi/block-core.json:3325
 msgid "Since 2.12"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3325 ../../../../qapi/block-core.json:3327
+#: ../../../../qapi/block-core.json:3327 ../../../../qapi/block-core.json:3329
 msgid "Since 3.0"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3329 ../../../../qapi/transaction.json:50
+#: ../../../../qapi/block-core.json:3331 ../../../../qapi/transaction.json:50
 msgid "Since 4.2"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3331
+#: ../../../../qapi/block-core.json:3333
 msgid "Since 5.0"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3333
+#: ../../../../qapi/block-core.json:3335
 msgid "Since 6.2"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3335
+#: ../../../../qapi/block-core.json:3337
 msgid "Since 7.0"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3362
+#: ../../../../qapi/block-core.json:3364
 msgid "Driver specific block device options for the file backend."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3364 ../../../../qapi/block-core.json:4120
+#: ../../../../qapi/block-core.json:3366 ../../../../qapi/block-core.json:4122
 msgid "path to the image file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3366
+#: ../../../../qapi/block-core.json:3368
 msgid ""
 "the id for the object that will handle persistent reservations for this "
 "device (default: none, forward the commands via SG_IO; since 2.11)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3370
+#: ../../../../qapi/block-core.json:3372
 msgid "AIO backend (default: threads) (since: 2.8)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3372
+#: ../../../../qapi/block-core.json:3374
 msgid ""
 "maximum number of requests to batch together into a single submission in the "
 "AIO backend.  The smallest value between this and the aio-max-batch value of "
@@ -4873,27 +4877,27 @@ msgid ""
 "automatically.  (default: 0, since 6.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3378
+#: ../../../../qapi/block-core.json:3380
 msgid ""
 "whether to enable file locking.  If set to 'auto', only enable when Open "
 "File Descriptor (OFD) locking API is available (default: auto, since 2.10)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3382
+#: ../../../../qapi/block-core.json:3384
 msgid ""
 "invalidate page cache during live migration.  This prevents stale data on "
 "the migration destination with cache.direct=off.  Currently only supported "
 "on Linux hosts. (default: on, since: 4.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3387
+#: ../../../../qapi/block-core.json:3389
 msgid ""
 "whether to check that page cache was dropped on live migration.  May cause "
 "noticeable delays if the image file is large, do not use in production.  "
 "(default: off) (since: 3.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3394
+#: ../../../../qapi/block-core.json:3396
 msgid ""
 "If present, enabled auto-read-only means that the driver will open the image "
 "read-only at first, dynamically reopen the image file read-write when the "
@@ -4902,147 +4906,147 @@ msgid ""
 "demand when an operation actually needs write access."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3402
+#: ../../../../qapi/block-core.json:3404
 msgid "Member x-check-cache-dropped is meant for debugging."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3422
+#: ../../../../qapi/block-core.json:3424
 msgid "Driver specific block device options for the null backend."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3424
+#: ../../../../qapi/block-core.json:3426
 msgid "size of the device in bytes."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3426
+#: ../../../../qapi/block-core.json:3428
 msgid ""
 "emulated latency (in nanoseconds) in processing requests.  Default to zero "
 "which completes requests immediately. (Since 2.4)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3430
+#: ../../../../qapi/block-core.json:3432
 msgid ""
 "if true, reads from the device produce zeroes; if false, the buffer is left "
 "unchanged. (default: false; since: 4.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3442
+#: ../../../../qapi/block-core.json:3444
 msgid "Driver specific block device options for the NVMe backend."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3444
+#: ../../../../qapi/block-core.json:3446
 msgid ""
 "PCI controller address of the NVMe device in format hhhh:bb:ss.f (host:bus:"
 "slot.function)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3447
+#: ../../../../qapi/block-core.json:3449
 msgid "namespace number of the device, starting from 1."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3449
+#: ../../../../qapi/block-core.json:3451
 msgid ""
 "Note that the PCI ``device`` must have been unbound from any host kernel "
 "driver before instructing QEMU to add the blockdev."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3460
+#: ../../../../qapi/block-core.json:3462
 msgid "Driver specific block device options for the vvfat protocol."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3462
+#: ../../../../qapi/block-core.json:3464
 msgid "directory to be exported as FAT image"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3464
+#: ../../../../qapi/block-core.json:3466
 msgid "FAT type: 12, 16 or 32"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3466
+#: ../../../../qapi/block-core.json:3468
 msgid ""
 "whether to export a floppy image (true) or partitioned hard disk (false; "
 "default)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3469
+#: ../../../../qapi/block-core.json:3471
 msgid ""
 "set the volume label, limited to 11 bytes.  FAT16 and FAT32 traditionally "
 "have some restrictions on labels, which are ignored by most operating "
 "systems.  Defaults to \"QEMU VVFAT\". (since 2.4)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3474
+#: ../../../../qapi/block-core.json:3476
 msgid "whether to allow write operations (default: false)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3485
+#: ../../../../qapi/block-core.json:3487
 msgid ""
 "Driver specific block device options for image format that have no option "
 "besides their data source."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3488 ../../../../qapi/block-core.json:4691
+#: ../../../../qapi/block-core.json:3490 ../../../../qapi/block-core.json:4693
 msgid "reference to or definition of the data source block device"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3498
+#: ../../../../qapi/block-core.json:3500
 msgid "Driver specific block device options for LUKS."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3500
+#: ../../../../qapi/block-core.json:3502
 msgid ""
 "the ID of a QCryptoSecret object providing the decryption key.  Mandatory "
 "except when doing a metadata-only probe of the image.  (since 2.6)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3504
+#: ../../../../qapi/block-core.json:3506
 msgid "block device holding a detached LUKS header.  (since 9.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3508 ../../../../qapi/block-core.json:3525
-#: ../../../../qapi/block-core.json:3682 ../../../../qapi/block-core.json:4445
-#: ../../../../qapi/block-core.json:4679 ../../../../qapi/block-core.json:4713
-#: ../../../../qapi/block-core.json:4773
+#: ../../../../qapi/block-core.json:3510 ../../../../qapi/block-core.json:3527
+#: ../../../../qapi/block-core.json:3684 ../../../../qapi/block-core.json:4447
+#: ../../../../qapi/block-core.json:4681 ../../../../qapi/block-core.json:4715
+#: ../../../../qapi/block-core.json:4775
 msgid "The members of :qapi:type:`BlockdevOptionsGenericFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3516
+#: ../../../../qapi/block-core.json:3518
 msgid ""
 "Driver specific block device options for image format that have no option "
 "besides their data source and an optional backing file."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3519
+#: ../../../../qapi/block-core.json:3521
 msgid ""
 "reference to or definition of the backing file block device, null disables "
 "the backing file entirely.  Defaults to the backing file stored the image "
 "file."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3532
+#: ../../../../qapi/block-core.json:3534
 msgid "General overlap check modes."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3534
+#: ../../../../qapi/block-core.json:3536
 msgid "Do not perform any checks"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3536
+#: ../../../../qapi/block-core.json:3538
 msgid ""
 "Perform only checks which can be done in constant time and without reading "
 "anything from disk"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3539
+#: ../../../../qapi/block-core.json:3541
 msgid ""
 "Perform only checks which can be done without reading anything from disk"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3542
+#: ../../../../qapi/block-core.json:3544
 msgid "Perform all available overlap checks"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3552
+#: ../../../../qapi/block-core.json:3554
 msgid ""
 "Structure of flags for each metadata structure.  Setting a field to 'true' "
 "makes QEMU guard that Qcow2 format structure against unintended "
@@ -5051,135 +5055,135 @@ msgid ""
 "given."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3558
+#: ../../../../qapi/block-core.json:3560
 msgid ""
 "Specifies a template mode which can be adjusted using the other flags, "
 "defaults to 'cached'"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3561
+#: ../../../../qapi/block-core.json:3563
 msgid "Qcow2 format header"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3563
+#: ../../../../qapi/block-core.json:3565
 msgid "Qcow2 active L1 table"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3565
+#: ../../../../qapi/block-core.json:3567
 msgid "Qcow2 active L2 table"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3567
+#: ../../../../qapi/block-core.json:3569
 msgid "Qcow2 refcount table"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3569
+#: ../../../../qapi/block-core.json:3571
 msgid "Qcow2 refcount blocks"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3571
+#: ../../../../qapi/block-core.json:3573
 msgid "Qcow2 snapshot table"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3573
+#: ../../../../qapi/block-core.json:3575
 msgid "Qcow2 inactive L1 tables"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3575
+#: ../../../../qapi/block-core.json:3577
 msgid "Qcow2 inactive L2 tables"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3577
+#: ../../../../qapi/block-core.json:3579
 msgid "Qcow2 bitmap directory (since 3.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3596
+#: ../../../../qapi/block-core.json:3598
 msgid ""
 "Specifies which metadata structures should be guarded against unintended "
 "overwriting."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3599
+#: ../../../../qapi/block-core.json:3601
 msgid "set of flags for separate specification of each metadata structure type"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3602
+#: ../../../../qapi/block-core.json:3604
 msgid "named mode which chooses a specific set of flags"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3613 ../../../../qapi/block-core.json:3649
+#: ../../../../qapi/block-core.json:3615 ../../../../qapi/block-core.json:3651
 msgid "AES-CBC with plain64 initialization vectors"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3623 ../../../../qapi/block-core.json:3659
+#: ../../../../qapi/block-core.json:3625 ../../../../qapi/block-core.json:3661
 msgid "encryption format"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3627 ../../../../qapi/block-core.json:3663
+#: ../../../../qapi/block-core.json:3629 ../../../../qapi/block-core.json:3665
 msgid ""
 "When ``format`` is ``aes``: The members of :qapi:type:"
 "`QCryptoBlockOptionsQCow`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3635
+#: ../../../../qapi/block-core.json:3637
 msgid "Driver specific block device options for qcow."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3637
+#: ../../../../qapi/block-core.json:3639
 msgid ""
 "Image decryption options.  Mandatory for encrypted images, except when doing "
 "a metadata-only probe of the image."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3642 ../../../../qapi/block-core.json:3751
+#: ../../../../qapi/block-core.json:3644 ../../../../qapi/block-core.json:3753
 msgid "The members of :qapi:type:`BlockdevOptionsGenericCOWFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3672
+#: ../../../../qapi/block-core.json:3674
 msgid ""
 "Filter driver intended to be inserted between format and protocol node and "
 "do preallocation in protocol node on write."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3675
+#: ../../../../qapi/block-core.json:3677
 msgid ""
 "on preallocation, align file length to this number, default 1048576 (1M)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3678
+#: ../../../../qapi/block-core.json:3680
 msgid "how much to preallocate, default 134217728 (128M)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3689
+#: ../../../../qapi/block-core.json:3691
 msgid "Driver specific block device options for qcow2."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3691
+#: ../../../../qapi/block-core.json:3693
 msgid ""
 "whether to enable the lazy refcounts feature (default is taken from the "
 "image file)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3694
+#: ../../../../qapi/block-core.json:3696
 msgid ""
 "whether discard requests to the qcow2 device should be forwarded to the data "
 "source"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3697
+#: ../../../../qapi/block-core.json:3699
 msgid ""
 "whether discard requests for the data source should be issued when a "
 "snapshot operation (e.g. deleting a snapshot) frees clusters in the qcow2 "
 "file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3701
+#: ../../../../qapi/block-core.json:3703
 msgid ""
 "whether discard requests for the data source should be issued on other "
 "occasions where a cluster gets freed"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3704
+#: ../../../../qapi/block-core.json:3706
 msgid ""
 "when enabled, data clusters will remain preallocated when they are no longer "
 "used, e.g. because they are discarded or converted to zero clusters.  As "
@@ -5195,47 +5199,47 @@ msgid ""
 "option.  (since 8.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3719
+#: ../../../../qapi/block-core.json:3721
 msgid ""
 "which overlap checks to perform for writes to the image, defaults to "
 "'cached' (since 2.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3722
+#: ../../../../qapi/block-core.json:3724
 msgid ""
 "the maximum total size of the L2 table and refcount block caches in bytes "
 "(since 2.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3725
+#: ../../../../qapi/block-core.json:3727
 msgid "the maximum size of the L2 table cache in bytes (since 2.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3728
+#: ../../../../qapi/block-core.json:3730
 msgid ""
 "the size of each entry in the L2 cache in bytes.  It must be a power of two "
 "between 512 and the cluster size.  The default value is the cluster size "
 "(since 2.12)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3732
+#: ../../../../qapi/block-core.json:3734
 msgid "the maximum size of the refcount block cache in bytes (since 2.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3735
+#: ../../../../qapi/block-core.json:3737
 msgid ""
 "clean unused entries in the L2 and refcount caches.  The interval is in "
 "seconds.  The default value is 600 on supporting platforms, and 0 on other "
 "platforms.  0 disables this feature.  (since 2.5)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3740
+#: ../../../../qapi/block-core.json:3742
 msgid ""
 "Image decryption options.  Mandatory for encrypted images, except when doing "
 "a metadata-only probe of the image. (since 2.10)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3744
+#: ../../../../qapi/block-core.json:3746
 msgid ""
 "reference to or definition of the external data file. This may only be "
 "specified for images that require an external data file.  If it is not "
@@ -5243,462 +5247,462 @@ msgid ""
 "file.  (since 4.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3770
+#: ../../../../qapi/block-core.json:3772
 msgid "Don't check the host key at all"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3772
+#: ../../../../qapi/block-core.json:3774
 msgid "Compare the host key with a given hash"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3774
+#: ../../../../qapi/block-core.json:3776
 msgid "Check the host key against the known_hosts file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3784
+#: ../../../../qapi/block-core.json:3786
 msgid "The given hash is an md5 hash"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3786
+#: ../../../../qapi/block-core.json:3788
 msgid "The given hash is an sha1 hash"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3788
+#: ../../../../qapi/block-core.json:3790
 msgid "The given hash is an sha256 hash"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3798
+#: ../../../../qapi/block-core.json:3800
 msgid "The hash algorithm used for the hash"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3800
+#: ../../../../qapi/block-core.json:3802
 msgid "The expected hash value"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3811
+#: ../../../../qapi/block-core.json:3813
 msgid "How to check the host key"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3815
+#: ../../../../qapi/block-core.json:3817
 msgid "When ``mode`` is ``hash``: The members of :qapi:type:`SshHostKeyHash`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3823 ../../../../qapi/block-core.json:4483
+#: ../../../../qapi/block-core.json:3825 ../../../../qapi/block-core.json:4485
 msgid "host address"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3825
+#: ../../../../qapi/block-core.json:3827
 msgid "path to the image on the host"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3827
+#: ../../../../qapi/block-core.json:3829
 msgid "user as which to connect, defaults to current local user name"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3829
+#: ../../../../qapi/block-core.json:3831
 msgid ""
 "Defines how and what to check the host key against (default: known_hosts)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3843
+#: ../../../../qapi/block-core.json:3845
 msgid "Trigger events supported by blkdebug."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3845
+#: ../../../../qapi/block-core.json:3847
 msgid "write zeros to the l1 table to shrink image. (since 2.11)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3848
+#: ../../../../qapi/block-core.json:3850
 msgid "discard the l2 tables.  (since 2.11)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3850
+#: ../../../../qapi/block-core.json:3852
 msgid "a write due to copy-on-read (since 2.11)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3852
+#: ../../../../qapi/block-core.json:3854
 msgid "an allocation of file space for a cluster (since 4.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3855
+#: ../../../../qapi/block-core.json:3857
 msgid "triggers once at creation of the blkdebug node (since 4.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3880
+#: ../../../../qapi/block-core.json:3882
 msgid "Kinds of I/O that blkdebug can inject errors in."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3882
+#: ../../../../qapi/block-core.json:3884
 msgid ".bdrv_co_preadv()"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3884
+#: ../../../../qapi/block-core.json:3886
 msgid ".bdrv_co_pwritev()"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3886
+#: ../../../../qapi/block-core.json:3888
 msgid ".bdrv_co_pwrite_zeroes()"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3888
+#: ../../../../qapi/block-core.json:3890
 msgid ".bdrv_co_pdiscard()"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3890
+#: ../../../../qapi/block-core.json:3892
 msgid ".bdrv_co_flush_to_disk()"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3892
+#: ../../../../qapi/block-core.json:3894
 msgid ".bdrv_co_block_status()"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3903
+#: ../../../../qapi/block-core.json:3905
 msgid "Describes a single error injection for blkdebug."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3905 ../../../../qapi/block-core.json:3944
+#: ../../../../qapi/block-core.json:3907 ../../../../qapi/block-core.json:3946
 msgid "trigger event"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3907
+#: ../../../../qapi/block-core.json:3909
 msgid ""
 "the state identifier blkdebug needs to be in to actually trigger the event; "
 "defaults to \"any\""
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3910
+#: ../../../../qapi/block-core.json:3912
 msgid ""
 "the type of I/O operations on which this error should be injected; defaults "
 "to \"all read, write, write-zeroes, discard, and flush operations\" (since: "
 "4.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3914
+#: ../../../../qapi/block-core.json:3916
 msgid "error identifier (errno) to be returned; defaults to EIO"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3916
+#: ../../../../qapi/block-core.json:3918
 msgid ""
 "request delay before completion in nanoseconds (default: 0, since: 11.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3919
+#: ../../../../qapi/block-core.json:3921
 msgid ""
 "specifies the sector index which has to be affected in order to actually "
 "trigger the event; defaults to \"any sector\""
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3922
+#: ../../../../qapi/block-core.json:3924
 msgid ""
 "disables further events after this one has been triggered; defaults to false"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3925
+#: ../../../../qapi/block-core.json:3927
 msgid "fail immediately; defaults to false"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3942
+#: ../../../../qapi/block-core.json:3944
 msgid "Describes a single state-change event for blkdebug."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3946
+#: ../../../../qapi/block-core.json:3948
 msgid ""
 "the current state identifier blkdebug needs to be in; defaults to \"any\""
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3949
+#: ../../../../qapi/block-core.json:3951
 msgid ""
 "the state identifier blkdebug is supposed to assume if this event is "
 "triggered"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3962
+#: ../../../../qapi/block-core.json:3964
 msgid "Driver specific block device options for blkdebug."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3964
+#: ../../../../qapi/block-core.json:3966
 msgid "underlying raw block device (or image file)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3966
+#: ../../../../qapi/block-core.json:3968
 msgid "filename of the configuration file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3968
+#: ../../../../qapi/block-core.json:3970
 msgid ""
 "required alignment for requests in bytes, must be positive power of 2, or 0 "
 "for default"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3971
+#: ../../../../qapi/block-core.json:3973
 msgid ""
 "maximum size for I/O transfers in bytes, must be positive multiple of "
 "``align`` and of the underlying file's request alignment (but need not be a "
 "power of 2), or 0 for default (since 2.10)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3976
+#: ../../../../qapi/block-core.json:3978
 msgid ""
 "preferred alignment for write zero requests in bytes, must be positive "
 "multiple of ``align`` and of the underlying file's request alignment (but "
 "need not be a power of 2), or 0 for default (since 2.10)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3981
+#: ../../../../qapi/block-core.json:3983
 msgid ""
 "maximum size for write zero requests in bytes, must be positive multiple of "
 "``align``, of ``opt-write-zero``, and of the underlying file's request "
 "alignment (but need not be a power of 2), or 0 for default (since 2.10)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3986
+#: ../../../../qapi/block-core.json:3988
 msgid ""
 "preferred alignment for discard requests in bytes, must be positive multiple "
 "of ``align`` and of the underlying file's request alignment (but need not be "
 "a power of 2), or 0 for default (since 2.10)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3991
+#: ../../../../qapi/block-core.json:3993
 msgid ""
 "maximum size for discard requests in bytes, must be positive multiple of "
 "``align``, of ``opt-discard``, and of the underlying file's request "
 "alignment (but need not be a power of 2), or 0 for default (since 2.10)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3996
+#: ../../../../qapi/block-core.json:3998
 msgid "array of error injection descriptions"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:3998
+#: ../../../../qapi/block-core.json:4000
 msgid "array of state-change descriptions"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4000
+#: ../../../../qapi/block-core.json:4002
 msgid ""
 "Permissions to take on ``image`` in addition to what is necessary anyway "
 "(which depends on how the blkdebug node is used).  Defaults to none.  (since "
 "5.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4004
+#: ../../../../qapi/block-core.json:4006
 msgid ""
 "Permissions not to share on ``image`` in addition to what cannot be shared "
 "anyway (which depends on how the blkdebug node is used).  Defaults to none.  "
 "(since 5.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4024
+#: ../../../../qapi/block-core.json:4026
 msgid "Driver specific block device options for blklogwrites."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4026
+#: ../../../../qapi/block-core.json:4028
 msgid "block device"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4028
+#: ../../../../qapi/block-core.json:4030
 msgid "block device used to log writes to ``file``"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4030
+#: ../../../../qapi/block-core.json:4032
 msgid ""
 "sector size used in logging writes to ``file``, determines granularity of "
 "offsets and sizes of writes (default: 512)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4034
+#: ../../../../qapi/block-core.json:4036
 msgid "append to an existing log (default: false)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4036
+#: ../../../../qapi/block-core.json:4038
 msgid ""
 "interval of write requests after which the log super block is updated to "
 "disk (default: 4096)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4051
+#: ../../../../qapi/block-core.json:4053
 msgid "Driver specific block device options for blkverify."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4053
+#: ../../../../qapi/block-core.json:4055
 msgid "block device to be tested"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4055
+#: ../../../../qapi/block-core.json:4057
 msgid "raw image used for verification"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4066
+#: ../../../../qapi/block-core.json:4068
 msgid "Driver specific block device options for blkreplay."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4068
+#: ../../../../qapi/block-core.json:4070
 msgid "disk image which should be controlled with blkreplay"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4078
+#: ../../../../qapi/block-core.json:4080
 msgid "An enumeration of quorum read patterns."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4080
+#: ../../../../qapi/block-core.json:4082
 msgid "read all the children and do a quorum vote on reads"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4082
+#: ../../../../qapi/block-core.json:4084
 msgid "read only from the first child that has not failed"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4091
+#: ../../../../qapi/block-core.json:4093
 msgid "Driver specific block device options for Quorum"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4093
+#: ../../../../qapi/block-core.json:4095
 msgid "true if the driver must print content mismatch set to false by default"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4096
+#: ../../../../qapi/block-core.json:4098
 msgid "the children block devices to use"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4098
+#: ../../../../qapi/block-core.json:4100
 msgid "the vote limit under which a read will fail"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4100
+#: ../../../../qapi/block-core.json:4102
 msgid "rewrite corrupted data when quorum is reached (Since 2.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4103
+#: ../../../../qapi/block-core.json:4105
 msgid "choose read pattern and set to quorum by default (Since 2.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4118
+#: ../../../../qapi/block-core.json:4120
 msgid "Driver specific block device options for the io_uring backend."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4131
+#: ../../../../qapi/block-core.json:4133
 msgid "Driver specific block device options for the nvme-io_uring backend."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4133
+#: ../../../../qapi/block-core.json:4135
 msgid "path to the NVMe namespace's character device (e.g. /dev/ng0n1)."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4145
+#: ../../../../qapi/block-core.json:4147
 msgid ""
 "Driver specific block device options for the virtio-blk-vfio-pci backend."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4148
+#: ../../../../qapi/block-core.json:4150
 msgid ""
 "path to the PCI device's sysfs directory (e.g. /sys/bus/pci/"
 "devices/0000:00:01.0)."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4160
+#: ../../../../qapi/block-core.json:4162
 msgid ""
 "Driver specific block device options for the virtio-blk-vhost-user backend."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4163
+#: ../../../../qapi/block-core.json:4165
 msgid "path to the vhost-user UNIX domain socket."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4174
+#: ../../../../qapi/block-core.json:4176
 msgid ""
 "Driver specific block device options for the virtio-blk-vhost-vdpa backend."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4177
+#: ../../../../qapi/block-core.json:4179
 msgid "path to the vhost-vdpa character device."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4181
+#: ../../../../qapi/block-core.json:4183
 msgid "Member ``path`` supports the special \"/dev/fdset/N\" path (since 8.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4195
+#: ../../../../qapi/block-core.json:4197
 msgid "An enumeration of libiscsi transport types"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4205
+#: ../../../../qapi/block-core.json:4207
 msgid "An enumeration of header digests supported by libiscsi"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4216
+#: ../../../../qapi/block-core.json:4218
 msgid "Driver specific block device options for iscsi"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4218
+#: ../../../../qapi/block-core.json:4220
 msgid "The iscsi transport type"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4220
+#: ../../../../qapi/block-core.json:4222
 msgid "The address of the iscsi portal"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4222
+#: ../../../../qapi/block-core.json:4224
 msgid "The target iqn name"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4224
+#: ../../../../qapi/block-core.json:4226
 msgid "LUN to connect to.  Defaults to 0."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4226
+#: ../../../../qapi/block-core.json:4228
 msgid ""
 "User name to log in with.  If omitted, no CHAP authentication is performed."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4229
+#: ../../../../qapi/block-core.json:4231
 msgid ""
 "The ID of a QCryptoSecret object providing the password for the login.  This "
 "option is required if ``user`` is specified."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4233
+#: ../../../../qapi/block-core.json:4235
 msgid ""
 "The iqn name we want to identify to the target as. If this option is not "
 "specified, an initiator name is generated automatically."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4237
+#: ../../../../qapi/block-core.json:4239
 msgid "The desired header digest.  Defaults to none-crc32c."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4239
+#: ../../../../qapi/block-core.json:4241
 msgid ""
 "Timeout in seconds after which a request will timeout.  0 means no timeout "
 "and is the default."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4266
+#: ../../../../qapi/block-core.json:4268
 msgid "Used for opening either luks or luks2 (Since 8.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4276
+#: ../../../../qapi/block-core.json:4278
 msgid ""
 "ID of a QCryptoSecret object providing a passphrase for unlocking the "
 "encryption"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4287
+#: ../../../../qapi/block-core.json:4289
 msgid "The encryption algorithm"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4291 ../../../../qapi/block-core.json:4300
-#: ../../../../qapi/block-core.json:4309 ../../../../qapi/block-core.json:4318
+#: ../../../../qapi/block-core.json:4293 ../../../../qapi/block-core.json:4302
+#: ../../../../qapi/block-core.json:4311 ../../../../qapi/block-core.json:4320
 msgid "The members of :qapi:type:`RbdEncryptionOptionsLUKSBase`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4327 ../../../../qapi/block-core.json:4336
+#: ../../../../qapi/block-core.json:4329 ../../../../qapi/block-core.json:4338
 msgid "The members of :qapi:type:`RbdEncryptionCreateOptionsLUKSBase`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4343 ../../../../qapi/block-core.json:4363
+#: ../../../../qapi/block-core.json:4345 ../../../../qapi/block-core.json:4365
 msgid "Encryption format."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4345
+#: ../../../../qapi/block-core.json:4347
 msgid ""
 "Parent image encryption options (for cloned images).  Can be left "
 "unspecified if this cloned image is encrypted using the same format and "
@@ -5706,224 +5710,224 @@ msgid ""
 "image is not encrypted.  (Since 8.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4352
+#: ../../../../qapi/block-core.json:4354
 msgid ""
 "When ``format`` is ``luks``: The members of :qapi:type:"
 "`RbdEncryptionOptionsLUKS`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4352
+#: ../../../../qapi/block-core.json:4354
 msgid ""
 "When ``format`` is ``luks2``: The members of :qapi:type:"
 "`RbdEncryptionOptionsLUKS2`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4352
+#: ../../../../qapi/block-core.json:4354
 msgid ""
 "When ``format`` is ``luks-any``: The members of :qapi:type:"
 "`RbdEncryptionOptionsLUKSAny`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4367
+#: ../../../../qapi/block-core.json:4369
 msgid ""
 "When ``format`` is ``luks``: The members of :qapi:type:"
 "`RbdEncryptionCreateOptionsLUKS`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4367
+#: ../../../../qapi/block-core.json:4369
 msgid ""
 "When ``format`` is ``luks2``: The members of :qapi:type:"
 "`RbdEncryptionCreateOptionsLUKS2`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4376
+#: ../../../../qapi/block-core.json:4378
 msgid "Ceph pool name."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4378
+#: ../../../../qapi/block-core.json:4380
 msgid "Rados namespace name in the Ceph pool.  (Since 5.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4380
+#: ../../../../qapi/block-core.json:4382
 msgid "Image name in the Ceph pool."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4382
+#: ../../../../qapi/block-core.json:4384
 msgid ""
 "path to Ceph configuration file.  Values in the configuration file will be "
 "overridden by options specified via QAPI."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4385
+#: ../../../../qapi/block-core.json:4387
 msgid "Ceph snapshot name."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4387 ../../../../qapi/block-core.json:5324
+#: ../../../../qapi/block-core.json:4389 ../../../../qapi/block-core.json:5326
 msgid "Image encryption options.  (Since 6.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4389
+#: ../../../../qapi/block-core.json:4391
 msgid "Ceph id name."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4391
+#: ../../../../qapi/block-core.json:4393
 msgid ""
 "Acceptable authentication modes.  This maps to Ceph configuration option "
 "\"auth_client_required\". (Since 3.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4395
+#: ../../../../qapi/block-core.json:4397
 msgid ""
 "ID of a QCryptoSecret object providing a key for cephx authentication.  This "
 "maps to Ceph configuration option \"key\". (Since 3.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4399
+#: ../../../../qapi/block-core.json:4401
 msgid ""
 "Monitor host address and port.  This maps to the \"mon_host\" Ceph option."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4419
+#: ../../../../qapi/block-core.json:4421
 msgid "An enumeration of replication modes."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4421
+#: ../../../../qapi/block-core.json:4423
 msgid "Primary mode, the vm's state will be sent to secondary QEMU."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4424
+#: ../../../../qapi/block-core.json:4426
 msgid "Secondary mode, receive the vm's state from primary QEMU."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4435
+#: ../../../../qapi/block-core.json:4437
 msgid "Driver specific block device options for replication"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4437
+#: ../../../../qapi/block-core.json:4439
 msgid "the replication mode"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4439
+#: ../../../../qapi/block-core.json:4441
 msgid ""
 "In secondary mode, node name or device ID of the root node who owns the "
 "replication node chain.  Must not be given in primary mode."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4454
+#: ../../../../qapi/block-core.json:4456
 msgid "An enumeration of NFS transport types"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4456
+#: ../../../../qapi/block-core.json:4458
 msgid "TCP transport"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4466
+#: ../../../../qapi/block-core.json:4468
 msgid "Captures the address of the socket"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4468
+#: ../../../../qapi/block-core.json:4470
 msgid "transport type used for NFS (only TCP supported)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4470
+#: ../../../../qapi/block-core.json:4472
 msgid "host address for NFS server"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4481
+#: ../../../../qapi/block-core.json:4483
 msgid "Driver specific block device option for NFS"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4485
+#: ../../../../qapi/block-core.json:4487
 msgid "path of the image on the host"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4487
+#: ../../../../qapi/block-core.json:4489
 msgid ""
 "UID value to use when talking to the server (defaults to 65534 on Windows "
 "and getuid() on unix)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4490
+#: ../../../../qapi/block-core.json:4492
 msgid ""
 "GID value to use when talking to the server (defaults to 65534 on Windows "
 "and getgid() in unix)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4493
+#: ../../../../qapi/block-core.json:4495
 msgid ""
 "number of SYNs during the session establishment (defaults to libnfs default)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4496
+#: ../../../../qapi/block-core.json:4498
 msgid "set the readahead size in bytes (defaults to libnfs default)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4499
+#: ../../../../qapi/block-core.json:4501
 msgid "set the pagecache size in bytes (defaults to libnfs default)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4502
+#: ../../../../qapi/block-core.json:4504
 msgid "set the NFS debug level (max 2) (defaults to libnfs default)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4519
+#: ../../../../qapi/block-core.json:4521
 msgid ""
 "Driver specific block device options shared by all protocols supported by "
 "the curl backend."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4522
+#: ../../../../qapi/block-core.json:4524
 msgid "URL of the image file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4524
+#: ../../../../qapi/block-core.json:4526
 msgid ""
 "Size of the read-ahead cache; must be a multiple of 512 (defaults to 256 kB)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4527
+#: ../../../../qapi/block-core.json:4529
 msgid "Timeout for connections, in seconds (defaults to 5)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4529
+#: ../../../../qapi/block-core.json:4531
 msgid "Username for authentication (defaults to none)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4531
+#: ../../../../qapi/block-core.json:4533
 msgid ""
 "ID of a QCryptoSecret object providing a password for authentication "
 "(defaults to no password)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4534
+#: ../../../../qapi/block-core.json:4536
 msgid "Username for proxy authentication (defaults to none)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4537
+#: ../../../../qapi/block-core.json:4539
 msgid ""
 "ID of a QCryptoSecret object providing a password for proxy authentication "
 "(defaults to no password)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4554
+#: ../../../../qapi/block-core.json:4556
 msgid ""
 "Driver specific block device options for HTTP connections over the curl "
 "backend.  URLs must start with \"http://\"."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4557
+#: ../../../../qapi/block-core.json:4559
 msgid ""
 "List of cookies to set; format is \"name1=content1; name2=content2;\" as "
 "explained by CURLOPT_COOKIE(3).  Defaults to no cookies."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4561
+#: ../../../../qapi/block-core.json:4563
 msgid ""
 "ID of a QCryptoSecret object providing the cookie data in a secure way.  See "
 "``cookie`` for the format.  (since 2.10)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4564
+#: ../../../../qapi/block-core.json:4566
 msgid ""
 "Don't issue a HEAD HTTP request to discover if the http server supports "
 "range requests and rely only on GET requests.  This is especially useful for "
@@ -5931,58 +5935,58 @@ msgid ""
 "since 11.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4571 ../../../../qapi/block-core.json:4600
-#: ../../../../qapi/block-core.json:4615
+#: ../../../../qapi/block-core.json:4573 ../../../../qapi/block-core.json:4602
+#: ../../../../qapi/block-core.json:4617
 msgid "The members of :qapi:type:`BlockdevOptionsCurlBase`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4580
+#: ../../../../qapi/block-core.json:4582
 msgid ""
 "Driver specific block device options for HTTPS connections over the curl "
 "backend.  URLs must start with \"https://\"."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4583 ../../../../qapi/block-core.json:4610
+#: ../../../../qapi/block-core.json:4585 ../../../../qapi/block-core.json:4612
 msgid "Whether to verify the SSL certificate's validity (defaults to true)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4588
+#: ../../../../qapi/block-core.json:4590
 msgid "The members of :qapi:type:`BlockdevOptionsCurlHttp`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4595
+#: ../../../../qapi/block-core.json:4597
 msgid ""
 "Driver specific block device options for FTP connections over the curl "
 "backend.  URLs must start with \"ftp://\"."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4607
+#: ../../../../qapi/block-core.json:4609
 msgid ""
 "Driver specific block device options for FTPS connections over the curl "
 "backend.  URLs must start with \"ftps://\"."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4622
+#: ../../../../qapi/block-core.json:4624
 msgid "Driver specific block device options for NBD."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4624
+#: ../../../../qapi/block-core.json:4626
 msgid "NBD server address"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4626
+#: ../../../../qapi/block-core.json:4628
 msgid "export name"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4628
+#: ../../../../qapi/block-core.json:4630
 msgid "TLS credentials ID"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4630
+#: ../../../../qapi/block-core.json:4632
 msgid "TLS hostname override for certificate validation (Since 7.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4633
+#: ../../../../qapi/block-core.json:4635
 msgid ""
 "A metadata context name such as \"qemu:dirty-bitmap:NAME\" or \"qemu:"
 "allocation-depth\" to query in place of the traditional \"base:allocation\" "
@@ -5990,7 +5994,7 @@ msgid ""
 "naming this option x-context would have made more sense) (since 3.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4639
+#: ../../../../qapi/block-core.json:4641
 msgid ""
 "On an unexpected disconnect, the nbd client tries to connect again until "
 "succeeding or encountering a serious error.  During the first ``reconnect-"
@@ -5999,7 +6003,7 @@ msgid ""
 "before a successful reconnect will immediately fail.  Default 0 (Since 4.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4647
+#: ../../../../qapi/block-core.json:4649
 msgid ""
 "In seconds.  If zero, the nbd driver tries the connection only once, and "
 "fails to open if the connection fails. If non-zero, the nbd driver will "
@@ -6007,35 +6011,35 @@ msgid ""
 "seconds have elapsed. Default 0 (Since 7.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4655
+#: ../../../../qapi/block-core.json:4657
 msgid "Member ``x-dirty-bitmap`` is experimental."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4671
+#: ../../../../qapi/block-core.json:4673
 msgid "Driver specific block device options for the raw driver."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4673
+#: ../../../../qapi/block-core.json:4675
 msgid "position where the block device starts"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4675
+#: ../../../../qapi/block-core.json:4677
 msgid "the assumed size of the device"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4686
+#: ../../../../qapi/block-core.json:4688
 msgid "Driver specific block device options for the throttle driver"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4688
+#: ../../../../qapi/block-core.json:4690
 msgid "the name of the throttle-group object to use.  It must already exist."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4703
+#: ../../../../qapi/block-core.json:4705
 msgid "Driver specific block device options for the copy-on-read driver."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4705
+#: ../../../../qapi/block-core.json:4707
 msgid ""
 "The name of a non-filter node (allocation-bearing layer) that limits the COR "
 "operations in the backing chain (inclusive), so that no data below this node "
@@ -6043,26 +6047,26 @@ msgid ""
 "applied, so that data from all backing layers may be copied."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4720
+#: ../../../../qapi/block-core.json:4722
 msgid ""
 "An enumeration of possible behaviors for copy-before-write operation "
 "failures."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4723
+#: ../../../../qapi/block-core.json:4725
 msgid ""
 "report the error to the guest.  This way, the guest will not be able to "
 "overwrite areas that cannot be backed up, so the backup process remains "
 "valid."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4727
+#: ../../../../qapi/block-core.json:4729
 msgid ""
 "continue guest write.  Doing so will make the provided snapshot state "
 "invalid and any backup or export process based on it will finally fail."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4739
+#: ../../../../qapi/block-core.json:4741
 msgid ""
 "Driver specific block device options for the copy-before-write driver, which "
 "does so called copy-before-write operations: when data is written to the "
@@ -6072,11 +6076,11 @@ msgid ""
 "request is failed too and no data is written to file child."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4747
+#: ../../../../qapi/block-core.json:4749
 msgid "The target for copy-before-write operations."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4749
+#: ../../../../qapi/block-core.json:4751
 msgid ""
 "If specified, copy-before-write filter will do copy-before-write operations "
 "only for dirty regions of the bitmap.  Bitmap size must be equal to length "
@@ -6085,13 +6089,13 @@ msgid ""
 "removing) of specified bitmap doesn't influence the filter.  (Since 7.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4757
+#: ../../../../qapi/block-core.json:4759
 msgid ""
 "Behavior on failure of copy-before-write operation. Default is ``break-guest-"
 "write``.  (Since 7.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4760
+#: ../../../../qapi/block-core.json:4762
 msgid ""
 "Zero means no limit.  Non-zero sets the timeout in seconds for copy-before-"
 "write operation.  When a timeout occurs, the respective copy-before-write "
@@ -6099,20 +6103,20 @@ msgid ""
 "failure is handled. Default 0.  (Since 7.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4766
+#: ../../../../qapi/block-core.json:4768
 msgid ""
 "Minimum size of blocks used by copy-before-write operations.  Has to be a "
 "power of 2.  No effect if smaller than the maximum of the target's cluster "
 "size and 64 KiB.  Default 0. (Since 9.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4782
+#: ../../../../qapi/block-core.json:4784
 msgid ""
 "Options for creating a block device.  Many options are available for all "
 "block devices, independent of the block driver:"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4787
+#: ../../../../qapi/block-core.json:4789
 msgid ""
 "the node name of the new node.  This option is required on the top level of "
 "`blockdev-add`.  Valid node names start with an alphabetic character and may "
@@ -6120,15 +6124,15 @@ msgid ""
 "length is 31 characters.  (Since 2.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4793
+#: ../../../../qapi/block-core.json:4795
 msgid "discard-related options (default: ignore)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4795
+#: ../../../../qapi/block-core.json:4797
 msgid "cache-related options"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4797
+#: ../../../../qapi/block-core.json:4799
 msgid ""
 "whether the block node should be activated (default: true). Having inactive "
 "block nodes is useful primarily for migration because it allows opening an "
@@ -6136,7 +6140,7 @@ msgid ""
 "(Since 10.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4802
+#: ../../../../qapi/block-core.json:4804
 msgid ""
 "whether the block device should be read-only (default: false).  Note that "
 "some block drivers support only read-only access, either generally or in "
@@ -6144,7 +6148,7 @@ msgid ""
 "the option must be specified explicitly."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4808
+#: ../../../../qapi/block-core.json:4810
 msgid ""
 "if true and ``read-only`` is false, QEMU may automatically decide not to "
 "open the image read-write as requested, but fall back to read-only instead "
@@ -6153,314 +6157,314 @@ msgid ""
 "false, since 3.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4815
+#: ../../../../qapi/block-core.json:4817
 msgid "detect and optimize zero writes (Since 2.1) (default: off)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4818
+#: ../../../../qapi/block-core.json:4820
 msgid ""
 "force share all permission on added nodes.  Requires read-only=true.  (Since "
 "2.10)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``blkdebug``: The members of :qapi:type:"
 "`BlockdevOptionsBlkdebug`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``blklogwrites``: The members of :qapi:type:"
 "`BlockdevOptionsBlklogwrites`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``blkverify``: The members of :qapi:type:"
 "`BlockdevOptionsBlkverify`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``blkreplay``: The members of :qapi:type:"
 "`BlockdevOptionsBlkreplay`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``bochs``: The members of :qapi:type:"
 "`BlockdevOptionsGenericFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``cloop``: The members of :qapi:type:"
 "`BlockdevOptionsGenericFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``compress``: The members of :qapi:type:"
 "`BlockdevOptionsGenericFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``copy-before-write``: The members of :qapi:type:"
 "`BlockdevOptionsCbw`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``copy-on-read``: The members of :qapi:type:"
 "`BlockdevOptionsCor`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``dmg``: The members of :qapi:type:"
 "`BlockdevOptionsGenericFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``file``: The members of :qapi:type:`BlockdevOptionsFile`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``ftp``: The members of :qapi:type:"
 "`BlockdevOptionsCurlFtp`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``ftps``: The members of :qapi:type:"
 "`BlockdevOptionsCurlFtps`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``host_cdrom``: The members of :qapi:type:"
 "`BlockdevOptionsFile`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``host_device``: The members of :qapi:type:"
 "`BlockdevOptionsFile`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``http``: The members of :qapi:type:"
 "`BlockdevOptionsCurlHttp`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``https``: The members of :qapi:type:"
 "`BlockdevOptionsCurlHttps`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``io_uring``: The members of :qapi:type:"
 "`BlockdevOptionsIoUring`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``iscsi``: The members of :qapi:type:"
 "`BlockdevOptionsIscsi`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``luks``: The members of :qapi:type:`BlockdevOptionsLUKS`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``nbd``: The members of :qapi:type:`BlockdevOptionsNbd`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``nfs``: The members of :qapi:type:`BlockdevOptionsNfs`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``null-aio``: The members of :qapi:type:"
 "`BlockdevOptionsNull`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``null-co``: The members of :qapi:type:"
 "`BlockdevOptionsNull`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``nvme``: The members of :qapi:type:`BlockdevOptionsNVMe`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``nvme-io_uring``: The members of :qapi:type:"
 "`BlockdevOptionsNvmeIoUring`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``parallels``: The members of :qapi:type:"
 "`BlockdevOptionsGenericFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``preallocate``: The members of :qapi:type:"
 "`BlockdevOptionsPreallocate`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``qcow2``: The members of :qapi:type:"
 "`BlockdevOptionsQcow2`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``qcow``: The members of :qapi:type:`BlockdevOptionsQcow`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``qed``: The members of :qapi:type:"
 "`BlockdevOptionsGenericCOWFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``quorum``: The members of :qapi:type:"
 "`BlockdevOptionsQuorum`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``raw``: The members of :qapi:type:`BlockdevOptionsRaw`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``rbd``: The members of :qapi:type:`BlockdevOptionsRbd`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``replication``: The members of :qapi:type:"
 "`BlockdevOptionsReplication`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``snapshot-access``: The members of :qapi:type:"
 "`BlockdevOptionsGenericFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``ssh``: The members of :qapi:type:`BlockdevOptionsSsh`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``throttle``: The members of :qapi:type:"
 "`BlockdevOptionsThrottle`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``vdi``: The members of :qapi:type:"
 "`BlockdevOptionsGenericFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``vhdx``: The members of :qapi:type:"
 "`BlockdevOptionsGenericFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``virtio-blk-vfio-pci``: The members of :qapi:type:"
 "`BlockdevOptionsVirtioBlkVfioPci`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``virtio-blk-vhost-user``: The members of :qapi:type:"
 "`BlockdevOptionsVirtioBlkVhostUser`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``virtio-blk-vhost-vdpa``: The members of :qapi:type:"
 "`BlockdevOptionsVirtioBlkVhostVdpa`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``vmdk``: The members of :qapi:type:"
 "`BlockdevOptionsGenericCOWFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``vpc``: The members of :qapi:type:"
 "`BlockdevOptionsGenericFormat`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4823
+#: ../../../../qapi/block-core.json:4825
 msgid ""
 "When ``driver`` is ``vvfat``: The members of :qapi:type:"
 "`BlockdevOptionsVVFAT`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4897 ../../../../qapi/block-core.json:4912
+#: ../../../../qapi/block-core.json:4899 ../../../../qapi/block-core.json:4914
 msgid "Reference to a block device."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4899 ../../../../qapi/block-core.json:4914
+#: ../../../../qapi/block-core.json:4901 ../../../../qapi/block-core.json:4916
 msgid "defines a new block device inline"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4901
+#: ../../../../qapi/block-core.json:4903
 msgid "references the ID of an existing block device"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4916
+#: ../../../../qapi/block-core.json:4918
 msgid ""
 "references the ID of an existing block device.  An empty string means that "
 "no block device should be referenced. Deprecated; use null instead."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4920
+#: ../../../../qapi/block-core.json:4922
 msgid "No block device should be referenced (since 2.10)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4932
+#: ../../../../qapi/block-core.json:4934
 msgid "Creates a new block device."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4976
+#: ../../../../qapi/block-core.json:4978
 msgid "The members of :qapi:type:`BlockdevOptions`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4936
+#: ../../../../qapi/block-core.json:4938
 msgid ""
 "-> { \"execute\": \"blockdev-add\",\n"
 "     \"arguments\": {\n"
@@ -6475,7 +6479,7 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4950
+#: ../../../../qapi/block-core.json:4952
 msgid ""
 "-> { \"execute\": \"blockdev-add\",\n"
 "     \"arguments\": {\n"
@@ -6502,7 +6506,7 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4982
+#: ../../../../qapi/block-core.json:4984
 msgid ""
 "Reopens one or more block devices using the given set of options. Any option "
 "not specified will be reset to its default value regardless of its previous "
@@ -6512,7 +6516,7 @@ msgid ""
 "transaction is cancelled."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4990
+#: ../../../../qapi/block-core.json:4992
 msgid ""
 "The command receives a list of block devices to reopen.  For each one of "
 "them, the top-level ``node-name`` option (from `BlockdevOptions`) must be "
@@ -6522,58 +6526,58 @@ msgid ""
 "attempt to do it will result in an error."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:4998
+#: ../../../../qapi/block-core.json:5000
 msgid ""
 "In the case of options that refer to child nodes, the behavior of this "
 "command depends on the value:"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5001
+#: ../../../../qapi/block-core.json:5003
 msgid ""
 "A set of options (`BlockdevOptions`): the child is reopened with the "
 "specified set of options."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5004
+#: ../../../../qapi/block-core.json:5006
 msgid ""
 "A reference to the current child: the child is reopened using its existing "
 "set of options."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5007
+#: ../../../../qapi/block-core.json:5009
 msgid ""
 "A reference to a different node: the current child is replaced with the "
 "specified one."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5010
+#: ../../../../qapi/block-core.json:5012
 msgid "null: the current child (if any) is detached."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5012
+#: ../../../../qapi/block-core.json:5014
 msgid ""
 "Options (1) and (2) are supported in all cases.  Option (3) is supported for "
 "``file`` and ``backing``, and option (4) for ``backing`` only."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5015
+#: ../../../../qapi/block-core.json:5017
 msgid ""
 "Unlike with `blockdev-add`, the ``backing`` option must always be present "
 "unless the node being reopened does not have a backing file and its image "
 "does not have a default backing file name as part of its metadata."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5029
+#: ../../../../qapi/block-core.json:5031
 msgid ""
 "Deletes a block device that has been added using `blockdev-add`. The command "
 "will fail if the node is attached to a device or is otherwise being used."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5033
+#: ../../../../qapi/block-core.json:5035
 msgid "Name of the graph node to delete."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5037
+#: ../../../../qapi/block-core.json:5039
 msgid ""
 "-> { \"execute\": \"blockdev-add\",\n"
 "     \"arguments\": {\n"
@@ -6593,32 +6597,32 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5062
+#: ../../../../qapi/block-core.json:5064
 msgid ""
 "Activate or deactivate a block device.  Use this to manage the handover of "
 "block devices on migration with qemu-storage-daemon."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5065
+#: ../../../../qapi/block-core.json:5067
 msgid ""
 "Activating a node automatically activates all of its child nodes first.  "
 "Deactivating a node automatically deactivates any of its child nodes that "
 "are not in use by a still active node."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5069
+#: ../../../../qapi/block-core.json:5071
 msgid ""
 "Name of the graph node to activate or deactivate.  By default, all nodes are "
 "affected by the operation."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5072
+#: ../../../../qapi/block-core.json:5074
 msgid ""
 "true if the nodes should be active when the command returns success, false "
 "if they should be inactive."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5077
+#: ../../../../qapi/block-core.json:5079
 msgid ""
 "-> { \"execute\": \"blockdev-set-active\",\n"
 "     \"arguments\": {\n"
@@ -6629,242 +6633,242 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5094
+#: ../../../../qapi/block-core.json:5096
 msgid "Driver specific image creation options for file."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5096
+#: ../../../../qapi/block-core.json:5098
 msgid "Filename for the new image file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5098 ../../../../qapi/block-core.json:5128
-#: ../../../../qapi/block-core.json:5149 ../../../../qapi/block-core.json:5164
-#: ../../../../qapi/block-core.json:5182 ../../../../qapi/block-core.json:5242
-#: ../../../../qapi/block-core.json:5291 ../../../../qapi/block-core.json:5320
-#: ../../../../qapi/block-core.json:5377 ../../../../qapi/block-core.json:5424
-#: ../../../../qapi/block-core.json:5439 ../../../../qapi/block-core.json:5470
-#: ../../../../qapi/block-core.json:5514
+#: ../../../../qapi/block-core.json:5100 ../../../../qapi/block-core.json:5130
+#: ../../../../qapi/block-core.json:5151 ../../../../qapi/block-core.json:5166
+#: ../../../../qapi/block-core.json:5184 ../../../../qapi/block-core.json:5244
+#: ../../../../qapi/block-core.json:5293 ../../../../qapi/block-core.json:5322
+#: ../../../../qapi/block-core.json:5379 ../../../../qapi/block-core.json:5426
+#: ../../../../qapi/block-core.json:5441 ../../../../qapi/block-core.json:5472
+#: ../../../../qapi/block-core.json:5516
 msgid "Size of the virtual disk in bytes"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5100
+#: ../../../../qapi/block-core.json:5102
 msgid ""
 "Preallocation mode for the new image (default: off; allowed values: off, "
 "falloc (if CONFIG_POSIX_FALLOCATE), full (if CONFIG_POSIX))"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5104
+#: ../../../../qapi/block-core.json:5106
 msgid "Turn off copy-on-write (valid only on btrfs; default: off)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5106
+#: ../../../../qapi/block-core.json:5108
 msgid ""
 "Extent size hint to add to the image file; 0 for not adding an extent size "
 "hint (default: 1 MB, since 5.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5121
+#: ../../../../qapi/block-core.json:5123
 msgid "Driver specific image creation options for LUKS."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5123
+#: ../../../../qapi/block-core.json:5125
 msgid ""
 "Node to create the image format on, mandatory except when 'preallocation' is "
 "not requested"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5126
+#: ../../../../qapi/block-core.json:5128
 msgid "Block device holding a detached LUKS header.  (since 9.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5130
+#: ../../../../qapi/block-core.json:5132
 msgid ""
 "Preallocation mode for the new image (since: 4.2) (default: off; allowed "
 "values: off, metadata, falloc, full)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5135
+#: ../../../../qapi/block-core.json:5137
 msgid "The members of :qapi:type:`QCryptoBlockCreateOptionsLUKS`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5145
+#: ../../../../qapi/block-core.json:5147
 msgid "Driver specific image creation options for NFS."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5147 ../../../../qapi/block-core.json:5422
+#: ../../../../qapi/block-core.json:5149 ../../../../qapi/block-core.json:5424
 msgid "Where to store the new image file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5160
+#: ../../../../qapi/block-core.json:5162
 msgid "Driver specific image creation options for parallels."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5162 ../../../../qapi/block-core.json:5180
-#: ../../../../qapi/block-core.json:5229 ../../../../qapi/block-core.json:5289
-#: ../../../../qapi/block-core.json:5437 ../../../../qapi/block-core.json:5468
-#: ../../../../qapi/block-core.json:5512
+#: ../../../../qapi/block-core.json:5164 ../../../../qapi/block-core.json:5182
+#: ../../../../qapi/block-core.json:5231 ../../../../qapi/block-core.json:5291
+#: ../../../../qapi/block-core.json:5439 ../../../../qapi/block-core.json:5470
+#: ../../../../qapi/block-core.json:5514
 msgid "Node to create the image format on"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5166
+#: ../../../../qapi/block-core.json:5168
 msgid "Cluster size in bytes (default: 1 MB)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5178
+#: ../../../../qapi/block-core.json:5180
 msgid "Driver specific image creation options for qcow."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5184 ../../../../qapi/block-core.json:5246
-#: ../../../../qapi/block-core.json:5293
+#: ../../../../qapi/block-core.json:5186 ../../../../qapi/block-core.json:5248
+#: ../../../../qapi/block-core.json:5295
 msgid "File name of the backing file if a backing file should be used"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5187 ../../../../qapi/block-core.json:5251
+#: ../../../../qapi/block-core.json:5189 ../../../../qapi/block-core.json:5253
 msgid "Encryption options if the image should be encrypted"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5200
+#: ../../../../qapi/block-core.json:5202
 msgid "The original QCOW2 format as introduced in QEMU 0.10 (version 2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5203
+#: ../../../../qapi/block-core.json:5205
 msgid "The extended QCOW2 format as introduced in QEMU 1.1 (version 3)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5213
+#: ../../../../qapi/block-core.json:5215
 msgid "Compression type used in qcow2 image file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5215
+#: ../../../../qapi/block-core.json:5217
 msgid "zlib compression, see <http://zlib.net/>"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5217
+#: ../../../../qapi/block-core.json:5219
 msgid "zstd compression, see <http://github.com/facebook/zstd>"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5227
+#: ../../../../qapi/block-core.json:5229
 msgid "Driver specific image creation options for qcow2."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5231
+#: ../../../../qapi/block-core.json:5233
 msgid ""
 "Node to use as an external data file in which all guest data is stored so "
 "that only metadata remains in the qcow2 file (since: 4.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5235
+#: ../../../../qapi/block-core.json:5237
 msgid ""
 "True if the external data file must stay valid as a standalone (read-only) "
 "raw image without looking at qcow2 metadata (default: false; since: 4.0)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5239
+#: ../../../../qapi/block-core.json:5241
 msgid ""
 "True to make the image have extended L2 entries (default: false; since 5.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5244
+#: ../../../../qapi/block-core.json:5246
 msgid "Compatibility level (default: v3)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5249 ../../../../qapi/block-core.json:5296
+#: ../../../../qapi/block-core.json:5251 ../../../../qapi/block-core.json:5298
 msgid "Name of the block driver to use for the backing file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5253
+#: ../../../../qapi/block-core.json:5255
 msgid "qcow2 cluster size in bytes (default: 65536)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5255
+#: ../../../../qapi/block-core.json:5257
 msgid ""
 "Preallocation mode for the new image (default: off; allowed values: off, "
 "falloc, full, metadata)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5258
+#: ../../../../qapi/block-core.json:5260
 msgid "True if refcounts may be updated lazily (default: off)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5261
+#: ../../../../qapi/block-core.json:5263
 msgid "Width of reference counts in bits (default: 16)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5263
+#: ../../../../qapi/block-core.json:5265
 msgid "The image cluster compression method (default: zlib, since 5.1)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5287
+#: ../../../../qapi/block-core.json:5289
 msgid "Driver specific image creation options for qed."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5298
+#: ../../../../qapi/block-core.json:5300
 msgid "Cluster size in bytes (default: 65536)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5300
+#: ../../../../qapi/block-core.json:5302
 msgid "L1/L2 table size (in clusters)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5315
+#: ../../../../qapi/block-core.json:5317
 msgid "Driver specific image creation options for rbd/Ceph."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5317
+#: ../../../../qapi/block-core.json:5319
 msgid ""
 "Where to store the new image file.  This location cannot point to a snapshot."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5322
+#: ../../../../qapi/block-core.json:5324
 msgid "RBD object size"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5337
+#: ../../../../qapi/block-core.json:5339
 msgid "Subformat options for VMDK images"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5339
+#: ../../../../qapi/block-core.json:5341
 msgid "Single file image with sparse cluster allocation"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5341
+#: ../../../../qapi/block-core.json:5343
 msgid "Single flat data image and a descriptor file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5343
+#: ../../../../qapi/block-core.json:5345
 msgid ""
 "Data is split into 2GB (per virtual LBA) sparse extent files, in addition to "
 "a descriptor file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5346
+#: ../../../../qapi/block-core.json:5348
 msgid ""
 "Data is split into 2GB (per virtual LBA) flat extent files, in addition to a "
 "descriptor file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5349
+#: ../../../../qapi/block-core.json:5351
 msgid ""
 "Single file image sparse cluster allocation, optimized for streaming over "
 "network."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5361
+#: ../../../../qapi/block-core.json:5363
 msgid "Adapter type info for VMDK images"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5371
+#: ../../../../qapi/block-core.json:5373
 msgid "Driver specific image creation options for VMDK."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5373
+#: ../../../../qapi/block-core.json:5375
 msgid ""
 "Where to store the new image file.  This refers to the image file for "
 "monolithcSparse and streamOptimized format, or the descriptor file for other "
 "formats."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5379
+#: ../../../../qapi/block-core.json:5381
 msgid ""
 "Where to store the data extents.  Required for monolithcFlat, "
 "twoGbMaxExtentSparse and twoGbMaxExtentFlat formats.  For monolithicFlat, "
@@ -6873,271 +6877,271 @@ msgid ""
 "Providing more extents than will be used is an error."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5386
+#: ../../../../qapi/block-core.json:5388
 msgid "The subformat of the VMDK image.  Default: \"monolithicSparse\"."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5389
+#: ../../../../qapi/block-core.json:5391
 msgid "The path of backing file.  Default: no backing file is used."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5392
+#: ../../../../qapi/block-core.json:5394
 msgid "The adapter type used to fill in the descriptor. Default: ide."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5395
+#: ../../../../qapi/block-core.json:5397
 msgid ""
 "Hardware version.  The meaningful options are \"4\" or \"6\".  Default: "
 "\"4\"."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5398
+#: ../../../../qapi/block-core.json:5400
 msgid "VMware guest tools version.  Default: \"2147483647\" (Since 6.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5401
+#: ../../../../qapi/block-core.json:5403
 msgid ""
 "Whether to enable zeroed-grain feature for sparse subformats.  Default: "
 "false."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5420
+#: ../../../../qapi/block-core.json:5422
 msgid "Driver specific image creation options for SSH."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5435
+#: ../../../../qapi/block-core.json:5437
 msgid "Driver specific image creation options for VDI."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5441
+#: ../../../../qapi/block-core.json:5443
 msgid ""
 "Preallocation mode for the new image (default: off; allowed values: off, "
 "metadata)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5454 ../../../../qapi/block-core.json:5498
+#: ../../../../qapi/block-core.json:5456 ../../../../qapi/block-core.json:5500
 msgid "Growing image file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5456 ../../../../qapi/block-core.json:5500
+#: ../../../../qapi/block-core.json:5458 ../../../../qapi/block-core.json:5502
 msgid "Preallocated fixed-size image file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5466
+#: ../../../../qapi/block-core.json:5468
 msgid "Driver specific image creation options for vhdx."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5472
+#: ../../../../qapi/block-core.json:5474
 msgid "Log size in bytes, must be a multiple of 1 MB (default: 1 MB)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5475
+#: ../../../../qapi/block-core.json:5477
 msgid ""
 "Block size in bytes, must be a multiple of 1 MB and not larger than 256 MB "
 "(default: automatically choose a block size depending on the image size)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5479 ../../../../qapi/block-core.json:5516
+#: ../../../../qapi/block-core.json:5481 ../../../../qapi/block-core.json:5518
 msgid "vhdx subformat (default: dynamic)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5481
+#: ../../../../qapi/block-core.json:5483
 msgid ""
 "Force use of payload blocks of type 'ZERO'. Non-standard, but default.  Do "
 "not set to 'off' when using 'qemu-img convert' with subformat=dynamic."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5510
+#: ../../../../qapi/block-core.json:5512
 msgid "Driver specific image creation options for vpc (VHD)."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5518
+#: ../../../../qapi/block-core.json:5520
 msgid ""
 "Force use of the exact byte size instead of rounding to the next size that "
 "can be represented in CHS geometry (default: false)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5533
+#: ../../../../qapi/block-core.json:5535
 msgid "Options for creating an image format on a given node."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5535
+#: ../../../../qapi/block-core.json:5537
 msgid "block driver to create the image format"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``file``: The members of :qapi:type:"
 "`BlockdevCreateOptionsFile`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``luks``: The members of :qapi:type:"
 "`BlockdevCreateOptionsLUKS`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``nfs``: The members of :qapi:type:"
 "`BlockdevCreateOptionsNfs`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``parallels``: The members of :qapi:type:"
 "`BlockdevCreateOptionsParallels`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``qcow``: The members of :qapi:type:"
 "`BlockdevCreateOptionsQcow`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``qcow2``: The members of :qapi:type:"
 "`BlockdevCreateOptionsQcow2`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``qed``: The members of :qapi:type:"
 "`BlockdevCreateOptionsQed`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``rbd``: The members of :qapi:type:"
 "`BlockdevCreateOptionsRbd`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``ssh``: The members of :qapi:type:"
 "`BlockdevCreateOptionsSsh`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``vdi``: The members of :qapi:type:"
 "`BlockdevCreateOptionsVdi`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``vhdx``: The members of :qapi:type:"
 "`BlockdevCreateOptionsVhdx`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``vmdk``: The members of :qapi:type:"
 "`BlockdevCreateOptionsVmdk`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5539
+#: ../../../../qapi/block-core.json:5541
 msgid ""
 "When ``driver`` is ``vpc``: The members of :qapi:type:"
 "`BlockdevCreateOptionsVpc`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5562
+#: ../../../../qapi/block-core.json:5564
 msgid ""
 "Starts a job to create an image format on a given node.  The job is "
 "automatically finalized, but a manual `job-dismiss` is required."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5565 ../../../../qapi/block-core.json:5625
+#: ../../../../qapi/block-core.json:5567 ../../../../qapi/block-core.json:5627
 msgid "Identifier for the newly created job."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5567
+#: ../../../../qapi/block-core.json:5569
 msgid "Options for the image creation."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5579
+#: ../../../../qapi/block-core.json:5581
 msgid "Driver specific image amend options for LUKS."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5583
+#: ../../../../qapi/block-core.json:5585
 msgid "The members of :qapi:type:`QCryptoBlockAmendOptionsLUKS`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5591
+#: ../../../../qapi/block-core.json:5593
 msgid ""
 "Driver specific image amend options for qcow2.  For now, only encryption "
 "options can be amended"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5594
+#: ../../../../qapi/block-core.json:5596
 msgid "Encryption options to be amended"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5604
+#: ../../../../qapi/block-core.json:5606
 msgid "Options for amending an image format"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5606
+#: ../../../../qapi/block-core.json:5608
 msgid "Block driver of the node to amend."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5610
+#: ../../../../qapi/block-core.json:5612
 msgid ""
 "When ``driver`` is ``luks``: The members of :qapi:type:"
 "`BlockdevAmendOptionsLUKS`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5610
+#: ../../../../qapi/block-core.json:5612
 msgid ""
 "When ``driver`` is ``qcow2``: The members of :qapi:type:"
 "`BlockdevAmendOptionsQcow2`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5621
+#: ../../../../qapi/block-core.json:5623
 msgid ""
 "Starts a job to amend format specific options of an existing open block "
 "device.  The job is automatically finalized, but a manual `job-dismiss` is "
 "required."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5627
+#: ../../../../qapi/block-core.json:5629
 msgid "Name of the block node to work on"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5629
+#: ../../../../qapi/block-core.json:5631
 msgid "Options (driver specific)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5631
+#: ../../../../qapi/block-core.json:5633
 msgid ""
 "Allow unsafe operations, format specific.  For luks that allows erase of the "
 "last active keyslot (permanent loss of data), and replacement of an active "
 "keyslot (possible loss of data if IO error happens)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5638 ../../../../qapi/block-core.json:6024
+#: ../../../../qapi/block-core.json:5640 ../../../../qapi/block-core.json:6026
 msgid "This command is experimental."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5653
+#: ../../../../qapi/block-core.json:5655
 msgid "An enumeration of action that has been taken when a DISK I/O occurs"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5655
+#: ../../../../qapi/block-core.json:5657
 msgid "error has been ignored"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5657
+#: ../../../../qapi/block-core.json:5659
 msgid "error has been reported to the device"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5659
+#: ../../../../qapi/block-core.json:5661
 msgid "error caused VM to be stopped"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5669
+#: ../../../../qapi/block-core.json:5671
 msgid ""
 "Emitted when a disk image is being marked corrupt.  The image can be "
 "identified by its device or node name.  The 'device' field is always present "
@@ -7145,48 +7149,48 @@ msgid ""
 "have a device name associated."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5674 ../../../../qapi/block-core.json:5721
+#: ../../../../qapi/block-core.json:5676 ../../../../qapi/block-core.json:5723
 msgid ""
 "device name.  This is always present for compatibility reasons, but it can "
 "be empty (\"\") if the image does not have a device name associated."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5678
+#: ../../../../qapi/block-core.json:5680
 msgid "node name (Since: 2.4)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5680
+#: ../../../../qapi/block-core.json:5682
 msgid ""
 "informative message for human consumption, such as the kind of corruption "
 "being detected.  It should not be parsed by machine as it is not guaranteed "
 "to be stable"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5684
+#: ../../../../qapi/block-core.json:5686
 msgid ""
 "if the corruption resulted from an image access, this is the host's access "
 "offset into the image"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5687
+#: ../../../../qapi/block-core.json:5689
 msgid ""
 "if the corruption resulted from an image access, this is the access size"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5690
+#: ../../../../qapi/block-core.json:5692
 msgid ""
 "if set, the image is marked corrupt and therefore unusable after this event "
 "and must be repaired (Since 2.2; before, every `BLOCK_IMAGE_CORRUPTED` event "
 "was fatal)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5694 ../../../../qapi/block-core.json:5743
+#: ../../../../qapi/block-core.json:5696 ../../../../qapi/block-core.json:5745
 msgid ""
 "If action is \"stop\", a `STOP` event will eventually follow the "
 "`BLOCK_IO_ERROR` event."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5697
+#: ../../../../qapi/block-core.json:5699
 msgid ""
 "<- { \"event\": \"BLOCK_IMAGE_CORRUPTED\",\n"
 "     \"data\": { \"device\": \"\", \"node-name\": \"drive\", \"fatal\": "
@@ -7196,48 +7200,48 @@ msgid ""
 "     \"timestamp\": { \"seconds\": 1648243240, \"microseconds\": 906060 } }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5717
+#: ../../../../qapi/block-core.json:5719
 msgid "Emitted when a disk I/O error occurs"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5719
+#: ../../../../qapi/block-core.json:5721
 msgid "path to the device object in the QOM tree (since 9.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5725
+#: ../../../../qapi/block-core.json:5727
 msgid ""
 "node name.  Note that errors may be reported for the root node that is "
 "directly attached to a guest device rather than for the node where the error "
 "occurred.  The node name is not present if the drive is empty.  (Since: 2.8)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5730 ../../../../qapi/block-core.json:5849
+#: ../../../../qapi/block-core.json:5732 ../../../../qapi/block-core.json:5851
 msgid "I/O operation"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5732 ../../../../qapi/block-core.json:5851
+#: ../../../../qapi/block-core.json:5734 ../../../../qapi/block-core.json:5853
 msgid "action that has been taken"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5734
+#: ../../../../qapi/block-core.json:5736
 msgid ""
 "true if I/O error was caused due to a no-space condition. This key is only "
 "present if query-block's io-status is present, please see `query-block` "
 "documentation for more information (since: 2.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5739
+#: ../../../../qapi/block-core.json:5741
 msgid ""
 "human readable string describing the error cause.  (This field is a "
 "debugging aid for humans, it should not be parsed by applications) (since: "
 "2.2)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5746
+#: ../../../../qapi/block-core.json:5748
 msgid "This event is rate-limited, except if action is \"stop\"."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5750
+#: ../../../../qapi/block-core.json:5752
 msgid ""
 "<- { \"event\": \"BLOCK_IO_ERROR\",\n"
 "     \"data\": { \"qom-path\": \"/machine/unattached/device[0]\",\n"
@@ -7249,40 +7253,40 @@ msgid ""
 "     \"timestamp\": { \"seconds\": 1265044230, \"microseconds\": 450486 } }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5770
+#: ../../../../qapi/block-core.json:5772
 msgid "Emitted when a block job has completed"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5772 ../../../../qapi/block-core.json:5812
-#: ../../../../qapi/block-core.json:5873 ../../../../qapi/block-core.json:5912
+#: ../../../../qapi/block-core.json:5774 ../../../../qapi/block-core.json:5814
+#: ../../../../qapi/block-core.json:5875 ../../../../qapi/block-core.json:5914
 msgid "job type"
-msgstr ""
-
-#: ../../../../qapi/block-core.json:5777 ../../../../qapi/block-core.json:5817
-#: ../../../../qapi/block-core.json:5878
-msgid "maximum progress value"
 msgstr ""
 
 #: ../../../../qapi/block-core.json:5779 ../../../../qapi/block-core.json:5819
 #: ../../../../qapi/block-core.json:5880
+msgid "maximum progress value"
+msgstr ""
+
+#: ../../../../qapi/block-core.json:5781 ../../../../qapi/block-core.json:5821
+#: ../../../../qapi/block-core.json:5882
 msgid ""
 "current progress value.  On success this is equal to len. On failure this is "
 "less than len"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5782 ../../../../qapi/block-core.json:5822
-#: ../../../../qapi/block-core.json:5883
+#: ../../../../qapi/block-core.json:5784 ../../../../qapi/block-core.json:5824
+#: ../../../../qapi/block-core.json:5885
 msgid "rate limit, bytes per second"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5784
+#: ../../../../qapi/block-core.json:5786
 msgid ""
 "error message.  Only present on failure.  This field contains a human-"
 "readable error message.  There are no semantics other than that streaming "
 "has failed and clients should not try to interpret the error string"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5791
+#: ../../../../qapi/block-core.json:5793
 msgid ""
 "<- { \"event\": \"BLOCK_JOB_COMPLETED\",\n"
 "     \"data\": { \"type\": \"stream\", \"device\": \"virtio-disk0\",\n"
@@ -7291,11 +7295,11 @@ msgid ""
 "     \"timestamp\": { \"seconds\": 1267061043, \"microseconds\": 959568 } }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5810
+#: ../../../../qapi/block-core.json:5812
 msgid "Emitted when a block job has been cancelled"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5826
+#: ../../../../qapi/block-core.json:5828
 msgid ""
 "<- { \"event\": \"BLOCK_JOB_CANCELLED\",\n"
 "     \"data\": { \"type\": \"stream\", \"device\": \"virtio-disk0\",\n"
@@ -7304,11 +7308,11 @@ msgid ""
 "     \"timestamp\": { \"seconds\": 1267061043, \"microseconds\": 959568 } }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5844
+#: ../../../../qapi/block-core.json:5846
 msgid "Emitted when a block job encounters an error"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5855
+#: ../../../../qapi/block-core.json:5857
 msgid ""
 "<- { \"event\": \"BLOCK_JOB_ERROR\",\n"
 "     \"data\": { \"device\": \"ide0-hd1\",\n"
@@ -7317,17 +7321,17 @@ msgid ""
 "     \"timestamp\": { \"seconds\": 1265044230, \"microseconds\": 450486 } }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5871
+#: ../../../../qapi/block-core.json:5873
 msgid "Emitted when a block job is ready to complete"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5885
+#: ../../../../qapi/block-core.json:5887
 msgid ""
 "The \"ready to complete\" status is always reset by a `BLOCK_JOB_ERROR` "
 "event."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5890
+#: ../../../../qapi/block-core.json:5892
 msgid ""
 "<- { \"event\": \"BLOCK_JOB_READY\",\n"
 "     \"data\": { \"device\": \"drive0\", \"type\": \"mirror\", \"speed\": "
@@ -7336,46 +7340,46 @@ msgid ""
 "     \"timestamp\": { \"seconds\": 1265044230, \"microseconds\": 450486 } }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5907
+#: ../../../../qapi/block-core.json:5909
 msgid ""
 "Emitted when a block job is awaiting explicit authorization to finalize "
 "graph changes via `job-finalize`.  If this job is part of a transaction, it "
 "will not emit this event until the transaction has converged first."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5918
+#: ../../../../qapi/block-core.json:5920
 msgid ""
 "<- { \"event\": \"BLOCK_JOB_PENDING\",\n"
 "     \"data\": { \"type\": \"mirror\", \"id\": \"backup_1\" },\n"
 "     \"timestamp\": { \"seconds\": 1265044230, \"microseconds\": 450486 } }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5931
+#: ../../../../qapi/block-core.json:5933
 msgid "Preallocation mode of QEMU image file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5933
+#: ../../../../qapi/block-core.json:5935
 msgid "no preallocation"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5935
+#: ../../../../qapi/block-core.json:5937
 msgid "preallocate only for metadata"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5937
+#: ../../../../qapi/block-core.json:5939
 msgid ""
 "like ``full`` preallocation but allocate disk space by posix_fallocate() "
 "rather than writing data."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5940
+#: ../../../../qapi/block-core.json:5942
 msgid ""
 "preallocate all data by writing it to the device to ensure disk space is "
 "really available.  This data may or may not be zero, depending on the image "
 "format and storage.  ``full`` preallocation also sets up metadata correctly."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5953
+#: ../../../../qapi/block-core.json:5955
 msgid ""
 "Emitted when writes on block device reaches or exceeds the configured write "
 "threshold.  For thin-provisioned devices, this means the device should be "
@@ -7384,19 +7388,19 @@ msgid ""
 "threshold` command."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5959
+#: ../../../../qapi/block-core.json:5961
 msgid "graph node name on which the threshold was exceeded."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5961
+#: ../../../../qapi/block-core.json:5963
 msgid "amount of data which exceeded the threshold, in bytes."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5964
+#: ../../../../qapi/block-core.json:5966
 msgid "last configured threshold, in bytes."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5976
+#: ../../../../qapi/block-core.json:5978
 msgid ""
 "Change the write threshold for a block drive.  An event will be delivered if "
 "a write to this block drive crosses the configured threshold.  The threshold "
@@ -7404,23 +7408,23 @@ msgid ""
 "Setting the threshold to zero disables it."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5982
+#: ../../../../qapi/block-core.json:5984
 msgid ""
 "This is useful to transparently resize thin-provisioned drives without the "
 "guest OS noticing."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5985
+#: ../../../../qapi/block-core.json:5987
 msgid "graph node name on which the threshold must be set."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5987
+#: ../../../../qapi/block-core.json:5989
 msgid ""
 "configured threshold for the block device, bytes. Use 0 to disable the "
 "threshold."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:5992
+#: ../../../../qapi/block-core.json:5994
 msgid ""
 "-> { \"execute\": \"block-set-write-threshold\",\n"
 "     \"arguments\": { \"node-name\": \"mydev\",\n"
@@ -7428,11 +7432,11 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6006
+#: ../../../../qapi/block-core.json:6008
 msgid "Dynamically reconfigure the block driver state graph."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6008
+#: ../../../../qapi/block-core.json:6010
 msgid ""
 "Currently only supports adding and deleting quorum children.  A child will "
 "be added at the end of the list of children.  Its contents *must* be "
@@ -7441,15 +7445,15 @@ msgid ""
 "children following it."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6014
+#: ../../../../qapi/block-core.json:6016
 msgid "the id or name of the parent node."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6016
+#: ../../../../qapi/block-core.json:6018
 msgid "the name of a child to be deleted.  Mutually exclusive with ``node``."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6019
+#: ../../../../qapi/block-core.json:6021
 msgid "the name of the node to be added.  Mutually exclusive with ``child``."
 msgstr ""
 
@@ -7457,7 +7461,7 @@ msgstr ""
 msgid "Example: Add a new node to a quorum"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6033
+#: ../../../../qapi/block-core.json:6035
 msgid ""
 " -> { \"execute\": \"blockdev-add\",\n"
 "      \"arguments\": {\n"
@@ -7476,7 +7480,7 @@ msgstr ""
 msgid "Example: Delete a quorum's node"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6048
+#: ../../../../qapi/block-core.json:6050
 msgid ""
 " -> { \"execute\": \"x-blockdev-change\",\n"
 "      \"arguments\": { \"parent\": \"disk1\",\n"
@@ -7484,31 +7488,31 @@ msgid ""
 " <- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6066
+#: ../../../../qapi/block-core.json:6068
 msgid ""
 "Move ``node`` and its children into the ``iothread``.  If ``iothread`` is "
 "null then move ``node`` and its children into the main loop."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6069
+#: ../../../../qapi/block-core.json:6071
 msgid "The node must not be attached to a BlockBackend."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6071
+#: ../../../../qapi/block-core.json:6073
 msgid "the name of the block driver node"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6073
+#: ../../../../qapi/block-core.json:6075
 msgid "the name of the IOThread object or null for the main loop"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6075
+#: ../../../../qapi/block-core.json:6077
 msgid ""
 "true if the node and its children should be moved when a BlockBackend is "
 "already attached"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6080
+#: ../../../../qapi/block-core.json:6082
 msgid ""
 "This command is experimental and intended for test cases that need control "
 "over IOThreads only."
@@ -7518,7 +7522,7 @@ msgstr ""
 msgid "Example: Move a node into an IOThread"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6085
+#: ../../../../qapi/block-core.json:6087
 msgid ""
 " -> { \"execute\": \"x-blockdev-set-iothread\",\n"
 "      \"arguments\": { \"node-name\": \"disk1\",\n"
@@ -7530,7 +7534,7 @@ msgstr ""
 msgid "Example: Move a node into the main loop"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6093
+#: ../../../../qapi/block-core.json:6095
 msgid ""
 " -> { \"execute\": \"x-blockdev-set-iothread\",\n"
 "      \"arguments\": { \"node-name\": \"disk1\",\n"
@@ -7538,36 +7542,36 @@ msgid ""
 " <- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6111
+#: ../../../../qapi/block-core.json:6113
 msgid "An enumeration of the quorum operation types"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6117
+#: ../../../../qapi/block-core.json:6119
 msgid "flush operation"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6127
+#: ../../../../qapi/block-core.json:6129
 msgid "Emitted by the Quorum block driver if it fails to establish a quorum"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6129
+#: ../../../../qapi/block-core.json:6131
 msgid "device name if defined else node name"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6131 ../../../../qapi/block-core.json:6162
+#: ../../../../qapi/block-core.json:6133 ../../../../qapi/block-core.json:6164
 msgid "number of the first sector of the failed read operation"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6133 ../../../../qapi/block-core.json:6164
+#: ../../../../qapi/block-core.json:6135 ../../../../qapi/block-core.json:6166
 msgid "failed read operation sector count"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6135 ../../../../qapi/block-core.json:6166
+#: ../../../../qapi/block-core.json:6137 ../../../../qapi/block-core.json:6168
 #: ../../../../qapi/char.json:903
 msgid "This event is rate-limited."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6139
+#: ../../../../qapi/block-core.json:6141
 msgid ""
 "<- { \"event\": \"QUORUM_FAILURE\",\n"
 "     \"data\": { \"reference\": \"usr1\", \"sector-num\": 345435, \"sectors-"
@@ -7575,15 +7579,15 @@ msgid ""
 "     \"timestamp\": { \"seconds\": 1344522075, \"microseconds\": 745528 } }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6151
+#: ../../../../qapi/block-core.json:6153
 msgid "Emitted to report a corruption of a Quorum file"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6153
+#: ../../../../qapi/block-core.json:6155
 msgid "quorum operation type (Since 2.6)"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6155
+#: ../../../../qapi/block-core.json:6157
 msgid ""
 "error message.  Only present on failure.  This field contains a human-"
 "readable error message.  There are no semantics other than that the block "
@@ -7591,7 +7595,7 @@ msgid ""
 "string."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6160
+#: ../../../../qapi/block-core.json:6162
 msgid "the graph node name of the block driver state"
 msgstr ""
 
@@ -7599,7 +7603,7 @@ msgstr ""
 msgid "Example: Read operation"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6170
+#: ../../../../qapi/block-core.json:6172
 msgid ""
 " <- { \"event\": \"QUORUM_REPORT_BAD\",\n"
 "      \"data\": { \"node-name\": \"node0\", \"sector-num\": 345435, "
@@ -7612,7 +7616,7 @@ msgstr ""
 msgid "Example: Flush operation"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6178
+#: ../../../../qapi/block-core.json:6180
 msgid ""
 " <- { \"event\": \"QUORUM_REPORT_BAD\",\n"
 "      \"data\": { \"node-name\": \"node0\", \"sector-num\": 0, \"sectors-"
@@ -7621,48 +7625,48 @@ msgid ""
 "      \"timestamp\": { \"seconds\": 1456406829, \"microseconds\": 291763 } }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6193
+#: ../../../../qapi/block-core.json:6195
 msgid ""
 "the device name or node-name of a root node to generate the snapshot from"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6196
+#: ../../../../qapi/block-core.json:6198
 msgid "the name of the internal snapshot to be created"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6206
+#: ../../../../qapi/block-core.json:6208
 msgid ""
 "Synchronously take an internal snapshot of a block device, when the format "
 "of the image used supports it.  If the name is an empty string, or a "
 "snapshot with name already exists, the operation will fail."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6231
+#: ../../../../qapi/block-core.json:6233
 msgid "The members of :qapi:type:`BlockdevSnapshotInternal`."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6211
+#: ../../../../qapi/block-core.json:6213
 msgid ""
 "- If ``device`` is not a valid block device, GenericError - If any snapshot "
 "matching ``name`` exists, or ``name`` is empty,   GenericError - If the "
 "format of the image used does not support it,   GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6213
+#: ../../../../qapi/block-core.json:6215
 msgid ""
 "If any snapshot matching ``name`` exists, or ``name`` is empty, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6215 ../../../../qapi/block-core.json:6253
+#: ../../../../qapi/block-core.json:6217 ../../../../qapi/block-core.json:6255
 msgid "If the format of the image used does not support it, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6218
+#: ../../../../qapi/block-core.json:6220
 msgid ""
 "Only some image formats such as qcow2 and rbd support internal snapshots."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6223
+#: ../../../../qapi/block-core.json:6225
 msgid ""
 "-> { \"execute\": \"blockdev-snapshot-internal-sync\",\n"
 "     \"arguments\": { \"device\": \"ide-hd0\",\n"
@@ -7671,7 +7675,7 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6238
+#: ../../../../qapi/block-core.json:6240
 msgid ""
 "Synchronously delete an internal snapshot of a block device, when the format "
 "of the image used support it.  The snapshot is identified by name or id or "
@@ -7679,34 +7683,34 @@ msgid ""
 "successfully deleted snapshot."
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6243
+#: ../../../../qapi/block-core.json:6245
 msgid "the device name or node-name of a root node to delete the snapshot from"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6246
+#: ../../../../qapi/block-core.json:6248
 msgid "optional the snapshot's ID to be deleted"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6248
+#: ../../../../qapi/block-core.json:6250
 msgid "optional the snapshot's name to be deleted"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6250
+#: ../../../../qapi/block-core.json:6252
 msgid ""
 "- If ``device`` is not a valid block device, GenericError - If snapshot not "
 "found, GenericError - If the format of the image used does not support it,   "
 "GenericError - If ``id`` and ``name`` are both not specified, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6252
+#: ../../../../qapi/block-core.json:6254
 msgid "If snapshot not found, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6255
+#: ../../../../qapi/block-core.json:6257
 msgid "If ``id`` and ``name`` are both not specified, GenericError"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6259
+#: ../../../../qapi/block-core.json:6261
 msgid ""
 "-> { \"execute\": \"blockdev-snapshot-delete-internal-sync\",\n"
 "     \"arguments\": { \"device\": \"ide-hd0\",\n"
@@ -7725,7 +7729,7 @@ msgid ""
 "   }"
 msgstr ""
 
-#: ../../../../qapi/block-core.json:6285
+#: ../../../../qapi/block-core.json:6287
 msgid "Not used by QMP; hack to let us use BlockGraphInfoList internally"
 msgstr ""
 
@@ -10002,11 +10006,6 @@ msgstr ""
 msgid "the value of the property.  Absent when the property cannot be read."
 msgstr ""
 
-#: ../../../../qapi/qom.json:61 ../../../../qapi/qom.json:73
-#: ../../../../qapi/qom.json:170
-msgid "Since 10.1"
-msgstr ""
-
 #: ../../../../qapi/qom.json:71
 msgid "a list of properties."
 msgstr ""
@@ -10917,32 +10916,38 @@ msgid ""
 "page for measured boot with -kernel (default: false) (since 6.2)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1022 ../../../../qapi/qom.json:1155
+#: ../../../../qapi/qom.json:1020
+msgid ""
+"enable virtualization of debug registers, only supported on SEV-ES and SEV-"
+"SNP guests (default: false) (since 11.1)"
+msgstr ""
+
+#: ../../../../qapi/qom.json:1026 ../../../../qapi/qom.json:1168
 msgid ""
 "If present, the hypervisor supports confidential guest resets (since 11.0)."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1037
+#: ../../../../qapi/qom.json:1042
 msgid "Properties for sev-guest objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1039
+#: ../../../../qapi/qom.json:1044
 msgid "guest owners DH certificate (encoded with base64)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1041
+#: ../../../../qapi/qom.json:1046
 msgid "guest owners session parameters (encoded with base64)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1043
+#: ../../../../qapi/qom.json:1048
 msgid "SEV policy value (default: 0x1)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1045
+#: ../../../../qapi/qom.json:1050
 msgid "SEV firmware handle (default: 0)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1047
+#: ../../../../qapi/qom.json:1052
 msgid ""
 "Use legacy KVM_SEV_INIT KVM interface for creating the VM.  The newer "
 "KVM_SEV_INIT2 interface, from Linux >= 6.10, syncs additional vCPU state "
@@ -10955,11 +10960,11 @@ msgid ""
 "off) (since 9.1)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1060 ../../../../qapi/qom.json:1113
+#: ../../../../qapi/qom.json:1065 ../../../../qapi/qom.json:1124
 msgid "The members of :qapi:type:`SevCommonProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1071
+#: ../../../../qapi/qom.json:1076
 msgid ""
 "Properties for sev-snp-guest objects.  Most of these are direct arguments "
 "for the KVM_SNP_* interfaces documented in the Linux kernel source under "
@@ -10968,53 +10973,53 @@ msgid ""
 "SEV-SNP Firmware ABI Specification (Rev 0.9)."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1078
+#: ../../../../qapi/qom.json:1083
 msgid ""
 "More usage information is also available in the QEMU source tree under docs/"
 "amd-memory-encryption."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1081
+#: ../../../../qapi/qom.json:1086
 msgid ""
 "the 'POLICY' parameter to the SNP_LAUNCH_START command, as defined in the "
 "SEV-SNP firmware ABI (default: 0x30000)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1084
+#: ../../../../qapi/qom.json:1089
 msgid ""
 "16-byte, base64-encoded blob to report hypervisor-defined workarounds, "
 "corresponding to the 'GOSVW' parameter of the SNP_LAUNCH_START command "
 "defined in the SEV-SNP firmware ABI (default: all-zero)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1089
+#: ../../../../qapi/qom.json:1094
 msgid ""
 "96-byte, base64-encoded blob to provide the 'ID Block' structure for the "
 "SNP_LAUNCH_FINISH command defined in the SEV-SNP firmware ABI (default: all-"
 "zero)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1093
+#: ../../../../qapi/qom.json:1098
 msgid ""
 "4096-byte, base64-encoded blob to provide the 'ID Authentication Information "
 "Structure' for the SNP_LAUNCH_FINISH command defined in the SEV-SNP firmware "
 "ABI (default: all-zero)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1097
+#: ../../../../qapi/qom.json:1102
 msgid ""
 "true if 'id-auth' blob contains the 'AUTHOR_KEY' field defined SEV-SNP "
 "firmware ABI (default: false)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1100
+#: ../../../../qapi/qom.json:1105
 msgid ""
 "32-byte, base64-encoded, user-defined blob to provide to the guest, as "
 "documented for the 'HOST_DATA' parameter of the SNP_LAUNCH_FINISH command in "
 "the SEV-SNP firmware ABI (default: all-zero)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1105
+#: ../../../../qapi/qom.json:1110
 msgid ""
 "Guests are by default allowed to choose between VLEK (Versioned Loaded "
 "Endorsement Key) or VCEK (Versioned Chip Endorsement Key) when requesting "
@@ -11022,58 +11027,68 @@ msgid ""
 "VCEK. (default: false) (since: 9.1)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1127
+#: ../../../../qapi/qom.json:1116
+msgid "enable Secure TSC (default: false) (since 11.1)"
+msgstr ""
+
+#: ../../../../qapi/qom.json:1119
+msgid ""
+"set secure TSC frequency.  Only valid if Secure TSC is enabled (default: "
+"zero) (since 11.1)"
+msgstr ""
+
+#: ../../../../qapi/qom.json:1140
 msgid "Properties for tdx-guest objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1129
+#: ../../../../qapi/qom.json:1142
 msgid "The 'attributes' of a TD guest that is passed to KVM_TDX_INIT_VM"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1132
+#: ../../../../qapi/qom.json:1145
 msgid ""
 "toggle bit 28 of TD attributes to control disabling of EPT violation "
 "conversion to #VE on guest TD access of PENDING pages.  Some guest OS (e.g., "
 "Linux TD guest) may require this to be set, otherwise they refuse to boot."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1137
+#: ../../../../qapi/qom.json:1150
 msgid ""
 "ID for non-owner-defined configuration of the guest TD, e.g., run-time or OS "
 "configuration (base64 encoded SHA384 digest).  Defaults to all zeros."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1141
+#: ../../../../qapi/qom.json:1154
 msgid ""
 "ID for the guest TD’s owner (base64 encoded SHA384 digest).  Defaults to all "
 "zeros."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1144
+#: ../../../../qapi/qom.json:1157
 msgid ""
 "ID for owner-defined configuration of the guest TD, e.g., specific to the "
 "workload rather than the run-time or OS (base64 encoded SHA384 digest).  "
 "Defaults to all zeros."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1148
+#: ../../../../qapi/qom.json:1161
 msgid ""
 "socket address for Quote Generation Service (QGS).  QGS is a daemon running "
 "on the host.  Without it, the guest will not be able to get a TD quote for "
 "attestation."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1172
+#: ../../../../qapi/qom.json:1185
 msgid "Properties for thread context objects."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1174
+#: ../../../../qapi/qom.json:1187
 msgid ""
 "the list of host CPU numbers used as CPU affinity for all threads created in "
 "the thread context (default: QEMU main thread CPU affinity)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1178
+#: ../../../../qapi/qom.json:1191
 msgid ""
 "the list of host node numbers that will be resolved to a list of host CPU "
 "numbers used as CPU affinity.  This is a shortcut for specifying the list of "
@@ -11081,386 +11096,386 @@ msgid ""
 "affinity``. (default: QEMU main thread affinity)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1193
+#: ../../../../qapi/qom.json:1206
 msgid "Properties for all monitors"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1195
+#: ../../../../qapi/qom.json:1208
 msgid "ID of the character device providing the monitor transport"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1205
+#: ../../../../qapi/qom.json:1218
 msgid "Properties for the HMP monitor"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1207
+#: ../../../../qapi/qom.json:1220
 msgid "whether to enable readline for line editing (default: true)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1212 ../../../../qapi/qom.json:1244
+#: ../../../../qapi/qom.json:1225 ../../../../qapi/qom.json:1257
 msgid "The members of :qapi:type:`MonitorProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1220
+#: ../../../../qapi/qom.json:1233
 msgid "Action to take when the character device backend is closed."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1222
+#: ../../../../qapi/qom.json:1235
 msgid "take no action"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1224
+#: ../../../../qapi/qom.json:1237
 msgid ""
 "delete both the 'monitor-qmp' object and its associated character device "
 "backend object"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1235
+#: ../../../../qapi/qom.json:1248
 msgid "Properties for the QMP monitor"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1237
+#: ../../../../qapi/qom.json:1250
 msgid "whether to pretty print JSON responses (default: false)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1239
+#: ../../../../qapi/qom.json:1252
 msgid ""
 "action to take when the character device backend is closed (default: none)"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1254
+#: ../../../../qapi/qom.json:1267
 msgid ""
 "Members ``x-remote-object`` and ``x-vfio-user-server`` are experimental."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1329
+#: ../../../../qapi/qom.json:1342
 msgid "Describes the options of a user creatable QOM object."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1331
+#: ../../../../qapi/qom.json:1344
 msgid "the class name for the object to be created"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1333
+#: ../../../../qapi/qom.json:1346
 msgid "the name of the new object"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``acpi-generic-initiator``: The members of :qapi:type:"
 "`AcpiGenericInitiatorProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``acpi-generic-port``: The members of :qapi:type:"
 "`AcpiGenericPortProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``authz-list``: The members of :qapi:type:"
 "`AuthZListProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``authz-listfile``: The members of :qapi:type:"
 "`AuthZListFileProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``authz-pam``: The members of :qapi:type:"
 "`AuthZPAMProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``authz-simple``: The members of :qapi:type:"
 "`AuthZSimpleProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``can-host-socketcan``: The members of :qapi:type:"
 "`CanHostSocketcanProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``colo-compare``: The members of :qapi:type:"
 "`ColoCompareProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``cryptodev-backend``: The members of :qapi:type:"
 "`CryptodevBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``cryptodev-backend-builtin``: The members of :qapi:"
 "type:`CryptodevBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``cryptodev-backend-lkcf``: The members of :qapi:type:"
 "`CryptodevBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``cryptodev-vhost-user``: The members of :qapi:type:"
 "`CryptodevVhostUserProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``dbus-vmstate``: The members of :qapi:type:"
 "`DBusVMStateProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``filter-buffer``: The members of :qapi:type:"
 "`FilterBufferProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``filter-dump``: The members of :qapi:type:"
 "`FilterDumpProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``filter-mirror``: The members of :qapi:type:"
 "`FilterMirrorProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``filter-redirector``: The members of :qapi:type:"
 "`FilterRedirectorProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``filter-replay``: The members of :qapi:type:"
 "`NetfilterProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``filter-rewriter``: The members of :qapi:type:"
 "`FilterRewriterProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``igvm-cfg``: The members of :qapi:type:"
 "`IgvmCfgProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``input-barrier``: The members of :qapi:type:"
 "`InputBarrierProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``input-linux``: The members of :qapi:type:"
 "`InputLinuxProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``iommufd``: The members of :qapi:type:"
 "`IOMMUFDProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``iothread``: The members of :qapi:type:"
 "`IothreadProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``main-loop``: The members of :qapi:type:"
 "`MainLoopProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``memory-backend-epc``: The members of :qapi:type:"
 "`MemoryBackendEpcProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``memory-backend-file``: The members of :qapi:type:"
 "`MemoryBackendFileProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``memory-backend-memfd``: The members of :qapi:type:"
 "`MemoryBackendMemfdProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``memory-backend-ram``: The members of :qapi:type:"
 "`MemoryBackendProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``memory-backend-shm``: The members of :qapi:type:"
 "`MemoryBackendShmProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``monitor-hmp``: The members of :qapi:type:"
 "`MonitorHMPProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``monitor-qmp``: The members of :qapi:type:"
 "`MonitorQMPProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``pr-manager-helper``: The members of :qapi:type:"
 "`PrManagerHelperProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``qtest``: The members of :qapi:type:`QtestProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``rng-builtin``: The members of :qapi:type:"
 "`RngProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``rng-egd``: The members of :qapi:type:"
 "`RngEgdProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``rng-random``: The members of :qapi:type:"
 "`RngRandomProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``secret``: The members of :qapi:type:"
 "`SecretProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``secret_keyring``: The members of :qapi:type:"
 "`SecretKeyringProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``sev-guest``: The members of :qapi:type:"
 "`SevGuestProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``sev-snp-guest``: The members of :qapi:type:"
 "`SevSnpGuestProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``tdx-guest``: The members of :qapi:type:"
 "`TdxGuestProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``thread-context``: The members of :qapi:type:"
 "`ThreadContextProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``throttle-group``: The members of :qapi:type:"
 "`ThrottleGroupProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``tls-creds-anon``: The members of :qapi:type:"
 "`TlsCredsAnonProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``tls-creds-psk``: The members of :qapi:type:"
 "`TlsCredsPskProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``tls-creds-x509``: The members of :qapi:type:"
 "`TlsCredsX509Properties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``tls-cipher-suites``: The members of :qapi:type:"
 "`TlsCredsProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``x-remote-object``: The members of :qapi:type:"
 "`RemoteObjectProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1337
+#: ../../../../qapi/qom.json:1350
 msgid ""
 "When ``qom-type`` is ``x-vfio-user-server``: The members of :qapi:type:"
 "`VfioUserServerProperties`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1407
+#: ../../../../qapi/qom.json:1420
 msgid "Create a QOM object."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1421
+#: ../../../../qapi/qom.json:1434
 msgid "The members of :qapi:type:`ObjectOptions`."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1409
+#: ../../../../qapi/qom.json:1422
 msgid "- If ``qom-type`` is not a valid class name"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1410
+#: ../../../../qapi/qom.json:1423
 msgid "If ``qom-type`` is not a valid class name"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1414
+#: ../../../../qapi/qom.json:1427
 msgid ""
 "-> { \"execute\": \"object-add\",\n"
 "     \"arguments\": { \"qom-type\": \"rng-random\", \"id\": \"rng1\",\n"
@@ -11468,23 +11483,23 @@ msgid ""
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1427
+#: ../../../../qapi/qom.json:1440
 msgid "Remove a QOM object."
 msgstr ""
 
-#: ../../../../qapi/qom.json:1429
+#: ../../../../qapi/qom.json:1442
 msgid "the name of the QOM object to remove"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1431
+#: ../../../../qapi/qom.json:1444
 msgid "- If ``id`` is not a valid id for a QOM object"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1432
+#: ../../../../qapi/qom.json:1445
 msgid "If ``id`` is not a valid id for a QOM object"
 msgstr ""
 
-#: ../../../../qapi/qom.json:1436
+#: ../../../../qapi/qom.json:1449
 msgid ""
 "-> { \"execute\": \"object-del\", \"arguments\": { \"id\": \"rng1\" } }\n"
 "<- { \"return\": {} }"
