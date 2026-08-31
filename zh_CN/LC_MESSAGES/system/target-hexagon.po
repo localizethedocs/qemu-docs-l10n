@@ -1,0 +1,177 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-09 04:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/target-hexagon.rst:6
+msgid "Hexagon System emulator"
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:8
+msgid ""
+"Use the ``qemu-system-hexagon`` executable to simulate a 32-bit Hexagon "
+"machine."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:12
+msgid "Hexagon Machines"
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:14
+msgid ""
+"Hexagon DSPs are suited to various functions and generally appear in a \"DSP "
+"subsystem\" of a larger system-on-chip (SoC)."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:17
+msgid ""
+"Hexagon DSPs are often included in a subsystem that looks like the diagram "
+"below.  Instructions are loaded into DDR before the DSP is brought out of "
+"reset and the first instructions are fetched from DDR via the EVB/reset "
+"vector."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:21
+msgid ""
+"In a real system, a TBU/SMMU would normally arbitrate AXI accesses but we "
+"don't have a need to model that for QEMU."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:24
+msgid ""
+"Hexagon DSP cores use simultaneous multithreading (SMT) with as many as 8 "
+"hardware threads."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:27
+msgid "Diagram"
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:29
+msgid ""
+"       AHB (local) bus                     AXI (global) bus\n"
+"             │                                 │\n"
+"             │                                 │\n"
+"┌─────────┐  │       ┌─────────────────┐       │\n"
+"│ L2VIC   ├──┤       │                 │       │\n"
+"│         ├──┼───────►                 ├───────┤\n"
+"└─────▲───┘  │       │   Hexagon DSP   │       │\n"
+"      │      │       │                 │       │        ┌─────┐\n"
+"      │      │       │    N threads    │       │        │ DDR │\n"
+"      │      ├───────┤                 │       │        │     │\n"
+" ┌────┴──┐   │       │                 │       ├────────┤     │\n"
+" │QTimer ├───┤       │                 │       │        │     │\n"
+" │       │   │       │                 │       │        │     │\n"
+" └───────┘   │       │   ┌─────────┐   │       │        │     │\n"
+"             │       │  ┌─────────┐│   │       │        │     │\n"
+" ┌───────┐   │       │  │  HVX xM ││   │       │        │     │\n"
+" │QDSP6SS├───┤       │  │         │┘   │       │        │     │\n"
+" └───────┘   │       │  └─────────┘    │       │        └─────┘\n"
+"             │       │                 │       │\n"
+" ┌───────┐   │       └─────────────────┘       │\n"
+" │  CSR  ├───┤\n"
+" └───────┘   │   ┌──────┐   ┌───────────┐\n"
+"             │   │ TCM  │   │   VTCM    │\n"
+"                 │      │   │           │\n"
+"                 └──────┘   │           │\n"
+"                            │           │\n"
+"                            │           │\n"
+"                            │           │\n"
+"                            └───────────┘"
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:62
+msgid "Components"
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:63
+msgid ""
+"Other than l2vic and HVX, the components below are not implemented in QEMU."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:65
+msgid ""
+"L2VIC: the L2 vectored interrupt controller.  Supports 1024 input "
+"interrupts, edge- or level-triggered.  The core ISA has system registers "
+"``VID``, ``VID1`` which read through to the L2VIC device."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:68
+msgid ""
+"QTimer: ARMSSE-based programmable timer device. Its interrupts are wired to "
+"the L2VIC.  System registers ``TIMER``, ``UTIMER`` read through to the "
+"QTimer device."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:71
+msgid ""
+"QDSP6SS: DSP subsystem features, accessible to the entire SoC, including DSP "
+"NMI, watchdog, reset, etc."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:73
+msgid "CSR: Configuration/Status Registers."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:74
+msgid ""
+"TCM: DSP-exclusive tightly-coupled memory.  This memory can be used for DSPs "
+"when isolated from DDR and in some bootstrapping modes."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:76
+msgid ""
+"VTCM: DSP-exclusive vector tightly-coupled memory.  This memory is accessed "
+"by some HVX instructions."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:78
+msgid ""
+"HVX: the vector coprocessor supports 64 and 128-byte vector registers. 64-"
+"byte mode is not implemented in QEMU."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:83
+msgid "Bootstrapping"
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:84
+msgid ""
+"Hexagon systems do not generally have access to a block device.  So, for "
+"QEMU the typical use case involves loading a binary or ELF file into memory "
+"and executing from the indicated start address::"
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:88
+msgid "$ qemu-system-hexagon -kernel ./prog -append 'arg1 arg2'"
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:91
+msgid "Semihosting"
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:92
+msgid ""
+"Hexagon supports a semihosting interface similar to other architectures'. "
+"The ``trap0`` instruction can activate these semihosting calls so that the "
+"guest software can access the host console and filesystem.  Semihosting is "
+"not yet implemented in QEMU hexagon."
+msgstr ""
+
+#: ../../../system/target-hexagon.rst:99
+msgid "Hexagon Features"
+msgstr ""
