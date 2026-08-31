@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-08-31 17:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -142,15 +142,18 @@ msgid ""
 "written to by the guest when it crashes, HV_X64_MSR_CRASH_P0.."
 "HV_X64_MSR_CRASH_P5 MSRs contain additional crash information. This "
 "information is outputted in QEMU log and through QAPI. Note: unlike under "
-"genuine Hyper-V, write to HV_X64_MSR_CRASH_CTL causes guest to shutdown. "
-"This effectively blocks crash dump generation by Windows."
+"genuine Hyper-V, write to HV_X64_MSR_CRASH_CTL triggers "
+"``qemu_system_guest_panicked()`` via ``KVM_SYSTEM_EVENT_CRASH`` and the "
+"resulting action depends on the ``-action panic=...`` policy (default: "
+"``shutdown``). With the default action, this effectively blocks crash dump "
+"generation by Windows."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:77
+#: ../../../system/i386/hyperv.rst:80
 msgid "``hv-time``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:78
+#: ../../../system/i386/hyperv.rst:81
 msgid ""
 "Enables two Hyper-V-specific clocksources available to the guest: MSR-based "
 "Hyper-V clocksource (HV_X64_MSR_TIME_REF_COUNT, 0x40000020) and Reference "
@@ -160,11 +163,11 @@ msgid ""
 "speedup of all timestamp related operations."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:85
+#: ../../../system/i386/hyperv.rst:88
 msgid "``hv-synic``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:86
+#: ../../../system/i386/hyperv.rst:89
 msgid ""
 "Enables Hyper-V Synthetic interrupt controller - an extension of a local "
 "APIC. When enabled, this enlightenment provides additional communication "
@@ -176,16 +179,16 @@ msgid ""
 "(0x40000090..0x4000009F)"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:94 ../../../system/i386/hyperv.rst:115
-#: ../../../system/i386/hyperv.rst:122
+#: ../../../system/i386/hyperv.rst:97 ../../../system/i386/hyperv.rst:118
+#: ../../../system/i386/hyperv.rst:125
 msgid "Requires: ``hv-vpindex``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:96
+#: ../../../system/i386/hyperv.rst:99
 msgid "``hv-stimer``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:97
+#: ../../../system/i386/hyperv.rst:100
 msgid ""
 "Enables Hyper-V synthetic timers. There are four synthetic timers per "
 "virtual CPU controlled through HV_X64_MSR_STIMER0_CONFIG.."
@@ -196,15 +199,15 @@ msgid ""
 "significant CPU consumption, even when virtual CPU is idle."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:105
+#: ../../../system/i386/hyperv.rst:108
 msgid "Requires: ``hv-vpindex``, ``hv-synic``, ``hv-time``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:107
+#: ../../../system/i386/hyperv.rst:110
 msgid "``hv-tlbflush``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:108
+#: ../../../system/i386/hyperv.rst:111
 msgid ""
 "Enables paravirtualized TLB shoot-down mechanism. On x86 architecture, "
 "remote TLB flush procedure requires sending IPIs and waiting for other CPUs "
@@ -215,11 +218,11 @@ msgid ""
 "the optimization."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:117
+#: ../../../system/i386/hyperv.rst:120
 msgid "``hv-ipi``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:118
+#: ../../../system/i386/hyperv.rst:121
 msgid ""
 "Enables paravirtualized IPI send mechanism. HvCallSendSyntheticClusterIpi "
 "hypercall may target more than 64 virtual CPUs simultaneously, doing the "
@@ -227,11 +230,11 @@ msgid ""
 "hypervisor)."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:124
+#: ../../../system/i386/hyperv.rst:127
 msgid "``hv-vendor-id`` = xxx"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:125
+#: ../../../system/i386/hyperv.rst:128
 msgid ""
 "This changes Hyper-V identification in CPUID 0x40000000.EBX-EDX from the "
 "default \"Microsoft Hv\". The parameter should be no longer than 12 "
@@ -242,11 +245,11 @@ msgid ""
 "enlightenment."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:132
+#: ../../../system/i386/hyperv.rst:135
 msgid "``hv-reset``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:133
+#: ../../../system/i386/hyperv.rst:136
 msgid ""
 "Provides HV_X64_MSR_RESET (0x40000003) MSR to the guest allowing it to reset "
 "itself by writing to it. Even when this MSR is enabled, it is not a "
@@ -254,22 +257,22 @@ msgid ""
 "used."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:137
+#: ../../../system/i386/hyperv.rst:140
 msgid "``hv-frequencies``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:138
+#: ../../../system/i386/hyperv.rst:141
 msgid ""
 "Provides HV_X64_MSR_TSC_FREQUENCY (0x40000022) and HV_X64_MSR_APIC_FREQUENCY "
 "(0x40000023) allowing the guest to get its TSC/APIC frequencies without "
 "doing measurements."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:142
+#: ../../../system/i386/hyperv.rst:145
 msgid "``hv-reenlightenment``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:143
+#: ../../../system/i386/hyperv.rst:146
 msgid ""
 "The enlightenment is nested specific, it targets Hyper-V on KVM guests. When "
 "enabled, it provides HV_X64_MSR_REENLIGHTENMENT_CONTROL (0x40000106), "
@@ -282,7 +285,7 @@ msgid ""
 "own guests."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:152
+#: ../../../system/i386/hyperv.rst:155
 msgid ""
 "Note, KVM doesn't fully support re-enlightenment notifications and doesn't "
 "emulate TSC accesses after migration so 'tsc-frequency=' CPU option also has "
@@ -290,15 +293,15 @@ msgid ""
 "either have the same TSC frequency or support TSC scaling CPU feature."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:157
+#: ../../../system/i386/hyperv.rst:160
 msgid "Recommended: ``hv-frequencies``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:159
+#: ../../../system/i386/hyperv.rst:162
 msgid "``hv-evmcs``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:160
+#: ../../../system/i386/hyperv.rst:163
 msgid ""
 "The enlightenment is nested specific, it targets Hyper-V on KVM guests. When "
 "enabled, it provides Enlightened VMCS version 1 feature to the guest. The "
@@ -307,22 +310,22 @@ msgid ""
 "Intel-only."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:165
+#: ../../../system/i386/hyperv.rst:168
 msgid ""
 "Note: some virtualization features (e.g. Posted Interrupts) are disabled "
 "when hv-evmcs is enabled. It may make sense to measure your nested workload "
 "with and without the feature to find out if enabling it is beneficial."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:169 ../../../system/i386/hyperv.rst:255
+#: ../../../system/i386/hyperv.rst:172 ../../../system/i386/hyperv.rst:258
 msgid "Requires: ``hv-vapic``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:171
+#: ../../../system/i386/hyperv.rst:174
 msgid "``hv-stimer-direct``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:172
+#: ../../../system/i386/hyperv.rst:175
 msgid ""
 "Hyper-V specification allows synthetic timer operation in two modes: "
 "\"classic\", when expiration event is delivered as SynIC message and "
@@ -331,15 +334,15 @@ msgid ""
 "``hv-stimer-direct`` needs to be enabled."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:178
+#: ../../../system/i386/hyperv.rst:181
 msgid "Requires: ``hv-vpindex``, ``hv-synic``, ``hv-time``, ``hv-stimer``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:180
+#: ../../../system/i386/hyperv.rst:183
 msgid "``hv-avic`` (``hv-apicv``)"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:181
+#: ../../../system/i386/hyperv.rst:184
 msgid ""
 "The enlightenment allows to use Hyper-V SynIC with hardware APICv/AVIC "
 "enabled. Normally, Hyper-V SynIC disables these hardware feature and "
@@ -348,11 +351,11 @@ msgid ""
 "effect on guest's performance."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:187
+#: ../../../system/i386/hyperv.rst:190
 msgid "``hv-no-nonarch-coresharing`` = on/off/auto"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:188
+#: ../../../system/i386/hyperv.rst:191
 msgid ""
 "This enlightenment tells guest OS that virtual processors will never share a "
 "physical core unless they are reported as sibling SMT threads. This "
@@ -360,7 +363,7 @@ msgid ""
 "SMT related CPU vulnerabilities."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:193
+#: ../../../system/i386/hyperv.rst:196
 msgid ""
 "When the option is set to 'auto' QEMU will enable the feature only when KVM "
 "reports that non-architectural coresharing is impossible, this means that "
@@ -371,53 +374,53 @@ msgid ""
 "conjunction with exposing correct vCPU topology and vCPU pinning."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:201
+#: ../../../system/i386/hyperv.rst:204
 msgid ""
 "``hv-version-id-build``, ``hv-version-id-major``, ``hv-version-id-minor``, "
 "``hv-version-id-spack``, ``hv-version-id-sbranch``, ``hv-version-id-snumber``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:202
+#: ../../../system/i386/hyperv.rst:205
 msgid ""
 "This changes Hyper-V version identification in CPUID 0x40000002.EAX-EDX from "
 "the default (WS2016)."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:205
+#: ../../../system/i386/hyperv.rst:208
 msgid "``hv-version-id-build`` sets 'Build Number' (32 bits)"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:206
+#: ../../../system/i386/hyperv.rst:209
 msgid "``hv-version-id-major`` sets 'Major Version' (16 bits)"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:207
+#: ../../../system/i386/hyperv.rst:210
 msgid "``hv-version-id-minor`` sets 'Minor Version' (16 bits)"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:208
+#: ../../../system/i386/hyperv.rst:211
 msgid "``hv-version-id-spack`` sets 'Service Pack' (32 bits)"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:209
+#: ../../../system/i386/hyperv.rst:212
 msgid "``hv-version-id-sbranch`` sets 'Service Branch' (8 bits)"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:210
+#: ../../../system/i386/hyperv.rst:213
 msgid "``hv-version-id-snumber`` sets 'Service Number' (24 bits)"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:212
+#: ../../../system/i386/hyperv.rst:215
 msgid ""
 "Note: hv-version-id-* are not enlightenments and thus don't enable Hyper-V "
 "identification when specified without any other enlightenments."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:215
+#: ../../../system/i386/hyperv.rst:218
 msgid "``hv-syndbg``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:216
+#: ../../../system/i386/hyperv.rst:219
 msgid ""
 "Enables Hyper-V synthetic debugger interface, this is a special interface "
 "used by Windows Kernel debugger to send the packets through, rather than "
@@ -429,17 +432,17 @@ msgid ""
 "irq=15)."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:226
+#: ../../../system/i386/hyperv.rst:229
 msgid ""
 "Requires: ``hv-relaxed``, ``hv_time``, ``hv-vapic``, ``hv-vpindex``, ``hv-"
 "synic``, ``hv-runtime``, ``hv-stimer``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:228
+#: ../../../system/i386/hyperv.rst:231
 msgid "``hv-emsr-bitmap``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:229
+#: ../../../system/i386/hyperv.rst:232
 msgid ""
 "The enlightenment is nested specific, it targets Hyper-V on KVM guests. When "
 "enabled, it allows L0 (KVM) and L1 (Hyper-V) hypervisors to collaborate to "
@@ -448,15 +451,15 @@ msgid ""
 "requires Enlightened VMCS (``hv-evmcs``) feature to also be enabled."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:235 ../../../system/i386/hyperv.rst:257
+#: ../../../system/i386/hyperv.rst:238 ../../../system/i386/hyperv.rst:260
 msgid "Recommended: ``hv-evmcs`` (Intel)"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:237
+#: ../../../system/i386/hyperv.rst:240
 msgid "``hv-xmm-input``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:238
+#: ../../../system/i386/hyperv.rst:241
 msgid ""
 "Hyper-V specification allows to pass parameters for certain hypercalls using "
 "XMM registers (\"XMM Fast Hypercall Input\"). When the feature is in use, it "
@@ -464,25 +467,25 @@ msgid ""
 "memory."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:242
+#: ../../../system/i386/hyperv.rst:245
 msgid "``hv-tlbflush-ext``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:243
+#: ../../../system/i386/hyperv.rst:246
 msgid ""
 "Allow for extended GVA ranges to be passed to Hyper-V TLB flush hypercalls "
 "(HvFlushVirtualAddressList/HvFlushVirtualAddressListEx)."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:246
+#: ../../../system/i386/hyperv.rst:249
 msgid "Requires: ``hv-tlbflush``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:248
+#: ../../../system/i386/hyperv.rst:251
 msgid "``hv-tlbflush-direct``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:249
+#: ../../../system/i386/hyperv.rst:252
 msgid ""
 "The enlightenment is nested specific, it targets Hyper-V on KVM guests. When "
 "enabled, it allows L0 (KVM) to directly handle TLB flush hypercalls from L2 "
@@ -491,22 +494,22 @@ msgid ""
 "requires Enlightened VMCS (``hv-evmcs``) feature to also be enabled."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:260
+#: ../../../system/i386/hyperv.rst:263
 msgid "Supplementary features"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:262
+#: ../../../system/i386/hyperv.rst:265
 msgid "``hv-passthrough``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:263
+#: ../../../system/i386/hyperv.rst:266
 msgid ""
 "In some cases (e.g. during development) it may make sense to use QEMU in "
 "'pass-through' mode and give Windows guests all enlightenments currently "
 "supported by KVM."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:267
+#: ../../../system/i386/hyperv.rst:270
 msgid ""
 "Note: ``hv-passthrough`` flag only enables enlightenments which are known to "
 "QEMU (have corresponding 'hv-' flag) and copies ``hv-spinlocks`` and ``hv-"
@@ -514,24 +517,24 @@ msgid ""
 "'hv-' settings on the command line."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:272
+#: ../../../system/i386/hyperv.rst:275
 msgid ""
 "Note: ``hv-passthrough`` does not enable ``hv-syndbg`` which can prevent "
 "certain Windows guests from booting when used without proper configuration. "
 "If needed, ``hv-syndbg`` can be enabled additionally."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:276
+#: ../../../system/i386/hyperv.rst:279
 msgid ""
 "Note: ``hv-passthrough`` effectively prevents migration as the list of "
 "enabled enlightenments may differ between target and destination hosts."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:279
+#: ../../../system/i386/hyperv.rst:282
 msgid "``hv-enforce-cpuid``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:280
+#: ../../../system/i386/hyperv.rst:283
 msgid ""
 "By default, KVM allows the guest to use all currently supported Hyper-V "
 "enlightenments when Hyper-V CPUID interface was exposed, regardless of if "
@@ -540,11 +543,11 @@ msgid ""
 "exposed Hyper-V enlightenments."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:287
+#: ../../../system/i386/hyperv.rst:290
 msgid "Recommendations"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:289
+#: ../../../system/i386/hyperv.rst:292
 msgid ""
 "To achieve the best performance of Windows and Hyper-V guests and unless "
 "there are any specific requirements (e.g. migration to older QEMU/KVM "
@@ -553,31 +556,31 @@ msgid ""
 "exceptions:"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:294
+#: ../../../system/i386/hyperv.rst:297
 msgid ""
 "``hv-syndbg``, ``hv-passthrough``, ``hv-enforce-cpuid`` should not be "
 "enabled in production configurations as these are debugging/development "
 "features."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:296
+#: ../../../system/i386/hyperv.rst:299
 msgid "``hv-reset`` can be avoided as modern Hyper-V versions don't expose it."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:297
+#: ../../../system/i386/hyperv.rst:300
 msgid ""
 "``hv-evmcs`` can (and should) be enabled on Intel CPUs only. While the "
 "feature is only used in nested configurations (Hyper-V, WSL2), enabling it "
 "for regular Windows guests should not have any negative effects."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:300
+#: ../../../system/i386/hyperv.rst:303
 msgid ""
 "``hv-no-nonarch-coresharing`` must only be enabled if vCPUs are properly "
 "pinned so no non-architectural core sharing is possible."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:302
+#: ../../../system/i386/hyperv.rst:305
 msgid ""
 "``hv-vendor-id``, ``hv-version-id-build``, ``hv-version-id-major``, ``hv-"
 "version-id-minor``, ``hv-version-id-spack``, ``hv-version-id-sbranch``, ``hv-"
@@ -585,45 +588,46 @@ msgid ""
 "behave differently when different Hyper-V version is presented to them."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:306
+#: ../../../system/i386/hyperv.rst:309
 msgid ""
 "``hv-crash`` must only be enabled if the crash information is consumed via "
-"QAPI by higher levels of the virtualization stack. Enabling this feature "
-"effectively prevents Windows from creating dumps upon crashes."
+"QAPI by higher levels of the virtualization stack. With the default ``-"
+"action panic=shutdown`` policy, enabling this feature effectively prevents "
+"Windows from creating dumps upon crashes."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:309
+#: ../../../system/i386/hyperv.rst:313
 msgid ""
 "``hv-reenlightenment`` can only be used on hardware which supports TSC "
 "scaling or when guest migration is not needed."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:311
+#: ../../../system/i386/hyperv.rst:315
 msgid ""
 "``hv-spinlocks`` should be set to e.g. 0xfff when host CPUs are overcommited "
 "(meaning there are other scheduled tasks or guests) and can be left "
 "unchanged from the default value (0xffffffff) otherwise."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:314
+#: ../../../system/i386/hyperv.rst:318
 msgid ""
 "``hv-avic``/``hv-apicv`` should not be enabled if the hardware does not "
 "support APIC virtualization (Intel APICv, AMD AVIC)."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:318
+#: ../../../system/i386/hyperv.rst:322
 msgid "Useful links"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:319
+#: ../../../system/i386/hyperv.rst:323
 msgid "Hyper-V Top Level Functional specification and other information:"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:321
+#: ../../../system/i386/hyperv.rst:325
 msgid "https://github.com/MicrosoftDocs/Virtualization-Documentation"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:322
+#: ../../../system/i386/hyperv.rst:326
 msgid ""
 "https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/tlfs/tlfs"
 msgstr ""

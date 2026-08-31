@@ -1,0 +1,390 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-31 17:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/s390x-secure-ipl.rst:4
+msgid "s390 Secure IPL"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:6
+msgid ""
+"Secure IPL (a.k.a. secure boot) enables s390-ccw virtual machines to "
+"leverage qcrypto libraries and z/Architecture emulation to verify the "
+"integrity of signed kernels. The qcrypto libraries are used to perform "
+"certificate validation and signature-verification, whereas the z/"
+"Architecture emulation is used to ensure secure IPL data has not been "
+"tampered with, convey data between QEMU and guest code, and set up the "
+"relevant secure IPL data structures with verification results."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:14
+msgid ""
+"To find out more about using this feature, see :doc:`documentation </system/"
+"s390x/secure-ipl>`."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:17
+msgid ""
+"Note that \"guest code\" will refer to the s390-ccw BIOS unless stated "
+"otherwise."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:20
+msgid ""
+"Both QEMU and guest code work in cooperation to perform secure IPL. The "
+"Secure Code Loading Attributes Facility (SCLAF) is used to check the Secure "
+"Code Loading Attribute Block (SCLAB) and ensure that secure IPL data has not "
+"been tampered with. DIAGNOSE 'X'320' is invoked by guest code to query the "
+"certificate store info and retrieve specific certificates from QEMU. "
+"DIAGNOSE 'X'508' is used by guest code to leverage qcrypto libraries to "
+"perform signature-verification in QEMU. Lastly, guest code generates and "
+"appends an IPL Information Report Block (IIRB) at the end of the IPL "
+"Parameter Block (IPLB), which is used by the kernel to store signed and "
+"verified entries."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:31
+msgid "The logical steps are as follows:"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:33
+msgid ""
+"guest code reads data payload from disk (e.g. stage3 boot loader, kernel)"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:34
+msgid "guest code checks the validity of the SCLAB"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:35
+msgid "guest code invokes DIAG 508 subcode 1 and provides the payload"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:36
+msgid ""
+"QEMU handles DIAG 508 request by reading the payload and retrieving the "
+"certificate store"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:38
+msgid ""
+"QEMU DIAG 508 utilizes handler qcrypto libraries to perform signature-"
+"verification on the payload, attempting with each cert in the store (until "
+"success or exhausted)"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:41
+msgid "QEMU DIAG 508 returns:"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:43
+msgid "success: index of cert used to verify payload"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:44
+msgid "failure: error code"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:46
+msgid "guest code is expected to respond to this operation by:"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:48
+msgid "success: retrieves cert from store via DIAG 320 using returned index"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:49
+msgid ""
+"failure: reports with warning (audit mode), aborts with error (secure mode)"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:51
+msgid "guest code appends IIRB at the end of the IPLB"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:52
+msgid "guest code kicks off IPL"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:54
+msgid ""
+"More information regarding the respective DIAGNOSE commands and IPL data "
+"structures are outlined within this document."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:59
+msgid "s390 Certificate Store and Functions"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:62
+msgid "s390 Certificate Store"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:64
+msgid ""
+"A certificate store is implemented for s390-ccw guests to retain within "
+"memory all certificates provided by the user via the command-line, which are "
+"expected to be stored somewhere on the host's file system. The store will "
+"keep track of the number of certificates, their respective size, and a "
+"summation of the sizes."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:70
+msgid ""
+"Each certificate is stored in an S390IPLCertificate struct, which has a name "
+"(converted to EBCDIC), size fields of PEM and DER data, and the raw PEM "
+"Base64 data."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:74
+msgid ""
+"Note: A maximum of 64 certificates are allowed to be stored in the "
+"certificate store."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:78
+msgid "DIAGNOSE function code 'X'320' - Certificate Store Facility"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:80
+msgid ""
+"DIAGNOSE 'X'320' is used to provide support for guest code to directly query "
+"the s390 certificate store. Guest code may be the s390-ccw BIOS or the guest "
+"kernel."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:84
+#: ../../../specs/s390x-secure-ipl.rst:140
+msgid "Subcode 0 - query installed subcodes"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:85
+msgid ""
+"Returns a 256-bit installed subcodes mask (ISM) stored in the installed "
+"subcodes block (ISB). This mask indicates which subcodes are currently "
+"installed and available for use."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:89
+msgid "Subcode 1 - query verification certificate storage information"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:90
+msgid ""
+"Provides the information required to determine the amount of memory needed "
+"to store one or more verification-certificates (VCs) from the certificate "
+"store (CS)."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:94
+msgid ""
+"Upon successful completion, this subcode returns various storage size values "
+"for verification-certificate blocks (VCBs)."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:97
+msgid ""
+"The output is returned in the verification-certificate-storage-size block "
+"(VCSSB). A VCSSB length of 4 indicates that no certificates are available in "
+"the CS."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:101
+msgid "Subcode 2 - store verification certificates"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:102
+msgid "Provides VCs that are in the certificate store."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:104
+msgid ""
+"The output is provided in a VCB, which includes a common header followed by "
+"zero or more verification-certificate entries (VCEs)."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:107
+msgid ""
+"The instruction expects the cert store to maintain an origin of 1 for the "
+"index (i.e. a retrieval of the first certificate in the store should be "
+"denoted by setting first-VC to 1)."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:111
+msgid ""
+"The first-VC and last-VC fields of the VCB specify the index range of VCs to "
+"be stored in the VCB. Certs are stored sequentially, starting with first-VC "
+"index. As each cert is stored, a \"stored count\" is incremented. If there "
+"is not enough space to store all certs requested by the index range, a "
+"\"remaining count\" will be recorded and no more certificates will be stored."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:118
+msgid ""
+"Each VCE contains a header followed by information extracted from a "
+"certificate within the certificate store. The information includes: key-id, "
+"hash, and certificate data. This information is stored contiguously in a VCE "
+"(with zero-padding). Following the header, the key-id is immediately stored. "
+"The hash and certificate data follow and may be accessed via the respective "
+"offset fields stored in the VCE."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:127
+msgid "Secure IPL Data Structures, Facilities, and Functions"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:130
+msgid "DIAGNOSE function code 'X'508' - IPL extensions"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:132
+msgid ""
+"DIAGNOSE 'X'508' is reserved for guest use in order to facilitate "
+"communication of additional IPL operations that cannot be handled by guest "
+"code, such as signature verification for secure IPL."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:136
+msgid ""
+"If the function code specifies 0x508, IPL extension functions are performed. "
+"These functions are meant to provide extended functionality for s390 guest "
+"boot that requires assistance from QEMU."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:141
+msgid "Returns a 64-bit mask indicating which subcodes are supported."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:143
+msgid "Subcode 1 - perform signature verification"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:144
+msgid ""
+"Perform signature-verification on a signed component, using certificates "
+"from the certificate store and leveraging qcrypto libraries to perform this "
+"operation."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:148
+msgid "Note: verification of initrd is not supported."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:150
+msgid ""
+"A return code of 1 indicates success, and the index and length of the "
+"corresponding certificate will be set in the Diag508SigVerifBlock. The "
+"following values indicate failure:"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:154
+msgid "``0x0102``: no certificates are available in the store"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:155
+msgid "``0x0202``: component data is invalid"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:156
+msgid "``0x0302``: PKCS#7 format signature is invalid"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:157
+msgid "``0x0402``: signature-verification failed"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:158
+msgid "``0x0502``: length of Diag508SigVerifBlock is invalid"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:161
+msgid "IPL Information Report Block"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:163
+msgid ""
+"The IPL Parameter Block (IPLB), utilized for IPL operation, is extended with "
+"an IPL Information Report Block (IIRB), which contains the results from "
+"secure IPL operations such as:"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:167
+msgid "component data"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:168
+msgid "verification results"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:169
+msgid "certificate data"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:171
+msgid ""
+"During early boot, the guest kernel reserves the memory region containing "
+"the IIRB. This preserves the data while the guest kernel is operating and "
+"during re-IPL."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:175
+msgid "The guest kernel uses the contents in the IIRB for:"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:177
+msgid "Boot logging: reports which components were loaded and verified."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:178
+msgid ""
+"kexec operations: builds the next kernel’s IPL report from the existing one."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:179
+msgid "Keying: installs IPL certificates into the platform trusted keyring."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:182
+msgid "Secure Code Loading Attributes Facility"
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:184
+msgid ""
+"The Secure Code Loading Attributes Facility (SCLAF) enhances system security "
+"during the IPL by enforcing additional verification rules."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:187
+msgid ""
+"When SCLAF is available, its behavior depends on the IPL mode. It introduces "
+"verification of both signed and unsigned components to help ensure that only "
+"authorized code is loaded during the IPL process. Any errors detected by "
+"SCLAF are reported in the IIRB."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:192
+msgid ""
+"Unsigned components are restricted to load addresses at or above absolute "
+"storage address ``0x2000``."
+msgstr ""
+
+#: ../../../specs/s390x-secure-ipl.rst:195
+msgid ""
+"Signed components must include a Secure Code Loading Attribute Block "
+"(SCLAB), which is appended at the very end of the component. The SCLAB "
+"defines security attributes for handling the signed code."
+msgstr ""

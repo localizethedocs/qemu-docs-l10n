@@ -1,0 +1,290 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-31 17:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/s390x/secure-ipl.rst:4
+msgid "s390 Secure IPL"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:6
+msgid ""
+"Secure IPL, also known as secure boot, enables s390-ccw virtual machines to "
+"verify the integrity of guest kernels."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:9
+msgid ""
+"For technical details of this feature, see the :doc:`specs document </specs/"
+"s390x-secure-ipl>`."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:12
+msgid ""
+"This document explains how to use secure IPL with s390x in QEMU. It covers "
+"the command line options for providing certificates and enabling secure IPL, "
+"the different IPL modes (Normal, Audit, and Secure), and system requirements."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:16
+msgid ""
+"A quickstart guide is provided to demonstrate how to generate certificates, "
+"sign images, and start a guest in Secure Mode."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:21
+msgid "Secure IPL Command Line Options"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:23
+msgid ""
+"The s390-ccw-virtio machine type supports secure IPL. These parameters allow "
+"users to provide certificates and enable secure IPL directly via the command "
+"line."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:28
+msgid "Providing Certificates"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:30
+msgid ""
+"The certificate store can be populated by supplying a list of X.509 "
+"certificate file paths or directories containing certificate files on the "
+"command-line:"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:33
+msgid "Note: certificate files must have a .pem extension."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:35
+#: ../../../system/s390x/secure-ipl.rst:83
+msgid ""
+"qemu-system-s390x -machine s390-ccw-virtio,boot-certs.0.path=/.../qemu/certs,"
+"boot-certs.1.path=/another/path/cert.pem ..."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:40
+msgid "Enabling Secure IPL"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:42
+msgid ""
+"Secure IPL is enabled by explicitly setting ``secure-boot=on``; if not "
+"specified, secure boot is considered off."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:45
+msgid "qemu-system-s390x -machine s390-ccw-virtio,secure-boot=on|off"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:51
+msgid "IPL Modes"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:53
+msgid ""
+"Multiple IPL modes are available to differentiate between the various IPL "
+"configurations. These modes are mutually exclusive and enabled based on "
+"specific combinations of the ``secure-boot`` and ``boot-certs`` options on "
+"the QEMU command line."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:59
+msgid "Normal Mode"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:61
+msgid ""
+"The absence of both certificates and the ``secure-boot`` option will attempt "
+"to IPL a guest without secure IPL operations. No checks are performed, and "
+"no warnings/errors are reported.  This is the default mode, and can be "
+"explicitly enabled with ``secure-boot=off``."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:66
+#: ../../../system/s390x/secure-ipl.rst:81
+#: ../../../system/s390x/secure-ipl.rst:94
+msgid "Configuration:"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:68
+msgid "qemu-system-s390x -machine s390-ccw-virtio ..."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:73
+msgid "Audit Mode"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:75
+msgid ""
+"When the certificate store is populated with at least one certificate and no "
+"additional secure IPL parameters are provided on the command line, then "
+"secure IPL will proceed in \"audit mode\". All secure IPL operations will be "
+"performed with signature verification errors reported as non-disruptive "
+"warnings."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:88
+msgid "Secure Mode"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:90
+msgid ""
+"When the ``secure-boot=on`` option is set and certificates are provided, a "
+"secure boot is performed with error reporting enabled. The boot process "
+"aborts if any error occurs."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:96
+msgid ""
+"qemu-system-s390x -machine s390-ccw-virtio,secure-boot=on,boot-certs.0."
+"path=/.../qemu/certs,boot-certs.1.path=/another/path/cert.pem ..."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:102
+msgid "Constraints"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:104
+msgid ""
+"The following constraints apply when attempting to boot an s390x guest in "
+"secure mode:"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:107
+msgid "z16 or \"qemu\" CPU model"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:108
+msgid "certificates must be in X.509 PEM format"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:109
+msgid "only support for SCSI scheme of virtio-blk/virtio-scsi devices"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:110
+msgid "a boot device must be specified"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:111
+msgid ""
+"any unsupported devices (e.g., ECKD and VFIO) or non-eligible devices (e.g., "
+"network) will cause the entire boot process to terminate early, with an "
+"error logged to the console."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:117
+msgid "Secure IPL Quickstart"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:120
+msgid "Build QEMU with gnutls enabled"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:122
+msgid "./configure … --enable-gnutls"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:127
+msgid "Generate certificate (e.g. via certtool)"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:129
+msgid ""
+"A private key is required before generating a certificate. This key must be "
+"kept secure and confidential."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:132
+msgid "Use an RSA private key for signing."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:134
+msgid "certtool --generate-privkey > key.pem"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:138
+msgid ""
+"A self-signed certificate requires the organization name. Use the ``cert."
+"info`` template to pre-fill values and avoid interactive prompts from "
+"certtool."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:141
+msgid ""
+"cat > cert.info <<EOF\n"
+"cn = \"My Name\"\n"
+"expiration_days = 365\n"
+"cert_signing_key\n"
+"EOF\n"
+"\n"
+"certtool --generate-self-signed \\\n"
+"         --load-privkey key.pem \\\n"
+"         --template cert.info \\\n"
+"         --hash=SHA256 \\\n"
+"         --outfile cert.pem"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:156
+msgid "Sign Images (e.g. via sign-file)"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:158
+msgid "signing must be performed on a guest filesystem"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:159
+msgid ""
+"sign-file script used in the example below is located within the kernel "
+"source repo"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:162
+msgid ""
+"./sign-file sha256 key.pem cert.pem /boot/vmlinuz-…\n"
+"./sign-file sha256 key.pem cert.pem /usr/lib/s390-tools/stage3.bin"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:167
+msgid ""
+"Note: re-signing a component will not verify correctly; the existing "
+"signature must be stripped before a new one is applied."
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:171
+msgid "Run zipl with secure boot enabled"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:173
+msgid "zipl must be performed on a guest filesystem"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:175
+msgid "zipl --secure 1 -V"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:180
+msgid "Command line options for starting the guest"
+msgstr ""
+
+#: ../../../system/s390x/secure-ipl.rst:182
+msgid ""
+"qemu-system-s390x -machine s390-ccw-virtio,secure-boot=on,boot-certs.0."
+"path=cert.pem ..."
+msgstr ""

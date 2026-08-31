@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-08-31 17:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -281,24 +281,121 @@ msgstr ""
 #: ../../../system/arm/nuvoton.rst:96
 msgid ""
 "The Nuvoton machines can boot from an OpenBMC firmware image, or directly "
-"into a kernel using the ``-kernel`` option. OpenBMC images for ``quanta-"
-"gsj`` and possibly others can be downloaded from the OpenBMC jenkins :"
+"into a kernel using the ``-kernel`` option. OpenBMC machine names do not "
+"always match QEMU machine names. Check the OpenBMC supported-machine list "
+"and Jenkins for currently available source and pre-built images."
 msgstr ""
 
-#: ../../../system/arm/nuvoton.rst:100
-msgid "https://jenkins.openbmc.org/"
+#: ../../../system/arm/nuvoton.rst:101
+msgid "Known OpenBMC (v2.18.0) target names for QEMU Nuvoton machines per:"
 msgstr ""
 
-#: ../../../system/arm/nuvoton.rst:102
-msgid "The firmware image should be attached as an MTD drive. Example :"
-msgstr ""
-
-#: ../../../system/arm/nuvoton.rst:104
+#: ../../../system/arm/nuvoton.rst:103
 msgid ""
-"$ qemu-system-arm -machine quanta-gsj -nographic \\\n"
-"    -drive file=image-bmc,if=mtd,bus=0,unit=0,format=raw"
+"https://github.com/openbmc/openbmc/blob/2.18.0/meta-phosphor/docs/supported-"
+"machines.md"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:108
+msgid "QEMU machine"
 msgstr ""
 
 #: ../../../system/arm/nuvoton.rst:109
+msgid "OpenBMC machine"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:110
+msgid "``npcm750-evb``"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:111
+msgid "``evb-npcm750``"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:112
+msgid "``npcm845-evb``"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:113
+msgid "``evb-npcm845``"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:114
+msgid "``quanta-gbs-bmc``"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:115
+msgid "``gbs``"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:116
+msgid "``kudo-bmc``"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:117
+msgid "``kudo``"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:118
+msgid "``mori-bmc``"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:119
+msgid "``mori``"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:121
+msgid ""
+"As of June 2026, the latest OpenBMC release, ``2.18.0``, no longer lists a "
+"``gsj`` machine. To build an image for QEMU's ``quanta-gsj`` machine, use an "
+"older OpenBMC release that still contains ``meta-quanta/meta-gsj``. The "
+"``2.14.0`` release contains the ``gsj`` machine:"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:126
+msgid "https://github.com/openbmc/openbmc/tree/2.14.0/meta-quanta/meta-gsj"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:128
+msgid ""
+"Some pre-built OpenBMC images for QEMU Nuvoton machines may be available on "
+"Jenkins:"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:131
+msgid "https://jenkins.openbmc.org/"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:133
+msgid ""
+"To find a pre-built MTD image on Jenkins, start from the Jenkins home page "
+"and open the ``latest-master`` job. Select the matrix configuration whose "
+"``target`` matches the OpenBMC machine name, for example ``label=docker-"
+"builder,target=gbs``, then open its latest successful build's artifacts. The "
+"MTD image is usually published under ``openbmc/build/tmp/deploy/images/"
+"<machine>/`` as ``obmc-phosphor-image-<machine>-<timestamp>.static.mtd``. If "
+"Jenkins does not list a matching target, or the build artifacts do not "
+"include an MTD image, there is no current pre-built MTD image for that "
+"machine."
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:143
+msgid "The firmware image should be attached as an MTD drive. Example:"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:145
+msgid ""
+"$ qemu-system-arm -machine quanta-gbs-bmc -nographic \\\n"
+"    -drive file=obmc-phosphor-image-gbs-xxxxxx.static.mtd,if=mtd,bus=0,"
+"unit=0,format=raw"
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:150
 msgid "The default root password for test images is usually ``0penBmc``."
+msgstr ""
+
+#: ../../../system/arm/nuvoton.rst:152
+msgid ""
+"For other machines that don't have pre-built images on Jenkins, build an "
+"image from source by following the OpenBMC build documentation."
 msgstr ""

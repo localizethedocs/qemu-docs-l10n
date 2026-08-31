@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-31 17:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../devel/migration/fast-snapshot-load.rst:3
+msgid "Fast Snapshot Load"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:6
+msgid "Overview"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:7
+msgid ""
+"Fast snapshot load is an extension of the postcopy migration feature to disk "
+"loads."
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:10
+msgid ""
+"Unlike a usual snapshot load, which requires all VM data (RAM as well as "
+"device states) to be loaded into host RAM from the snapshot file for the "
+"guest to run, fast snapshot load uses postcopy infrastructure to load in "
+"only the required device states and allows RAM pages to be loaded after the "
+"guest starts execution. The idea is to start the guest and serve its page "
+"faults on the go, reducing the perceived resume time for large snapshots."
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:19
+msgid "Architecture"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:20
+msgid ""
+"This feature combines postcopy migration and mapped-ram capabilities to load "
+"RAM pages on demand. It is done by catching guest faults using Linux "
+"``userfaultfd`` and loading the page by calculating the offset of its "
+"location in the snapshot file using mapped-ram capabilities."
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:26
+msgid "Fault Thread"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:27
+msgid ""
+"The fault thread uses Linux ``userfaultfd`` to catch page faults caused by "
+"guest and directly load the page from the snapshot file. It is very similar "
+"to network postcopy fault thread, with primary difference being it loads "
+"pages directly by reading from the snapshot file."
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:33
+msgid "Eager Thread"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:34
+msgid ""
+"Eager thread iterates over all pages in RAM and loads each page not yet "
+"loaded by fault thread. It is required as unlike network postcopy where "
+"majority of RAM has already been loaded via precopy, here entire RAM is "
+"waiting to be loaded. If there is no eager loading thread each page will "
+"only be loaded when it is required by guest. In case there are some "
+"background pages that are never/rarely accessed by guest, the system will be "
+"locked in migration state indefinitely."
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:43
+msgid "Synchronization"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:44
+msgid ""
+"In order to make sure both of these threads do not load the same page twice "
+"potentially overwriting and corrupting user RAM, a bitmap is used "
+"(``RAMBlock->pending_bmap``) which tracks the pages claimed to be loaded by "
+"threads. This prevents race condition when one thread is loading the page "
+"and other one tries to do the same."
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:51
+msgid "Usage"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:53
+msgid ""
+"Simply enable ``mapped-ram`` and ``postcopy-ram`` capabilities on the "
+"destination:"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:56
+msgid ""
+"migrate_set_capability mapped-ram on\n"
+"migrate_set_capability postcopy-ram on"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:61
+msgid "Use a ``file:`` URI for migration:"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:63
+msgid "migrate_incoming file:/path/to/snapshot/file"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:68
+msgid "Limitations"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:70
+msgid "Multifd"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:71
+msgid ""
+"Fast snapshot load is currently incompatible with ``multifd`` capability. "
+"While ``mapped-ram`` allows for parallel disk I/O, coupling it with "
+"``postcopy`` capability requires additional infrastructure."
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:76
+msgid "Host OS support"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:77
+msgid ""
+"Because this feautre essentially depends on ``userfaultfd`` to trap page "
+"faults, it is supported only on Linux hosts."
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:80
+msgid "vhost-user"
+msgstr ""
+
+#: ../../../devel/migration/fast-snapshot-load.rst:81
+msgid "Fast snapshot load does not currently support ``vhost-user`` backends."
+msgstr ""
