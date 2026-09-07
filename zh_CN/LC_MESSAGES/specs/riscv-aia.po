@@ -1,0 +1,222 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-23 09:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../specs/riscv-aia.rst:4
+msgid "RISC-V AIA support for RISC-V machines"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:6
+msgid ""
+"AIA (Advanced Interrupt Architecture) support is implemented in the ``virt`` "
+"RISC-V machine for TCG and KVM accelerators."
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:9
+msgid "The support consists of two main modes:"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:11
+msgid ""
+"*aia=aplic*: adds one or more APLIC (Advanced Platform Level Interrupt "
+"Controller) devices"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:12
+msgid ""
+"*aia=aplic-imsic*: adds one or more APLIC device and an IMSIC (Incoming MSI "
+"Controller) device for each CPU"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:14
+msgid ""
+"From an user standpoint, these modes will behave the same regardless of the "
+"accelerator used.  From a developer standpoint the accelerator settings will "
+"change what it being emulated in userspace versus what is being emulated by "
+"an in-kernel irqchip."
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:18
+msgid ""
+"When running TCG, all controllers are emulated in userspace, including "
+"machine mode (m-mode) APLIC and IMSIC (when applicable)."
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:21
+msgid "When running KVM:"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:23
+msgid ""
+"no m-mode is provided, so there is no m-mode APLIC or IMSIC emulation "
+"regardless of the AIA mode chosen"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:25
+msgid "with \"aia=aplic\", s-mode APLIC will be emulated by userspace"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:26
+msgid ""
+"with \"aia=aplic-imsic\" there are two possibilities.  If no additional KVM "
+"option is provided there will be no APLIC or IMSIC emulation in userspace, "
+"and the virtual machine will use the provided in-kernel APLIC and IMSIC "
+"controllers.  If the user chooses to use the irqchip in split mode via \"-"
+"accel kvm,kernel-irqchip=split\", s-mode APLIC will be emulated while using "
+"the s-mode IMSIC from the irqchip"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:32
+msgid ""
+"The following table summarizes how the AIA and accelerator options defines "
+"what we will emulate in userspace:"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:36
+msgid "How AIA and accel options changes controller emulation"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:40 ../../../specs/riscv-aia.rst:99
+msgid "Accel"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:41
+msgid "Accel props"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:42 ../../../specs/riscv-aia.rst:101
+msgid "AIA type"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:43
+msgid "APLIC m-mode"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:44
+msgid "IMSIC m-mode"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:45
+msgid "APLIC s-mode"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:46 ../../../specs/riscv-aia.rst:102
+msgid "IMSIC s-mode"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:47 ../../../specs/riscv-aia.rst:54
+msgid "tcg"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:48 ../../../specs/riscv-aia.rst:55
+#: ../../../specs/riscv-aia.rst:62
+msgid "---"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:49 ../../../specs/riscv-aia.rst:63
+msgid "aplic"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:50 ../../../specs/riscv-aia.rst:52
+#: ../../../specs/riscv-aia.rst:57 ../../../specs/riscv-aia.rst:58
+#: ../../../specs/riscv-aia.rst:59 ../../../specs/riscv-aia.rst:60
+#: ../../../specs/riscv-aia.rst:66 ../../../specs/riscv-aia.rst:80
+#: ../../../specs/riscv-aia.rst:116
+msgid "emul"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:51 ../../../specs/riscv-aia.rst:53
+#: ../../../specs/riscv-aia.rst:64 ../../../specs/riscv-aia.rst:65
+#: ../../../specs/riscv-aia.rst:67 ../../../specs/riscv-aia.rst:71
+#: ../../../specs/riscv-aia.rst:72 ../../../specs/riscv-aia.rst:78
+#: ../../../specs/riscv-aia.rst:79
+msgid "n/a"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:56 ../../../specs/riscv-aia.rst:70
+#: ../../../specs/riscv-aia.rst:77 ../../../specs/riscv-aia.rst:105
+#: ../../../specs/riscv-aia.rst:109 ../../../specs/riscv-aia.rst:113
+#: ../../../specs/riscv-aia.rst:117
+msgid "aplic-imsic"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:61 ../../../specs/riscv-aia.rst:68
+#: ../../../specs/riscv-aia.rst:75 ../../../specs/riscv-aia.rst:103
+#: ../../../specs/riscv-aia.rst:107 ../../../specs/riscv-aia.rst:111
+#: ../../../specs/riscv-aia.rst:115
+msgid "kvm"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:69 ../../../specs/riscv-aia.rst:104
+msgid "none"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:73 ../../../specs/riscv-aia.rst:74
+#: ../../../specs/riscv-aia.rst:81
+msgid "in-kernel"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:76
+msgid "irqchip=split"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:85
+msgid "KVM accel option 'riscv-aia'"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:87
+msgid ""
+"The KVM accelerator property 'riscv-aia' interacts with the \"aia=aplic-"
+"imsic\" to determine how the host KVM module will provide the in-kernel "
+"IMSIC s-mode controller.  The 'kernel-irqchip' setting has no impact in "
+"'riscv-aia' given that any available 'kernel-irqchip' setting will always "
+"have an in-kernel IMSIC s-mode.  'riscv-aia' has no impact in APLIC m-mode/s-"
+"mode and IMSIC m-mode settings."
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:95
+msgid "How 'riscv-aia' changes in-kernel IMSIC s-mode provisioning"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:100
+msgid "KVM riscv-aia"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:106
+msgid "in-kernel, default to 'auto'"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:108
+msgid "auto"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:110
+msgid "in-kernel, hwaccel if available, emul otherwise"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:112
+msgid "hwaccel"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:114
+msgid "in-kernel, use IMSIC controller from guest hardware"
+msgstr ""
+
+#: ../../../specs/riscv-aia.rst:118
+msgid "in-kernel, IMSIC is emulated by KVM"
+msgstr ""
