@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-09 04:01+0000\n"
+"POT-Creation-Date: 2026-09-07 14:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgid ""
 msgstr ""
 
 #: ../../../devel/testing/main.rst:16
-msgid "[./pyvenv/bin/]meson test --suite qemu:softfloat"
+msgid "./run meson test --suite qemu:softfloat"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:18
@@ -1640,19 +1640,19 @@ msgid "Running subset of tests"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:1038
-msgid "You can build the tests for one architecture::"
+msgid "You can build the tcg tests using::"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:1040
-msgid "make build-tcg-tests-$TARGET"
+msgid "make tcg-tests"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:1042
-msgid "And run with::"
+msgid "And run them for one target with::"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:1044
-msgid "make run-tcg-tests-$TARGET"
+msgid "make check-tcg-$TARGET"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:1046
@@ -1661,33 +1661,53 @@ msgid ""
 "for the test which is useful for debugging tests."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1050
-msgid "Running individual tests"
+#: ../../../devel/testing/main.rst:1049 ../../../devel/testing/main.rst:1061
+msgid "Tests can also be run using directly meson test::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1052
+#: ../../../devel/testing/main.rst:1051
 msgid ""
-"Tests can also be run directly from the test build directory. If you run "
-"``make help`` from the test build directory you will get a list of all the "
-"tests that can be run. Please note that same binaries are used in multiple "
-"tests, for example::"
+"./run meson test --suite tcg\n"
+"./run meson test --suite tcg-$TARGET"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1057
-msgid "make run-plugin-test-mmap-with-libinline.so"
+#: ../../../devel/testing/main.rst:1054
+msgid "Tests can be listed using::"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1056
+msgid "./run meson test --suite tcg --list"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:1059
-msgid ""
-"will run the mmap test with the ``libinline.so`` TCG plugin. The gdbstub "
-"tests also re-use the test binaries but while exercising gdb."
+msgid "Running individual tests"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:1063
-msgid "TCG test dependencies"
+msgid "./run meson test $TARGET-$TEST"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:1065
+msgid "For instance::"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1067
+msgid "./run meson test aarch64-softmmu-hello"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1069
+msgid "Test command and output can be accessed by using verbose flag::"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1071
+msgid "./run meson test aarch64-softmmu-hello --verbose"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1074
+msgid "TCG test dependencies"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1076
 msgid ""
 "The TCG tests are deliberately very light on dependencies and are either "
 "totally bare with minimal gcc lib support (for system-mode tests) or just "
@@ -1695,21 +1715,21 @@ msgid ""
 "work with additional libraries can be challenging."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1071
+#: ../../../devel/testing/main.rst:1082
 msgid "Other TCG Tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1073
+#: ../../../devel/testing/main.rst:1084
 msgid ""
 "There are a number of out-of-tree test suites that are used for more "
 "extensive testing of processor features."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1077
+#: ../../../devel/testing/main.rst:1088
 msgid "KVM Unit Tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1079
+#: ../../../devel/testing/main.rst:1090
 msgid ""
 "The KVM unit tests are designed to run as a Guest OS under KVM but there is "
 "no reason why they can't exercise the TCG as well. It provides a minimal OS "
@@ -1717,15 +1737,15 @@ msgid ""
 "a special device::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1084
+#: ../../../devel/testing/main.rst:1095
 msgid "https://git.kernel.org/pub/scm/virt/kvm/kvm-unit-tests.git"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1087
+#: ../../../devel/testing/main.rst:1098
 msgid "Linux Test Project"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1089
+#: ../../../devel/testing/main.rst:1100
 msgid ""
 "The LTP is focused on exercising the syscall interface of a Linux kernel. It "
 "checks that syscalls behave as documented and strives to exercise as many "
@@ -1733,46 +1753,46 @@ msgid ""
 "QEMU's linux-user code::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1094
+#: ../../../devel/testing/main.rst:1105
 msgid "https://linux-test-project.github.io/"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1097
+#: ../../../devel/testing/main.rst:1108
 msgid "GCC gcov support"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1099
+#: ../../../devel/testing/main.rst:1110
 msgid ""
 "``gcov`` is a GCC tool to analyze the testing coverage by instrumenting the "
 "tested code. To use it, configure QEMU with ``--enable-gcov`` option and "
 "build. Then run the tests as usual."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1103
+#: ../../../devel/testing/main.rst:1114
 msgid ""
 "If you want to gather coverage information on a single test the ``make clean-"
 "gcda`` target can be used to delete any existing coverage information before "
 "running a single test."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1107
+#: ../../../devel/testing/main.rst:1118
 msgid ""
 "You can generate a HTML coverage report by executing ``make coverage-html`` "
 "which will create ``meson-logs/coveragereport/index.html``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1111
+#: ../../../devel/testing/main.rst:1122
 msgid ""
 "Further analysis can be conducted by running the ``gcov`` command directly "
 "on the various .gcda output files. Please read the ``gcov`` documentation "
 "for more information."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1116
+#: ../../../devel/testing/main.rst:1127
 msgid "Flaky tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1118
+#: ../../../devel/testing/main.rst:1129
 msgid ""
 "A flaky test is defined as a test that exhibits both a passing and a failing "
 "result with the same code on different runs. Some usual reasons for an "
@@ -1780,34 +1800,34 @@ msgid ""
 "dependency [4]_."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1123
+#: ../../../devel/testing/main.rst:1134
 msgid ""
 "In QEMU, tests that are identified to be flaky are normally disabled by "
 "default. Set the QEMU_TEST_FLAKY_TESTS environment variable before running "
 "the tests to enable them."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1128
+#: ../../../devel/testing/main.rst:1139
 msgid "References"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1130
+#: ../../../devel/testing/main.rst:1141
 msgid "Sommerville, Ian (2016). Software Engineering. p. 233."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1131
+#: ../../../devel/testing/main.rst:1142
 msgid ""
 "Pressman, Roger S. & Maxim, Bruce R. (2020). Software Engineering, A "
 "Practitioner’s Approach. p. 48, 376, 378, 381."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1133
+#: ../../../devel/testing/main.rst:1144
 msgid ""
 "Pressman, Roger S. & Maxim, Bruce R. (2020). Software Engineering, A "
 "Practitioner’s Approach. p. 388."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1135
+#: ../../../devel/testing/main.rst:1146
 msgid ""
 "Luo, Qingzhou, et al. An empirical analysis of flaky tests. Proceedings of "
 "the 22nd ACM SIGSOFT International Symposium on Foundations of Software "
