@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-04 11:20+0000\n"
+"POT-Creation-Date: 2026-09-28 17:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,48 +25,54 @@ msgstr ""
 msgid "**The QEMU Device API**"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:15
+#: ../../../../include/hw/core/qdev.h:16
 msgid ""
 "All modern devices should represented as a derived QOM class of TYPE_DEVICE. "
 "The device API introduces the additional methods of **realize** and "
 "**unrealize** to represent additional stages in a device objects life cycle."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:23
-msgid "Devices are constructed in two stages:"
-msgstr ""
-
-#: ../../../../include/hw/core/qdev.h:25
-msgid "object instantiation via object_initialize() and"
+#: ../../../../include/hw/core/qdev.h:24
+msgid "Devices are constructed in the following order:"
 msgstr ""
 
 #: ../../../../include/hw/core/qdev.h:26
-msgid ""
-"device realization via the :c:type:`DeviceState.realized <DeviceState>` "
-"property"
+msgid ":c:type:`TypeInfo.instance_init <TypeInfo>`"
+msgstr ""
+
+#: ../../../../include/hw/core/qdev.h:27
+msgid "pre-realize property value setting"
 msgstr ""
 
 #: ../../../../include/hw/core/qdev.h:28
-msgid ""
-"The former may not fail (and must not abort or exit, since it is called "
-"during device introspection already), and the latter may return error "
-"information to the caller and must be re-entrant. Trivial field "
-"initializations should go into :c:type:`TypeInfo.instance_init <TypeInfo>`. "
-"Operations depending on **props** static properties should go into "
-"**realize**. After successful realization, setting static properties will "
-"fail."
+msgid "device realization"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:35
+#: ../../../../include/hw/core/qdev.h:30
 msgid ""
-"As an interim step, the :c:type:`DeviceState.realized <DeviceState>` "
-"property can also be set with qdev_realize(). In the future, devices will "
-"propagate this state change to their children and along busses they expose. "
-"The point in time will be deferred to machine creation, so that values set "
-"in **realize** will not be introspectable beforehand. Therefore devices must "
-"not create children during **realize**; they should initialize them via "
-"object_initialize() in their own :c:type:`TypeInfo.instance_init <TypeInfo>` "
-"and forward the realization events appropriately."
+":c:type:`TypeInfo.instance_init <TypeInfo>` may not fail. :c:type:"
+"`DeviceClass.realize <DeviceClass>` can fail, returning error information to "
+"the caller, and must be re-entrant."
+msgstr ""
+
+#: ../../../../include/hw/core/qdev.h:33
+msgid ""
+":c:type:`TypeInfo.instance_init <TypeInfo>` should add instance properties "
+"but must not have any side effect not contained in the instance, since it "
+"happens during device introspection. Any operations without special "
+"requirements should go into **realize** so that they can be skipped during "
+"device introspection. It is possible to add properties during realization, "
+"but they will not be introspectable or configurable before realization."
+msgstr ""
+
+#: ../../../../include/hw/core/qdev.h:40
+msgid ""
+"Child buses are automatically realized. Child devices must be manually "
+"realized (e.g. by calling qdev_realize())."
+msgstr ""
+
+#: ../../../../include/hw/core/qdev.h:43
+msgid "After successful realization, setting static properties will fail."
 msgstr ""
 
 #: ../../../../include/hw/core/qdev.h:45
@@ -103,7 +109,7 @@ msgid "The base class for all devices."
 msgstr ""
 
 #: ../../../../include/hw/core/qdev.h:106
-#: ../../../../include/hw/core/qdev.h:221
+#: ../../../../include/hw/core/qdev.h:219
 #: ../../../../include/hw/core/qdev.h:374
 msgid "**Definition**::"
 msgstr ""
@@ -128,65 +134,65 @@ msgid ""
 msgstr ""
 
 #: ../../../../include/hw/core/qdev.h:124
-#: ../../../../include/hw/core/qdev.h:243
+#: ../../../../include/hw/core/qdev.h:241
 #: ../../../../include/hw/core/qdev.h:389
 msgid "**Members**"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:122
+#: ../../../../include/hw/core/qdev.h:120
 msgid "``categories``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:123
+#: ../../../../include/hw/core/qdev.h:121
 msgid "device categories device belongs to"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:126
+#: ../../../../include/hw/core/qdev.h:124
 msgid "``fw_name``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:127
+#: ../../../../include/hw/core/qdev.h:125
 msgid "name used to identify device to firmware interfaces"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:130
+#: ../../../../include/hw/core/qdev.h:128
 msgid "``desc``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:131
+#: ../../../../include/hw/core/qdev.h:129
 msgid "human readable description of device"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:135
+#: ../../../../include/hw/core/qdev.h:133
 msgid "``props_``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:136
+#: ../../../../include/hw/core/qdev.h:134
 msgid ""
 "properties associated with device, should only be assigned by using "
 "device_class_set_props(). The underscore ensures a compile-time error if "
 "someone attempts to assign dc->props directly."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:143
+#: ../../../../include/hw/core/qdev.h:141
 msgid "``props_count_``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:144
+#: ../../../../include/hw/core/qdev.h:142
 msgid ""
 "number of elements in **props_**; should only be assigned by using "
 "device_class_set_props()."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:149
+#: ../../../../include/hw/core/qdev.h:147
 msgid "``user_creatable``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:150
+#: ../../../../include/hw/core/qdev.h:148
 msgid "Can user instantiate with -device / device_add?"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:152
+#: ../../../../include/hw/core/qdev.h:150
 msgid ""
 "All devices should support instantiation with device_add, and this flag "
 "should not exist.  But we're not there, yet.  Some devices fail to "
@@ -196,36 +202,36 @@ msgid ""
 "why it is cleared."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:160
+#: ../../../../include/hw/core/qdev.h:158
 msgid "TODO remove once we're there"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:111
+#: ../../../../include/hw/core/qdev.h:109
 msgid "``hotpluggable``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:112
+#: ../../../../include/hw/core/qdev.h:110
 msgid ""
 "indicates if :c:type:`DeviceClass <DeviceClass>` is hotpluggable, available "
 "as readonly \"hotpluggable\" property of :c:type:`DeviceState <DeviceState>` "
 "instance"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:166
+#: ../../../../include/hw/core/qdev.h:164
 msgid "``legacy_reset``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:167
+#: ../../../../include/hw/core/qdev.h:165
 msgid "deprecated device reset method pointer"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:169
+#: ../../../../include/hw/core/qdev.h:167
 msgid ""
 "Modern code should use the ResettableClass interface to implement a multi-"
 "phase reset."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:172
+#: ../../../../include/hw/core/qdev.h:170
 msgid "TODO: remove once every reset callback is unused"
 msgstr ""
 
@@ -234,53 +240,49 @@ msgid "``realize``"
 msgstr ""
 
 #: ../../../../include/hw/core/qdev.h:105
-msgid ""
-"Callback function invoked when the :c:type:`DeviceState <DeviceState>`:"
-"realized property is changed to ``true``."
+msgid "Callback function to realize the device."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:106
+#: ../../../../include/hw/core/qdev.h:105
 msgid "``unrealize``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:107
-msgid ""
-"Callback function invoked when the :c:type:`DeviceState <DeviceState>`:"
-"realized property is changed to ``false``."
+#: ../../../../include/hw/core/qdev.h:106
+msgid "Callback function to unrealize the device."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:108
+#: ../../../../include/hw/core/qdev.h:106
 msgid "``sync_config``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:109
+#: ../../../../include/hw/core/qdev.h:107
 msgid ""
 "Callback function invoked when QMP command device-sync-config is called. "
 "Should synchronize device configuration from host to guest part and notify "
 "the guest about the change."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:179
+#: ../../../../include/hw/core/qdev.h:177
 msgid "``vmsd``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:180
+#: ../../../../include/hw/core/qdev.h:178
 msgid "device state serialisation description for migration/save/restore"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:185
+#: ../../../../include/hw/core/qdev.h:183
 msgid "``bus_type``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:186
+#: ../../../../include/hw/core/qdev.h:184
 msgid "bus type private: to qdev / bus."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:217
+#: ../../../../include/hw/core/qdev.h:215
 msgid "common device state, accessed with qdev helpers"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:223
+#: ../../../../include/hw/core/qdev.h:221
 msgid ""
 "struct DeviceState {\n"
 "    char *id;\n"
@@ -303,149 +305,149 @@ msgid ""
 "};"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:228
+#: ../../../../include/hw/core/qdev.h:226
 msgid "``id``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:229
+#: ../../../../include/hw/core/qdev.h:227
 msgid "global device id"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:232
+#: ../../../../include/hw/core/qdev.h:230
 msgid "``canonical_path``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:233
+#: ../../../../include/hw/core/qdev.h:231
 msgid "canonical path of realized device in the QOM tree"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:236
+#: ../../../../include/hw/core/qdev.h:234
 #: ../../../../include/hw/core/qdev.h:376
 msgid "``realized``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:237
+#: ../../../../include/hw/core/qdev.h:235
 msgid "has device been realized?"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:240
+#: ../../../../include/hw/core/qdev.h:238
 msgid "``pending_deleted_event``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:241
+#: ../../../../include/hw/core/qdev.h:239
 msgid "track pending deletion events during unplug"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:244
+#: ../../../../include/hw/core/qdev.h:242
 msgid "``pending_deleted_expires_ms``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:245
+#: ../../../../include/hw/core/qdev.h:243
 msgid "optional timeout for deletion events"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:248
+#: ../../../../include/hw/core/qdev.h:246
 msgid "``hotplugged``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:249
+#: ../../../../include/hw/core/qdev.h:247
 msgid "was device added after PHASE_MACHINE_READY?"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:252
+#: ../../../../include/hw/core/qdev.h:250
 msgid "``allow_unplug_during_migration``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:253
+#: ../../../../include/hw/core/qdev.h:251
 msgid "can device be unplugged during migration"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:256
+#: ../../../../include/hw/core/qdev.h:254
 msgid "``parent_bus``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:257
+#: ../../../../include/hw/core/qdev.h:255
 msgid "bus this device belongs to"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:260
+#: ../../../../include/hw/core/qdev.h:258
 msgid "``gpios``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:261
+#: ../../../../include/hw/core/qdev.h:259
 msgid "QLIST of named GPIOs the device provides."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:264
+#: ../../../../include/hw/core/qdev.h:262
 msgid "``clocks``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:265
+#: ../../../../include/hw/core/qdev.h:263
 msgid "QLIST of named clocks the device provides."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:268
+#: ../../../../include/hw/core/qdev.h:266
 msgid "``child_bus``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:269
+#: ../../../../include/hw/core/qdev.h:267
 msgid "QLIST of child buses"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:272
+#: ../../../../include/hw/core/qdev.h:270
 msgid "``num_child_bus``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:273
+#: ../../../../include/hw/core/qdev.h:271
 msgid "number of **child_bus** entries"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:276
+#: ../../../../include/hw/core/qdev.h:274
 msgid "``instance_id_alias``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:277
+#: ../../../../include/hw/core/qdev.h:275
 msgid "device alias for handling legacy migration setups"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:280
+#: ../../../../include/hw/core/qdev.h:278
 msgid "``alias_required_for_version``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:281
+#: ../../../../include/hw/core/qdev.h:279
 msgid "indicates **instance_id_alias** is needed for migration"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:285
+#: ../../../../include/hw/core/qdev.h:283
 #: ../../../../include/hw/core/qdev.h:402
 msgid "``reset``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:286
+#: ../../../../include/hw/core/qdev.h:284
 msgid "ResettableState for the device; handled by Resettable interface."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:289
+#: ../../../../include/hw/core/qdev.h:287
 msgid "``unplug_blockers``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:290
+#: ../../../../include/hw/core/qdev.h:288
 msgid "list of reasons to block unplugging of device"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:293
+#: ../../../../include/hw/core/qdev.h:291
 msgid "``mem_reentrancy_guard``"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:294
+#: ../../../../include/hw/core/qdev.h:292
 msgid "Is the device currently in mmio/pio/dma?"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:296
+#: ../../../../include/hw/core/qdev.h:294
 msgid "Used to prevent re-entrancy confusing things."
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:3 ../../../../include/hw/core/qdev.h:299
+#: ../../../../include/hw/core/qdev.h:3 ../../../../include/hw/core/qdev.h:297
 #: ../../../../include/hw/core/qdev.h:413
 #: ../../../../include/hw/core/qdev.h:425
 #: ../../../../include/hw/core/qdev.h:451
@@ -478,7 +480,7 @@ msgstr ""
 msgid "**Description**"
 msgstr ""
 
-#: ../../../../include/hw/core/qdev.h:218
+#: ../../../../include/hw/core/qdev.h:216
 msgid ""
 "This structure should not be accessed directly.  We declare it here so that "
 "it can be embedded in individual device state structures."
@@ -489,7 +491,7 @@ msgid ""
 "struct BusState {\n"
 "    DeviceState *parent;\n"
 "    char *name;\n"
-"    HotplugHandler *hotplug_handler;\n"
+"    const HotplugHandler *hotplug_handler;\n"
 "    int max_index;\n"
 "    bool realized;\n"
 "    bool full;\n"
@@ -692,6 +694,30 @@ msgid "check if device is realized"
 msgstr ""
 
 #: ../../../../include/hw/core/qdev.h:440
+#: ../../../../include/hw/core/qdev.h:690
+msgid "``const DeviceState *dev``"
+msgstr ""
+
+#: ../../../../include/hw/core/qdev.h:435
+msgid "The device to check."
+msgstr ""
+
+#: ../../../../include/hw/core/qdev.h:437
+msgid "**Context**"
+msgstr ""
+
+#: ../../../../include/hw/core/qdev.h:437
+msgid "May be called outside big qemu lock."
+msgstr ""
+
+#: ../../../../include/hw/core/qdev.h:438
+msgid "true if the device has been fully constructed, false otherwise."
+msgstr ""
+
+#: ../../../../include/hw/core/qdev.h:446
+msgid "Realize **dev**."
+msgstr ""
+
 #: ../../../../include/hw/core/qdev.h:452
 #: ../../../../include/hw/core/qdev.h:471
 #: ../../../../include/hw/core/qdev.h:499
@@ -715,26 +741,6 @@ msgstr ""
 #: ../../../../include/hw/core/qdev.h:1028
 #: ../../../../include/hw/core/qdev.h:1046
 msgid "``DeviceState *dev``"
-msgstr ""
-
-#: ../../../../include/hw/core/qdev.h:435
-msgid "The device to check."
-msgstr ""
-
-#: ../../../../include/hw/core/qdev.h:437
-msgid "**Context**"
-msgstr ""
-
-#: ../../../../include/hw/core/qdev.h:437
-msgid "May be called outside big qemu lock."
-msgstr ""
-
-#: ../../../../include/hw/core/qdev.h:438
-msgid "true if the device has been fully constructed, false otherwise."
-msgstr ""
-
-#: ../../../../include/hw/core/qdev.h:446
-msgid "Realize **dev**."
 msgstr ""
 
 #: ../../../../include/hw/core/qdev.h:447
@@ -1129,10 +1135,6 @@ msgstr ""
 
 #: ../../../../include/hw/core/qdev.h:684
 msgid "Get the qemu_irq connected to an output GPIO"
-msgstr ""
-
-#: ../../../../include/hw/core/qdev.h:690
-msgid "``const DeviceState *dev``"
 msgstr ""
 
 #: ../../../../include/hw/core/qdev.h:685
