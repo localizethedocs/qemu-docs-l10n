@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-10-05 17:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -494,10 +494,52 @@ msgid ""
 msgstr ""
 
 #: ../../../devel/migration/postcopy.rst:298
-msgid "Postcopy blocktime statistics"
+msgid "Postcopy with multifd"
 msgstr ""
 
 #: ../../../devel/migration/postcopy.rst:300
+msgid ""
+"The ``multifd`` capability can be enabled together with ``postcopy-ram`` "
+"since the 10.1 QEMU release.  The two features apply to different phases of "
+"the migration:"
+msgstr ""
+
+#: ../../../devel/migration/postcopy.rst:304
+msgid ""
+"During the precopy phase, guest pages are sent over the multifd channels as "
+"usual, so the initial RAM transfer can use all of them."
+msgstr ""
+
+#: ../../../devel/migration/postcopy.rst:307
+msgid ""
+"Just before switching to postcopy, the source flushes and syncs the multifd "
+"channels.  This guarantees that all the pages already queued on those "
+"channels are loaded on the destination *before* the destination CPUs are "
+"started, which is required because loading a page in a multifd receive "
+"thread is not atomic with regard to a running vCPU."
+msgstr ""
+
+#: ../../../devel/migration/postcopy.rst:313
+msgid ""
+"During the postcopy phase the multifd channels are no longer used for guest "
+"pages.  Both the background stream and the pages requested by the "
+"destination go through the background migration channel instead, or through "
+"the preempt channel for the requested pages when postcopy preemption is "
+"enabled."
+msgstr ""
+
+#: ../../../devel/migration/postcopy.rst:319
+msgid ""
+"Consequently, multifd only speeds up the precopy phase of a postcopy "
+"migration.  The bandwidth available once postcopy has started is the same as "
+"without multifd."
+msgstr ""
+
+#: ../../../devel/migration/postcopy.rst:324
+msgid "Postcopy blocktime statistics"
+msgstr ""
+
+#: ../../../devel/migration/postcopy.rst:326
 msgid ""
 "Blocktime is a postcopy live migration metric, intended to show how long the "
 "vCPU was in state of interruptible sleep due to pagefault. That metric is "
@@ -506,11 +548,11 @@ msgid ""
 "blocktime calculation, enter following command on destination monitor:"
 msgstr ""
 
-#: ../../../devel/migration/postcopy.rst:307
+#: ../../../devel/migration/postcopy.rst:333
 msgid "``migrate_set_capability postcopy-blocktime on``"
 msgstr ""
 
-#: ../../../devel/migration/postcopy.rst:309
+#: ../../../devel/migration/postcopy.rst:335
 msgid ""
 "Postcopy blocktime can be retrieved by query-migrate qmp command. postcopy-"
 "blocktime value of qmp command will show overlapped blocking time for all "

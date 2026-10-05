@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-05 17:38+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/guest-memfd.rst:4
+msgid "guest-memfd support"
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:6
+msgid ""
+"Recent kernels allow for the creation of a guest-memfd file descriptor, "
+"which can be used to back VMs in a similar manner as a memfd file "
+"descriptor, but is intended specifically for this purpose and allows for "
+"closer coordination between KVM and the management of this memory to enable "
+"more advanced/VM-specific use-cases."
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:12
+msgid ""
+"Initially this additional functionality centered around providing a common/"
+"centralized place for managing kernel-side memory handing requirements for "
+"various Confidential Guest architectures. (For more on Confidential Guests, "
+"see :ref:`confidential-guest-support`)."
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:17
+msgid ""
+"guest_memfd has since evolved to become a more general-purpose way to "
+"allocate/manage guest memory and potentially allow for things like providing "
+"additional memory isolation within the kernel[1] and support for persisting "
+"a guest's state across kexec to allow for live-updating the host kernel with "
+"minimal guest downtime[2]."
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:24
+msgid "Usage"
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:26
+msgid ""
+"For Confidential Guests, guest-memfd is currently utilized internally by "
+"QEMU to handle private guest memory, independently of whatever memory "
+"backend the user has configured for normal/non-private/shared guest memory. "
+"To avoid doubling memory, QEMU discards memory in response to the guest "
+"converting GPA ranges between shared/private. (e.g. if GPA X is converted "
+"from private to shared, the guest-memfd FD offset corresponding to GPA x "
+"will be truncated since the memory will be provided by the memory backend "
+"the user configured for shared memory, and vice-versa). This is handled "
+"automatically/internally for Confidential Guests that rely on this handling "
+"and is not directly exposed by QEMU command-line options."
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:38
+msgid ""
+"For non-Confidential guests, guest-memfd can be used in a manner that is "
+"somewhat interchangeable with a normal memfd. Currently, this is handled by "
+"using the same memory-backend implementation as memfd, but with an "
+"additional 'guest-memfd=on' option. E.g.::"
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:43
+msgid ""
+"qemu ... \\\n"
+"  -object memory-backend-memfd,id=ID,size=SIZE,share=on,guest-memfd=on"
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:46
+msgid ""
+"Note that the share=on option is required for guest-memfd, since it does not "
+"support anonymous memory allocations or COW-like semantics."
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:49
+msgid ""
+"Also note that there are a couple of limitations in using guest_memfd in "
+"this way compared to a normal memfd, which is why the option is exposed as "
+"an experimental for the time being:"
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:53
+msgid "guest_memfd does not currently support the hugetlb=on option"
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:54
+msgid "guest_memfd does not currently support Transparent Huge Pages"
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:57
+msgid "References"
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:59
+msgid ""
+"`[1] directmap removal <https://lore.kernel.org/kvm/20260317141031.514-1-"
+"kalyazin@amazon.com/>`__"
+msgstr ""
+
+#: ../../../system/guest-memfd.rst:60
+msgid ""
+"`[2] LUO <https://lore.kernel.org/kvm/20260728121138.1103610-1-"
+"tarunsahu@google.com/>`__"
+msgstr ""
