@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-23 09:30+0000\n"
+"POT-Creation-Date: 2026-10-05 17:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../../system/confidential-guest-support.rst:2
+#: ../../../system/confidential-guest-support.rst:4
 msgid "Confidential Guest Support"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:4
+#: ../../../system/confidential-guest-support.rst:6
 msgid ""
 "Traditionally, hypervisors such as QEMU have complete access to a guest's "
 "memory and other state, meaning that a compromised hypervisor can compromise "
@@ -31,7 +31,7 @@ msgid ""
 "cloud environments."
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:11
+#: ../../../system/confidential-guest-support.rst:13
 msgid ""
 "These mechanisms have different names and different modes of operation, but "
 "are often referred to as Secure Guests or Confidential Guests.  We use the "
@@ -40,32 +40,32 @@ msgid ""
 "from network sources)."
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:18
+#: ../../../system/confidential-guest-support.rst:20
 msgid "Running a Confidential Guest"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:20
+#: ../../../system/confidential-guest-support.rst:22
 msgid ""
 "To run a confidential guest you need to add two command line parameters:"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:22
+#: ../../../system/confidential-guest-support.rst:24
 msgid ""
 "Use ``-object`` to create a \"confidential guest support\" object.  The type "
 "and parameters will vary with the specific mechanism to be used"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:25
+#: ../../../system/confidential-guest-support.rst:27
 msgid ""
 "Set the ``confidential-guest-support`` machine parameter to the ID of the "
 "object from (1)."
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:28
+#: ../../../system/confidential-guest-support.rst:30
 msgid "Example (for AMD SEV)::"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:30
+#: ../../../system/confidential-guest-support.rst:32
 msgid ""
 "qemu-system-x86_64 \\\n"
 "    <other parameters> \\\n"
@@ -73,38 +73,38 @@ msgid ""
 "    -object sev-guest,id=sev0,cbitpos=47,reduced-phys-bits=1"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:36
+#: ../../../system/confidential-guest-support.rst:38
 msgid "Supported mechanisms"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:38
+#: ../../../system/confidential-guest-support.rst:40
 msgid "Currently supported confidential guest mechanisms are:"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:40
+#: ../../../system/confidential-guest-support.rst:42
 msgid ""
 "AMD Secure Encrypted Virtualization (SEV) (see :doc:`i386/amd-memory-"
 "encryption`)"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:41
+#: ../../../system/confidential-guest-support.rst:43
 msgid "Intel Trust Domain Extension (TDX) (see :doc:`i386/tdx`)"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:42
+#: ../../../system/confidential-guest-support.rst:44
 msgid ""
 "POWER Protected Execution Facility (PEF) (see :ref:`power-papr-protected-"
 "execution-facility-pef`)"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:43
+#: ../../../system/confidential-guest-support.rst:45
 msgid "s390x Protected Virtualization (PV) (see :doc:`s390x/protvirt`)"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:44
+#: ../../../system/confidential-guest-support.rst:46
 msgid "AWS Nitro Enclaves (see :doc:`nitro`)"
 msgstr ""
 
-#: ../../../system/confidential-guest-support.rst:46
+#: ../../../system/confidential-guest-support.rst:48
 msgid "Other mechanisms may be supported in future."
 msgstr ""
