@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-10-19 16:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,12 +138,12 @@ msgstr ""
 
 #: ../../../tools/qemu-nbd.rst:98
 msgid ""
-"Load an internal snapshot inside *filename* and export it as an read-only "
-"device, SNAPSHOT_PARAM format is ``snapshot.id=[ID],snapshot.name=[NAME]`` "
-"or ``[ID_OR_NAME]``"
+"Load an internal snapshot inside *filename* and export it. SNAPSHOT_PARAM "
+"format is ``snapshot.id=[ID],snapshot.name=[NAME]`` or ``[ID_OR_NAME]``. The "
+"export is read-only unless ``-s`` is also in use."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:104
+#: ../../../tools/qemu-nbd.rst:105
 msgid ""
 "The cache mode to be used with the file. Valid values are: ``none``, "
 "``writeback`` (the default), ``writethrough``, ``directsync`` and "
@@ -151,24 +151,24 @@ msgid ""
 "option for more info."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:111
+#: ../../../tools/qemu-nbd.rst:112
 msgid "Equivalent to :option:`--cache=none`."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:115
+#: ../../../tools/qemu-nbd.rst:116
 msgid ""
 "Set the asynchronous I/O mode between ``threads`` (the default), ``native`` "
 "(Linux only), and ``io_uring`` (Linux 5.1+)."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:120
+#: ../../../tools/qemu-nbd.rst:121
 msgid ""
 "Control whether ``discard`` (also known as ``trim`` or ``unmap``) requests "
 "are ignored or passed to the filesystem. *DISCARD* is one of ``ignore`` (or "
 "``off``), ``unmap`` (or ``on``).  The default is ``ignore``."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:127
+#: ../../../tools/qemu-nbd.rst:128
 msgid ""
 "Control the automatic conversion of plain zero writes by the OS to driver-"
 "specific optimized zero write commands.  *DETECT_ZEROES* is one of ``off``, "
@@ -177,39 +177,39 @@ msgid ""
 "``off``."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:135
+#: ../../../tools/qemu-nbd.rst:136
 msgid "Connect *filename* to NBD device *DEV* (Linux only)."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:139
+#: ../../../tools/qemu-nbd.rst:140
 msgid "Disconnect the device *DEV* (Linux only)."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:143
+#: ../../../tools/qemu-nbd.rst:144
 msgid ""
 "Allow up to *NUM* clients to share the device (default ``1``), 0 for "
 "unlimited."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:148
+#: ../../../tools/qemu-nbd.rst:149
 msgid "Don't exit on the last connection."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:152
+#: ../../../tools/qemu-nbd.rst:153
 msgid "Set the NBD volume export name (default of a zero-length string)."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:156
+#: ../../../tools/qemu-nbd.rst:157
 msgid "Set the NBD volume export description, as a human-readable string."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:161
+#: ../../../tools/qemu-nbd.rst:162
 msgid ""
 "Set the timeout for a client to successfully complete its handshake to N "
 "seconds (default 10), or 0 for no limit."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:166
+#: ../../../tools/qemu-nbd.rst:167
 msgid ""
 "Connect as a client and list all details about the exports exposed by a "
 "remote NBD server.  This enables list mode, and is incompatible with options "
@@ -217,14 +217,14 @@ msgid ""
 "name`, :option:`--offset`, ...)."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:173
+#: ../../../tools/qemu-nbd.rst:174
 msgid ""
 "Enable mandatory TLS encryption for the server by setting the ID of the TLS "
 "credentials object previously created with the :option:`--object` option; or "
 "provide the credentials needed for connecting as a client in list mode."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:180
+#: ../../../tools/qemu-nbd.rst:181
 msgid ""
 "When validating an x509 certificate received over a TLS connection, the "
 "hostname that the NBD client used to connect will be checked against "
@@ -238,34 +238,34 @@ msgid ""
 "option:`--list` option."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:193
+#: ../../../tools/qemu-nbd.rst:194
 msgid ""
 "Fork off the server process and exit the parent once the server is running."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:197
+#: ../../../tools/qemu-nbd.rst:198
 msgid "Store the server's process ID in the given file."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:201
+#: ../../../tools/qemu-nbd.rst:202
 msgid ""
 "Specify the ID of a qauthz object previously created with the :option:`--"
 "object` option. This will be used to authorize connecting users against "
 "their x509 distinguished name."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:207
+#: ../../../tools/qemu-nbd.rst:208
 msgid ""
 "Display extra debugging information. This option also keeps the original "
 "*STDERR* stream open if the ``qemu-nbd`` process is daemonized due to other "
 "options like :option:`--fork` or :option:`-c`."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:213
+#: ../../../tools/qemu-nbd.rst:214
 msgid "Display this help and exit."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:217
+#: ../../../tools/qemu-nbd.rst:218
 msgid "Display version information and exit."
 msgstr ""
 
@@ -312,11 +312,11 @@ msgid ""
 "compiled with the ``simple`` tracing backend."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:224
+#: ../../../tools/qemu-nbd.rst:225
 msgid "Examples"
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:226
+#: ../../../tools/qemu-nbd.rst:227
 msgid ""
 "Start a server listening on port 10809 that exposes only the guest-visible "
 "contents of a qcow2 file, with no TLS encryption, and with the default "
@@ -324,18 +324,18 @@ msgid ""
 "the first successful client disconnects:"
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:234
+#: ../../../tools/qemu-nbd.rst:235
 msgid "qemu-nbd -f qcow2 file.qcow2"
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:236
+#: ../../../tools/qemu-nbd.rst:237
 msgid ""
 "Start a long-running server listening with encryption on port 10810, and "
 "allow clients with a specific X.509 certificate to connect to a 1 megabyte "
 "subset of a raw file, using the export name 'subset':"
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:242
+#: ../../../tools/qemu-nbd.rst:243
 msgid ""
 "qemu-nbd \\\n"
 "  --object tls-creds-x509,id=tls0,endpoint=server,dir=/path/to/qemutls \\\n"
@@ -347,19 +347,19 @@ msgid ""
 "filename=file.raw"
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:250
+#: ../../../tools/qemu-nbd.rst:251
 msgid ""
 "Serve a read-only copy of a guest image over a Unix socket with as many as 5 "
 "simultaneous readers, with a persistent process forked as a daemon:"
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:256
+#: ../../../tools/qemu-nbd.rst:257
 msgid ""
 "qemu-nbd --fork --persistent --shared=5 --socket=/path/to/sock \\\n"
 "  --read-only --format=qcow2 file.qcow2"
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:259
+#: ../../../tools/qemu-nbd.rst:260
 msgid ""
 "Expose the guest-visible contents of a qcow2 file via a block device /dev/"
 "nbd0 (and possibly creating /dev/nbd0p1 and friends for partitions found "
@@ -371,19 +371,19 @@ msgid ""
 "attempt to trigger kernel bugs in partition probing or file system mounting."
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:271
+#: ../../../tools/qemu-nbd.rst:272
 msgid ""
 "qemu-nbd -c /dev/nbd0 -f qcow2 file.qcow2\n"
 "qemu-nbd -d /dev/nbd0"
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:274
+#: ../../../tools/qemu-nbd.rst:275
 msgid ""
 "Query a remote server to see details about what export(s) it is serving on "
 "port 10809, and authenticating via PSK:"
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:279
+#: ../../../tools/qemu-nbd.rst:280
 msgid ""
 "qemu-nbd \\\n"
 "  --object tls-creds-psk,id=tls0,dir=/tmp/keys,username=eblake,"
@@ -391,10 +391,10 @@ msgid ""
 "  --tls-creds tls0 -L -b remote.example.com"
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:284
+#: ../../../tools/qemu-nbd.rst:285
 msgid "See also"
 msgstr ""
 
-#: ../../../tools/qemu-nbd.rst:286
+#: ../../../tools/qemu-nbd.rst:287
 msgid ":manpage:`qemu(1)`, :manpage:`qemu-img(1)`"
 msgstr ""
