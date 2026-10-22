@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-09 04:01+0000\n"
+"POT-Creation-Date: 2026-10-19 16:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgid ""
 msgstr ""
 
 #: ../../../devel/testing/main.rst:16
-msgid "[./pyvenv/bin/]meson test --suite qemu:softfloat"
+msgid "./run meson test --suite qemu:softfloat"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:18
@@ -1640,54 +1640,78 @@ msgid "Running subset of tests"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:1038
-msgid "You can build the tests for one architecture::"
+msgid "You can build and run the TCG tests using respectively::"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:1040
-msgid "make build-tcg-tests-$TARGET"
+msgid ""
+"make tcg-tests\n"
+"make check-tcg-$TARGET"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1042
-msgid "And run with::"
+#: ../../../devel/testing/main.rst:1043
+msgid "Or for a single target::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1044
-msgid "make run-tcg-tests-$TARGET"
+#: ../../../devel/testing/main.rst:1045
+msgid ""
+"make tcg-tests-$TARGET\n"
+"make check-tcg-$TARGET"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1046
+#: ../../../devel/testing/main.rst:1048
 msgid ""
 "Adding ``V=1`` to the invocation will show the details of how to invoke QEMU "
 "for the test which is useful for debugging tests."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1050
+#: ../../../devel/testing/main.rst:1051 ../../../devel/testing/main.rst:1063
+msgid "Tests can also be run using directly meson test::"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1053
+msgid ""
+"./run meson test --suite tcg\n"
+"./run meson test --suite tcg-$TARGET"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1056
+msgid "Tests can be listed using::"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1058
+msgid "./run meson test --suite tcg --list"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1061
 msgid "Running individual tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1052
-msgid ""
-"Tests can also be run directly from the test build directory. If you run "
-"``make help`` from the test build directory you will get a list of all the "
-"tests that can be run. Please note that same binaries are used in multiple "
-"tests, for example::"
+#: ../../../devel/testing/main.rst:1065
+msgid "./run meson test $TARGET-$TEST"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1057
-msgid "make run-plugin-test-mmap-with-libinline.so"
+#: ../../../devel/testing/main.rst:1067
+msgid "For instance::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1059
-msgid ""
-"will run the mmap test with the ``libinline.so`` TCG plugin. The gdbstub "
-"tests also re-use the test binaries but while exercising gdb."
+#: ../../../devel/testing/main.rst:1069
+msgid "./run meson test aarch64-softmmu-hello"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1063
+#: ../../../devel/testing/main.rst:1071
+msgid "Test command and output can be accessed by using verbose flag::"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1073
+msgid "./run meson test aarch64-softmmu-hello --verbose"
+msgstr ""
+
+#: ../../../devel/testing/main.rst:1076
 msgid "TCG test dependencies"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1065
+#: ../../../devel/testing/main.rst:1078
 msgid ""
 "The TCG tests are deliberately very light on dependencies and are either "
 "totally bare with minimal gcc lib support (for system-mode tests) or just "
@@ -1695,21 +1719,21 @@ msgid ""
 "work with additional libraries can be challenging."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1071
+#: ../../../devel/testing/main.rst:1084
 msgid "Other TCG Tests"
 msgstr "其他 TCG 測試"
 
-#: ../../../devel/testing/main.rst:1073
+#: ../../../devel/testing/main.rst:1086
 msgid ""
 "There are a number of out-of-tree test suites that are used for more "
 "extensive testing of processor features."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1077
+#: ../../../devel/testing/main.rst:1090
 msgid "KVM Unit Tests"
 msgstr "KVM 單元測試"
 
-#: ../../../devel/testing/main.rst:1079
+#: ../../../devel/testing/main.rst:1092
 msgid ""
 "The KVM unit tests are designed to run as a Guest OS under KVM but there is "
 "no reason why they can't exercise the TCG as well. It provides a minimal OS "
@@ -1717,15 +1741,15 @@ msgid ""
 "a special device::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1084
+#: ../../../devel/testing/main.rst:1097
 msgid "https://git.kernel.org/pub/scm/virt/kvm/kvm-unit-tests.git"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1087
+#: ../../../devel/testing/main.rst:1100
 msgid "Linux Test Project"
 msgstr "Linux 測試專案"
 
-#: ../../../devel/testing/main.rst:1089
+#: ../../../devel/testing/main.rst:1102
 msgid ""
 "The LTP is focused on exercising the syscall interface of a Linux kernel. It "
 "checks that syscalls behave as documented and strives to exercise as many "
@@ -1733,46 +1757,46 @@ msgid ""
 "QEMU's linux-user code::"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1094
+#: ../../../devel/testing/main.rst:1107
 msgid "https://linux-test-project.github.io/"
 msgstr "https://linux-test-project.github.io/"
 
-#: ../../../devel/testing/main.rst:1097
+#: ../../../devel/testing/main.rst:1110
 msgid "GCC gcov support"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1099
+#: ../../../devel/testing/main.rst:1112
 msgid ""
 "``gcov`` is a GCC tool to analyze the testing coverage by instrumenting the "
 "tested code. To use it, configure QEMU with ``--enable-gcov`` option and "
 "build. Then run the tests as usual."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1103
+#: ../../../devel/testing/main.rst:1116
 msgid ""
 "If you want to gather coverage information on a single test the ``make clean-"
 "gcda`` target can be used to delete any existing coverage information before "
 "running a single test."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1107
+#: ../../../devel/testing/main.rst:1120
 msgid ""
 "You can generate a HTML coverage report by executing ``make coverage-html`` "
 "which will create ``meson-logs/coveragereport/index.html``."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1111
+#: ../../../devel/testing/main.rst:1124
 msgid ""
 "Further analysis can be conducted by running the ``gcov`` command directly "
 "on the various .gcda output files. Please read the ``gcov`` documentation "
 "for more information."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1116
+#: ../../../devel/testing/main.rst:1129
 msgid "Flaky tests"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1118
+#: ../../../devel/testing/main.rst:1131
 msgid ""
 "A flaky test is defined as a test that exhibits both a passing and a failing "
 "result with the same code on different runs. Some usual reasons for an "
@@ -1780,34 +1804,34 @@ msgid ""
 "dependency [4]_."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1123
+#: ../../../devel/testing/main.rst:1136
 msgid ""
 "In QEMU, tests that are identified to be flaky are normally disabled by "
 "default. Set the QEMU_TEST_FLAKY_TESTS environment variable before running "
 "the tests to enable them."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1128
+#: ../../../devel/testing/main.rst:1141
 msgid "References"
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1130
+#: ../../../devel/testing/main.rst:1143
 msgid "Sommerville, Ian (2016). Software Engineering. p. 233."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1131
+#: ../../../devel/testing/main.rst:1144
 msgid ""
 "Pressman, Roger S. & Maxim, Bruce R. (2020). Software Engineering, A "
 "Practitioner’s Approach. p. 48, 376, 378, 381."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1133
+#: ../../../devel/testing/main.rst:1146
 msgid ""
 "Pressman, Roger S. & Maxim, Bruce R. (2020). Software Engineering, A "
 "Practitioner’s Approach. p. 388."
 msgstr ""
 
-#: ../../../devel/testing/main.rst:1135
+#: ../../../devel/testing/main.rst:1148
 msgid ""
 "Luo, Qingzhou, et al. An empirical analysis of flaky tests. Proceedings of "
 "the 22nd ACM SIGSOFT International Symposium on Foundations of Software "

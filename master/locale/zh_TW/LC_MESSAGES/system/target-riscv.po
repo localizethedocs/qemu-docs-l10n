@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-09 04:01+0000\n"
+"POT-Creation-Date: 2026-10-19 16:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,21 +99,21 @@ msgid ""
 "machine help``, or ``qemu-system-riscv32 --machine help``."
 msgstr ""
 
-#: ../../../system/target-riscv.rst:80
+#: ../../../system/target-riscv.rst:82
 msgid "RISC-V CPU firmware"
 msgstr ""
 
-#: ../../../system/target-riscv.rst:82
+#: ../../../system/target-riscv.rst:84
 msgid ""
 "When using the ``sifive_u`` or ``virt`` machine there are three different "
 "firmware boot options:"
 msgstr ""
 
-#: ../../../system/target-riscv.rst:85
+#: ../../../system/target-riscv.rst:87
 msgid "``-bios default``"
 msgstr ""
 
-#: ../../../system/target-riscv.rst:87
+#: ../../../system/target-riscv.rst:89
 msgid ""
 "This is the default behaviour if no ``-bios`` option is included. This "
 "option will load the default OpenSBI firmware automatically. The firmware is "
@@ -122,29 +122,29 @@ msgid ""
 "kernel`` option"
 msgstr ""
 
-#: ../../../system/target-riscv.rst:92
+#: ../../../system/target-riscv.rst:94
 msgid "``-bios none``"
 msgstr ""
 
-#: ../../../system/target-riscv.rst:94
+#: ../../../system/target-riscv.rst:96
 msgid ""
 "QEMU will not automatically load any firmware. It is up to the user to load "
 "all the images they need."
 msgstr ""
 
-#: ../../../system/target-riscv.rst:97
+#: ../../../system/target-riscv.rst:99
 msgid "``-bios <file>``"
 msgstr ""
 
-#: ../../../system/target-riscv.rst:99
+#: ../../../system/target-riscv.rst:101
 msgid "Tells QEMU to load the specified file as the firmware."
 msgstr ""
 
-#: ../../../system/target-riscv.rst:102
+#: ../../../system/target-riscv.rst:104
 msgid "RISC-V CPU endianness"
 msgstr ""
 
-#: ../../../system/target-riscv.rst:104
+#: ../../../system/target-riscv.rst:106
 msgid ""
 "The RISC-V ISA specifies that instruction fetches are always little-endian, "
 "while data accesses can be either little-endian or big-endian under control "
@@ -152,7 +152,7 @@ msgid ""
 "Endianness\", in the RISC-V Privileged Specification)."
 msgstr ""
 
-#: ../../../system/target-riscv.rst:109
+#: ../../../system/target-riscv.rst:111
 msgid ""
 "QEMU implements the full data-endianness behaviour described by those bits. "
 "In addition, the RISC-V CPU object exposes a ``big-endian`` boolean property "
@@ -163,7 +163,7 @@ msgid ""
 "CPU hardware configuration option and is not meant to be toggled at runtime."
 msgstr ""
 
-#: ../../../system/target-riscv.rst:118
+#: ../../../system/target-riscv.rst:120
 msgid ""
 "The property does not model a mixed-endian implementation where software can "
 "toggle ``MBE``/``SBE``/``UBE`` at runtime. QEMU's RISC-V CPUs treat these "
@@ -171,15 +171,15 @@ msgid ""
 "to 1 when ``big-endian`` is enabled."
 msgstr ""
 
-#: ../../../system/target-riscv.rst:123
+#: ../../../system/target-riscv.rst:125
 msgid "The property can be enabled from the command line, for example::"
 msgstr ""
 
-#: ../../../system/target-riscv.rst:125
+#: ../../../system/target-riscv.rst:127
 msgid "-cpu <cpu>,big-endian=on"
 msgstr ""
 
-#: ../../../system/target-riscv.rst:127
+#: ../../../system/target-riscv.rst:129
 msgid ""
 "No upstream CPU model currently defaults to big-endian; the property is "
 "provided so that big-endian-only RISC-V CPU variants can be modelled."
