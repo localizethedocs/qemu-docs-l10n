@@ -1,0 +1,194 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-19 16:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/devices/ufs.rst:5
+msgid "UFS Emulation"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:7
+msgid ""
+"QEMU emulates a Universal Flash Storage (UFS) host controller and the "
+"logical units behind it. The host controller follows the UFSHCI register "
+"interface and reports UFS version 4.1 to the guest."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:11
+msgid "Two devices are involved:"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:13
+msgid "``ufs``"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:14
+msgid ""
+"The host controller on the PCI bus. A ``sysbus-ufs`` variant exists for "
+"boards that place the controller on the system bus; it cannot be created "
+"with ``-device``."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:18
+msgid "``ufs-lu``"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:19
+msgid ""
+"A logical unit attached to a host controller through ``bus=``. Each logical "
+"unit is backed by a block device."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:22
+msgid ""
+"The well-known logical units (REPORT LUNS, UFS Device, Boot and RPMB) are "
+"created by the host controller and need no configuration."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:26
+msgid "Adding a UFS Device"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:28
+msgid ""
+"The following adds a host controller with MCQ enabled and one logical unit "
+"backed by ``ufs.img``:"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:31
+msgid ""
+"-drive file=ufs.img,if=none,id=lu0,format=raw \\\n"
+"-device ufs,id=ufs0,serial=0001,mcq=on \\\n"
+"-device ufs-lu,drive=lu0,bus=ufs0,lun=0"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:37
+msgid ""
+"Add more ``ufs-lu`` devices with different ``lun`` values to create more "
+"logical units. On top of the architecture defconfig, a Linux guest needs "
+"``CONFIG_SCSI_UFSHCD``, ``CONFIG_SCSI_UFSHCD_PCI`` and "
+"``CONFIG_BLK_DEV_SD``; each logical unit then appears as a SCSI disk."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:43
+msgid "Host Controller Properties"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:45
+msgid "``serial``"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:46
+msgid ""
+"Serial number string. It is accepted but not reported to the guest yet; the "
+"serial number string descriptor reads back empty."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:49
+msgid "``nutrs`` (default 32, maximum 32)"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:50
+msgid "Number of UTP transfer request slots."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:52
+msgid "``nutmrs`` (default 8, maximum 8)"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:53
+msgid ""
+"Number of UTP task management request slots advertised to the guest. Task "
+"management requests are not processed yet (see Limitations)."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:56
+msgid "``mcq`` (default off)"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:57
+msgid ""
+"Advertise Multi-Circular Queue (MCQ) support. When off, the guest uses the "
+"single doorbell transfer request list."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:60
+msgid "``mcq-maxq`` (default 2, maximum 31)"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:61
+msgid "Number of MCQ submission and completion queue pairs."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:63
+msgid "``wb-max-size``, ``wb-min-size`` (default 0x400 and 0x100)"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:64
+msgid ""
+"Maximum and minimum WriteBooster buffer size, in allocation units. ``wb-min-"
+"size`` must not exceed ``wb-max-size``."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:68
+msgid "Logical Unit Properties"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:70
+msgid "``drive``"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:71
+msgid "Backing block device."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:73
+msgid "``lun`` (default 0)"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:74
+msgid ""
+"Logical unit number, 0 to 31. A host controller accepts up to 32 logical "
+"units."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:78
+msgid "Limitations"
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:80
+msgid ""
+"UniPro and M-PHY are not modelled. Only the UIC commands needed for link "
+"startup, DME attribute access and hibernation are handled; DME reads return "
+"fixed values, and DME writes, power mode changes and hibernation do not "
+"change any link state."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:84
+msgid ""
+"UTP task management requests are not processed, so a guest that tries to "
+"abort a command or reset a logical unit gets no completion."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:86
+msgid ""
+"The Boot and RPMB well-known logical units only answer basic SCSI commands "
+"such as INQUIRY; boot and RPMB data access are not emulated."
+msgstr ""
+
+#: ../../../system/devices/ufs.rst:88
+msgid "The device cannot be migrated."
+msgstr ""

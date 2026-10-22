@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-10-19 16:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,56 +103,81 @@ msgstr ""
 #: ../../../interop/pr-helper.rst:56
 msgid ""
 "the command (stored in the first byte) must be one of 0x5E (PERSISTENT "
-"RESERVE IN) or 0x5F (PERSISTENT RESERVE OUT)."
+"RESERVE IN), 0x5F (PERSISTENT RESERVE OUT), or 0xFF (PR HELPER CLEANUP, see "
+"below)."
 msgstr ""
 
-#: ../../../interop/pr-helper.rst:59
+#: ../../../interop/pr-helper.rst:60
 msgid ""
 "the allocation length (stored in bytes 7-8 of the CDB for PERSISTENT RESERVE "
 "IN) or parameter list length (stored in bytes 5-8 of the CDB for PERSISTENT "
 "RESERVE OUT) is limited to 8 KiB."
 msgstr ""
 
-#: ../../../interop/pr-helper.rst:63
+#: ../../../interop/pr-helper.rst:64
 msgid ""
 "For PERSISTENT RESERVE OUT, the parameter list is sent right after the CDB.  "
 "The length of the parameter list is taken from the CDB itself."
 msgstr ""
 
-#: ../../../interop/pr-helper.rst:66
+#: ../../../interop/pr-helper.rst:67
+msgid ""
+"The PR HELPER CLEANUP command is a vendor-specific command without a "
+"parameter list that has the following effect on Linux device-mapper "
+"multipath devices and otherwise has no effect. This command is intended for "
+"cleaning up the multipath device on the source host after live migration has "
+"completed successfully:"
+msgstr ""
+
+#: ../../../interop/pr-helper.rst:72
+msgid "Sends \"unsetprkey map <dm-target>\" to multipathd."
+msgstr ""
+
+#: ../../../interop/pr-helper.rst:74
+msgid "Sends \"unsetprstatus map <dm-target>\" to multipathd."
+msgstr ""
+
+#: ../../../interop/pr-helper.rst:76
+msgid ""
+"Performs PERSISTENT RESERVE OUT with the REGISTER AND IGNORE EXISTING KEY "
+"service action containing zero values for the RESERVATION KEY and SERVICE "
+"ACTION RESERVATION KEY."
+msgstr ""
+
+#: ../../../interop/pr-helper.rst:80
 msgid "The helper's reply has the following structure:"
 msgstr ""
 
-#: ../../../interop/pr-helper.rst:68
+#: ../../../interop/pr-helper.rst:82
 msgid "4 bytes for the SCSI status"
 msgstr ""
 
-#: ../../../interop/pr-helper.rst:70
+#: ../../../interop/pr-helper.rst:84
 msgid ""
 "4 bytes for the payload size (nonzero only for PERSISTENT RESERVE IN and "
 "only if the SCSI status is 0x00, i.e. GOOD)"
 msgstr ""
 
-#: ../../../interop/pr-helper.rst:73
+#: ../../../interop/pr-helper.rst:87
 msgid "96 bytes for the SCSI sense data"
 msgstr ""
 
-#: ../../../interop/pr-helper.rst:75
+#: ../../../interop/pr-helper.rst:89
 msgid "if the size is nonzero, the payload follows"
 msgstr ""
 
-#: ../../../interop/pr-helper.rst:77
+#: ../../../interop/pr-helper.rst:91
 msgid ""
 "The sense data is always sent to keep the protocol simple, even though it is "
 "only valid if the SCSI status is CHECK CONDITION (0x02)."
 msgstr ""
 
-#: ../../../interop/pr-helper.rst:80
+#: ../../../interop/pr-helper.rst:94
 msgid ""
 "The payload size is always less than or equal to the allocation length "
 "specified in the CDB for the PERSISTENT RESERVE IN command."
 msgstr ""
 
-#: ../../../interop/pr-helper.rst:83
+#: ../../../interop/pr-helper.rst:97
 msgid "If the protocol is violated, the helper closes the socket."
 msgstr ""
