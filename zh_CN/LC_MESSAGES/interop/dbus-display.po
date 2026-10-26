@@ -1,0 +1,1081 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-19 16:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../interop/dbus-display.rst:4
+msgid "D-Bus display"
+msgstr ""
+
+#: ../../../interop/dbus-display.rst:6
+msgid ""
+"QEMU can export the VM display through D-Bus (when started with ``-display "
+"dbus``), to allow out-of-process UIs, remote protocol servers or other "
+"interactive display usages."
+msgstr ""
+
+#: ../../../interop/dbus-display.rst:10
+msgid ""
+"Various specialized D-Bus interfaces are available on different object paths "
+"under ``/org/qemu/Display1/``, depending on the VM configuration."
+msgstr ""
+
+#: ../../../interop/dbus-display.rst:13
+msgid ""
+"QEMU also implements the standard interfaces, such as `org.freedesktop.DBus."
+"Introspectable <https://dbus.freedesktop.org/doc/dbus-specification."
+"html#standard-interfaces>`_."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "This interface is implemented on ``/org/qemu/Display1/VM``."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:0
+msgid "Access"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:0
+msgid "Emits Changed"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The name of the VM."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The UUID of the VM."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The list of consoles available on ``/org/qemu/Display1/Console_$id``."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This property lists extra interfaces provided by the /org/qemu/Display1/VM "
+"object, and can be used to detect the capabilities with which they are "
+"communicating."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Unlike the standard D-Bus Introspectable interface, querying this property "
+"does not require parsing XML."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "(earlier version of the display interface do not provide this property)"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This interface is implemented on ``/org/qemu/Display1/Console_$id``. You may "
+"discover available consoles through introspection or with the :dbus:prop:"
+"`org.qemu.Display1.VM.ConsoleIDs` property."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"A console is attached to a video device head. It may be \"Graphic\" or "
+"\"Text\" (see :dbus:prop:`Type` and other properties)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Interactions with a console may be done with :dbus:iface:`org.qemu.Display1."
+"Keyboard`, :dbus:iface:`org.qemu.Display1.Mouse` and :dbus:iface:`org.qemu."
+"Display1.MultiTouch` interfaces when available."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:0 ../../../interop/dbus-display.rst:0
+msgid "Arguments"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "a Unix socket FD, for peer-to-peer D-Bus communication."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Register a console listener, which will receive display updates, until it is "
+"disconnected."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Multiple listeners may be registered simultaneously."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"The listener is expected to implement the :dbus:iface:`org.qemu.Display1."
+"Listener` interface."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the physical display width in millimeters."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the physical display height in millimeters."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "horizontal offset, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "vertical offset, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "console width, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "console height, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Modify the dimensions and display settings."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+":dbus:iface:`org.qemu.Display1.UIInfo` which supports a superset of these "
+"properties."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "A user-friendly name for the console (for ex: \"VGA\")."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Graphical device head number."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Console type (\"Graphic\" or \"Text\")."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Console width, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Console height, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The device address (ex: \"pci/0000/02.0\")."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This property lists extra interfaces provided by the ``/org/qemu/Display1/"
+"Console_$id`` object, and can be used to detect the capabilities with which "
+"they are communicating."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This interface is optionally implemented on ``/org/qemu/Display1/"
+"Console_$id`` (see :dbus:iface:`~org.qemu.Display1.Console`)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "QEMU key number (xtkbd + special re-encoding of high bit)"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Send a key press event."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Send a key release event."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The active keyboard modifiers::"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Scroll = 1 << 0\n"
+"Num    = 1 << 1\n"
+"Caps   = 1 << 2"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This interface is optionally implemented on ``/org/qemu/Display1/"
+"Console_$id`` (see :dbus:iface:`~org.qemu.Display1.Console` documentation)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "**Button values**::"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Left       = 0\n"
+"Middle     = 1\n"
+"Right      = 2\n"
+"Wheel-up   = 3\n"
+"Wheel-down = 4\n"
+"Side       = 5\n"
+"Extra      = 6"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ":ref:`button value<dbus-button-values>`."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Send a mouse button press event."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Send a mouse button release event."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "X position, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Y position, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Set the mouse pointer position."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Returns an error if not :dbus:prop:`IsAbsolute`."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "X-delta, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Y-delta, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Move the mouse pointer position, relative to the current position."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Returns an error if :dbus:prop:`IsAbsolute`."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Whether the mouse is using absolute movements."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This interface in implemented on ``/org/qemu/Display1/Console_$id`` (see :"
+"dbus:iface:`~org.qemu.Display1.Console` documentation)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "**Kind values**::"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Begin       = 0\n"
+"Update      = 1\n"
+"End         = 2\n"
+"Cancel      = 3"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The touch event kind"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The slot number."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The x coordinates."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The y coordinates."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Send a touch gesture event."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The maximum number of slots."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This client-side interface must be available on ``/org/qemu/Display1/"
+"Listener`` when registering the peer-to-peer connection with :dbus:meth:"
+"`~org.qemu.Display1.Console.Register`."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "display width, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "display height, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "data stride, in bytes."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "image format (ex: ``PIXMAN_X8R8G8B8``)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "image data."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Resize and update the display content."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"The data to transfer for the display update may be large. The preferred "
+"scanout method is :dbus:meth:`ScanoutDMABUF`, used whenever possible."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "X update position, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Y update position, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "update width, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "update height, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "display image data."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Update the display content."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "This method is only called after a :dbus:meth:`Scanout` call."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the DMABUF file descriptor."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "stride, in bytes."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "DMABUF fourcc."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "DMABUF modifier."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "whether Y position 0 is the top or not."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Resize and update the display content with a DMABUF."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the X update position, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the Y update position, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the update width, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the update height, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Update the display content with the current DMABUF and the given region."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Disable the display (turn it off)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "X mouse position, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Y mouse position, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "whether the mouse is visible or not."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Set the mouse position and visibility."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "cursor width, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "cursor height, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "hot-spot X position, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "hot-spot Y position, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the cursor data."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Set the mouse cursor shape and hot-spot. The \"data\" must be ARGB, 32-bit "
+"per pixel."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This property lists extra interfaces provided by the /org/qemu/Display1/"
+"Listener object, and can be used to detect the capabilities with which they "
+"are communicating."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This optional client-side interface can complement org.qemu.Display1."
+"Listener on ``/org/qemu/Display1/Listener`` for Unix-specific shared memory "
+"scanouts."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the shared map FD."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "mapping offset, in bytes."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Resize and update the display content with a shared map."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Update the display content with the current shared map and the given region."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This optional client-side interface can complement org.qemu.Display1."
+"Listener on ``/org/qemu/Display1/Listener`` for Windows specific shared "
+"memory scanouts."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the shared file mapping handle value (not a file handle)"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "mapping offset."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Resize and update the display content with a shared file mapping object."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This optional client-side interface can complement org.qemu.Display1."
+"Listener on ``/org/qemu/Display1/Listener`` for Windows specific Direct3D "
+"texture sharing of the scanouts."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"the NT handle for the shared texture (to be opened back with ID3D11Device1::"
+"OpenSharedResource1)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "texture width, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "texture height, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the X scanout position, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the Y scanout position, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the scanout width, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the scanout height, in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Resize and update the display content with a Direct3D 11 2D texture. You "
+"must acquire and release the associated KeyedMutex 0 during rendering."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Update the display content with the current Direct3D 2D texture and the "
+"given region. You must acquire and release the associated KeyedMutex 0 "
+"during rendering."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This optional client-side interface can complement org.qemu.Display1."
+"Listener on ``/org/qemu/Display1/Listener`` for Unix-specific DMABUF scanout "
+"setup which support multi plane."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "DMABUF file descriptor of each plane."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "display x offset, in pixels"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "display y offset, in pixels"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "offset of each plane, in bytes."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "stride of each plane, in bytes."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "plane number."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "backing framebuffer width, in pixels"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "backing framebuffer height, in pixels"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Resize and update the display content with DMABUF."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This interface must be implemented by both the client and the server on ``/"
+"org/qemu/Display1/Clipboard`` to support clipboard sharing between the "
+"client and the guest."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Once :dbus:meth:`Register`'ed, method calls may be sent and received in both "
+"directions. Unregistered callers will get error replies."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "**Selection values**::"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Clipboard   = 0\n"
+"Primary     = 1\n"
+"Secondary   = 2"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "**Serial counter**"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"To solve potential clipboard races, clipboard grabs have an associated "
+"serial counter. It is set to 0 on registration, and incremented by 1 for "
+"each grab. The peer with the highest serial is the clipboard grab owner."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "When a grab with a lower serial is received, it should be discarded."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"When a grab is attempted with the same serial number as the current grab, "
+"the one coming from the client should have higher priority, and the client "
+"should gain clipboard grab ownership."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Register a clipboard session and reinitialize the serial counter."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"The client must register itself, and is granted an exclusive access for "
+"handling the clipboard."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The server can reinitialize the session as well (to reset the counter)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Unregister the clipboard session."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "a :ref:`selection value<dbus-clipboard-selection>`."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the current grab :ref:`serial<dbus-clipboard-serial>`."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the list of available content MIME types."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Grab the clipboard, claiming current clipboard content."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Release the clipboard (does nothing if not the current owner)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "a :ref:`selection value<dbus-clipboard-selection>`"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "requested MIME types (by order of preference)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:0 ../../../interop/dbus-display.rst:0
+msgid "Returns"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the returned data MIME type."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the clipboard data."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Request the clipboard content."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Return an error if the clipboard is empty, or the requested MIME types are "
+"unavailable."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This property lists extra interfaces provided by the /org/qemu/Display1/"
+"Clipboard object, and can be used to detect the capabilities with which they "
+"are communicating."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Audio backend may be available on ``/org/qemu/Display1/Audio``."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Register an audio backend playback handler."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"The listener is expected to implement the :dbus:iface:`org.qemu.Display1."
+"AudioOutListener` interface."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Register an audio backend record handler."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"The listener is expected to implement the :dbus:iface:`org.qemu.Display1."
+"AudioInListener` interface."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"The number of samples per read/write frames. (for example the default is "
+"480, or 10ms at 48kHz)"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This property lists extra interfaces provided by the /org/qemu/Display1/"
+"Audio object, and can be used to detect the capabilities with which they are "
+"communicating."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This client-side interface must be available on ``/org/qemu/Display1/"
+"AudioOutListener`` when registering the peer-to-peer connection with :dbus:"
+"meth:`~org.qemu.Display1.Audio.RegisterOutListener`."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the stream ID."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "PCM bits per sample."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "whether the PCM data is signed."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "PCM floating point format."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the PCM frequency in Hz."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the number of channels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the bytes per frame."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the bytes per second."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "whether using big-endian format."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Initializes a PCM playback stream."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Finish & close a playback stream."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Resume or suspend the playback stream."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "whether the stream is muted."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the volume per-channel."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Set the stream volume and mute state (volume without unit, 0-255)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the PCM data."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "PCM stream to play."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This property lists extra interfaces provided by the /org/qemu/Display1/"
+"AudioOutListener object, and can be used to detect the capabilities with "
+"which they are communicating."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This client-side interface must be available on ``/org/qemu/Display1/"
+"AudioInListener`` when registering the peer-to-peer connection with :dbus:"
+"meth:`~org.qemu.Display1.Audio.RegisterInListener`."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Initializes a PCM record stream."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Finish & close a record stream."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Resume or suspend the record stream."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the amount to read, in bytes."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "the recorded data (which may be less than requested)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Read \"size\" bytes from the record stream."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This property lists extra interfaces provided by the /org/qemu/Display1/"
+"AudioInListener object, and can be used to detect the capabilities with "
+"which they are communicating."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Character devices may be available on ``/org/qemu/Display1/Chardev_$id``."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"They may be used for different kind of streams, which are identified via "
+"their FQDN :dbus:prop:`Name`."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Here are some known reserved kind names (the ``org.qemu`` prefix is reserved "
+"by QEMU):"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "org.qemu.console.serial.0"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "A serial console stream."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "org.qemu.monitor.hmp.0"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "A QEMU HMP human monitor."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "org.qemu.monitor.qmp.0"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "A QEMU QMP monitor."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "org.qemu.usbredir"
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "A usbredir stream."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "a Unix FD to redirect the stream to."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Register a file-descriptor for the stream handling."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The current handler, if any, will be replaced."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Send a break event to the character device."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"The FQDN name to identify the kind of stream. See :ref:`reserved names<dbus-"
+"chardev-fqdn>`."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Whether the front-end side is opened."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Whether the input should be echo'ed (for serial streams)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "The D-Bus unique name of the registered handler."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This property lists extra interfaces provided by the ``/org/qemu/Display1/"
+"Chardev_$i`` object, and can be used to detect the capabilities with which "
+"they are communicating."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Provides encoding information for virtual console chardevs."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This interface is present on chardev objects that are virtual consoles, and "
+"exposes the character encoding used by the guest."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"The character encoding used by the virtual console (matching "
+"``ChardevVCEncoding``): ``cp437`` or ``utf8``."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"This interface is implemented on ``/org/qemu/Display1/Console_$id`` (see :"
+"dbus:iface:`~org.qemu.Display1.Console`)."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "a dictionary of UI info properties."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Return the currently requested properties for the console. The list of "
+"returned properties may vary and be extended in the future."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "``width_mm`` (q): the physical display width in millimeters."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "``height_mm`` (q): the physical display height in millimeters."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "``xoff`` (i): the horizontal offset in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "``yoff`` (i): the vertical offset in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "``width`` (u): the console width in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "``height`` (u): the console height in pixels."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "``refresh_rate`` (u): the display refresh rate in millihertz."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "a dictionary of new UI info properties."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"Apply the properties to the console display. The dictionary schema of "
+"``Apply`` is a subset of that of ``Get``."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid ""
+"The properties will be merged with existing values. Extra keys will be "
+"ignored. The invocation will fail if any key has the wrong type, leaving the "
+"UI info unchanged."
+msgstr ""
+
+#: ../../../../ui/dbus-display1.xml:1
+msgid "Whether console UI info is supported."
+msgstr ""

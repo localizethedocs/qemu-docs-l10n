@@ -1,0 +1,3490 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-19 16:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../interop/vhost-user.rst:5
+msgid "Vhost-user Protocol"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:14
+msgid "Table of Contents"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:17
+msgid "Introduction"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:19
+msgid ""
+"This protocol is aiming to complement the ``ioctl`` interface used to "
+"control the vhost implementation in the Linux kernel. It implements the "
+"control plane needed to establish virtqueue sharing with a user space "
+"process on the same host. It uses communication over a Unix domain socket to "
+"share file descriptors in the ancillary data of the message."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:26
+msgid ""
+"The protocol defines 2 sides of the communication, *front-end* and *back-"
+"end*. The *front-end* is the application that shares its virtqueues, in our "
+"case QEMU. The *back-end* is the consumer of the virtqueues."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:30
+msgid ""
+"In the current implementation QEMU is the *front-end*, and the *back-end* is "
+"the external process consuming the virtio queues, for example a software "
+"Ethernet switch running in user space, such as Snabbswitch, or a block "
+"device back-end processing read & write to a virtual disk. In order to "
+"facilitate interoperability between various back-end implementations, it is "
+"recommended to follow the :ref:`Backend program conventions "
+"<backend_conventions>`."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:38
+msgid ""
+"The *front-end* and *back-end* can be either a client (i.e. connecting) or "
+"server (listening) in the socket communication."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:42
+msgid "Support for platforms other than Linux"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:44
+msgid ""
+"While vhost-user was initially developed targeting Linux, nowadays it is "
+"supported on any platform that provides the following features:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:47
+msgid ""
+"A way for requesting shared memory represented by a file descriptor so it "
+"can be passed over a UNIX domain socket and then mapped by the other process."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:51
+msgid ""
+"AF_UNIX sockets with SCM_RIGHTS, so QEMU and the other process can exchange "
+"messages through it, including ancillary data when needed."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:54
+msgid ""
+"Either eventfd or pipe/pipe2. On platforms where eventfd is not available, "
+"QEMU will automatically fall back to pipe2 or, as a last resort, pipe. Each "
+"file descriptor will be used for receiving or sending events by reading or "
+"writing (respectively) an 8-byte value to the corresponding it. The 8-value "
+"itself has no meaning and should not be interpreted."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:62
+msgid "Message Specification"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:64
+msgid "All numbers are in the machine native byte order."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:66
+msgid "A vhost-user message consists of 3 header fields and a payload."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:69
+msgid "request"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:69
+#: ../../../interop/vhost-user.rst:152 ../../../interop/vhost-user.rst:297
+#: ../../../interop/vhost-user.rst:381
+msgid "flags"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:69
+#: ../../../interop/vhost-user.rst:184 ../../../interop/vhost-user.rst:202
+#: ../../../interop/vhost-user.rst:270 ../../../interop/vhost-user.rst:297
+#: ../../../interop/vhost-user.rst:315
+msgid "size"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:69
+#: ../../../interop/vhost-user.rst:297
+msgid "payload"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:73
+msgid "Header"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:75
+msgid "32-bit type of the request"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:77
+msgid "32-bit bit field"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:79
+msgid "Lower 2 bits are the version (currently 0x01)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:80
+msgid ""
+"Bit 2 is the reply flag - needs to be sent on each reply from the back-end"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:81
+msgid ""
+"Bit 3 is the need_reply flag - see :ref:`REPLY_ACK <reply_ack>` for details."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:84
+msgid "32-bit size of the payload"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:87
+msgid "Payload"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:89
+msgid "Depending on the request type, **payload** can be:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:92
+msgid "A single 64-bit integer"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:95
+#: ../../../interop/vhost-user.rst:315 ../../../interop/vhost-user.rst:1273
+#: ../../../interop/vhost-user.rst:1426 ../../../interop/vhost-user.rst:1682
+msgid "u64"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:98
+msgid "a 64-bit unsigned integer"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:101
+msgid "A vring state description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:104
+#: ../../../interop/vhost-user.rst:152
+msgid "index"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:104
+msgid "num"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:107
+msgid "a 32-bit index"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:109
+msgid "a 32-bit number"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:112
+msgid "A vring descriptor index for split virtqueues"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:115
+#: ../../../interop/vhost-user.rst:132
+msgid "vring index"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:115
+msgid "index in avail ring"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:118 ../../../interop/vhost-user.rst:135
+msgid "32-bit index of the respective virtqueue"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:120
+msgid "32-bit value, of which currently only the lower 16 bits are used:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:123
+msgid ""
+"Bits 0–15: Index of the next *Available Ring* descriptor that the back-end "
+"will process.  This is a free-running index that is not wrapped by the ring "
+"size."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:126
+msgid "Bits 16–31: Reserved (set to zero)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:129
+msgid "Vring descriptor indices for packed virtqueues"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:132
+msgid "descriptor indices"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:137
+msgid "32-bit value:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:139
+msgid ""
+"Bits 0–14: Index of the next *Available Ring* descriptor that the back-end "
+"will process.  This is a free-running index that is not wrapped by the ring "
+"size."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:142
+msgid "Bit 15: Driver (Available) Ring Wrap Counter"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:143
+msgid ""
+"Bits 16–30: Index of the entry in the *Used Ring* where the back-end will "
+"place the next descriptor.  This is a free-running index that is not wrapped "
+"by the ring size."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:146
+msgid "Bit 31: Device (Used) Ring Wrap Counter"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:149
+msgid "A vring address description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:152
+msgid "descriptor"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:152
+msgid "used"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:152
+msgid "available"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:152
+msgid "log"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:155
+msgid "a 32-bit vring index"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:157
+msgid "a 32-bit vring flags"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:159
+msgid "a 64-bit ring address of the vring descriptor table"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:161
+msgid "a 64-bit ring address of the vring used ring"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:163
+msgid "a 64-bit ring address of the vring available ring"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:165
+msgid "a 64-bit guest address for logging"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:168
+msgid ""
+"When ``VIRTIO_F_IOMMU_PLATFORM`` is negotiated, ring addresses are IOVAs."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:170
+msgid ""
+"Otherwise, when ``VHOST_USER_PROTOCOL_F_GPA_ADDRESSES`` is negotiated, the "
+"ring addresses are guest physical addresses for frontend messages. That does "
+"not apply to backend replies."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:174
+msgid ""
+"Finally, when neither ``VIRTIO_F_IOMMU_PLATFORM`` nor "
+"``VHOST_USER_PROTOCOL_F_GPA_ADDRESSES`` features are negotiated, ring "
+"addresses are user virtual addresses."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:181
+msgid "Memory region description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:184
+#: ../../../interop/vhost-user.rst:202
+msgid "guest address"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:184
+#: ../../../interop/vhost-user.rst:202 ../../../interop/vhost-user.rst:270
+msgid "user address"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:184
+#: ../../../interop/vhost-user.rst:202 ../../../interop/vhost-user.rst:329
+msgid "mmap offset"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:187
+msgid "a 64-bit guest address of the region"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:189 ../../../interop/vhost-user.rst:275
+msgid "a 64-bit size"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:191
+msgid ""
+"a 64-bit user address. When ``VHOST_USER_PROTOCOL_F_GPA_ADDRESSES`` is "
+"negotiated, this field contain guest physical address instead and must "
+"duplicate ``guest address`` field."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:195
+msgid "a 64-bit offset where region starts in the mapped memory"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:197
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_XEN_MMAP`` protocol feature has been "
+"successfully negotiated, the memory region description contains two extra "
+"fields at the end."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:202
+msgid "xen mmap flags"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:202
+msgid "domid"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:205
+msgid "a 32-bit bit field"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:207
+msgid "Bit 0 is set for Xen foreign memory mapping."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:208
+msgid "Bit 1 is set for Xen grant memory mapping."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:209
+msgid ""
+"Bit 8 is set if the memory region can not be mapped in advance, and memory "
+"areas within this region must be mapped / unmapped only when required by the "
+"back-end. The back-end shouldn't try to map the entire region at once, as "
+"the front-end may not allow it. The back-end should rather map only the "
+"required amount of memory at once and unmap it after it is used."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:215
+msgid "a 32-bit Xen hypervisor specific domain id."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:217
+msgid "For all memory regions active at a given time:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:219
+msgid ""
+"``[guest address, guest address + size)`` of one memory region never "
+"overlaps the ``[guest address, guest address + size)`` of another memory "
+"region."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:222
+msgid ""
+"``[user address, user address + size)`` of one memory region never overlaps "
+"the ``[user address, user address + size)`` of another memory region."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:225
+msgid ""
+"Violating any of these is a bug in the front-end. This ensures that a guest "
+"address or user address always refers to at most one location in memory. The "
+"front-end must remove a region before it can add an overlapping one."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:230
+msgid "Single memory region description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:233
+#: ../../../interop/vhost-user.rst:244 ../../../interop/vhost-user.rst:381
+#: ../../../interop/vhost-user.rst:403
+msgid "padding"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:233
+msgid "region"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:236
+msgid "64-bit"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:238
+msgid ""
+"region is represented by :ref:`Memory region description "
+"<memory_region_description>`."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:241
+msgid "Multiple Memory regions description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:244
+#: ../../../interop/vhost-user.rst:403
+msgid "num regions"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:244
+msgid "region0"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:244 ../../../interop/vhost-user.rst:862
+msgid "..."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:244
+msgid "region7"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:247 ../../../interop/vhost-user.rst:406
+msgid "a 32-bit number of regions"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:249 ../../../interop/vhost-user.rst:408
+msgid "32-bit"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0
+msgid "regions"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:251
+msgid ""
+"regions field contains 8 regions of type :ref:`Memory region description "
+"<memory_region_description>`."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:254
+msgid "Log description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:257
+msgid "log size"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:257
+msgid "log offset"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:260
+msgid "a 64-bit size of area used for logging"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:262
+msgid ""
+"a 64-bit offset from start of supplied file descriptor where logging starts "
+"(i.e. where guest address 0 would be logged)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:267
+msgid "An IOTLB message"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:270
+msgid "iova"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:270
+msgid "permissions flags"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:270
+msgid "type"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:273
+msgid "a 64-bit I/O virtual address programmed by the guest"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:277
+msgid ""
+"a 64-bit user address. When ``VHOST_USER_PROTOCOL_F_GPA_ADDRESSES`` is "
+"negotiated, this field contain guest physical address instead, except for "
+"``VHOST_USER_BACKEND_IOTLB_MSG``, where it's user address anyway."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:281
+msgid ""
+"an 8-bit value: - 0: No access - 1: Read access - 2: Write access - 3: Read/"
+"Write access"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:287
+msgid ""
+"an 8-bit IOTLB message type: - 1: IOTLB miss - 2: IOTLB update - 3: IOTLB "
+"invalidate - 4: IOTLB access fail"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:294
+msgid "Virtio device config space"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:297
+#: ../../../interop/vhost-user.rst:315
+msgid "offset"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:300
+msgid "a 32-bit offset of virtio device's configuration space"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:302
+msgid "a 32-bit configuration space access size in bytes"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:304
+msgid ""
+"a 32-bit value: - 0: Vhost front-end messages used for writable fields - 1: "
+"Vhost front-end messages used for live migration"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:308
+msgid ""
+"Size bytes array holding the contents of the virtio device's configuration "
+"space"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:312
+msgid "Vring area description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:318
+msgid "a 64-bit integer contains vring index and flags"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:320
+msgid "a 64-bit size of this area"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:322 ../../../interop/vhost-user.rst:334
+#: ../../../interop/vhost-user.rst:386
+msgid ""
+"a 64-bit offset of this area from the start of the supplied file descriptor"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:326
+msgid "Inflight description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:329
+msgid "mmap size"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:329
+msgid "num queues"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:329
+msgid "queue size"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:332
+msgid "a 64-bit size of area to track inflight I/O"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:337
+msgid "a 16-bit number of virtqueues"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:339
+msgid "a 16-bit size of virtqueues"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:342
+msgid "VhostUserShared"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:345
+msgid "UUID"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:348
+msgid ""
+"16 bytes UUID, whose first three components (a 32-bit value, then two 16-bit "
+"values) are stored in big endian."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:352
+msgid "Device state transfer parameters"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:355
+msgid "transfer direction"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:355
+msgid "migration phase"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:358
+msgid ""
+"a 32-bit enum, describing the direction in which the state is transferred:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:361
+msgid ""
+"0: Save: Transfer the state from the back-end to the front-end, which "
+"happens on the source side of migration"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:363
+msgid ""
+"1: Load: Transfer the state from the front-end to the back-end, which "
+"happens on the destination side of migration"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:366
+msgid ""
+"a 32-bit enum, describing the state in which the VM guest and devices are:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:369
+msgid ""
+"0: Stopped (in the period after the transfer of memory-mapped regions before "
+"switch-over to the destination): The VM guest is stopped, and the vhost-user "
+"device is suspended (see :ref:`Suspended device state "
+"<suspended_device_state>`)."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:374
+msgid ""
+"In the future, additional phases might be added e.g. to allow iterative "
+"migration while the device is running."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:378
+msgid "MMAP request"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:381
+msgid "shmid"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:381
+msgid "fd_offset"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:381
+msgid "shm_offset"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0 ../../../interop/vhost-user.rst:381
+msgid "len"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:384
+msgid "a 8-bit shared memory region identifier"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:389
+msgid "a 64-bit offset from the start of the pointed shared memory region"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:392
+msgid "a 64-bit size of the memory to map"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:394
+msgid "a 64-bit value:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:396
+msgid "0: Pages are mapped read-only"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:397
+msgid "1: Pages are mapped read-write"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:400
+msgid "VIRTIO Shared Memory Region configuration"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:403
+msgid "mem size 0"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:403
+msgid "mem size 255"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0
+msgid "mem size"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:410
+msgid ""
+"an array of 256 64-bit fields representing the size of each VIRTIO Shared "
+"Memory Region. ``num regions`` specifies the number of valid regions (non-"
+"zero size). The array index corresponds to the shared memory ID (shmid)."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:416
+msgid "C structure"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:418
+msgid ""
+"In QEMU the vhost-user message is implemented with the following struct:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:420
+msgid ""
+"typedef struct VhostUserMsg {\n"
+"    VhostUserRequest request;\n"
+"    uint32_t flags;\n"
+"    uint32_t size;\n"
+"    union {\n"
+"        uint64_t u64;\n"
+"        struct vhost_vring_state state;\n"
+"        struct vhost_vring_addr addr;\n"
+"        VhostUserMemory memory;\n"
+"        VhostUserMemRegMsg mem_reg;\n"
+"        VhostUserLog log;\n"
+"        struct vhost_iotlb_msg iotlb;\n"
+"        VhostUserConfig config;\n"
+"        VhostUserCryptoSession session;\n"
+"        VhostUserVringArea area;\n"
+"        VhostUserInflight inflight;\n"
+"        VhostUserShared object;\n"
+"        VhostUserTransferDeviceState transfer_state;\n"
+"        VhostUserMMap mmap;\n"
+"        VhostUserShMemConfig shmem;\n"
+"    };\n"
+"} QEMU_PACKED VhostUserMsg;"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:446
+msgid "Communication"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:448
+msgid ""
+"The protocol for vhost-user is based on the existing implementation of vhost "
+"for the Linux Kernel. Most messages that can be sent via the Unix domain "
+"socket implementing vhost-user have an equivalent ioctl to the kernel "
+"implementation."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:453
+msgid ""
+"The communication consists of the *front-end* sending message requests and "
+"the *back-end* sending message replies. Most of the requests don't require "
+"replies, except for the following requests:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:457 ../../../interop/vhost-user.rst:1168
+msgid "``VHOST_USER_GET_FEATURES``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:458 ../../../interop/vhost-user.rst:1190
+msgid "``VHOST_USER_GET_PROTOCOL_FEATURES``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:459 ../../../interop/vhost-user.rst:1327
+#: ../../../interop/vhost-user.rst:1329
+msgid "``VHOST_USER_GET_VRING_BASE``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:460 ../../../interop/vhost-user.rst:1867
+msgid "``VHOST_USER_GET_VRING_BASE_SKIP_DRAIN``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:461 ../../../interop/vhost-user.rst:474
+msgid "``VHOST_USER_SET_LOG_BASE`` (if ``VHOST_USER_PROTOCOL_F_LOG_SHMFD``)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:462
+msgid ""
+"``VHOST_USER_GET_INFLIGHT_FD`` (if ``VHOST_USER_PROTOCOL_F_INFLIGHT_SHMFD``)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:466
+msgid ":ref:`REPLY_ACK <reply_ack>`"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:467
+msgid "The section on ``REPLY_ACK`` protocol extension."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:469
+msgid ""
+"There are several messages that the front-end sends with file descriptors "
+"passed in the ancillary data:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:472 ../../../interop/vhost-user.rst:1692
+msgid "``VHOST_USER_ADD_MEM_REG``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:473 ../../../interop/vhost-user.rst:1246
+msgid "``VHOST_USER_SET_MEM_TABLE``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:475 ../../../interop/vhost-user.rst:1283
+msgid "``VHOST_USER_SET_LOG_FD``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:476 ../../../interop/vhost-user.rst:1366
+msgid "``VHOST_USER_SET_VRING_KICK``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:477 ../../../interop/vhost-user.rst:1385
+msgid "``VHOST_USER_SET_VRING_CALL``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:478 ../../../interop/vhost-user.rst:1404
+msgid "``VHOST_USER_SET_VRING_ERR``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:479 ../../../interop/vhost-user.rst:1479
+msgid ""
+"``VHOST_USER_SET_BACKEND_REQ_FD`` (previous name "
+"``VHOST_USER_SET_SLAVE_REQ_FD``)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:480
+msgid ""
+"``VHOST_USER_SET_INFLIGHT_FD`` (if ``VHOST_USER_PROTOCOL_F_INFLIGHT_SHMFD``)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:481 ../../../interop/vhost-user.rst:1775
+msgid "``VHOST_USER_SET_DEVICE_STATE_FD``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:483
+msgid ""
+"When sending file descriptors in ancillary data, *front-end* should "
+"associate the ancillary data with a ``sendmsg`` operation (or equivalent) "
+"that sends bytes starting with the first byte of the message header.  *back-"
+"end* can therefore expect that file descriptors will only be received in the "
+"first ``recvmsg`` operation for a message header."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:490
+msgid ""
+"If *front-end* is unable to send the full message or receives a wrong reply "
+"it will close the connection. An optional reconnection mechanism can be "
+"implemented."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:494
+msgid ""
+"If *back-end* detects some error such as incompatible features, it may also "
+"close the connection. This should only happen in exceptional circumstances."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:497
+msgid ""
+"Any protocol extensions are gated by protocol feature bits, which allows "
+"full backwards compatibility on both front-end and back-end.  As older back-"
+"ends don't support negotiating protocol features, a feature bit was "
+"dedicated for this purpose::"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:502
+msgid "#define VHOST_USER_F_PROTOCOL_FEATURES 30"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:504
+msgid ""
+"Note that VHOST_USER_F_PROTOCOL_FEATURES is the UNUSED (30) feature bit "
+"defined in `VIRTIO 1.1 6.3 Legacy Interface: Reserved Feature Bits <https://"
+"docs.oasis-open.org/virtio/virtio/v1.1/cs01/virtio-v1.1-cs01."
+"html#x1-4130003>`_. VIRTIO devices do not advertise this feature bit and "
+"therefore VIRTIO drivers cannot negotiate it."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:510
+msgid ""
+"This reserved feature bit was reused by the vhost-user protocol to add vhost-"
+"user protocol feature negotiation in a backwards compatible fashion. Old "
+"vhost-user front-end and back-end implementations continue to work even "
+"though they are not aware of vhost-user protocol feature negotiation."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:517
+msgid "Ring states"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:519
+msgid ""
+"Rings have two independent states: started/stopped, and enabled/disabled."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:521
+msgid ""
+"While a ring is stopped, the back-end must not process the ring at all, "
+"regardless of whether it is enabled or disabled.  The enabled/disabled state "
+"should still be tracked, though, so it can come into effect once the ring is "
+"started."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:526
+msgid ""
+"started and disabled: The back-end must process the ring without causing any "
+"side effects.  For example, for a networking device, in the disabled state "
+"the back-end must not supply any new RX packets, but must process and "
+"discard any TX packets."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:531
+msgid ""
+"started and enabled: The back-end must process the ring normally, i.e. "
+"process all requests and execute them."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:534
+msgid ""
+"Each ring is initialized in a stopped and disabled state.  Rings are started "
+"with ``VHOST_USER_SET_VRING_KICK`` (or ``VHOST_USER_VRING_KICK`` if "
+"``VHOST_USER_PROTOCOL_F_INBAND_NOTIFICATIONS`` is negotiated) and stopped "
+"with ``VHOST_USER_GET_VRING_BASE`` or "
+"``VHOST_USER_GET_VRING_BASE_SKIP_DRAIN``.  A stopped ring enters the started "
+"state again with ``VHOST_USER_SET_VRING_KICK`` (or ``VHOST_USER_VRING_KICK`` "
+"if ``VHOST_USER_PROTOCOL_F_INBAND_NOTIFICATIONS`` is negotiated) and the "
+"back-end resumes processing requests."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:542
+msgid ""
+"Note that previous versions of this specification stated that rings start "
+"when the back-end receives a kick (that is, detecting that file descriptor "
+"is readable) on the descriptor specified by ``VHOST_USER_SET_VRING_KICK`` or "
+"receiving the in-band message ``VHOST_USER_VRING_KICK`` if negotiated. "
+"Widely-used front-ends and back-ends did not implement this behavior and it "
+"complicates poll mode back-ends that do not rely on the kick file descriptor."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:549
+msgid ""
+"For compatibility with back-ends that implemented the start on kick "
+"behavior, front-ends SHOULD inject a kick after "
+"``VHOST_USER_SET_VRING_KICK``.  This ensures that the back-end processes any "
+"available requests in the ring. Back-ends SHOULD NOT rely on receiving a "
+"kick after ``VHOST_USER_SET_VRING_KICK``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:555
+msgid "Rings can be enabled or disabled by ``VHOST_USER_SET_VRING_ENABLE``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:557
+msgid ""
+"In addition, upon receiving a ``VHOST_USER_SET_FEATURES`` message from the "
+"front-end without ``VHOST_USER_F_PROTOCOL_FEATURES`` set, the back-end must "
+"enable all rings immediately."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:561
+msgid ""
+"While processing the rings (whether they are enabled or not), the back-end "
+"must support changing some configuration aspects on the fly."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:567
+msgid "Suspended device state"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:569
+msgid ""
+"While all vrings are stopped, the device is *suspended*.  In addition to not "
+"processing any vring (because they are stopped), the device must:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:572
+msgid "not write to any guest memory regions,"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:573
+msgid "not send any notifications to the guest,"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:574
+msgid "not send any messages to the front-end,"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:575
+msgid "still process and reply to messages from the front-end."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:578
+msgid "Multiple queue support"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:580
+msgid ""
+"Many devices have a fixed number of virtqueues.  In this case the front-end "
+"already knows the number of available virtqueues without communicating with "
+"the back-end."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:584
+msgid ""
+"Some devices do not have a fixed number of virtqueues.  Instead the maximum "
+"number of virtqueues is chosen by the back-end.  The number can depend on "
+"host resource availability or back-end implementation details.  Such devices "
+"are called multiple queue devices."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:589
+msgid ""
+"Multiple queue support allows the back-end to advertise the maximum number "
+"of queues.  This is treated as a protocol extension, hence the back-end has "
+"to implement protocol features first. The multiple queues feature is "
+"supported only when the protocol feature ``VHOST_USER_PROTOCOL_F_MQ`` (bit "
+"0) is set."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:594
+msgid ""
+"The max number of queues the back-end supports can be queried with message "
+"``VHOST_USER_GET_QUEUE_NUM``. Front-end should stop when the number of "
+"requested queues is bigger than that."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:598
+msgid ""
+"As all queues share one connection, the front-end uses a unique index for "
+"each queue in the sent message to identify a specified queue."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:601
+msgid ""
+"The front-end enables queues by sending message "
+"``VHOST_USER_SET_VRING_ENABLE``. vhost-user-net has historically "
+"automatically enabled the first queue pair."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:604
+msgid ""
+"Back-ends should always implement the ``VHOST_USER_PROTOCOL_F_MQ`` protocol "
+"feature, even for devices with a fixed number of virtqueues, since it is "
+"simple to implement and offers a degree of introspection."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:608
+msgid ""
+"Front-ends must not rely on the ``VHOST_USER_PROTOCOL_F_MQ`` protocol "
+"feature for devices with a fixed number of virtqueues.  Only true multiqueue "
+"devices require this protocol feature."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:613
+msgid "Migration"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:615
+msgid ""
+"During live migration, the front-end may need to track the modifications the "
+"back-end makes to the memory mapped regions. The front-end should mark the "
+"dirty pages in a log. Once it complies to this logging, it may declare the "
+"``VHOST_F_LOG_ALL`` vhost feature."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:620
+msgid ""
+"To start/stop logging of data/used ring writes, the front-end may send "
+"messages ``VHOST_USER_SET_FEATURES`` with ``VHOST_F_LOG_ALL`` and "
+"``VHOST_USER_SET_VRING_ADDR`` with ``VHOST_VRING_F_LOG`` in ring's flags set "
+"to 1/0, respectively."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:625
+msgid ""
+"All the modifications to memory pointed by vring \"descriptor\" should be "
+"marked. Modifications to \"used\" vring should be marked if "
+"``VHOST_VRING_F_LOG`` is part of ring's flags."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:629
+msgid "Dirty pages are of size::"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:631
+msgid "#define VHOST_LOG_PAGE 0x1000"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:633
+msgid ""
+"The log memory fd is provided in the ancillary data of "
+"``VHOST_USER_SET_LOG_BASE`` message when the back-end has "
+"``VHOST_USER_PROTOCOL_F_LOG_SHMFD`` protocol feature."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:637
+msgid ""
+"The size of the log is supplied as part of ``VhostUserMsg`` which should be "
+"large enough to cover all known guest addresses. Log starts at the supplied "
+"offset in the supplied file descriptor.  The log covers from address 0 to "
+"the maximum of guest regions. In pseudo-code, to mark page at ``addr`` as "
+"dirty::"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:643
+msgid ""
+"page = addr / VHOST_LOG_PAGE\n"
+"log[page / 8] |= 1 << page % 8"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:646
+msgid "Where ``addr`` is the guest physical address."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:648
+msgid "Use atomic operations, as the log may be concurrently manipulated."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:650
+msgid ""
+"Note that when logging modifications to the used ring (when "
+"``VHOST_VRING_F_LOG`` is set for this ring), ``log_guest_addr`` should be "
+"used to calculate the log offset: the write to first byte of the used ring "
+"is logged at this offset from log start. Also note that this value might be "
+"outside the legal guest physical address range (i.e. does not have to be "
+"covered by the ``VhostUserMemory`` table), but the bit offset of the last "
+"byte of the ring must fall within the size supplied by ``VhostUserLog``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:659
+msgid ""
+"``VHOST_USER_SET_LOG_FD`` is an optional message with an eventfd in "
+"ancillary data, it may be used to inform the front-end that the log has been "
+"modified."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:663
+msgid ""
+"Once the source has finished migration, rings will be stopped by the source "
+"(:ref:`Suspended device state <suspended_device_state>`). No further update "
+"must be done before rings are restarted."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:667
+msgid ""
+"In postcopy migration the back-end is started before all the memory has been "
+"received from the source host, and care must be taken to avoid accessing "
+"pages that have yet to be received.  The back-end opens a 'userfault'-fd and "
+"registers the memory with it; this fd is then passed back over to the front-"
+"end.  The front-end services requests on the userfaultfd for pages that are "
+"accessed and when the page is available it performs WAKE ioctl's on the "
+"userfaultfd to wake the stalled back-end.  The front-end indicates support "
+"for this via the ``VHOST_USER_PROTOCOL_F_PAGEFAULT`` feature."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:680
+msgid "Migrating back-end state"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:682
+msgid ""
+"Migrating device state involves transferring the state from one back-end, "
+"called the source, to another back-end, called the destination.  After "
+"migration, the destination transparently resumes operation without requiring "
+"the driver to re-initialize the device at the VIRTIO level.  If the "
+"migration fails, then the source can transparently resume operation until "
+"another migration attempt is made."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:689
+msgid ""
+"Generally, the front-end is connected to a virtual machine guest (which "
+"contains the driver), which has its own state to transfer between source and "
+"destination, and therefore will have an implementation-specific mechanism to "
+"do so.  The ``VHOST_USER_PROTOCOL_F_DEVICE_STATE`` feature provides "
+"functionality to have the front-end include the back-end's state in this "
+"transfer operation so the back-end does not need to implement its own "
+"mechanism, and so the virtual machine may have its complete state, including "
+"vhost-user devices' states, contained within a single stream of data."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:699
+msgid ""
+"To do this, the back-end state is transferred from back-end to front-end on "
+"the source side, and vice versa on the destination side.  This transfer "
+"happens over a channel that is negotiated using the "
+"``VHOST_USER_SET_DEVICE_STATE_FD`` message.  This message has two parameters:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:705
+msgid ""
+"Direction of transfer: On the source, the data is saved, transferring it "
+"from the back-end to the front-end.  On the destination, the data is loaded, "
+"transferring it from the front-end to the back-end."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:709
+msgid ""
+"Migration phase: Currently, the only supported phase is the period after the "
+"transfer of memory-mapped regions before switch-over to the destination, "
+"when both the source and destination devices are suspended (:ref:`Suspended "
+"device state <suspended_device_state>`). In the future, additional phases "
+"might be supported to allow iterative migration while the device is running."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:716
+msgid ""
+"The nature of the channel is implementation-defined, but it must generally "
+"behave like a pipe: The writing end will write all the data it has into it, "
+"signalling the end of data by closing its end.  The reading end must read "
+"all of this data (until encountering the end of file) and process it."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:722
+msgid ""
+"When saving, the writing end is the source back-end, and the reading end is "
+"the source front-end.  After reading the state data from the channel, the "
+"source front-end must transfer it to the destination front-end through an "
+"implementation-defined mechanism."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:727
+msgid ""
+"When loading, the writing end is the destination front-end, and the reading "
+"end is the destination back-end.  After reading the state data from the "
+"channel, the destination back-end must deserialize its internal state from "
+"that data and set itself up to allow the driver to seamlessly resume "
+"operation on the VIRTIO level."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:733
+msgid ""
+"Seamlessly resuming operation means that the migration must be transparent "
+"to the guest driver, which operates on the VIRTIO level. This driver will "
+"not perform any re-initialization steps, but continue to use the device as "
+"if no migration had occurred.  The vhost-user front-end, however, will re-"
+"initialize the vhost state on the destination, following the usual protocol "
+"for establishing a connection to a vhost-user back-end: This includes, for "
+"example, setting up memory mappings and kick and call FDs as necessary, "
+"negotiating protocol features, or setting the initial vring base indices (to "
+"the same value as on the source side, so that operation can resume). The "
+"vhost-user front-end may also write to the kick FDs of vrings containing "
+"unused buffers or send ``VHOST_USER_VRING_KICK`` if negotiated to start "
+"those vrings in the destination since the driver likely already kicked them "
+"in the source and won't do it again."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:747
+msgid ""
+"Both on the source and on the destination side, after the respective front-"
+"end has seen all data transferred (when the transfer FD has been closed), it "
+"sends the ``VHOST_USER_CHECK_DEVICE_STATE`` message to verify that data "
+"transfer was successful in the back-end, too.  The back-end responds once it "
+"knows whether the transfer and processing was successful or not."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:755
+msgid "Memory access"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:757
+msgid ""
+"The front-end sends a list of vhost memory regions to the back-end using the "
+"``VHOST_USER_SET_MEM_TABLE`` message.  Each region has two base addresses: a "
+"guest address and a user address."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:761
+msgid ""
+"Memory regions can be added via the ``VHOST_USER_ADD_MEM_REG`` message.  "
+"They can be removed via the ``VHOST_USER_REM_MEM_REG`` message. These "
+"messages can only be used if the "
+"``VHOST_USER_PROTOCOL_F_CONFIGURE_MEM_SLOTS`` protocol feature has been "
+"successfully negotiated."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:766
+msgid ""
+"Guest addresses are physical addresses in the guest.  User addresses are "
+"arbitrary opaque values, though they typically refer to userspace addresses "
+"in the client process."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:770
+msgid ""
+"Messages contain guest addresses and/or user addresses to reference "
+"locations within the shared memory.  The mapping of these addresses works as "
+"follows."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:773
+msgid ""
+"User addresses map to the vhost memory region containing that user address."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:775
+msgid "When the ``VIRTIO_F_IOMMU_PLATFORM`` feature has not been negotiated:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:777
+msgid ""
+"Guest addresses map to the vhost memory region containing that guest address."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:780
+msgid "When the ``VIRTIO_F_IOMMU_PLATFORM`` feature has been negotiated:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:782
+msgid ""
+"Guest addresses are also called I/O virtual addresses (IOVAs).  They are "
+"translated to user addresses via the IOTLB."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:785
+msgid "The vhost memory region guest address is not used."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:788
+msgid "IOMMU support"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:790
+msgid ""
+"When the ``VIRTIO_F_IOMMU_PLATFORM`` feature has been negotiated, the front-"
+"end sends IOTLB entries update & invalidation by sending "
+"``VHOST_USER_IOTLB_MSG`` requests to the back-end with a ``struct "
+"vhost_iotlb_msg`` as payload. For update events, the ``iotlb`` payload has "
+"to be filled with the update message type (2), the I/O virtual address, the "
+"size, the user virtual address, and the permissions flags. Addresses and "
+"size must be within vhost memory regions set via the "
+"``VHOST_USER_SET_MEM_TABLE`` request. For invalidation events, the ``iotlb`` "
+"payload has to be filled with the invalidation message type (3), the I/O "
+"virtual address and the size. On success, the back-end is expected to reply "
+"with a zero payload, non-zero otherwise."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:802
+msgid ""
+"The back-end relies on the back-end communication channel (see :ref:`Back-"
+"end communication <backend_communication>` section below) to send IOTLB miss "
+"and access failure events, by sending ``VHOST_USER_BACKEND_IOTLB_MSG`` "
+"requests to the front-end with a ``struct vhost_iotlb_msg`` as payload. For "
+"miss events, the iotlb payload has to be filled with the miss message type "
+"(1), the I/O virtual address and the permissions flags. For access failure "
+"event, the iotlb payload has to be filled with the access failure message "
+"type (4), the I/O virtual address and the permissions flags.  For "
+"synchronization purpose, the back-end may rely on the reply-ack feature, so "
+"the front-end may send a reply when operation is completed if the reply-ack "
+"feature is negotiated and back-ends requests a reply. For miss events, "
+"completed operation means either front-end sent an update message containing "
+"the IOTLB entry containing requested address and permission, or front-end "
+"sent nothing if the IOTLB miss message is invalid (invalid IOVA or "
+"permission)."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:818
+msgid ""
+"The front-end isn't expected to take the initiative to send IOTLB update "
+"messages, as the back-end sends IOTLB miss messages for the guest virtual "
+"memory areas it needs to access."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:825
+msgid "Back-end communication"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:827
+msgid ""
+"An optional communication channel is provided if the back-end declares "
+"``VHOST_USER_PROTOCOL_F_BACKEND_REQ`` protocol feature, to allow the back-"
+"end to make requests to the front-end."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:831
+msgid ""
+"The fd is provided via ``VHOST_USER_SET_BACKEND_REQ_FD`` ancillary data."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:833
+msgid ""
+"A back-end may then send ``VHOST_USER_BACKEND_*`` messages to the front-end "
+"using this fd communication channel."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:836
+msgid ""
+"If ``VHOST_USER_PROTOCOL_F_BACKEND_SEND_FD`` protocol feature is negotiated, "
+"back-end can send file descriptors (at most 8 descriptors in each message) "
+"to front-end via ancillary data using this fd communication channel."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:844
+msgid "Inflight I/O tracking"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:846
+msgid ""
+"To support reconnecting after restart or crash, back-end may need to "
+"resubmit inflight I/Os. If virtqueue is processed in order, we can easily "
+"achieve that by getting the inflight descriptors from descriptor table "
+"(split virtqueue) or descriptor ring (packed virtqueue). However, it can't "
+"work when we process descriptors out-of-order because some entries which "
+"store the information of inflight descriptors in available ring (split "
+"virtqueue) or descriptor ring (packed virtqueue) might be overridden by new "
+"entries. To solve this problem, the back-end need to allocate an extra "
+"buffer to store this information of inflight descriptors and share it with "
+"front-end for persistent. ``VHOST_USER_GET_INFLIGHT_FD`` and "
+"``VHOST_USER_SET_INFLIGHT_FD`` are used to transfer this buffer between "
+"front-end and back-end. And the format of this buffer is described below:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:862
+msgid "queue0 region"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:862
+msgid "queue1 region"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:862
+msgid "queueN region"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:865
+msgid ""
+"N is the number of available virtqueues. The back-end could get it from num "
+"queues field of ``VhostUserInflight``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:868
+msgid "For split virtqueue, queue region can be implemented as:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:870
+msgid ""
+"typedef struct DescStateSplit {\n"
+"    /* Indicate whether this descriptor is inflight or not.\n"
+"     * Only available for head-descriptor. */\n"
+"    uint8_t inflight;\n"
+"\n"
+"    /* Padding */\n"
+"    uint8_t padding[5];\n"
+"\n"
+"    /* Maintain a list for the last batch of used descriptors.\n"
+"     * Only available when batching is used for submitting */\n"
+"    uint16_t next;\n"
+"\n"
+"    /* Used to preserve the order of fetching available descriptors.\n"
+"     * Only available for head-descriptor. */\n"
+"    uint64_t counter;\n"
+"} DescStateSplit;\n"
+"\n"
+"typedef struct QueueRegionSplit {\n"
+"    /* The feature flags of this region. Now it's initialized to 0. */\n"
+"    uint64_t features;\n"
+"\n"
+"    /* The version of this region. It's 1 currently.\n"
+"     * Zero value indicates an uninitialized buffer */\n"
+"    uint16_t version;\n"
+"\n"
+"    /* The size of DescStateSplit array. It's equal to the virtqueue size.\n"
+"     * The back-end could get it from queue size field of VhostUserInflight. "
+"*/\n"
+"    uint16_t desc_num;\n"
+"\n"
+"    /* The head of list that track the last batch of used descriptors. */\n"
+"    uint16_t last_batch_head;\n"
+"\n"
+"    /* Store the idx value of used ring */\n"
+"    uint16_t used_idx;\n"
+"\n"
+"    /* Used to track the state of each descriptor in descriptor table */\n"
+"    DescStateSplit desc[];\n"
+"} QueueRegionSplit;"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:911 ../../../interop/vhost-user.rst:1033
+msgid "To track inflight I/O, the queue region should be processed as follows:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:913 ../../../interop/vhost-user.rst:1035
+msgid "When receiving available buffers from the driver:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:915
+msgid "Get the next available head-descriptor index from available ring, ``i``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:917
+msgid "Set ``desc[i].counter`` to the value of global counter"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:919 ../../../interop/vhost-user.rst:1045
+msgid "Increase global counter by 1"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:921
+msgid "Set ``desc[i].inflight`` to 1"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:923 ../../../interop/vhost-user.rst:1062
+msgid "When supplying used buffers to the driver:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:925
+msgid "Get corresponding used head-descriptor index, i"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:927
+msgid "Set ``desc[i].next`` to ``last_batch_head``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:929
+msgid "Set ``last_batch_head`` to ``i``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:931
+msgid "Steps 1,2,3 may be performed repeatedly if batching is possible"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:933
+msgid "Increase the ``idx`` value of used ring by the size of the batch"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:935
+msgid ""
+"Set the ``inflight`` field of each ``DescStateSplit`` entry in the batch to 0"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:937 ../../../interop/vhost-user.rst:951
+msgid "Set ``used_idx`` to the ``idx`` value of used ring"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:939 ../../../interop/vhost-user.rst:1086
+msgid "When reconnecting:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:941
+msgid ""
+"If the value of ``used_idx`` does not match the ``idx`` value of used ring "
+"(means the inflight field of ``DescStateSplit`` entries in last batch may be "
+"incorrect),"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:945
+msgid ""
+"Subtract the value of ``used_idx`` from the ``idx`` value of used ring to "
+"get last batch size of ``DescStateSplit`` entries"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:948
+msgid ""
+"Set the ``inflight`` field of each ``DescStateSplit`` entry to 0 in last "
+"batch list which starts from ``last_batch_head``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:953
+msgid ""
+"Resubmit inflight ``DescStateSplit`` entries in order of their counter value"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:956
+msgid "For packed virtqueue, queue region can be implemented as:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:958
+msgid ""
+"typedef struct DescStatePacked {\n"
+"    /* Indicate whether this descriptor is inflight or not.\n"
+"     * Only available for head-descriptor. */\n"
+"    uint8_t inflight;\n"
+"\n"
+"    /* Padding */\n"
+"    uint8_t padding;\n"
+"\n"
+"    /* Link to the next free entry */\n"
+"    uint16_t next;\n"
+"\n"
+"    /* Link to the last entry of descriptor list.\n"
+"     * Only available for head-descriptor. */\n"
+"    uint16_t last;\n"
+"\n"
+"    /* The length of descriptor list.\n"
+"     * Only available for head-descriptor. */\n"
+"    uint16_t num;\n"
+"\n"
+"    /* Used to preserve the order of fetching available descriptors.\n"
+"     * Only available for head-descriptor. */\n"
+"    uint64_t counter;\n"
+"\n"
+"    /* The buffer id */\n"
+"    uint16_t id;\n"
+"\n"
+"    /* The descriptor flags */\n"
+"    uint16_t flags;\n"
+"\n"
+"    /* The buffer length */\n"
+"    uint32_t len;\n"
+"\n"
+"    /* The buffer address */\n"
+"    uint64_t addr;\n"
+"} DescStatePacked;\n"
+"\n"
+"typedef struct QueueRegionPacked {\n"
+"    /* The feature flags of this region. Now it's initialized to 0. */\n"
+"    uint64_t features;\n"
+"\n"
+"    /* The version of this region. It's 1 currently.\n"
+"     * Zero value indicates an uninitialized buffer */\n"
+"    uint16_t version;\n"
+"\n"
+"    /* The size of DescStatePacked array. It's equal to the virtqueue size.\n"
+"     * The back-end could get it from queue size field of VhostUserInflight. "
+"*/\n"
+"    uint16_t desc_num;\n"
+"\n"
+"    /* The head of free DescStatePacked entry list */\n"
+"    uint16_t free_head;\n"
+"\n"
+"    /* The old head of free DescStatePacked entry list */\n"
+"    uint16_t old_free_head;\n"
+"\n"
+"    /* The used index of descriptor ring */\n"
+"    uint16_t used_idx;\n"
+"\n"
+"    /* The old used index of descriptor ring */\n"
+"    uint16_t old_used_idx;\n"
+"\n"
+"    /* Device ring wrap counter */\n"
+"    uint8_t used_wrap_counter;\n"
+"\n"
+"    /* The old device ring wrap counter */\n"
+"    uint8_t old_used_wrap_counter;\n"
+"\n"
+"    /* Padding */\n"
+"    uint8_t padding[7];\n"
+"\n"
+"    /* Used to track the state of each descriptor fetched from descriptor "
+"ring */\n"
+"    DescStatePacked desc[];\n"
+"} QueueRegionPacked;"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1037
+msgid "Get the next available descriptor entry from descriptor ring, ``d``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1039
+msgid "If ``d`` is head descriptor,"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1041
+msgid "Set ``desc[old_free_head].num`` to 0"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1043
+msgid "Set ``desc[old_free_head].counter`` to the value of global counter"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1047
+msgid "Set ``desc[old_free_head].inflight`` to 1"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1049
+msgid ""
+"If ``d`` is last descriptor, set ``desc[old_free_head].last`` to "
+"``free_head``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1052
+msgid "Increase ``desc[old_free_head].num`` by 1"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1054
+msgid ""
+"Set ``desc[free_head].addr``, ``desc[free_head].len``, ``desc[free_head]."
+"flags``, ``desc[free_head].id`` to ``d.addr``, ``d.len``, ``d.flags``, ``d."
+"id``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1058
+msgid "Set ``free_head`` to ``desc[free_head].next``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1060
+msgid "If ``d`` is last descriptor, set ``old_free_head`` to ``free_head``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1064
+msgid ""
+"Get corresponding used head-descriptor entry from descriptor ring, ``d``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1067
+msgid "Get corresponding ``DescStatePacked`` entry, ``e``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1069
+msgid "Set ``desc[e.last].next`` to ``free_head``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1071
+msgid "Set ``free_head`` to the index of ``e``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1073
+msgid "Steps 1,2,3,4 may be performed repeatedly if batching is possible"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1075
+msgid ""
+"Increase ``used_idx`` by the size of the batch and update "
+"``used_wrap_counter`` if needed"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1078
+msgid "Update ``d.flags``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1080
+msgid ""
+"Set the ``inflight`` field of each head ``DescStatePacked`` entry in the "
+"batch to 0"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1083
+msgid ""
+"Set ``old_free_head``,  ``old_used_idx``, ``old_used_wrap_counter`` to "
+"``free_head``, ``used_idx``, ``used_wrap_counter``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1088
+msgid ""
+"If ``used_idx`` does not match ``old_used_idx`` (means the ``inflight`` "
+"field of ``DescStatePacked`` entries in last batch may be incorrect),"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1092
+msgid "Get the next descriptor ring entry through ``old_used_idx``, ``d``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1094
+msgid "Use ``old_used_wrap_counter`` to calculate the available flags"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1096
+msgid ""
+"If ``d.flags`` is not equal to the calculated flags value (means back-end "
+"has submitted the buffer to guest driver before crash, so it has to commit "
+"the in-progress update), set ``old_free_head``, ``old_used_idx``, "
+"``old_used_wrap_counter`` to ``free_head``, ``used_idx``, "
+"``used_wrap_counter``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1102
+msgid ""
+"Set ``free_head``, ``used_idx``, ``used_wrap_counter`` to ``old_free_head``, "
+"``old_used_idx``, ``old_used_wrap_counter`` (roll back any in-progress "
+"update)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1106
+msgid ""
+"Set the ``inflight`` field of each ``DescStatePacked`` entry in free list to "
+"0"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1109
+msgid ""
+"Resubmit inflight ``DescStatePacked`` entries in order of their counter value"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1113
+msgid "In-band notifications"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1115
+msgid ""
+"In some limited situations (e.g. for simulation) it is desirable to have the "
+"kick, call and error (if used) signals done via in-band messages instead of "
+"asynchronous eventfd notifications. This can be done by negotiating the "
+"``VHOST_USER_PROTOCOL_F_INBAND_NOTIFICATIONS`` protocol feature."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1121
+msgid ""
+"Note that due to the fact that too many messages on the sockets can cause "
+"the sending application(s) to block, it is not advised to use this feature "
+"unless absolutely necessary. It is also considered an error to negotiate "
+"this feature without also negotiating ``VHOST_USER_PROTOCOL_F_BACKEND_REQ`` "
+"and ``VHOST_USER_PROTOCOL_F_REPLY_ACK``, the former is necessary for getting "
+"a message channel from the back-end to the front-end, while the latter needs "
+"to be used with the in-band notification messages to block until they are "
+"processed, both to avoid blocking later and for proper processing (at least "
+"in the simulation use case.) As it has no other way of signalling this "
+"error, the back-end should close the connection as a response to a "
+"``VHOST_USER_SET_PROTOCOL_FEATURES`` message that sets the in-band "
+"notifications feature flag without the other two."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1136
+msgid "Protocol features"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1138
+msgid ""
+"#define VHOST_USER_PROTOCOL_F_MQ                       0\n"
+"#define VHOST_USER_PROTOCOL_F_LOG_SHMFD                1\n"
+"#define VHOST_USER_PROTOCOL_F_RARP                     2\n"
+"#define VHOST_USER_PROTOCOL_F_REPLY_ACK                3\n"
+"#define VHOST_USER_PROTOCOL_F_MTU                      4\n"
+"#define VHOST_USER_PROTOCOL_F_BACKEND_REQ              5\n"
+"#define VHOST_USER_PROTOCOL_F_CROSS_ENDIAN             6\n"
+"#define VHOST_USER_PROTOCOL_F_CRYPTO_SESSION           7\n"
+"#define VHOST_USER_PROTOCOL_F_PAGEFAULT                8\n"
+"#define VHOST_USER_PROTOCOL_F_CONFIG                   9\n"
+"#define VHOST_USER_PROTOCOL_F_BACKEND_SEND_FD         10\n"
+"#define VHOST_USER_PROTOCOL_F_HOST_NOTIFIER           11\n"
+"#define VHOST_USER_PROTOCOL_F_INFLIGHT_SHMFD          12\n"
+"#define VHOST_USER_PROTOCOL_F_RESET_DEVICE            13\n"
+"#define VHOST_USER_PROTOCOL_F_INBAND_NOTIFICATIONS    14\n"
+"#define VHOST_USER_PROTOCOL_F_CONFIGURE_MEM_SLOTS     15\n"
+"#define VHOST_USER_PROTOCOL_F_STATUS                  16\n"
+"#define VHOST_USER_PROTOCOL_F_XEN_MMAP                17\n"
+"#define VHOST_USER_PROTOCOL_F_SHARED_OBJECT           18\n"
+"#define VHOST_USER_PROTOCOL_F_DEVICE_STATE            19\n"
+"#define VHOST_USER_PROTOCOL_F_GET_VRING_BASE_INFLIGHT 20\n"
+"#define VHOST_USER_PROTOCOL_F_GPA_ADDRESSES           21\n"
+"#define VHOST_USER_PROTOCOL_F_SHMEM                   22\n"
+"#define VHOST_USER_PROTOCOL_F_GET_VRING_BASE_SKIP_DRAIN 23"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1166
+msgid "Front-end message types"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0
+msgid "id"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1169 ../../../interop/vhost-user.rst:1896
+msgid "1"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0
+msgid "equivalent ioctl"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1170 ../../../interop/vhost-user.rst:1192
+msgid "``VHOST_GET_FEATURES``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0
+msgid "request payload"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1171 ../../../interop/vhost-user.rst:1183
+#: ../../../interop/vhost-user.rst:1193 ../../../interop/vhost-user.rst:1211
+#: ../../../interop/vhost-user.rst:1226 ../../../interop/vhost-user.rst:1227
+#: ../../../interop/vhost-user.rst:1235 ../../../interop/vhost-user.rst:1236
+#: ../../../interop/vhost-user.rst:1274 ../../../interop/vhost-user.rst:1286
+#: ../../../interop/vhost-user.rst:1287 ../../../interop/vhost-user.rst:1295
+#: ../../../interop/vhost-user.rst:1303 ../../../interop/vhost-user.rst:1311
+#: ../../../interop/vhost-user.rst:1370 ../../../interop/vhost-user.rst:1389
+#: ../../../interop/vhost-user.rst:1408 ../../../interop/vhost-user.rst:1424
+#: ../../../interop/vhost-user.rst:1425 ../../../interop/vhost-user.rst:1436
+#: ../../../interop/vhost-user.rst:1438 ../../../interop/vhost-user.rst:1447
+#: ../../../interop/vhost-user.rst:1449 ../../../interop/vhost-user.rst:1463
+#: ../../../interop/vhost-user.rst:1465 ../../../interop/vhost-user.rst:1481
+#: ../../../interop/vhost-user.rst:1482 ../../../interop/vhost-user.rst:1483
+#: ../../../interop/vhost-user.rst:1514 ../../../interop/vhost-user.rst:1528
+#: ../../../interop/vhost-user.rst:1542 ../../../interop/vhost-user.rst:1544
+#: ../../../interop/vhost-user.rst:1555 ../../../interop/vhost-user.rst:1568
+#: ../../../interop/vhost-user.rst:1570 ../../../interop/vhost-user.rst:1582
+#: ../../../interop/vhost-user.rst:1592 ../../../interop/vhost-user.rst:1593
+#: ../../../interop/vhost-user.rst:1604 ../../../interop/vhost-user.rst:1619
+#: ../../../interop/vhost-user.rst:1621 ../../../interop/vhost-user.rst:1631
+#: ../../../interop/vhost-user.rst:1633 ../../../interop/vhost-user.rst:1642
+#: ../../../interop/vhost-user.rst:1643 ../../../interop/vhost-user.rst:1644
+#: ../../../interop/vhost-user.rst:1652 ../../../interop/vhost-user.rst:1653
+#: ../../../interop/vhost-user.rst:1654 ../../../interop/vhost-user.rst:1666
+#: ../../../interop/vhost-user.rst:1668 ../../../interop/vhost-user.rst:1680
+#: ../../../interop/vhost-user.rst:1681 ../../../interop/vhost-user.rst:1694
+#: ../../../interop/vhost-user.rst:1695 ../../../interop/vhost-user.rst:1718
+#: ../../../interop/vhost-user.rst:1719 ../../../interop/vhost-user.rst:1744
+#: ../../../interop/vhost-user.rst:1754 ../../../interop/vhost-user.rst:1764
+#: ../../../interop/vhost-user.rst:1777 ../../../interop/vhost-user.rst:1830
+#: ../../../interop/vhost-user.rst:1831 ../../../interop/vhost-user.rst:1847
+#: ../../../interop/vhost-user.rst:1848 ../../../interop/vhost-user.rst:1869
+#: ../../../interop/vhost-user.rst:1899 ../../../interop/vhost-user.rst:1912
+#: ../../../interop/vhost-user.rst:1913 ../../../interop/vhost-user.rst:1914
+#: ../../../interop/vhost-user.rst:1927 ../../../interop/vhost-user.rst:1929
+#: ../../../interop/vhost-user.rst:1950 ../../../interop/vhost-user.rst:1952
+#: ../../../interop/vhost-user.rst:1964 ../../../interop/vhost-user.rst:1966
+#: ../../../interop/vhost-user.rst:1978 ../../../interop/vhost-user.rst:1980
+#: ../../../interop/vhost-user.rst:1996 ../../../interop/vhost-user.rst:1998
+#: ../../../interop/vhost-user.rst:2012 ../../../interop/vhost-user.rst:2025
+#: ../../../interop/vhost-user.rst:2027 ../../../interop/vhost-user.rst:2049
+#: ../../../interop/vhost-user.rst:2051
+msgid "N/A"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:0
+msgid "reply payload"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1172 ../../../interop/vhost-user.rst:1182
+#: ../../../interop/vhost-user.rst:1194 ../../../interop/vhost-user.rst:1210
+#: ../../../interop/vhost-user.rst:1369 ../../../interop/vhost-user.rst:1388
+#: ../../../interop/vhost-user.rst:1407 ../../../interop/vhost-user.rst:1448
+#: ../../../interop/vhost-user.rst:1464 ../../../interop/vhost-user.rst:1499
+#: ../../../interop/vhost-user.rst:1569 ../../../interop/vhost-user.rst:1605
+#: ../../../interop/vhost-user.rst:1743 ../../../interop/vhost-user.rst:1755
+#: ../../../interop/vhost-user.rst:1779 ../../../interop/vhost-user.rst:1832
+msgid "``u64``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1174
+msgid ""
+"Get from the underlying vhost implementation the features bitmask. Feature "
+"bit ``VHOST_USER_F_PROTOCOL_FEATURES`` signals back-end support for "
+"``VHOST_USER_GET_PROTOCOL_FEATURES`` and "
+"``VHOST_USER_SET_PROTOCOL_FEATURES``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1179
+msgid "``VHOST_USER_SET_FEATURES``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1180 ../../../interop/vhost-user.rst:1911
+msgid "2"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1181 ../../../interop/vhost-user.rst:1209
+msgid "``VHOST_SET_FEATURES``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1185
+msgid ""
+"Enable features in the underlying vhost implementation using a bitmask.  "
+"Feature bit ``VHOST_USER_F_PROTOCOL_FEATURES`` signals back-end support for "
+"``VHOST_USER_GET_PROTOCOL_FEATURES`` and "
+"``VHOST_USER_SET_PROTOCOL_FEATURES``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1191
+msgid "15"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1196
+msgid ""
+"Get the protocol feature bitmask from the underlying vhost implementation.  "
+"Only legal if feature bit ``VHOST_USER_F_PROTOCOL_FEATURES`` is present in "
+"``VHOST_USER_GET_FEATURES``.  It does not need to be acknowledged by "
+"``VHOST_USER_SET_FEATURES``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1203 ../../../interop/vhost-user.rst:1220
+msgid ""
+"Back-ends that report ``VHOST_USER_F_PROTOCOL_FEATURES`` must support this "
+"message even before ``VHOST_USER_SET_FEATURES`` was called."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1207
+msgid "``VHOST_USER_SET_PROTOCOL_FEATURES``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1208
+msgid "16"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1213
+msgid "Enable protocol features in the underlying vhost implementation."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1215
+msgid ""
+"Only legal if feature bit ``VHOST_USER_F_PROTOCOL_FEATURES`` is present in "
+"``VHOST_USER_GET_FEATURES``.  It does not need to be acknowledged by "
+"``VHOST_USER_SET_FEATURES``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1223
+msgid "``VHOST_USER_SET_OWNER``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1224 ../../../interop/vhost-user.rst:1926
+msgid "3"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1225
+msgid "``VHOST_SET_OWNER``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1229
+msgid ""
+"Issued when a new connection is established. It marks the sender as the "
+"front-end that owns of the session. This can be used on the *back-end* as a "
+"\"session start\" flag."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1233
+msgid "``VHOST_USER_RESET_OWNER``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1234 ../../../interop/vhost-user.rst:1949
+msgid "4"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1238
+msgid "Deprecated"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1240
+msgid ""
+"This is no longer used. Used to be sent to request disabling all rings, but "
+"some back-ends interpreted it to also discard connection state (this "
+"interpretation would lead to bugs).  It is recommended that back-ends either "
+"ignore this message, or use it to disable all rings."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1247 ../../../interop/vhost-user.rst:1963
+msgid "5"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1248
+msgid "``VHOST_SET_MEM_TABLE``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1249
+msgid "multiple memory regions description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1250
+msgid "(postcopy only) multiple memory regions description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1252
+msgid ""
+"Sets the memory map regions on the back-end so it can translate the vring "
+"addresses. In the ancillary data there is an array of file descriptors for "
+"each memory mapped region. The size and ordering of the fds matches the "
+"number and ordering of memory regions."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1257
+msgid ""
+"When ``VHOST_USER_POSTCOPY_LISTEN`` has been received, ``SET_MEM_TABLE`` "
+"replies with the bases of the memory mapped regions to the front-end.  The "
+"back-end must have mmap'd the regions but not yet accessed them and should "
+"not yet generate a userfault event."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1264
+msgid ""
+"``NEED_REPLY_MASK`` is not set in this case.  QEMU will then reply back to "
+"the list of mappings with an empty ``VHOST_USER_SET_MEM_TABLE`` as an "
+"acknowledgement; only upon reception of this message may the guest start "
+"accessing the memory and generating faults."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1270
+msgid "``VHOST_USER_SET_LOG_BASE``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1271 ../../../interop/vhost-user.rst:1977
+msgid "6"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1272
+msgid "``VHOST_SET_LOG_BASE``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1276
+msgid "Sets logging shared memory space."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1278
+msgid ""
+"When the back-end has ``VHOST_USER_PROTOCOL_F_LOG_SHMFD`` protocol feature, "
+"the log memory fd is provided in the ancillary data of "
+"``VHOST_USER_SET_LOG_BASE`` message, the size and offset of shared memory "
+"area provided in the message."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1284 ../../../interop/vhost-user.rst:1995
+msgid "7"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1285
+msgid "``VHOST_SET_LOG_FD``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1289
+msgid "Sets the logging file descriptor, which is passed as ancillary data."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1291
+msgid "``VHOST_USER_SET_VRING_NUM``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1292 ../../../interop/vhost-user.rst:2011
+msgid "8"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1293
+msgid "``VHOST_SET_VRING_NUM``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1294 ../../../interop/vhost-user.rst:1330
+#: ../../../interop/vhost-user.rst:1437 ../../../interop/vhost-user.rst:1513
+#: ../../../interop/vhost-user.rst:1667 ../../../interop/vhost-user.rst:1870
+#: ../../../interop/vhost-user.rst:1951 ../../../interop/vhost-user.rst:1965
+msgid "vring state description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1297
+msgid "Set the size of the queue."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1299
+msgid "``VHOST_USER_SET_VRING_ADDR``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1300 ../../../interop/vhost-user.rst:2024
+msgid "9"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1301
+msgid "``VHOST_SET_VRING_ADDR``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1302
+msgid "vring address description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1305
+msgid "Sets the addresses of the different aspects of the vring."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1307
+msgid "``VHOST_USER_SET_VRING_BASE``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1308 ../../../interop/vhost-user.rst:2048
+msgid "10"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1309
+msgid "``VHOST_SET_VRING_BASE``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1310 ../../../interop/vhost-user.rst:1331
+#: ../../../interop/vhost-user.rst:1871
+msgid "vring descriptor index/indices"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1313
+msgid "Sets the next index to use for descriptors in this vring:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1315
+msgid ""
+"For a split virtqueue, sets only the next descriptor index to process in the "
+"*Available Ring*.  The device is supposed to read the next index in the "
+"*Used Ring* from the respective vring structure in guest memory."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1320
+msgid ""
+"For a packed virtqueue, both indices are supplied, as they are not "
+"explicitly available in memory."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1323 ../../../interop/vhost-user.rst:1348
+msgid ""
+"Consequently, the payload type is specific to the type of virt queue (*a "
+"vring descriptor index for split virtqueues* vs. *vring descriptor indices "
+"for packed virtqueues*)."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1328
+msgid "11"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1333
+msgid "Stops the vring and returns the current descriptor index or indices:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1335
+msgid ""
+"For a split virtqueue, returns only the 16-bit next descriptor index to "
+"process in the *Available Ring*.  Note that this may differ from the "
+"available ring index in the vring structure in memory, which points to where "
+"the driver will put new available descriptors.  For the *Used Ring*, the "
+"device only needs the next descriptor index at which to put new descriptors, "
+"which is the value in the vring structure in memory, so this value is not "
+"covered by this message."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1344
+msgid ""
+"For a packed virtqueue, neither index is explicitly available to read from "
+"memory, so both indices (as maintained by the device) are returned."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1352
+msgid ""
+"When and as long as all of a device's vrings are stopped, it is *suspended*, "
+"see :ref:`Suspended device state <suspended_device_state>`."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1356
+msgid ""
+"The request payload's *num* field is currently reserved and must be set to 0."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1359
+msgid ""
+"By default, the back-end must complete all inflight I/O requests for the "
+"specified vring before stopping it. If the "
+"``VHOST_USER_PROTOCOL_F_GET_VRING_BASE_SKIP_DRAIN`` protocol feature has "
+"been negotiated, the front-end may instead use "
+"``VHOST_USER_GET_VRING_BASE_SKIP_DRAIN`` to request the back-end to suspend "
+"in-flight I/O immediately."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1367
+msgid "12"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1368
+msgid "``VHOST_SET_VRING_KICK``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1372
+msgid ""
+"Set the event file descriptor for adding buffers to the vring. It is passed "
+"in the ancillary data."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1375
+msgid ""
+"Bits (0-7) of the payload contain the vring index. Bit 8 is the invalid FD "
+"flag. This flag is set when there is no file descriptor in the ancillary "
+"data. This signals that polling should be used instead of waiting for the "
+"kick. Note that if the protocol feature "
+"``VHOST_USER_PROTOCOL_F_INBAND_NOTIFICATIONS`` has been negotiated this "
+"message isn't necessary as the ring is also started on the "
+"``VHOST_USER_VRING_KICK`` message, it may however still be used to set an "
+"event file descriptor (which will be preferred over the message) or to "
+"enable polling."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1386
+msgid "13"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1387
+msgid "``VHOST_SET_VRING_CALL``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1391
+msgid ""
+"Set the event file descriptor to signal when buffers are used. It is passed "
+"in the ancillary data."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1394
+msgid ""
+"Bits (0-7) of the payload contain the vring index. Bit 8 is the invalid FD "
+"flag. This flag is set when there is no file descriptor in the ancillary "
+"data. This signals that polling will be used instead of waiting for the "
+"call. Note that if the protocol features "
+"``VHOST_USER_PROTOCOL_F_INBAND_NOTIFICATIONS`` and "
+"``VHOST_USER_PROTOCOL_F_BACKEND_REQ`` have been negotiated this message "
+"isn't necessary as the ``VHOST_USER_BACKEND_VRING_CALL`` message can be "
+"used, it may however still be used to set an event file descriptor or to "
+"enable polling."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1405
+msgid "14"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1406
+msgid "``VHOST_SET_VRING_ERR``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1410
+msgid ""
+"Set the event file descriptor to signal when error occurs. It is passed in "
+"the ancillary data."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1413
+msgid ""
+"Bits (0-7) of the payload contain the vring index. Bit 8 is the invalid FD "
+"flag. This flag is set when there is no file descriptor in the ancillary "
+"data. Note that if the protocol features "
+"``VHOST_USER_PROTOCOL_F_INBAND_NOTIFICATIONS`` and "
+"``VHOST_USER_PROTOCOL_F_BACKEND_REQ`` have been negotiated this message "
+"isn't necessary as the ``VHOST_USER_BACKEND_VRING_ERR`` message can be used, "
+"it may however still be used to set an event file descriptor (which will be "
+"preferred over the message)."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1422
+msgid "``VHOST_USER_GET_QUEUE_NUM``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1423
+msgid "17"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1428
+msgid "Query how many queues the back-end supports."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1430
+msgid ""
+"This request should be sent only when ``VHOST_USER_PROTOCOL_F_MQ`` is set in "
+"queried protocol features by ``VHOST_USER_GET_PROTOCOL_FEATURES``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1434
+msgid "``VHOST_USER_SET_VRING_ENABLE``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1435
+msgid "18"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1440
+msgid "Signal the back-end to enable or disable corresponding vring."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1442
+msgid ""
+"This request should be sent only when ``VHOST_USER_F_PROTOCOL_FEATURES`` has "
+"been negotiated."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1445
+msgid "``VHOST_USER_SEND_RARP``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1446
+msgid "19"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1451
+msgid ""
+"Ask vhost user back-end to broadcast a fake RARP to notify the migration is "
+"terminated for guest that does not support GUEST_ANNOUNCE."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1454
+msgid ""
+"Only legal if feature bit ``VHOST_USER_F_PROTOCOL_FEATURES`` is present in "
+"``VHOST_USER_GET_FEATURES`` and protocol feature bit "
+"``VHOST_USER_PROTOCOL_F_RARP`` is present in "
+"``VHOST_USER_GET_PROTOCOL_FEATURES``.  The first 6 bytes of the payload "
+"contain the mac address of the guest to allow the vhost user back-end to "
+"construct and broadcast the fake RARP."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1461
+msgid "``VHOST_USER_NET_SET_MTU``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1462
+msgid "20"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1467
+msgid "Set host MTU value exposed to the guest."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1469
+msgid ""
+"This request should be sent only when ``VIRTIO_NET_F_MTU`` feature has been "
+"successfully negotiated, ``VHOST_USER_F_PROTOCOL_FEATURES`` is present in "
+"``VHOST_USER_GET_FEATURES`` and protocol feature bit "
+"``VHOST_USER_PROTOCOL_F_NET_MTU`` is present in "
+"``VHOST_USER_GET_PROTOCOL_FEATURES``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1475
+msgid ""
+"If ``VHOST_USER_PROTOCOL_F_REPLY_ACK`` is negotiated, the back-end must "
+"respond with zero in case the specified MTU is valid, or non-zero otherwise."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1480
+msgid "21"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1485
+msgid ""
+"Set the socket file descriptor for back-end initiated requests. It is passed "
+"in the ancillary data."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1488
+msgid ""
+"This request should be sent only when ``VHOST_USER_F_PROTOCOL_FEATURES`` has "
+"been negotiated, and protocol feature bit "
+"``VHOST_USER_PROTOCOL_F_BACKEND_REQ`` bit is present in "
+"``VHOST_USER_GET_PROTOCOL_FEATURES``.  If "
+"``VHOST_USER_PROTOCOL_F_REPLY_ACK`` is negotiated, the back-end must respond "
+"with zero for success, non-zero otherwise."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1495
+msgid "``VHOST_USER_IOTLB_MSG``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1496
+msgid "22"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1497 ../../../interop/vhost-user.rst:1897
+msgid "N/A (equivalent to ``VHOST_IOTLB_MSG`` message type)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1498 ../../../interop/vhost-user.rst:1898
+msgid "``struct vhost_iotlb_msg``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1501
+msgid "Send IOTLB messages with ``struct vhost_iotlb_msg`` as payload."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1503
+msgid ""
+"The front-end sends such requests to update and invalidate entries in the "
+"device IOTLB. The back-end has to acknowledge the request with sending zero "
+"as ``u64`` payload for success, non-zero otherwise."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1507
+msgid ""
+"This request should be send only when ``VIRTIO_F_IOMMU_PLATFORM`` feature "
+"has been successfully negotiated."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1510
+msgid "``VHOST_USER_SET_VRING_ENDIAN``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1511
+msgid "23"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1512
+msgid "``VHOST_SET_VRING_ENDIAN``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1516
+msgid ""
+"Set the endianness of a VQ for legacy devices. Little-endian is indicated "
+"with state.num set to 0 and big-endian is indicated with state.num set to 1. "
+"Other values are invalid."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1520
+msgid ""
+"This request should be sent only when ``VHOST_USER_PROTOCOL_F_CROSS_ENDIAN`` "
+"has been negotiated. Backends that negotiated this feature should handle "
+"both endiannesses and expect this message once (per VQ) during device "
+"configuration (ie. before the front-end starts the VQ)."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1526
+msgid "``VHOST_USER_GET_CONFIG``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1527
+msgid "24"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1529 ../../../interop/vhost-user.rst:1530
+#: ../../../interop/vhost-user.rst:1543
+msgid "virtio device config space"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1532
+msgid ""
+"When ``VHOST_USER_PROTOCOL_F_CONFIG`` is negotiated, this message is "
+"submitted by the vhost-user front-end to fetch the contents of the virtio "
+"device configuration space, vhost-user back-end's payload size MUST match "
+"the front-end's request, vhost-user back-end uses zero length of payload to "
+"indicate an error to the vhost-user front-end. The vhost-user front-end may "
+"cache the contents to avoid repeated ``VHOST_USER_GET_CONFIG`` calls."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1540
+msgid "``VHOST_USER_SET_CONFIG``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1541
+msgid "25"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1546
+msgid ""
+"When ``VHOST_USER_PROTOCOL_F_CONFIG`` is negotiated, this message is "
+"submitted by the vhost-user front-end when the Guest changes the virtio "
+"device configuration space and also can be used for live migration on the "
+"destination host. The vhost-user back-end must check the flags field, and "
+"back-ends MUST NOT accept SET_CONFIG for read-only configuration space "
+"fields unless the live migration bit is set."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1553
+msgid "``VHOST_USER_CREATE_CRYPTO_SESSION``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1554
+msgid "26"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1556 ../../../interop/vhost-user.rst:1557
+msgid "crypto session description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1559
+msgid ""
+"Create a session for crypto operation. The back-end must return the session "
+"id, 0 or positive for success, negative for failure. This request should be "
+"sent only when ``VHOST_USER_PROTOCOL_F_CRYPTO_SESSION`` feature has been "
+"successfully negotiated.  It's a required feature for crypto devices."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1566
+msgid "``VHOST_USER_CLOSE_CRYPTO_SESSION``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1567
+msgid "27"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1572
+msgid ""
+"Close a session for crypto operation which was previously created by "
+"``VHOST_USER_CREATE_CRYPTO_SESSION``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1575
+msgid ""
+"This request should be sent only when "
+"``VHOST_USER_PROTOCOL_F_CRYPTO_SESSION`` feature has been successfully "
+"negotiated.  It's a required feature for crypto devices."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1580
+msgid "``VHOST_USER_POSTCOPY_ADVISE``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1581
+msgid "28"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1583
+msgid "userfault fd"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1585
+msgid ""
+"When ``VHOST_USER_PROTOCOL_F_PAGEFAULT`` is supported, the front-end advises "
+"back-end that a migration with postcopy enabled is underway, the back-end "
+"must open a userfaultfd for later use.  Note that at this stage the "
+"migration is still in precopy mode."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1590
+msgid "``VHOST_USER_POSTCOPY_LISTEN``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1591
+msgid "29"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1595
+msgid ""
+"The front-end advises back-end that a transition to postcopy mode has "
+"happened.  The back-end must ensure that shared memory is registered with "
+"userfaultfd to cause faulting of non-present pages."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1599
+msgid ""
+"This is always sent sometime after a ``VHOST_USER_POSTCOPY_ADVISE``, and "
+"thus only when ``VHOST_USER_PROTOCOL_F_PAGEFAULT`` is supported."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1602
+msgid "``VHOST_USER_POSTCOPY_END``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1603
+msgid "30"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1607
+msgid ""
+"The front-end advises that postcopy migration has now completed.  The back-"
+"end must disable the userfaultfd. The reply is an acknowledgement only."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1611
+msgid ""
+"When ``VHOST_USER_PROTOCOL_F_PAGEFAULT`` is supported, this message is sent "
+"at the end of the migration, after ``VHOST_USER_POSTCOPY_LISTEN`` was "
+"previously sent."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1615
+msgid "The value returned is an error indication; 0 is success."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1617
+msgid "``VHOST_USER_GET_INFLIGHT_FD``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1618
+msgid "31"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1620 ../../../interop/vhost-user.rst:1632
+msgid "inflight description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1623
+msgid ""
+"When ``VHOST_USER_PROTOCOL_F_INFLIGHT_SHMFD`` protocol feature has been "
+"successfully negotiated, this message is submitted by the front-end to get a "
+"shared buffer from back-end. The shared buffer will be used to track "
+"inflight I/O by back-end. QEMU should retrieve a new one when vm reset."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1629
+msgid "``VHOST_USER_SET_INFLIGHT_FD``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1630
+msgid "32"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1635
+msgid ""
+"When ``VHOST_USER_PROTOCOL_F_INFLIGHT_SHMFD`` protocol feature has been "
+"successfully negotiated, this message is submitted by the front-end to send "
+"the shared inflight buffer back to the back-end so that the back-end could "
+"get inflight I/O after a crash or restart."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1640
+msgid "``VHOST_USER_GPU_SET_SOCKET``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1641
+msgid "33"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1646
+msgid ""
+"Sets the GPU protocol socket file descriptor, which is passed as ancillary "
+"data. The GPU protocol is used to inform the front-end of rendering state "
+"and updates. See vhost-user-gpu.rst for details."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1650
+msgid "``VHOST_USER_RESET_DEVICE``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1651
+msgid "34"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1656
+msgid ""
+"Ask the vhost user back-end to disable all rings and reset all internal "
+"device state to the initial state, ready to be reinitialized. The back-end "
+"retains ownership of the device throughout the reset operation."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1661
+msgid ""
+"Only valid if the ``VHOST_USER_PROTOCOL_F_RESET_DEVICE`` protocol feature is "
+"set by the back-end."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1664
+msgid "``VHOST_USER_VRING_KICK``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1665
+msgid "35"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1670
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_INBAND_NOTIFICATIONS`` protocol feature has "
+"been successfully negotiated, this message may be submitted by the front-end "
+"to indicate that a buffer was added to the vring instead of signalling it "
+"using the vring's kick file descriptor or having the back-end rely on "
+"polling."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1676 ../../../interop/vhost-user.rst:1960
+#: ../../../interop/vhost-user.rst:1974
+msgid "The state.num field is currently reserved and must be set to 0."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1678
+msgid "``VHOST_USER_GET_MAX_MEM_SLOTS``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1679
+msgid "36"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1684
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_CONFIGURE_MEM_SLOTS`` protocol feature has "
+"been successfully negotiated, this message is submitted by the front-end to "
+"the back-end. The back-end should return the message with a u64 payload "
+"containing the maximum number of memory slots for QEMU to expose to the "
+"guest. The value returned by the back-end will be capped at the maximum "
+"number of ram slots which can be supported by the target platform."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1693
+msgid "37"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1696 ../../../interop/vhost-user.rst:1720
+msgid "single memory region description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1698
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_CONFIGURE_MEM_SLOTS`` protocol feature has "
+"been successfully negotiated, this message is submitted by the front-end to "
+"the back-end. The message payload contains a memory region descriptor "
+"struct, describing a region of guest memory which the back-end device must "
+"map in. When the ``VHOST_USER_PROTOCOL_F_CONFIGURE_MEM_SLOTS`` protocol "
+"feature has been successfully negotiated, along with the "
+"``VHOST_USER_REM_MEM_REG`` message, this message is used to set and update "
+"the memory tables of the back-end device."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1708
+msgid ""
+"Exactly one file descriptor from which the memory is mapped is passed in the "
+"ancillary data."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1711
+msgid ""
+"In postcopy mode (see ``VHOST_USER_POSTCOPY_LISTEN``), the back-end replies "
+"with the bases of the memory mapped region to the front-end. For further "
+"details on postcopy, see ``VHOST_USER_SET_MEM_TABLE``. They apply to "
+"``VHOST_USER_ADD_MEM_REG`` accordingly."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1716
+msgid "``VHOST_USER_REM_MEM_REG``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1717
+msgid "38"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1722
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_CONFIGURE_MEM_SLOTS`` protocol feature has "
+"been successfully negotiated, this message is submitted by the front-end to "
+"the back-end. The message payload contains a memory region descriptor "
+"struct, describing a region of guest memory which the back-end device must "
+"unmap. When the ``VHOST_USER_PROTOCOL_F_CONFIGURE_MEM_SLOTS`` protocol "
+"feature has been successfully negotiated, along with the "
+"``VHOST_USER_ADD_MEM_REG`` message, this message is used to set and update "
+"the memory tables of the back-end device."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1732
+msgid ""
+"The memory region to be removed is identified by its guest address, user "
+"address and size. The mmap offset is ignored."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1735
+msgid ""
+"No file descriptors SHOULD be passed in the ancillary data. For "
+"compatibility with existing incorrect implementations, the back-end MAY "
+"accept messages with one file descriptor. If a file descriptor is passed, "
+"the back-end MUST close it without using it otherwise."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1740
+msgid "``VHOST_USER_SET_STATUS``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1741
+msgid "39"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1742
+msgid "VHOST_VDPA_SET_STATUS"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1746
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_STATUS`` protocol feature has been "
+"successfully negotiated, this message is submitted by the front-end to "
+"notify the back-end with updated device status as defined in the Virtio "
+"specification."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1751
+msgid "``VHOST_USER_GET_STATUS``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1752
+msgid "40"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1753
+msgid "VHOST_VDPA_GET_STATUS"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1757
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_STATUS`` protocol feature has been "
+"successfully negotiated, this message is submitted by the front-end to query "
+"the back-end for its device status as defined in the Virtio specification."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1762
+msgid "``VHOST_USER_GET_SHARED_OBJECT``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1763
+msgid "41"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1765 ../../../interop/vhost-user.rst:1979
+#: ../../../interop/vhost-user.rst:1997 ../../../interop/vhost-user.rst:2013
+msgid "``struct VhostUserShared``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1766
+msgid "dmabuf fd"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1768
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_SHARED_OBJECT`` protocol feature has been "
+"successfully negotiated, and the UUID is found in the exporters cache, this "
+"message is submitted by the front-end to retrieve a given dma-buf fd from a "
+"given back-end, determined by the requested UUID. Back-end will reply "
+"passing the fd when the operation is successful, or no fd otherwise."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1776
+msgid "42"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1778
+msgid "device state transfer parameters"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1781
+msgid ""
+"Front-end and back-end negotiate a channel over which to transfer the back-"
+"end's internal state during migration.  Either side (front-end or back-end) "
+"may create the channel.  The nature of this channel is not restricted or "
+"defined in this document, but whichever side creates it must create a file "
+"descriptor that is provided to the respectively other side, allowing access "
+"to the channel.  This FD must behave as follows:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1789
+msgid ""
+"For the writing end, it must allow writing the whole back-end state "
+"sequentially.  Closing the file descriptor signals the end of transfer."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1793
+msgid ""
+"For the reading end, it must allow reading the whole back-end state "
+"sequentially.  The end of file signals the end of the transfer."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1796
+msgid ""
+"For example, the channel may be a pipe, in which case the two ends of the "
+"pipe fulfill these requirements respectively."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1799
+msgid ""
+"Initially, the front-end creates a channel along with such an FD.  It passes "
+"the FD to the back-end as ancillary data of a "
+"``VHOST_USER_SET_DEVICE_STATE_FD`` message.  The back-end may create a "
+"different transfer channel, passing the respective FD back to the front-end "
+"as ancillary data of the reply.  If so, the front-end must then discard its "
+"channel and use the one provided by the back-end."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1806
+msgid ""
+"Whether the back-end should decide to use its own channel is decided based "
+"on efficiency: If the channel is a pipe, both ends will most likely need to "
+"copy data into and out of it.  Any channel that allows for more efficient "
+"processing on at least one end, e.g. through zero-copy, is considered more "
+"efficient and thus preferred.  If the back-end can provide such a channel, "
+"it should decide to use it."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1813
+msgid ""
+"The request payload contains parameters for the subsequent data transfer, as "
+"described in the :ref:`Migrating back-end state <migrating_backend_state>` "
+"section."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1817
+msgid ""
+"The value returned is both an indication for success, and whether a file "
+"descriptor for a back-end-provided channel is returned: Bits 0–7 are 0 on "
+"success, and non-zero on error.  Bit 8 is the invalid FD flag; this flag is "
+"set when there is no file descriptor returned. When this flag is not set, "
+"the front-end must use the returned file descriptor as its end of the "
+"transfer channel.  The back-end must not both indicate an error and return a "
+"file descriptor."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1825 ../../../interop/vhost-user.rst:1842
+msgid ""
+"Using this function requires prior negotiation of the "
+"``VHOST_USER_PROTOCOL_F_DEVICE_STATE`` feature."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1828
+msgid "``VHOST_USER_CHECK_DEVICE_STATE``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1829
+msgid "43"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1834
+msgid ""
+"After transferring the back-end's internal state during migration (see the :"
+"ref:`Migrating back-end state <migrating_backend_state>` section), check "
+"whether the back-end was able to successfully fully process the state."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1839
+msgid ""
+"The value returned indicates success or error; 0 is success, any non-zero "
+"value is an error."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1845
+msgid "``VHOST_USER_GET_SHMEM_CONFIG``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1846
+msgid "44"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1849
+msgid "``struct VhostUserShMemConfig``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1851
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_SHMEM`` protocol feature has been "
+"successfully negotiated, this message can be submitted by the front-end to "
+"gather the VIRTIO Shared Memory Region configuration. The back-end will "
+"respond with the number of VIRTIO Shared Memory Regions it requires, and "
+"each shared memory region size in an array. The shared memory IDs are "
+"represented by the array index. The information returned shall comply with "
+"the following rules:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1859
+msgid ""
+"The shared information will remain valid and unchanged for the entire "
+"lifetime of the connection."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1862
+msgid ""
+"The Shared Memory Region size must be a multiple of the page size supported "
+"by mmap(2)."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1865
+msgid "The size may be 0 if the region is unused."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1868
+msgid "45"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1873
+msgid ""
+"This message requires the "
+"``VHOST_USER_PROTOCOL_F_GET_VRING_BASE_SKIP_DRAIN`` protocol feature to be "
+"negotiated."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1876
+msgid ""
+"Identical to ``VHOST_USER_GET_VRING_BASE`` except that the back-end must not "
+"wait for inflight I/O requests to complete before stopping the vring.  "
+"Instead, the back-end must immediately suspend all in-flight I/O requests "
+"and record them as described in :ref:`Inflight I/O tracking "
+"<inflight_io_tracking>`. How to suspend an in-flight request depends on the "
+"implementation of the back-end, but it typically can be done by aborting or "
+"cancelling the underlying I/O request."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1885
+msgid ""
+"The ``VHOST_USER_PROTOCOL_F_GET_VRING_BASE_SKIP_DRAIN`` protocol feature "
+"must only be negotiated if both "
+"``VHOST_USER_PROTOCOL_F_GET_VRING_BASE_INFLIGHT`` and "
+"``VHOST_USER_PROTOCOL_F_INFLIGHT_SHMFD`` are also negotiated."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1890
+msgid "Back-end message types"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1892
+msgid ""
+"For this type of message, the request is sent by the back-end and the reply "
+"is sent by the front-end."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1895
+msgid ""
+"``VHOST_USER_BACKEND_IOTLB_MSG`` (previous name "
+"``VHOST_USER_SLAVE_IOTLB_MSG``)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1901
+msgid ""
+"Send IOTLB messages with ``struct vhost_iotlb_msg`` as payload. The back-end "
+"sends such requests to notify of an IOTLB miss, or an IOTLB access failure. "
+"If ``VHOST_USER_PROTOCOL_F_REPLY_ACK`` is negotiated, and back-end set the "
+"``VHOST_USER_NEED_REPLY`` flag, the front-end must respond with zero when "
+"operation is successfully completed, or non-zero otherwise.  This request "
+"should be send only when ``VIRTIO_F_IOMMU_PLATFORM`` feature has been "
+"successfully negotiated."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1910
+msgid ""
+"``VHOST_USER_BACKEND_CONFIG_CHANGE_MSG`` (previous name "
+"``VHOST_USER_SLAVE_CONFIG_CHANGE_MSG``)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1916
+msgid ""
+"When ``VHOST_USER_PROTOCOL_F_CONFIG`` is negotiated, vhost-user back-end "
+"sends such messages to notify that the virtio device's configuration space "
+"has changed, for those host devices which can support such feature, host "
+"driver can send ``VHOST_USER_GET_CONFIG`` message to the back-end to get the "
+"latest content. If ``VHOST_USER_PROTOCOL_F_REPLY_ACK`` is negotiated, and "
+"the back-end sets the ``VHOST_USER_NEED_REPLY`` flag, the front-end must "
+"respond with zero when operation is successfully completed, or non-zero "
+"otherwise."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1925
+msgid ""
+"``VHOST_USER_BACKEND_VRING_HOST_NOTIFIER_MSG`` (previous name "
+"``VHOST_USER_SLAVE_VRING_HOST_NOTIFIER_MSG``)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1928
+msgid "vring area description"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1931
+msgid ""
+"Sets host notifier for a specified queue. The queue index is contained in "
+"the ``u64`` field of the vring area description. The host notifier is "
+"described by the file descriptor (typically it's a VFIO device fd) which is "
+"passed as ancillary data and the size (which is mmap size and should be the "
+"same as host page size) and offset (which is mmap offset) carried in the "
+"vring area description. QEMU can mmap the file descriptor based on the size "
+"and offset to get a memory range. Registering a host notifier means mapping "
+"this memory range to the VM as the specified queue's notify MMIO region. The "
+"back-end sends this request to tell QEMU to de-register the existing "
+"notifier if any and register the new notifier if the request is sent with a "
+"file descriptor."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1944
+msgid ""
+"This request should be sent only when "
+"``VHOST_USER_PROTOCOL_F_HOST_NOTIFIER`` protocol feature has been "
+"successfully negotiated."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1948
+msgid ""
+"``VHOST_USER_BACKEND_VRING_CALL`` (previous name "
+"``VHOST_USER_SLAVE_VRING_CALL``)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1954
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_INBAND_NOTIFICATIONS`` protocol feature has "
+"been successfully negotiated, this message may be submitted by the back-end "
+"to indicate that a buffer was used from the vring instead of signalling this "
+"using the vring's call file descriptor or having the front-end relying on "
+"polling."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1962
+msgid ""
+"``VHOST_USER_BACKEND_VRING_ERR`` (previous name "
+"``VHOST_USER_SLAVE_VRING_ERR``)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1968
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_INBAND_NOTIFICATIONS`` protocol feature has "
+"been successfully negotiated, this message may be submitted by the back-end "
+"to indicate that an error occurred on the specific vring, instead of "
+"signalling the error file descriptor set by the front-end via "
+"``VHOST_USER_SET_VRING_ERR``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1976
+msgid "``VHOST_USER_BACKEND_SHARED_OBJECT_ADD``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1982
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_SHARED_OBJECT`` protocol feature has been "
+"successfully negotiated, this message can be submitted by the backends to "
+"add themselves as exporters to the virtio shared lookup table. The back-end "
+"device gets associated with a UUID in the shared table. The back-end is "
+"responsible of keeping its own table with exported dma-buf fds. When another "
+"back-end tries to import the resource associated with the UUID, it will send "
+"a message to the front-end, which will act as a proxy to the exporter back-"
+"end. If ``VHOST_USER_PROTOCOL_F_REPLY_ACK`` is negotiated, and the back-end "
+"sets the ``VHOST_USER_NEED_REPLY`` flag, the front-end must respond with "
+"zero when operation is successfully completed, or non-zero otherwise."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:1994
+msgid "``VHOST_USER_BACKEND_SHARED_OBJECT_REMOVE``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2000
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_SHARED_OBJECT`` protocol feature has been "
+"successfully negotiated, this message can be submitted by the backend to "
+"remove themselves from to the virtio-dmabuf shared table API. Only the back-"
+"end owning the entry (i.e., the one that first added it) will have "
+"permission to remove it. Otherwise, the message is ignored. The shared table "
+"will remove the back-end device associated with the UUID. If "
+"``VHOST_USER_PROTOCOL_F_REPLY_ACK`` is negotiated, and the back-end sets the "
+"``VHOST_USER_NEED_REPLY`` flag, the front-end must respond with zero when "
+"operation is successfully completed, or non-zero otherwise."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2010
+msgid "``VHOST_USER_BACKEND_SHARED_OBJECT_LOOKUP``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2014
+msgid "dmabuf fd and ``u64``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2016
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_SHARED_OBJECT`` protocol feature has been "
+"successfully negotiated, this message can be submitted by the backends to "
+"retrieve a given dma-buf fd from the virtio-dmabuf shared table given a "
+"UUID. Frontend will reply passing the fd and a zero when the operation is "
+"successful, or non-zero otherwise. Note that if the operation fails, no fd "
+"is sent to the backend."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2023
+msgid "``VHOST_USER_BACKEND_SHMEM_MAP``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2026
+msgid "fd and ``struct VhostUserMMap``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2029
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_SHMEM`` protocol feature has been "
+"successfully negotiated, this message can be submitted by the backends to "
+"advertise a new mapping to be made in a given VIRTIO Shared Memory Region. "
+"Upon receiving the message, the front-end will mmap the given fd into the "
+"VIRTIO Shared Memory Region with the requested ``shmid``."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2035
+msgid ""
+"If ``VHOST_USER_PROTOCOL_F_REPLY_ACK`` is negotiated, and back-end set the "
+"``VHOST_USER_NEED_REPLY`` flag, the front-end must respond with zero when "
+"operation is successfully completed, or non-zero otherwise."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2040
+msgid ""
+"Mapping over an already existing map is not allowed and requests shall fail. "
+"Therefore, the memory range in the request must correspond with a valid, "
+"free region of the VIRTIO Shared Memory Region. Also, note that mappings "
+"consume resources and that the request can fail when there are no resources "
+"available. Lastly, mappings are automatically unmapped by the front-end "
+"across device reset operation."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2047
+msgid "``VHOST_USER_BACKEND_SHMEM_UNMAP``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2050
+msgid "``struct VhostUserMMap``"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2053
+msgid ""
+"When the ``VHOST_USER_PROTOCOL_F_SHMEM`` protocol feature has been "
+"successfully negotiated, this message can be submitted by the backends so "
+"that the front-end un-mmaps a given range (``shm_offset``, ``len``) in the "
+"VIRTIO Shared Memory Region with the requested ``shmid``. Note that the "
+"given range shall correspond to the entirety of a valid mapped region."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2059
+msgid ""
+"If ``VHOST_USER_PROTOCOL_F_REPLY_ACK`` is negotiated, and the back-end sets "
+"the ``VHOST_USER_NEED_REPLY`` flag, the front-end must respond with zero "
+"when operation is successfully completed, or non-zero otherwise."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2066
+msgid "VHOST_USER_PROTOCOL_F_REPLY_ACK"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2068
+msgid ""
+"The original vhost-user specification only demands replies for certain "
+"commands. This differs from the vhost protocol implementation where commands "
+"are sent over an ``ioctl()`` call and block until the back-end has completed."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2073
+msgid ""
+"With this protocol extension negotiated, the sender (QEMU) can set the "
+"``need_reply`` [Bit 3] flag to any command. This indicates that the back-end "
+"MUST respond with a Payload ``VhostUserMsg`` indicating success or failure. "
+"The payload should be set to zero on success or non-zero on failure, unless "
+"the message already has an explicit reply body."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2079
+msgid ""
+"The reply payload gives QEMU a deterministic indication of the result of the "
+"command. Today, QEMU is expected to terminate the main vhost-user loop upon "
+"receiving such errors. In future, qemu could be taught to be more resilient "
+"for selective requests."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2084
+msgid ""
+"For the message types that already solicit a reply from the back-end, the "
+"presence of ``VHOST_USER_PROTOCOL_F_REPLY_ACK`` or need_reply bit being set "
+"brings no behavioural change. (See the Communication_ section for details.)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2092
+msgid "Backend program conventions"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2094
+msgid ""
+"vhost-user back-ends can provide various devices & services and may need to "
+"be configured manually depending on the use case. However, it is a good idea "
+"to follow the conventions listed here when possible. Users, QEMU or libvirt, "
+"can then rely on some common behaviour to avoid heterogeneous configuration "
+"and management of the back-end programs and facilitate interoperability."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2101
+msgid ""
+"Each back-end installed on a host system should come with at least one JSON "
+"file that conforms to the vhost-user.json schema. Each file informs the "
+"management applications about the back-end type, and binary location. In "
+"addition, it defines rules for management apps for picking the highest "
+"priority back-end when multiple match the search criteria (see "
+"``@VhostUserBackend`` documentation in the schema file)."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2108
+msgid ""
+"If the back-end is not capable of enabling a requested feature on the host "
+"(such as 3D acceleration with virgl), or the initialization failed, the back-"
+"end should fail to start early and exit with a status != 0. It may also "
+"print a message to stderr for further details."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2113
+msgid ""
+"The back-end program must not daemonize itself, but it may be daemonized by "
+"the management layer. It may also have a restricted access to the system."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2117
+msgid ""
+"File descriptors 0, 1 and 2 will exist, and have regular stdin/stdout/stderr "
+"usage (they may have been redirected to /dev/null by the management layer, "
+"or to a log handler)."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2121
+msgid ""
+"The back-end program must end (as quickly and cleanly as possible) when the "
+"SIGTERM signal is received. Eventually, it may receive SIGKILL by the "
+"management layer after a few seconds."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2125
+msgid ""
+"The following command line options have an expected behaviour. They are "
+"mandatory, unless explicitly said differently:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2130
+msgid ""
+"This option specify the location of the vhost-user Unix domain socket. It is "
+"incompatible with --fd."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2135
+msgid ""
+"When this argument is given, the back-end program is started with the vhost-"
+"user socket as file descriptor FDNUM. It is incompatible with --socket-path."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2141
+msgid ""
+"Output to stdout the back-end capabilities in JSON format, and then exit "
+"successfully. Other options and arguments should be ignored, and the back-"
+"end program should not perform its normal function.  The capabilities can be "
+"reported dynamically depending on the host capabilities."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2147
+msgid ""
+"The JSON output is described in the ``vhost-user.json`` schema, by "
+"```@VHostUserBackendCapabilities``.  Example:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2150
+msgid ""
+"{\n"
+"  \"type\": \"foo\",\n"
+"  \"features\": [\n"
+"    \"feature-a\",\n"
+"    \"feature-b\"\n"
+"  ]\n"
+"}"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2161
+msgid "vhost-user-input"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2163 ../../../interop/vhost-user.rst:2180
+#: ../../../interop/vhost-user.rst:2197
+msgid "Command line options:"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2167
+msgid "Specify the linux input device."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2169 ../../../interop/vhost-user.rst:2175
+#: ../../../interop/vhost-user.rst:2186 ../../../interop/vhost-user.rst:2192
+#: ../../../interop/vhost-user.rst:2203 ../../../interop/vhost-user.rst:2209
+msgid "(optional)"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2173
+msgid "Do no request exclusive access to the input device."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2178
+msgid "vhost-user-gpu"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2184
+msgid "Specify the GPU DRM render node."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2190
+msgid "Enable virgl rendering support."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2195
+msgid "vhost-user-blk"
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2201
+msgid "Specify block device or file path."
+msgstr ""
+
+#: ../../../interop/vhost-user.rst:2207
+msgid "Enable read-only."
+msgstr ""
