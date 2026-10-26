@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="en-US" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>QEMU virtio-net standby (net_failover) &#8212; QEMU 4.2.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=91307e3b"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="canonical" href="https://projects.localizethedocs.org/qemu-docs-l10n/virtio-net-failover.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+<script type="text/javascript" src="ltd-provenance.js"></script>
+<script type="text/javascript" src="ltd-current.js"></script>
+<script type="text/javascript" src="../../ltd-config.js"></script>
+<script type="text/javascript" src="../../ltd-flyout.js"></script>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="qemu-virtio-net-standby-net-failover">
+<h1>QEMU virtio-net standby (net_failover)<a class="headerlink" href="#qemu-virtio-net-standby-net-failover" title="Link to this heading">¶</a></h1>
+<p>This document explains the setup and usage of virtio-net standby feature which
+is used to create a net_failover pair of devices.</p>
+<p>The general idea is that we have a pair of devices, a (vfio-)pci and a
+virtio-net device. Before migration the vfio device is unplugged and data flows
+through the virtio-net device, on the target side another vfio-pci device is
+plugged in to take over the data-path. In the guest the net_failover kernel
+module will pair net devices with the same MAC address.</p>
+<p>The two devices are called primary and standby device. The fast hardware based
+networking device is called the primary device and the virtio-net device is the
+standby device.</p>
+<section id="restrictions">
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Link to this heading">¶</a></h2>
+<p>Currently only PCIe devices are allowed as primary devices, this restriction
+can be lifted in the future with enhanced QEMU support. Also, only networking
+devices are allowed as primary device. The user needs to ensure that primary
+and standby devices are not plugged into the same PCIe slot.</p>
+</section>
+<section id="usecase">
+<h2>Usecase<a class="headerlink" href="#usecase" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Virtio-net standby allows easy migration while using a passed-through fast
+networking device by falling back to a virtio-net device for the duration of
+the migration. It is like a simple version of a bond, the difference is that it
+requires no configuration in the guest. When a guest is live-migrated to
+another host QEMU will unplug the primary device via the PCIe based hotplug
+handler and traffic will go through the virtio-net device.  On the target
+system the primary device will be automatically plugged back and the
+net_failover module registers it again as the primary device.</p>
+</div></blockquote>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>The primary device can be hotplugged or be part of the startup configuration</p>
+<dl class="simple">
+<dt>-device virtio-net-pci,netdev=hostnet1,id=net1,mac=52:54:00:6f:55:cc, </dt><dd><p>bus=root2,failover=on</p>
+</dd>
+</dl>
+<p>With the parameter failover=on the VIRTIO_NET_F_STANDBY feature will be enabled.</p>
+<p>-device vfio-pci,host=5e:00.2,id=hostdev0,bus=root1,failover_pair_id=net1</p>
+<p>failover_pair_id references the id of the virtio-net standby device. This
+is only for pairing the devices within QEMU. The guest kernel module
+net_failover will match devices with identical MAC addresses.</p>
+</div></blockquote>
+</section>
+<section id="hotplug">
+<h2>Hotplug<a class="headerlink" href="#hotplug" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Both primary and standby device can be hotplugged via the QEMU monitor.  Note
+that if the virtio-net device is plugged first a warning will be issued that it
+couldn’t find the primary device.</p>
+</div></blockquote>
+</section>
+<section id="migration">
+<h2>Migration<a class="headerlink" href="#migration" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>A new migration state wait-unplug was added for this feature. If failover primary
+devices are present in the configuration, migration will go into this state.
+It will wait until the device unplug is completed in the guest and then move into
+active state. On the target system the primary devices will be automatically hotplugged
+when the feature bit was negotiated for the virtio-net standby device.</p>
+</div></blockquote>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="interop/index.html">QEMU System Emulation Management and Interoperability Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devel/index.html">QEMU Developer’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specs/index.html">QEMU System Emulation Guest Hardware Specifications</a></li>
+</ul>
+
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2019, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

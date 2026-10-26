@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-TW" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPACF Support &mdash; QEMU 11.1.50 說明文件</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=7ab3649f" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=b3ae9cc8" />
+
+  
+    <link rel="shortcut icon" href="../../_static/qemu_32x32.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/qemu-docs-l10n/system/s390x/cpacf.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=324ead25"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=cbf116e0"></script>
+      <script src="../../_static/custom.js?v=2ab9f71d"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜尋" href="../../search.html" />
+    <link rel="next" title="Sparc32 System emulator" href="../target-sparc.html" />
+    <link rel="prev" title="s390 Secure IPL" href="secure-ipl.html" />
+ 
+<script type="text/javascript" src="../../ltd-provenance.js"></script>
+<script type="text/javascript" src="../../ltd-current.js"></script>
+<script type="text/javascript" src="../../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #802400" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            QEMU
+              <img src="../../_static/qemu_128x128.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次：</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../about/index.html">關於 QEMU</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">系統仿真</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">介紹</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../invocation.html">Invocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../device-emulation.html">裝置仿真</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../keys.html">Keys in the graphical frontends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mux-chardev.html">Keys in the character backend multiplexer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../monitor.html">QEMU Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../images.html">Disk Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../virtio-net-failover.html">QEMU virtio-net standby (net_failover)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxboot.html">Direct Linux Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generic-loader.html">Generic Loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guest-loader.html">Guest Loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../barrier.html">QEMU Barrier Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vnc-security.html">VNC security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tls.html">TLS setup for network services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../secrets.html">Providing secret data to QEMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authz.html">Client authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gdb.html">GDB usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../replay.html">Record/replay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../managed-startup.html">Managed start up options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootindex.html">Managing device boot order with bootindex properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpu-hotplug.html">Virtual CPU hotplug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pr-manager.html">Persistent reservation managers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../targets.html">QEMU System Emulator Targets</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../target-arm.html">Arm System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-avr.html">AVR System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-loongarch.html">LoongArch System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-m68k.html">ColdFire System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-mips.html">MIPS System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-or1k.html">OpenRISC System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-ppc.html">PowerPC System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-riscv.html">RISC-V System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-rx.html">RX 系統仿真器</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../target-s390x.html">s390x System emulator</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../target-s390x.html#device-support">Device support</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../target-s390x.html#architectural-features">Architectural features</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../target-sparc.html">Sparc32 System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-sparc64.html">Sparc64 System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-i386.html">x86 System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-xtensa.html">Xtensa System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-hexagon.html">Hexagon System emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-hexagon.html#components">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-hexagon.html#bootstrapping">Bootstrapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-hexagon.html#semihosting">Semihosting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi-process.html">Multi-process QEMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../confidential-guest-support.html">Confidential Guest Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../igvm.html">Independent Guest Virtual Machine (IGVM) support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nitro.html">AWS Nitro Enclaves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../whpx.html">Windows Hypervisor Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vm-templating.html">QEMU VM templating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sriov.html">Composable SR-IOV device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qemu-colo.html">Qemu COLO Fault Tolerance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guest-memfd.html">guest-memfd support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/index.html">使用者模式仿真</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/index.html">工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../interop/index.html">系統仿真管理與互通性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../specs/index.html">System Emulation Guest Hardware Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devel/index.html">開發者資訊</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">詞彙表</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #802400" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QEMU</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">系統仿真</a></li>
+          <li class="breadcrumb-item"><a href="../targets.html">QEMU System Emulator Targets</a></li>
+          <li class="breadcrumb-item"><a href="../target-s390x.html">s390x System emulator</a></li>
+      <li class="breadcrumb-item active">CPACF Support</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/system/s390x/cpacf.rst">View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cpacf-support">
+<h1>CPACF Support<a class="headerlink" href="#cpacf-support" title="連結到這個標頭"></a></h1>
+<section id="cpacf">
+<h2>CPACF<a class="headerlink" href="#cpacf" title="連結到這個標頭"></a></h2>
+<p>CP Assist for Cryptographic Function (CPACF) is a hardware-integrated
+coprocessor feature built into every  processor core of IBM Z and
+LinuxONE mainframes (s390x architecture). It provides high-speed,
+hardware-accelerated encryption and hashing directly on the CPU.</p>
+<p>CPACF provides a set of z/Architecture instructions (known as Message
+Security Assist or MSA) that execute cryptographic operations
+synchronously with the main processor.</p>
+<ul class="simple">
+<li><p>Symmetric Encryption: Support for AES (128, 192, 256-bit), DES, and
+Triple-DES (TDES).</p></li>
+<li><p>Hashing: Acceleration for SHA-1, SHA-2 (up to SHA-512), SHA-3 and
+SHAKE.</p></li>
+<li><p>Random Number Generation: Pseudo Random Number Generator (PRNG) and
+a hardware-based True Random Number Generator (TRNG).</p></li>
+<li><p>Asymmetric Support: Elliptic Curve Cryptography (ECC) primitives
+P-256, P-384, P-521, Montgomery/Edwards curves (e.g., Ed25519).</p></li>
+</ul>
+<p>Documentation about CPACF instructions is publicly available and
+can be found in the &quot;z/Architecture Principles of Operation&quot;
+accessible at the IBM documentation hub <a class="reference external" href="https://www.ibm.com/docs/en">https://www.ibm.com/docs/en</a>.
+For example the latest version as a pdf is available here:
+<a class="reference external" href="https://www.ibm.com/support/pages/zvm/library/other/22783214.pdf">https://www.ibm.com/support/pages/zvm/library/other/22783214.pdf</a></p>
+</section>
+<section id="cpacf-instructions">
+<h2>CPACF instructions<a class="headerlink" href="#cpacf-instructions" title="連結到這個標頭"></a></h2>
+<p>Here is a list of implemented CPACF instructions and the supported
+functions for each instruction:</p>
+<p>KDSA (COMPUTE DIGITAL SIGNATURE AUTHENTICATION)
+- Function code 0x00 - Function Query</p>
+<p>KIMD (COMPUTE INTERMEDIATE MESSAGE DIGEST)
+- Function code 0x00 - Function Query
+- Function code 0x02 - CPACF_KIMD_SHA_256
+- Function code 0x03 - CPACF_KIMD_SHA_512</p>
+<p>KLMD (COMPUTE LAST MESSAGE DIGEST)
+- Function code 0x00 - Function Query
+- Function code 0x02 - CPACF_KLMD_SHA_256
+- Function code 0x03 - CPACF_KLMD_SHA_512</p>
+<p>KM (CIPHER MESSAGE)
+- Function code 0x00 - Function Query
+- Function code 0x12 - CPACF_KM_AES_128
+- Function code 0x13 - CPACF_KM_AES_192
+- Function code 0x14 - CPACF_KM_AES_256
+- Function code 0x1a - CPACF_KM_PAES_128
+- Function code 0x1b - CPACF_KM_PAES_192
+- Function code 0x1c - CPACF_KM_PAES_256
+- Function code 0x32 - CPACF_KM_XTS_128
+- Function code 0x34 - CPACF_KM_XTS_256
+- Function code 0x3a - CPACF_KM_PXTS_128
+- Function code 0x3c - CPACF_KM_PXTS_256</p>
+<p>KMAC (COMPUTE MESSAGE AUTHENTICATION CODE)
+- Function code 0x00 - Function Query</p>
+<p>KMC (CIPHER MESSAGE WITH CHAINING)
+- Function code 0x00 - Function Query
+- Function code 0x12 - CPACF_KMC_AES_128
+- Function code 0x13 - CPACF_KMC_AES_192
+- Function code 0x14 - CPACF_KMC_AES_256
+- Function code 0x1a - CPACF_KMC_PAES_128
+- Function code 0x1b - CPACF_KMC_PAES_192
+- Function code 0x1c - CPACF_KMC_PAES_256</p>
+<p>KMCTR (CIPHER MESSAGE WITH COUNTER)
+- Function code 0x00 - Function Query
+- Function code 0x12 - CPACF_KMCTR_AES_128
+- Function code 0x13 - CPACF_KMCTR_AES_192
+- Function code 0x14 - CPACF_KMCTR_AES_256
+- Function code 0x1a - CPACF_KMCTR_PAES_128
+- Function code 0x1b - CPACF_KMCTR_PAES_192
+- Function code 0x1c - CPACF_KMCTR_PAES_256</p>
+<p>KMF (CIPHER MESSAGE WITH CIPHER FEEDBACK)
+- not supported</p>
+<p>KMO (CIPHER MESSAGE WITH OUTPUT FEEDBACK)
+- not supported</p>
+<p>PCC (PERFORM CRYPTOGRAPHIC COMPUTATION)
+- Function code 0x00 - Function Query
+- Function code 0x32 - compute XTS param AES-128
+- Function code 0x34 - compute XTS param AES-256
+- Function code 0x3a - compute XTS param Encrypted AES-128
+- Function code 0x3c - compute XTS param Encrypted AES-256</p>
+<p>PCKMO (PERFORM CRYPTOGRAPHIC KEY MANAGEMENT OPERATION)
+- Function code 0x00 - Function Query
+- Function code 0x12 - CPACF_PCKMO_ENC_AES_128_KEY
+- Function code 0x13 - CPACF_PCKMO_ENC_AES_192_KEY
+- Function code 0x14 - CPACF_PCKMO_ENC_AES_256_KEY</p>
+<p>PRNO (PERFORM RANDOM NUMBER OPERATION)
+- Function code 0x00 - Function Query
+- Function code 0x72 - CPACF_PRNO_TRNG</p>
+<p>Not listed CPACF instructions (KMA) cause an Operation Exception when
+used. Instructions with only query function support (KMF, KMO, KDSA)
+perform register validation and raise a Specification Exception for
+invalid registers or non-query function codes. The query function for
+these instructions will return a function status word with all but the
+query function bit set to 0.</p>
+</section>
+<section id="protected-key-support">
+<h2>Protected key support<a class="headerlink" href="#protected-key-support" title="連結到這個標頭"></a></h2>
+<p>The qemu version for protected key support is only a fake provided
+here for developing and testing purpose:</p>
+<ul class="simple">
+<li><p>The protected key is _derived_ from the clear key by xoring the
+fixed pattern 0xAAAA... onto the key value.</p></li>
+<li><p>The AES Wrapping Key Verification Pattern is a fixed value of 32
+bytes 0x0F0A0C0E0F0A0C0E...</p></li>
+</ul>
+<p>The PCKMO instruction implementation does exactly this - _derive_ a
+_protected_ key from the clear key given by xor 0xAAAA... and writing
+the fixed value for the WKVP of 0x0F0A0C0E0F0A0C0E... into the blob.
+The other subfunctions of the CPACF instructions dealing with
+protected key treat the protected key blob by first checking for the
+WKVP (against the fixed value of 0x0F0A0C0E0F0A0C0E...) and second
+_decrypting_ the key value by xoring 0xAAAA... and then execute the
+clear key operation with the decrypted key value.
+This is suitable for testing purpose but such keys are not for real
+production load and would open up a huge security breach!</p>
+<p>For more details about protected keys see the &quot;z/Architecture
+Principles of Operation&quot; document chapter &quot;General Instructions&quot;
+sub-chapter &quot;Protection of Cryptographic Keys&quot; and again the
+implementation here does NOT implement what is explained there.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="secure-ipl.html" class="btn btn-neutral float-left" title="s390 Secure IPL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../target-sparc.html" class="btn btn-neutral float-right" title="Sparc32 System emulator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, The QEMU Project Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+
+<!-- Empty para to force a blank line after "Built with Sphinx ..." -->
+<p></p>
+
+<p>This documentation is for QEMU version master.</p>
+
+
+<p><a href="../../about/license.html">QEMU and this manual are released under the
+GNU General Public License, version 2.</a></p>
+
+ 
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en-US" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VMLAUNCHUPDATE Interface Specification &mdash; QEMU 11.1.50 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=7ab3649f" />
+      <link rel="stylesheet" type="text/css" href="../_static/theme_overrides.css?v=b3ae9cc8" />
+
+  
+    <link rel="shortcut icon" href="../_static/qemu_32x32.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/qemu-docs-l10n/specs/vmlaunchupdate.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f306cfd1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/custom.js?v=2ab9f71d"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="RAPL MSR support" href="rapl-msr.html" />
+    <link rel="prev" title="Virtual Machine Generation ID Device" href="vmgenid.html" />
+ 
+<script type="text/javascript" src="../ltd-provenance.js"></script>
+<script type="text/javascript" src="../ltd-current.js"></script>
+<script type="text/javascript" src="../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #802400" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QEMU
+              <img src="../_static/qemu_128x128.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system/index.html">System Emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Mode Emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interop/index.html">System Emulation Management and Interoperability</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Emulation Guest Hardware Specifications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pci-ids.html">PCI IDs for QEMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pci-serial.html">QEMU PCI serial devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pci-testdev.html">QEMU PCI test device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppc-xive.html">POWER9 XIVE interrupt controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppc-spapr-xive.html">XIVE for sPAPR (pseries machines)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppc-spapr-numa.html">NUMA mechanics for sPAPR (pseries machines)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppc-spapr-numa.html#how-the-pseries-linux-guest-calculates-numa-distances">How the pseries Linux guest calculates NUMA distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppc-spapr-numa.html#pseries-numa-mechanics">pseries NUMA mechanics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppc-spapr-numa.html#legacy-5-1-and-older-pseries-numa-mechanics">Legacy (5.1 and older) pseries NUMA mechanics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpi_hw_reduced_hotplug.html">QEMU and ACPI BIOS Generic Event Device interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tpm.html">QEMU TPM Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpi_hest_ghes.html">APEI tables generating and CPER record</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpi_cpu_hotplug.html">QEMU&lt;-&gt;ACPI BIOS CPU hotplug interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpi_mem_hotplug.html">QEMU&lt;-&gt;ACPI BIOS memory hotplug interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpi_pci_hotplug.html">QEMU&lt;-&gt;ACPI BIOS PCI hotplug interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpi_nvdimm.html">QEMU&lt;-&gt;ACPI BIOS NVDIMM interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpi_erst.html">ACPI ERST DEVICE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sev-guest-firmware.html">QEMU/Guest Firmware Interface for AMD SEV and SEV-ES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fw_cfg.html">QEMU Firmware Configuration (fw_cfg) Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsi.html">IBM’s Flexible Service Interface (FSI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vmw_pvscsi-spec.html">VMWare PVSCSI Device Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edu.html">EDU device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ivshmem-spec.html">Device Specification for Inter-VM shared memory device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pvpanic.html">PVPANIC DEVICE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spdm.html">QEMU Security Protocols and Data Models (SPDM) Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="standard-vga.html">QEMU Standard VGA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virt-ctlr.html">Virtual System Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vmcoreinfo.html">VMCoreInfo device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vmgenid.html">Virtual Machine Generation ID Device</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">VMLAUNCHUPDATE Interface Specification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#base-requirements">Base Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-fw-cfg-file">The Fw-cfg File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#triggering-the-launch-state-update-using-igvm">Triggering the Launch State Update using IGVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#closing-remarks">Closing Remarks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rapl-msr.html">RAPL MSR support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rocker.html">Rocker Network Switch Register Programming Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="riscv-iommu.html">RISC-V IOMMU support for RISC-V machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="riscv-aia.html">RISC-V AIA support for RISC-V machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="riscv-debug.html">RISC-V Debug support for RISC-V CPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aspeed-intc.html">ASPEED Interrupt Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iommu-testdev.html">iommu-testdev — IOMMU test device for bare-metal testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s390x-secure-ipl.html">s390 Secure IPL</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../devel/index.html">Developer Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #802400" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QEMU</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">System Emulation Guest Hardware Specifications</a></li>
+      <li class="breadcrumb-item active">VMLAUNCHUPDATE Interface Specification</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/specs/vmlaunchupdate.rst">View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vmlaunchupdate-interface-specification">
+<h1>VMLAUNCHUPDATE Interface Specification<a class="headerlink" href="#vmlaunchupdate-interface-specification" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">VmLaunchUpdate</span></code> is an extension to <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code> that allows guests to replace
+boot state in their virtual machine using IGVM file container. Through a combination
+of this <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code> hypervisor interface, an IGVM file containing specific directives
+and with hypervisor stack knowledge, guests can deterministically replace the launch
+state for guests. This is useful for environments like SEV-SNP where the
+launch payload becomes the launch digest. Guests can use vm-launch-update device to
+provide a measured, full guest payload (BIOS image, kernel, initramfs, kernel
+command line) to the virtual machine which enables them to easily reason about
+integrity of the resulting system.
+It is also to be noted that this mechanism currently works only when the guest was
+already started with an IGVM file defining its initial launch state. Subsequent
+guest resets will use the launch state as defined in the guest provided IGVM file,
+not the file with which the guest was initially started. If the guest was not started
+with IGVM, writing a new bundle through the <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code> interface has no effect.</p>
+<p>For more information, please see the <a class="reference external" href="https://www.youtube.com/watch?v=VCMBxU6tAto">KVM Forum 2024 presentation</a>
+about this work.</p>
+</section>
+<section id="base-requirements">
+<h2>Base Requirements<a class="headerlink" href="#base-requirements" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>fw-cfg</strong>:</dt><dd><p>The target system must provide a <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code> interface. For x86 based
+environments, this <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code> interface must be accessible through PIO ports
+0x510 and 0x511. The <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code> interface does not need to be announced as part
+of system device tables such as DSDT. The <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code> interface must support the
+DMA interface. It may only support the DMA interface for write operations.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>IGVM support</strong>:</dt><dd><p>The hypervisor must provide support for parsing and executing the IGVM file bundle.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Confidential guests</strong>:</dt><dd><p>For confidential guests, the hypervisor must support guest reset. Otherwise, the new
+boot state provided through IGVM will not be applied.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="the-fw-cfg-file">
+<h2>The Fw-cfg File<a class="headerlink" href="#the-fw-cfg-file" title="Link to this heading"></a></h2>
+<p>Guests drive vmlaunchupdate through special <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code> files that control its flow
+followed by a standard system reset operation. When the <code class="docutils literal notranslate"><span class="pre">vm-launch-update</span></code> device
+is available, it provides the following <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code> file:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">etc/vmlaunchupdate</span></code> - It exposes a structure of the following type, all in
+little-endian format:</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 2</span><span class="w">       </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">version</span><span class="p">;</span>
+<span class="linenos"> 3</span><span class="w">       </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">       </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">_padding</span><span class="p">;</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="w">       </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">capabilities</span><span class="p">;</span>
+<span class="linenos"> 8</span><span class="w">       </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">control</span><span class="p">;</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">       </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">fw_image_addr</span><span class="p">;</span>
+<span class="linenos">11</span><span class="w">       </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">fw_image_size</span><span class="p">;</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">       </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">opaque_addr</span><span class="p">;</span>
+<span class="linenos">14</span><span class="w">       </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">opaque_size</span><span class="p">;</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="p">}</span><span class="w"> </span><span class="n">VMLaunchUpdate</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Currently, the <code class="docutils literal notranslate"><span class="pre">version</span></code> number (line 2 above) is initialized to the value <code class="docutils literal notranslate"><span class="pre">1</span></code>.
+Only IGVM files are supported at present. The <code class="docutils literal notranslate"><span class="pre">capabilities</span></code> (line 7) and <code class="docutils literal notranslate"><span class="pre">control</span></code> (line 8) both support
+the following single value:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">VM_LAUNCHUPDATE_FORMAT_IGVM</span></code></p>
+<p>This value is used by the hypervisor to indicate that only IGVM container files are supported.
+This is set  as a part of <code class="docutils literal notranslate"><span class="pre">capabilities</span></code> parameter (line 7) in the above structure. This same value
+is passed by the guest to the hypervisor in the <code class="docutils literal notranslate"><span class="pre">control</span></code> parameter (line 8) in the above structure
+to indicate that the guest passed IGVM file in memory to the hypervisor. The starting guest physical
+address of the IGVM file in memory is specified in <code class="docutils literal notranslate"><span class="pre">fw_image_addr</span></code> and it’s length is specified in
+<code class="docutils literal notranslate"><span class="pre">fw_image_size</span></code> by the guest. If any other value is passed by the guest in the <code class="docutils literal notranslate"><span class="pre">control</span></code> parameter,
+the write is ignored by the hypervisor.</p>
+</li>
+</ul>
+<p>Following  <code class="docutils literal notranslate"><span class="pre">control</span></code> parameters are supported:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">VM_LAUNCHUPDATE_CTL_DISABLE</span></code></p>
+<p>This value is set in the <code class="docutils literal notranslate"><span class="pre">control</span></code> parameter by the guest in order to disable this <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code>
+hypervisor interface from further updating the guest launch state with a new IGVM file.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VM_LAUNCHUPDATE_CTL_HOST_IGVM</span></code></p>
+<p>This value is set in the <code class="docutils literal notranslate"><span class="pre">control</span></code> parameter by the guest in order to send request to the
+hypervisor to initialize the guest using the original host provided IGVM file.
+It is useful if the guest wanted to update the UKIs present in the ESP and upon
+reset, use one of the updated UKIs present there. If the guest passed addresses in memory
+where its own IGVM file is loaded (see below) while also setting this control value, the next
+reset will load the guest provided IGVM file and a subsequent second reset will restore the original
+host IGVM. If the guest did not provide any addresses of its own IGVM (the address values are
+cleared) while setting this control parameter, the immediate next guest reset will load the
+original host provided IGVM file.</p>
+<p>The combination of the above two ctl interfaces work as
+follows:</p>
+<ol class="upperalpha simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CTL_HOST_IGVM</span></code> = off <code class="docutils literal notranslate"><span class="pre">CTL_DISABLE</span></code> = off</p></li>
+</ol>
+<blockquote>
+<div><p>Supplied IGVM file replaces the firmware permanently.  Updating the
+firmware again is possible.</p>
+</div></blockquote>
+<ol class="upperalpha simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">CTL_HOST_IGVM</span></code> = off <code class="docutils literal notranslate"><span class="pre">CTL_DISABLE</span></code> = on</p></li>
+</ol>
+<blockquote>
+<div><p>Supplied IGVM file replaces the firmware permanently.  Updating the
+firmware again is not possible.</p>
+</div></blockquote>
+<ol class="upperalpha simple" start="3">
+<li><p><code class="docutils literal notranslate"><span class="pre">CTL_HOST_IGVM</span></code> = on <code class="docutils literal notranslate"><span class="pre">CTL_DISABLE</span></code> = off</p></li>
+</ol>
+<blockquote>
+<div><p>Supplied IGVM file replaces the firmware for one reset.  Resetting
+again will switch back to the original firmware.  Updating the
+firmware again is possible.</p>
+</div></blockquote>
+<ol class="upperalpha simple" start="4">
+<li><p><code class="docutils literal notranslate"><span class="pre">CTL_HOST_IGVM</span></code> = on <code class="docutils literal notranslate"><span class="pre">CTL_DISABLE</span></code> = on</p></li>
+</ol>
+<blockquote>
+<div><p>Supplied IGVM file replaces the firmware for one reset.  Resetting
+again will switch back to the original firmware.  Updating the
+firmware again is NOT possible.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">fw_image_addr</span></code> (line 10) is the base guest physical address of the guest memory where the IGVM file of size
+<code class="docutils literal notranslate"><span class="pre">fw_image_size</span></code> (line 11) is loaded. <code class="docutils literal notranslate"><span class="pre">opaque_addr</span></code> (line 13) and <code class="docutils literal notranslate"><span class="pre">opaque_size</span></code> (line 14) are used by
+the guest for passing data across resets. The contents of this guest memory are preserved across the
+reset. For confidential guests, this memory region must come from guest shared unencrypted memory.</p>
+<p><code class="docutils literal notranslate"><span class="pre">status</span></code> (line 3) is written by the hypervisor and it indicates the result of the IGVM loading operation.
+A success indicates status code 0. Otherwise a non-zero status code indicates failure. The nature of the
+failure is indicated by the value of the code.</p>
+</section>
+<section id="triggering-the-launch-state-update-using-igvm">
+<h2>Triggering the Launch State Update using IGVM<a class="headerlink" href="#triggering-the-launch-state-update-using-igvm" title="Link to this heading"></a></h2>
+<p>To initiate the launch update process, the guest issues a standard system reset
+operation through any of the means implemented by the machine model.</p>
+<p>On a write to the <code class="docutils literal notranslate"><span class="pre">etc/vmlaunchupdate</span></code> interface, the hypervisor evaluates whether this
+hypervisor interface is disabled. If it is, it ignores any writes to this <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code> file
+by the guest. No updates to initial launch state is performed.</p>
+<p>If the hypervisor interface is enabled, upon write to the <code class="docutils literal notranslate"><span class="pre">etc/vmlaunchupdate</span></code> interface,
+the hypervisor parses the IGVM file bundle passed to it in memory, with starting guest physical
+address at <code class="docutils literal notranslate"><span class="pre">fw_image_addr</span></code> and length <code class="docutils literal notranslate"><span class="pre">fw_image_size</span></code>. If parsing is successful, it creates
+a context handle to the IGVM file. If parsing and context loading is successful and there are no
+errors, <code class="docutils literal notranslate"><span class="pre">fw_image_addr</span></code> and <code class="docutils literal notranslate"><span class="pre">fw_image_size</span></code> are cleared. The guest can check this in order
+to determine if the IGVM was successfully parsed and the new context was loaded. If not, the
+guest can throw error and abort rebooting to new IGVM boot state. Alternatively, the guest can
+also check the <code class="docutils literal notranslate"><span class="pre">status</span></code> code from the <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code> file. A status code of 0 indicates success
+of the operation. Non-zero status code indicates failure. Exact nature of the failure is
+indicated by the value of the code. Currently, only two error values are supported:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VM_LAUNCHUPDATE_LOAD_FAIL</span></code> - defined as value 1 and is set when loading of the IGVM file failed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VM_LAUNCHUPDATE_NOT_IGVM_INIT</span></code> - defined as value 2 and is set when the guest was not started with
+IGVM file.</p></li>
+</ul>
+<p>Upon guest reset, the hypervisor executes the IGVM bundle using
+the context handle, setting the initial launch state of the guest accordingly.
+If an invalid IGVM file is passed, parsing the file fails and the hypervisor ignores it
+when <code class="docutils literal notranslate"><span class="pre">fw-cfg</span></code> files are written. In this case, the initial launch state
+is not modified. If invalid addresses are passed, the hypervisor ignores them as well and no
+new launch state is set.</p>
+<p>The launch state update mechanism works both for confidential and non-confidential
+guests. In confidential guests, as a part of the reset operation, all existing
+guest shared memory (shared with the hypervisor) as well as the guest memory region
+starting with <code class="docutils literal notranslate"><span class="pre">opaque_addr</span></code> and length <code class="docutils literal notranslate"><span class="pre">opaque_size</span></code> are preserved.
+The reset causes recreation of the VM context which triggers a fresh
+measurement of the replaced BIOS region and reset CPU state.</p>
+<p>For non-confidential guests, there is no concept of guest private memory and all the existing
+guest memory is preserved (this is the default behaviour today - QEMU does not reset/clear
+guest memory upon reset).</p>
+<p>In both confidential and non-confidential cases, CPU and device state are reset to
+the reset states specified in IGVM. In confidential environments, the guest
+always resumes operation in the highest privileged mode available to it (VMPL0 in SEV-SNP).</p>
+</section>
+<section id="closing-remarks">
+<h2>Closing Remarks<a class="headerlink" href="#closing-remarks" title="Link to this heading"></a></h2>
+<p>The exact content of the memory region specified by starting address <code class="docutils literal notranslate"><span class="pre">opaque_addr</span></code>
+and length <code class="docutils literal notranslate"><span class="pre">opaque_size</span></code> is guest specific and is hypervisor agnostic. The hypervisor does
+not care about the contents of this memory region. Therefore, it is not included in this
+specification. As of writing this document, TDX guests on QEMU does not support IGVM.
+Therefore, this mechanism cannot be used to change launch state of TDX guests.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vmgenid.html" class="btn btn-neutral float-left" title="Virtual Machine Generation ID Device" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rapl-msr.html" class="btn btn-neutral float-right" title="RAPL MSR support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, The QEMU Project Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+
+<!-- Empty para to force a blank line after "Built with Sphinx ..." -->
+<p></p>
+
+<p>This documentation is for QEMU version master.</p>
+
+
+<p><a href="../about/license.html">QEMU and this manual are released under the
+GNU General Public License, version 2.</a></p>
+
+ 
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
