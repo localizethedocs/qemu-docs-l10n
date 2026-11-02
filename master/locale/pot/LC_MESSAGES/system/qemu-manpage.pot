@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 16:46+0000\n"
+"POT-Creation-Date: 2026-11-02 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -216,7 +216,7 @@ msgstr ""
 msgid "Display version information and exit"
 msgstr ""
 
-#: ../../../../qemu-options.hx:54
+#: ../../../../qemu-options.hx:223
 msgid "``-machine [type=]name[,prop=value[,...]]``"
 msgstr ""
 
@@ -247,7 +247,7 @@ msgstr ""
 msgid "Supported machine properties are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:71
+#: ../../../../qemu-options.hx:76
 msgid "``accel=accels1[:accels2[:...]]``"
 msgstr ""
 
@@ -259,7 +259,7 @@ msgid ""
 "is used if the previous one fails to initialize."
 msgstr ""
 
-#: ../../../../qemu-options.hx:78
+#: ../../../../qemu-options.hx:81
 msgid "``vmport=on|off|auto``"
 msgstr ""
 
@@ -270,7 +270,7 @@ msgid ""
 "is off otherwise the default is on."
 msgstr ""
 
-#: ../../../../qemu-options.hx:83
+#: ../../../../qemu-options.hx:84
 msgid "``dump-guest-core=on|off``"
 msgstr ""
 
@@ -278,7 +278,7 @@ msgstr ""
 msgid "Include guest memory in a core dump. The default is on."
 msgstr ""
 
-#: ../../../../qemu-options.hx:86
+#: ../../../../qemu-options.hx:89
 msgid "``mem-merge=on|off``"
 msgstr ""
 
@@ -289,7 +289,7 @@ msgid ""
 "by default)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:91
+#: ../../../../qemu-options.hx:95
 msgid "``aes-key-wrap=on|off``"
 msgstr ""
 
@@ -300,7 +300,7 @@ msgid ""
 "cryptographic functions. The default is on."
 msgstr ""
 
-#: ../../../../qemu-options.hx:97
+#: ../../../../qemu-options.hx:101
 msgid "``dea-key-wrap=on|off``"
 msgstr ""
 
@@ -311,7 +311,7 @@ msgid ""
 "cryptographic functions. The default is on."
 msgstr ""
 
-#: ../../../../qemu-options.hx:103
+#: ../../../../qemu-options.hx:104
 msgid "``nvdimm=on|off``"
 msgstr ""
 
@@ -319,7 +319,7 @@ msgstr ""
 msgid "Enables or disables NVDIMM support. The default is off."
 msgstr ""
 
-#: ../../../../qemu-options.hx:106
+#: ../../../../qemu-options.hx:107
 msgid "``confidential-guest-support=<id>``"
 msgstr ""
 
@@ -327,7 +327,7 @@ msgstr ""
 msgid "confidential guest support object to use. The default is none."
 msgstr ""
 
-#: ../../../../qemu-options.hx:109
+#: ../../../../qemu-options.hx:111
 msgid "``memory-encryption=<id>``"
 msgstr ""
 
@@ -337,7 +337,7 @@ msgid ""
 "guest-support."
 msgstr ""
 
-#: ../../../../qemu-options.hx:113
+#: ../../../../qemu-options.hx:115
 msgid "``hmat=on|off``"
 msgstr ""
 
@@ -347,7 +347,7 @@ msgid ""
 "support. The default is off."
 msgstr ""
 
-#: ../../../../qemu-options.hx:117
+#: ../../../../qemu-options.hx:119
 msgid "``spcr=on|off``"
 msgstr ""
 
@@ -357,7 +357,7 @@ msgid ""
 "support. The default is on."
 msgstr ""
 
-#: ../../../../qemu-options.hx:121
+#: ../../../../qemu-options.hx:129
 msgid "``aux-ram-share=on|off``"
 msgstr ""
 
@@ -374,7 +374,7 @@ msgstr ""
 msgid "To use the cpr-transfer migration mode, you must set aux-ram-share=on."
 msgstr ""
 
-#: ../../../../qemu-options.hx:131
+#: ../../../../qemu-options.hx:156
 msgid "``memory-backend='id'``"
 msgstr ""
 
@@ -390,8 +390,8 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:138
 msgid ""
-"-object memory-backend-file,id=pc.ram,size=512M,mem-path=/hugetlbfs,"
-"prealloc=on,share=on\n"
+"-object memory-backend-file,id=pc.ram,size=512M,mem-path=/"
+"hugetlbfs,prealloc=on,share=on\n"
 "-machine memory-backend=pc.ram\n"
 "-m 512M"
 msgstr ""
@@ -422,10 +422,10 @@ msgid ""
 "-m 512M"
 msgstr ""
 
-#: ../../../../qemu-options.hx:158
+#: ../../../../qemu-options.hx:188
 msgid ""
-"``cxl-fmw.0.targets.0=firsttarget,cxl-fmw.0.targets.1=secondtarget,cxl-fmw.0."
-"size=size[,cxl-fmw.0.interleave-granularity=granularity]``"
+"``cxl-fmw.0.targets.0=firsttarget,cxl-fmw.0.targets.1=secondtarget,cxl-"
+"fmw.0.size=size[,cxl-fmw.0.interleave-granularity=granularity]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:159
@@ -478,11 +478,11 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:188
 msgid ""
-"-machine cxl-fmw.0.targets.0=cxl.0,cxl-fmw.0.targets.1=cxl.1,cxl-fmw.0."
-"size=128G,cxl-fmw.0.interleave-granularity=512"
+"-machine cxl-fmw.0.targets.0=cxl.0,cxl-fmw.0.targets.1=cxl.1,cxl-"
+"fmw.0.size=128G,cxl-fmw.0.interleave-granularity=512"
 msgstr ""
 
-#: ../../../../qemu-options.hx:190
+#: ../../../../qemu-options.hx:191
 msgid "``sgx-epc.0.memdev=<memid>,sgx-epc.0.node=<numaid>``"
 msgstr ""
 
@@ -490,7 +490,7 @@ msgstr ""
 msgid "Define an SGX EPC section."
 msgstr ""
 
-#: ../../../../qemu-options.hx:193
+#: ../../../../qemu-options.hx:218
 msgid "``smp-cache.0.cache=cachename,smp-cache.0.topology=topologylevel``"
 msgstr ""
 
@@ -527,11 +527,11 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:218
 msgid ""
-"-machine smp-cache.0.cache=l1d,smp-cache.0.topology=core,smp-cache.1."
-"cache=l1i,smp-cache.1.topology=core"
+"-machine smp-cache.0.cache=l1d,smp-cache.0.topology=core,smp-"
+"cache.1.cache=l1i,smp-cache.1.topology=core"
 msgstr ""
 
-#: ../../../../qemu-options.hx:220
+#: ../../../../qemu-options.hx:221
 msgid "``boot-certs.0.path=/path/directory,boot-certs.1.path=/path/file``"
 msgstr ""
 
@@ -557,7 +557,7 @@ msgstr ""
 msgid "as -machine."
 msgstr ""
 
-#: ../../../../qemu-options.hx:237
+#: ../../../../qemu-options.hx:238
 msgid "``-cpu model``"
 msgstr ""
 
@@ -566,11 +566,11 @@ msgid ""
 "Select CPU model (``-cpu help`` for list and additional feature selection)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:257
+#: ../../../../qemu-options.hx:344
 msgid "``-accel name[,prop=value[,...]]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:264
+#: ../../../../qemu-options.hx:267
 msgid "``igd-passthru=on|off``"
 msgstr ""
 
@@ -580,7 +580,7 @@ msgid ""
 "devices can be passed through to the guest (default=off)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:269
+#: ../../../../qemu-options.hx:274
 msgid "``kernel-irqchip=on|off|split``"
 msgstr ""
 
@@ -592,7 +592,7 @@ msgid ""
 "kernel irqchip completely is not recommended except for debugging purposes."
 msgstr ""
 
-#: ../../../../qemu-options.hx:276
+#: ../../../../qemu-options.hx:277
 msgid "``kvm-shadow-mem=size``"
 msgstr ""
 
@@ -600,7 +600,7 @@ msgstr ""
 msgid "Defines the size of the KVM shadow MMU."
 msgstr ""
 
-#: ../../../../qemu-options.hx:279
+#: ../../../../qemu-options.hx:283
 msgid "``one-insn-per-tb=on|off``"
 msgstr ""
 
@@ -612,7 +612,7 @@ msgid ""
 "d`` option."
 msgstr ""
 
-#: ../../../../qemu-options.hx:285
+#: ../../../../qemu-options.hx:289
 msgid "``split-wx=on|off``"
 msgstr ""
 
@@ -624,7 +624,7 @@ msgid ""
 "may enable this for testing or debugging."
 msgstr ""
 
-#: ../../../../qemu-options.hx:291
+#: ../../../../qemu-options.hx:292
 msgid "``tb-size=n``"
 msgstr ""
 
@@ -632,7 +632,7 @@ msgstr ""
 msgid "Controls the size (in MiB) of the TCG translation block cache."
 msgstr ""
 
-#: ../../../../qemu-options.hx:294
+#: ../../../../qemu-options.hx:300
 msgid "``thread=single|multi``"
 msgstr ""
 
@@ -645,7 +645,7 @@ msgid ""
 "replay)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:302
+#: ../../../../qemu-options.hx:310
 msgid "``dirty-ring-size=n``"
 msgstr ""
 
@@ -660,7 +660,7 @@ msgid ""
 "When enabled, KVM will instead record dirty pages in a bitmap."
 msgstr ""
 
-#: ../../../../qemu-options.hx:312
+#: ../../../../qemu-options.hx:324
 msgid "``eager-split-size=n``"
 msgstr ""
 
@@ -673,13 +673,13 @@ msgid ""
 "situations where TLBI costs associated with break-before-make sequences are "
 "considerable and also if guest workloads are read intensive. The size here "
 "specifies how many pages to break at a time and needs to be a valid block "
-"size which is 1GiB/2MiB/4KiB, 32MiB/16KiB and 512MiB/64KiB for "
-"4KiB/16KiB/64KiB PAGE_SIZE respectively. Be wary of specifying a higher size "
-"as it will have an impact on the memory. By default, this feature is "
-"disabled (eager-split-size=0)."
+"size which is 1GiB/2MiB/4KiB, 32MiB/16KiB and 512MiB/64KiB for 4KiB/16KiB/"
+"64KiB PAGE_SIZE respectively. Be wary of specifying a higher size as it will "
+"have an impact on the memory. By default, this feature is disabled (eager-"
+"split-size=0)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:326
+#: ../../../../qemu-options.hx:334
 msgid "``notify-vmexit=run|internal-error|disable,notify-window=n``"
 msgstr ""
 
@@ -695,7 +695,7 @@ msgid ""
 "window=0."
 msgstr ""
 
-#: ../../../../qemu-options.hx:336
+#: ../../../../qemu-options.hx:339
 msgid "``device=path``"
 msgstr ""
 
@@ -706,7 +706,7 @@ msgid ""
 "the value to ``/dev/fdset/NN``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:341
+#: ../../../../qemu-options.hx:344
 msgid "``hyperv=on|off|auto``"
 msgstr ""
 
@@ -717,11 +717,11 @@ msgid ""
 "by default."
 msgstr ""
 
-#: ../../../../qemu-options.hx:377
+#: ../../../../qemu-options.hx:448
 msgid ""
-"``-smp [[cpus=]n][,maxcpus=maxcpus][,drawers=drawers][,books=books][,"
-"sockets=sockets][,dies=dies][,clusters=clusters][,modules=modules][,"
-"cores=cores][,threads=threads]``"
+"``-smp [[cpus=]n][,maxcpus=maxcpus][,drawers=drawers][,books=books]"
+"[,sockets=sockets][,dies=dies][,clusters=clusters][,modules=modules]"
+"[,cores=cores][,threads=threads]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:378
@@ -824,8 +824,8 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:461
 msgid ""
-"``-numa node[,mem=size][,cpus=firstcpu[-lastcpu]][,nodeid=node][,"
-"initiator=initiator]``"
+"``-numa node[,mem=size][,cpus=firstcpu[-lastcpu]][,nodeid=node]"
+"[,initiator=initiator]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:462 ../../../../qemu-options.hx:464
@@ -834,7 +834,7 @@ msgstr ""
 #: ../../../../qemu-options.hx:1435 ../../../../qemu-options.hx:1449
 #: ../../../../qemu-options.hx:1451 ../../../../qemu-options.hx:1453
 #: ../../../../qemu-options.hx:1773 ../../../../qemu-options.hx:1962
-#: ../../../../qemu-options.hx:2068 ../../../../qemu-options.hx:4438
+#: ../../../../qemu-options.hx:2068 ../../../../qemu-options.hx:4445
 #: ../../../../qemu-options.hx:5084 ../../../../qemu-options.hx:5450
 #: ../../../../qemu-options.hx:6325
 msgid "\\"
@@ -842,8 +842,8 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:463
 msgid ""
-"``-numa node[,memdev=id][,cpus=firstcpu[-lastcpu]][,nodeid=node][,"
-"initiator=initiator]``"
+"``-numa node[,memdev=id][,cpus=firstcpu[-lastcpu]][,nodeid=node]"
+"[,initiator=initiator]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:465
@@ -860,10 +860,10 @@ msgid ""
 "type=type[,latency=lat][,bandwidth=bw]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:471
+#: ../../../../qemu-options.hx:621
 msgid ""
-"``-numa hmat-cache,node-id=node,size=size,level=level[,associativity=str][,"
-"policy=str][,line=size]``"
+"``-numa hmat-cache,node-id=node,size=size,level=level[,associativity=str]"
+"[,policy=str][,line=size]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:472
@@ -1056,21 +1056,21 @@ msgid ""
 "-numa node,nodeid=1,memdev=m1,initiator=0 \\\n"
 "-numa cpu,node-id=0,socket-id=0 \\\n"
 "-numa cpu,node-id=0,socket-id=1 \\\n"
-"-numa hmat-lb,initiator=0,target=0,hierarchy=memory,data-type=access-latency,"
-"latency=5 \\\n"
+"-numa hmat-lb,initiator=0,target=0,hierarchy=memory,data-type=access-"
+"latency,latency=5 \\\n"
 "-numa hmat-lb,initiator=0,target=0,hierarchy=memory,data-type=access-"
 "bandwidth,bandwidth=200M \\\n"
-"-numa hmat-lb,initiator=0,target=1,hierarchy=memory,data-type=access-latency,"
-"latency=10 \\\n"
+"-numa hmat-lb,initiator=0,target=1,hierarchy=memory,data-type=access-"
+"latency,latency=10 \\\n"
 "-numa hmat-lb,initiator=0,target=1,hierarchy=memory,data-type=access-"
 "bandwidth,bandwidth=100M \\\n"
-"-numa hmat-cache,node-id=0,size=10K,level=1,associativity=direct,"
-"policy=write-back,line=8 \\\n"
-"-numa hmat-cache,node-id=1,size=10K,level=1,associativity=direct,"
-"policy=write-back,line=8"
+"-numa hmat-cache,node-"
+"id=0,size=10K,level=1,associativity=direct,policy=write-back,line=8 \\\n"
+"-numa hmat-cache,node-"
+"id=1,size=10K,level=1,associativity=direct,policy=write-back,line=8"
 msgstr ""
 
-#: ../../../../qemu-options.hx:629
+#: ../../../../qemu-options.hx:652
 msgid "``-add-fd fd=fd,set=set[,opaque=opaque]``"
 msgstr ""
 
@@ -1078,7 +1078,7 @@ msgstr ""
 msgid "Add a file descriptor to an fd set. Valid options are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:632
+#: ../../../../qemu-options.hx:635
 msgid "``fd=fd``"
 msgstr ""
 
@@ -1088,7 +1088,7 @@ msgid ""
 "set. The file descriptor cannot be stdin, stdout, or stderr."
 msgstr ""
 
-#: ../../../../qemu-options.hx:637
+#: ../../../../qemu-options.hx:639
 msgid "``set=set``"
 msgstr ""
 
@@ -1096,7 +1096,7 @@ msgstr ""
 msgid "This option defines the ID of the fd set to add the file descriptor to."
 msgstr ""
 
-#: ../../../../qemu-options.hx:641
+#: ../../../../qemu-options.hx:643
 msgid "``opaque=opaque``"
 msgstr ""
 
@@ -1128,7 +1128,7 @@ msgstr ""
 msgid "``-global driver.prop=value``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:673
+#: ../../../../qemu-options.hx:686
 msgid "``-global driver=driver,property=property,value=value``"
 msgstr ""
 
@@ -1150,12 +1150,12 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:685
 msgid ""
-"-global driver.prop=value is shorthand for -global driver=driver,"
-"property=prop,value=value. The longhand syntax works even when driver "
-"contains a dot."
+"-global driver.prop=value is shorthand for -global "
+"driver=driver,property=prop,value=value. The longhand syntax works even when "
+"driver contains a dot."
 msgstr ""
 
-#: ../../../../qemu-options.hx:699
+#: ../../../../qemu-options.hx:739
 msgid ""
 "``-boot [order=drives][,once=drives][,menu=on|off][,splash=sp_name][,splash-"
 "time=sp_time][,reboot-timeout=rb_timeout][,strict=on|off]``"
@@ -1220,7 +1220,7 @@ msgid ""
 "discouraged as it may be removed from future versions."
 msgstr ""
 
-#: ../../../../qemu-options.hx:752
+#: ../../../../qemu-options.hx:767
 msgid "``-m [size=]megs[,slots=n,maxmem=size]``"
 msgstr ""
 
@@ -1266,7 +1266,7 @@ msgstr ""
 msgid "Preallocate memory when using -mem-path."
 msgstr ""
 
-#: ../../../../qemu-options.hx:790
+#: ../../../../qemu-options.hx:804
 msgid "``-k language``"
 msgstr ""
 
@@ -1293,7 +1293,7 @@ msgstr ""
 msgid "The default is ``en-us``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:820
+#: ../../../../qemu-options.hx:843
 msgid "``-audio [driver=]driver[,model=value][,prop=value[,...]]``"
 msgstr ""
 
@@ -1332,7 +1332,7 @@ msgid ""
 "audiodev`` option below.  Use ``driver=help`` to list the available drivers."
 msgstr ""
 
-#: ../../../../qemu-options.hx:916
+#: ../../../../qemu-options.hx:978
 msgid "``-audiodev [driver=]driver,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1371,7 +1371,7 @@ msgstr ""
 msgid "Valid global options are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:939
+#: ../../../../qemu-options.hx:940
 msgid "``id=identifier``"
 msgstr ""
 
@@ -1379,7 +1379,7 @@ msgstr ""
 msgid "Identifies the audio backend."
 msgstr ""
 
-#: ../../../../qemu-options.hx:942
+#: ../../../../qemu-options.hx:944
 msgid "``timer-period=period``"
 msgstr ""
 
@@ -1389,7 +1389,7 @@ msgid ""
 "is 10000 (10 ms)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:946
+#: ../../../../qemu-options.hx:954
 msgid "``in|out.mixing-engine=on|off``"
 msgstr ""
 
@@ -1404,7 +1404,7 @@ msgid ""
 "supports mono and stereo audio. Default is on."
 msgstr ""
 
-#: ../../../../qemu-options.hx:956
+#: ../../../../qemu-options.hx:959
 msgid "``in|out.fixed-settings=on|off``"
 msgstr ""
 
@@ -1415,7 +1415,7 @@ msgid ""
 "channels or format. Default is on."
 msgstr ""
 
-#: ../../../../qemu-options.hx:961
+#: ../../../../qemu-options.hx:963
 msgid "``in|out.frequency=frequency``"
 msgstr ""
 
@@ -1424,7 +1424,7 @@ msgid ""
 "Specify the frequency to use when using fixed-settings. Default is 44100Hz."
 msgstr ""
 
-#: ../../../../qemu-options.hx:965
+#: ../../../../qemu-options.hx:967
 msgid "``in|out.channels=channels``"
 msgstr ""
 
@@ -1434,7 +1434,7 @@ msgid ""
 "2 (stereo)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:969
+#: ../../../../qemu-options.hx:972
 msgid "``in|out.format=format``"
 msgstr ""
 
@@ -1445,7 +1445,7 @@ msgid ""
 "``s16``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:974
+#: ../../../../qemu-options.hx:975
 msgid "``in|out.voices=voices``"
 msgstr ""
 
@@ -1453,7 +1453,7 @@ msgstr ""
 msgid "Specify the number of voices to use. Default is 1."
 msgstr ""
 
-#: ../../../../qemu-options.hx:977
+#: ../../../../qemu-options.hx:978
 msgid "``in|out.buffer-length=usecs``"
 msgstr ""
 
@@ -1461,7 +1461,7 @@ msgstr ""
 msgid "Sets the size of the buffer in microseconds."
 msgstr ""
 
-#: ../../../../qemu-options.hx:980
+#: ../../../../qemu-options.hx:982
 msgid "``-audiodev none,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1471,7 +1471,7 @@ msgid ""
 "backend specific properties."
 msgstr ""
 
-#: ../../../../qemu-options.hx:984
+#: ../../../../qemu-options.hx:1001
 msgid "``-audiodev alsa,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1484,8 +1484,8 @@ msgstr ""
 msgid "ALSA specific options are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:990 ../../../../qemu-options.hx:1038
-#: ../../../../qemu-options.hx:1108
+#: ../../../../qemu-options.hx:992 ../../../../qemu-options.hx:1040
+#: ../../../../qemu-options.hx:1110
 msgid "``in|out.dev=device``"
 msgstr ""
 
@@ -1495,7 +1495,7 @@ msgid ""
 "``default``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:994
+#: ../../../../qemu-options.hx:995
 msgid "``in|out.period-length=usecs``"
 msgstr ""
 
@@ -1503,7 +1503,7 @@ msgstr ""
 msgid "Sets the period length in microseconds."
 msgstr ""
 
-#: ../../../../qemu-options.hx:997 ../../../../qemu-options.hx:1045
+#: ../../../../qemu-options.hx:998 ../../../../qemu-options.hx:1046
 msgid "``in|out.try-poll=on|off``"
 msgstr ""
 
@@ -1511,7 +1511,7 @@ msgstr ""
 msgid "Attempt to use poll mode with the device. Default is off."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1000
+#: ../../../../qemu-options.hx:1001
 msgid "``threshold=threshold``"
 msgstr ""
 
@@ -1519,7 +1519,7 @@ msgstr ""
 msgid "Threshold (in microseconds) when playback starts. Default is 0."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1003
+#: ../../../../qemu-options.hx:1010
 msgid "``-audiodev coreaudio,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1533,8 +1533,8 @@ msgstr ""
 msgid "Core Audio specific options are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1009 ../../../../qemu-options.hx:1042
-#: ../../../../qemu-options.hx:1099
+#: ../../../../qemu-options.hx:1010 ../../../../qemu-options.hx:1043
+#: ../../../../qemu-options.hx:1100
 msgid "``in|out.buffer-count=count``"
 msgstr ""
 
@@ -1543,7 +1543,7 @@ msgstr ""
 msgid "Sets the count of the buffers."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1012
+#: ../../../../qemu-options.hx:1020
 msgid "``-audiodev dbus,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1557,7 +1557,7 @@ msgstr ""
 msgid "D-Bus specific options are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1018
+#: ../../../../qemu-options.hx:1020
 msgid "``nsamples``"
 msgstr ""
 
@@ -1566,7 +1566,7 @@ msgid ""
 "Number of samples per read/write (default to 480, 10ms at 48kHz) (Since 10.0)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1022
+#: ../../../../qemu-options.hx:1030
 msgid "``-audiodev dsound,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1580,7 +1580,7 @@ msgstr ""
 msgid "DirectSound specific options are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1028
+#: ../../../../qemu-options.hx:1030
 msgid "``latency=usecs``"
 msgstr ""
 
@@ -1589,7 +1589,7 @@ msgid ""
 "Add extra usecs microseconds latency to playback. Default is 10000 (10 ms)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1032
+#: ../../../../qemu-options.hx:1059
 msgid "``-audiodev oss,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1612,7 +1612,7 @@ msgstr ""
 msgid "Attempt to use poll mode with the device. Default is on."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1048
+#: ../../../../qemu-options.hx:1049
 msgid "``try-mmap=on|off``"
 msgstr ""
 
@@ -1620,7 +1620,7 @@ msgstr ""
 msgid "Try using memory mapped device access. Default is off."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1051
+#: ../../../../qemu-options.hx:1053
 msgid "``exclusive=on|off``"
 msgstr ""
 
@@ -1630,7 +1630,7 @@ msgid ""
 "off."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1055
+#: ../../../../qemu-options.hx:1059
 msgid "``dsp-policy=policy``"
 msgstr ""
 
@@ -1642,7 +1642,7 @@ msgid ""
 "OSS 4. Default is 5."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1061
+#: ../../../../qemu-options.hx:1075
 msgid "``-audiodev pa,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1656,7 +1656,7 @@ msgstr ""
 msgid "PulseAudio specific options are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1067
+#: ../../../../qemu-options.hx:1068
 msgid "``server=server``"
 msgstr ""
 
@@ -1664,7 +1664,7 @@ msgstr ""
 msgid "Sets the PulseAudio server to connect to."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1070 ../../../../qemu-options.hx:1086
+#: ../../../../qemu-options.hx:1071 ../../../../qemu-options.hx:1087
 msgid "``in|out.name=sink``"
 msgstr ""
 
@@ -1672,8 +1672,8 @@ msgstr ""
 msgid "Use the specified source/sink for recording/playback."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1073 ../../../../qemu-options.hx:1083
-#: ../../../../qemu-options.hx:1112
+#: ../../../../qemu-options.hx:1075 ../../../../qemu-options.hx:1084
+#: ../../../../qemu-options.hx:1113
 msgid "``in|out.latency=usecs``"
 msgstr ""
 
@@ -1683,7 +1683,7 @@ msgid ""
 "this value but actual latencies may be lower or higher."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1077
+#: ../../../../qemu-options.hx:1090
 msgid "``-audiodev pipewire,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1700,7 +1700,7 @@ msgstr ""
 msgid "Desired latency in microseconds."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1089
+#: ../../../../qemu-options.hx:1090
 msgid "``in|out.stream-name``"
 msgstr ""
 
@@ -1708,7 +1708,7 @@ msgstr ""
 msgid "Specify the name of pipewire stream."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1092
+#: ../../../../qemu-options.hx:1100
 msgid "``-audiodev sdl,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1722,7 +1722,7 @@ msgstr ""
 msgid "SDL specific options are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1102
+#: ../../../../qemu-options.hx:1113
 msgid "``-audiodev sndio,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1746,7 +1746,7 @@ msgstr ""
 msgid "Sets the desired period length in microseconds."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1115
+#: ../../../../qemu-options.hx:1119
 msgid "``-audiodev spice,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1757,7 +1757,7 @@ msgid ""
 "this option. This backend has no backend specific properties."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1121
+#: ../../../../qemu-options.hx:1127
 msgid "``-audiodev wav,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1769,8 +1769,8 @@ msgstr ""
 msgid "Backend specific options are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1126 ../../../../qemu-options.hx:1975
-#: ../../../../qemu-options.hx:2091
+#: ../../../../qemu-options.hx:1127 ../../../../qemu-options.hx:1977
+#: ../../../../qemu-options.hx:2093
 msgid "``path=path``"
 msgstr ""
 
@@ -1778,7 +1778,7 @@ msgstr ""
 msgid "Write recorded audio into the specified file. Default is ``qemu.wav``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1139
+#: ../../../../qemu-options.hx:1144
 msgid "``-device driver[,prop=value[,...]]``"
 msgstr ""
 
@@ -1793,7 +1793,7 @@ msgstr ""
 msgid "Some drivers are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1146
+#: ../../../../qemu-options.hx:1204
 msgid "``-device ipmi-bmc-sim,id=id[,prop=value[,...]]``"
 msgstr ""
 
@@ -1812,9 +1812,9 @@ msgid ""
 "don't know what this means, it is safe to ignore it."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1157 ../../../../qemu-options.hx:1972
-#: ../../../../qemu-options.hx:2088 ../../../../qemu-options.hx:3245
-#: ../../../../qemu-options.hx:3368
+#: ../../../../qemu-options.hx:1158 ../../../../qemu-options.hx:1973
+#: ../../../../qemu-options.hx:2089 ../../../../qemu-options.hx:3246
+#: ../../../../qemu-options.hx:3369
 msgid "``id=id``"
 msgstr ""
 
@@ -1822,7 +1822,7 @@ msgstr ""
 msgid "The BMC id for interfaces to use this device."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1160
+#: ../../../../qemu-options.hx:1161
 msgid "``slave_addr=val``"
 msgstr ""
 
@@ -1830,7 +1830,7 @@ msgstr ""
 msgid "Define slave address to use for the BMC. The default is 0x20."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1163
+#: ../../../../qemu-options.hx:1165
 msgid "``sdrfile=file``"
 msgstr ""
 
@@ -1839,7 +1839,7 @@ msgid ""
 "file containing raw Sensor Data Records (SDR) data. The default is none."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1167
+#: ../../../../qemu-options.hx:1169
 msgid "``fruareasize=val``"
 msgstr ""
 
@@ -1847,7 +1847,7 @@ msgstr ""
 msgid "size of a Field Replaceable Unit (FRU) area. The default is 1024."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1171
+#: ../../../../qemu-options.hx:1173
 msgid "``frudatafile=file``"
 msgstr ""
 
@@ -1857,7 +1857,7 @@ msgid ""
 "is none."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1175
+#: ../../../../qemu-options.hx:1178
 msgid "``guid=uuid``"
 msgstr ""
 
@@ -1868,7 +1868,7 @@ msgid ""
 "return an error."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1180
+#: ../../../../qemu-options.hx:1184
 msgid "``lan.channel=val``"
 msgstr ""
 
@@ -1879,7 +1879,7 @@ msgid ""
 "LAN channel is enabled at the specified channel number. The default is 0."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1186
+#: ../../../../qemu-options.hx:1187
 msgid "``lan.ipaddr=addr``"
 msgstr ""
 
@@ -1887,7 +1887,7 @@ msgstr ""
 msgid "the ipv4 address of the BMC LAN channel."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1189
+#: ../../../../qemu-options.hx:1192
 msgid "``lan.ipsrc=val``"
 msgstr ""
 
@@ -1898,7 +1898,7 @@ msgid ""
 "(other source). The default is 0."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1194
+#: ../../../../qemu-options.hx:1195
 msgid "``lan.macaddr=mac``"
 msgstr ""
 
@@ -1906,7 +1906,7 @@ msgstr ""
 msgid "the mac address of the BMC LAN channel."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1197
+#: ../../../../qemu-options.hx:1198
 msgid "``lan.netmask=mask``"
 msgstr ""
 
@@ -1914,7 +1914,7 @@ msgstr ""
 msgid "the ipv4 subnet mask for the BMC LAN channel."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1200
+#: ../../../../qemu-options.hx:1201
 msgid "``lan.defgw_ipaddr=addr``"
 msgstr ""
 
@@ -1922,7 +1922,7 @@ msgstr ""
 msgid "the default gateway ipv4 address for the BMC LAN channel."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1203
+#: ../../../../qemu-options.hx:1204
 msgid "``lan.defgw_macaddr=mac``"
 msgstr ""
 
@@ -1930,7 +1930,7 @@ msgstr ""
 msgid "the default gateway mac address for the BMC LAN channel."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1206
+#: ../../../../qemu-options.hx:1221
 msgid "``-device ipmi-bmc-extern,id=id,chardev=id[,slave_addr=val]``"
 msgstr ""
 
@@ -1958,7 +1958,7 @@ msgid ""
 "on the external interface."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1223
+#: ../../../../qemu-options.hx:1237
 msgid "``-device isa-ipmi-kcs,bmc=id[,ioport=val][,irq=val]``"
 msgstr ""
 
@@ -1968,7 +1968,7 @@ msgid ""
 "and SMBIOS entries, if appropriate."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1227 ../../../../qemu-options.hx:1246
+#: ../../../../qemu-options.hx:1229 ../../../../qemu-options.hx:1247
 msgid "``bmc=id``"
 msgstr ""
 
@@ -1976,7 +1976,7 @@ msgstr ""
 msgid "The BMC to connect to, one of ipmi-bmc-sim or ipmi-bmc-extern above."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1231
+#: ../../../../qemu-options.hx:1233
 msgid "``ioport=val``"
 msgstr ""
 
@@ -1984,7 +1984,7 @@ msgstr ""
 msgid "Define the I/O address of the interface. The default is 0xca0 for KCS."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1235
+#: ../../../../qemu-options.hx:1237
 msgid "``irq=val``"
 msgstr ""
 
@@ -1994,7 +1994,7 @@ msgid ""
 "this to 0."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1239
+#: ../../../../qemu-options.hx:1241
 msgid "``-device isa-ipmi-bt,bmc=id[,ioport=val][,irq=val]``"
 msgstr ""
 
@@ -2004,7 +2004,7 @@ msgid ""
 "and the default interrupt is 5."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1243
+#: ../../../../qemu-options.hx:1247
 msgid "``-device pci-ipmi-kcs,bmc=id``"
 msgstr ""
 
@@ -2012,7 +2012,7 @@ msgstr ""
 msgid "Add a KCS IPMI interface on the PCI bus."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1249
+#: ../../../../qemu-options.hx:1250
 msgid "``-device pci-ipmi-bt,bmc=id``"
 msgstr ""
 
@@ -2020,7 +2020,7 @@ msgstr ""
 msgid "Like the KCS interface, but defines a BT interface on the PCI bus."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1252
+#: ../../../../qemu-options.hx:1282
 msgid "``-device intel-iommu[,option=...]``"
 msgstr ""
 
@@ -2030,7 +2030,7 @@ msgid ""
 "emulation within the guest.  It supports below options:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1256 ../../../../qemu-options.hx:1363
+#: ../../../../qemu-options.hx:1261 ../../../../qemu-options.hx:1369
 msgid "``intremap=on|off`` (default: auto)"
 msgstr ""
 
@@ -2042,7 +2042,7 @@ msgid ""
 "is \"auto\", which will be decided by the mode of kernel-irqchip."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1263
+#: ../../../../qemu-options.hx:1269
 msgid "``caching-mode=on|off`` (default: off)"
 msgstr ""
 
@@ -2056,7 +2056,7 @@ msgid ""
 "on the host before guest DMA starts."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1271
+#: ../../../../qemu-options.hx:1274
 msgid "``device-iotlb=on|off`` (default: off)"
 msgstr ""
 
@@ -2067,7 +2067,7 @@ msgid ""
 "ats=on configured for the device."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1276
+#: ../../../../qemu-options.hx:1279
 msgid "``aw-bits=39|48`` (default: 39)"
 msgstr ""
 
@@ -2084,7 +2084,7 @@ msgid ""
 "in QEMU: https://wiki.qemu.org/Features/VT-d."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1284
+#: ../../../../qemu-options.hx:1293
 msgid "``-device virtio-iommu-pci[,option=...]``"
 msgstr ""
 
@@ -2094,7 +2094,7 @@ msgid ""
 "(ARM). It supports below options:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1288
+#: ../../../../qemu-options.hx:1290
 msgid ""
 "``granule=val`` (possible values are 4k, 8k, 16k, 64k and host; default: "
 "host)"
@@ -2106,7 +2106,7 @@ msgid ""
 "host, the granule matches the host page size."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1292
+#: ../../../../qemu-options.hx:1293
 msgid "``aw-bits=val`` (val between 32 and 64, default depends on machine)"
 msgstr ""
 
@@ -2114,7 +2114,7 @@ msgstr ""
 msgid "This decides the address width of the IOVA address space."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1295
+#: ../../../../qemu-options.hx:1351
 msgid "``-device arm-smmuv3,primary-bus=id[,option=...]``"
 msgstr ""
 
@@ -2122,7 +2122,7 @@ msgstr ""
 msgid "This is only supported by ``-machine virt`` (ARM)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1298
+#: ../../../../qemu-options.hx:1300
 msgid "``primary-bus=id``"
 msgstr ""
 
@@ -2132,7 +2132,7 @@ msgid ""
 "complex."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1302
+#: ../../../../qemu-options.hx:1305
 msgid "``accel=on|off`` (default: off)"
 msgstr ""
 
@@ -2157,7 +2157,7 @@ msgid ""
 "If accel=off, auto values resolve to the non-accel defaults given below."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1315
+#: ../../../../qemu-options.hx:1321
 msgid "``ril=on|off|auto`` (default: auto)"
 msgstr ""
 
@@ -2173,7 +2173,7 @@ msgstr ""
 msgid "With accel=off, auto is resolved to 'on'."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1323
+#: ../../../../qemu-options.hx:1328
 msgid "``ats=on|off|auto`` (default: auto)"
 msgstr ""
 
@@ -2188,7 +2188,7 @@ msgstr ""
 msgid "With accel=off, auto is resolved to 'off'."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1330
+#: ../../../../qemu-options.hx:1336
 msgid "``oas=val|auto`` (supported values are 44 and 48. default: auto)"
 msgstr ""
 
@@ -2204,7 +2204,7 @@ msgstr ""
 msgid "With accel=off, auto is resolved to 44."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1338
+#: ../../../../qemu-options.hx:1343
 msgid "``ssidsize=val|auto`` (val between 0 and 20. default: auto)"
 msgstr ""
 
@@ -2219,7 +2219,7 @@ msgstr ""
 msgid "With accel=off, auto is resolved to 0."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1345
+#: ../../../../qemu-options.hx:1351
 msgid "``cmdqv=on|off|auto`` (default: auto)"
 msgstr ""
 
@@ -2235,7 +2235,7 @@ msgid ""
 "SMMU."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1353
+#: ../../../../qemu-options.hx:1374
 msgid "``-device amd-iommu[,option=...]``"
 msgstr ""
 
@@ -2245,7 +2245,7 @@ msgid ""
 "available with ``-machine q35``, it supports the following options:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1357
+#: ../../../../qemu-options.hx:1361
 msgid "``dma-remap=on|off`` (default: off)"
 msgstr ""
 
@@ -2266,7 +2266,7 @@ msgid ""
 "disabled with ``kernel-irqchip=on``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1371
+#: ../../../../qemu-options.hx:1374
 msgid "``xtsup=on|off`` (default: off)"
 msgstr ""
 
@@ -2277,7 +2277,7 @@ msgid ""
 "routing interrupts to vCPUs with APIC IDs larger than 0xff."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1386
+#: ../../../../qemu-options.hx:1389
 msgid "``-name name``"
 msgstr ""
 
@@ -2335,7 +2335,7 @@ msgstr ""
 msgid "``-fda file``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1436
+#: ../../../../qemu-options.hx:1437
 msgid "``-fdb file``"
 msgstr ""
 
@@ -2357,7 +2357,7 @@ msgstr ""
 msgid "``-hdc file``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1454
+#: ../../../../qemu-options.hx:1458
 msgid "``-hdd file``"
 msgstr ""
 
@@ -2369,7 +2369,7 @@ msgid ""
 "also the :ref:`disk images` chapter in the System Emulation Users Guide."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1466
+#: ../../../../qemu-options.hx:1469
 msgid "``-cdrom file``"
 msgstr ""
 
@@ -2381,7 +2381,7 @@ msgid ""
 "using ``/dev/cdrom`` as filename."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1481
+#: ../../../../qemu-options.hx:1704
 msgid "``-blockdev option[,option[,option[,...]]]``"
 msgstr ""
 
@@ -2408,11 +2408,11 @@ msgid ""
 "device`` argument that defines a block device."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1497
+#: ../../../../qemu-options.hx:1563
 msgid "``Valid options for any block driver node:``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1498
+#: ../../../../qemu-options.hx:1499
 msgid "``driver``"
 msgstr ""
 
@@ -2420,7 +2420,7 @@ msgstr ""
 msgid "Specifies the block driver to use for the given node."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1501
+#: ../../../../qemu-options.hx:1510
 msgid "``node-name``"
 msgstr ""
 
@@ -2439,7 +2439,7 @@ msgid ""
 "invocations. For the top level, an explicit node name must be specified."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1512
+#: ../../../../qemu-options.hx:1518
 msgid "``read-only``"
 msgstr ""
 
@@ -2454,7 +2454,7 @@ msgid ""
 "only=off`` does not work and the option must be specified explicitly."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1520
+#: ../../../../qemu-options.hx:1525
 msgid "``auto-read-only``"
 msgstr ""
 
@@ -2466,7 +2466,7 @@ msgid ""
 "user is attached to the node."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1527
+#: ../../../../qemu-options.hx:1536
 msgid "``force-share``"
 msgstr ""
 
@@ -2484,7 +2484,7 @@ msgstr ""
 msgid "Enabling ``force-share=on`` requires ``read-only=on``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1538
+#: ../../../../qemu-options.hx:1541
 msgid "``cache.direct``"
 msgstr ""
 
@@ -2495,7 +2495,7 @@ msgid ""
 "an internal copy of the data."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1543
+#: ../../../../qemu-options.hx:1550
 msgid "``cache.no-flush``"
 msgstr ""
 
@@ -2508,7 +2508,7 @@ msgid ""
 "accidentally, etc. your image will most probably be rendered unusable."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1552
+#: ../../../../qemu-options.hx:1556
 msgid "``discard=discard``"
 msgstr ""
 
@@ -2520,7 +2520,7 @@ msgid ""
 "discard requests."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1558
+#: ../../../../qemu-options.hx:1563
 msgid "``detect-zeroes=detect-zeroes``"
 msgstr ""
 
@@ -2532,7 +2532,7 @@ msgid ""
 "to allow a zero write to be converted to an ``unmap`` operation."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1565
+#: ../../../../qemu-options.hx:1586
 msgid "``Driver-specific options for file``"
 msgstr ""
 
@@ -2540,7 +2540,7 @@ msgstr ""
 msgid "This is the protocol-level block driver for accessing regular files."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1569
+#: ../../../../qemu-options.hx:1570
 msgid "``filename``"
 msgstr ""
 
@@ -2548,7 +2548,7 @@ msgstr ""
 msgid "The path to the image file in the local filesystem"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1572
+#: ../../../../qemu-options.hx:1574
 msgid "``aio``"
 msgstr ""
 
@@ -2556,7 +2556,7 @@ msgstr ""
 msgid "Specifies the AIO backend (threads/native/io_uring, default: threads)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1576
+#: ../../../../qemu-options.hx:1580
 msgid "``locking``"
 msgstr ""
 
@@ -2571,7 +2571,7 @@ msgstr ""
 msgid "-blockdev driver=file,node-name=disk,filename=disk.img"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1588
+#: ../../../../qemu-options.hx:1608
 msgid "``Driver-specific options for raw``"
 msgstr ""
 
@@ -2581,7 +2581,7 @@ msgid ""
 "on top of a protocol level block driver such as ``file``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1593 ../../../../qemu-options.hx:1615
+#: ../../../../qemu-options.hx:1595 ../../../../qemu-options.hx:1617
 msgid "``file``"
 msgstr ""
 
@@ -2610,7 +2610,7 @@ msgid ""
 "-blockdev driver=raw,node-name=disk,file.driver=file,file.filename=disk.img"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1610
+#: ../../../../qemu-options.hx:1701
 msgid "``Driver-specific options for qcow2``"
 msgstr ""
 
@@ -2620,7 +2620,7 @@ msgid ""
 "stacked on top of a protocol level block driver such as ``file``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1619
+#: ../../../../qemu-options.hx:1623
 msgid "``backing``"
 msgstr ""
 
@@ -2631,7 +2631,7 @@ msgid ""
 "disable the default backing file."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1625
+#: ../../../../qemu-options.hx:1627
 msgid "``lazy-refcounts``"
 msgstr ""
 
@@ -2641,7 +2641,7 @@ msgid ""
 "the image file)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1629
+#: ../../../../qemu-options.hx:1632
 msgid "``cache-size``"
 msgstr ""
 
@@ -2651,7 +2651,7 @@ msgid ""
 "(default: the sum of l2-cache-size and refcount-cache-size)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1634
+#: ../../../../qemu-options.hx:1639
 msgid "``l2-cache-size``"
 msgstr ""
 
@@ -2663,7 +2663,7 @@ msgid ""
 "requested or the minimal refcount cache size)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1641
+#: ../../../../qemu-options.hx:1645
 msgid "``refcount-cache-size``"
 msgstr ""
 
@@ -2674,7 +2674,7 @@ msgid ""
 "used for the L2 cache)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1647
+#: ../../../../qemu-options.hx:1651
 msgid "``cache-clean-interval``"
 msgstr ""
 
@@ -2685,7 +2685,7 @@ msgid ""
 "platforms. Setting it to 0 disables this feature."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1653
+#: ../../../../qemu-options.hx:1656
 msgid "``pass-discard-request``"
 msgstr ""
 
@@ -2695,7 +2695,7 @@ msgid ""
 "source (on/off; default: on if discard=unmap is specified, off otherwise)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1658
+#: ../../../../qemu-options.hx:1661
 msgid "``pass-discard-snapshot``"
 msgstr ""
 
@@ -2706,7 +2706,7 @@ msgid ""
 "file (on/off; default: on)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1663
+#: ../../../../qemu-options.hx:1666
 msgid "``pass-discard-other``"
 msgstr ""
 
@@ -2716,7 +2716,7 @@ msgid ""
 "occasions where a cluster gets freed (on/off; default: off)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1668
+#: ../../../../qemu-options.hx:1682
 msgid "``discard-no-unref``"
 msgstr ""
 
@@ -2735,7 +2735,7 @@ msgid ""
 "images directly on block devices), you should consider enabling this option."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1684
+#: ../../../../qemu-options.hx:1688
 msgid "``overlap-check``"
 msgstr ""
 
@@ -2759,7 +2759,7 @@ msgid ""
 "example.com/image.qcow2"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1703
+#: ../../../../qemu-options.hx:1704
 msgid "``Driver-specific options for other drivers``"
 msgstr ""
 
@@ -2768,7 +2768,7 @@ msgid ""
 "Please refer to the QAPI documentation of the ``blockdev-add`` QMP command."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1724
+#: ../../../../qemu-options.hx:1911
 msgid "``-drive option[,option[,option[,...]]]``"
 msgstr ""
 
@@ -2785,7 +2785,7 @@ msgid ""
 "addition, it knows the following options:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1732 ../../../../qemu-options.hx:5648
+#: ../../../../qemu-options.hx:1740 ../../../../qemu-options.hx:5649
 msgid "``file=file``"
 msgstr ""
 
@@ -2803,7 +2803,7 @@ msgid ""
 "URLs. See the section for \"Device URL Syntax\" for more information."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1742
+#: ../../../../qemu-options.hx:1745
 msgid "``if=interface``"
 msgstr ""
 
@@ -2813,7 +2813,7 @@ msgid ""
 "Available types are: ide, scsi, sd, mtd, floppy, pflash, virtio, none."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1747
+#: ../../../../qemu-options.hx:1749
 msgid "``bus=bus,unit=unit``"
 msgstr ""
 
@@ -2823,7 +2823,7 @@ msgid ""
 "and the unit id."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1751
+#: ../../../../qemu-options.hx:1754
 msgid "``index=index``"
 msgstr ""
 
@@ -2833,7 +2833,7 @@ msgid ""
 "list of available connectors of a given interface type."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1756
+#: ../../../../qemu-options.hx:1757
 msgid "``media=media``"
 msgstr ""
 
@@ -2841,7 +2841,7 @@ msgstr ""
 msgid "This option defines the type of the media: disk or cdrom."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1759
+#: ../../../../qemu-options.hx:1761
 msgid "``snapshot=snapshot``"
 msgstr ""
 
@@ -2851,7 +2851,7 @@ msgid ""
 "(see ``-snapshot``)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1763
+#: ../../../../qemu-options.hx:1782
 msgid "``cache=cache``"
 msgstr ""
 
@@ -2912,7 +2912,7 @@ msgstr ""
 msgid "The default mode is ``cache=writeback``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1784
+#: ../../../../qemu-options.hx:1786
 msgid "``aio=aio``"
 msgstr ""
 
@@ -2922,7 +2922,7 @@ msgid ""
 "based disk I/O, native Linux AIO, or Linux io_uring API."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1788
+#: ../../../../qemu-options.hx:1791
 msgid "``format=format``"
 msgstr ""
 
@@ -2933,7 +2933,7 @@ msgid ""
 "header."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1793
+#: ../../../../qemu-options.hx:1799
 msgid "``werror=action,rerror=action``"
 msgstr ""
 
@@ -2946,7 +2946,7 @@ msgid ""
 "setting is ``werror=enospc`` and ``rerror=report``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1801
+#: ../../../../qemu-options.hx:1803
 msgid "``copy-on-read=copy-on-read``"
 msgstr ""
 
@@ -2956,7 +2956,7 @@ msgid ""
 "file sectors into the image file."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1805
+#: ../../../../qemu-options.hx:1809
 msgid "``bps=b,bps_rd=r,bps_wr=w``"
 msgstr ""
 
@@ -2967,7 +2967,7 @@ msgid ""
 "or hangs inside the guest. A safe minimum for disks is 2 MiB/s."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1811
+#: ../../../../qemu-options.hx:1814
 msgid "``bps_max=bm,bps_rd_max=rm,bps_wr_max=wm``"
 msgstr ""
 
@@ -2978,7 +2978,7 @@ msgid ""
 "temporarily."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1816
+#: ../../../../qemu-options.hx:1818
 msgid "``iops=i,iops_rd=r,iops_wr=w``"
 msgstr ""
 
@@ -2988,7 +2988,7 @@ msgid ""
 "types or for reads or writes only."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1820
+#: ../../../../qemu-options.hx:1823
 msgid "``iops_max=bm,iops_rd_max=rm,iops_wr_max=wm``"
 msgstr ""
 
@@ -2999,7 +2999,7 @@ msgid ""
 "temporarily."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1825
+#: ../../../../qemu-options.hx:1828
 msgid "``iops_size=is``"
 msgstr ""
 
@@ -3010,7 +3010,7 @@ msgid ""
 "by sending fewer but larger requests."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1830
+#: ../../../../qemu-options.hx:1835
 msgid "``group=g``"
 msgstr ""
 
@@ -3131,7 +3131,7 @@ msgstr ""
 msgid "Use file as SecureDigital card image."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1934
+#: ../../../../qemu-options.hx:1945
 msgid "``-snapshot``"
 msgstr ""
 
@@ -3153,12 +3153,12 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:1961
 msgid ""
-"``-fsdev local,id=id,path=path,security_model=security_model [,"
-"writeout=writeout][,readonly=on][,fmode=fmode][,dmode=dmode][,max_xattr=max] "
-"[,throttling.option=value[,throttling.option=value[,...]]]``"
+"``-fsdev local,id=id,path=path,security_model=security_model "
+"[,writeout=writeout][,readonly=on][,fmode=fmode][,dmode=dmode]"
+"[,max_xattr=max] [,throttling.option=value[,throttling.option=value[,...]]]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1963
+#: ../../../../qemu-options.hx:2043
 msgid "``-fsdev synth,id=id[,readonly=on][,max_xattr=max]``"
 msgstr ""
 
@@ -3166,7 +3166,7 @@ msgstr ""
 msgid "Define a new file system device. Valid options are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:1966 ../../../../qemu-options.hx:2082
+#: ../../../../qemu-options.hx:1967 ../../../../qemu-options.hx:2083
 msgid "``local``"
 msgstr ""
 
@@ -3174,7 +3174,7 @@ msgstr ""
 msgid "Accesses to the filesystem are done by QEMU."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1969 ../../../../qemu-options.hx:2085
+#: ../../../../qemu-options.hx:1970 ../../../../qemu-options.hx:2086
 msgid "``synth``"
 msgstr ""
 
@@ -3192,7 +3192,7 @@ msgid ""
 "will be available to the 9p client on the guest."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1979 ../../../../qemu-options.hx:2095
+#: ../../../../qemu-options.hx:1992 ../../../../qemu-options.hx:2108
 msgid "``security_model=security_model``"
 msgstr ""
 
@@ -3211,7 +3211,7 @@ msgid ""
 "ownership. Security model is mandatory only for local fsdriver."
 msgstr ""
 
-#: ../../../../qemu-options.hx:1994 ../../../../qemu-options.hx:2110
+#: ../../../../qemu-options.hx:1999 ../../../../qemu-options.hx:2115
 msgid "``writeout=writeout``"
 msgstr ""
 
@@ -3223,7 +3223,7 @@ msgid ""
 "reported as written by the storage subsystem."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2001 ../../../../qemu-options.hx:2117
+#: ../../../../qemu-options.hx:2003 ../../../../qemu-options.hx:2119
 msgid "``readonly=on``"
 msgstr ""
 
@@ -3233,7 +3233,7 @@ msgid ""
 "write access is given."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2005 ../../../../qemu-options.hx:2121
+#: ../../../../qemu-options.hx:2008 ../../../../qemu-options.hx:2124
 msgid "``fmode=fmode``"
 msgstr ""
 
@@ -3243,7 +3243,7 @@ msgid ""
 "with security models \"mapped-xattr\" and \"mapped-file\"."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2010 ../../../../qemu-options.hx:2126
+#: ../../../../qemu-options.hx:2013 ../../../../qemu-options.hx:2129
 msgid "``dmode=dmode``"
 msgstr ""
 
@@ -3253,7 +3253,7 @@ msgid ""
 "only with security models \"mapped-xattr\" and \"mapped-file\"."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2015
+#: ../../../../qemu-options.hx:2017
 msgid "``throttling.bps-total=b,throttling.bps-read=r,throttling.bps-write=w``"
 msgstr ""
 
@@ -3263,22 +3263,22 @@ msgid ""
 "request types or for reads or writes only."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2019
+#: ../../../../qemu-options.hx:2022
 msgid "``throttling.bps-total-max=bm,bps-read-max=rm,bps-write-max=wm``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2024
+#: ../../../../qemu-options.hx:2026
 msgid ""
 "``throttling.iops-total=i,throttling.iops-read=r, throttling.iops-write=w``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2028
+#: ../../../../qemu-options.hx:2031
 msgid ""
 "``throttling.iops-total-max=im,throttling.iops-read-max=irm, throttling.iops-"
 "write-max=iwm``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2033
+#: ../../../../qemu-options.hx:2035
 msgid "``throttling.iops-size=is``"
 msgstr ""
 
@@ -3288,7 +3288,7 @@ msgid ""
 "purposes."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2037 ../../../../qemu-options.hx:2135
+#: ../../../../qemu-options.hx:2041 ../../../../qemu-options.hx:2139
 msgid "``max_xattr=max``"
 msgstr ""
 
@@ -3304,7 +3304,7 @@ msgstr ""
 msgid "-fsdev option is used along with -device driver \"virtio-9p-...\"."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2045
+#: ../../../../qemu-options.hx:2056
 msgid "``-device virtio-9p-type,fsdev=id,mount_tag=mount_tag``"
 msgstr ""
 
@@ -3312,7 +3312,7 @@ msgstr ""
 msgid "Options for virtio-9p-... driver are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2048
+#: ../../../../qemu-options.hx:2050
 msgid "``type``"
 msgstr ""
 
@@ -3322,7 +3322,7 @@ msgid ""
 "\"device\", depending on the machine type."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2052
+#: ../../../../qemu-options.hx:2053
 msgid "``fsdev=id``"
 msgstr ""
 
@@ -3330,7 +3330,7 @@ msgstr ""
 msgid "Specifies the id value specified along with -fsdev option."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2055 ../../../../qemu-options.hx:2131
+#: ../../../../qemu-options.hx:2056 ../../../../qemu-options.hx:2133
 msgid "``mount_tag=mount_tag``"
 msgstr ""
 
@@ -3341,12 +3341,13 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:2067
 msgid ""
-"``-virtfs local,path=path,mount_tag=mount_tag ,"
-"security_model=security_model[,writeout=writeout][,readonly=on] [,"
-"fmode=fmode][,dmode=dmode][,multidevs=multidevs][,max_xattr=max]``"
+"``-virtfs "
+"local,path=path,mount_tag=mount_tag ,security_model=security_model[,writeout=writeout]"
+"[,readonly=on] [,fmode=fmode][,dmode=dmode][,multidevs=multidevs]"
+"[,max_xattr=max]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2069
+#: ../../../../qemu-options.hx:2170
 msgid "``-virtfs synth,mount_tag=mount_tag[,max_xattr=max]``"
 msgstr ""
 
@@ -3374,7 +3375,7 @@ msgstr ""
 msgid "Specifies identifier for the filesystem device"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2141
+#: ../../../../qemu-options.hx:2170
 msgid "``multidevs=remap|forbid|warn``"
 msgstr ""
 
@@ -3425,7 +3426,7 @@ msgstr ""
 msgid "Configure iSCSI session parameters."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2194
+#: ../../../../qemu-options.hx:2197
 msgid "``-usb``"
 msgstr ""
 
@@ -3437,7 +3438,7 @@ msgid ""
 "machines with PCI."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2205
+#: ../../../../qemu-options.hx:2241
 msgid "``-usbdevice devname``"
 msgstr ""
 
@@ -3456,7 +3457,7 @@ msgid ""
 "Guide. Possible devices for devname are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2220 ../../../../qemu-options.hx:4937
+#: ../../../../qemu-options.hx:2224 ../../../../qemu-options.hx:4939
 msgid "``braille``"
 msgstr ""
 
@@ -3467,7 +3468,7 @@ msgid ""
 "automatically beside the ``usb-braille`` USB device)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2226
+#: ../../../../qemu-options.hx:2227
 msgid "``keyboard``"
 msgstr ""
 
@@ -3475,7 +3476,7 @@ msgstr ""
 msgid "Standard USB keyboard. Will override the PS/2 keyboard (if present)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2229
+#: ../../../../qemu-options.hx:2231
 msgid "``mouse``"
 msgstr ""
 
@@ -3484,7 +3485,7 @@ msgid ""
 "Virtual Mouse. This will override the PS/2 mouse emulation when activated."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2233
+#: ../../../../qemu-options.hx:2237
 msgid "``tablet``"
 msgstr ""
 
@@ -3495,7 +3496,7 @@ msgid ""
 "mouse. Also overrides the PS/2 mouse emulation when activated."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2239
+#: ../../../../qemu-options.hx:2241
 msgid "``wacom-tablet``"
 msgstr ""
 
@@ -3503,7 +3504,7 @@ msgstr ""
 msgid "Wacom PenPartner USB tablet."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2296
+#: ../../../../qemu-options.hx:2415
 msgid "``-display type``"
 msgstr ""
 
@@ -3519,7 +3520,7 @@ msgid ""
 "type are"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2303
+#: ../../../../qemu-options.hx:2306
 msgid "``spice-app[,gl=on|off]``"
 msgstr ""
 
@@ -3530,7 +3531,7 @@ msgid ""
 "monitors. (Since 4.0)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2308
+#: ../../../../qemu-options.hx:2322
 msgid "``dbus``"
 msgstr ""
 
@@ -3566,7 +3567,7 @@ msgid ""
 "share framebuffers with DMABUF file descriptors)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2324
+#: ../../../../qemu-options.hx:2337
 msgid "``sdl``"
 msgstr ""
 
@@ -3596,7 +3597,7 @@ msgstr ""
 msgid "``window-close=on|off`` : Allow to quit qemu with window close button"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2339
+#: ../../../../qemu-options.hx:2364
 msgid "``gtk``"
 msgstr ""
 
@@ -3607,7 +3608,7 @@ msgid ""
 "Valid parameters are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2344
+#: ../../../../qemu-options.hx:2345
 msgid "``clipboard=on|off``"
 msgstr ""
 
@@ -3632,7 +3633,7 @@ msgstr ""
 msgid "``grab-on-hover=on|off`` : Grab keyboard input on mouse hover"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2353
+#: ../../../../qemu-options.hx:2355
 msgid "``show-tabs=on|off``"
 msgstr ""
 
@@ -3651,7 +3652,7 @@ msgid ""
 "``show-menubar=on|off`` : Display the main window menubar, defaults to \"on\""
 msgstr ""
 
-#: ../../../../qemu-options.hx:2363 ../../../../qemu-options.hx:2399
+#: ../../../../qemu-options.hx:2364 ../../../../qemu-options.hx:2400
 msgid "``zoom-to-fit=on|off``"
 msgstr ""
 
@@ -3659,7 +3660,7 @@ msgstr ""
 msgid "Expand video output to the window size,"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2366
+#: ../../../../qemu-options.hx:2375
 msgid "``curses[,charset=<encoding>]``"
 msgstr ""
 
@@ -3674,7 +3675,7 @@ msgid ""
 "CP850 encoding. The default is ``CP437``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2377
+#: ../../../../qemu-options.hx:2400
 msgid "``cocoa``"
 msgstr ""
 
@@ -3685,7 +3686,7 @@ msgid ""
 "runtime. Valid parameters are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2382
+#: ../../../../qemu-options.hx:2386
 msgid "``full-grab=on|off``"
 msgstr ""
 
@@ -3700,7 +3701,7 @@ msgid ""
 "help/mh32356/mac"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2388
+#: ../../../../qemu-options.hx:2391
 msgid "``swap-opt-cmd=on|off``"
 msgstr ""
 
@@ -3719,7 +3720,7 @@ msgid ""
 "``left-command-key=on|off`` : Disable forwarding left command key to host"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2402
+#: ../../../../qemu-options.hx:2405
 msgid "``egl-headless[,rendernode=<file>]``"
 msgstr ""
 
@@ -3729,7 +3730,7 @@ msgid ""
 "display, this display needs to be paired with either VNC or SPICE displays."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2407
+#: ../../../../qemu-options.hx:2408
 msgid "``vnc=<display>``"
 msgstr ""
 
@@ -3737,8 +3738,8 @@ msgstr ""
 msgid "Start a VNC server on display <display>"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2410 ../../../../qemu-options.hx:2606
-#: ../../../../qemu-options.hx:2663 ../../../../qemu-options.hx:4813
+#: ../../../../qemu-options.hx:2415 ../../../../qemu-options.hx:2606
+#: ../../../../qemu-options.hx:2665 ../../../../qemu-options.hx:4819
 msgid "``none``"
 msgstr ""
 
@@ -3751,7 +3752,7 @@ msgid ""
 "parallel port data."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2423
+#: ../../../../qemu-options.hx:2430
 msgid "``-nographic``"
 msgstr ""
 
@@ -3767,7 +3768,7 @@ msgid ""
 "console and monitor."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2460
+#: ../../../../qemu-options.hx:2557
 msgid "``-spice option[,option[,...]]``"
 msgstr ""
 
@@ -3775,7 +3776,7 @@ msgstr ""
 msgid "Enable the spice remote desktop protocol. Valid options are"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2463
+#: ../../../../qemu-options.hx:2464
 msgid "``port=<nr>``"
 msgstr ""
 
@@ -3783,7 +3784,7 @@ msgstr ""
 msgid "Set the TCP port spice is listening on for plaintext channels."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2466
+#: ../../../../qemu-options.hx:2468
 msgid "``addr=<addr>``"
 msgstr ""
 
@@ -3791,7 +3792,7 @@ msgstr ""
 msgid "Set the IP address spice is listening on. Default is any address."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2470
+#: ../../../../qemu-options.hx:2471
 msgid "``ipv4=on|off``; \\ ``ipv6=on|off``; \\ ``unix=on|off``"
 msgstr ""
 
@@ -3799,7 +3800,7 @@ msgstr ""
 msgid "Force using the specified IP version."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2473 ../../../../qemu-options.hx:2716
+#: ../../../../qemu-options.hx:2475 ../../../../qemu-options.hx:2719
 msgid "``password-secret=<secret-id>``"
 msgstr ""
 
@@ -3809,7 +3810,7 @@ msgid ""
 "authenticate."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2477 ../../../../qemu-options.hx:2736
+#: ../../../../qemu-options.hx:2489 ../../../../qemu-options.hx:2750
 msgid "``sasl=on|off``"
 msgstr ""
 
@@ -3827,7 +3828,7 @@ msgid ""
 "authentication credentials."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2491
+#: ../../../../qemu-options.hx:2492
 msgid "``disable-ticketing=on|off``"
 msgstr ""
 
@@ -3835,7 +3836,7 @@ msgstr ""
 msgid "Allow client connects without authentication."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2494
+#: ../../../../qemu-options.hx:2495
 msgid "``disable-copy-paste=on|off``"
 msgstr ""
 
@@ -3843,7 +3844,7 @@ msgstr ""
 msgid "Disable copy paste between the client and the guest."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2497
+#: ../../../../qemu-options.hx:2499
 msgid "``disable-agent-file-xfer=on|off``"
 msgstr ""
 
@@ -3851,7 +3852,7 @@ msgstr ""
 msgid "Disable spice-vdagent based file-xfer between the client and the guest."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2501
+#: ../../../../qemu-options.hx:2502
 msgid "``tls-port=<nr>``"
 msgstr ""
 
@@ -3859,17 +3860,17 @@ msgstr ""
 msgid "Set the TCP port spice is listening on for encrypted channels."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2504
+#: ../../../../qemu-options.hx:2506
 msgid "``x509-dir=<dir>``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:2505
 msgid ""
-"Set the x509 file directory. Expects same filenames as -vnc $display,"
-"x509=$dir"
+"Set the x509 file directory. Expects same filenames as -vnc "
+"$display,x509=$dir"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2508
+#: ../../../../qemu-options.hx:2509
 msgid ""
 "``x509-key-file=<file>``; \\ ``x509-key-password=<file>``; \\ ``x509-cert-"
 "file=<file>``; \\ ``x509-cacert-file=<file>``; \\ ``x509-dh-key-file=<file>``"
@@ -3879,7 +3880,7 @@ msgstr ""
 msgid "The x509 file names can also be configured individually."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2511
+#: ../../../../qemu-options.hx:2512
 msgid "``tls-ciphers=<list>``"
 msgstr ""
 
@@ -3887,7 +3888,7 @@ msgstr ""
 msgid "Specify which ciphers to use."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2514
+#: ../../../../qemu-options.hx:2520
 msgid ""
 "``tls-channel=main|display|cursor|inputs|record|playback``; \\ ``plaintext-"
 "channel=main|display|cursor|inputs|record|playback``"
@@ -3902,7 +3903,7 @@ msgid ""
 "pick tls/plaintext as he pleases."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2522
+#: ../../../../qemu-options.hx:2523
 msgid "``image-compression=auto_glz|auto_lz|quic|glz|lz|off``"
 msgstr ""
 
@@ -3910,7 +3911,7 @@ msgstr ""
 msgid "Configure image compression (lossless). Default is auto\\_glz."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2525
+#: ../../../../qemu-options.hx:2527
 msgid ""
 "``jpeg-wan-compression=auto|never|always``; \\ ``zlib-glz-wan-"
 "compression=auto|never|always``"
@@ -3921,7 +3922,7 @@ msgid ""
 "Configure wan image compression (lossy for slow links). Default is auto."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2529
+#: ../../../../qemu-options.hx:2530
 msgid "``streaming-video=off|all|filter``"
 msgstr ""
 
@@ -3929,7 +3930,7 @@ msgstr ""
 msgid "Configure video stream detection. Default is off."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2532
+#: ../../../../qemu-options.hx:2533
 msgid "``agent-mouse=on|off``"
 msgstr ""
 
@@ -3937,7 +3938,7 @@ msgstr ""
 msgid "Enable/disable passing mouse events via vdagent. Default is on."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2535
+#: ../../../../qemu-options.hx:2537
 msgid "``playback-compression=on|off``"
 msgstr ""
 
@@ -3946,7 +3947,7 @@ msgid ""
 "Enable/disable audio stream compression (using celt 0.5.1). Default is on."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2539
+#: ../../../../qemu-options.hx:2540
 msgid "``seamless-migration=on|off``"
 msgstr ""
 
@@ -3954,7 +3955,7 @@ msgstr ""
 msgid "Enable/disable spice seamless migration. Default is off."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2542
+#: ../../../../qemu-options.hx:2547
 msgid "``video-codec=<codec>``"
 msgstr ""
 
@@ -3967,7 +3968,7 @@ msgid ""
 "Spice server."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2549
+#: ../../../../qemu-options.hx:2551
 msgid "``max-refresh-rate=rate``"
 msgstr ""
 
@@ -3977,7 +3978,7 @@ msgid ""
 "should be sent to the Spice server. Default would be 30."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2553
+#: ../../../../qemu-options.hx:2554
 msgid "``gl=on|off``"
 msgstr ""
 
@@ -3985,7 +3986,7 @@ msgstr ""
 msgid "Enable/disable OpenGL context. Default is off."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2556
+#: ../../../../qemu-options.hx:2557
 msgid "``rendernode=<file>``"
 msgstr ""
 
@@ -3995,7 +3996,7 @@ msgid ""
 "first available. (Since 2.9)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2565
+#: ../../../../qemu-options.hx:2606
 msgid "``-vga type``"
 msgstr ""
 
@@ -4003,7 +4004,7 @@ msgstr ""
 msgid "Select type of VGA card to emulate. Valid values for type are"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2568
+#: ../../../../qemu-options.hx:2572
 msgid "``cirrus``"
 msgstr ""
 
@@ -4015,7 +4016,7 @@ msgid ""
 "before QEMU 2.2)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2574
+#: ../../../../qemu-options.hx:2579
 msgid "``std``"
 msgstr ""
 
@@ -4027,7 +4028,7 @@ msgid ""
 "card is the default since QEMU 2.2)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2581
+#: ../../../../qemu-options.hx:2584
 msgid "``vmware``"
 msgstr ""
 
@@ -4037,7 +4038,7 @@ msgid ""
 "XFree86/XOrg server or Windows guest with a driver for this card."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2586
+#: ../../../../qemu-options.hx:2590
 msgid "``qxl``"
 msgstr ""
 
@@ -4048,7 +4049,7 @@ msgid ""
 "choice when using the spice protocol."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2592
+#: ../../../../qemu-options.hx:2595
 msgid "``tcx``"
 msgstr ""
 
@@ -4059,7 +4060,7 @@ msgid ""
 "resolution of 1024x768."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2597
+#: ../../../../qemu-options.hx:2601
 msgid "``cg3``"
 msgstr ""
 
@@ -4070,7 +4071,7 @@ msgid ""
 "resolutions aimed at people wishing to run older Solaris versions."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2603
+#: ../../../../qemu-options.hx:2604
 msgid "``virtio``"
 msgstr ""
 
@@ -4090,7 +4091,7 @@ msgstr ""
 msgid "Start in full screen."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2621
+#: ../../../../qemu-options.hx:2628
 msgid "``-g`` *width*\\ ``x``\\ *height*\\ ``[x``\\ *depth*\\ ``]``"
 msgstr ""
 
@@ -4109,7 +4110,7 @@ msgid ""
 "option of 1152x900x8 for people who wish to use OBP."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2637
+#: ../../../../qemu-options.hx:2811
 msgid "``-vnc display[,option[,option[,...]]]``"
 msgstr ""
 
@@ -4125,7 +4126,7 @@ msgid ""
 "display is"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2647
+#: ../../../../qemu-options.hx:2651
 msgid "``to=L``"
 msgstr ""
 
@@ -4136,7 +4137,7 @@ msgid ""
 "port 5900+display is already used by another application. By default, to=0."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2653
+#: ../../../../qemu-options.hx:2657
 msgid "``host:d``"
 msgstr ""
 
@@ -4147,7 +4148,7 @@ msgid ""
 "server will accept connections from any host."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2659
+#: ../../../../qemu-options.hx:2661
 msgid "``unix:path``"
 msgstr ""
 
@@ -4169,18 +4170,19 @@ msgid ""
 "by commas. Valid options are"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2670
+#: ../../../../qemu-options.hx:2674
 msgid "``reverse=on|off``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:2671
 msgid ""
 "Connect to a listening VNC client via a \"reverse\" connection. The client "
-"is specified by the display. For reverse network connections (host:d,"
-"``reverse``), the d argument is a TCP port number, not a display number."
+"is specified by the display. For reverse network connections "
+"(host:d,``reverse``), the d argument is a TCP port number, not a display "
+"number."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2676
+#: ../../../../qemu-options.hx:2692
 msgid "``websocket=on|off``"
 msgstr ""
 
@@ -4213,7 +4215,7 @@ msgid ""
 "requires encrypted client connections."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2694
+#: ../../../../qemu-options.hx:2714
 msgid "``password=on|off``"
 msgstr ""
 
@@ -4253,7 +4255,7 @@ msgid ""
 "id``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2721
+#: ../../../../qemu-options.hx:2727
 msgid "``tls-creds=ID``"
 msgstr ""
 
@@ -4266,7 +4268,7 @@ msgid ""
 "been previously created using the ``-object tls-creds`` argument."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2729
+#: ../../../../qemu-options.hx:2734
 msgid "``tls-authz=ID``"
 msgstr ""
 
@@ -4293,7 +4295,7 @@ msgid ""
 "System Emulation Users Guide for details on using SASL authentication."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2752
+#: ../../../../qemu-options.hx:2757
 msgid "``sasl-authz=ID``"
 msgstr ""
 
@@ -4305,7 +4307,7 @@ msgid ""
 "active. If missing, it will default to denying access."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2759
+#: ../../../../qemu-options.hx:2767
 msgid "``acl=on|off``"
 msgstr ""
 
@@ -4323,7 +4325,7 @@ msgid ""
 "authz`` and ``tls-authz`` options are a replacement."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2769
+#: ../../../../qemu-options.hx:2773
 msgid "``lossy=on|off``"
 msgstr ""
 
@@ -4335,7 +4337,7 @@ msgid ""
 "expense of quality."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2775
+#: ../../../../qemu-options.hx:2781
 msgid "``non-adaptive=on|off``"
 msgstr ""
 
@@ -4348,7 +4350,7 @@ msgid ""
 "encodings restores the original static behavior of encodings like Tight."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2783
+#: ../../../../qemu-options.hx:2794
 msgid "``share=allow-exclusive|force-shared|ignore``"
 msgstr ""
 
@@ -4359,13 +4361,13 @@ msgid ""
 "dropping other connections. Connecting multiple clients in parallel requires "
 "all clients asking for a shared session (vncviewer: -shared switch). This is "
 "the default. 'force-shared' disables exclusive client access. Useful for "
-"shared desktop sessions, where you don't want someone forgetting specify -"
-"shared disconnect everybody else. 'ignore' completely ignores the shared "
+"shared desktop sessions, where you don't want someone forgetting specify "
+"-shared disconnect everybody else. 'ignore' completely ignores the shared "
 "flag and allows everybody connect unconditionally. Doesn't conform to the "
 "rfb spec but is traditional QEMU behavior."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2796
+#: ../../../../qemu-options.hx:2802
 msgid "``key-delay-ms``"
 msgstr ""
 
@@ -4378,7 +4380,7 @@ msgid ""
 "scripts for automated testing."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2804
+#: ../../../../qemu-options.hx:2808
 msgid "``audiodev=audiodev``"
 msgstr ""
 
@@ -4389,7 +4391,7 @@ msgid ""
 "is must be present and specify a valid audiodev."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2810
+#: ../../../../qemu-options.hx:2811
 msgid "``power-control=on|off``"
 msgstr ""
 
@@ -4399,7 +4401,7 @@ msgid ""
 "requests."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2823
+#: ../../../../qemu-options.hx:2826
 msgid "``-win2k-hack``"
 msgstr ""
 
@@ -4410,7 +4412,7 @@ msgid ""
 "the IDE transfers).  Synonym of ``-global ide-device.win2k-install-hack=on``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2834
+#: ../../../../qemu-options.hx:2835
 msgid "``-no-fd-bootchk``"
 msgstr ""
 
@@ -4420,10 +4422,10 @@ msgid ""
 "boot from old floppy disks.  Synonym of ``-m fd-bootchk=off``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2843
+#: ../../../../qemu-options.hx:2851
 msgid ""
-"``-acpitable [sig=str][,rev=n][,oem_id=str][,oem_table_id=str][,oem_rev=n] [,"
-"asl_compiler_id=str][,asl_compiler_rev=n][,data=file1[:file2]...]``"
+"``-acpitable [sig=str][,rev=n][,oem_id=str][,oem_table_id=str][,oem_rev=n] "
+"[,asl_compiler_id=str][,asl_compiler_rev=n][,data=file1[:file2]...]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:2844
@@ -4438,7 +4440,7 @@ msgid ""
 "Microsoft SLIC spec and the ACPI spec."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2885
+#: ../../../../qemu-options.hx:2886
 msgid "``-smbios file=binary``"
 msgstr ""
 
@@ -4446,17 +4448,17 @@ msgstr ""
 msgid "Load SMBIOS entry from binary file."
 msgstr ""
 
-#: ../../../../qemu-options.hx:2888
+#: ../../../../qemu-options.hx:2889
 msgid ""
-"``-smbios type=0[,vendor=str][,version=str][,date=str][,release=%d.%d][,"
-"uefi=on|off]``"
+"``-smbios type=0[,vendor=str][,version=str][,date=str][,release=%d.%d]"
+"[,uefi=on|off]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:2889
 msgid "Specify SMBIOS type 0 fields"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2891
+#: ../../../../qemu-options.hx:2892
 msgid ""
 "``-smbios type=1[,manufacturer=str][,product=str][,version=str][,serial=str]"
 "[,uuid=uuid][,sku=str][,family=str]``"
@@ -4466,7 +4468,7 @@ msgstr ""
 msgid "Specify SMBIOS type 1 fields"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2894
+#: ../../../../qemu-options.hx:2895
 msgid ""
 "``-smbios type=2[,manufacturer=str][,product=str][,version=str][,serial=str]"
 "[,asset=str][,location=str]``"
@@ -4476,17 +4478,17 @@ msgstr ""
 msgid "Specify SMBIOS type 2 fields"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2897
+#: ../../../../qemu-options.hx:2898
 msgid ""
-"``-smbios type=3[,manufacturer=str][,version=str][,serial=str][,asset=str][,"
-"sku=str]``"
+"``-smbios type=3[,manufacturer=str][,version=str][,serial=str][,asset=str]"
+"[,sku=str]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:2898
 msgid "Specify SMBIOS type 3 fields"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2900
+#: ../../../../qemu-options.hx:2901
 msgid ""
 "``-smbios type=4[,sock_pfx=str][,manufacturer=str][,version=str][,serial=str]"
 "[,asset=str][,part=str][,processor-family=%d][,processor-id=%d]``"
@@ -4496,18 +4498,18 @@ msgstr ""
 msgid "Specify SMBIOS type 4 fields"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2903
+#: ../../../../qemu-options.hx:2904
 msgid ""
-"``-smbios type=9[,slot_designation=str][,slot_type=%d][,"
-"slot_data_bus_width=%d][,current_usage=%d][,slot_length=%d][,slot_id=%d][,"
-"slot_characteristics1=%d][,slot_characteristics12=%d][,pci_device=str]``"
+"``-smbios type=9[,slot_designation=str][,slot_type=%d]"
+"[,slot_data_bus_width=%d][,current_usage=%d][,slot_length=%d][,slot_id=%d]"
+"[,slot_characteristics1=%d][,slot_characteristics12=%d][,pci_device=str]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:2904
 msgid "Specify SMBIOS type 9 fields"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2906
+#: ../../../../qemu-options.hx:2943
 msgid "``-smbios type=11[,value=str][,path=filename]``"
 msgstr ""
 
@@ -4573,17 +4575,17 @@ msgid ""
 "     String 3: myapp:some extra data"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2945
+#: ../../../../qemu-options.hx:2946
 msgid ""
-"``-smbios type=17[,loc_pfx=str][,bank=str][,manufacturer=str][,serial=str][,"
-"asset=str][,part=str][,speed=%d]``"
+"``-smbios type=17[,loc_pfx=str][,bank=str][,manufacturer=str][,serial=str]"
+"[,asset=str][,part=str][,speed=%d]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:2946
 msgid "Specify SMBIOS type 17 fields"
 msgstr ""
 
-#: ../../../../qemu-options.hx:2948
+#: ../../../../qemu-options.hx:2971
 msgid ""
 "``-smbios type=41[,designation=str][,kind=str][,instance=%d][,pcidev=str]``"
 msgstr ""
@@ -4609,8 +4611,8 @@ msgid ""
 "-netdev user,id=internet \\\\\n"
 "-device virtio-net-pci,mac=50:54:00:00:00:42,netdev=internet,id=internet-dev "
 "\\\\\n"
-"-smbios type=41,designation='Onboard LAN',instance=1,kind=ethernet,"
-"pcidev=internet-dev"
+"-smbios type=41,designation='Onboard "
+"LAN',instance=1,kind=ethernet,pcidev=internet-dev"
 msgstr ""
 
 #: ../../../../qemu-options.hx:2963
@@ -4625,15 +4627,15 @@ msgstr ""
 msgid ""
 "$ ip -brief l\n"
 "lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP>\n"
-"eno1             UP             50:54:00:00:00:42 <BROADCAST,MULTICAST,UP,"
-"LOWER_UP>"
+"eno1             UP             50:54:00:00:00:42 "
+"<BROADCAST,MULTICAST,UP,LOWER_UP>"
 msgstr ""
 
 #: ../../../../qemu-options.hx:2971
 msgid "Currently, the PCI device has to be attached to the root bus."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3219
+#: ../../../../qemu-options.hx:3233
 msgid ""
 "``-nic [tap|passt|bridge|user|l2tpv3|vde|netmap|af-xdp|vhost-user|socket]"
 "[,...][,mac=macaddr][,model=mn]``"
@@ -4657,12 +4659,12 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:14
 msgid ""
-"|qemu_system| -netdev user,id=n1,ipv6=off -device e1000,netdev=n1,"
-"mac=52:54:98:76:54:32\n"
+"|qemu_system| -netdev user,id=n1,ipv6=off -device "
+"e1000,netdev=n1,mac=52:54:98:76:54:32\n"
 "|qemu_system| -nic user,ipv6=off,model=e1000,mac=52:54:98:76:54:32"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3235
+#: ../../../../qemu-options.hx:3239
 msgid "``-nic none``"
 msgstr ""
 
@@ -4673,7 +4675,7 @@ msgid ""
 "backend) which is activated if no other networking options are provided."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3241
+#: ../../../../qemu-options.hx:3362
 msgid "``-netdev passt,id=str[,option][,...]``"
 msgstr ""
 
@@ -4687,7 +4689,7 @@ msgstr ""
 msgid "Assign symbolic name for use in monitor commands."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3248
+#: ../../../../qemu-options.hx:3251
 msgid "``path=file``"
 msgstr ""
 
@@ -4697,7 +4699,7 @@ msgid ""
 "will be started with the help of the PATH environment variable."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3253
+#: ../../../../qemu-options.hx:3255
 msgid "``quiet=on|off``"
 msgstr ""
 
@@ -4707,7 +4709,7 @@ msgid ""
 "``quiet=on`` is passed as ``--quiet`` to passt."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3257
+#: ../../../../qemu-options.hx:3261
 msgid "``vhost-user=on|off``"
 msgstr ""
 
@@ -4719,7 +4721,7 @@ msgid ""
 "with passt."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3263
+#: ../../../../qemu-options.hx:3264
 msgid "``@mtu``"
 msgstr ""
 
@@ -4727,7 +4729,7 @@ msgstr ""
 msgid "Assign MTU via DHCP/NDP"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3266
+#: ../../../../qemu-options.hx:3267
 msgid "``address``"
 msgstr ""
 
@@ -4735,7 +4737,7 @@ msgstr ""
 msgid "IPv4 or IPv6 address"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3269
+#: ../../../../qemu-options.hx:3270
 msgid "``netmask``"
 msgstr ""
 
@@ -4743,7 +4745,7 @@ msgstr ""
 msgid "IPv4 mask"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3272
+#: ../../../../qemu-options.hx:3273
 msgid "``mac``"
 msgstr ""
 
@@ -4751,7 +4753,7 @@ msgstr ""
 msgid "source MAC address"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3275
+#: ../../../../qemu-options.hx:3276
 msgid "``gateway``"
 msgstr ""
 
@@ -4759,7 +4761,7 @@ msgstr ""
 msgid "IPv4 or IPv6 address as gateway"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3278
+#: ../../../../qemu-options.hx:3279
 msgid "``interface``"
 msgstr ""
 
@@ -4767,7 +4769,7 @@ msgstr ""
 msgid "Interface for addresses and routes"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3281
+#: ../../../../qemu-options.hx:3282
 msgid "``outbound``"
 msgstr ""
 
@@ -4775,7 +4777,7 @@ msgstr ""
 msgid "Bind to address as outbound source"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3284
+#: ../../../../qemu-options.hx:3285
 msgid "``outbound-if4``"
 msgstr ""
 
@@ -4783,7 +4785,7 @@ msgstr ""
 msgid "Bind to outbound interface for IPv4"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3287
+#: ../../../../qemu-options.hx:3288
 msgid "``outbound-if6``"
 msgstr ""
 
@@ -4791,7 +4793,7 @@ msgstr ""
 msgid "Bind to outbound interface for IPv6"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3290
+#: ../../../../qemu-options.hx:3291
 msgid "``dns``"
 msgstr ""
 
@@ -4799,7 +4801,7 @@ msgstr ""
 msgid "IPv4 or IPv6 address as DNS"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3293
+#: ../../../../qemu-options.hx:3294
 msgid "``search``"
 msgstr ""
 
@@ -4807,7 +4809,7 @@ msgstr ""
 msgid "Search domains"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3296
+#: ../../../../qemu-options.hx:3297
 msgid "``fqdn``"
 msgstr ""
 
@@ -4815,7 +4817,7 @@ msgstr ""
 msgid "FQDN to configure client with"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3299
+#: ../../../../qemu-options.hx:3300
 msgid "``dhcp-dns``"
 msgstr ""
 
@@ -4823,7 +4825,7 @@ msgstr ""
 msgid "Enable/disable DNS list in DHCP/DHCPv6/NDP"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3302
+#: ../../../../qemu-options.hx:3303
 msgid "``dhcp-search``"
 msgstr ""
 
@@ -4831,7 +4833,7 @@ msgstr ""
 msgid "Enable/disable list in DHCP/DHCPv6/NDP"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3305
+#: ../../../../qemu-options.hx:3306
 msgid "``map-host-loopback``"
 msgstr ""
 
@@ -4839,7 +4841,7 @@ msgstr ""
 msgid "Address to refer to host"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3308
+#: ../../../../qemu-options.hx:3309
 msgid "``map-guest-addr``"
 msgstr ""
 
@@ -4847,7 +4849,7 @@ msgstr ""
 msgid "Addr to translate to guest's address"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3311
+#: ../../../../qemu-options.hx:3312
 msgid "``dns-forward``"
 msgstr ""
 
@@ -4855,7 +4857,7 @@ msgstr ""
 msgid "Forward DNS queries sent to"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3314
+#: ../../../../qemu-options.hx:3315
 msgid "``dns-host``"
 msgstr ""
 
@@ -4863,7 +4865,7 @@ msgstr ""
 msgid "Host nameserver to direct queries to"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3317
+#: ../../../../qemu-options.hx:3318
 msgid "``tcp``"
 msgstr ""
 
@@ -4871,7 +4873,7 @@ msgstr ""
 msgid "Enable/disable TCP"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3320
+#: ../../../../qemu-options.hx:3321
 msgid "``udp``"
 msgstr ""
 
@@ -4879,7 +4881,7 @@ msgstr ""
 msgid "Enable/disable UDP"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3323
+#: ../../../../qemu-options.hx:3324
 msgid "``icmp``"
 msgstr ""
 
@@ -4887,7 +4889,7 @@ msgstr ""
 msgid "Enable/disable ICMP"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3326
+#: ../../../../qemu-options.hx:3327
 msgid "``dhcp``"
 msgstr ""
 
@@ -4895,7 +4897,7 @@ msgstr ""
 msgid "Enable/disable DHCP"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3329
+#: ../../../../qemu-options.hx:3330
 msgid "``ndp``"
 msgstr ""
 
@@ -4903,7 +4905,7 @@ msgstr ""
 msgid "Enable/disable NDP"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3332
+#: ../../../../qemu-options.hx:3333
 msgid "``dhcpv6``"
 msgstr ""
 
@@ -4911,7 +4913,7 @@ msgstr ""
 msgid "Enable/disable DHCPv6"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3335
+#: ../../../../qemu-options.hx:3336
 msgid "``ra``"
 msgstr ""
 
@@ -4919,7 +4921,7 @@ msgstr ""
 msgid "Enable/disable route advertisements"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3338
+#: ../../../../qemu-options.hx:3339
 msgid "``freebind``"
 msgstr ""
 
@@ -4927,7 +4929,7 @@ msgstr ""
 msgid "Bind to any address for forwarding"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3341
+#: ../../../../qemu-options.hx:3342
 msgid "``ipv4``"
 msgstr ""
 
@@ -4935,7 +4937,7 @@ msgstr ""
 msgid "Enable/disable IPv4"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3344
+#: ../../../../qemu-options.hx:3345
 msgid "``ipv6``"
 msgstr ""
 
@@ -4943,7 +4945,7 @@ msgstr ""
 msgid "Enable/disable IPv6"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3347
+#: ../../../../qemu-options.hx:3348
 msgid "``tcp-ports``"
 msgstr ""
 
@@ -4951,7 +4953,7 @@ msgstr ""
 msgid "TCP ports to forward"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3350
+#: ../../../../qemu-options.hx:3351
 msgid "``udp-ports``"
 msgstr ""
 
@@ -4959,7 +4961,7 @@ msgstr ""
 msgid "UDP ports to forward"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3353
+#: ../../../../qemu-options.hx:3358
 msgid "``param=string``"
 msgstr ""
 
@@ -4978,7 +4980,7 @@ msgstr ""
 msgid "|qemu_system| -nic passt,param=--trace,param=--log=trace.log"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3364
+#: ../../../../qemu-options.hx:3554
 msgid "``-netdev user,id=id[,option][,option][,...]``"
 msgstr ""
 
@@ -4988,7 +4990,7 @@ msgid ""
 "privilege to run. Valid options are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3371
+#: ../../../../qemu-options.hx:3373
 msgid "``ipv4=on|off and ipv6=on|off``"
 msgstr ""
 
@@ -4998,7 +5000,7 @@ msgid ""
 "both protocols are enabled."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3375
+#: ../../../../qemu-options.hx:3378
 msgid "``net=addr[/mask]``"
 msgstr ""
 
@@ -5009,7 +5011,7 @@ msgid ""
 "10.0.2.0/24."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3380
+#: ../../../../qemu-options.hx:3382
 msgid "``host=addr``"
 msgstr ""
 
@@ -5019,7 +5021,7 @@ msgid ""
 "guest network, i.e. x.x.x.2."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3384
+#: ../../../../qemu-options.hx:3388
 msgid "``ipv6-net=addr[/int]``"
 msgstr ""
 
@@ -5031,7 +5033,7 @@ msgid ""
 "(default is 64)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3390
+#: ../../../../qemu-options.hx:3392
 msgid "``ipv6-host=addr``"
 msgstr ""
 
@@ -5041,7 +5043,7 @@ msgid ""
 "in the guest network, i.e. xxxx::2."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3394
+#: ../../../../qemu-options.hx:3398
 msgid "``restrict=on|off``"
 msgstr ""
 
@@ -5053,7 +5055,7 @@ msgid ""
 "forwarding rules."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3400
+#: ../../../../qemu-options.hx:3402
 msgid "``hostname=name``"
 msgstr ""
 
@@ -5061,7 +5063,7 @@ msgstr ""
 msgid "Specifies the client hostname reported by the built-in DHCP server."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3404
+#: ../../../../qemu-options.hx:3407
 msgid "``dhcpstart=addr``"
 msgstr ""
 
@@ -5071,7 +5073,7 @@ msgid ""
 "is the 15th to 31st IP in the guest network, i.e. x.x.x.15 to x.x.x.31."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3409
+#: ../../../../qemu-options.hx:3412
 msgid "``dns=addr``"
 msgstr ""
 
@@ -5082,7 +5084,7 @@ msgid ""
 "network, i.e. x.x.x.3."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3414
+#: ../../../../qemu-options.hx:3417
 msgid "``ipv6-dns=addr``"
 msgstr ""
 
@@ -5093,7 +5095,7 @@ msgid ""
 "the guest network, i.e. xxxx::3."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3419
+#: ../../../../qemu-options.hx:3431
 msgid "``dnssearch=domain``"
 msgstr ""
 
@@ -5111,7 +5113,7 @@ msgid ""
 "|qemu_system| -nic user,dnssearch=mgmt.example.org,dnssearch=example.org"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3433
+#: ../../../../qemu-options.hx:3435
 msgid "``domainname=domain``"
 msgstr ""
 
@@ -5119,7 +5121,7 @@ msgstr ""
 msgid "Specifies the client domain name reported by the built-in DHCP server."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3437
+#: ../../../../qemu-options.hx:3443
 msgid "``tftp=dir``"
 msgstr ""
 
@@ -5133,7 +5135,7 @@ msgid ""
 "directory."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3445
+#: ../../../../qemu-options.hx:3449
 msgid "``tftp-server-name=name``"
 msgstr ""
 
@@ -5144,7 +5146,7 @@ msgid ""
 "configurations from a different server than the host address."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3451
+#: ../../../../qemu-options.hx:3461
 msgid "``bootfile=file``"
 msgstr ""
 
@@ -5165,7 +5167,7 @@ msgid ""
 "    -netdev user,id=n1,tftp=/path/to/tftp/files,bootfile=/pxelinux.0"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3463
+#: ../../../../qemu-options.hx:3491
 msgid "``smb=dir[,smbserver=addr]``"
 msgstr ""
 
@@ -5221,10 +5223,10 @@ msgstr ""
 msgid "Note that a SAMBA server must be installed on the host OS."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3493
+#: ../../../../qemu-options.hx:3529
 msgid ""
-"``hostfwd=[tcp|udp|unix]:[[hostaddr]:hostport|hostpath]-[guestaddr]:"
-"guestport``"
+"``hostfwd=[tcp|udp|unix]:[[hostaddr]:hostport|hostpath]-"
+"[guestaddr]:guestport``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:3494
@@ -5281,10 +5283,10 @@ msgid ""
 "|qemu_system| -nic user,hostfwd=unix:/tmp/vm-:23"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3531
+#: ../../../../qemu-options.hx:3554
 msgid ""
-"``guestfwd=[tcp]:server:port-dev``; \\ ``guestfwd=[tcp]:server:port-cmd:"
-"command``"
+"``guestfwd=[tcp]:server:port-dev``; \\ ``guestfwd=[tcp]:server:port-"
+"cmd:command``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:3532
@@ -5322,10 +5324,10 @@ msgid ""
 "10.10.1.1 4321'"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3556
+#: ../../../../qemu-options.hx:3599
 msgid ""
-"``-netdev tap,id=id[,fd=h][,ifname=name][,script=file][,downscript=dfile][,"
-"br=bridge][,helper=helper]``"
+"``-netdev tap,id=id[,fd=h][,ifname=name][,script=file][,downscript=dfile]"
+"[,br=bridge][,helper=helper]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:3557
@@ -5387,7 +5389,7 @@ msgid ""
 "        -netdev tap,id=n1,\"helper=/path/to/qemu-bridge-helper\""
 msgstr ""
 
-#: ../../../../qemu-options.hx:3601
+#: ../../../../qemu-options.hx:3621
 msgid "``-netdev bridge,id=id[,br=bridge][,helper=helper]``"
 msgstr ""
 
@@ -5413,11 +5415,11 @@ msgstr ""
 msgid ""
 "#launch a QEMU instance with the default network helper to\n"
 "#connect a TAP device to bridge qemubr0\n"
-"|qemu_system| linux.img -netdev bridge,br=qemubr0,id=n1 -device virtio-net,"
-"netdev=n1"
+"|qemu_system| linux.img -netdev bridge,br=qemubr0,id=n1 -device virtio-"
+"net,netdev=n1"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3623
+#: ../../../../qemu-options.hx:3642
 msgid ""
 "``-netdev socket,id=id[,fd=h][,listen=[host]:port][,connect=host:port]``"
 msgstr ""
@@ -5443,7 +5445,7 @@ msgid ""
 "                 -netdev socket,id=n2,connect=127.0.0.1:1234"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3644
+#: ../../../../qemu-options.hx:3692
 msgid "``-netdev socket,id=id[,fd=h][,mcast=maddr:port[,localaddr=addr]]``"
 msgstr ""
 
@@ -5509,15 +5511,16 @@ msgstr ""
 msgid ""
 "|qemu_system| linux.img \\\\\n"
 "                 -device e1000,netdev=n1,mac=52:54:00:12:34:56 \\\\\n"
-"                 -netdev socket,id=n1,mcast=239.192.168.1:1102,"
-"localaddr=1.2.3.4"
+"                 -netdev "
+"socket,id=n1,mcast=239.192.168.1:1102,localaddr=1.2.3.4"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3694
+#: ../../../../qemu-options.hx:3736
 msgid ""
-"``-netdev stream,id=str[,server=on|off],addr.type=inet,addr.host=host,addr."
-"port=port[,to=maxport][,numeric=on|off][,keep-alive=on|off][,mptcp=on|off][,"
-"addr.ipv4=on|off][,addr.ipv6=on|off][,reconnect-ms=milliseconds]``"
+"``-netdev stream,id=str[,server=on|"
+"off],addr.type=inet,addr.host=host,addr.port=port[,to=maxport][,numeric=on|"
+"off][,keep-alive=on|off][,mptcp=on|off][,addr.ipv4=on|off][,addr.ipv6=on|off]"
+"[,reconnect-ms=milliseconds]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:3695
@@ -5526,8 +5529,8 @@ msgid ""
 "proxy using a TCP/IP socket."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3697 ../../../../qemu-options.hx:3741
-#: ../../../../qemu-options.hx:3785
+#: ../../../../qemu-options.hx:3698 ../../../../qemu-options.hx:3742
+#: ../../../../qemu-options.hx:3786
 msgid "``server=on|off``"
 msgstr ""
 
@@ -5536,7 +5539,7 @@ msgstr ""
 msgid "if ``on`` create a server socket"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3700
+#: ../../../../qemu-options.hx:3701
 msgid "``addr.host=host,addr.port=port``"
 msgstr ""
 
@@ -5544,7 +5547,7 @@ msgstr ""
 msgid "socket address to listen on (server=on) or connect to (server=off)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3703
+#: ../../../../qemu-options.hx:3704
 msgid "``to=maxport``"
 msgstr ""
 
@@ -5554,7 +5557,7 @@ msgid ""
 "and ``maxport``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3706
+#: ../../../../qemu-options.hx:3707
 msgid "``numeric=on|off``"
 msgstr ""
 
@@ -5564,7 +5567,7 @@ msgid ""
 "name resolution should be attempted (default: ``off``)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3709
+#: ../../../../qemu-options.hx:3710
 msgid "``keep-alive=on|off``"
 msgstr ""
 
@@ -5574,7 +5577,7 @@ msgid ""
 "sockets."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3712
+#: ../../../../qemu-options.hx:3713
 msgid "``mptcp=on|off``"
 msgstr ""
 
@@ -5582,7 +5585,7 @@ msgstr ""
 msgid "enable multipath TCP"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3715
+#: ../../../../qemu-options.hx:3716
 msgid "``ipv4=on|off``"
 msgstr ""
 
@@ -5590,7 +5593,7 @@ msgstr ""
 msgid "whether to accept IPv4 addresses, default to try both IPv4 and IPv6"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3718
+#: ../../../../qemu-options.hx:3719
 msgid "``ipv6=on|off``"
 msgstr ""
 
@@ -5598,8 +5601,8 @@ msgstr ""
 msgid "whether to accept IPv6 addresses, default to try both IPv4 and IPv6"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3721 ../../../../qemu-options.hx:3753
-#: ../../../../qemu-options.hx:3791
+#: ../../../../qemu-options.hx:3723 ../../../../qemu-options.hx:3755
+#: ../../../../qemu-options.hx:3793
 msgid "``reconnect-ms=milliseconds``"
 msgstr ""
 
@@ -5620,19 +5623,21 @@ msgid ""
 "# first VM\n"
 "|qemu_system| linux.img \\\\\n"
 "              -device virtio-net,netdev=net0,mac=52:54:00:12:34:56 \\\\\n"
-"              -netdev stream,id=net0,server=on,addr.type=inet,addr."
-"host=localhost,addr.port=1234\n"
+"              -netdev "
+"stream,id=net0,server=on,addr.type=inet,addr.host=localhost,addr.port=1234\n"
 "# second VM\n"
 "|qemu_system| linux.img \\\\\n"
 "              -device virtio-net,netdev=net0,mac=52:54:00:12:34:57 \\\\\n"
-"              -netdev stream,id=net0,server=off,addr.type=inet,addr."
-"host=localhost,addr.port=1234,reconnect-ms=5000"
+"              -netdev "
+"stream,id=net0,server=off,addr.type=inet,addr.host=localhost,addr.port=1234,reconnect-"
+"ms=5000"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3738
+#: ../../../../qemu-options.hx:3780
 msgid ""
-"``-netdev stream,id=str[,server=on|off],addr.type=unix,addr.path=path[,"
-"abstract=on|off][,tight=on|off][,reconnect-ms=milliseconds]``"
+"``-netdev stream,id=str[,server=on|"
+"off],addr.type=unix,addr.path=path[,abstract=on|off][,tight=on|off]"
+"[,reconnect-ms=milliseconds]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:3739
@@ -5641,7 +5646,7 @@ msgid ""
 "proxy using a stream oriented unix domain socket."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3744
+#: ../../../../qemu-options.hx:3745
 msgid "``addr.path=path``"
 msgstr ""
 
@@ -5649,7 +5654,7 @@ msgstr ""
 msgid "filesystem path to use"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3747
+#: ../../../../qemu-options.hx:3748
 msgid "``abstract=on|off``"
 msgstr ""
 
@@ -5657,7 +5662,7 @@ msgstr ""
 msgid "if ``on``, this is a Linux abstract socket address."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3750
+#: ../../../../qemu-options.hx:3751
 msgid "``tight=on|off``"
 msgstr ""
 
@@ -5702,7 +5707,7 @@ msgid ""
 "tmp/qemu0,reconnect-ms=5000"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3782
+#: ../../../../qemu-options.hx:3793
 msgid ""
 "``-netdev stream,id=str[,server=on|off],addr.type=fd,addr.str=file-"
 "descriptor[,reconnect-ms=milliseconds]``"
@@ -5714,7 +5719,7 @@ msgid ""
 "proxy using a stream oriented socket file descriptor."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3788
+#: ../../../../qemu-options.hx:3789
 msgid "``addr.str=file-descriptor``"
 msgstr ""
 
@@ -5722,17 +5727,17 @@ msgstr ""
 msgid "file descriptor number to use as a socket"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3795
+#: ../../../../qemu-options.hx:3819
 msgid ""
-"``-netdev dgram,id=str,remote.type=inet,remote.host=maddr,remote.port=port[,"
-"local.type=inet,local.host=addr]``"
+"``-netdev "
+"dgram,id=str,remote.type=inet,remote.host=maddr,remote.port=port[,local.type=inet,local.host=addr]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:3796
 msgid "Configure a network backend to connect to a multicast address."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3798 ../../../../qemu-options.hx:3824
+#: ../../../../qemu-options.hx:3799 ../../../../qemu-options.hx:3825
 msgid "``remote.host=maddr,remote.port=port``"
 msgstr ""
 
@@ -5740,7 +5745,7 @@ msgstr ""
 msgid "multicast address"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3801
+#: ../../../../qemu-options.hx:3802
 msgid "``local.host=addr``"
 msgstr ""
 
@@ -5753,24 +5758,25 @@ msgid ""
 "# launch one QEMU instance\n"
 "|qemu_system| linux.img \\\\\n"
 "              -device virtio-net,netdev=net0,mac=52:54:00:12:34:56 \\\\\n"
-"              -netdev dgram,id=net0,remote.type=inet,remote.host=224.0.0.1,"
-"remote.port=1234\n"
+"              -netdev "
+"dgram,id=net0,remote.type=inet,remote.host=224.0.0.1,remote.port=1234\n"
 "# launch another QEMU instance on same \"bus\"\n"
 "|qemu_system| linux.img \\\\\n"
 "              -device virtio-net,netdev=net0,mac=52:54:00:12:34:57 \\\\\n"
-"              -netdev dgram,id=net0,remote.type=inet,remote.host=224.0.0.1,"
-"remote.port=1234\n"
+"              -netdev "
+"dgram,id=net0,remote.type=inet,remote.host=224.0.0.1,remote.port=1234\n"
 "# launch yet another QEMU instance on same \"bus\"\n"
 "|qemu_system| linux.img \\\\\n"
 "              -device virtio-net,netdev=net0,mac=52:54:00:12:34:58 \\\\\n"
-"              -netdev dgram,id=net0,remote.type=inet,remote.host=224.0.0.1,"
-"remote.port=1234"
+"              -netdev "
+"dgram,id=net0,remote.type=inet,remote.host=224.0.0.1,remote.port=1234"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3821
+#: ../../../../qemu-options.hx:3828
 msgid ""
-"``-netdev dgram,id=str,remote.type=inet,remote.host=maddr,remote.port=port[,"
-"local.type=fd,local.str=file-descriptor]``"
+"``-netdev "
+"dgram,id=str,remote.type=inet,remote.host=maddr,remote.port=port[,local.type=fd,local.str=file-"
+"descriptor]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:3822
@@ -5779,7 +5785,7 @@ msgid ""
 "socket file descriptor."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3827 ../../../../qemu-options.hx:3880
+#: ../../../../qemu-options.hx:3828 ../../../../qemu-options.hx:3881
 msgid "``local.str=file-descriptor``"
 msgstr ""
 
@@ -5787,10 +5793,10 @@ msgstr ""
 msgid "File descriptor to use to send packets"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3830
+#: ../../../../qemu-options.hx:3851
 msgid ""
-"``-netdev dgram,id=str,local.type=inet,local.host=addr,local.port=port[,"
-"remote.type=inet,remote.host=addr,remote.port=port]``"
+"``-netdev "
+"dgram,id=str,local.type=inet,local.host=addr,local.port=port[,remote.type=inet,remote.host=addr,remote.port=port]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:3831
@@ -5799,7 +5805,7 @@ msgid ""
 "proxy using a datagram oriented unix domain socket."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3834
+#: ../../../../qemu-options.hx:3835
 msgid "``local.host=addr,local.port=port``"
 msgstr ""
 
@@ -5807,7 +5813,7 @@ msgstr ""
 msgid "IP address to use to send the packets from"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3837
+#: ../../../../qemu-options.hx:3838
 msgid "``remote.host=addr,remote.port=port``"
 msgstr ""
 
@@ -5824,19 +5830,19 @@ msgid ""
 "# first VM\n"
 "|qemu_system| linux.img \\\\\n"
 "              -device virtio-net,netdev=net0,mac=52:54:00:12:34:56 \\\\\n"
-"              -netdev dgram,id=net0,local.type=inet,local.host=localhost,"
-"local.port=1234,remote.type=inet,remote.host=localhost,remote.port=1235\n"
+"              -netdev "
+"dgram,id=net0,local.type=inet,local.host=localhost,local.port=1234,remote.type=inet,remote.host=localhost,remote.port=1235\n"
 "# second VM\n"
 "|qemu_system| linux.img \\\\\n"
 "              -device virtio-net,netdev=net0,mac=52:54:00:12:34:56 \\\\\n"
-"              -netdev dgram,id=net0,local.type=inet,local.host=localhost,"
-"local.port=1235,remote.type=inet,remote.host=localhost,remote.port=1234"
+"              -netdev "
+"dgram,id=net0,local.type=inet,local.host=localhost,local.port=1235,remote.type=inet,remote.host=localhost,remote.port=1234"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3853
+#: ../../../../qemu-options.hx:3874
 msgid ""
-"``-netdev dgram,id=str,local.type=unix,local.path=path[,remote.type=unix,"
-"remote.path=path]``"
+"``-netdev "
+"dgram,id=str,local.type=unix,local.path=path[,remote.type=unix,remote.path=path]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:3854
@@ -5845,7 +5851,7 @@ msgid ""
 "proxy using a datagram oriented unix socket."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3857
+#: ../../../../qemu-options.hx:3858
 msgid "``local.path=path``"
 msgstr ""
 
@@ -5853,7 +5859,7 @@ msgstr ""
 msgid "filesystem path to use to bind the socket"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3860
+#: ../../../../qemu-options.hx:3861
 msgid "``remote.path=path``"
 msgstr ""
 
@@ -5870,16 +5876,16 @@ msgid ""
 "# first VM\n"
 "|qemu_system| linux.img \\\\\n"
 "              -device virtio-net,netdev=net0,mac=52:54:00:12:34:56 \\\\\n"
-"              -netdev dgram,id=net0,local.type=unix,local.path=/tmp/qemu0,"
-"remote.type=unix,remote.path=/tmp/qemu1\n"
+"              -netdev dgram,id=net0,local.type=unix,local.path=/tmp/"
+"qemu0,remote.type=unix,remote.path=/tmp/qemu1\n"
 "# second VM\n"
 "|qemu_system| linux.img \\\\\n"
 "              -device virtio-net,netdev=net0,mac=52:54:00:12:34:57 \\\\\n"
-"              -netdev dgram,id=net0,local.type=unix,local.path=/tmp/qemu1,"
-"remote.type=unix,remote.path=/tmp/qemu0"
+"              -netdev dgram,id=net0,local.type=unix,local.path=/tmp/"
+"qemu1,remote.type=unix,remote.path=/tmp/qemu0"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3876
+#: ../../../../qemu-options.hx:3881
 msgid "``-netdev dgram,id=str,local.type=fd,local.str=file-descriptor``"
 msgstr ""
 
@@ -5889,12 +5895,12 @@ msgid ""
 "proxy using a datagram oriented socket file descriptor."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3883
+#: ../../../../qemu-options.hx:3949
 msgid ""
-"``-netdev l2tpv3,id=id,src=srcaddr,dst=dstaddr[,srcport=srcport][,"
-"dstport=dstport],txsession=txsession[,rxsession=rxsession][,ipv6=on|off][,"
-"udp=on|off][,cookie64=on|off][,counter=on|off][,pincounter=on|off][,"
-"txcookie=txcookie][,rxcookie=rxcookie][,offset=offset]``"
+"``-netdev l2tpv3,id=id,src=srcaddr,dst=dstaddr[,srcport=srcport]"
+"[,dstport=dstport],txsession=txsession[,rxsession=rxsession][,ipv6=on|off]"
+"[,udp=on|off][,cookie64=on|off][,counter=on|off][,pincounter=on|off]"
+"[,txcookie=txcookie][,rxcookie=rxcookie][,offset=offset]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:3884
@@ -5911,7 +5917,7 @@ msgid ""
 "directly."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3892
+#: ../../../../qemu-options.hx:3893
 msgid "``src=srcaddr``"
 msgstr ""
 
@@ -5919,7 +5925,7 @@ msgstr ""
 msgid "source address (mandatory)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3895
+#: ../../../../qemu-options.hx:3896
 msgid "``dst=dstaddr``"
 msgstr ""
 
@@ -5927,7 +5933,7 @@ msgstr ""
 msgid "destination address (mandatory)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3898
+#: ../../../../qemu-options.hx:3899
 msgid "``udp=on``"
 msgstr ""
 
@@ -5935,7 +5941,7 @@ msgstr ""
 msgid "select udp encapsulation (default is ip)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3901
+#: ../../../../qemu-options.hx:3902
 msgid "``srcport=srcport``"
 msgstr ""
 
@@ -5943,7 +5949,7 @@ msgstr ""
 msgid "source udp port."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3904
+#: ../../../../qemu-options.hx:3905
 msgid "``dstport=dstport``"
 msgstr ""
 
@@ -5951,7 +5957,7 @@ msgstr ""
 msgid "destination udp port."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3907
+#: ../../../../qemu-options.hx:3908
 msgid "``ipv6=on``"
 msgstr ""
 
@@ -5959,7 +5965,7 @@ msgstr ""
 msgid "force v6, otherwise defaults to v4."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3910
+#: ../../../../qemu-options.hx:3913
 msgid "``rxcookie=rxcookie``; \\ ``txcookie=txcookie``"
 msgstr ""
 
@@ -5969,7 +5975,7 @@ msgid ""
 "function is mostly to prevent misconfiguration. By default they are 32 bit."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3915
+#: ../../../../qemu-options.hx:3916
 msgid "``cookie64=on``"
 msgstr ""
 
@@ -5977,7 +5983,7 @@ msgstr ""
 msgid "Set cookie size to 64 bit instead of the default 32"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3918
+#: ../../../../qemu-options.hx:3920
 msgid "``counter=off``"
 msgstr ""
 
@@ -5987,7 +5993,7 @@ msgid ""
 "ipv6-tunnel-00"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3922
+#: ../../../../qemu-options.hx:3924
 msgid "``pincounter=on``"
 msgstr ""
 
@@ -5997,7 +6003,7 @@ msgid ""
 "which have packet reorder."
 msgstr ""
 
-#: ../../../../qemu-options.hx:3926
+#: ../../../../qemu-options.hx:3927
 msgid "``offset=offset``"
 msgstr ""
 
@@ -6026,18 +6032,18 @@ msgid ""
 "\n"
 "\n"
 "# on 4.3.2.1\n"
-"# launch QEMU instance - if your network has reorder or is very lossy add ,"
-"pincounter\n"
+"# launch QEMU instance - if your network has reorder or is very lossy "
+"add ,pincounter\n"
 "\n"
 "|qemu_system| linux.img -device e1000,netdev=n1 \\\\\n"
-"    -netdev l2tpv3,id=n1,src=4.2.3.1,dst=1.2.3.4,udp=on,srcport=16384,"
-"dstport=16384,rxsession=0xffffffff,txsession=0xffffffff,counter=on"
+"    -netdev "
+"l2tpv3,id=n1,src=4.2.3.1,dst=1.2.3.4,udp=on,srcport=16384,dstport=16384,rxsession=0xffffffff,txsession=0xffffffff,counter=on"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3951
+#: ../../../../qemu-options.hx:3965
 msgid ""
-"``-netdev vde,id=id[,sock=socketpath][,port=n][,group=groupname][,"
-"mode=octalmode]``"
+"``-netdev vde,id=id[,sock=socketpath][,port=n][,group=groupname]"
+"[,mode=octalmode]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:3952
@@ -6057,10 +6063,10 @@ msgid ""
 "|qemu_system| linux.img -nic vde,sock=/tmp/myswitch"
 msgstr ""
 
-#: ../../../../qemu-options.hx:3967
+#: ../../../../qemu-options.hx:4030
 msgid ""
-"``-netdev af-xdp,id=str,ifname=name[,mode=native|skb][,force-copy=on|off][,"
-"queues=n][,start-queue=m][,inhibit=on|off][,sock-fds=x:y:...:z][,map-path=/"
+"``-netdev af-xdp,id=str,ifname=name[,mode=native|skb][,force-copy=on|off]"
+"[,queues=n][,start-queue=m][,inhibit=on|off][,sock-fds=x:y:...:z][,map-path=/"
 "path/to/socket/map][,map-start-index=i]``"
 msgstr ""
 
@@ -6146,7 +6152,7 @@ msgid ""
 "together is not supported."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4032
+#: ../../../../qemu-options.hx:4049
 msgid "``-netdev vhost-user,chardev=id[,vhostforce=on|off][,queues=n]``"
 msgstr ""
 
@@ -6162,15 +6168,15 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:4045
 msgid ""
-"qemu -m 512 -object memory-backend-file,id=mem,size=512M,mem-path=/hugetlbfs,"
-"share=on \\\n"
+"qemu -m 512 -object memory-backend-file,id=mem,size=512M,mem-path=/"
+"hugetlbfs,share=on \\\n"
 "     -numa node,memdev=mem \\\n"
 "     -chardev socket,id=chr0,path=/path/to/socket \\\n"
 "     -netdev type=vhost-user,id=net0,chardev=chr0 \\\n"
 "     -device virtio-net-pci,netdev=net0"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4051
+#: ../../../../qemu-options.hx:4057
 msgid "``-netdev vhost-vdpa[,vhostdev=/path/to/dev][,vhostfd=h]``"
 msgstr ""
 
@@ -6185,7 +6191,7 @@ msgid ""
 "physically located on the hardware or emulated by software."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4059
+#: ../../../../qemu-options.hx:4065
 msgid "``-netdev hubport,id=id,hubid=hubid[,netdev=nd]``"
 msgstr ""
 
@@ -6200,10 +6206,10 @@ msgid ""
 "netdev with ID nd by using the ``netdev=nd`` option."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4067
+#: ../../../../qemu-options.hx:4082
 msgid ""
-"``-net nic[,netdev=nd][,macaddr=mac][,model=type] [,name=name][,addr=addr][,"
-"vectors=v]``"
+"``-net nic[,netdev=nd][,macaddr=mac][,model=type] [,name=name][,addr=addr]"
+"[,vectors=v]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:4068
@@ -6223,7 +6229,7 @@ msgid ""
 "list of available devices for your target."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4084
+#: ../../../../qemu-options.hx:4086
 msgid "``-net user|passt|tap|bridge|socket|l2tpv3|vde[,...][,name=name]``"
 msgstr ""
 
@@ -6238,7 +6244,7 @@ msgstr ""
 msgid "The general form of a character device option is:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4141
+#: ../../../../qemu-options.hx:4207
 msgid "``-chardev backend,id=id[,mux=on|off][,options]``"
 msgstr ""
 
@@ -6336,7 +6342,7 @@ msgstr ""
 msgid "The available backends are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4211
+#: ../../../../qemu-options.hx:4213
 msgid "``-chardev null,id=id``"
 msgstr ""
 
@@ -6346,11 +6352,11 @@ msgid ""
 "receives. The null backend does not take any options."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4215
+#: ../../../../qemu-options.hx:4278
 msgid ""
-"``-chardev socket,id=id[,TCP options or unix options][,server=on|off][,"
-"wait=on|off][,telnet=on|off][,websocket=on|off][,reconnect-ms=milliseconds][,"
-"tls-creds=id][,tls-authz=id]``"
+"``-chardev socket,id=id[,TCP options or unix options][,server=on|off]"
+"[,wait=on|off][,telnet=on|off][,websocket=on|off][,reconnect-ms=milliseconds]"
+"[,tls-creds=id][,tls-authz=id]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:4216
@@ -6411,10 +6417,10 @@ msgstr ""
 msgid "TCP and unix socket options are given below:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4250
+#: ../../../../qemu-options.hx:4270
 msgid ""
-"``TCP options: port=port[,host=host][,to=to][,ipv4=on|off][,ipv6=on|off][,"
-"nodelay=on|off]``"
+"``TCP options: port=port[,host=host][,to=to][,ipv4=on|off][,ipv6=on|off]"
+"[,nodelay=on|off]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:4251
@@ -6450,7 +6456,7 @@ msgstr ""
 msgid "``nodelay=on|off`` disables the Nagle algorithm."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4272
+#: ../../../../qemu-options.hx:4278
 msgid "``unix options: path=path[,abstract=on|off][,tight=on|off]``"
 msgstr ""
 
@@ -6463,10 +6469,10 @@ msgid ""
 "full sun_path length.  Optional, defaults to true."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4280
+#: ../../../../qemu-options.hx:4296
 msgid ""
-"``-chardev udp,id=id[,host=host],port=port[,localaddr=localaddr][,"
-"localport=localport][,ipv4=on|off][,ipv6=on|off]``"
+"``-chardev udp,id=id[,host=host],port=port[,localaddr=localaddr]"
+"[,localport=localport][,ipv4=on|off][,ipv6=on|off]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:4281
@@ -6503,7 +6509,7 @@ msgid ""
 "used. If neither is specified the device may use either protocol."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4298
+#: ../../../../qemu-options.hx:4300
 msgid "``-chardev msmouse,id=id``"
 msgstr ""
 
@@ -6513,7 +6519,7 @@ msgid ""
 "take any options."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4302
+#: ../../../../qemu-options.hx:4340
 msgid "``-chardev hub,id=id,chardevs.0=id[,chardevs.N=id]``"
 msgstr ""
 
@@ -6568,7 +6574,7 @@ msgid ""
 "devices is not supported as well."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4342
+#: ../../../../qemu-options.hx:4362
 msgid ""
 "``-chardev vc,id=id[[,width=width][,height=height]][[,cols=cols][,rows=rows]]"
 "[,encoding=ENCODING]``"
@@ -6617,7 +6623,7 @@ msgid ""
 "or ``cp437`` (8-bit Extended ASCII / VGA)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4364
+#: ../../../../qemu-options.hx:4366
 msgid "``-chardev ringbuf,id=id[,size=size]``"
 msgstr ""
 
@@ -6627,7 +6633,7 @@ msgid ""
 "and defaults to ``64K``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4368
+#: ../../../../qemu-options.hx:4379
 msgid "``-chardev file,id=id,path=path[,input-path=input-path]``"
 msgstr ""
 
@@ -6653,7 +6659,7 @@ msgstr ""
 msgid "Note that ``input-path`` is not supported on Windows hosts."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4381
+#: ../../../../qemu-options.hx:4394
 msgid "``-chardev pipe,id=id,path=path``"
 msgstr ""
 
@@ -6682,7 +6688,7 @@ msgid ""
 "required."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4396
+#: ../../../../qemu-options.hx:4400
 msgid "``-chardev console,id=id``"
 msgstr ""
 
@@ -6696,7 +6702,7 @@ msgstr ""
 msgid "``console`` is only available on Windows hosts."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4402
+#: ../../../../qemu-options.hx:4408
 msgid "``-chardev serial,id=id,path=path``"
 msgstr ""
 
@@ -6714,7 +6720,7 @@ msgstr ""
 msgid "``path`` specifies the name of the serial device to open."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4410
+#: ../../../../qemu-options.hx:4424
 msgid "``-chardev pty,id=id[,path=path]``"
 msgstr ""
 
@@ -6746,7 +6752,7 @@ msgid ""
 "terminates to account for this."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4426
+#: ../../../../qemu-options.hx:4431
 msgid "``-chardev stdio,id=id[,signal=on|off]``"
 msgstr ""
 
@@ -6761,7 +6767,7 @@ msgid ""
 "default, use ``signal=off`` to disable it."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4433
+#: ../../../../qemu-options.hx:4435
 msgid "``-chardev braille,id=id``"
 msgstr ""
 
@@ -6770,7 +6776,7 @@ msgid ""
 "Connect to a local BrlAPI server. ``braille`` does not take any options."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4437
+#: ../../../../qemu-options.hx:4445
 msgid "``-chardev parallel,id=id,path=path``"
 msgstr ""
 
@@ -6789,7 +6795,7 @@ msgid ""
 "required."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4447
+#: ../../../../qemu-options.hx:4454
 msgid "``-chardev spicevmc,id=id,debug=debug,name=name``"
 msgstr ""
 
@@ -6809,7 +6815,7 @@ msgstr ""
 msgid "Connect to a spice virtual machine channel, such as vdiport."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4456
+#: ../../../../qemu-options.hx:4464
 msgid "``-chardev spiceport,id=id,debug=debug,name=name``"
 msgstr ""
 
@@ -6827,7 +6833,7 @@ msgid ""
 "identified by a name (preferably a fqdn)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4466
+#: ../../../../qemu-options.hx:4472
 msgid "``-chardev dbus,id=id,name=name``"
 msgstr ""
 
@@ -6849,7 +6855,7 @@ msgstr ""
 msgid "The general form of a TPM device option is:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4492
+#: ../../../../qemu-options.hx:4497
 msgid "``-tpmdev backend,id=id[,options]``"
 msgstr ""
 
@@ -6864,7 +6870,7 @@ msgstr ""
 msgid "Use ``-tpmdev help`` to print all available TPM backend types."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4501
+#: ../../../../qemu-options.hx:4537
 msgid "``-tpmdev passthrough,id=id,path=path,cancel-path=cancel-path``"
 msgstr ""
 
@@ -6926,7 +6932,7 @@ msgid ""
 "``tpmdev=tpm0`` in the device option."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4539
+#: ../../../../qemu-options.hx:4549
 msgid "``-tpmdev emulator,id=id,chardev=dev``"
 msgstr ""
 
@@ -6948,8 +6954,8 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:4550
 msgid ""
-"-chardev socket,id=chrtpm,path=/tmp/swtpm-sock -tpmdev emulator,id=tpm0,"
-"chardev=chrtpm -device tpm-tis,tpmdev=tpm0"
+"-chardev socket,id=chrtpm,path=/tmp/swtpm-sock -tpmdev "
+"emulator,id=tpm0,chardev=chrtpm -device tpm-tis,tpmdev=tpm0"
 msgstr ""
 
 #: ../../../../qemu-options.hx:4559
@@ -7010,7 +7016,7 @@ msgstr ""
 msgid "Set the filename for the BIOS."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4602
+#: ../../../../qemu-options.hx:4603
 msgid "``-pflash file``"
 msgstr ""
 
@@ -7034,7 +7040,7 @@ msgid ""
 "kernels for that architecture must be started."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4624
+#: ../../../../qemu-options.hx:4625
 msgid "``-kernel bzImage``"
 msgstr ""
 
@@ -7052,7 +7058,7 @@ msgstr ""
 msgid "Use 'shim.efi' to boot the kernel"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4639
+#: ../../../../qemu-options.hx:4640
 msgid "``-append cmdline``"
 msgstr ""
 
@@ -7060,7 +7066,7 @@ msgstr ""
 msgid "Use cmdline as kernel command line"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4647
+#: ../../../../qemu-options.hx:4648
 msgid "``-initrd file``"
 msgstr ""
 
@@ -7068,7 +7074,7 @@ msgstr ""
 msgid "Use file as initial ram disk."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4650
+#: ../../../../qemu-options.hx:4655
 msgid "``-initrd \"file1 arg=foo,file2\"``"
 msgstr ""
 
@@ -7083,19 +7089,19 @@ msgid ""
 "on the command line to escape them:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4657
+#: ../../../../qemu-options.hx:4660
 msgid ""
 "``-initrd \"bzImage earlyprintk=xen,,keep root=/dev/xvda1,initrd.img\"``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:4658
 msgid ""
-"Multiboot only. Use bzImage as the first module with \"``earlyprintk=xen,"
-"keep root=/dev/xvda1``\" as its command line, and initrd.img as the second "
-"module."
+"Multiboot only. Use bzImage as the first module with "
+"\"``earlyprintk=xen,keep root=/dev/xvda1``\" as its command line, and "
+"initrd.img as the second module."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4667
+#: ../../../../qemu-options.hx:4669
 msgid "``-dtb file``"
 msgstr ""
 
@@ -7132,11 +7138,11 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:4687
 msgid ""
-"``-device guest-loader,addr=<addr>[,kernel=<path>,[bootargs=<arguments>]][,"
-"initrd=<path>]``"
+"``-device guest-loader,addr=<addr>[,kernel=<path>,[bootargs=<arguments>]]"
+"[,initrd=<path>]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4702
+#: ../../../../qemu-options.hx:4716
 msgid ""
 "``-compat [deprecated-input=<input-policy>][,deprecated-output=<output-"
 "policy>]``"
@@ -7179,7 +7185,7 @@ msgstr ""
 msgid "Emit deprecated command results and events"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4713
+#: ../../../../qemu-options.hx:4714
 msgid "``deprecated-output=hide``"
 msgstr ""
 
@@ -7191,7 +7197,7 @@ msgstr ""
 msgid "Limitation: covers only syntactic aspects of QMP."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4718
+#: ../../../../qemu-options.hx:4731
 msgid ""
 "``-compat [unstable-input=<input-policy>][,unstable-output=<output-policy>]``"
 msgstr ""
@@ -7232,7 +7238,7 @@ msgstr ""
 msgid "Emit unstable command results and events"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4729
+#: ../../../../qemu-options.hx:4730
 msgid "``unstable-output=hide``"
 msgstr ""
 
@@ -7240,7 +7246,7 @@ msgstr ""
 msgid "Suppress unstable command results and events"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4742
+#: ../../../../qemu-options.hx:4745
 msgid "``-fw_cfg [name=]name,file=file``"
 msgstr ""
 
@@ -7251,7 +7257,7 @@ msgid ""
 "file \"my,file\")."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4747
+#: ../../../../qemu-options.hx:4764
 msgid "``-fw_cfg [name=]name,string=str``"
 msgstr ""
 
@@ -7283,7 +7289,7 @@ msgid ""
 "my\\_blob.bin."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4772
+#: ../../../../qemu-options.hx:4942
 msgid "``-serial dev``"
 msgstr ""
 
@@ -7308,7 +7314,7 @@ msgstr ""
 msgid "Available character devices are:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4785
+#: ../../../../qemu-options.hx:4797
 msgid "``vc[:WxH]``"
 msgstr ""
 
@@ -7329,7 +7335,7 @@ msgstr ""
 msgid "vc:80Cx24C"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4799
+#: ../../../../qemu-options.hx:4811
 msgid "``pty[:path]``"
 msgstr ""
 
@@ -7346,7 +7352,7 @@ msgid ""
 "ports is truly variable, this suppresses the creation of the device."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4821
+#: ../../../../qemu-options.hx:4824
 msgid "``null``"
 msgstr ""
 
@@ -7357,7 +7363,7 @@ msgid ""
 "redirecting the output to ``/dev/null``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4826
+#: ../../../../qemu-options.hx:4828
 msgid "``chardev:id``"
 msgstr ""
 
@@ -7365,7 +7371,7 @@ msgstr ""
 msgid "Use a named character device defined with the ``-chardev`` option."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4830
+#: ../../../../qemu-options.hx:4832
 msgid "``/dev/XXX``"
 msgstr ""
 
@@ -7375,7 +7381,7 @@ msgid ""
 "parameters are set according to the emulated ones."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4834
+#: ../../../../qemu-options.hx:4836
 msgid "``/dev/parportN``"
 msgstr ""
 
@@ -7385,7 +7391,7 @@ msgid ""
 "EPP parallel port features can be used."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4838
+#: ../../../../qemu-options.hx:4839
 msgid "``file:filename``"
 msgstr ""
 
@@ -7393,7 +7399,7 @@ msgstr ""
 msgid "Write output to filename. No character can be read."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4841
+#: ../../../../qemu-options.hx:4842
 msgid "``stdio``"
 msgstr ""
 
@@ -7401,7 +7407,7 @@ msgstr ""
 msgid "[Unix only] standard input/output"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4844
+#: ../../../../qemu-options.hx:4845
 msgid "``pipe:filename``"
 msgstr ""
 
@@ -7409,7 +7415,7 @@ msgstr ""
 msgid "name pipe filename"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4847
+#: ../../../../qemu-options.hx:4848
 msgid "``COMn``"
 msgstr ""
 
@@ -7417,7 +7423,7 @@ msgstr ""
 msgid "[Windows only] Use host serial port n"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4850
+#: ../../../../qemu-options.hx:4879
 msgid "``udp:[remote_host]:remote_port[@[src_ip]:src_port]``"
 msgstr ""
 
@@ -7448,7 +7454,7 @@ msgid ""
 "redirector to allow telnet on port 5555 to access the QEMU port."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4872
+#: ../../../../qemu-options.hx:4873
 msgid "``QEMU Options:``"
 msgstr ""
 
@@ -7456,7 +7462,7 @@ msgstr ""
 msgid "-serial udp::4555@:4556"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4875
+#: ../../../../qemu-options.hx:4876
 msgid "``netcat options:``"
 msgstr ""
 
@@ -7464,7 +7470,7 @@ msgstr ""
 msgid "-u -P 4555 -L 0.0.0.0:4556 -t -p 5555 -I -T"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4878
+#: ../../../../qemu-options.hx:4879
 msgid "``telnet options:``"
 msgstr ""
 
@@ -7472,7 +7478,7 @@ msgstr ""
 msgid "localhost 5555"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4881
+#: ../../../../qemu-options.hx:4902
 msgid ""
 "``tcp:[host]:port[,server=on|off][,wait=on|off][,nodelay=on|off][,reconnect-"
 "ms=milliseconds]``"
@@ -7493,7 +7499,7 @@ msgid ""
 "character device."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4895
+#: ../../../../qemu-options.hx:4896
 msgid "``Example to send tcp console to 192.168.0.2 port 4444``"
 msgstr ""
 
@@ -7501,7 +7507,7 @@ msgstr ""
 msgid "-serial tcp:192.168.0.2:4444"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4898
+#: ../../../../qemu-options.hx:4899
 msgid "``Example to listen and wait on port 4444 for connection``"
 msgstr ""
 
@@ -7509,7 +7515,7 @@ msgstr ""
 msgid "-serial tcp::4444,server=on"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4901
+#: ../../../../qemu-options.hx:4902
 msgid "``Example to not wait and listen on ip 192.168.0.100 port 4444``"
 msgstr ""
 
@@ -7517,7 +7523,7 @@ msgstr ""
 msgid "-serial tcp:192.168.0.100:4444,server=on,wait=off"
 msgstr ""
 
-#: ../../../../qemu-options.hx:4904
+#: ../../../../qemu-options.hx:4912
 msgid "``telnet:host:port[,server=on|off][,wait=on|off][,nodelay=on|off]``"
 msgstr ""
 
@@ -7532,7 +7538,7 @@ msgid ""
 "the enter key."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4914
+#: ../../../../qemu-options.hx:4916
 msgid "``websocket:host:port,server=on[,wait=on|off][,nodelay=on|off]``"
 msgstr ""
 
@@ -7542,7 +7548,7 @@ msgid ""
 "WebSocket server. Client mode is not supported."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4918
+#: ../../../../qemu-options.hx:4921
 msgid "``unix:path[,server=on|off][,wait=on|off][,reconnect-ms=milliseconds]``"
 msgstr ""
 
@@ -7553,7 +7559,7 @@ msgid ""
 "path is used for connections."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4923
+#: ../../../../qemu-options.hx:4935
 msgid "``mon:dev_string``"
 msgstr ""
 
@@ -7582,7 +7588,7 @@ msgid ""
 "or fake device."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4941
+#: ../../../../qemu-options.hx:4942
 msgid "``msmouse``"
 msgstr ""
 
@@ -7591,7 +7597,7 @@ msgid ""
 "Three button serial mouse. Configure the guest to use Microsoft protocol."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4950
+#: ../../../../qemu-options.hx:4958
 msgid "``-parallel dev``"
 msgstr ""
 
@@ -7611,7 +7617,7 @@ msgstr ""
 msgid "Use ``-parallel none`` to disable all parallel ports."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4966
+#: ../../../../qemu-options.hx:4974
 msgid "``-monitor dev``"
 msgstr ""
 
@@ -7630,7 +7636,7 @@ msgid ""
 "``compat_monitorNNN`` where ``NNN`` is a counter starting from 0."
 msgstr ""
 
-#: ../../../../qemu-options.hx:4981
+#: ../../../../qemu-options.hx:4989
 msgid "``-qmp dev``"
 msgstr ""
 
@@ -7660,7 +7666,7 @@ msgstr ""
 msgid "Like ``-qmp`` but uses pretty JSON formatting."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5007
+#: ../../../../qemu-options.hx:5031
 msgid "``-mon [chardev=]name[,mode=readline|control][,pretty=on|off]``"
 msgstr ""
 
@@ -7702,7 +7708,7 @@ msgid ""
 "ID ``compat_monitorNNN`` where ``NNN`` is a counter starting from 0."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5039
+#: ../../../../qemu-options.hx:5043
 msgid "``-debugcon dev``"
 msgstr ""
 
@@ -7714,7 +7720,7 @@ msgid ""
 "``vc`` in graphical mode and ``stdio`` in non graphical mode."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5050
+#: ../../../../qemu-options.hx:5051
 msgid "``-pidfile file``"
 msgstr ""
 
@@ -7724,7 +7730,7 @@ msgid ""
 "script."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5059
+#: ../../../../qemu-options.hx:5064
 msgid "``--preconfig``"
 msgstr ""
 
@@ -7749,7 +7755,7 @@ msgstr ""
 msgid "``-overcommit mem-lock=on|off|on-fault``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5085
+#: ../../../../qemu-options.hx:5101
 msgid "``-overcommit cpu-pm=on|off``"
 msgstr ""
 
@@ -7778,7 +7784,7 @@ msgid ""
 "power utilization will be incorrect, not taking into account guest idle time."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5111
+#: ../../../../qemu-options.hx:5128
 msgid "``-gdb dev``"
 msgstr ""
 
@@ -7810,7 +7816,7 @@ msgstr ""
 msgid "(gdb) target remote | exec |qemu_system| -gdb stdio ..."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5136
+#: ../../../../qemu-options.hx:5137
 msgid "``-s``"
 msgstr ""
 
@@ -7820,7 +7826,7 @@ msgid ""
 "the :ref:`GDB usage` chapter in the System Emulation Users Guide)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5145
+#: ../../../../qemu-options.hx:5146
 msgid "``-d item1[,...]``"
 msgstr ""
 
@@ -7837,7 +7843,7 @@ msgstr ""
 msgid "Output log in logfile instead of to stderr"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5162
+#: ../../../../qemu-options.hx:5173
 msgid "``-dfilter range1[,...]``"
 msgstr ""
 
@@ -7860,7 +7866,7 @@ msgid ""
 "sized block starting at 0xffffffc00005f000."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5181
+#: ../../../../qemu-options.hx:5183
 msgid "``-seed number``"
 msgstr ""
 
@@ -7870,7 +7876,7 @@ msgid ""
 "seeded with number. This does not affect crypto routines within the host."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5191
+#: ../../../../qemu-options.hx:5193
 msgid "``-L  path``"
 msgstr ""
 
@@ -7882,7 +7888,7 @@ msgstr ""
 msgid "To list all the data directories, use ``-L help``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5202
+#: ../../../../qemu-options.hx:5203
 msgid "``-enable-kvm``"
 msgstr ""
 
@@ -7892,7 +7898,7 @@ msgid ""
 "support is enabled when compiling."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5220
+#: ../../../../qemu-options.hx:5221
 msgid "``-xen-domid id``"
 msgstr ""
 
@@ -7900,7 +7906,7 @@ msgstr ""
 msgid "Specify xen guest domain id (XEN only)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5223
+#: ../../../../qemu-options.hx:5225
 msgid "``-xen-attach``"
 msgstr ""
 
@@ -7919,7 +7925,7 @@ msgstr ""
 msgid "Exit instead of rebooting."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5239
+#: ../../../../qemu-options.hx:5241
 msgid "``-no-shutdown``"
 msgstr ""
 
@@ -7929,7 +7935,7 @@ msgid ""
 "allows for instance switching to monitor to commit changes to the disk image."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5256
+#: ../../../../qemu-options.hx:5266
 msgid "``-action event=action``"
 msgstr ""
 
@@ -7955,7 +7961,7 @@ msgstr ""
 msgid "Start right away with a saved state (``loadvm`` in monitor)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5284
+#: ../../../../qemu-options.hx:5288
 msgid "``-daemonize``"
 msgstr ""
 
@@ -7967,7 +7973,7 @@ msgid ""
 "having to cope with initialization race conditions."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5296
+#: ../../../../qemu-options.hx:5297
 msgid "``-option-rom file``"
 msgstr ""
 
@@ -7977,7 +7983,7 @@ msgid ""
 "things like EtherBoot."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5307
+#: ../../../../qemu-options.hx:5329
 msgid ""
 "``-rtc [base=utc|localtime|datetime][,clock=host|rt|vm][,driftfix=none|"
 "slew]``"
@@ -8014,10 +8020,10 @@ msgid ""
 "and will re-inject them."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5340
+#: ../../../../qemu-options.hx:5380
 msgid ""
-"``-icount [shift=N|auto][,align=on|off][,sleep=on|off][,rr=record|replay,"
-"rrfile=filename[,rrsnapshot=snapshot]]``"
+"``-icount [shift=N|auto][,align=on|off][,sleep=on|off][,rr=record|"
+"replay,rrfile=filename[,rrsnapshot=snapshot]]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:5341
@@ -8071,7 +8077,7 @@ msgid ""
 "specifies the snapshot name used to load the initial VM state."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5389
+#: ../../../../qemu-options.hx:5405
 msgid "``-watchdog-action action``"
 msgstr ""
 
@@ -8097,7 +8103,7 @@ msgstr ""
 msgid "``-device i6300esb -watchdog-action pause``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5413
+#: ../../../../qemu-options.hx:5422
 msgid "``-echr numeric_ascii_value``"
 msgstr ""
 
@@ -8128,7 +8134,7 @@ msgstr ""
 msgid "``-incoming tcp:[host]:port[,to=maxport][,ipv4=on|off][,ipv6=on|off]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5451
+#: ../../../../qemu-options.hx:5452
 msgid "``-incoming rdma:host:port[,ipv4=on|off][,ipv6=on|off]``"
 msgstr ""
 
@@ -8136,7 +8142,7 @@ msgstr ""
 msgid "Prepare for incoming migration, listen on a given tcp port."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5454
+#: ../../../../qemu-options.hx:5455
 msgid "``-incoming unix:socketpath``"
 msgstr ""
 
@@ -8144,7 +8150,7 @@ msgstr ""
 msgid "Prepare for incoming migration, listen on a given unix socket."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5457
+#: ../../../../qemu-options.hx:5458
 msgid "``-incoming fd:fd``"
 msgstr ""
 
@@ -8152,7 +8158,7 @@ msgstr ""
 msgid "Accept incoming migration from a given file descriptor."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5460
+#: ../../../../qemu-options.hx:5462
 msgid "``-incoming file:filename[,offset=offset]``"
 msgstr ""
 
@@ -8162,7 +8168,7 @@ msgid ""
 "allows the common size suffixes, or a 0x prefix, but not both."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5464
+#: ../../../../qemu-options.hx:5466
 msgid "``-incoming exec:cmdline``"
 msgstr ""
 
@@ -8170,7 +8176,7 @@ msgstr ""
 msgid "Accept incoming migration as an output from specified external command."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5468
+#: ../../../../qemu-options.hx:5479
 msgid "``-incoming <channel>``"
 msgstr ""
 
@@ -8190,7 +8196,7 @@ msgid ""
 "-incoming main,addr.transport=socket,addr.type=unix,addr.path=my.sock"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5481
+#: ../../../../qemu-options.hx:5483
 msgid "``-incoming defer``"
 msgstr ""
 
@@ -8201,7 +8207,7 @@ msgid ""
 "migrate\\_incoming to allow the migration to begin."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5490
+#: ../../../../qemu-options.hx:5491
 msgid "``-only-migratable``"
 msgstr ""
 
@@ -8211,7 +8217,7 @@ msgid ""
 "unmigratable state."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5498
+#: ../../../../qemu-options.hx:5501
 msgid "``-nodefaults``"
 msgstr ""
 
@@ -8223,7 +8229,7 @@ msgid ""
 "all those default devices."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5510
+#: ../../../../qemu-options.hx:5521
 msgid "``-prom-env variable=value``"
 msgstr ""
 
@@ -8244,7 +8250,7 @@ msgid ""
 " -prom-env 'boot-args=conf=hd:2,\\yaboot.conf'"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5529
+#: ../../../../qemu-options.hx:5536
 msgid "``-semihosting``"
 msgstr ""
 
@@ -8264,10 +8270,10 @@ msgid ""
 "about the facilities this enables."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5545
+#: ../../../../qemu-options.hx:5575
 msgid ""
-"``-semihosting-config [enable=on|off][,target=native|gdb|auto][,chardev=id][,"
-"userspace=on|off][,arg=str[,...]]``"
+"``-semihosting-config [enable=on|off][,target=native|gdb|auto][,chardev=id]"
+"[,userspace=on|off][,arg=str[,...]]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:5546
@@ -8276,7 +8282,7 @@ msgid ""
 "Hexagon only)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5553
+#: ../../../../qemu-options.hx:5556
 msgid "``target=native|gdb|auto``"
 msgstr ""
 
@@ -8287,7 +8293,7 @@ msgid ""
 "debug sessions and ``native`` otherwise."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5558
+#: ../../../../qemu-options.hx:5560
 msgid "``chardev=str1``"
 msgstr ""
 
@@ -8297,7 +8303,7 @@ msgid ""
 "not in gdb"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5562
+#: ../../../../qemu-options.hx:5567
 msgid "``userspace=on|off``"
 msgstr ""
 
@@ -8309,7 +8315,7 @@ msgid ""
 "trusted (for example, in bare-metal test case code)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5569
+#: ../../../../qemu-options.hx:5575
 msgid "``arg=str1,arg=str2,...``"
 msgstr ""
 
@@ -8322,10 +8328,10 @@ msgid ""
 "former is passed to semihosting as it always takes precedence."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5594
+#: ../../../../qemu-options.hx:5607
 msgid ""
-"``-sandbox arg[,obsolete=string][,elevateprivileges=string][,spawn=string][,"
-"resourcecontrol=string]``"
+"``-sandbox arg[,obsolete=string][,elevateprivileges=string][,spawn=string]"
+"[,resourcecontrol=string]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:5595
@@ -8334,7 +8340,7 @@ msgid ""
 "and 'off' will disable it. The default is 'off'."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5598
+#: ../../../../qemu-options.hx:5599
 msgid "``obsolete=string``"
 msgstr ""
 
@@ -8342,7 +8348,7 @@ msgstr ""
 msgid "Enable Obsolete system calls"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5601
+#: ../../../../qemu-options.hx:5602
 msgid "``elevateprivileges=string``"
 msgstr ""
 
@@ -8350,7 +8356,7 @@ msgstr ""
 msgid "Disable set\\*uid\\|gid system calls"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5604
+#: ../../../../qemu-options.hx:5605
 msgid "``spawn=string``"
 msgstr ""
 
@@ -8366,7 +8372,7 @@ msgstr ""
 msgid "Disable process affinity and scheduler priority"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5615
+#: ../../../../qemu-options.hx:5617
 msgid "``-readconfig file``"
 msgstr ""
 
@@ -8377,7 +8383,7 @@ msgid ""
 "exceed the command line character limit."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5626
+#: ../../../../qemu-options.hx:5627
 msgid "``-no-user-config``"
 msgstr ""
 
@@ -8387,7 +8393,7 @@ msgid ""
 "config files on sysconfdir."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5636
+#: ../../../../qemu-options.hx:5637
 msgid "``-trace [[enable=]pattern][,events=file][,file=file]``"
 msgstr ""
 
@@ -8434,7 +8440,7 @@ msgid ""
 "compiled with the ``simple`` tracing backend."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5645
+#: ../../../../qemu-options.hx:5651
 msgid "``-plugin file=file[,argname=argvalue]``"
 msgstr ""
 
@@ -8454,10 +8460,10 @@ msgstr ""
 msgid "Argument passed to the plugin. (Can be given multiple times.)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5672
+#: ../../../../qemu-options.hx:5700
 msgid ""
-"``-run-with [async-teardown=on|off][,chroot=dir][,exit-with-parent=on|off][,"
-"user=username|uid:gid]``"
+"``-run-with [async-teardown=on|off][,chroot=dir][,exit-with-parent=on|off]"
+"[,user=username|uid:gid]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:5673
@@ -8503,7 +8509,7 @@ msgid ""
 "group."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5713
+#: ../../../../qemu-options.hx:5720
 msgid "``-msg [timestamp=on|off][,guest-name=on|off]``"
 msgstr ""
 
@@ -8511,7 +8517,7 @@ msgstr ""
 msgid "Control error message format."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5716
+#: ../../../../qemu-options.hx:5717
 msgid "``timestamp=on|off``"
 msgstr ""
 
@@ -8519,7 +8525,7 @@ msgstr ""
 msgid "Prefix messages with a timestamp. Default is off."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5719
+#: ../../../../qemu-options.hx:5720
 msgid "``guest-name=on|off``"
 msgstr ""
 
@@ -8529,7 +8535,7 @@ msgid ""
 "otherwise the option is ignored. Default is off."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5732
+#: ../../../../qemu-options.hx:5733
 msgid "``-dump-vmstate file``"
 msgstr ""
 
@@ -8547,7 +8553,7 @@ msgstr ""
 msgid "Enable synchronization profiling."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5751
+#: ../../../../qemu-options.hx:5752
 msgid "``-perfmap``"
 msgstr ""
 
@@ -8557,7 +8563,7 @@ msgid ""
 "information to be broken down into basic blocks."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5760
+#: ../../../../qemu-options.hx:5761
 msgid "``-jitdump``"
 msgstr ""
 
@@ -8567,7 +8573,7 @@ msgid ""
 "names, line numbers and JITted code."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5778
+#: ../../../../qemu-options.hx:6687
 msgid "``-object typename[,prop1=value1,...]``"
 msgstr ""
 
@@ -8578,7 +8584,7 @@ msgid ""
 "placed in the '/objects' path."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5783
+#: ../../../../qemu-options.hx:5794
 msgid "``-object monitor-hmp,id=id,chardev=chardev_id,readline=on|off``"
 msgstr ""
 
@@ -8602,7 +8608,7 @@ msgid ""
 "monitor provides line editing."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5796
+#: ../../../../qemu-options.hx:5819
 msgid ""
 "``-object monitor-qmp,id=id,chardev=chardev_id,pretty=on|off,close-"
 "action=none|delete``"
@@ -8638,12 +8644,12 @@ msgid ""
 "was hotplugged for a specific task and should be unplugged when completed."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5821
+#: ../../../../qemu-options.hx:5920
 msgid ""
-"``-object memory-backend-file,id=id,size=size,mem-path=dir,share=on|off,"
-"discard-data=on|off,merge=on|off,dump=on|off,prealloc=on|off,host-nodes=host-"
-"nodes,policy=default|preferred|bind|interleave,align=align,offset=offset,"
-"readonly=on|off,rom=on|off|auto``"
+"``-object memory-backend-file,id=id,size=size,mem-path=dir,share=on|"
+"off,discard-data=on|off,merge=on|off,dump=on|off,prealloc=on|off,host-"
+"nodes=host-nodes,policy=default|preferred|bind|"
+"interleave,align=align,offset=offset,readonly=on|off,rom=on|off|auto``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:5822
@@ -8722,7 +8728,7 @@ msgid ""
 "The ``policy`` option sets the NUMA policy to one of the following values:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5867
+#: ../../../../qemu-options.hx:5868
 msgid "``default``"
 msgstr ""
 
@@ -8730,7 +8736,7 @@ msgstr ""
 msgid "default host policy"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5870
+#: ../../../../qemu-options.hx:5871
 msgid "``preferred``"
 msgstr ""
 
@@ -8738,7 +8744,7 @@ msgstr ""
 msgid "prefer the given host node list for allocation"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5873
+#: ../../../../qemu-options.hx:5874
 msgid "``bind``"
 msgstr ""
 
@@ -8746,7 +8752,7 @@ msgstr ""
 msgid "restrict memory allocation to the given host node list"
 msgstr ""
 
-#: ../../../../qemu-options.hx:5876
+#: ../../../../qemu-options.hx:5878
 msgid "``interleave``"
 msgstr ""
 
@@ -8805,10 +8811,10 @@ msgid ""
 "ROM, and want to also set ``rom=off``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5922
+#: ../../../../qemu-options.hx:5927
 msgid ""
-"``-object memory-backend-ram,id=id,merge=on|off,dump=on|off,share=on|off,"
-"prealloc=on|off,size=size,host-nodes=host-nodes,policy=default|preferred|"
+"``-object memory-backend-ram,id=id,merge=on|off,dump=on|off,share=on|"
+"off,prealloc=on|off,size=size,host-nodes=host-nodes,policy=default|preferred|"
 "bind|interleave``"
 msgstr ""
 
@@ -8820,10 +8826,10 @@ msgid ""
 "file`` for a description of the options."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5929
+#: ../../../../qemu-options.hx:5952
 msgid ""
-"``-object memory-backend-memfd,id=id,merge=on|off,dump=on|off,share=on|off,"
-"prealloc=on|off,size=size,host-nodes=host-nodes,policy=default|preferred|"
+"``-object memory-backend-memfd,id=id,merge=on|off,dump=on|off,share=on|"
+"off,prealloc=on|off,size=size,host-nodes=host-nodes,policy=default|preferred|"
 "bind|interleave,seal=on|off,hugetlb=on|off,hugetlbsize=size``"
 msgstr ""
 
@@ -8865,10 +8871,10 @@ msgstr ""
 msgid "The ``share`` boolean option is on by default with memfd."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5954
+#: ../../../../qemu-options.hx:5968
 msgid ""
-"``-object memory-backend-shm,id=id,merge=on|off,dump=on|off,share=on|off,"
-"prealloc=on|off,size=size,host-nodes=host-nodes,policy=default|preferred|"
+"``-object memory-backend-shm,id=id,merge=on|off,dump=on|off,share=on|"
+"off,prealloc=on|off,size=size,host-nodes=host-nodes,policy=default|preferred|"
 "bind|interleave``"
 msgstr ""
 
@@ -8897,7 +8903,7 @@ msgid ""
 "backend."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5970
+#: ../../../../qemu-options.hx:5980
 msgid "``-object iommufd,id=id[,fd=fd]``"
 msgstr ""
 
@@ -8920,7 +8926,7 @@ msgid ""
 "subsystems, bringing the benefit of centralized reference counting."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5982
+#: ../../../../qemu-options.hx:5987
 msgid "``-object rng-builtin,id=id``"
 msgstr ""
 
@@ -8932,7 +8938,7 @@ msgid ""
 "the ``virtio-rng`` device uses this RNG backend."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5989
+#: ../../../../qemu-options.hx:5995
 msgid "``-object rng-random,id=id,filename=/dev/random``"
 msgstr ""
 
@@ -8945,7 +8951,7 @@ msgid ""
 "omitted defaults to ``/dev/urandom``."
 msgstr ""
 
-#: ../../../../qemu-options.hx:5997
+#: ../../../../qemu-options.hx:6003
 msgid "``-object rng-egd,id=id,chardev=chardevid``"
 msgstr ""
 
@@ -8958,10 +8964,10 @@ msgid ""
 "backend that provides the connection to the RNG daemon."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6005
+#: ../../../../qemu-options.hx:6023
 msgid ""
-"``-object tls-creds-anon,id=id,endpoint=endpoint,dir=/path/to/cred/dir,"
-"verify-peer=on|off``"
+"``-object tls-creds-anon,id=id,endpoint=endpoint,dir=/path/to/cred/"
+"dir,verify-peer=on|off``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:6006
@@ -8986,10 +8992,10 @@ msgid ""
 "that a persistent set of parameters be generated upfront and saved."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6025
+#: ../../../../qemu-options.hx:6046
 msgid ""
-"``-object tls-creds-psk,id=id,endpoint=endpoint,dir=/path/to/keys/dir[,"
-"username=username]``"
+"``-object tls-creds-psk,id=id,endpoint=endpoint,dir=/path/to/keys/"
+"dir[,username=username]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:6026
@@ -9020,10 +9026,10 @@ msgid ""
 "saved."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6048
+#: ../../../../qemu-options.hx:6090
 msgid ""
-"``-object tls-creds-x509,id=id,endpoint=endpoint,dir=/path/to/cred/dir,"
-"priority=priority,verify-peer=on|off,passwordid=id``"
+"``-object tls-creds-x509,id=id,endpoint=endpoint,dir=/path/to/cred/"
+"dir,priority=priority,verify-peer=on|off,passwordid=id``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:6049
@@ -9067,7 +9073,7 @@ msgid ""
 "https://gnutls.org/manual/html_node/Priority-Strings.html."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6092
+#: ../../../../qemu-options.hx:6127
 msgid "``-object tls-cipher-suites,id=id,priority=priority``"
 msgstr ""
 
@@ -9118,10 +9124,10 @@ msgid ""
 "    -fw_cfg name=etc/edk2/https/ciphers,gen_id=mysuite0"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6129
+#: ../../../../qemu-options.hx:6168
 msgid ""
-"``-object filter-buffer,id=id,netdev=netdevid,interval=t[,queue=all|rx|tx][,"
-"status=on|off][,position=head|tail|id=<id>][,insert=behind|before]``"
+"``-object filter-buffer,id=id,netdev=netdevid,interval=t[,queue=all|rx|tx]"
+"[,status=on|off][,position=head|tail|id=<id>][,insert=behind|before]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:6130
@@ -9194,7 +9200,7 @@ msgstr ""
 msgid "``behind``: insert behind the specified filter (default)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6170
+#: ../../../../qemu-options.hx:6173
 msgid ""
 "``-object filter-mirror,id=id,netdev=netdevid,outdev=chardevid,queue=all|rx|"
 "tx[,vnet_hdr_support][,position=head|tail|id=<id>][,insert=behind|before]``"
@@ -9207,11 +9213,12 @@ msgid ""
 "vnet\\_hdr\\_len."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6175
+#: ../../../../qemu-options.hx:6182
 msgid ""
-"``-object filter-redirector,id=id,netdev=netdevid,indev=chardevid,"
-"outdev=chardevid,queue=all|rx|tx[,vnet_hdr_support][,position=head|tail|"
-"id=<id>][,insert=behind|before]``"
+"``-object filter-"
+"redirector,id=id,netdev=netdevid,indev=chardevid,outdev=chardevid,queue=all|"
+"rx|tx[,vnet_hdr_support][,position=head|tail|id=<id>][,insert=behind|"
+"before]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:6176
@@ -9224,7 +9231,7 @@ msgid ""
 "at least one of indev or outdev need to be specified."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6184
+#: ../../../../qemu-options.hx:6194
 msgid ""
 "``-object filter-rewriter,id=id,netdev=netdevid,queue=all|rx|tx,"
 "[vnet_hdr_support][,position=head|tail|id=<id>][,insert=behind|before]``"
@@ -9240,15 +9247,16 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:6191
 msgid ""
-"usage: colo secondary: -object filter-redirector,id=f1,netdev=hn0,queue=tx,"
-"indev=red0 -object filter-redirector,id=f2,netdev=hn0,queue=rx,outdev=red1 -"
-"object filter-rewriter,id=rew0,netdev=hn0,queue=all"
+"usage: colo secondary: -object filter-"
+"redirector,id=f1,netdev=hn0,queue=tx,indev=red0 -object filter-"
+"redirector,id=f2,netdev=hn0,queue=rx,outdev=red1 -object filter-"
+"rewriter,id=rew0,netdev=hn0,queue=all"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6196
+#: ../../../../qemu-options.hx:6200
 msgid ""
-"``-object filter-dump,id=id,netdev=dev[,file=filename][,maxlen=len][,"
-"position=head|tail|id=<id>][,insert=behind|before]``"
+"``-object filter-dump,id=id,netdev=dev[,file=filename][,maxlen=len]"
+"[,position=head|tail|id=<id>][,insert=behind|before]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:6197
@@ -9258,10 +9266,10 @@ msgid ""
 "libpcap, so it can be analyzed with tools such as tcpdump or Wireshark."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6202
+#: ../../../../qemu-options.hx:6286
 msgid ""
-"``-object colo-compare,id=<id>,primary_in=<chardevid>,"
-"secondary_in=<chardevid>,outdev=<chardevid>,iothread=<id>[,vnet_hdr_support]"
+"``-object colo-"
+"compare,id=<id>,primary_in=<chardevid>,secondary_in=<chardevid>,outdev=<chardevid>,iothread=<id>[,vnet_hdr_support]"
 "[,notify_dev=<id>][,compare_timeout=<time_ms>][,expired_scan_cycle=<time_ms>]"
 "[,max_queue_size=<maxsize>]``"
 msgstr ""
@@ -9334,8 +9342,8 @@ msgid ""
 "-object filter-mirror,id=m0,netdev=hn0,queue=tx,outdev=mirror0\n"
 "-object filter-redirector,netdev=hn0,id=redire0,queue=rx,indev=compare_out\n"
 "-object filter-redirector,netdev=hn0,id=redire1,queue=rx,outdev=compare0\n"
-"-object colo-compare,id=comp0,primary_in=compare0-0,secondary_in=compare1,"
-"outdev=compare_out0,iothread=iothread1\n"
+"-object colo-"
+"compare,id=comp0,primary_in=compare0-0,secondary_in=compare1,outdev=compare_out0,iothread=iothread1\n"
 "\n"
 "secondary:\n"
 "-netdev tap,id=hn0,vhost=off\n"
@@ -9362,8 +9370,8 @@ msgid ""
 "-object filter-redirector,netdev=hn0,id=redire0,queue=rx,indev=compare_out\n"
 "-object filter-redirector,netdev=hn0,id=redire1,queue=rx,outdev=compare0\n"
 "-object iothread,id=iothread1\n"
-"-object colo-compare,id=comp0,primary_in=compare0-0,secondary_in=compare1,"
-"outdev=compare_out0,notify_dev=notify_way,iothread=iothread1\n"
+"-object colo-"
+"compare,id=comp0,primary_in=compare0-0,secondary_in=compare1,outdev=compare_out0,notify_dev=notify_way,iothread=iothread1\n"
 "\n"
 "secondary:\n"
 "-netdev tap,id=hn0,vhost=off\n"
@@ -9380,7 +9388,7 @@ msgid ""
 "compare git log."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6288
+#: ../../../../qemu-options.hx:6302
 msgid "``-object cryptodev-backend-builtin,id=id[,queues=queues]``"
 msgstr ""
 
@@ -9402,7 +9410,7 @@ msgid ""
 "  [...]"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6304
+#: ../../../../qemu-options.hx:6322
 msgid ""
 "``-object cryptodev-vhost-user,id=id,chardev=chardevid[,queues=queues]``"
 msgstr ""
@@ -9431,14 +9439,14 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:6324
 msgid ""
-"``-object secret,id=id,data=string,format=raw|base64[,keyid=secretid,"
-"iv=string]``"
+"``-object secret,id=id,data=string,format=raw|"
+"base64[,keyid=secretid,iv=string]``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6326
+#: ../../../../qemu-options.hx:6402
 msgid ""
-"``-object secret,id=id,file=filename,format=raw|base64[,keyid=secretid,"
-"iv=string]``"
+"``-object secret,id=id,file=filename,format=raw|"
+"base64[,keyid=secretid,iv=string]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:6327
@@ -9484,8 +9492,8 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:6359
 msgid ""
-"# printf \"letmein\" > mypasswd.txt # QEMU\\_SYSTEM\\_MACRO -object secret,"
-"id=sec0,file=mypasswd.txt,format=raw"
+"# printf \"letmein\" > mypasswd.txt # QEMU\\_SYSTEM\\_MACRO -object "
+"secret,id=sec0,file=mypasswd.txt,format=raw"
 msgstr ""
 
 #: ../../../../qemu-options.hx:6362
@@ -9546,7 +9554,7 @@ msgid ""
 "        data=$SECRET,iv=$(<iv.b64)"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6404
+#: ../../../../qemu-options.hx:6456
 msgid ""
 "``-object sev-guest,id=id,cbitpos=cbitpos,reduced-phys-bits=val,[sev-"
 "device=string,policy=policy,handle=handle,dh-cert-file=file,session-"
@@ -9629,11 +9637,11 @@ msgid ""
 "    ....."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6458
+#: ../../../../qemu-options.hx:6497
 msgid ""
-"``-object tdx-guest,id=id,[attributes=attrs,sept-ve-disable=on|off,"
-"mrconfigid=sha384_digest,mrowner=sha384_digest,mrownerconfig=sha384_digest,"
-"quote-generation-socket=socketaddr]``"
+"``-object tdx-guest,id=id,[attributes=attrs,sept-ve-disable=on|"
+"off,mrconfigid=sha384_digest,mrowner=sha384_digest,mrownerconfig=sha384_digest,quote-"
+"generation-socket=socketaddr]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:6459
@@ -9697,8 +9705,8 @@ msgid ""
 "    ......"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6499
-msgid "``-object igvm-cfg,file=file``"
+#: ../../../../qemu-options.hx:6529
+msgid "``-object igvm-cfg,file=file[,cmdline=string]``"
 msgstr ""
 
 #: ../../../../qemu-options.hx:6500
@@ -9723,16 +9731,23 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:6512
 msgid ""
+"The optional ``cmdline`` parameter is a command line passed verbatim to the "
+"software loaded from the IGVM file, if the file requests one. Its format is "
+"specific to that software."
+msgstr ""
+
+#: ../../../../qemu-options.hx:6516
+msgid ""
 "The IGVM file is expected to contain the firmware for the virtual machine, "
 "therefore an ``igvm-cfg`` object cannot be provided along with other ways of "
 "specifying firmware, such as the ``-bios`` parameter on x86 machines."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6517
+#: ../../../../qemu-options.hx:6521
 msgid "e.g to launch a machine providing the firmware in an IGVM file"
 msgstr ""
 
-#: ../../../../qemu-options.hx:744
+#: ../../../../qemu-options.hx:748
 msgid ""
 "# |qemu_system_x86| \\\\\n"
 "    ...... \\\\\n"
@@ -9741,17 +9756,17 @@ msgid ""
 "    ....."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6527
+#: ../../../../qemu-options.hx:6552
 msgid "``-object authz-simple,id=id,identity=string``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6528 ../../../../qemu-options.hx:6551
-#: ../../../../qemu-options.hx:6599
+#: ../../../../qemu-options.hx:6532 ../../../../qemu-options.hx:6555
+#: ../../../../qemu-options.hx:6603
 msgid ""
 "Create an authorization object that will control access to network services."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6531
+#: ../../../../qemu-options.hx:6535
 msgid ""
 "The ``identity`` parameter is identifies the user and its format depends on "
 "the network service that authorization object is associated with. For "
@@ -9760,13 +9775,13 @@ msgid ""
 "distinguished name."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6537
+#: ../../../../qemu-options.hx:6541
 msgid ""
 "An example authorization object to validate a x509 distinguished name would "
 "look like:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:765
+#: ../../../../qemu-options.hx:769
 msgid ""
 "# |qemu_system| \\\\\n"
 "    ... \\\\\n"
@@ -9775,28 +9790,28 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6547
+#: ../../../../qemu-options.hx:6551
 msgid ""
 "Note the use of quotes due to the x509 distinguished name containing "
 "whitespace, and escaping of ','."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6550
+#: ../../../../qemu-options.hx:6600
 msgid "``-object authz-listfile,id=id,filename=path,refresh=on|off``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6554
+#: ../../../../qemu-options.hx:6558
 msgid ""
 "The ``filename`` parameter is the fully qualified path to a file containing "
 "the access control list rules in JSON format."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6557
+#: ../../../../qemu-options.hx:6561
 msgid ""
 "An example set of rules that match against SASL usernames might look like:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6562
+#: ../../../../qemu-options.hx:6566
 msgid ""
 "{\n"
 "  \"rules\": [\n"
@@ -9809,38 +9824,38 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6572
+#: ../../../../qemu-options.hx:6576
 msgid ""
 "When checking access the object will iterate over all the rules and the "
 "first rule to match will have its ``policy`` value returned as the result. "
 "If no rules match, then the default ``policy`` value is returned."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6577
+#: ../../../../qemu-options.hx:6581
 msgid ""
 "The rules can either be an exact string match, or they can use the simple "
 "UNIX glob pattern matching to allow wildcards to be used."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6581
+#: ../../../../qemu-options.hx:6585
 msgid ""
 "If ``refresh`` is set to true the file will be monitored and automatically "
 "reloaded whenever its content changes."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6584
+#: ../../../../qemu-options.hx:6588
 msgid ""
 "As with the ``authz-simple`` object, the format of the identity strings "
 "being matched depends on the network service, but is usually a TLS x509 "
 "distinguished name, or a SASL username."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6588
+#: ../../../../qemu-options.hx:6592
 msgid ""
 "An example authorization object to validate a SASL username would look like:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:816
+#: ../../../../qemu-options.hx:820
 msgid ""
 "# |qemu_system| \\\\\n"
 "    ... \\\\\n"
@@ -9849,24 +9864,24 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6598
+#: ../../../../qemu-options.hx:6634
 msgid "``-object authz-pam,id=id,service=string``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6602
+#: ../../../../qemu-options.hx:6606
 msgid ""
 "The ``service`` parameter provides the name of a PAM service to use for "
 "authorization. It requires that a file ``/etc/pam.d/service`` exist to "
 "provide the configuration for the ``account`` subsystem."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6607
+#: ../../../../qemu-options.hx:6611
 msgid ""
 "An example authorization object to validate a TLS x509 distinguished name "
 "would look like:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:835
+#: ../../../../qemu-options.hx:839
 msgid ""
 "# |qemu_system| \\\\\n"
 "    ... \\\\\n"
@@ -9874,35 +9889,35 @@ msgid ""
 "    ..."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6617
+#: ../../../../qemu-options.hx:6621
 msgid ""
 "There would then be a corresponding config file for PAM at ``/etc/pam.d/qemu-"
 "vnc`` that contains:"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6622
+#: ../../../../qemu-options.hx:6626
 msgid ""
 "account requisite  pam_listfile.so item=user sense=allow \\\n"
 "           file=/etc/qemu/vnc.allow"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6625
+#: ../../../../qemu-options.hx:6629
 msgid ""
 "Finally the ``/etc/qemu/vnc.allow`` file would contain the list of x509 "
 "distinguished names that are permitted access"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6630
+#: ../../../../qemu-options.hx:6634
 msgid "CN=laptop.example.com,O=Example Home,L=London,ST=London,C=GB"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6632
+#: ../../../../qemu-options.hx:6687
 msgid ""
 "``-object iothread,id=id,poll-max-ns=poll-max-ns,poll-grow=poll-grow,poll-"
 "shrink=poll-shrink,poll-weight=poll-weight,aio-max-batch=aio-max-batch``"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6633
+#: ../../../../qemu-options.hx:6637
 msgid ""
 "Creates a dedicated event loop thread that devices can be assigned to. This "
 "is known as an IOThread. By default device emulation happens in vCPU threads "
@@ -9910,20 +9925,20 @@ msgid ""
 "IOThreads allow device emulation and I/O to run on other host CPUs."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6639
+#: ../../../../qemu-options.hx:6643
 msgid ""
 "The ``id`` parameter is a unique ID that will be used to reference this "
 "IOThread from ``-device ...,iothread=id``. Multiple devices can be assigned "
 "to an IOThread. Note that not all devices support an ``iothread`` parameter."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6644
+#: ../../../../qemu-options.hx:6648
 msgid ""
 "The ``query-iothreads`` QMP command lists IOThreads and reports their thread "
 "IDs so that the user can configure host CPU pinning/affinity."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6648
+#: ../../../../qemu-options.hx:6652
 msgid ""
 "IOThreads use an adaptive polling algorithm to reduce event loop latency. "
 "Instead of entering a blocking system call to monitor file descriptors and "
@@ -9933,27 +9948,27 @@ msgid ""
 "knowledge of the workload and/or host device latency."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6656
+#: ../../../../qemu-options.hx:6660
 msgid ""
 "The ``poll-max-ns`` parameter is the maximum number of nanoseconds to busy "
 "wait for events. Polling can be disabled by setting this value to 0."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6660
+#: ../../../../qemu-options.hx:6664
 msgid ""
 "The ``poll-grow`` parameter is the multiplier used to increase the polling "
 "time when the algorithm detects it is missing events due to not polling long "
 "enough."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6664
+#: ../../../../qemu-options.hx:6668
 msgid ""
 "The ``poll-shrink`` parameter is the divisor used to decrease the polling "
 "time when the algorithm detects it is spending too long polling without "
 "encountering events."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6668
+#: ../../../../qemu-options.hx:6672
 msgid ""
 "The ``poll-weight`` parameter is the weight factor for adaptive polling. It "
 "determines how much the most recent event interval affects the next polling "
@@ -9962,31 +9977,31 @@ msgid ""
 "recent interval)."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6674
+#: ../../../../qemu-options.hx:6678
 msgid ""
 "The ``aio-max-batch`` parameter is the maximum number of requests in a batch "
 "for the AIO engine, 0 means that the engine will use its default."
 msgstr ""
 
-#: ../../../../qemu-options.hx:6678
+#: ../../../../qemu-options.hx:6682
 msgid ""
 "The IOThread parameters can be modified at run-time using the ``qom-set`` "
 "command (where ``iothread1`` is the IOThread's ``id``):"
 msgstr ""
 
-#: ../../../../qemu-options.hx:6684
+#: ../../../../qemu-options.hx:6688
 msgid "(qemu) qom-set /objects/iothread1 poll-max-ns 100000"
 msgstr ""
 
 #: ../../../system/keys.rst.inc:1
 msgid ""
 "During the graphical emulation, you can use special key combinations from "
-"the following table to change modes. By default the modifier is :kbd:"
-"`Ctrl+Alt` (used in the table below) which can be changed with ``-display`` "
-"suboption ``mod=`` where appropriate. For example, ``-display sdl, grab-"
-"mod=lshift-lctrl-lalt`` changes the modifier key to :kbd:`Ctrl+Alt+Shift`, "
-"while ``-display sdl,grab-mod=rctrl`` changes it to the right :kbd:`Ctrl` "
-"key."
+"the following table to change modes. By default the modifier "
+"is :kbd:`Ctrl+Alt` (used in the table below) which can be changed with ``-"
+"display`` suboption ``mod=`` where appropriate. For example, ``-display sdl, "
+"grab-mod=lshift-lctrl-lalt`` changes the modifier key "
+"to :kbd:`Ctrl+Alt+Shift`, while ``-display sdl,grab-mod=rctrl`` changes it "
+"to the right :kbd:`Ctrl` key."
 msgstr ""
 
 #: ../../../system/keys.rst.inc:8 ../../../system/mux-chardev.rst.inc:7
@@ -10063,8 +10078,9 @@ msgstr ""
 
 #: ../../../system/keys.rst.inc:36
 msgid ""
-"In the virtual consoles, you can use :kbd:`Ctrl+Up`, :kbd:`Ctrl+Down`, :kbd:"
-"`Ctrl+PageUp` and :kbd:`Ctrl+PageDown` to move in the back log."
+"In the virtual consoles, you can "
+"use :kbd:`Ctrl+Up`, :kbd:`Ctrl+Down`, :kbd:`Ctrl+PageUp` "
+"and :kbd:`Ctrl+PageDown` to move in the back log."
 msgstr ""
 
 #: ../../../system/mux-chardev.rst.inc:1
@@ -10145,7 +10161,7 @@ msgid ""
 "specified using a special URL syntax."
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:6
+#: ../../../system/device-url-syntax.rst.inc:44
 msgid "``iSCSI``"
 msgstr ""
 
@@ -10194,8 +10210,8 @@ msgstr ""
 
 #: ../../../system/device-url-syntax.rst.inc:251
 msgid ""
-"|qemu_system| -drive file=iscsi://user%password\\@192.0.2.1/iqn.2001-04.com."
-"example/1"
+"|qemu_system| -drive file=iscsi://user%password\\@192.0.2.1/"
+"iqn.2001-04.com.example/1"
 msgstr ""
 
 #: ../../../system/device-url-syntax.rst.inc:38
@@ -10209,7 +10225,7 @@ msgid ""
 "|qemu_system| -drive file=iscsi://192.0.2.1/iqn.2001-04.com.example/1"
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:46
+#: ../../../system/device-url-syntax.rst.inc:73
 msgid "``NBD``"
 msgstr ""
 
@@ -10234,8 +10250,8 @@ msgstr ""
 
 #: ../../../system/device-url-syntax.rst.inc:57
 msgid ""
-"Older syntax that is also recognized: \"nbd:<server-ip>:<port>[:"
-"exportname=<export>]\""
+"Older syntax that is also recognized: \"nbd:<server-ip>:"
+"<port>[:exportname=<export>]\""
 msgstr ""
 
 #: ../../../system/device-url-syntax.rst.inc:60
@@ -10260,7 +10276,7 @@ msgstr ""
 msgid "|qemu_system| --drive file=nbd:unix:/tmp/nbd-socket"
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:75
+#: ../../../system/device-url-syntax.rst.inc:86
 msgid "``SSH``"
 msgstr ""
 
@@ -10271,8 +10287,9 @@ msgstr ""
 #: ../../../system/device-url-syntax.rst.inc:297
 msgid ""
 "|qemu_system| -drive file=ssh://user\\@host/path/to/disk.img\n"
-"|qemu_system| -drive file.driver=ssh,file.user=user,file.host=host,file."
-"port=22,file.path=/path/to/disk.img"
+"|qemu_system| -drive "
+"file.driver=ssh,file.user=user,file.host=host,file.port=22,file.path=/path/"
+"to/disk.img"
 msgstr ""
 
 #: ../../../system/device-url-syntax.rst.inc:85
@@ -10281,7 +10298,7 @@ msgid ""
 "methods may be supported in future."
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:88
+#: ../../../system/device-url-syntax.rst.inc:177
 msgid "``HTTP/HTTPS/FTP/FTPS``"
 msgstr ""
 
@@ -10302,7 +10319,7 @@ msgstr ""
 msgid "where:"
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:100
+#: ../../../system/device-url-syntax.rst.inc:101
 msgid "``protocol``"
 msgstr ""
 
@@ -10310,7 +10327,7 @@ msgstr ""
 msgid "'http', 'https', 'ftp', or 'ftps'."
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:103
+#: ../../../system/device-url-syntax.rst.inc:104
 msgid "``username``"
 msgstr ""
 
@@ -10318,7 +10335,7 @@ msgstr ""
 msgid "Optional username for authentication to the remote server."
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:106
+#: ../../../system/device-url-syntax.rst.inc:107
 msgid "``password``"
 msgstr ""
 
@@ -10326,7 +10343,7 @@ msgstr ""
 msgid "Optional password for authentication to the remote server."
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:109
+#: ../../../system/device-url-syntax.rst.inc:110
 msgid "``host``"
 msgstr ""
 
@@ -10334,7 +10351,7 @@ msgstr ""
 msgid "Address of the remote server."
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:112
+#: ../../../system/device-url-syntax.rst.inc:113
 msgid "``path``"
 msgstr ""
 
@@ -10346,7 +10363,7 @@ msgstr ""
 msgid "The following options are also supported:"
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:117
+#: ../../../system/device-url-syntax.rst.inc:118
 msgid "``url``"
 msgstr ""
 
@@ -10354,7 +10371,7 @@ msgstr ""
 msgid "The full URL when passing options to the driver explicitly."
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:120
+#: ../../../system/device-url-syntax.rst.inc:125
 msgid "``readahead``"
 msgstr ""
 
@@ -10366,7 +10383,7 @@ msgid ""
 "value must be a multiple of 512 bytes. It defaults to 256k."
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:127
+#: ../../../system/device-url-syntax.rst.inc:130
 msgid "``sslverify``"
 msgstr ""
 
@@ -10376,7 +10393,7 @@ msgid ""
 "It can have the value 'on' or 'off'. It defaults to 'on'."
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:132
+#: ../../../system/device-url-syntax.rst.inc:135
 msgid "``cookie``"
 msgstr ""
 
@@ -10387,7 +10404,7 @@ msgid ""
 "which support cookies, otherwise ignored."
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:137
+#: ../../../system/device-url-syntax.rst.inc:141
 msgid "``timeout``"
 msgstr ""
 
@@ -10398,7 +10415,7 @@ msgid ""
 "image to be downloaded. If not set, the default timeout of 5 seconds is used."
 msgstr ""
 
-#: ../../../system/device-url-syntax.rst.inc:143
+#: ../../../system/device-url-syntax.rst.inc:147
 msgid "``force-range``"
 msgstr ""
 
@@ -10422,9 +10439,9 @@ msgstr ""
 
 #: ../../../system/device-url-syntax.rst.inc:371
 msgid ""
-"|qemu_system_x86| --drive media=cdrom,file=https://archives.fedoraproject."
-"org/pub/archive/fedora/linux/releases/20/Live/x86_64/Fedora-Live-Desktop-"
-"x86_64-20-1.iso,readonly\n"
+"|qemu_system_x86| --drive media=cdrom,file=https://"
+"archives.fedoraproject.org/pub/archive/fedora/linux/releases/20/Live/x86_64/"
+"Fedora-Live-Desktop-x86_64-20-1.iso,readonly\n"
 "\n"
 "|qemu_system_x86| --drive media=cdrom,file.driver=http,file.url=http://"
 "archives.fedoraproject.org/pub/fedora/linux/releases/20/Live/x86_64/Fedora-"
@@ -10441,11 +10458,11 @@ msgstr ""
 msgid ""
 "qemu-img create -f qcow2 -o backing_file='json:{\"file.driver\":\"http\",, "
 "\"file.url\":\"http://archives.fedoraproject.org/pub/archive/fedora/linux/"
-"releases/20/Images/x86_64/Fedora-x86_64-20-20131211.1-sda.qcow2\",, \"file."
-"readahead\":\"64k\"}' /tmp/Fedora-x86_64-20-20131211.1-sda.qcow2\n"
+"releases/20/Images/x86_64/Fedora-x86_64-20-20131211.1-sda.qcow2\",, "
+"\"file.readahead\":\"64k\"}' /tmp/Fedora-x86_64-20-20131211.1-sda.qcow2\n"
 "\n"
-"|qemu_system_x86| -drive file=/tmp/Fedora-x86_64-20-20131211.1-sda.qcow2,"
-"copy-on-read=on"
+"|qemu_system_x86| -drive file=/tmp/Fedora-x86_64-20-20131211.1-"
+"sda.qcow2,copy-on-read=on"
 msgstr ""
 
 #: ../../../system/device-url-syntax.rst.inc:169
@@ -10460,8 +10477,8 @@ msgid ""
 "qemu-img create -f qcow2 -o backing_file='json:{\"file.driver\":\"https\",, "
 "\"file.url\":\"https://user:password@vsphere.example.com/folder/test/test-"
 "flat.vmdk?dcPath=Datacenter&dsName=datastore1\",, \"file.sslverify\":"
-"\"off\",, \"file.readahead\":\"64k\",, \"file.timeout\":10}' /tmp/test."
-"qcow2\n"
+"\"off\",, \"file.readahead\":\"64k\",, \"file.timeout\":10}' /tmp/"
+"test.qcow2\n"
 "\n"
 "|qemu_system_x86| -drive file=/tmp/test.qcow2"
 msgstr ""

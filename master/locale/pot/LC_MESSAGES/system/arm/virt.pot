@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-09 04:01+0000\n"
+"POT-Creation-Date: 2026-11-02 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -234,9 +234,9 @@ msgstr ""
 msgid ""
 "Also, please note that passing ``max`` CPU (i.e. ``-cpu max``) won't enable "
 "all the CPU features for a given ``virt`` machine. Where a CPU architectural "
-"feature requires support in both the CPU itself and in the wider system (e."
-"g. the MTE feature), it may not be enabled by default, but instead requires "
-"a machine option to enable it."
+"feature requires support in both the CPU itself and in the wider system "
+"(e.g. the MTE feature), it may not be enabled by default, but instead "
+"requires a machine option to enable it."
 msgstr ""
 
 #: ../../../system/arm/virt.rst:92
@@ -270,7 +270,7 @@ msgstr ""
 msgid "The following machine-specific options are supported:"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:111
+#: ../../../system/arm/virt.rst:113
 msgid "secure"
 msgstr ""
 
@@ -280,7 +280,7 @@ msgid ""
 "the Arm Security Extensions (TrustZone). The default is ``off``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:115
+#: ../../../system/arm/virt.rst:117
 msgid "virtualization"
 msgstr ""
 
@@ -290,7 +290,7 @@ msgid ""
 "the Arm Virtualization Extensions. The default is ``off``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:119
+#: ../../../system/arm/virt.rst:121
 msgid "mte"
 msgstr ""
 
@@ -300,7 +300,7 @@ msgid ""
 "the Arm Memory Tagging Extensions. The default is ``off``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:123
+#: ../../../system/arm/virt.rst:132
 msgid "highmem"
 msgstr ""
 
@@ -316,7 +316,7 @@ msgid ""
 "the PCI controller, will not be accessible."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:134
+#: ../../../system/arm/virt.rst:136
 msgid "compact-highmem"
 msgstr ""
 
@@ -326,7 +326,7 @@ msgid ""
 "regions. The default is ``on`` for machine types later than ``virt-7.2``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:138
+#: ../../../system/arm/virt.rst:141
 msgid "highmem-redists"
 msgstr ""
 
@@ -337,7 +337,7 @@ msgid ""
 "limit the maximum number of CPUs when GICv3 or GICv4 is used."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:143
+#: ../../../system/arm/virt.rst:145
 msgid "highmem-ecam"
 msgstr ""
 
@@ -347,7 +347,7 @@ msgid ""
 "The default is ``on`` for machine types later than ``virt-3.0``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:147
+#: ../../../system/arm/virt.rst:149
 msgid "highmem-mmio"
 msgstr ""
 
@@ -357,7 +357,7 @@ msgid ""
 "The default is ``on``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:151
+#: ../../../system/arm/virt.rst:153
 msgid "highmem-mmio-size"
 msgstr ""
 
@@ -367,7 +367,7 @@ msgid ""
 "greater than or equal to the default size (512G)."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:155
+#: ../../../system/arm/virt.rst:189
 msgid "gic-version"
 msgstr ""
 
@@ -401,7 +401,7 @@ msgstr ""
 msgid "GICv4. Requires ``virtualization`` to be ``on``; allows up to 317 CPUs."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:165
+#: ../../../system/arm/virt.rst:182
 msgid "``x-5``"
 msgstr ""
 
@@ -453,7 +453,7 @@ msgstr ""
 msgid "Use the same GIC version the host provides, when using KVM"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:186
+#: ../../../system/arm/virt.rst:189
 msgid "``max``"
 msgstr ""
 
@@ -464,7 +464,7 @@ msgid ""
 "``virtualization`` is ``on``, but this may change in future)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:191
+#: ../../../system/arm/virt.rst:203
 msgid "msi"
 msgstr ""
 
@@ -491,7 +491,7 @@ msgstr ""
 msgid "GICv2m. Typically used with a GICv2. Also available with a newer GIC."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:199
+#: ../../../system/arm/virt.rst:200
 msgid "``its``"
 msgstr ""
 
@@ -501,7 +501,7 @@ msgid ""
 "supported accelerator."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:202
+#: ../../../system/arm/virt.rst:203
 msgid "``off``"
 msgstr ""
 
@@ -509,7 +509,7 @@ msgstr ""
 msgid "Disable support for MSI/MSI-X interrupts."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:205
+#: ../../../system/arm/virt.rst:206
 msgid "its"
 msgstr ""
 
@@ -519,7 +519,7 @@ msgid ""
 "option, use ``msi`` instead."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:208
+#: ../../../system/arm/virt.rst:214
 msgid "iommu"
 msgstr ""
 
@@ -535,7 +535,7 @@ msgstr ""
 msgid "Don't create an IOMMU (the default)"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:213
+#: ../../../system/arm/virt.rst:214
 msgid "``smmuv3``"
 msgstr ""
 
@@ -543,7 +543,7 @@ msgstr ""
 msgid "Create a machine-wide SMMUv3."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:216
+#: ../../../system/arm/virt.rst:219
 msgid "default-bus-bypass-iommu"
 msgstr ""
 
@@ -553,7 +553,7 @@ msgid ""
 "project/qemu/-/blob/master/docs/bypass-iommu.txt>`_ for default root bus."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:221
+#: ../../../system/arm/virt.rst:223
 msgid "ras"
 msgstr ""
 
@@ -563,7 +563,7 @@ msgid ""
 "using ACPI and guest external abort exceptions. The default is off."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:225
+#: ../../../system/arm/virt.rst:226
 msgid "acpi"
 msgstr ""
 
@@ -571,7 +571,7 @@ msgstr ""
 msgid "Set ``on``/``off``/``auto`` to enable/disable ACPI."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:228
+#: ../../../system/arm/virt.rst:230
 msgid "cxl"
 msgstr ""
 
@@ -581,7 +581,7 @@ msgid ""
 "cxl`. The default is off."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:232
+#: ../../../system/arm/virt.rst:234
 msgid "cxl-fmw"
 msgstr ""
 
@@ -591,7 +591,7 @@ msgid ""
 "CXL host bridges. See :doc:`../devices/cxl`."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:236
+#: ../../../system/arm/virt.rst:244
 msgid "dtb-randomness"
 msgstr ""
 
@@ -606,7 +606,7 @@ msgid ""
 "with a seed and pass it on if it wants to."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:246
+#: ../../../system/arm/virt.rst:247
 msgid "dtb-kaslr-seed"
 msgstr ""
 
@@ -614,7 +614,7 @@ msgstr ""
 msgid "A deprecated synonym for dtb-randomness."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:249
+#: ../../../system/arm/virt.rst:252
 msgid "virtio-mmio-transports"
 msgstr ""
 
@@ -625,7 +625,7 @@ msgid ""
 "property to avoid exposing them to the guest if you wish."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:254
+#: ../../../system/arm/virt.rst:256
 msgid "x-oem-id"
 msgstr ""
 
@@ -635,7 +635,7 @@ msgid ""
 "ACPI table header."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:258
+#: ../../../system/arm/virt.rst:260
 msgid "x-oem-table-id"
 msgstr ""
 
@@ -649,7 +649,7 @@ msgstr ""
 msgid "SMMU configuration"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:265
+#: ../../../system/arm/virt.rst:271
 msgid "Machine-wide SMMUv3 IOMMU"
 msgstr ""
 
@@ -666,7 +666,7 @@ msgid ""
 "iommu.txt``."
 msgstr ""
 
-#: ../../../system/arm/virt.rst:273
+#: ../../../system/arm/virt.rst:316
 msgid "User-creatable SMMUv3 devices"
 msgstr ""
 
@@ -753,7 +753,7 @@ msgstr ""
 msgid "Two modes are available:"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:328
+#: ../../../system/arm/virt.rst:332
 msgid "Native mode (default)"
 msgstr ""
 
@@ -767,7 +767,7 @@ msgstr ""
 msgid "-device sbsa-gwdt"
 msgstr ""
 
-#: ../../../system/arm/virt.rst:334
+#: ../../../system/arm/virt.rst:339
 msgid "WDAT mode"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-11-02 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,9 +35,9 @@ msgid ""
 "it is not used alone.  Typically, the write-side will use a lock to "
 "serialize multiple updates, but other approaches are possible (e.g., "
 "restricting updates to a single task).  In QEMU, when a lock is used, this "
-"will often be the \"iothread mutex\", also known as the \"big QEMU "
-"lock\" (BQL).  Also, restricting updates to a single task is done in QEMU "
-"using the \"bottom half\" API."
+"will often be the \"iothread mutex\", also known as the \"big QEMU lock\" "
+"(BQL).  Also, restricting updates to a single task is done in QEMU using the "
+"\"bottom half\" API."
 msgstr ""
 
 #: ../../../devel/rcu.rst:17
@@ -106,7 +106,7 @@ msgstr ""
 msgid "The core RCU API is small:"
 msgstr ""
 
-#: ../../../devel/rcu.rst:65
+#: ../../../devel/rcu.rst:67
 msgid "``void rcu_read_lock(void);``"
 msgstr ""
 
@@ -116,7 +116,7 @@ msgid ""
 "read-side critical section."
 msgstr ""
 
-#: ../../../devel/rcu.rst:69
+#: ../../../devel/rcu.rst:72
 msgid "``void rcu_read_unlock(void);``"
 msgstr ""
 
@@ -127,7 +127,7 @@ msgid ""
 "be nested and/or overlapping."
 msgstr ""
 
-#: ../../../devel/rcu.rst:74
+#: ../../../devel/rcu.rst:83
 msgid "``void synchronize_rcu(void);``"
 msgstr ""
 
@@ -147,7 +147,7 @@ msgid ""
 "the BQL), you can use ``call_rcu``."
 msgstr ""
 
-#: ../../../devel/rcu.rst:85
+#: ../../../devel/rcu.rst:114
 msgid ""
 "``void call_rcu1(struct rcu_head * head, void (*func)(struct rcu_head "
 "*head));``"
@@ -200,7 +200,7 @@ msgid ""
 "member is the first of the struct."
 msgstr ""
 
-#: ../../../devel/rcu.rst:116
+#: ../../../devel/rcu.rst:118
 msgid "``void call_rcu(T *p, void (*func)(T *p), field-name);``"
 msgstr ""
 
@@ -210,7 +210,7 @@ msgid ""
 "this macro instead of ``call_rcu1``."
 msgstr ""
 
-#: ../../../devel/rcu.rst:120
+#: ../../../devel/rcu.rst:125
 msgid "``void g_free_rcu(T *p, field-name);``"
 msgstr ""
 
@@ -225,7 +225,7 @@ msgstr ""
 msgid "g_free_rcu(&foo, rcu);"
 msgstr ""
 
-#: ../../../devel/rcu.rst:127
+#: ../../../devel/rcu.rst:146
 msgid "``typeof(*p) qatomic_rcu_read(p);``"
 msgstr ""
 
@@ -260,7 +260,7 @@ msgid ""
 "updater initializes it."
 msgstr ""
 
-#: ../../../devel/rcu.rst:148
+#: ../../../devel/rcu.rst:162
 msgid "``void qatomic_rcu_set(p, typeof(*p) v);``"
 msgstr ""
 
@@ -288,7 +288,7 @@ msgstr ""
 msgid "The following APIs must be used before RCU is used in a thread:"
 msgstr ""
 
-#: ../../../devel/rcu.rst:166
+#: ../../../devel/rcu.rst:169
 msgid "``void rcu_register_thread(void);``"
 msgstr ""
 
@@ -299,7 +299,7 @@ msgid ""
 "``QemuCond``/``QemuSemaphore``/``QemuEvent`` APIs."
 msgstr ""
 
-#: ../../../devel/rcu.rst:171
+#: ../../../devel/rcu.rst:175
 msgid "``void rcu_unregister_thread(void);``"
 msgstr ""
 
@@ -326,7 +326,7 @@ msgid ""
 "of the scope."
 msgstr ""
 
-#: ../../../devel/rcu.rst:186
+#: ../../../devel/rcu.rst:188
 msgid "``RCU_READ_LOCK_GUARD()``"
 msgstr ""
 
@@ -335,7 +335,7 @@ msgid ""
 "Takes the lock and will release it at the end of the block it's used in."
 msgstr ""
 
-#: ../../../devel/rcu.rst:190
+#: ../../../devel/rcu.rst:191
 msgid "``WITH_RCU_READ_LOCK_GUARD()  { code }``"
 msgstr ""
 

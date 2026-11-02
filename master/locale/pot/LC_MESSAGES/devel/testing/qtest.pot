@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 16:46+0000\n"
+"POT-Creation-Date: 2026-11-02 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,244 +133,244 @@ msgstr ""
 msgid "QTest Protocol"
 msgstr ""
 
-#: ../../../../system/qtest.c:69
+#: ../../../../system/qtest.c:75
 msgid ""
 "Line based protocol, request/response based.  Server can send async messages "
 "so clients should always handle many async messages before the response "
 "comes in."
 msgstr ""
 
-#: ../../../../system/qtest.c:73
+#: ../../../../system/qtest.c:79
 msgid ""
 "Extra ASCII space characters in command inputs are permitted and ignored. "
 "Lines containing only spaces are permitted and ignored. Lines that start "
 "with a '#' character (comments) are permitted and ignored."
 msgstr ""
 
-#: ../../../../system/qtest.c:83
+#: ../../../../system/qtest.c:89
 msgid ""
 "The qtest client is completely in charge of the QEMU_CLOCK_VIRTUAL.  qtest "
 "commands let you adjust the value of the clock (monotonically).  All the "
 "commands return the current value of the clock in nanoseconds."
 msgstr ""
 
-#: ../../../../system/qtest.c:87
+#: ../../../../system/qtest.c:93
 msgid ""
 "If the commands FAIL then time wasn't advanced which is likely because the "
 "machine was in a paused state or no timer events exist in the future. This "
 "will cause qtest to abort and the test will need to check its assumptions."
 msgstr ""
 
-#: ../../../../system/qtest.c:92
+#: ../../../../system/qtest.c:98
 msgid ""
 "> clock_step\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:97
+#: ../../../../system/qtest.c:103
 msgid ""
 "Advance the clock to the next deadline.  Useful when waiting for "
 "asynchronous events."
 msgstr ""
 
-#: ../../../../system/qtest.c:100
+#: ../../../../system/qtest.c:106
 msgid ""
 "> clock_step NS\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:105
+#: ../../../../system/qtest.c:111
 msgid "Advance the clock by NS nanoseconds."
 msgstr ""
 
-#: ../../../../system/qtest.c:107
+#: ../../../../system/qtest.c:113
 msgid ""
 "> clock_set NS\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:112
+#: ../../../../system/qtest.c:118
 msgid "Advance the clock to NS nanoseconds (do nothing if it's already past)."
 msgstr ""
 
-#: ../../../../system/qtest.c:117
+#: ../../../../system/qtest.c:123
 msgid ""
 "> outb ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:122
+#: ../../../../system/qtest.c:128
 msgid ""
 "> outw ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:127
+#: ../../../../system/qtest.c:133
 msgid ""
 "> outl ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:132
+#: ../../../../system/qtest.c:138
 msgid ""
 "> inb ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:137
+#: ../../../../system/qtest.c:143
 msgid ""
 "> inw ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:142
+#: ../../../../system/qtest.c:148
 msgid ""
 "> inl ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:147
+#: ../../../../system/qtest.c:153
 msgid ""
 "> writeb ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:152
+#: ../../../../system/qtest.c:158
 msgid ""
 "> writew ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:157
+#: ../../../../system/qtest.c:163
 msgid ""
 "> writel ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:162
+#: ../../../../system/qtest.c:168
 msgid ""
 "> writeq ADDR VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:167
+#: ../../../../system/qtest.c:173
 msgid ""
 "> readb ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:172
+#: ../../../../system/qtest.c:178
 msgid ""
 "> readw ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:177
+#: ../../../../system/qtest.c:183
 msgid ""
 "> readl ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:182
+#: ../../../../system/qtest.c:188
 msgid ""
 "> readq ADDR\n"
 "< OK VALUE"
 msgstr ""
 
-#: ../../../../system/qtest.c:187
+#: ../../../../system/qtest.c:193
 msgid ""
 "> read ADDR SIZE\n"
 "< OK DATA"
 msgstr ""
 
-#: ../../../../system/qtest.c:192
+#: ../../../../system/qtest.c:198
 msgid ""
 "> write ADDR SIZE DATA\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:197
+#: ../../../../system/qtest.c:203
 msgid ""
 "> b64read ADDR SIZE\n"
 "< OK B64_DATA"
 msgstr ""
 
-#: ../../../../system/qtest.c:202
+#: ../../../../system/qtest.c:208
 msgid ""
 "> b64write ADDR SIZE B64_DATA\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:207
+#: ../../../../system/qtest.c:213
 msgid ""
 "> memset ADDR SIZE VALUE\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:212
+#: ../../../../system/qtest.c:218
 msgid ""
 "ADDR, SIZE, VALUE are all integers parsed with strtoul() with a base of 0. "
 "For 'memset' a zero size is permitted and does nothing."
 msgstr ""
 
-#: ../../../../system/qtest.c:215
+#: ../../../../system/qtest.c:221
 msgid ""
 "DATA is an arbitrarily long hex number prefixed with '0x'.  If it's smaller "
 "than the expected size, the value will be zero filled at the end of the data "
 "sequence."
 msgstr ""
 
-#: ../../../../system/qtest.c:219
+#: ../../../../system/qtest.c:225
 msgid ""
 "B64_DATA is an arbitrarily long base64 encoded string. If the sizes do not "
 "match, the data will be truncated."
 msgstr ""
 
-#: ../../../../system/qtest.c:225
+#: ../../../../system/qtest.c:231
 msgid ""
 "> irq_intercept_in QOM-PATH\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:230
+#: ../../../../system/qtest.c:236
 msgid ""
 "> irq_intercept_out QOM-PATH\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:235
+#: ../../../../system/qtest.c:241
 msgid ""
 "Attach to the gpio-in (resp. gpio-out) pins exported by the device at QOM-"
 "PATH.  When the pin is triggered, one of the following async messages will "
 "be printed to the qtest stream::"
 msgstr ""
 
-#: ../../../../system/qtest.c:239
+#: ../../../../system/qtest.c:245
 msgid ""
 "IRQ raise NUM\n"
 "IRQ lower NUM"
 msgstr ""
 
-#: ../../../../system/qtest.c:242
+#: ../../../../system/qtest.c:248
 msgid ""
 "where NUM is an IRQ number.  For the PC, interrupts can be intercepted "
 "simply with \"irq_intercept_in ioapic\" (note that IRQ0 comes out with NUM=0 "
 "even though it is remapped to GSI 2)."
 msgstr ""
 
-#: ../../../../system/qtest.c:249
+#: ../../../../system/qtest.c:255
 msgid ""
 "> set_irq_in QOM-PATH NAME NUM LEVEL\n"
 "< OK"
 msgstr ""
 
-#: ../../../../system/qtest.c:254
+#: ../../../../system/qtest.c:260
 msgid ""
 "where NAME is the name of the irq/gpio list, NUM is an IRQ number and LEVEL "
 "is an signed integer IRQ level."
 msgstr ""
 
-#: ../../../../system/qtest.c:257
+#: ../../../../system/qtest.c:263
 msgid "Forcibly set the given interrupt pin to the given level."
 msgstr ""
 
@@ -480,30 +480,30 @@ msgstr ""
 msgid "**Parameters**"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:34 ../../../../tests/qtest/libqtest.h:45
-#: ../../../../tests/qtest/libqtest.h:197
-#: ../../../../tests/qtest/libqtest.h:211
-#: ../../../../tests/qtest/libqtest.h:223
-#: ../../../../tests/qtest/libqtest.h:235
-#: ../../../../tests/qtest/libqtest.h:257
-#: ../../../../tests/qtest/libqtest.h:272
-#: ../../../../tests/qtest/libqtest.h:288
-#: ../../../../tests/qtest/libqtest.h:303
-#: ../../../../tests/qtest/libqtest.h:417
-#: ../../../../tests/qtest/libqtest.h:429
-#: ../../../../tests/qtest/libqtest.h:445
-#: ../../../../tests/qtest/libqtest.h:880
-#: ../../../../tests/qtest/libqtest.h:895
-#: ../../../../tests/qtest/libqtest.h:913
-#: ../../../../tests/qtest/libqtest.h:931
-#: ../../../../tests/qtest/libqtest.h:947
-#: ../../../../tests/qtest/libqtest.h:960
-#: ../../../../tests/qtest/libqtest.h:975
-#: ../../../../tests/qtest/libqtest.h:988
-#: ../../../../tests/qtest/libqtest.h:1004
-#: ../../../../tests/qtest/libqtest.h:1021
-#: ../../../../tests/qtest/libqtest.h:1103
-#: ../../../../tests/qtest/libqtest.h:1204
+#: ../../../../tests/qtest/libqtest.h:30 ../../../../tests/qtest/libqtest.h:41
+#: ../../../../tests/qtest/libqtest.h:198
+#: ../../../../tests/qtest/libqtest.h:212
+#: ../../../../tests/qtest/libqtest.h:224
+#: ../../../../tests/qtest/libqtest.h:234
+#: ../../../../tests/qtest/libqtest.h:258
+#: ../../../../tests/qtest/libqtest.h:273
+#: ../../../../tests/qtest/libqtest.h:289
+#: ../../../../tests/qtest/libqtest.h:304
+#: ../../../../tests/qtest/libqtest.h:416
+#: ../../../../tests/qtest/libqtest.h:428
+#: ../../../../tests/qtest/libqtest.h:444
+#: ../../../../tests/qtest/libqtest.h:881
+#: ../../../../tests/qtest/libqtest.h:896
+#: ../../../../tests/qtest/libqtest.h:914
+#: ../../../../tests/qtest/libqtest.h:932
+#: ../../../../tests/qtest/libqtest.h:948
+#: ../../../../tests/qtest/libqtest.h:961
+#: ../../../../tests/qtest/libqtest.h:976
+#: ../../../../tests/qtest/libqtest.h:989
+#: ../../../../tests/qtest/libqtest.h:1005
+#: ../../../../tests/qtest/libqtest.h:1022
+#: ../../../../tests/qtest/libqtest.h:1104
+#: ../../../../tests/qtest/libqtest.h:1203
 msgid "``const char *fmt``"
 msgstr ""
 
@@ -513,18 +513,7 @@ msgid ""
 "sprintf()."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:32 ../../../../tests/qtest/libqtest.h:200
-#: ../../../../tests/qtest/libqtest.h:214
-#: ../../../../tests/qtest/libqtest.h:226
-#: ../../../../tests/qtest/libqtest.h:236
-#: ../../../../tests/qtest/libqtest.h:418
-#: ../../../../tests/qtest/libqtest.h:446
-#: ../../../../tests/qtest/libqtest.h:950
-#: ../../../../tests/qtest/libqtest.h:978
-#: ../../../../tests/qtest/libqtest.h:991
-#: ../../../../tests/qtest/libqtest.h:1007
-#: ../../../../tests/qtest/libqtest.h:1024
-#: ../../../../tests/qtest/libqtest.h:1106
+#: ../../../../tests/qtest/libqtest.h:1
 msgid "``...``"
 msgstr ""
 
@@ -650,11 +639,11 @@ msgid ""
 "vsprintf()."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:43 ../../../../tests/qtest/libqtest.h:260
-#: ../../../../tests/qtest/libqtest.h:275
-#: ../../../../tests/qtest/libqtest.h:291
-#: ../../../../tests/qtest/libqtest.h:306
-#: ../../../../tests/qtest/libqtest.h:430
+#: ../../../../tests/qtest/libqtest.h:42 ../../../../tests/qtest/libqtest.h:259
+#: ../../../../tests/qtest/libqtest.h:274
+#: ../../../../tests/qtest/libqtest.h:290
+#: ../../../../tests/qtest/libqtest.h:305
+#: ../../../../tests/qtest/libqtest.h:429
 msgid "``va_list ap``"
 msgstr ""
 
@@ -662,9 +651,9 @@ msgstr ""
 msgid "Format arguments."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:57 ../../../../tests/qtest/libqtest.h:91
-#: ../../../../tests/qtest/libqtest.h:1049
-#: ../../../../tests/qtest/libqtest.h:1067
+#: ../../../../tests/qtest/libqtest.h:52 ../../../../tests/qtest/libqtest.h:86
+#: ../../../../tests/qtest/libqtest.h:1044
+#: ../../../../tests/qtest/libqtest.h:1062
 msgid "``const char *var``"
 msgstr ""
 
@@ -678,21 +667,21 @@ msgid ""
 "NULL, look up  the default var name."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:66 ../../../../tests/qtest/libqtest.h:883
-#: ../../../../tests/qtest/libqtest.h:898
-#: ../../../../tests/qtest/libqtest.h:914
-#: ../../../../tests/qtest/libqtest.h:932
-#: ../../../../tests/qtest/libqtest.h:950
-#: ../../../../tests/qtest/libqtest.h:963
-#: ../../../../tests/qtest/libqtest.h:978
-#: ../../../../tests/qtest/libqtest.h:991
-#: ../../../../tests/qtest/libqtest.h:1005
-#: ../../../../tests/qtest/libqtest.h:1022
-#: ../../../../tests/qtest/libqtest.h:1092
-#: ../../../../tests/qtest/libqtest.h:1104
-#: ../../../../tests/qtest/libqtest.h:1118
-#: ../../../../tests/qtest/libqtest.h:1129
-#: ../../../../tests/qtest/libqtest.h:1138
+#: ../../../../tests/qtest/libqtest.h:61 ../../../../tests/qtest/libqtest.h:878
+#: ../../../../tests/qtest/libqtest.h:893
+#: ../../../../tests/qtest/libqtest.h:909
+#: ../../../../tests/qtest/libqtest.h:927
+#: ../../../../tests/qtest/libqtest.h:945
+#: ../../../../tests/qtest/libqtest.h:958
+#: ../../../../tests/qtest/libqtest.h:973
+#: ../../../../tests/qtest/libqtest.h:986
+#: ../../../../tests/qtest/libqtest.h:1000
+#: ../../../../tests/qtest/libqtest.h:1017
+#: ../../../../tests/qtest/libqtest.h:1087
+#: ../../../../tests/qtest/libqtest.h:1099
+#: ../../../../tests/qtest/libqtest.h:1113
+#: ../../../../tests/qtest/libqtest.h:1124
+#: ../../../../tests/qtest/libqtest.h:1133
 msgid "``QTestState *qts``"
 msgstr ""
 
@@ -704,9 +693,9 @@ msgstr ""
 msgid "Return a test state representing new QEMU after **qts** exec's it."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:74 ../../../../tests/qtest/libqtest.h:82
-#: ../../../../tests/qtest/libqtest.h:88 ../../../../tests/qtest/libqtest.h:108
-#: ../../../../tests/qtest/libqtest.h:133
+#: ../../../../tests/qtest/libqtest.h:69 ../../../../tests/qtest/libqtest.h:78
+#: ../../../../tests/qtest/libqtest.h:88 ../../../../tests/qtest/libqtest.h:104
+#: ../../../../tests/qtest/libqtest.h:129
 msgid "``const char *extra_args``"
 msgstr ""
 
@@ -737,7 +726,7 @@ msgid ""
 "word splitting and shell evaluation."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:90 ../../../../tests/qtest/libqtest.h:122
+#: ../../../../tests/qtest/libqtest.h:89 ../../../../tests/qtest/libqtest.h:121
 msgid "``QList *capabilities``"
 msgstr ""
 
@@ -745,7 +734,7 @@ msgstr ""
 msgid "list of QMP capabilities (strings) to enable"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:91
+#: ../../../../tests/qtest/libqtest.h:90
 msgid "``bool do_connect``"
 msgstr ""
 
@@ -759,67 +748,67 @@ msgid ""
 "binary, allow specify capabilities and skip connecting to QEMU monitor."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:117
-#: ../../../../tests/qtest/libqtest.h:125
-#: ../../../../tests/qtest/libqtest.h:144
-#: ../../../../tests/qtest/libqtest.h:153
-#: ../../../../tests/qtest/libqtest.h:169
-#: ../../../../tests/qtest/libqtest.h:178
-#: ../../../../tests/qtest/libqtest.h:189
-#: ../../../../tests/qtest/libqtest.h:198
-#: ../../../../tests/qtest/libqtest.h:214
-#: ../../../../tests/qtest/libqtest.h:226
-#: ../../../../tests/qtest/libqtest.h:238
-#: ../../../../tests/qtest/libqtest.h:258
-#: ../../../../tests/qtest/libqtest.h:275
-#: ../../../../tests/qtest/libqtest.h:289
-#: ../../../../tests/qtest/libqtest.h:306
-#: ../../../../tests/qtest/libqtest.h:319
-#: ../../../../tests/qtest/libqtest.h:327
-#: ../../../../tests/qtest/libqtest.h:358
-#: ../../../../tests/qtest/libqtest.h:369
-#: ../../../../tests/qtest/libqtest.h:381
-#: ../../../../tests/qtest/libqtest.h:395
-#: ../../../../tests/qtest/libqtest.h:408
-#: ../../../../tests/qtest/libqtest.h:420
-#: ../../../../tests/qtest/libqtest.h:432
-#: ../../../../tests/qtest/libqtest.h:447
-#: ../../../../tests/qtest/libqtest.h:460
-#: ../../../../tests/qtest/libqtest.h:468
-#: ../../../../tests/qtest/libqtest.h:477
-#: ../../../../tests/qtest/libqtest.h:487
-#: ../../../../tests/qtest/libqtest.h:497
-#: ../../../../tests/qtest/libqtest.h:508
-#: ../../../../tests/qtest/libqtest.h:521
-#: ../../../../tests/qtest/libqtest.h:531
-#: ../../../../tests/qtest/libqtest.h:541
-#: ../../../../tests/qtest/libqtest.h:551
-#: ../../../../tests/qtest/libqtest.h:560
-#: ../../../../tests/qtest/libqtest.h:569
-#: ../../../../tests/qtest/libqtest.h:578
-#: ../../../../tests/qtest/libqtest.h:588
-#: ../../../../tests/qtest/libqtest.h:598
-#: ../../../../tests/qtest/libqtest.h:608
-#: ../../../../tests/qtest/libqtest.h:618
-#: ../../../../tests/qtest/libqtest.h:629
-#: ../../../../tests/qtest/libqtest.h:640
-#: ../../../../tests/qtest/libqtest.h:651
-#: ../../../../tests/qtest/libqtest.h:662
-#: ../../../../tests/qtest/libqtest.h:673
-#: ../../../../tests/qtest/libqtest.h:688
-#: ../../../../tests/qtest/libqtest.h:702
-#: ../../../../tests/qtest/libqtest.h:713
-#: ../../../../tests/qtest/libqtest.h:724
-#: ../../../../tests/qtest/libqtest.h:736
-#: ../../../../tests/qtest/libqtest.h:747
-#: ../../../../tests/qtest/libqtest.h:757
-#: ../../../../tests/qtest/libqtest.h:768
-#: ../../../../tests/qtest/libqtest.h:779
-#: ../../../../tests/qtest/libqtest.h:1148
-#: ../../../../tests/qtest/libqtest.h:1156
-#: ../../../../tests/qtest/libqtest.h:1170
-#: ../../../../tests/qtest/libqtest.h:1182
-#: ../../../../tests/qtest/libqtest.h:1192
+#: ../../../../tests/qtest/libqtest.h:113
+#: ../../../../tests/qtest/libqtest.h:120
+#: ../../../../tests/qtest/libqtest.h:139
+#: ../../../../tests/qtest/libqtest.h:148
+#: ../../../../tests/qtest/libqtest.h:164
+#: ../../../../tests/qtest/libqtest.h:173
+#: ../../../../tests/qtest/libqtest.h:184
+#: ../../../../tests/qtest/libqtest.h:193
+#: ../../../../tests/qtest/libqtest.h:209
+#: ../../../../tests/qtest/libqtest.h:221
+#: ../../../../tests/qtest/libqtest.h:233
+#: ../../../../tests/qtest/libqtest.h:253
+#: ../../../../tests/qtest/libqtest.h:270
+#: ../../../../tests/qtest/libqtest.h:284
+#: ../../../../tests/qtest/libqtest.h:301
+#: ../../../../tests/qtest/libqtest.h:314
+#: ../../../../tests/qtest/libqtest.h:322
+#: ../../../../tests/qtest/libqtest.h:353
+#: ../../../../tests/qtest/libqtest.h:364
+#: ../../../../tests/qtest/libqtest.h:376
+#: ../../../../tests/qtest/libqtest.h:390
+#: ../../../../tests/qtest/libqtest.h:403
+#: ../../../../tests/qtest/libqtest.h:415
+#: ../../../../tests/qtest/libqtest.h:427
+#: ../../../../tests/qtest/libqtest.h:442
+#: ../../../../tests/qtest/libqtest.h:455
+#: ../../../../tests/qtest/libqtest.h:463
+#: ../../../../tests/qtest/libqtest.h:472
+#: ../../../../tests/qtest/libqtest.h:482
+#: ../../../../tests/qtest/libqtest.h:492
+#: ../../../../tests/qtest/libqtest.h:503
+#: ../../../../tests/qtest/libqtest.h:516
+#: ../../../../tests/qtest/libqtest.h:526
+#: ../../../../tests/qtest/libqtest.h:536
+#: ../../../../tests/qtest/libqtest.h:546
+#: ../../../../tests/qtest/libqtest.h:555
+#: ../../../../tests/qtest/libqtest.h:564
+#: ../../../../tests/qtest/libqtest.h:573
+#: ../../../../tests/qtest/libqtest.h:583
+#: ../../../../tests/qtest/libqtest.h:593
+#: ../../../../tests/qtest/libqtest.h:603
+#: ../../../../tests/qtest/libqtest.h:613
+#: ../../../../tests/qtest/libqtest.h:624
+#: ../../../../tests/qtest/libqtest.h:635
+#: ../../../../tests/qtest/libqtest.h:646
+#: ../../../../tests/qtest/libqtest.h:657
+#: ../../../../tests/qtest/libqtest.h:668
+#: ../../../../tests/qtest/libqtest.h:683
+#: ../../../../tests/qtest/libqtest.h:697
+#: ../../../../tests/qtest/libqtest.h:708
+#: ../../../../tests/qtest/libqtest.h:719
+#: ../../../../tests/qtest/libqtest.h:731
+#: ../../../../tests/qtest/libqtest.h:742
+#: ../../../../tests/qtest/libqtest.h:752
+#: ../../../../tests/qtest/libqtest.h:763
+#: ../../../../tests/qtest/libqtest.h:774
+#: ../../../../tests/qtest/libqtest.h:1143
+#: ../../../../tests/qtest/libqtest.h:1151
+#: ../../../../tests/qtest/libqtest.h:1165
+#: ../../../../tests/qtest/libqtest.h:1177
+#: ../../../../tests/qtest/libqtest.h:1187
 msgid "``QTestState *s``"
 msgstr ""
 
@@ -936,13 +925,13 @@ msgstr ""
 msgid "Shut down the QEMU process associated to **s**."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:195
-#: ../../../../tests/qtest/libqtest.h:255
-#: ../../../../tests/qtest/libqtest.h:286
-#: ../../../../tests/qtest/libqtest.h:911
-#: ../../../../tests/qtest/libqtest.h:929
-#: ../../../../tests/qtest/libqtest.h:1002
-#: ../../../../tests/qtest/libqtest.h:1019
+#: ../../../../tests/qtest/libqtest.h:194
+#: ../../../../tests/qtest/libqtest.h:254
+#: ../../../../tests/qtest/libqtest.h:285
+#: ../../../../tests/qtest/libqtest.h:910
+#: ../../../../tests/qtest/libqtest.h:928
+#: ../../../../tests/qtest/libqtest.h:1001
+#: ../../../../tests/qtest/libqtest.h:1018
 msgid "``int *fds``"
 msgstr ""
 
@@ -952,9 +941,9 @@ msgstr ""
 msgid "array of file descriptors"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:196
-#: ../../../../tests/qtest/libqtest.h:256
-#: ../../../../tests/qtest/libqtest.h:287
+#: ../../../../tests/qtest/libqtest.h:195
+#: ../../../../tests/qtest/libqtest.h:255
+#: ../../../../tests/qtest/libqtest.h:286
 msgid "``size_t fds_num``"
 msgstr ""
 
@@ -1009,7 +998,7 @@ msgid ""
 "useful for negative tests."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:249
+#: ../../../../tests/qtest/libqtest.h:244
 msgid "``const char *socket_path``"
 msgstr ""
 
@@ -1053,7 +1042,7 @@ msgstr ""
 msgid ":c:type:`QTestSTate <QTestSTate>` instance to operate on"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:355
+#: ../../../../tests/qtest/libqtest.h:354
 msgid "``QTestQMPEventCallback cb``"
 msgstr ""
 
@@ -1061,7 +1050,7 @@ msgstr ""
 msgid "callback to invoke for events"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:356
+#: ../../../../tests/qtest/libqtest.h:355
 msgid "``void *opaque``"
 msgstr ""
 
@@ -1073,9 +1062,9 @@ msgstr ""
 msgid "Register a callback to be invoked whenever an event arrives"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:366
-#: ../../../../tests/qtest/libqtest.h:378
-#: ../../../../tests/qtest/libqtest.h:392
+#: ../../../../tests/qtest/libqtest.h:365
+#: ../../../../tests/qtest/libqtest.h:377
+#: ../../../../tests/qtest/libqtest.h:391
 msgid "``const char *event``"
 msgstr ""
 
@@ -1112,7 +1101,7 @@ msgid ""
 "returns it. If no event matches, clears the buffer and returns NULL."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:405
+#: ../../../../tests/qtest/libqtest.h:404
 msgid "``const char *job_id``"
 msgstr ""
 
@@ -1151,8 +1140,8 @@ msgstr ""
 msgid "HMP command arguments"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:444
-#: ../../../../tests/qtest/libqtest.h:1084
+#: ../../../../tests/qtest/libqtest.h:443
+#: ../../../../tests/qtest/libqtest.h:1079
 msgid "``const char *device``"
 msgstr ""
 
@@ -1172,7 +1161,7 @@ msgstr ""
 msgid "Run QOM property get/set round-trip tests on all non-abstract types."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:465
+#: ../../../../tests/qtest/libqtest.h:464
 msgid "``int num``"
 msgstr ""
 
@@ -1184,9 +1173,9 @@ msgstr ""
 msgid "The level of the **num** interrupt."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:474
-#: ../../../../tests/qtest/libqtest.h:484
-#: ../../../../tests/qtest/libqtest.h:505
+#: ../../../../tests/qtest/libqtest.h:473
+#: ../../../../tests/qtest/libqtest.h:483
+#: ../../../../tests/qtest/libqtest.h:504
 msgid "``const char *string``"
 msgstr ""
 
@@ -1208,14 +1197,14 @@ msgid ""
 "specified by **string**."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:494
+#: ../../../../tests/qtest/libqtest.h:493
 msgid "``const char *qom_path``"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:495
-#: ../../../../tests/qtest/libqtest.h:506
-#: ../../../../tests/qtest/libqtest.h:670
-#: ../../../../tests/qtest/libqtest.h:685
+#: ../../../../tests/qtest/libqtest.h:494
+#: ../../../../tests/qtest/libqtest.h:505
+#: ../../../../tests/qtest/libqtest.h:669
+#: ../../../../tests/qtest/libqtest.h:684
 msgid "``const char *name``"
 msgstr ""
 
@@ -1249,7 +1238,7 @@ msgstr ""
 msgid "IRQ name"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:507
+#: ../../../../tests/qtest/libqtest.h:506
 msgid "``int irq``"
 msgstr ""
 
@@ -1257,7 +1246,7 @@ msgstr ""
 msgid "IRQ number"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:508
+#: ../../../../tests/qtest/libqtest.h:507
 msgid "``int level``"
 msgstr ""
 
@@ -1269,12 +1258,12 @@ msgstr ""
 msgid "Force given device/irq GPIO-in pin to the given level."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:518
-#: ../../../../tests/qtest/libqtest.h:528
-#: ../../../../tests/qtest/libqtest.h:538
-#: ../../../../tests/qtest/libqtest.h:548
-#: ../../../../tests/qtest/libqtest.h:557
-#: ../../../../tests/qtest/libqtest.h:566
+#: ../../../../tests/qtest/libqtest.h:517
+#: ../../../../tests/qtest/libqtest.h:527
+#: ../../../../tests/qtest/libqtest.h:537
+#: ../../../../tests/qtest/libqtest.h:547
+#: ../../../../tests/qtest/libqtest.h:556
+#: ../../../../tests/qtest/libqtest.h:565
 msgid "``uint16_t addr``"
 msgstr ""
 
@@ -1284,8 +1273,8 @@ msgstr ""
 msgid "I/O port to write to."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:519
-#: ../../../../tests/qtest/libqtest.h:576
+#: ../../../../tests/qtest/libqtest.h:518
+#: ../../../../tests/qtest/libqtest.h:575
 msgid "``uint8_t value``"
 msgstr ""
 
@@ -1303,8 +1292,8 @@ msgstr ""
 msgid "Write an 8-bit value to an I/O port."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:529
-#: ../../../../tests/qtest/libqtest.h:586
+#: ../../../../tests/qtest/libqtest.h:528
+#: ../../../../tests/qtest/libqtest.h:585
 msgid "``uint16_t value``"
 msgstr ""
 
@@ -1312,8 +1301,8 @@ msgstr ""
 msgid "Write a 16-bit value to an I/O port."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:539
-#: ../../../../tests/qtest/libqtest.h:596
+#: ../../../../tests/qtest/libqtest.h:538
+#: ../../../../tests/qtest/libqtest.h:595
 msgid "``uint32_t value``"
 msgstr ""
 
@@ -1339,19 +1328,19 @@ msgstr ""
 msgid "Returns a 32-bit value from an I/O port."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:575
-#: ../../../../tests/qtest/libqtest.h:585
-#: ../../../../tests/qtest/libqtest.h:595
-#: ../../../../tests/qtest/libqtest.h:605
-#: ../../../../tests/qtest/libqtest.h:615
-#: ../../../../tests/qtest/libqtest.h:626
-#: ../../../../tests/qtest/libqtest.h:637
-#: ../../../../tests/qtest/libqtest.h:648
-#: ../../../../tests/qtest/libqtest.h:659
-#: ../../../../tests/qtest/libqtest.h:699
-#: ../../../../tests/qtest/libqtest.h:710
-#: ../../../../tests/qtest/libqtest.h:721
-#: ../../../../tests/qtest/libqtest.h:733
+#: ../../../../tests/qtest/libqtest.h:574
+#: ../../../../tests/qtest/libqtest.h:584
+#: ../../../../tests/qtest/libqtest.h:594
+#: ../../../../tests/qtest/libqtest.h:604
+#: ../../../../tests/qtest/libqtest.h:614
+#: ../../../../tests/qtest/libqtest.h:625
+#: ../../../../tests/qtest/libqtest.h:636
+#: ../../../../tests/qtest/libqtest.h:647
+#: ../../../../tests/qtest/libqtest.h:658
+#: ../../../../tests/qtest/libqtest.h:698
+#: ../../../../tests/qtest/libqtest.h:709
+#: ../../../../tests/qtest/libqtest.h:720
+#: ../../../../tests/qtest/libqtest.h:732
 msgid "``uint64_t addr``"
 msgstr ""
 
@@ -1377,7 +1366,7 @@ msgstr ""
 msgid "Writes a 32-bit value to memory."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:606
+#: ../../../../tests/qtest/libqtest.h:605
 msgid "``uint64_t value``"
 msgstr ""
 
@@ -1417,10 +1406,10 @@ msgstr ""
 msgid "Reads a 64-bit value from memory."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:660
-#: ../../../../tests/qtest/libqtest.h:700
-#: ../../../../tests/qtest/libqtest.h:823
-#: ../../../../tests/qtest/libqtest.h:874
+#: ../../../../tests/qtest/libqtest.h:659
+#: ../../../../tests/qtest/libqtest.h:699
+#: ../../../../tests/qtest/libqtest.h:822
+#: ../../../../tests/qtest/libqtest.h:869
 msgid "``void *data``"
 msgstr ""
 
@@ -1429,11 +1418,11 @@ msgstr ""
 msgid "Pointer to where memory contents will be stored."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:661
-#: ../../../../tests/qtest/libqtest.h:701
-#: ../../../../tests/qtest/libqtest.h:712
-#: ../../../../tests/qtest/libqtest.h:723
-#: ../../../../tests/qtest/libqtest.h:735
+#: ../../../../tests/qtest/libqtest.h:660
+#: ../../../../tests/qtest/libqtest.h:700
+#: ../../../../tests/qtest/libqtest.h:711
+#: ../../../../tests/qtest/libqtest.h:722
+#: ../../../../tests/qtest/libqtest.h:734
 msgid "``size_t size``"
 msgstr ""
 
@@ -1451,7 +1440,7 @@ msgstr ""
 msgid "name of the command to call."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:671
+#: ../../../../tests/qtest/libqtest.h:670
 msgid "``uint32_t nargs``"
 msgstr ""
 
@@ -1459,7 +1448,7 @@ msgstr ""
 msgid "Number of args."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:672
+#: ../../../../tests/qtest/libqtest.h:671
 msgid "``uint64_t args``"
 msgstr ""
 
@@ -1467,7 +1456,7 @@ msgstr ""
 msgid "Guest address to read args from."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:673
+#: ../../../../tests/qtest/libqtest.h:672
 msgid "``uint32_t nret``"
 msgstr ""
 
@@ -1475,7 +1464,7 @@ msgstr ""
 msgid "Number of return value."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:674
+#: ../../../../tests/qtest/libqtest.h:673
 msgid "``uint64_t ret``"
 msgstr ""
 
@@ -1487,7 +1476,7 @@ msgstr ""
 msgid "Call an RTAS function"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:686
+#: ../../../../tests/qtest/libqtest.h:685
 msgid "``uint64_t cpu``"
 msgstr ""
 
@@ -1495,7 +1484,7 @@ msgstr ""
 msgid "hart number."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:687
+#: ../../../../tests/qtest/libqtest.h:686
 msgid "``int csr``"
 msgstr ""
 
@@ -1503,7 +1492,7 @@ msgstr ""
 msgid "CSR number."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:688
+#: ../../../../tests/qtest/libqtest.h:687
 msgid "``uint64_t *val``"
 msgstr ""
 
@@ -1519,10 +1508,10 @@ msgstr ""
 msgid "Read guest memory into a buffer and receive using a base64 encoding."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:711
-#: ../../../../tests/qtest/libqtest.h:722
-#: ../../../../tests/qtest/libqtest.h:810
-#: ../../../../tests/qtest/libqtest.h:860
+#: ../../../../tests/qtest/libqtest.h:710
+#: ../../../../tests/qtest/libqtest.h:721
+#: ../../../../tests/qtest/libqtest.h:809
+#: ../../../../tests/qtest/libqtest.h:859
 msgid "``const void *data``"
 msgstr ""
 
@@ -1545,7 +1534,7 @@ msgstr ""
 msgid "Write a buffer to guest memory and transmit using a base64 encoding."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:734
+#: ../../../../tests/qtest/libqtest.h:733
 msgid "``uint8_t patt``"
 msgstr ""
 
@@ -1567,7 +1556,7 @@ msgstr ""
 msgid "The current value of the QEMU_CLOCK_VIRTUAL in nanoseconds."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:754
+#: ../../../../tests/qtest/libqtest.h:753
 msgid "``int64_t step``"
 msgstr ""
 
@@ -1579,7 +1568,7 @@ msgstr ""
 msgid "Advance the QEMU_CLOCK_VIRTUAL by **step** nanoseconds."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:765
+#: ../../../../tests/qtest/libqtest.h:764
 msgid "``int64_t val``"
 msgstr ""
 
@@ -1597,8 +1586,7 @@ msgstr ""
 msgid "True if the architecture under test has a big endian configuration."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:787
-#: ../../../../tests/qtest/libqtest.h:1200
+#: ../../../../tests/qtest/libqtest.h:1
 msgid "``void``"
 msgstr ""
 
@@ -1610,7 +1598,7 @@ msgstr ""
 msgid "The architecture for the QEMU executable under test."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:794
+#: ../../../../tests/qtest/libqtest.h:789
 msgid "``const char *accel_name``"
 msgstr ""
 
@@ -1622,9 +1610,9 @@ msgstr ""
 msgid "true if the accelerator is built in."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:802
-#: ../../../../tests/qtest/libqtest.h:813
-#: ../../../../tests/qtest/libqtest.h:826
+#: ../../../../tests/qtest/libqtest.h:797
+#: ../../../../tests/qtest/libqtest.h:808
+#: ../../../../tests/qtest/libqtest.h:821
 msgid "``const char *str``"
 msgstr ""
 
@@ -1634,7 +1622,7 @@ msgstr ""
 msgid "Test case path."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:799
+#: ../../../../tests/qtest/libqtest.h:798
 msgid "``void (*fn)(void)``"
 msgstr ""
 
@@ -1657,8 +1645,8 @@ msgstr ""
 msgid "Test case data"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:811
-#: ../../../../tests/qtest/libqtest.h:824
+#: ../../../../tests/qtest/libqtest.h:810
+#: ../../../../tests/qtest/libqtest.h:823
 msgid "``void (*fn)(const void *)``"
 msgstr ""
 
@@ -1669,7 +1657,7 @@ msgid ""
 "prefixed with the architecture under test, as returned by qtest_get_arch()."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:825
+#: ../../../../tests/qtest/libqtest.h:824
 msgid "``GDestroyNotify data_free_func``"
 msgstr ""
 
@@ -1685,7 +1673,7 @@ msgstr ""
 msgid "``qtest_add (testpath, Fixture, tdata, fsetup, ftest, fteardown)``"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:843
+#: ../../../../tests/qtest/libqtest.h:838
 msgid "``testpath``"
 msgstr ""
 
@@ -1693,7 +1681,7 @@ msgstr ""
 msgid "Test case path"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:840
+#: ../../../../tests/qtest/libqtest.h:839
 msgid "``Fixture``"
 msgstr ""
 
@@ -1701,11 +1689,11 @@ msgstr ""
 msgid "Fixture type"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:841
+#: ../../../../tests/qtest/libqtest.h:840
 msgid "``tdata``"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:842
+#: ../../../../tests/qtest/libqtest.h:841
 msgid "``fsetup``"
 msgstr ""
 
@@ -1713,11 +1701,11 @@ msgstr ""
 msgid "Test case setup function"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:843
+#: ../../../../tests/qtest/libqtest.h:842
 msgid "``ftest``"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:844
+#: ../../../../tests/qtest/libqtest.h:843
 msgid "``fteardown``"
 msgstr ""
 
@@ -1731,7 +1719,7 @@ msgid ""
 "prefixed with the architecture under test, as returned by qtest_get_arch()."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:863
+#: ../../../../tests/qtest/libqtest.h:858
 msgid "``GHookFunc fn``"
 msgstr ""
 
@@ -1778,11 +1766,11 @@ msgstr ""
 msgid "QTestState instance to operate on"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:883
-#: ../../../../tests/qtest/libqtest.h:898
-#: ../../../../tests/qtest/libqtest.h:916
-#: ../../../../tests/qtest/libqtest.h:934
-#: ../../../../tests/qtest/libqtest.h:963
+#: ../../../../tests/qtest/libqtest.h:882
+#: ../../../../tests/qtest/libqtest.h:897
+#: ../../../../tests/qtest/libqtest.h:915
+#: ../../../../tests/qtest/libqtest.h:933
+#: ../../../../tests/qtest/libqtest.h:962
 msgid "``va_list args``"
 msgstr ""
 
@@ -1815,10 +1803,10 @@ msgstr ""
 msgid "the file descriptors to send"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:912
-#: ../../../../tests/qtest/libqtest.h:930
-#: ../../../../tests/qtest/libqtest.h:1003
-#: ../../../../tests/qtest/libqtest.h:1020
+#: ../../../../tests/qtest/libqtest.h:911
+#: ../../../../tests/qtest/libqtest.h:929
+#: ../../../../tests/qtest/libqtest.h:1002
+#: ../../../../tests/qtest/libqtest.h:1019
 msgid "``size_t nfds``"
 msgstr ""
 
@@ -1850,7 +1838,7 @@ msgid ""
 "response, and returns the response."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1039
+#: ../../../../tests/qtest/libqtest.h:1034
 msgid "``void (*cb)(const char *machine)``"
 msgstr ""
 
@@ -1858,7 +1846,7 @@ msgstr ""
 msgid "Pointer to the callback function"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1036
+#: ../../../../tests/qtest/libqtest.h:1035
 msgid "``bool skip_old_versioned``"
 msgstr ""
 
@@ -1870,7 +1858,7 @@ msgstr ""
 msgid "Call a callback function for every name of all available machines."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1046
+#: ../../../../tests/qtest/libqtest.h:1045
 msgid "``const char *alias``"
 msgstr ""
 
@@ -1882,8 +1870,8 @@ msgstr ""
 msgid "the machine type corresponding to the alias if any, otherwise NULL."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1059
-#: ../../../../tests/qtest/libqtest.h:1064
+#: ../../../../tests/qtest/libqtest.h:1054
+#: ../../../../tests/qtest/libqtest.h:1063
 msgid "``const char *machine``"
 msgstr ""
 
@@ -1900,7 +1888,7 @@ msgstr ""
 msgid "true if the machine is available in the specified binary."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1076
+#: ../../../../tests/qtest/libqtest.h:1071
 msgid "``const char *cpu``"
 msgstr ""
 
@@ -1920,7 +1908,7 @@ msgstr ""
 msgid "true if the device is available in the target binary."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1089
+#: ../../../../tests/qtest/libqtest.h:1088
 msgid "``const char *drv``"
 msgstr ""
 
@@ -1929,7 +1917,7 @@ msgstr ""
 msgid "Name of the device that should be added"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1090
+#: ../../../../tests/qtest/libqtest.h:1089
 msgid "``const QDict *arguments``"
 msgstr ""
 
@@ -1943,13 +1931,13 @@ msgid ""
 "supplied in form of QDict. Use NULL for empty properties list."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1101
+#: ../../../../tests/qtest/libqtest.h:1100
 msgid "``const char *driver``"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1102
-#: ../../../../tests/qtest/libqtest.h:1126
-#: ../../../../tests/qtest/libqtest.h:1135
+#: ../../../../tests/qtest/libqtest.h:1101
+#: ../../../../tests/qtest/libqtest.h:1125
+#: ../../../../tests/qtest/libqtest.h:1134
 msgid "``const char *id``"
 msgstr ""
 
@@ -1963,7 +1951,7 @@ msgstr ""
 msgid "Generic hot-plugging test via the device_add QMP command."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1115
+#: ../../../../tests/qtest/libqtest.h:1114
 msgid "``const char *protocol``"
 msgstr ""
 
@@ -1971,7 +1959,7 @@ msgstr ""
 msgid "the protocol to add to"
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1116
+#: ../../../../tests/qtest/libqtest.h:1115
 msgid "``int fd``"
 msgstr ""
 
@@ -1999,7 +1987,7 @@ msgstr ""
 msgid "true if the child is still alive."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1153
+#: ../../../../tests/qtest/libqtest.h:1152
 msgid "``int status``"
 msgstr ""
 
@@ -2011,8 +1999,8 @@ msgstr ""
 msgid "Set expected exit status of the child."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1167
-#: ../../../../tests/qtest/libqtest.h:1179
+#: ../../../../tests/qtest/libqtest.h:1166
+#: ../../../../tests/qtest/libqtest.h:1178
 msgid "``const char *path``"
 msgstr ""
 
@@ -2020,8 +2008,8 @@ msgstr ""
 msgid "Path to the property being set."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1168
-#: ../../../../tests/qtest/libqtest.h:1180
+#: ../../../../tests/qtest/libqtest.h:1167
+#: ../../../../tests/qtest/libqtest.h:1179
 msgid "``const char *property``"
 msgstr ""
 
@@ -2029,7 +2017,7 @@ msgstr ""
 msgid "Property being set."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1169
+#: ../../../../tests/qtest/libqtest.h:1168
 msgid "``bool value``"
 msgstr ""
 
@@ -2061,7 +2049,7 @@ msgstr ""
 msgid "true if \"qemu-img\" is available."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1207
+#: ../../../../tests/qtest/libqtest.h:1202
 msgid "``const char *file``"
 msgstr ""
 
@@ -2073,7 +2061,7 @@ msgstr ""
 msgid "Format, e.g. \"qcow2\" or \"raw\""
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1205
+#: ../../../../tests/qtest/libqtest.h:1204
 msgid "``unsigned size_mb``"
 msgstr ""
 
@@ -2091,7 +2079,7 @@ msgstr ""
 msgid "true if the image has been created successfully."
 msgstr ""
 
-#: ../../../../tests/qtest/libqtest.h:1220
+#: ../../../../tests/qtest/libqtest.h:1215
 msgid "``const char *domain``"
 msgstr ""
 
@@ -2120,7 +2108,7 @@ msgid ""
 "environment variables recognized by QTest, not including test-specific ones:"
 msgstr ""
 
-#: ../../../devel/testing/qtest.rst:106
+#: ../../../devel/testing/qtest.rst:107
 msgid "``QTEST_QEMU_BINARY``"
 msgstr ""
 
@@ -2128,7 +2116,7 @@ msgstr ""
 msgid "The QEMU binary itself (generally a ``qemu-system-<arch>`` binary)."
 msgstr ""
 
-#: ../../../devel/testing/qtest.rst:109
+#: ../../../devel/testing/qtest.rst:110
 msgid "``QTEST_QEMU_ARGS``"
 msgstr ""
 
@@ -2136,7 +2124,7 @@ msgstr ""
 msgid "Extra arguments for the QEMU command line."
 msgstr ""
 
-#: ../../../devel/testing/qtest.rst:112
+#: ../../../devel/testing/qtest.rst:113
 msgid "``QTEST_QEMU_IMG``"
 msgstr ""
 
@@ -2144,7 +2132,7 @@ msgstr ""
 msgid "The ``qemu-img`` binary."
 msgstr ""
 
-#: ../../../devel/testing/qtest.rst:115
+#: ../../../devel/testing/qtest.rst:116
 msgid "``QTEST_QEMU_STORAGE_DAEMON_BINARY``"
 msgstr ""
 
@@ -2152,7 +2140,7 @@ msgstr ""
 msgid "The ``qemu-storage-daemon`` binary."
 msgstr ""
 
-#: ../../../devel/testing/qtest.rst:118
+#: ../../../devel/testing/qtest.rst:120
 msgid "``QTEST_STOP``"
 msgstr ""
 
@@ -2162,7 +2150,7 @@ msgid ""
 "execution."
 msgstr ""
 
-#: ../../../devel/testing/qtest.rst:122
+#: ../../../devel/testing/qtest.rst:137
 msgid "``QTEST_LOG``"
 msgstr ""
 
@@ -2172,7 +2160,7 @@ msgid ""
 "defined log domains are:"
 msgstr ""
 
-#: ../../../devel/testing/qtest.rst:126
+#: ../../../devel/testing/qtest.rst:127
 msgid "``qmp``"
 msgstr ""
 
@@ -2180,7 +2168,7 @@ msgstr ""
 msgid "controls verbose output of QMP command invocations."
 msgstr ""
 
-#: ../../../devel/testing/qtest.rst:129
+#: ../../../devel/testing/qtest.rst:130
 msgid "``qtest``"
 msgstr ""
 
@@ -2188,7 +2176,7 @@ msgstr ""
 msgid "controls verbose output of QTest operations."
 msgstr ""
 
-#: ../../../devel/testing/qtest.rst:132
+#: ../../../devel/testing/qtest.rst:133
 msgid "``test``"
 msgstr ""
 
