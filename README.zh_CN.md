@@ -100,9 +100,9 @@ The goal of this project is to translate The QEMU Documentation into multiple la
     </tr>
     <!-- Mirror -->
     <tr>
-      <th rowspan="1" colspan="1" align="center" style="text-align: center;"><div>GitCode</div></th>
+      <th rowspan="1" colspan="1" align="center" style="text-align: center;"><div>AtomGit</div></th>
       <td rowspan="1" colspan="1" align="center" style="text-align: center;">
-        <div><a href="https://gitcode.com/localizethedocs/qemu-docs-l10n" target="_blank">qemu-docs-l10n</a></div>
+        <div><a href="https://atomgit.com/localizethedocs/qemu-docs-l10n" target="_blank">qemu-docs-l10n</a></div>
       </td>
     </tr>
     <tr>
