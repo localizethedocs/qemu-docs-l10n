@@ -572,8 +572,8 @@ msgid ""
 "sufficient for most devices. Some devices change behaviour based on the "
 "attributes used for the memory transaction, or need to be able to respond "
 "that the access should provoke a bus error rather than completing "
-"successfully; those devices can use the ->read_with_attrs() and -"
-">write_with_attrs() callbacks instead."
+"successfully; those devices can use the ->read_with_attrs() and "
+"->write_with_attrs() callbacks instead."
 msgstr ""
 
 #: ../../../devel/memory.rst:346
@@ -931,11 +931,12 @@ msgstr ""
 #: ../../../../include/system/memory.h:634
 msgid ""
 "Called at the beginning of an address space update transaction. Followed by "
-"calls to :c:type:`MemoryListener.region_add\\(\\) <MemoryListener>`, :c:type:"
-"`MemoryListener.region_del\\(\\) <MemoryListener>`, :c:type:`MemoryListener."
-"region_nop\\(\\) <MemoryListener>`, :c:type:`MemoryListener.log_start\\(\\) "
-"<MemoryListener>` and :c:type:`MemoryListener.log_stop\\(\\) "
-"<MemoryListener>` in increasing address order."
+"calls to :c:type:`MemoryListener.region_add\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.region_del\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.region_nop\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.log_start\\(\\) <MemoryListener>` "
+"and :c:type:`MemoryListener.log_stop\\(\\) <MemoryListener>` in increasing "
+"address order."
 msgstr ""
 
 #: ../../../../include/system/memory.h:640
@@ -952,11 +953,11 @@ msgstr ""
 #: ../../../../include/system/memory.h:647
 msgid ""
 "Called at the end of an address space update transaction, after the last "
-"call to :c:type:`MemoryListener.region_add\\(\\) <MemoryListener>`, :c:type:"
-"`MemoryListener.region_del\\(\\) <MemoryListener>` or :c:type:"
-"`MemoryListener.region_nop\\(\\) <MemoryListener>`, :c:type:`MemoryListener."
-"log_start\\(\\) <MemoryListener>` and :c:type:`MemoryListener.log_stop\\(\\) "
-"<MemoryListener>`."
+"call to :c:type:`MemoryListener.region_add\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.region_del\\(\\) "
+"<MemoryListener>` or :c:type:`MemoryListener.region_nop\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.log_start\\(\\) <MemoryListener>` "
+"and :c:type:`MemoryListener.log_stop\\(\\) <MemoryListener>`."
 msgstr ""
 
 #: ../../../../include/system/memory.h:658
@@ -1018,11 +1019,12 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:695
 msgid ""
-"Called during an address space update transaction, after one of :c:type:"
-"`MemoryListener.region_add\\(\\) <MemoryListener>`, :c:type:`MemoryListener."
-"region_del\\(\\) <MemoryListener>` or :c:type:`MemoryListener."
-"region_nop\\(\\) <MemoryListener>`, if dirty memory logging clients have "
-"become active since the last transaction."
+"Called during an address space update transaction, after one "
+"of :c:type:`MemoryListener.region_add\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.region_del\\(\\) "
+"<MemoryListener>` or :c:type:`MemoryListener.region_nop\\(\\) "
+"<MemoryListener>`, if dirty memory logging clients have become active since "
+"the last transaction."
 msgstr ""
 
 #: ../../../../include/system/memory.h:700
@@ -1041,12 +1043,13 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:713
 msgid ""
-"Called during an address space update transaction, after one of :c:type:"
-"`MemoryListener.region_add\\(\\) <MemoryListener>`, :c:type:`MemoryListener."
-"region_del\\(\\) <MemoryListener>` or :c:type:`MemoryListener."
-"region_nop\\(\\) <MemoryListener>` and possibly after :c:type:"
-"`MemoryListener.log_start\\(\\) <MemoryListener>`, if dirty memory logging "
-"clients have become inactive since the last transaction."
+"Called during an address space update transaction, after one "
+"of :c:type:`MemoryListener.region_add\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.region_del\\(\\) "
+"<MemoryListener>` or :c:type:`MemoryListener.region_nop\\(\\) "
+"<MemoryListener>` and possibly after :c:type:`MemoryListener.log_start\\(\\) "
+"<MemoryListener>`, if dirty memory logging clients have become inactive "
+"since the last transaction."
 msgstr ""
 
 #: ../../../../include/system/memory.h:731
@@ -1087,8 +1090,8 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:759
 msgid ""
-"Called before reading the dirty memory bitmap for a :c:type:"
-"`MemoryRegionSection <MemoryRegionSection>`."
+"Called before reading the dirty memory bitmap for "
+"a :c:type:`MemoryRegionSection <MemoryRegionSection>`."
 msgstr ""
 
 #: ../../../../include/system/memory.h:769
@@ -1098,10 +1101,10 @@ msgstr ""
 #: ../../../../include/system/memory.h:770
 msgid ""
 "Called by memory_global_dirty_log_start(), which enables the "
-"``DIRTY_LOG_MIGRATION`` client on all memory regions in the address space.  :"
-"c:type:`MemoryListener.log_global_start\\(\\) <MemoryListener>` is also "
-"called when a :c:type:`MemoryListener <MemoryListener>` is added, if global "
-"dirty logging is active at that time."
+"``DIRTY_LOG_MIGRATION`` client on all memory regions in the address "
+"space.  :c:type:`MemoryListener.log_global_start\\(\\) <MemoryListener>` is "
+"also called when a :c:type:`MemoryListener <MemoryListener>` is added, if "
+"global dirty logging is active at that time."
 msgstr ""
 
 #: ../../../../include/system/memory.h:776
@@ -1130,8 +1133,8 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:797
 msgid ""
-"Called after reading the dirty memory bitmap for any :c:type:"
-"`MemoryRegionSection <MemoryRegionSection>`."
+"Called after reading the dirty memory bitmap for "
+"any :c:type:`MemoryRegionSection <MemoryRegionSection>`."
 msgstr ""
 
 #: ../../../../include/system/memory.h:806
@@ -1170,8 +1173,9 @@ msgid ""
 "**listener**: The :c:type:`MemoryListener <MemoryListener>`. **section**: "
 "The new :c:type:`MemoryRegionSection <MemoryRegionSection>`. **match_data**: "
 "The **match_data** parameter for the dropped ioeventfd. **data**: The "
-"**data** parameter for the dropped ioeventfd. **e**: The :c:type:"
-"`EventNotifier <EventNotifier>` parameter for the dropped ioeventfd."
+"**data** parameter for the dropped ioeventfd. **e**: "
+"The :c:type:`EventNotifier <EventNotifier>` parameter for the dropped "
+"ioeventfd."
 msgstr ""
 
 #: ../../../../include/system/memory.h:838
@@ -2257,8 +2261,8 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:1617
 msgid ""
-"the IOMMUNotifier to be added; the notify callback receives a pointer to an :"
-"c:type:`IOMMUTLBEntry <IOMMUTLBEntry>` as the opaque value; the pointer "
+"the IOMMUNotifier to be added; the notify callback receives a pointer to "
+"an :c:type:`IOMMUTLBEntry <IOMMUTLBEntry>` as the opaque value; the pointer "
 "ceases to be valid on exit from the notifier."
 msgstr ""
 
@@ -3036,8 +3040,8 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:2211
 msgid ""
-"checks if an address relative to a **container** translates into :c:type:"
-"`MemoryRegion <MemoryRegion>` within **container**"
+"checks if an address relative to a **container** translates "
+"into :c:type:`MemoryRegion <MemoryRegion>` within **container**"
 msgstr ""
 
 #: ../../../../include/system/memory.h:2217
@@ -3075,8 +3079,8 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:2232
 msgid ""
-"get the :c:type:`RamDiscardManager <RamDiscardManager>` for a :c:type:"
-"`MemoryRegion <MemoryRegion>`"
+"get the :c:type:`RamDiscardManager <RamDiscardManager>` for "
+"a :c:type:`MemoryRegion <MemoryRegion>`"
 msgstr ""
 
 #: ../../../../include/system/memory.h:2233
@@ -3087,14 +3091,14 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:2242
 msgid ""
-"check whether a :c:type:`MemoryRegion <MemoryRegion>` has a :c:type:"
-"`RamDiscardManager <RamDiscardManager>` assigned"
+"check whether a :c:type:`MemoryRegion <MemoryRegion>` has "
+"a :c:type:`RamDiscardManager <RamDiscardManager>` assigned"
 msgstr ""
 
 #: ../../../../include/system/memory.h:2253
 msgid ""
-"add a :c:type:`RamDiscardSource <RamDiscardSource>` for a :c:type:"
-"`MemoryRegion <MemoryRegion>`"
+"add a :c:type:`RamDiscardSource <RamDiscardSource>` for "
+"a :c:type:`MemoryRegion <MemoryRegion>`"
 msgstr ""
 
 #: ../../../../include/system/memory.h:2258
@@ -3108,8 +3112,8 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:2262
 msgid ""
-"remove a :c:type:`RamDiscardSource <RamDiscardSource>` for a :c:type:"
-"`MemoryRegion <MemoryRegion>`"
+"remove a :c:type:`RamDiscardSource <RamDiscardSource>` for "
+"a :c:type:`MemoryRegion <MemoryRegion>`"
 msgstr ""
 
 #: ../../../../include/system/memory.h:2266
@@ -3122,8 +3126,8 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:2273
 msgid ""
-"translate an address/size relative to a MemoryRegion into a :c:type:"
-"`MemoryRegionSection <MemoryRegionSection>`."
+"translate an address/size relative to a MemoryRegion into "
+"a :c:type:`MemoryRegionSection <MemoryRegionSection>`."
 msgstr ""
 
 #: ../../../../include/system/memory.h:2296
@@ -3199,8 +3203,8 @@ msgstr ""
 msgid ""
 "Synchronizes the vCPUs with a thread that is reading the dirty bitmap. This "
 "function must be called after the dirty log bitmap is cleared, and before "
-"dirty guest memory pages are read.  If you are using :c:type:"
-"`DirtyBitmapSnapshot <DirtyBitmapSnapshot>`, "
+"dirty guest memory pages are read.  If you are "
+"using :c:type:`DirtyBitmapSnapshot <DirtyBitmapSnapshot>`, "
 "memory_region_snapshot_and_clear_dirty() takes care of doing this."
 msgstr ""
 

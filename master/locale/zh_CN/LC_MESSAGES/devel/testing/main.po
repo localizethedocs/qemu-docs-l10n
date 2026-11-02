@@ -608,8 +608,8 @@ msgstr ""
 msgid ""
 "``-valgrind`` attaches a valgrind instance to QEMU. If it detects warnings, "
 "it will print and save the log in ``$TEST_DIR/<valgrind_pid>.valgrind``. The "
-"final command line will be ``valgrind --log-file=$TEST_DIR/ <valgrind_pid>."
-"valgrind --error-exitcode=99 $QEMU ...``"
+"final command line will be ``valgrind --log-file=$TEST_DIR/ "
+"<valgrind_pid>.valgrind --error-exitcode=99 $QEMU ...``"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:379
@@ -646,10 +646,10 @@ msgstr ""
 
 #: ../../../devel/testing/main.rst:400
 msgid ""
-"Another way of defining groups is creating the tests/qemu-iotests/group."
-"local file. This should be used only for downstream (this file should never "
-"appear in upstream). This file may be used for defining some downstream test "
-"groups or for temporarily disabling tests, like this:"
+"Another way of defining groups is creating the tests/qemu-iotests/"
+"group.local file. This should be used only for downstream (this file should "
+"never appear in upstream). This file may be used for defining some "
+"downstream test groups or for temporarily disabling tests, like this:"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:405
@@ -804,12 +804,12 @@ msgstr ""
 
 #: ../../../devel/testing/main.rst:516
 msgid ""
-"The QEMU project has a container registry hosted by GitLab at ``registry."
-"gitlab.com/qemu-project/qemu`` which will automatically be used to pull in "
-"pre-built layers. This avoids unnecessary strain on the distro archives "
-"created by multiple developers running the same container build steps over "
-"and over again. This can be overridden locally by using the ``NOCACHE`` "
-"build option:"
+"The QEMU project has a container registry hosted by GitLab at "
+"``registry.gitlab.com/qemu-project/qemu`` which will automatically be used "
+"to pull in pre-built layers. This avoids unnecessary strain on the distro "
+"archives created by multiple developers running the same container build "
+"steps over and over again. This can be overridden locally by using the "
+"``NOCACHE`` build option:"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:523
@@ -904,10 +904,10 @@ msgstr ""
 
 #: ../../../devel/testing/main.rst:580
 msgid ""
-"Add an entry for the new build prerequisite to ``lcitool/facts/mappings."
-"yml``, listing its native package name on as many OS distros as practical.  "
-"Run ``python -m pytest --regenerate-output`` and check that the changes are "
-"correct."
+"Add an entry for the new build prerequisite to ``lcitool/facts/"
+"mappings.yml``, listing its native package name on as many OS distros as "
+"practical.  Run ``python -m pytest --regenerate-output`` and check that the "
+"changes are correct."
 msgstr ""
 
 #: ../../../devel/testing/main.rst:585
@@ -936,9 +936,9 @@ msgstr ""
 msgid ""
 "Please also trigger gitlab container generation pipelines on your change for "
 "as many OS distros as practical to make sure that there are no obvious "
-"breakages when adding the new pre-requisite. Please see `CI <https://www."
-"qemu.org/docs/master/devel/ci.html>`__ documentation page on how to trigger "
-"gitlab CI pipelines on your change."
+"breakages when adding the new pre-requisite. Please see `CI <https://"
+"www.qemu.org/docs/master/devel/ci.html>`__ documentation page on how to "
+"trigger gitlab CI pipelines on your change."
 msgstr ""
 
 #: ../../../devel/testing/main.rst:605
@@ -1501,15 +1501,15 @@ msgstr ""
 
 #: ../../../devel/testing/main.rst:952
 msgid ""
-"User ``BaseVM.GUEST_USER`` is created, and password set to ``BaseVM."
-"GUEST_PASS``"
+"User ``BaseVM.GUEST_USER`` is created, and password set to "
+"``BaseVM.GUEST_PASS``"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:954
 msgid ""
-"SSH service is enabled and started on boot, ``$QEMU_SRC/tests/keys/id_rsa."
-"pub`` is added to ssh's ``authorized_keys`` file of both root and the normal "
-"user"
+"SSH service is enabled and started on boot, ``$QEMU_SRC/tests/keys/"
+"id_rsa.pub`` is added to ssh's ``authorized_keys`` file of both root and the "
+"normal user"
 msgstr ""
 
 #: ../../../devel/testing/main.rst:957

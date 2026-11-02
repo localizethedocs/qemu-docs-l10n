@@ -93,8 +93,9 @@ msgstr ""
 
 #: ../../../about/removed-features.rst:50
 msgid ""
-"The drive geometry should now be specified via ``-device ...,drive=dr,cyls=c,"
-"heads=h,secs=s`` (together with ``-drive if=none,id=dr,...``)."
+"The drive geometry should now be specified via ``-"
+"device ...,drive=dr,cyls=c,heads=h,secs=s`` (together with ``-drive "
+"if=none,id=dr,...``)."
 msgstr ""
 
 #: ../../../about/removed-features.rst:55
@@ -120,8 +121,8 @@ msgid ""
 "either use ``-nic ...`` (e.g. for on-board NICs) or use ``-netdev ...,id=n`` "
 "together with ``-device ...,netdev=n`` (for full control over pluggable "
 "NICs). To connect multiple NICs or network backends via a hub device (which "
-"is what vlan did), use ``-nic hubport,hubid=x,...`` or ``-netdev hubport,"
-"id=n,hubid=x,...`` (with ``-device ...,netdev=n``) instead."
+"is what vlan did), use ``-nic hubport,hubid=x,...`` or ``-netdev "
+"hubport,id=n,hubid=x,...`` (with ``-device ...,netdev=n``) instead."
 msgstr ""
 
 #: ../../../about/removed-features.rst:73
@@ -156,10 +157,10 @@ msgstr ""
 
 #: ../../../about/removed-features.rst:91
 msgid ""
-"The ``-bootp /some/file`` argument is replaced by either ``-netdev user,id=x,"
-"bootp=/some/file`` (for pluggable NICs, accompanied with ``-device ...,"
-"netdev=x``), or ``-nic user,bootp=/some/file`` (for on-board NICs). The new "
-"syntax allows different settings to be provided per NIC."
+"The ``-bootp /some/file`` argument is replaced by either ``-netdev "
+"user,id=x,bootp=/some/file`` (for pluggable NICs, accompanied with ``-"
+"device ...,netdev=x``), or ``-nic user,bootp=/some/file`` (for on-board "
+"NICs). The new syntax allows different settings to be provided per NIC."
 msgstr ""
 
 #: ../../../about/removed-features.rst:97
@@ -170,10 +171,10 @@ msgstr ""
 msgid ""
 "The ``-redir [tcp|udp]:hostport:[guestaddr]:guestport`` option is replaced "
 "by either ``-netdev user,id=x,hostfwd=[tcp|udp]:[hostaddr]:hostport-"
-"[guestaddr]:guestport`` (for pluggable NICs, accompanied with ``-device ...,"
-"netdev=x``) or by the option ``-nic user,hostfwd=[tcp|udp]:[hostaddr]:"
-"hostport-[guestaddr]:guestport`` (for on-board NICs). The new syntax allows "
-"different settings to be provided per NIC."
+"[guestaddr]:guestport`` (for pluggable NICs, accompanied with ``-"
+"device ...,netdev=x``) or by the option ``-nic user,hostfwd=[tcp|udp]:"
+"[hostaddr]:hostport-[guestaddr]:guestport`` (for on-board NICs). The new "
+"syntax allows different settings to be provided per NIC."
 msgstr ""
 
 #: ../../../about/removed-features.rst:108
@@ -182,10 +183,10 @@ msgstr ""
 
 #: ../../../about/removed-features.rst:110
 msgid ""
-"The ``-smb /some/dir`` argument is replaced by either ``-netdev user,id=x,"
-"smb=/some/dir`` (for pluggable NICs, accompanied with ``-device ...,"
-"netdev=x``), or ``-nic user,smb=/some/dir`` (for on-board NICs). The new "
-"syntax allows different settings to be provided per NIC."
+"The ``-smb /some/dir`` argument is replaced by either ``-netdev "
+"user,id=x,smb=/some/dir`` (for pluggable NICs, accompanied with ``-"
+"device ...,netdev=x``), or ``-nic user,smb=/some/dir`` (for on-board NICs). "
+"The new syntax allows different settings to be provided per NIC."
 msgstr ""
 
 #: ../../../about/removed-features.rst:116
@@ -194,10 +195,10 @@ msgstr ""
 
 #: ../../../about/removed-features.rst:118
 msgid ""
-"The ``-tftp /some/dir`` argument is replaced by either ``-netdev user,id=x,"
-"tftp=/some/dir`` (for pluggable NICs, accompanied with ``-device ...,"
-"netdev=x``), or ``-nic user,tftp=/some/dir`` (for embedded NICs). The new "
-"syntax allows different settings to be provided per NIC."
+"The ``-tftp /some/dir`` argument is replaced by either ``-netdev "
+"user,id=x,tftp=/some/dir`` (for pluggable NICs, accompanied with ``-"
+"device ...,netdev=x``), or ``-nic user,tftp=/some/dir`` (for embedded NICs). "
+"The new syntax allows different settings to be provided per NIC."
 msgstr ""
 
 #: ../../../about/removed-features.rst:124
@@ -297,8 +298,8 @@ msgid ""
 "configured *memory-backend-file* backend to actually benefit from NUMA "
 "configuration. New machine versions (since 5.1) will not accept the option "
 "but it will still work with old machine types. User can check the QAPI "
-"schema to see if the legacy option is supported by looking at MachineInfo::"
-"numa-mem-supported property."
+"schema to see if the legacy option is supported by looking at "
+"MachineInfo::numa-mem-supported property."
 msgstr ""
 
 #: ../../../about/removed-features.rst:190
@@ -776,8 +777,8 @@ msgstr ""
 #: ../../../about/removed-features.rst:488
 msgid ""
 "The ``-singlestep`` option has been turned into an accelerator property, and "
-"given a name that better reflects what it actually does. Use ``-accel tcg,"
-"one-insn-per-tb=on`` instead."
+"given a name that better reflects what it actually does. Use ``-accel "
+"tcg,one-insn-per-tb=on`` instead."
 msgstr ""
 
 #: ../../../about/removed-features.rst:493
@@ -1059,8 +1060,8 @@ msgstr ""
 
 #: ../../../about/removed-features.rst:666
 msgid ""
-"``query-named-block-nodes`` and ``query-block`` result dirty-bitmaps[i]."
-"status (removed in 6.0)"
+"``query-named-block-nodes`` and ``query-block`` result dirty-"
+"bitmaps[i].status (removed in 6.0)"
 msgstr ""
 
 #: ../../../about/removed-features.rst:668
@@ -2136,8 +2137,8 @@ msgstr ""
 
 #: ../../../about/removed-features.rst:1404
 msgid ""
-"qemu-nbd -t --image-opts driver=raw,offset=1M,size=100M,file.driver=qcow2,"
-"file.file.driver=file,file.file.filename=file.qcow2"
+"qemu-nbd -t --image-opts "
+"driver=raw,offset=1M,size=100M,file.driver=qcow2,file.file.driver=file,file.file.filename=file.qcow2"
 msgstr ""
 
 #: ../../../about/removed-features.rst:1407
@@ -2289,10 +2290,10 @@ msgstr ""
 
 #: ../../../about/removed-features.rst:1508
 msgid ""
-"There is a newer Rust implementation of ``virtiofsd`` at ``https://gitlab."
-"com/virtio-fs/virtiofsd``; this has been stable for some time and is now "
-"widely used. The command line and feature set is very close to the removed C "
-"implementation."
+"There is a newer Rust implementation of ``virtiofsd`` at ``https://"
+"gitlab.com/virtio-fs/virtiofsd``; this has been stable for some time and is "
+"now widely used. The command line and feature set is very close to the "
+"removed C implementation."
 msgstr ""
 
 #: ../../../about/removed-features.rst:1515

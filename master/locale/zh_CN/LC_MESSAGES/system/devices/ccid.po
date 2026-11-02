@@ -139,8 +139,9 @@ msgstr ""
 
 #: ../../../system/devices/ccid.rst:68
 msgid ""
-"qemu -usb -device usb-ccid -device ccid-card-emulated,backend=certificates,"
-"db=sql:$PWD,cert1=id-cert,cert2=signing-cert,cert3=encryption-cert"
+"qemu -usb -device usb-ccid -device ccid-card-"
+"emulated,backend=certificates,db=sql:$PWD,cert1=id-cert,cert2=signing-"
+"cert,cert3=encryption-cert"
 msgstr ""
 
 #: ../../../system/devices/ccid.rst:70
@@ -247,8 +248,8 @@ msgstr ""
 msgid ""
 "qemu -chardev socket,server=on,host=0.0.0.0,port=2001,id=ccid,wait=off \\\n"
 "     -usb -device usb-ccid -device ccid-card-passthru,chardev=ccid\n"
-"vscclient -e \"db=\\\"sql:$PWD\\\" use_hw=no soft=(,Test,CAC,,id-cert,"
-"signing-cert,encryption-cert)\" <qemu-host> 2001"
+"vscclient -e \"db=\\\"sql:$PWD\\\" use_hw=no soft=(,Test,CAC,,id-"
+"cert,signing-cert,encryption-cert)\" <qemu-host> 2001"
 msgstr ""
 
 #: ../../../system/devices/ccid.rst:126

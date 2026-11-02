@@ -457,8 +457,8 @@ msgstr ""
 
 #: ../../../system/tls.rst:330
 msgid ""
-"|qemu_system| -object tls-creds-x509,id=tls0,dir=/etc/pki/qemu,"
-"endpoint=server"
+"|qemu_system| -object tls-creds-x509,id=tls0,dir=/etc/pki/"
+"qemu,endpoint=server"
 msgstr ""
 
 #: ../../../system/tls.rst:332
@@ -467,8 +467,8 @@ msgstr ""
 
 #: ../../../system/tls.rst:336
 msgid ""
-"|qemu_system| -object tls-creds-x509,id=tls0,dir=/etc/pki/qemu,"
-"endpoint=client"
+"|qemu_system| -object tls-creds-x509,id=tls0,dir=/etc/pki/"
+"qemu,endpoint=client"
 msgstr ""
 
 #: ../../../system/tls.rst:338
@@ -584,8 +584,8 @@ msgid ""
 "NO_MLDSA=\"-SIGN-ML-DSA-65:-SIGN-ML-DSA-44:-SIGN-ML-DSA-87\"\n"
 "NO_MLKEM=\"-GROUP-X25519-MLKEM768:-GROUP-SECP256R1-MLKEM768:-GROUP-SECP384R1-"
 "MLKEM1024\"\n"
-"# qemu-nbd --object tls-creds-x509,id=tls0,endpoint=server,dir=....,"
-"priority=@SYSTEM:$NO_MLDSA:$NO_MLKEM"
+"# qemu-nbd --object tls-creds-"
+"x509,id=tls0,endpoint=server,dir=....,priority=@SYSTEM:$NO_MLDSA:$NO_MLKEM"
 msgstr ""
 
 #: ../../../system/tls.rst:417
@@ -636,6 +636,6 @@ msgid ""
 "  --object tls-creds-psk,id=tls0,dir=/tmp/keys,username=rich,endpoint=client "
 "\\\n"
 "  --image-opts \\\n"
-"  file.driver=nbd,file.host=localhost,file.port=10809,file.tls-creds=tls0,"
-"file.export=/"
+"  file.driver=nbd,file.host=localhost,file.port=10809,file.tls-"
+"creds=tls0,file.export=/"
 msgstr ""

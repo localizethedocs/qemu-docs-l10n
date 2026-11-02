@@ -149,8 +149,8 @@ msgstr ""
 msgid ""
 "NUL-terminated file names with ``#[track_caller]`` are scheduled for "
 "inclusion as ``#![feature(location_file_nul)]``, but it will be a while "
-"before QEMU can use them.  For now, there is special code in ``util/error."
-"c`` to support non-NUL-terminated file names."
+"before QEMU can use them.  For now, there is special code in ``util/"
+"error.c`` to support non-NUL-terminated file names."
 msgstr ""
 
 #: ../../../devel/rust.rst:88
@@ -359,8 +359,8 @@ msgid ""
 "both function and structs sometimes have a ``qemu_`` or ``QEMU`` prefix. "
 "Generally speaking, these are all removed in the corresponding Rust "
 "functions: ``QEMUTimer`` becomes ``timer::Timer``, ``timer_mod`` becomes "
-"``Timer::modify``, ``sysbus_connect_irq`` becomes ``SysBusDeviceMethods::"
-"connect_irq``."
+"``Timer::modify``, ``sysbus_connect_irq`` becomes "
+"``SysBusDeviceMethods::connect_irq``."
 msgstr ""
 
 #: ../../../devel/rust.rst:179
@@ -525,11 +525,11 @@ msgstr ""
 #: ../../../devel/rust.rst:261
 msgid ""
 "Whenever C code provides you with an opaque ``void *``, avoid converting it "
-"to a Rust mutable reference, and use a shared reference instead.  The ``bql::"
-"cell`` module provides wrappers that can be used to tell the Rust compiler "
-"about interior mutability, and optionally to enforce locking rules for the "
-"\"Big QEMU Lock\".  In the future, similar cell types might also be provided "
-"for ``AioContext``-based locking as well."
+"to a Rust mutable reference, and use a shared reference instead.  The "
+"``bql::cell`` module provides wrappers that can be used to tell the Rust "
+"compiler about interior mutability, and optionally to enforce locking rules "
+"for the \"Big QEMU Lock\".  In the future, similar cell types might also be "
+"provided for ``AioContext``-based locking as well."
 msgstr ""
 
 #: ../../../devel/rust.rst:268
