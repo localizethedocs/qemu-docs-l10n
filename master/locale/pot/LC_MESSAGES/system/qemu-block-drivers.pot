@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-01 14:32+0000\n"
+"POT-Creation-Date: 2026-11-02 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -186,8 +186,8 @@ msgstr ""
 #: ../../../system/qemu-block-drivers.rst.inc:116
 msgid ""
 "Name of the hash algorithm to use with the initialization vector generator "
-"(if required). Defaults to ``sha256``. Only used when ``encrypt."
-"format=luks``."
+"(if required). Defaults to ``sha256``. Only used when "
+"``encrypt.format=luks``."
 msgstr ""
 
 #: ../../../system/qemu-block-drivers.rst.inc:121
@@ -495,8 +495,8 @@ msgid ""
 "example, use ``/dev/cdrom`` to access to the CDROM."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:412
-#: ../../../system/qemu-block-drivers.rst.inc:442
+#: ../../../system/qemu-block-drivers.rst.inc:415
+#: ../../../system/qemu-block-drivers.rst.inc:449
 msgid "CD"
 msgstr ""
 
@@ -507,7 +507,7 @@ msgid ""
 "supported. Currently only data CDs are supported."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:417
+#: ../../../system/qemu-block-drivers.rst.inc:423
 msgid "Floppy"
 msgstr ""
 
@@ -520,8 +520,8 @@ msgid ""
 "and support for it will be removed in a future release."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:425
-#: ../../../system/qemu-block-drivers.rst.inc:451
+#: ../../../system/qemu-block-drivers.rst.inc:431
+#: ../../../system/qemu-block-drivers.rst.inc:458
 msgid "Hard disks"
 msgstr ""
 
@@ -535,7 +535,7 @@ msgid ""
 "permissions accordingly)."
 msgstr ""
 
-#: ../../../system/qemu-block-drivers.rst.inc:433
+#: ../../../system/qemu-block-drivers.rst.inc:437
 msgid "Zoned block devices"
 msgstr ""
 
@@ -903,8 +903,8 @@ msgstr ""
 
 #: ../../../system/qemu-block-drivers.rst.inc:701
 msgid ""
-"|qemu_system| -drive file.driver=ssh[,file.user=USER],file.host=SERVER[,file."
-"port=PORT],file.path=PATH[,file.host_key_check=HOST_KEY_CHECK]"
+"|qemu_system| -drive "
+"file.driver=ssh[,file.user=USER],file.host=SERVER[,file.port=PORT],file.path=PATH[,file.host_key_check=HOST_KEY_CHECK]"
 msgstr ""
 
 #: ../../../system/qemu-block-drivers.rst.inc:684
@@ -1044,8 +1044,8 @@ msgstr ""
 
 #: ../../../system/qemu-block-drivers.rst.inc:794
 msgid ""
-"|qemu_system| -drive file.driver=nvme,file.device=HOST:BUS:SLOT.FUNC,file."
-"namespace=NAMESPACE"
+"|qemu_system| -drive "
+"file.driver=nvme,file.device=HOST:BUS:SLOT.FUNC,file.namespace=NAMESPACE"
 msgstr ""
 
 #: ../../../system/qemu-block-drivers.rst.inc:777
@@ -1097,10 +1097,10 @@ msgstr ""
 #: ../../../system/qemu-block-drivers.rst.inc:805
 msgid ""
 "By default, the guest has exclusive write access to its disk image. If the "
-"guest can safely share the disk image with other writers the ``-device ...,"
-"share-rw=on`` parameter can be used.  This is only safe if the guest is "
-"running software, such as a cluster file system, that coordinates disk "
-"accesses to avoid corruption."
+"guest can safely share the disk image with other writers the ``-"
+"device ...,share-rw=on`` parameter can be used.  This is only safe if the "
+"guest is running software, such as a cluster file system, that coordinates "
+"disk accesses to avoid corruption."
 msgstr ""
 
 #: ../../../system/qemu-block-drivers.rst.inc:811
@@ -1113,15 +1113,15 @@ msgstr ""
 #: ../../../system/qemu-block-drivers.rst.inc:815
 msgid ""
 "Alternatively, locking can be fully disabled by \"locking=off\" block device "
-"option. In the command line, the option is usually in the form of \"file."
-"locking=off\" as the protocol driver is normally placed as a \"file\" child "
-"under a format driver. For example:"
+"option. In the command line, the option is usually in the form of "
+"\"file.locking=off\" as the protocol driver is normally placed as a \"file\" "
+"child under a format driver. For example:"
 msgstr ""
 
 #: ../../../system/qemu-block-drivers.rst.inc:822
 msgid ""
-"-blockdev driver=qcow2,file.filename=/path/to/image,file.locking=off,file."
-"driver=file"
+"-blockdev driver=qcow2,file.filename=/path/to/"
+"image,file.locking=off,file.driver=file"
 msgstr ""
 
 #: ../../../system/qemu-block-drivers.rst.inc:824

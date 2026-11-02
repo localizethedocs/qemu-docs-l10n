@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-04 11:20+0000\n"
+"POT-Creation-Date: 2026-11-02 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -285,7 +285,7 @@ msgid ""
 "KVM VCPU features and their descriptions."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:182
+#: ../../../system/arm/cpu-features.rst:197
 msgid "``kvm-no-adjvtime``"
 msgstr ""
 
@@ -313,7 +313,7 @@ msgid ""
 "the legacy (pre-5.0) behavior."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:199
+#: ../../../system/arm/cpu-features.rst:207
 msgid "``kvm-steal-time``"
 msgstr ""
 
@@ -331,7 +331,7 @@ msgid ""
 "behavior and/or be exposed to the guest userspace."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:209
+#: ../../../system/arm/cpu-features.rst:218
 msgid "``kvm-psci-version``"
 msgstr ""
 
@@ -363,7 +363,7 @@ msgid ""
 "list of TCG VCPU features and their descriptions."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:226
+#: ../../../system/arm/cpu-features.rst:227
 msgid "``pauth``"
 msgstr ""
 
@@ -371,7 +371,7 @@ msgstr ""
 msgid "Enable or disable ``FEAT_Pauth`` entirely."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:229
+#: ../../../system/arm/cpu-features.rst:230
 msgid "``pauth-impdef``"
 msgstr ""
 
@@ -380,7 +380,7 @@ msgid ""
 "When ``pauth`` is enabled, select the QEMU implementation defined algorithm."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:232
+#: ../../../system/arm/cpu-features.rst:233
 msgid "``pauth-qarma3``"
 msgstr ""
 
@@ -388,7 +388,7 @@ msgstr ""
 msgid "When ``pauth`` is enabled, select the architected QARMA3 algorithm."
 msgstr ""
 
-#: ../../../system/arm/cpu-features.rst:235
+#: ../../../system/arm/cpu-features.rst:236
 msgid "``pauth-qarma5``"
 msgstr ""
 
@@ -435,8 +435,8 @@ msgstr ""
 msgid ""
 "If a vector length ``N`` is enabled, then, when KVM is enabled, all smaller, "
 "host supported vector lengths must also be enabled.  If KVM is not enabled, "
-"then only all the smaller, power-of-two vector lengths must be enabled.  E."
-"g. with KVM if the host supports all vector lengths up to 512-bits (128, "
+"then only all the smaller, power-of-two vector lengths must be enabled.  "
+"E.g. with KVM if the host supports all vector lengths up to 512-bits (128, "
 "256, 384, 512), then if ``sve512`` is enabled, the 128-bit vector length, "
 "256-bit vector length, and 384-bit vector length must also be enabled. "
 "Without KVM, the 384-bit vector length would not be required."
@@ -790,10 +790,10 @@ msgstr ""
 #: ../../../system/arm/cpu-features.rst:490
 msgid ""
 "To aid firmware developers in testing different possible CPU configurations, "
-"``x-l0gptsz=S`` may be used to specify the value to encode into ``GPCCR_EL3."
-"L0GPTSZ``, a read-only field that specifies the size of the Level 0 Granule "
-"Protection Table. Legal values for ``S`` are 30, 34, 36, and 39; the default "
-"is 30."
+"``x-l0gptsz=S`` may be used to specify the value to encode into "
+"``GPCCR_EL3.L0GPTSZ``, a read-only field that specifies the size of the "
+"Level 0 Granule Protection Table. Legal values for ``S`` are 30, 34, 36, and "
+"39; the default is 30."
 msgstr ""
 
 #: ../../../system/arm/cpu-features.rst:496

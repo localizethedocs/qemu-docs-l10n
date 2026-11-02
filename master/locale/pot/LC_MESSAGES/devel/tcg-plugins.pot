@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-09 04:01+0000\n"
+"POT-Creation-Date: 2026-11-02 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,11 +168,11 @@ msgstr ""
 msgid ""
 "Instruction instrumentation runs before the instruction executes. You can be "
 "can be sure the instruction will be dispatched, but you can't be sure it "
-"will complete. Generally this will be because of a synchronous exception (e."
-"g. SIGILL) triggered by the instruction attempting to execute. If you want "
-"to be sure you will need to instrument the next instruction as well. See the "
-"``execlog.c`` plugin for examples of how to track this and finalise details "
-"after execution."
+"will complete. Generally this will be because of a synchronous exception "
+"(e.g. SIGILL) triggered by the instruction attempting to execute. If you "
+"want to be sure you will need to instrument the next instruction as well. "
+"See the ``execlog.c`` plugin for examples of how to track this and finalise "
+"details after execution."
 msgstr ""
 
 #: ../../../devel/tcg-plugins.rst:118
@@ -291,7 +291,7 @@ msgstr ""
 msgid "**Members**"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:102
+#: ../../../../include/plugins/qemu-plugin.h:103
 msgid "``target_name``"
 msgstr ""
 
@@ -299,7 +299,7 @@ msgstr ""
 msgid "string describing architecture"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:104
+#: ../../../../include/plugins/qemu-plugin.h:105
 msgid "``version``"
 msgstr ""
 
@@ -307,7 +307,7 @@ msgstr ""
 msgid "minimum and current plugin API level"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:109
+#: ../../../../include/plugins/qemu-plugin.h:110
 msgid "``system_emulation``"
 msgstr ""
 
@@ -315,7 +315,7 @@ msgstr ""
 msgid "is this a full system emulation?"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1
+#: ../../../../include/plugins/qemu-plugin.h:2
 msgid "``{unnamed_union}``"
 msgstr ""
 
@@ -469,21 +469,21 @@ msgstr ""
 msgid "**Parameters**"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:129
-#: ../../../../include/plugins/qemu-plugin.h:208
-#: ../../../../include/plugins/qemu-plugin.h:224
-#: ../../../../include/plugins/qemu-plugin.h:240
-#: ../../../../include/plugins/qemu-plugin.h:255
-#: ../../../../include/plugins/qemu-plugin.h:270
-#: ../../../../include/plugins/qemu-plugin.h:283
-#: ../../../../include/plugins/qemu-plugin.h:296
-#: ../../../../include/plugins/qemu-plugin.h:431
-#: ../../../../include/plugins/qemu-plugin.h:897
-#: ../../../../include/plugins/qemu-plugin.h:911
-#: ../../../../include/plugins/qemu-plugin.h:930
-#: ../../../../include/plugins/qemu-plugin.h:966
-#: ../../../../include/plugins/qemu-plugin.h:981
-#: ../../../../include/plugins/qemu-plugin.h:997
+#: ../../../../include/plugins/qemu-plugin.h:124
+#: ../../../../include/plugins/qemu-plugin.h:203
+#: ../../../../include/plugins/qemu-plugin.h:219
+#: ../../../../include/plugins/qemu-plugin.h:235
+#: ../../../../include/plugins/qemu-plugin.h:250
+#: ../../../../include/plugins/qemu-plugin.h:265
+#: ../../../../include/plugins/qemu-plugin.h:278
+#: ../../../../include/plugins/qemu-plugin.h:291
+#: ../../../../include/plugins/qemu-plugin.h:426
+#: ../../../../include/plugins/qemu-plugin.h:892
+#: ../../../../include/plugins/qemu-plugin.h:907
+#: ../../../../include/plugins/qemu-plugin.h:926
+#: ../../../../include/plugins/qemu-plugin.h:961
+#: ../../../../include/plugins/qemu-plugin.h:976
+#: ../../../../include/plugins/qemu-plugin.h:992
 msgid "``qemu_plugin_id_t id``"
 msgstr ""
 
@@ -493,7 +493,7 @@ msgstr ""
 msgid "this plugin's opaque ID"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:126
+#: ../../../../include/plugins/qemu-plugin.h:125
 msgid "``const qemu_info_t *info``"
 msgstr ""
 
@@ -501,7 +501,7 @@ msgstr ""
 msgid "a block describing some details about the guest"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:127
+#: ../../../../include/plugins/qemu-plugin.h:126
 msgid "``int argc``"
 msgstr ""
 
@@ -509,7 +509,7 @@ msgstr ""
 msgid "number of arguments"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:128
+#: ../../../../include/plugins/qemu-plugin.h:127
 msgid "``char **argv``"
 msgstr ""
 
@@ -574,31 +574,31 @@ msgstr ""
 
 #: ../../../../include/plugins/qemu-plugin.h:153
 #: ../../../../include/plugins/qemu-plugin.h:157
-#: ../../../../include/plugins/qemu-plugin.h:187
-#: ../../../../include/plugins/qemu-plugin.h:206
-#: ../../../../include/plugins/qemu-plugin.h:222
-#: ../../../../include/plugins/qemu-plugin.h:238
-#: ../../../../include/plugins/qemu-plugin.h:253
-#: ../../../../include/plugins/qemu-plugin.h:268
-#: ../../../../include/plugins/qemu-plugin.h:281
-#: ../../../../include/plugins/qemu-plugin.h:295
+#: ../../../../include/plugins/qemu-plugin.h:186
+#: ../../../../include/plugins/qemu-plugin.h:205
+#: ../../../../include/plugins/qemu-plugin.h:221
+#: ../../../../include/plugins/qemu-plugin.h:237
+#: ../../../../include/plugins/qemu-plugin.h:252
+#: ../../../../include/plugins/qemu-plugin.h:267
+#: ../../../../include/plugins/qemu-plugin.h:280
+#: ../../../../include/plugins/qemu-plugin.h:294
 #: ../../../../include/plugins/qemu-plugin.h:420
-#: ../../../../include/plugins/qemu-plugin.h:429
-#: ../../../../include/plugins/qemu-plugin.h:448
+#: ../../../../include/plugins/qemu-plugin.h:428
+#: ../../../../include/plugins/qemu-plugin.h:447
 #: ../../../../include/plugins/qemu-plugin.h:465
-#: ../../../../include/plugins/qemu-plugin.h:516
-#: ../../../../include/plugins/qemu-plugin.h:534
+#: ../../../../include/plugins/qemu-plugin.h:515
+#: ../../../../include/plugins/qemu-plugin.h:533
 #: ../../../../include/plugins/qemu-plugin.h:750
-#: ../../../../include/plugins/qemu-plugin.h:763
+#: ../../../../include/plugins/qemu-plugin.h:762
 #: ../../../../include/plugins/qemu-plugin.h:842
-#: ../../../../include/plugins/qemu-plugin.h:865
+#: ../../../../include/plugins/qemu-plugin.h:864
 #: ../../../../include/plugins/qemu-plugin.h:884
-#: ../../../../include/plugins/qemu-plugin.h:895
-#: ../../../../include/plugins/qemu-plugin.h:910
-#: ../../../../include/plugins/qemu-plugin.h:929
-#: ../../../../include/plugins/qemu-plugin.h:964
-#: ../../../../include/plugins/qemu-plugin.h:979
-#: ../../../../include/plugins/qemu-plugin.h:995
+#: ../../../../include/plugins/qemu-plugin.h:894
+#: ../../../../include/plugins/qemu-plugin.h:909
+#: ../../../../include/plugins/qemu-plugin.h:928
+#: ../../../../include/plugins/qemu-plugin.h:963
+#: ../../../../include/plugins/qemu-plugin.h:978
+#: ../../../../include/plugins/qemu-plugin.h:994
 msgid "``void *userdata``"
 msgstr ""
 
@@ -641,16 +641,16 @@ msgid ""
 "*userdata)``"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:163
-#: ../../../../include/plugins/qemu-plugin.h:193
-#: ../../../../include/plugins/qemu-plugin.h:758
-#: ../../../../include/plugins/qemu-plugin.h:843
-#: ../../../../include/plugins/qemu-plugin.h:864
-#: ../../../../include/plugins/qemu-plugin.h:891
-#: ../../../../include/plugins/qemu-plugin.h:1317
-#: ../../../../include/plugins/qemu-plugin.h:1335
+#: ../../../../include/plugins/qemu-plugin.h:151
+#: ../../../../include/plugins/qemu-plugin.h:181
+#: ../../../../include/plugins/qemu-plugin.h:746
+#: ../../../../include/plugins/qemu-plugin.h:831
+#: ../../../../include/plugins/qemu-plugin.h:853
+#: ../../../../include/plugins/qemu-plugin.h:880
+#: ../../../../include/plugins/qemu-plugin.h:1316
+#: ../../../../include/plugins/qemu-plugin.h:1334
 #: ../../../../include/plugins/qemu-plugin.h:1345
-#: ../../../../include/plugins/qemu-plugin.h:1353
+#: ../../../../include/plugins/qemu-plugin.h:1352
 msgid "``unsigned int vcpu_index``"
 msgstr ""
 
@@ -673,7 +673,7 @@ msgstr ""
 msgid "**Constants**"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:165
+#: ../../../../include/plugins/qemu-plugin.h:168
 msgid "``QEMU_PLUGIN_DISCON_INTERRUPT``"
 msgstr ""
 
@@ -683,7 +683,7 @@ msgid ""
 "usually originating from outside the CPU"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:170
+#: ../../../../include/plugins/qemu-plugin.h:173
 msgid "``QEMU_PLUGIN_DISCON_EXCEPTION``"
 msgstr ""
 
@@ -693,7 +693,7 @@ msgid ""
 "response to a specific instruction being executed"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:175
+#: ../../../../include/plugins/qemu-plugin.h:178
 msgid "``QEMU_PLUGIN_DISCON_HOSTCALL``"
 msgstr ""
 
@@ -722,8 +722,8 @@ msgid ""
 "*userdata)``"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:183
-#: ../../../../include/plugins/qemu-plugin.h:293
+#: ../../../../include/plugins/qemu-plugin.h:182
+#: ../../../../include/plugins/qemu-plugin.h:292
 msgid "``enum qemu_plugin_discon_type type``"
 msgstr ""
 
@@ -739,7 +739,7 @@ msgstr ""
 msgid "the source of the discontinuity, e.g. the PC before the transition"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:186
+#: ../../../../include/plugins/qemu-plugin.h:185
 msgid "``uint64_t to_pc``"
 msgstr ""
 
@@ -762,10 +762,10 @@ msgstr ""
 msgid "Uninstall a plugin"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:205
-#: ../../../../include/plugins/qemu-plugin.h:221
-#: ../../../../include/plugins/qemu-plugin.h:978
-#: ../../../../include/plugins/qemu-plugin.h:994
+#: ../../../../include/plugins/qemu-plugin.h:204
+#: ../../../../include/plugins/qemu-plugin.h:220
+#: ../../../../include/plugins/qemu-plugin.h:977
+#: ../../../../include/plugins/qemu-plugin.h:993
 msgid "``qemu_plugin_udata_cb_t cb``"
 msgstr ""
 
@@ -819,15 +819,15 @@ msgstr ""
 msgid "plugin ID"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:237
-#: ../../../../include/plugins/qemu-plugin.h:252
-#: ../../../../include/plugins/qemu-plugin.h:267
-#: ../../../../include/plugins/qemu-plugin.h:280
-#: ../../../../include/plugins/qemu-plugin.h:446
-#: ../../../../include/plugins/qemu-plugin.h:461
-#: ../../../../include/plugins/qemu-plugin.h:514
-#: ../../../../include/plugins/qemu-plugin.h:529
-#: ../../../../include/plugins/qemu-plugin.h:963
+#: ../../../../include/plugins/qemu-plugin.h:236
+#: ../../../../include/plugins/qemu-plugin.h:251
+#: ../../../../include/plugins/qemu-plugin.h:266
+#: ../../../../include/plugins/qemu-plugin.h:279
+#: ../../../../include/plugins/qemu-plugin.h:445
+#: ../../../../include/plugins/qemu-plugin.h:460
+#: ../../../../include/plugins/qemu-plugin.h:513
+#: ../../../../include/plugins/qemu-plugin.h:528
+#: ../../../../include/plugins/qemu-plugin.h:962
 msgid "``qemu_plugin_vcpu_udata_cb_t cb``"
 msgstr ""
 
@@ -890,7 +890,7 @@ msgstr ""
 msgid "types of discontinuities for which to call the callback"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:294
+#: ../../../../include/plugins/qemu-plugin.h:293
 msgid "``qemu_plugin_vcpu_discon_cb_t cb``"
 msgstr ""
 
@@ -916,7 +916,7 @@ msgstr ""
 msgid "type of callback"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:332
+#: ../../../../include/plugins/qemu-plugin.h:333
 msgid "``QEMU_PLUGIN_CB_NO_REGS``"
 msgstr ""
 
@@ -924,7 +924,7 @@ msgstr ""
 msgid "callback does not access the CPU's regs"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:335
+#: ../../../../include/plugins/qemu-plugin.h:336
 msgid "``QEMU_PLUGIN_CB_R_REGS``"
 msgstr ""
 
@@ -932,7 +932,7 @@ msgstr ""
 msgid "callback reads the CPU's regs"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:338
+#: ../../../../include/plugins/qemu-plugin.h:339
 msgid "``QEMU_PLUGIN_CB_RW_REGS``"
 msgstr ""
 
@@ -940,7 +940,7 @@ msgstr ""
 msgid "callback reads and writes the CPU's regs"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:341
+#: ../../../../include/plugins/qemu-plugin.h:342
 msgid "``QEMU_PLUGIN_CB_RW_REGS_PC``"
 msgstr ""
 
@@ -952,7 +952,7 @@ msgstr ""
 msgid "type of memory access"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:348
+#: ../../../../include/plugins/qemu-plugin.h:349
 msgid "``QEMU_PLUGIN_MEM_R``"
 msgstr ""
 
@@ -960,7 +960,7 @@ msgstr ""
 msgid "memory read access only"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:351
+#: ../../../../include/plugins/qemu-plugin.h:352
 msgid "``QEMU_PLUGIN_MEM_W``"
 msgstr ""
 
@@ -980,7 +980,7 @@ msgstr ""
 msgid "size of memory value"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:361
+#: ../../../../include/plugins/qemu-plugin.h:362
 msgid "``QEMU_PLUGIN_MEM_VALUE_U8``"
 msgstr ""
 
@@ -988,7 +988,7 @@ msgstr ""
 msgid "unsigned 8-bit value"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:364
+#: ../../../../include/plugins/qemu-plugin.h:365
 msgid "``QEMU_PLUGIN_MEM_VALUE_U16``"
 msgstr ""
 
@@ -996,7 +996,7 @@ msgstr ""
 msgid "unsigned 16-bit value"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:367
+#: ../../../../include/plugins/qemu-plugin.h:368
 msgid "``QEMU_PLUGIN_MEM_VALUE_U32``"
 msgstr ""
 
@@ -1004,7 +1004,7 @@ msgstr ""
 msgid "unsigned 32-bit value"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:370
+#: ../../../../include/plugins/qemu-plugin.h:371
 msgid "``QEMU_PLUGIN_MEM_VALUE_U64``"
 msgstr ""
 
@@ -1030,7 +1030,7 @@ msgstr ""
 msgid "condition to enable callback"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:400
+#: ../../../../include/plugins/qemu-plugin.h:401
 msgid "``QEMU_PLUGIN_COND_NEVER``"
 msgstr ""
 
@@ -1038,7 +1038,7 @@ msgstr ""
 msgid "false"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:403
+#: ../../../../include/plugins/qemu-plugin.h:404
 msgid "``QEMU_PLUGIN_COND_ALWAYS``"
 msgstr ""
 
@@ -1046,7 +1046,7 @@ msgstr ""
 msgid "true"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:406
+#: ../../../../include/plugins/qemu-plugin.h:407
 msgid "``QEMU_PLUGIN_COND_EQ``"
 msgstr ""
 
@@ -1054,7 +1054,7 @@ msgstr ""
 msgid "is equal?"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:409
+#: ../../../../include/plugins/qemu-plugin.h:410
 msgid "``QEMU_PLUGIN_COND_NE``"
 msgstr ""
 
@@ -1062,7 +1062,7 @@ msgstr ""
 msgid "is not equal?"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:412
+#: ../../../../include/plugins/qemu-plugin.h:413
 msgid "``QEMU_PLUGIN_COND_LT``"
 msgstr ""
 
@@ -1070,7 +1070,7 @@ msgstr ""
 msgid "is less than?"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:415
+#: ../../../../include/plugins/qemu-plugin.h:416
 msgid "``QEMU_PLUGIN_COND_LE``"
 msgstr ""
 
@@ -1078,7 +1078,7 @@ msgstr ""
 msgid "is less than or equal?"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:418
+#: ../../../../include/plugins/qemu-plugin.h:419
 msgid "``QEMU_PLUGIN_COND_GT``"
 msgstr ""
 
@@ -1104,10 +1104,10 @@ msgid ""
 "*userdata)``"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:430
-#: ../../../../include/plugins/qemu-plugin.h:449
-#: ../../../../include/plugins/qemu-plugin.h:464
-#: ../../../../include/plugins/qemu-plugin.h:501
+#: ../../../../include/plugins/qemu-plugin.h:418
+#: ../../../../include/plugins/qemu-plugin.h:444
+#: ../../../../include/plugins/qemu-plugin.h:459
+#: ../../../../include/plugins/qemu-plugin.h:496
 msgid "``struct qemu_plugin_tb *tb``"
 msgstr ""
 
@@ -1123,7 +1123,7 @@ msgstr ""
 msgid "register a translate cb"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:428
+#: ../../../../include/plugins/qemu-plugin.h:427
 msgid "``qemu_plugin_vcpu_tb_trans_cb_t cb``"
 msgstr ""
 
@@ -1146,11 +1146,11 @@ msgstr ""
 msgid "the opaque qemu_plugin_tb handle for the translation"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:447
-#: ../../../../include/plugins/qemu-plugin.h:462
-#: ../../../../include/plugins/qemu-plugin.h:515
-#: ../../../../include/plugins/qemu-plugin.h:530
-#: ../../../../include/plugins/qemu-plugin.h:761
+#: ../../../../include/plugins/qemu-plugin.h:446
+#: ../../../../include/plugins/qemu-plugin.h:464
+#: ../../../../include/plugins/qemu-plugin.h:514
+#: ../../../../include/plugins/qemu-plugin.h:529
+#: ../../../../include/plugins/qemu-plugin.h:760
 msgid "``enum qemu_plugin_cb_flags flags``"
 msgstr ""
 
@@ -1169,19 +1169,19 @@ msgstr ""
 msgid "register conditional callback"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:466
-#: ../../../../include/plugins/qemu-plugin.h:531
+#: ../../../../include/plugins/qemu-plugin.h:461
+#: ../../../../include/plugins/qemu-plugin.h:530
 msgid "``enum qemu_plugin_cond cond``"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:463
-#: ../../../../include/plugins/qemu-plugin.h:499
-#: ../../../../include/plugins/qemu-plugin.h:532
-#: ../../../../include/plugins/qemu-plugin.h:557
-#: ../../../../include/plugins/qemu-plugin.h:789
-#: ../../../../include/plugins/qemu-plugin.h:1338
-#: ../../../../include/plugins/qemu-plugin.h:1348
-#: ../../../../include/plugins/qemu-plugin.h:1356
+#: ../../../../include/plugins/qemu-plugin.h:462
+#: ../../../../include/plugins/qemu-plugin.h:498
+#: ../../../../include/plugins/qemu-plugin.h:531
+#: ../../../../include/plugins/qemu-plugin.h:556
+#: ../../../../include/plugins/qemu-plugin.h:788
+#: ../../../../include/plugins/qemu-plugin.h:1333
+#: ../../../../include/plugins/qemu-plugin.h:1343
+#: ../../../../include/plugins/qemu-plugin.h:1351
 #: ../../../../include/plugins/qemu-plugin.h:1366
 msgid "``qemu_plugin_u64 entry``"
 msgstr ""
@@ -1191,11 +1191,11 @@ msgstr ""
 msgid "first operand for condition"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:464
-#: ../../../../include/plugins/qemu-plugin.h:500
-#: ../../../../include/plugins/qemu-plugin.h:533
-#: ../../../../include/plugins/qemu-plugin.h:558
-#: ../../../../include/plugins/qemu-plugin.h:790
+#: ../../../../include/plugins/qemu-plugin.h:463
+#: ../../../../include/plugins/qemu-plugin.h:499
+#: ../../../../include/plugins/qemu-plugin.h:532
+#: ../../../../include/plugins/qemu-plugin.h:557
+#: ../../../../include/plugins/qemu-plugin.h:789
 msgid "``uint64_t imm``"
 msgstr ""
 
@@ -1217,7 +1217,7 @@ msgstr ""
 msgid "describes an inline op"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:490
+#: ../../../../include/plugins/qemu-plugin.h:491
 msgid "``QEMU_PLUGIN_INLINE_ADD_U64``"
 msgstr ""
 
@@ -1237,9 +1237,9 @@ msgstr ""
 msgid "execution inline op"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:498
-#: ../../../../include/plugins/qemu-plugin.h:556
-#: ../../../../include/plugins/qemu-plugin.h:788
+#: ../../../../include/plugins/qemu-plugin.h:497
+#: ../../../../include/plugins/qemu-plugin.h:555
+#: ../../../../include/plugins/qemu-plugin.h:787
 msgid "``enum qemu_plugin_op op``"
 msgstr ""
 
@@ -1267,11 +1267,11 @@ msgstr ""
 msgid "register insn execution cb"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:517
-#: ../../../../include/plugins/qemu-plugin.h:532
-#: ../../../../include/plugins/qemu-plugin.h:559
-#: ../../../../include/plugins/qemu-plugin.h:763
-#: ../../../../include/plugins/qemu-plugin.h:790
+#: ../../../../include/plugins/qemu-plugin.h:512
+#: ../../../../include/plugins/qemu-plugin.h:527
+#: ../../../../include/plugins/qemu-plugin.h:554
+#: ../../../../include/plugins/qemu-plugin.h:758
+#: ../../../../include/plugins/qemu-plugin.h:785
 msgid "``struct qemu_plugin_insn *insn``"
 msgstr ""
 
@@ -1310,9 +1310,9 @@ msgstr ""
 msgid "query helper for number of insns in TB"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:575
-#: ../../../../include/plugins/qemu-plugin.h:584
-#: ../../../../include/plugins/qemu-plugin.h:593
+#: ../../../../include/plugins/qemu-plugin.h:570
+#: ../../../../include/plugins/qemu-plugin.h:579
+#: ../../../../include/plugins/qemu-plugin.h:588
 msgid "``const struct qemu_plugin_tb *tb``"
 msgstr ""
 
@@ -1338,7 +1338,7 @@ msgstr ""
 msgid "retrieve handle for instruction"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:590
+#: ../../../../include/plugins/qemu-plugin.h:589
 msgid "``size_t idx``"
 msgstr ""
 
@@ -1361,12 +1361,12 @@ msgstr ""
 msgid "copy instruction data"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:608
-#: ../../../../include/plugins/qemu-plugin.h:620
-#: ../../../../include/plugins/qemu-plugin.h:629
-#: ../../../../include/plugins/qemu-plugin.h:638
-#: ../../../../include/plugins/qemu-plugin.h:947
-#: ../../../../include/plugins/qemu-plugin.h:956
+#: ../../../../include/plugins/qemu-plugin.h:603
+#: ../../../../include/plugins/qemu-plugin.h:615
+#: ../../../../include/plugins/qemu-plugin.h:624
+#: ../../../../include/plugins/qemu-plugin.h:633
+#: ../../../../include/plugins/qemu-plugin.h:942
+#: ../../../../include/plugins/qemu-plugin.h:951
 msgid "``const struct qemu_plugin_insn *insn``"
 msgstr ""
 
@@ -1377,7 +1377,7 @@ msgstr ""
 msgid "opaque instruction handle from qemu_plugin_tb_get_insn()"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:605
+#: ../../../../include/plugins/qemu-plugin.h:604
 msgid "``void *dest``"
 msgstr ""
 
@@ -1385,9 +1385,9 @@ msgstr ""
 msgid "destination into which data is copied"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:606
-#: ../../../../include/plugins/qemu-plugin.h:1165
-#: ../../../../include/plugins/qemu-plugin.h:1227
+#: ../../../../include/plugins/qemu-plugin.h:605
+#: ../../../../include/plugins/qemu-plugin.h:1164
+#: ../../../../include/plugins/qemu-plugin.h:1226
 msgid "``size_t len``"
 msgstr ""
 
@@ -1441,13 +1441,13 @@ msgstr ""
 msgid "get size of access"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:657
-#: ../../../../include/plugins/qemu-plugin.h:665
-#: ../../../../include/plugins/qemu-plugin.h:673
-#: ../../../../include/plugins/qemu-plugin.h:681
-#: ../../../../include/plugins/qemu-plugin.h:690
-#: ../../../../include/plugins/qemu-plugin.h:699
-#: ../../../../include/plugins/qemu-plugin.h:748
+#: ../../../../include/plugins/qemu-plugin.h:652
+#: ../../../../include/plugins/qemu-plugin.h:660
+#: ../../../../include/plugins/qemu-plugin.h:668
+#: ../../../../include/plugins/qemu-plugin.h:676
+#: ../../../../include/plugins/qemu-plugin.h:685
+#: ../../../../include/plugins/qemu-plugin.h:694
+#: ../../../../include/plugins/qemu-plugin.h:747
 msgid "``qemu_plugin_meminfo_t info``"
 msgstr ""
 
@@ -1489,10 +1489,10 @@ msgstr ""
 msgid "opaque memory info structure"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:696
-#: ../../../../include/plugins/qemu-plugin.h:749
-#: ../../../../include/plugins/qemu-plugin.h:1154
-#: ../../../../include/plugins/qemu-plugin.h:1288
+#: ../../../../include/plugins/qemu-plugin.h:695
+#: ../../../../include/plugins/qemu-plugin.h:748
+#: ../../../../include/plugins/qemu-plugin.h:1150
+#: ../../../../include/plugins/qemu-plugin.h:1284
 msgid "``uint64_t vaddr``"
 msgstr ""
 
@@ -1517,8 +1517,8 @@ msgstr ""
 msgid "query whether memory operation is IO"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:722
-#: ../../../../include/plugins/qemu-plugin.h:732
+#: ../../../../include/plugins/qemu-plugin.h:717
+#: ../../../../include/plugins/qemu-plugin.h:727
 msgid "``const struct qemu_plugin_hwaddr *haddr``"
 msgstr ""
 
@@ -1581,7 +1581,7 @@ msgstr ""
 msgid "handle for instruction to instrument"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:760
+#: ../../../../include/plugins/qemu-plugin.h:759
 msgid "``qemu_plugin_vcpu_mem_cb_t cb``"
 msgstr ""
 
@@ -1593,8 +1593,8 @@ msgstr ""
 msgid "(currently unused) callback flags"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:762
-#: ../../../../include/plugins/qemu-plugin.h:787
+#: ../../../../include/plugins/qemu-plugin.h:761
+#: ../../../../include/plugins/qemu-plugin.h:786
 msgid "``enum qemu_plugin_mem_rw rw``"
 msgstr ""
 
@@ -1648,12 +1648,7 @@ msgstr ""
 msgid "request the ability to control time"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:809
-#: ../../../../include/plugins/qemu-plugin.h:1039
-#: ../../../../include/plugins/qemu-plugin.h:1050
-#: ../../../../include/plugins/qemu-plugin.h:1059
-#: ../../../../include/plugins/qemu-plugin.h:1068
-#: ../../../../include/plugins/qemu-plugin.h:1097
+#: ../../../../include/plugins/qemu-plugin.h:1
 msgid "``void``"
 msgstr ""
 
@@ -1676,7 +1671,7 @@ msgstr ""
 msgid "update system emulation time"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:821
+#: ../../../../include/plugins/qemu-plugin.h:816
 msgid "``const void *handle``"
 msgstr ""
 
@@ -1684,7 +1679,7 @@ msgstr ""
 msgid "opaque handle returned by qemu_plugin_request_time_control()"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:818
+#: ../../../../include/plugins/qemu-plugin.h:817
 msgid "``int64_t time``"
 msgstr ""
 
@@ -1715,9 +1710,9 @@ msgid ""
 "a6, uint64_t a7, uint64_t a8, void *userdata)``"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:833
-#: ../../../../include/plugins/qemu-plugin.h:855
-#: ../../../../include/plugins/qemu-plugin.h:882
+#: ../../../../include/plugins/qemu-plugin.h:832
+#: ../../../../include/plugins/qemu-plugin.h:854
+#: ../../../../include/plugins/qemu-plugin.h:881
 msgid "``int64_t num``"
 msgstr ""
 
@@ -1727,8 +1722,8 @@ msgstr ""
 msgid "the syscall number"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:834
-#: ../../../../include/plugins/qemu-plugin.h:856
+#: ../../../../include/plugins/qemu-plugin.h:833
+#: ../../../../include/plugins/qemu-plugin.h:855
 msgid "``uint64_t a1``"
 msgstr ""
 
@@ -1737,8 +1732,8 @@ msgstr ""
 msgid "the 1st syscall argument"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:835
-#: ../../../../include/plugins/qemu-plugin.h:857
+#: ../../../../include/plugins/qemu-plugin.h:834
+#: ../../../../include/plugins/qemu-plugin.h:856
 msgid "``uint64_t a2``"
 msgstr ""
 
@@ -1747,8 +1742,8 @@ msgstr ""
 msgid "the 2nd syscall argument"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:836
-#: ../../../../include/plugins/qemu-plugin.h:858
+#: ../../../../include/plugins/qemu-plugin.h:835
+#: ../../../../include/plugins/qemu-plugin.h:857
 msgid "``uint64_t a3``"
 msgstr ""
 
@@ -1757,8 +1752,8 @@ msgstr ""
 msgid "the 3rd syscall argument"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:837
-#: ../../../../include/plugins/qemu-plugin.h:859
+#: ../../../../include/plugins/qemu-plugin.h:836
+#: ../../../../include/plugins/qemu-plugin.h:858
 msgid "``uint64_t a4``"
 msgstr ""
 
@@ -1767,8 +1762,8 @@ msgstr ""
 msgid "the 4th syscall argument"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:838
-#: ../../../../include/plugins/qemu-plugin.h:860
+#: ../../../../include/plugins/qemu-plugin.h:837
+#: ../../../../include/plugins/qemu-plugin.h:859
 msgid "``uint64_t a5``"
 msgstr ""
 
@@ -1777,8 +1772,8 @@ msgstr ""
 msgid "the 5th syscall argument"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:839
-#: ../../../../include/plugins/qemu-plugin.h:861
+#: ../../../../include/plugins/qemu-plugin.h:838
+#: ../../../../include/plugins/qemu-plugin.h:860
 msgid "``uint64_t a6``"
 msgstr ""
 
@@ -1787,8 +1782,8 @@ msgstr ""
 msgid "the 6th syscall argument"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:840
-#: ../../../../include/plugins/qemu-plugin.h:862
+#: ../../../../include/plugins/qemu-plugin.h:839
+#: ../../../../include/plugins/qemu-plugin.h:861
 msgid "``uint64_t a7``"
 msgstr ""
 
@@ -1797,8 +1792,8 @@ msgstr ""
 msgid "the 7th syscall argument"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:841
-#: ../../../../include/plugins/qemu-plugin.h:863
+#: ../../../../include/plugins/qemu-plugin.h:840
+#: ../../../../include/plugins/qemu-plugin.h:862
 msgid "``uint64_t a8``"
 msgstr ""
 
@@ -1818,7 +1813,7 @@ msgid ""
 "a5, uint64_t a6, uint64_t a7, uint64_t a8, int64_t *sysret, void *userdata)``"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:864
+#: ../../../../include/plugins/qemu-plugin.h:863
 msgid "``int64_t *sysret``"
 msgstr ""
 
@@ -1842,7 +1837,7 @@ msgid ""
 "num, int64_t ret, void *userdata)``"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:883
+#: ../../../../include/plugins/qemu-plugin.h:882
 msgid "``int64_t ret``"
 msgstr ""
 
@@ -1861,7 +1856,7 @@ msgstr ""
 msgid "plugin id"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:894
+#: ../../../../include/plugins/qemu-plugin.h:893
 msgid "``qemu_plugin_vcpu_syscall_cb_t cb``"
 msgstr ""
 
@@ -1879,7 +1874,7 @@ msgstr ""
 msgid "register a syscall filter callback"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:909
+#: ../../../../include/plugins/qemu-plugin.h:908
 msgid "``qemu_plugin_vcpu_syscall_filter_cb_t cb``"
 msgstr ""
 
@@ -1896,7 +1891,7 @@ msgid ""
 "corresponding pointer passed to it."
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:928
+#: ../../../../include/plugins/qemu-plugin.h:927
 msgid "``qemu_plugin_vcpu_syscall_ret_cb_t cb``"
 msgstr ""
 
@@ -1994,7 +1989,7 @@ msgid ""
 "false]\""
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1025
+#: ../../../../include/plugins/qemu-plugin.h:1022
 msgid "``const char *name``"
 msgstr ""
 
@@ -2002,7 +1997,7 @@ msgstr ""
 msgid "argument name, the part before the equals sign"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1024
+#: ../../../../include/plugins/qemu-plugin.h:1023
 msgid "``const char *val``"
 msgstr ""
 
@@ -2010,7 +2005,7 @@ msgstr ""
 msgid "argument value, what's after the equals sign"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1025
+#: ../../../../include/plugins/qemu-plugin.h:1024
 msgid "``bool *ret``"
 msgstr ""
 
@@ -2089,8 +2084,8 @@ msgstr ""
 msgid "read register for current vCPU"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1109
-#: ../../../../include/plugins/qemu-plugin.h:1130
+#: ../../../../include/plugins/qemu-plugin.h:1105
+#: ../../../../include/plugins/qemu-plugin.h:1126
 msgid "``struct qemu_plugin_register *handle``"
 msgstr ""
 
@@ -2099,8 +2094,8 @@ msgstr ""
 msgid "a **qemu_plugin_reg_handle** handle"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1107
-#: ../../../../include/plugins/qemu-plugin.h:1128
+#: ../../../../include/plugins/qemu-plugin.h:1106
+#: ../../../../include/plugins/qemu-plugin.h:1127
 msgid "``GByteArray *buf``"
 msgstr ""
 
@@ -2170,10 +2165,10 @@ msgstr ""
 msgid "read from memory using a virtual address"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1166
-#: ../../../../include/plugins/qemu-plugin.h:1188
-#: ../../../../include/plugins/qemu-plugin.h:1228
-#: ../../../../include/plugins/qemu-plugin.h:1254
+#: ../../../../include/plugins/qemu-plugin.h:1162
+#: ../../../../include/plugins/qemu-plugin.h:1184
+#: ../../../../include/plugins/qemu-plugin.h:1224
+#: ../../../../include/plugins/qemu-plugin.h:1250
 msgid "``uint64_t addr``"
 msgstr ""
 
@@ -2181,10 +2176,10 @@ msgstr ""
 msgid "A virtual address to read from"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1164
-#: ../../../../include/plugins/qemu-plugin.h:1186
-#: ../../../../include/plugins/qemu-plugin.h:1226
-#: ../../../../include/plugins/qemu-plugin.h:1252
+#: ../../../../include/plugins/qemu-plugin.h:1163
+#: ../../../../include/plugins/qemu-plugin.h:1185
+#: ../../../../include/plugins/qemu-plugin.h:1225
+#: ../../../../include/plugins/qemu-plugin.h:1251
 msgid "``GByteArray *data``"
 msgstr ""
 
@@ -2253,7 +2248,7 @@ msgstr ""
 msgid "result of a memory operation"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1209
+#: ../../../../include/plugins/qemu-plugin.h:1210
 msgid "``QEMU_PLUGIN_HWADDR_OPERATION_OK``"
 msgstr ""
 
@@ -2261,7 +2256,7 @@ msgstr ""
 msgid "hwaddr operation succeeded"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1212
+#: ../../../../include/plugins/qemu-plugin.h:1213
 msgid "``QEMU_PLUGIN_HWADDR_OPERATION_ERROR``"
 msgstr ""
 
@@ -2269,7 +2264,7 @@ msgstr ""
 msgid "unexpected error occurred"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1215
+#: ../../../../include/plugins/qemu-plugin.h:1216
 msgid "``QEMU_PLUGIN_HWADDR_OPERATION_DEVICE_ERROR``"
 msgstr ""
 
@@ -2277,7 +2272,7 @@ msgstr ""
 msgid "error in memory device"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1218
+#: ../../../../include/plugins/qemu-plugin.h:1219
 msgid "``QEMU_PLUGIN_HWADDR_OPERATION_ACCESS_DENIED``"
 msgstr ""
 
@@ -2285,7 +2280,7 @@ msgstr ""
 msgid "permission error"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1221
+#: ../../../../include/plugins/qemu-plugin.h:1222
 msgid "``QEMU_PLUGIN_HWADDR_OPERATION_INVALID_ADDRESS``"
 msgstr ""
 
@@ -2374,7 +2369,7 @@ msgstr ""
 msgid "virtual address to translate"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1286
+#: ../../../../include/plugins/qemu-plugin.h:1285
 msgid "``uint64_t *hwaddr``"
 msgstr ""
 
@@ -2392,7 +2387,7 @@ msgstr ""
 msgid "alloc a new scoreboard"
 msgstr ""
 
-#: ../../../../include/plugins/qemu-plugin.h:1302
+#: ../../../../include/plugins/qemu-plugin.h:1298
 msgid "``size_t element_size``"
 msgstr ""
 
@@ -2411,7 +2406,7 @@ msgid "free a scoreboard"
 msgstr ""
 
 #: ../../../../include/plugins/qemu-plugin.h:1313
-#: ../../../../include/plugins/qemu-plugin.h:1320
+#: ../../../../include/plugins/qemu-plugin.h:1315
 msgid "``struct qemu_plugin_scoreboard *score``"
 msgstr ""
 
