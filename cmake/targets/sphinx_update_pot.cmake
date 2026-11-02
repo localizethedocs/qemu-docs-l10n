@@ -128,19 +128,6 @@ message("")
 restore_cmake_message_indent()
 
 
-message(STATUS "Copying 'layout.html' file to the sphinx templates directory...")
-file(MAKE_DIRECTORY "${PROJ_OUT_REPO_DOCS_TMPLS_DIR}")
-file(COPY_FILE
-    "${PROJ_CMAKE_CUSTOM_DIR}/layout.html"
-    "${PROJ_OUT_REPO_DOCS_TMPLS_DIR}/layout.html")
-remove_cmake_message_indent()
-message("")
-message("From: ${PROJ_CMAKE_CUSTOM_DIR}/layout.html")
-message("To:   ${PROJ_OUT_REPO_DOCS_TMPLS_DIR}/layout.html")
-message("")
-restore_cmake_message_indent()
-
-
 if (NOT UPDATE_POT_REQUIRED)
     message(STATUS "No need to update .pot files.")
     return()
