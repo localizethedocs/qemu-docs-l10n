@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 16:46+0000\n"
+"POT-Creation-Date: 2026-11-09 18:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,4 +37,126 @@ msgstr ""
 
 #: ../../../system/hexagon/cdsp.rst:12
 msgid "This machine will support any Hexagon CPU, but will default to ``v66``."
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:15
+msgid "H2 boot firmware"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:17
+msgid ""
+"These machines can be started through the H2 hypervisor images shipped in "
+"``pc-bios``, selected with ``-bios``:"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:23
+msgid "Machine"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:24
+msgid "CPU"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:25
+msgid "``-kernel`` address"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:26
+msgid "Image suffix"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:27
+msgid "``qcs6490-cdsp``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:28
+msgid "``v68``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:29
+msgid "``0xa1000000``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:30
+msgid "``qcs6490_cdsp``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:31
+msgid "``sa8775p-cdsp``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:32
+msgid "``v73``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:33 ../../../system/hexagon/cdsp.rst:37
+#: ../../../system/hexagon/cdsp.rst:41 ../../../system/hexagon/cdsp.rst:45
+msgid "``0xa0000000``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:34
+msgid "``sa8775p_cdsp``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:35
+msgid "``sm8975-nsp``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:36
+msgid "``v85``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:38
+msgid "``sm8975_nsp``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:39
+msgid "``sc8480xp-nsp0``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:40 ../../../system/hexagon/cdsp.rst:44
+msgid "``v81``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:42
+msgid "``sc8480xp_nsp0``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:43
+msgid "``sa8797p-nsp0``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:46
+msgid "``sa8797p_nsp0``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:56
+msgid "``hexagon_booter_<suffix>``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:49
+msgid ""
+"H2 plus a loader that reads guest ELF files from the host through QEMU "
+"semihosting::"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:52
+msgid ""
+"qemu-system-hexagon -M qcs6490-cdsp -serial stdio -display none \\\n"
+"    -bios hexagon_booter_qcs6490_cdsp \\\n"
+"    -semihosting-config enable=on,target=native,arg=booter,arg=guest.elf"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:56
+msgid "Guests are loaded at ``0xa2000000``."
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:60
+msgid "``hexagon_loadlinux_<suffix>``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:59
+msgid ""
+"H2 plus a loader that starts a kernel which QEMU has placed at the ``-"
+"kernel`` address in the table above."
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-11-09 18:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -415,39 +415,33 @@ msgid ""
 "performance penalty."
 msgstr ""
 
-#: ../../../devel/tracing.rst:233
-msgid ""
-"Note that regardless of the selected trace backend, events with the "
-"\"disable\" property will be generated with the \"nop\" backend."
-msgstr ""
-
-#: ../../../devel/tracing.rst:237
+#: ../../../devel/tracing.rst:234
 msgid "Log"
 msgstr ""
 
-#: ../../../devel/tracing.rst:239
+#: ../../../devel/tracing.rst:236
 msgid ""
 "The \"log\" backend sends trace events directly to standard error.  This "
 "effectively turns trace events into debug printfs."
 msgstr ""
 
-#: ../../../devel/tracing.rst:242
+#: ../../../devel/tracing.rst:239
 msgid ""
 "This is the simplest backend and can be used together with existing code "
 "that uses DPRINTF()."
 msgstr ""
 
-#: ../../../devel/tracing.rst:245
+#: ../../../devel/tracing.rst:242
 msgid ""
 "The -msg timestamp=on|off command-line option controls whether or not to "
 "print the tid/timestamp prefix for each trace event."
 msgstr ""
 
-#: ../../../devel/tracing.rst:249
+#: ../../../devel/tracing.rst:246
 msgid "Simpletrace"
 msgstr ""
 
-#: ../../../devel/tracing.rst:251
+#: ../../../devel/tracing.rst:248
 msgid ""
 "The \"simple\" backend writes binary trace logs to a file from a thread, "
 "making it lower overhead than the \"log\" backend. A Python API is available "
@@ -456,74 +450,74 @@ msgid ""
 "has no special library dependencies."
 msgstr ""
 
-#: ../../../devel/tracing.rst:258
+#: ../../../devel/tracing.rst:255
 msgid "Monitor commands"
 msgstr ""
 
-#: ../../../devel/tracing.rst:260
+#: ../../../devel/tracing.rst:257
 msgid ""
 "``trace-file on|off|flush|set <path>`` Enable/disable/flush the trace file "
 "or set the trace file name."
 msgstr ""
 
-#: ../../../devel/tracing.rst:264
+#: ../../../devel/tracing.rst:261
 msgid "Analyzing trace files"
 msgstr ""
 
-#: ../../../devel/tracing.rst:266
+#: ../../../devel/tracing.rst:263
 msgid ""
 "The \"simple\" backend produces binary trace files that can be formatted "
 "with the simpletrace.py script.  The script takes the \"trace-events-all\" "
 "file and the binary trace::"
 msgstr ""
 
-#: ../../../devel/tracing.rst:270
+#: ../../../devel/tracing.rst:267
 msgid "./scripts/simpletrace.py trace-events-all trace-12345"
 msgstr ""
 
-#: ../../../devel/tracing.rst:272
+#: ../../../devel/tracing.rst:269
 msgid ""
 "You must ensure that the same \"trace-events-all\" file was used to build "
 "QEMU, otherwise trace event declarations may have changed and output will "
 "not be consistent."
 msgstr ""
 
-#: ../../../devel/tracing.rst:277
+#: ../../../devel/tracing.rst:274
 msgid "Ftrace"
 msgstr ""
 
-#: ../../../devel/tracing.rst:279
+#: ../../../devel/tracing.rst:276
 msgid ""
 "The \"ftrace\" backend writes trace data to ftrace marker. This effectively "
 "sends trace events to ftrace ring buffer, and you can compare qemu trace "
 "data and kernel(especially kvm.ko when using KVM) trace data."
 msgstr ""
 
-#: ../../../devel/tracing.rst:283
+#: ../../../devel/tracing.rst:280
 msgid "if you use KVM, enable kvm events in ftrace::"
 msgstr ""
 
-#: ../../../devel/tracing.rst:285
+#: ../../../devel/tracing.rst:282
 msgid "# echo 1 > /sys/kernel/debug/tracing/events/kvm/enable"
 msgstr ""
 
-#: ../../../devel/tracing.rst:287
+#: ../../../devel/tracing.rst:284
 msgid "After running qemu by root user, you can get the trace::"
 msgstr ""
 
-#: ../../../devel/tracing.rst:289
+#: ../../../devel/tracing.rst:286
 msgid "# cat /sys/kernel/debug/tracing/trace"
 msgstr ""
 
-#: ../../../devel/tracing.rst:291
+#: ../../../devel/tracing.rst:288
 msgid "Restriction: \"ftrace\" backend is restricted to Linux only."
 msgstr ""
 
-#: ../../../devel/tracing.rst:294
+#: ../../../devel/tracing.rst:291
 msgid "Syslog"
 msgstr ""
 
-#: ../../../devel/tracing.rst:296
+#: ../../../devel/tracing.rst:293
 msgid ""
 "The \"syslog\" backend sends trace events using the POSIX syslog API. The "
 "log is opened specifying the LOG_DAEMON facility and LOG_PID option (so "
@@ -531,31 +525,31 @@ msgid ""
 "them). All events are logged at LOG_INFO level."
 msgstr ""
 
-#: ../../../devel/tracing.rst:301
+#: ../../../devel/tracing.rst:299
 msgid ""
 "NOTE: syslog may squash duplicate consecutive trace events and apply rate"
 msgstr ""
 
-#: ../../../devel/tracing.rst:302
+#: ../../../devel/tracing.rst:299
 msgid "limiting."
 msgstr ""
 
-#: ../../../devel/tracing.rst:304
+#: ../../../devel/tracing.rst:301
 msgid "Restriction: \"syslog\" backend is restricted to POSIX compliant OS."
 msgstr ""
 
-#: ../../../devel/tracing.rst:307
+#: ../../../devel/tracing.rst:304
 msgid "LTTng Userspace Tracer"
 msgstr ""
 
-#: ../../../devel/tracing.rst:309
+#: ../../../devel/tracing.rst:306
 msgid ""
 "The \"ust\" backend uses the LTTng Userspace Tracer library.  There are no "
 "monitor commands built into QEMU, instead UST utilities should be used to "
 "list, enable/disable, and dump traces."
 msgstr ""
 
-#: ../../../devel/tracing.rst:313
+#: ../../../devel/tracing.rst:310
 msgid ""
 "Package lttng-tools is required for userspace tracing. You must ensure that "
 "the current user belongs to the \"tracing\" group, or manually launch the "
@@ -563,73 +557,73 @@ msgid ""
 "QEMU."
 msgstr ""
 
-#: ../../../devel/tracing.rst:318
+#: ../../../devel/tracing.rst:315
 msgid ""
 "While running an instrumented QEMU, LTTng should be able to list all "
 "available events::"
 msgstr ""
 
-#: ../../../devel/tracing.rst:321
+#: ../../../devel/tracing.rst:318
 msgid "lttng list -u"
 msgstr ""
 
-#: ../../../devel/tracing.rst:323
+#: ../../../devel/tracing.rst:320
 msgid "Create tracing session::"
 msgstr ""
 
-#: ../../../devel/tracing.rst:325
+#: ../../../devel/tracing.rst:322
 msgid "lttng create mysession"
 msgstr ""
 
-#: ../../../devel/tracing.rst:327
+#: ../../../devel/tracing.rst:324
 msgid "Enable events::"
 msgstr ""
 
-#: ../../../devel/tracing.rst:329
+#: ../../../devel/tracing.rst:326
 msgid "lttng enable-event qemu:g_malloc -u"
 msgstr ""
 
-#: ../../../devel/tracing.rst:331
+#: ../../../devel/tracing.rst:328
 msgid ""
 "Where the events can either be a comma-separated list of events, or \"-a\" "
 "to enable all tracepoint events. Start and stop tracing as needed::"
 msgstr ""
 
-#: ../../../devel/tracing.rst:334
+#: ../../../devel/tracing.rst:331
 msgid ""
 "lttng start\n"
 "lttng stop"
 msgstr ""
 
-#: ../../../devel/tracing.rst:337
+#: ../../../devel/tracing.rst:334
 msgid "View the trace::"
 msgstr ""
 
-#: ../../../devel/tracing.rst:339
+#: ../../../devel/tracing.rst:336
 msgid "lttng view"
 msgstr ""
 
-#: ../../../devel/tracing.rst:341
+#: ../../../devel/tracing.rst:338
 msgid "Destroy tracing session::"
 msgstr ""
 
-#: ../../../devel/tracing.rst:343
+#: ../../../devel/tracing.rst:340
 msgid "lttng destroy"
 msgstr ""
 
-#: ../../../devel/tracing.rst:345
+#: ../../../devel/tracing.rst:342
 msgid "Babeltrace can be used at any later time to view the trace::"
 msgstr ""
 
-#: ../../../devel/tracing.rst:347
+#: ../../../devel/tracing.rst:344
 msgid "babeltrace $HOME/lttng-traces/mysession-<date>-<time>"
 msgstr ""
 
-#: ../../../devel/tracing.rst:350
+#: ../../../devel/tracing.rst:347
 msgid "SystemTap"
 msgstr ""
 
-#: ../../../devel/tracing.rst:352
+#: ../../../devel/tracing.rst:349
 msgid ""
 "The \"dtrace\" backend uses DTrace sdt probes but has only been tested with "
 "SystemTap.  When SystemTap support is detected a .stp file with wrapper "
@@ -638,7 +632,7 @@ msgid ""
 "in the .stp probes::"
 msgstr ""
 
-#: ../../../devel/tracing.rst:358
+#: ../../../devel/tracing.rst:355
 msgid ""
 "scripts/tracetool.py --backends=dtrace --format=stap \\\n"
 "                     --binary path/to/qemu-binary \\\n"
@@ -648,53 +642,26 @@ msgid ""
 "                     qemu.stp"
 msgstr ""
 
-#: ../../../devel/tracing.rst:365
+#: ../../../devel/tracing.rst:362
 msgid ""
 "To facilitate simple usage of systemtap where there merely needs to be "
 "printf logging of certain probes, a helper script \"qemu-trace-stap\" is "
 "provided. Consult its manual page for guidance on its usage."
 msgstr ""
 
-#: ../../../devel/tracing.rst:370
-msgid "Trace event properties"
+#: ../../../devel/tracing.rst:367
+msgid "Trace event conditions"
 msgstr ""
 
-#: ../../../devel/tracing.rst:372
+#: ../../../devel/tracing.rst:369
 msgid ""
-"Each event in the \"trace-events-all\" file can be prefixed with a space-"
-"separated list of zero or more of the following event properties."
+"There might be cases where relatively complex computations must be performed "
+"to generate values that are only used as arguments for a trace function. In "
+"these cases you can use 'trace_event_get_state_backends()' to guard such "
+"computations, so they are skipped if the event is not currently enabled:"
 msgstr ""
 
-#: ../../../devel/tracing.rst:376
-msgid "\"disable\""
-msgstr ""
-
-#: ../../../devel/tracing.rst:378
-msgid ""
-"If a specific trace event is going to be invoked a huge number of times, "
-"this might have a noticeable performance impact even when the event is "
-"programmatically disabled."
-msgstr ""
-
-#: ../../../devel/tracing.rst:382
-msgid ""
-"In this case you should declare such event with the \"disable\" property. "
-"This will effectively disable the event at compile time (by using the "
-"\"nop\" backend), thus having no performance impact at all on regular builds "
-"(i.e., unless you edit the \"trace-events-all\" file)."
-msgstr ""
-
-#: ../../../devel/tracing.rst:387
-msgid ""
-"In addition, there might be cases where relatively complex computations must "
-"be performed to generate values that are only used as arguments for a trace "
-"function. In these cases you can use 'trace_event_get_state_backends()' to "
-"guard such computations, so they are skipped if the event has been either "
-"compile-time disabled or run-time disabled. If the event is compile-time "
-"disabled, this check will have no performance impact."
-msgstr ""
-
-#: ../../../devel/tracing.rst:396
+#: ../../../devel/tracing.rst:377
 msgid ""
 "#include \"trace.h\"  /* needed for trace event prototype */\n"
 "\n"

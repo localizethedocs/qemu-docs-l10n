@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-11-09 18:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,8 +122,8 @@ msgid "{ \"QMP\": { \"version\": json-object, \"capabilities\": json-array } }"
 msgstr ""
 
 #: ../../../interop/qmp-spec.rst:75 ../../../interop/qmp-spec.rst:107
-#: ../../../interop/qmp-spec.rst:171 ../../../interop/qmp-spec.rst:190
-#: ../../../interop/qmp-spec.rst:216
+#: ../../../interop/qmp-spec.rst:173 ../../../interop/qmp-spec.rst:192
+#: ../../../interop/qmp-spec.rst:218
 msgid "Where:"
 msgstr ""
 
@@ -148,7 +148,7 @@ msgstr ""
 msgid "Currently supported capabilities are:"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:88
+#: ../../../interop/qmp-spec.rst:90
 msgid "``oob``"
 msgstr ""
 
@@ -206,17 +206,17 @@ msgstr ""
 msgid "The actual commands are documented in the :doc:`qemu-qmp-ref`."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:123 ../../../interop/qmp-spec.rst:323
+#: ../../../interop/qmp-spec.rst:125 ../../../interop/qmp-spec.rst:325
 msgid "Out-of-band execution"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:125
+#: ../../../interop/qmp-spec.rst:127
 msgid ""
 "The server normally reads, executes and responds to one command after the "
 "other.  The client therefore receives command responses in issue order."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:129
+#: ../../../interop/qmp-spec.rst:131
 msgid ""
 "With out-of-band execution enabled via `capabilities negotiation`_, the "
 "server reads and queues commands as they arrive.  It executes commands from "
@@ -226,43 +226,43 @@ msgid ""
 "before responses from prior in-band commands."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:137
+#: ../../../interop/qmp-spec.rst:139
 msgid ""
 "To be able to match responses back to their commands, the client needs to "
 "pass ``id`` with out-of-band commands.  Passing it with all commands is "
 "recommended for clients that accept capability ``oob``."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:141
+#: ../../../interop/qmp-spec.rst:143
 msgid ""
 "If the client sends in-band commands faster than the server can execute "
 "them, the server will stop reading requests until the request queue length "
 "is reduced to an acceptable range."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:145
+#: ../../../interop/qmp-spec.rst:147
 msgid ""
 "To ensure commands to be executed out-of-band get read and executed, the "
 "client should have at most eight in-band commands in flight."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:148
+#: ../../../interop/qmp-spec.rst:150
 msgid ""
 "Only a few commands support out-of-band execution.  The ones that do have "
 "``\"allow-oob\": true`` in the output of ``query-qmp-schema``."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:152
+#: ../../../interop/qmp-spec.rst:154
 msgid "Commands Responses"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:154
+#: ../../../interop/qmp-spec.rst:156
 msgid ""
 "There are two possible responses which the Server will issue as the result "
 "of a command execution: success or error."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:157
+#: ../../../interop/qmp-spec.rst:159
 msgid ""
 "As long as the commands were issued with a proper ``id`` field, then the "
 "same ``id`` field will be attached in the corresponding response message so "
@@ -270,19 +270,19 @@ msgid ""
 "responses that have an unknown ``id`` field."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:163
+#: ../../../interop/qmp-spec.rst:165
 msgid "Success"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:165
+#: ../../../interop/qmp-spec.rst:167
 msgid "The format of a success response is:"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:169
+#: ../../../interop/qmp-spec.rst:171
 msgid "{ \"return\": json-value, \"id\": json-value }"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:173
+#: ../../../interop/qmp-spec.rst:175
 msgid ""
 "The ``return`` member contains the data returned by the command, which is "
 "defined on a per-command basis (usually a json-object or json-array of json-"
@@ -290,78 +290,78 @@ msgid ""
 "strings); it is an empty json-object if the command does not return data."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:178 ../../../interop/qmp-spec.rst:195
+#: ../../../interop/qmp-spec.rst:180 ../../../interop/qmp-spec.rst:197
 msgid ""
 "The ``id`` member contains the transaction identification associated with "
 "the command execution if issued by the Client."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:182
+#: ../../../interop/qmp-spec.rst:184
 msgid "Error"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:184
+#: ../../../interop/qmp-spec.rst:186
 msgid "The format of an error response is:"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:188
+#: ../../../interop/qmp-spec.rst:190
 msgid ""
 "{ \"error\": { \"class\": json-string, \"desc\": json-string }, \"id\": json-"
 "value }"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:192
+#: ../../../interop/qmp-spec.rst:194
 msgid ""
 "The ``class`` member contains the error class name (eg. "
 "``\"GenericError\"``)."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:193
+#: ../../../interop/qmp-spec.rst:195
 msgid ""
 "The ``desc`` member is a human-readable error message. Clients should not "
 "attempt to parse this message."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:198
+#: ../../../interop/qmp-spec.rst:200
 msgid ""
 "NOTE: Some errors can occur before the Server is able to read the ``id`` "
 "member; in these cases the ``id`` member will not be part of the error "
 "response, even if provided by the client."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:203
+#: ../../../interop/qmp-spec.rst:205
 msgid "Asynchronous events"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:205
+#: ../../../interop/qmp-spec.rst:207
 msgid ""
 "As a result of state changes, the Server may send messages unilaterally to "
 "the Client at any time, when not in the middle of any other response. They "
 "are called \"asynchronous events\"."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:209
+#: ../../../interop/qmp-spec.rst:211
 msgid "The format of asynchronous events is:"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:213
+#: ../../../interop/qmp-spec.rst:215
 msgid ""
 "{ \"event\": json-string, \"data\": json-object,\n"
 "  \"timestamp\": { \"seconds\": json-number, \"microseconds\": json-"
 "number } }"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:218
+#: ../../../interop/qmp-spec.rst:220
 msgid "The ``event`` member contains the event's name."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:219
+#: ../../../interop/qmp-spec.rst:221
 msgid ""
 "The ``data`` member contains event specific data, which is defined in a per-"
 "event basis. It is optional."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:221
+#: ../../../interop/qmp-spec.rst:223
 msgid ""
 "The ``timestamp`` member contains the exact time of when the event occurred "
 "in the Server. It is a fixed json-object with time in seconds and "
@@ -369,12 +369,12 @@ msgid ""
 "to retrieve host time, both members of the timestamp will be set to -1."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:227
+#: ../../../interop/qmp-spec.rst:229
 msgid ""
 "The actual asynchronous events are documented in the :doc:`qemu-qmp-ref`."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:229
+#: ../../../interop/qmp-spec.rst:231
 msgid ""
 "Some events are rate-limited to at most one per second.  If additional "
 "\"similar\" events arrive within one second, all but the last one are "
@@ -382,34 +382,34 @@ msgid ""
 "type."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:235
+#: ../../../interop/qmp-spec.rst:237
 msgid "Forcing the JSON parser into known-good state"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:237
+#: ../../../interop/qmp-spec.rst:239
 msgid ""
 "Incomplete or invalid input can leave the server's JSON parser in a state "
 "where it can't parse additional commands.  To get it back into known-good "
 "state, the client should provoke a lexical error."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:241
+#: ../../../interop/qmp-spec.rst:243
 msgid ""
 "The cleanest way to do that is sending an ASCII control character other than "
 "``\\t`` (horizontal tab), ``\\r`` (carriage return), or ``\\n`` (new line)."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:245
+#: ../../../interop/qmp-spec.rst:247
 msgid ""
 "Sadly, older versions of QEMU can fail to flag this as an error.  If a "
 "client needs to deal with them, it should send a 0xFF byte."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:249
+#: ../../../interop/qmp-spec.rst:251
 msgid "QGA Synchronization"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:251
+#: ../../../interop/qmp-spec.rst:253
 msgid ""
 "When a client connects to QGA over a transport lacking proper connection "
 "semantics such as virtio-serial, QGA may have read partial input from a "
@@ -420,88 +420,88 @@ msgid ""
 "documentation for details."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:262
+#: ../../../interop/qmp-spec.rst:264
 msgid "QMP Examples"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:264
+#: ../../../interop/qmp-spec.rst:266
 msgid ""
 "This section provides some examples of real QMP usage, in all of them ``->`` "
 "marks text sent by the Client and ``<-`` marks replies by the Server."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:267 ../../../interop/qmp-spec.rst:276
-#: ../../../interop/qmp-spec.rst:285 ../../../interop/qmp-spec.rst:294
-#: ../../../interop/qmp-spec.rst:303 ../../../interop/qmp-spec.rst:312
-#: ../../../interop/qmp-spec.rst:321
+#: ../../../interop/qmp-spec.rst:269 ../../../interop/qmp-spec.rst:278
+#: ../../../interop/qmp-spec.rst:287 ../../../interop/qmp-spec.rst:296
+#: ../../../interop/qmp-spec.rst:305 ../../../interop/qmp-spec.rst:314
+#: ../../../interop/qmp-spec.rst:323
 msgid "Example"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:269
+#: ../../../interop/qmp-spec.rst:271
 msgid "Server greeting"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:271
+#: ../../../interop/qmp-spec.rst:273
 msgid ""
 "<- { \"QMP\": {\"version\": {\"qemu\": {\"micro\": 0, \"minor\": 0, "
 "\"major\": 3},\n"
 "     \"package\": \"v3.0.0\"}, \"capabilities\": [\"oob\"] } }"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:278
+#: ../../../interop/qmp-spec.rst:280
 msgid "Capabilities negotiation"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:280
+#: ../../../interop/qmp-spec.rst:282
 msgid ""
 "-> { \"execute\": \"qmp_capabilities\", \"arguments\": { \"enable\": "
 "[\"oob\"] } }\n"
 "<- { \"return\": {}}"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:287
+#: ../../../interop/qmp-spec.rst:289
 msgid "Simple 'stop' execution"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:289
+#: ../../../interop/qmp-spec.rst:291
 msgid ""
 "-> { \"execute\": \"stop\" }\n"
 "<- { \"return\": {} }"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:296
+#: ../../../interop/qmp-spec.rst:298
 msgid "KVM information"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:298
+#: ../../../interop/qmp-spec.rst:300
 msgid ""
 "-> { \"execute\": \"query-kvm\", \"id\": \"example\" }\n"
 "<- { \"return\": { \"enabled\": true, \"present\": true }, \"id\": "
 "\"example\"}"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:305
+#: ../../../interop/qmp-spec.rst:307
 msgid "Parsing error"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:307
+#: ../../../interop/qmp-spec.rst:309
 msgid ""
 "-> { \"execute\": }\n"
 "<- { \"error\": { \"class\": \"GenericError\", \"desc\": \"JSON parse error, "
 "expecting value\" } }"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:314
+#: ../../../interop/qmp-spec.rst:316
 msgid "Powerdown event"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:316
+#: ../../../interop/qmp-spec.rst:318
 msgid ""
 "<- { \"timestamp\": { \"seconds\": 1258551470, \"microseconds\": 802384 },\n"
 "    \"event\": \"POWERDOWN\" }"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:325
+#: ../../../interop/qmp-spec.rst:327
 msgid ""
 "-> { \"exec-oob\": \"migrate-pause\", \"id\": 42 }\n"
 "<- { \"id\": 42,\n"
@@ -510,30 +510,30 @@ msgid ""
 "active state\" } }"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:334
+#: ../../../interop/qmp-spec.rst:336
 msgid "Capabilities Negotiation"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:336
+#: ../../../interop/qmp-spec.rst:338
 msgid ""
 "When a Client successfully establishes a connection, the Server is in "
 "Capabilities Negotiation mode."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:339
+#: ../../../interop/qmp-spec.rst:341
 msgid ""
 "In this mode only the ``qmp_capabilities`` command is allowed to run; all "
 "other commands will return the ``CommandNotFound`` error. Asynchronous "
 "messages are not delivered either."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:343
+#: ../../../interop/qmp-spec.rst:345
 msgid ""
 "Clients should use the ``qmp_capabilities`` command to enable capabilities "
 "advertised in the `Server Greeting`_ which they support."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:346
+#: ../../../interop/qmp-spec.rst:348
 msgid ""
 "When the ``qmp_capabilities`` command is issued, and if it does not return "
 "an error, the Server enters Command mode where capabilities changes take "
@@ -541,11 +541,11 @@ msgid ""
 "asynchronous messages are delivered."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:352
+#: ../../../interop/qmp-spec.rst:354
 msgid "Compatibility Considerations"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:354
+#: ../../../interop/qmp-spec.rst:356
 msgid ""
 "All protocol changes or new features which modify the protocol format in an "
 "incompatible way are disabled by default and will be advertised by the "
@@ -553,7 +553,7 @@ msgid ""
 "array and enable the capabilities they support."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:359
+#: ../../../interop/qmp-spec.rst:361
 msgid ""
 "The QMP Server performs a type check on the arguments to a command.  It "
 "generates an error if a value does not have the expected type for its key, "
@@ -563,48 +563,48 @@ msgid ""
 "will be reported before the command generated any side effect."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:367
+#: ../../../interop/qmp-spec.rst:369
 msgid "However, Clients must not assume any particular:"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:369
+#: ../../../interop/qmp-spec.rst:371
 msgid "Length of json-arrays"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:370
+#: ../../../interop/qmp-spec.rst:372
 msgid ""
 "Size of json-objects; in particular, future versions of QEMU may add new "
 "keys and Clients should be able to ignore them"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:372
+#: ../../../interop/qmp-spec.rst:374
 msgid "Order of json-object members or json-array elements"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:373
+#: ../../../interop/qmp-spec.rst:375
 msgid ""
 "Amount of errors generated by a command, that is, new errors can be added to "
 "any existing command in newer versions of the Server"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:376
+#: ../../../interop/qmp-spec.rst:378
 msgid ""
 "Any command or member name beginning with ``x-`` is deemed experimental, and "
 "may be withdrawn or changed in an incompatible manner in a future release."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:380
+#: ../../../interop/qmp-spec.rst:382
 msgid ""
 "Of course, the Server does guarantee to send valid JSON.  But apart from "
 "this, a Client should be \"conservative in what they send, and liberal in "
 "what they accept\"."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:385
+#: ../../../interop/qmp-spec.rst:387
 msgid "Downstream extension of QMP"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:387
+#: ../../../interop/qmp-spec.rst:389
 msgid ""
 "We recommend that downstream consumers of QEMU do *not* modify QMP. "
 "Management tools should be able to support both upstream and downstream "
@@ -612,14 +612,14 @@ msgid ""
 "inherently at odds with that."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:392
+#: ../../../interop/qmp-spec.rst:394
 msgid ""
 "However, we recognize that it is sometimes impossible for downstreams to "
 "avoid modifying QMP.  Both upstream and downstream need to take care to "
 "preserve long-term compatibility and interoperability."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:396
+#: ../../../interop/qmp-spec.rst:398
 msgid ""
 "To help with that, QMP reserves JSON object member names beginning with "
 "``__`` (double underscore) for downstream use (\"downstream names\").  This "
@@ -627,7 +627,7 @@ msgid ""
 "arguments, errors, asynchronous events, and so forth."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:401
+#: ../../../interop/qmp-spec.rst:403
 msgid ""
 "Any new names downstream wishes to add must begin with ``__``.  To ensure "
 "compatibility with other downstreams, it is strongly recommended that you "
@@ -636,17 +636,17 @@ msgid ""
 "kvm specific monitor command would be:"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:409
+#: ../../../interop/qmp-spec.rst:411
 msgid "(qemu) __org.linux-kvm_enable_irqchip"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:411
+#: ../../../interop/qmp-spec.rst:413
 msgid ""
 "Downstream must not change the `server greeting`_ other than to offer "
 "additional capabilities.  But see below for why even that is discouraged."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:415
+#: ../../../interop/qmp-spec.rst:417
 msgid ""
 "The section `Compatibility Considerations`_ applies to downstream as well as "
 "to upstream, obviously.  It follows that downstream must behave exactly like "
@@ -655,36 +655,36 @@ msgid ""
 "its output."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:421
+#: ../../../interop/qmp-spec.rst:423
 msgid ""
 "Thus, a client should not be able to distinguish downstream from upstream as "
 "long as it doesn't send input with downstream members, and properly ignores "
 "any downstream members in the output it receives."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:425
+#: ../../../interop/qmp-spec.rst:427
 msgid "Advice on downstream modifications:"
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:427
+#: ../../../interop/qmp-spec.rst:429
 msgid ""
 "Introducing new commands is okay.  If you want to extend an existing "
 "command, consider introducing a new one with the new behaviour instead."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:431
+#: ../../../interop/qmp-spec.rst:433
 msgid ""
 "Introducing new asynchronous messages is okay.  If you want to extend an "
 "existing message, consider adding a new one instead."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:434
+#: ../../../interop/qmp-spec.rst:436
 msgid ""
 "Introducing new errors for use in new commands is okay.  Adding new errors "
 "to existing commands counts as extension, so 1. applies."
 msgstr ""
 
-#: ../../../interop/qmp-spec.rst:437
+#: ../../../interop/qmp-spec.rst:439
 msgid ""
 "New capabilities are strongly discouraged.  Capabilities are for evolving "
 "the basic protocol, and multiple diverging basic protocol dialects are most "

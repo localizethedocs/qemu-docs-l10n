@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 16:46+0000\n"
+"POT-Creation-Date: 2026-11-09 18:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Existing enlightenments"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:40
+#: ../../../system/i386/hyperv.rst:43
 msgid "``hv-relaxed``"
 msgstr ""
 
@@ -84,7 +84,7 @@ msgid ""
 "they see 'hypervisor' CPU flag."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:45
+#: ../../../system/i386/hyperv.rst:48
 msgid "``hv-vapic``"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgid ""
 "(exit-less) EOI processing."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:50
+#: ../../../system/i386/hyperv.rst:53
 msgid "``hv-spinlocks`` = xxx"
 msgstr ""
 
@@ -106,7 +106,7 @@ msgid ""
 "the hypervisor. A special value 0xffffffff indicates \"never notify\"."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:55
+#: ../../../system/i386/hyperv.rst:60
 msgid "``hv-vpindex``"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgid ""
 "a hypercall)."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:62
+#: ../../../system/i386/hyperv.rst:66
 msgid "``hv-runtime``"
 msgstr ""
 
@@ -131,7 +131,7 @@ msgid ""
 "was preempted to perform some other work)."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:68
+#: ../../../system/i386/hyperv.rst:78
 msgid "``hv-crash``"
 msgstr ""
 
@@ -139,17 +139,17 @@ msgstr ""
 msgid ""
 "Provides HV_X64_MSR_CRASH_P0..HV_X64_MSR_CRASH_P5 (0x40000100..0x40000105) "
 "and HV_X64_MSR_CRASH_CTL (0x40000105) MSRs to the guest. These MSRs are "
-"written to by the guest when it crashes, HV_X64_MSR_CRASH_P0.."
-"HV_X64_MSR_CRASH_P5 MSRs contain additional crash information. This "
-"information is outputted in QEMU log and through QAPI. Note: unlike under "
-"genuine Hyper-V, write to HV_X64_MSR_CRASH_CTL triggers "
+"written to by the guest when it crashes, "
+"HV_X64_MSR_CRASH_P0..HV_X64_MSR_CRASH_P5 MSRs contain additional crash "
+"information. This information is outputted in QEMU log and through QAPI. "
+"Note: unlike under genuine Hyper-V, write to HV_X64_MSR_CRASH_CTL triggers "
 "``qemu_system_guest_panicked()`` via ``KVM_SYSTEM_EVENT_CRASH`` and the "
 "resulting action depends on the ``-action panic=...`` policy (default: "
 "``shutdown``). With the default action, this effectively blocks crash dump "
 "generation by Windows."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:80
+#: ../../../system/i386/hyperv.rst:86
 msgid "``hv-time``"
 msgstr ""
 
@@ -163,7 +163,7 @@ msgid ""
 "speedup of all timestamp related operations."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:88
+#: ../../../system/i386/hyperv.rst:97
 msgid "``hv-synic``"
 msgstr ""
 
@@ -184,26 +184,26 @@ msgstr ""
 msgid "Requires: ``hv-vpindex``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:99
+#: ../../../system/i386/hyperv.rst:108
 msgid "``hv-stimer``"
 msgstr ""
 
 #: ../../../system/i386/hyperv.rst:100
 msgid ""
 "Enables Hyper-V synthetic timers. There are four synthetic timers per "
-"virtual CPU controlled through HV_X64_MSR_STIMER0_CONFIG.."
-"HV_X64_MSR_STIMER3_COUNT (0x400000B0..0x400000B7) MSRs. These timers can "
-"work either in single-shot or periodic mode. It is known that certain "
-"Windows versions revert to using HPET (or even RTC when HPET is unavailable) "
-"extensively when this enlightenment is not provided; this can lead to "
-"significant CPU consumption, even when virtual CPU is idle."
+"virtual CPU controlled through "
+"HV_X64_MSR_STIMER0_CONFIG..HV_X64_MSR_STIMER3_COUNT (0x400000B0..0x400000B7) "
+"MSRs. These timers can work either in single-shot or periodic mode. It is "
+"known that certain Windows versions revert to using HPET (or even RTC when "
+"HPET is unavailable) extensively when this enlightenment is not provided; "
+"this can lead to significant CPU consumption, even when virtual CPU is idle."
 msgstr ""
 
 #: ../../../system/i386/hyperv.rst:108
 msgid "Requires: ``hv-vpindex``, ``hv-synic``, ``hv-time``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:110
+#: ../../../system/i386/hyperv.rst:118
 msgid "``hv-tlbflush``"
 msgstr ""
 
@@ -218,7 +218,7 @@ msgid ""
 "the optimization."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:120
+#: ../../../system/i386/hyperv.rst:125
 msgid "``hv-ipi``"
 msgstr ""
 
@@ -230,7 +230,7 @@ msgid ""
 "hypervisor)."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:127
+#: ../../../system/i386/hyperv.rst:133
 msgid "``hv-vendor-id`` = xxx"
 msgstr ""
 
@@ -245,7 +245,7 @@ msgid ""
 "enlightenment."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:135
+#: ../../../system/i386/hyperv.rst:138
 msgid "``hv-reset``"
 msgstr ""
 
@@ -257,7 +257,7 @@ msgid ""
 "used."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:140
+#: ../../../system/i386/hyperv.rst:143
 msgid "``hv-frequencies``"
 msgstr ""
 
@@ -268,7 +268,7 @@ msgid ""
 "doing measurements."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:145
+#: ../../../system/i386/hyperv.rst:160
 msgid "``hv-reenlightenment``"
 msgstr ""
 
@@ -297,7 +297,7 @@ msgstr ""
 msgid "Recommended: ``hv-frequencies``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:162
+#: ../../../system/i386/hyperv.rst:172
 msgid "``hv-evmcs``"
 msgstr ""
 
@@ -321,7 +321,7 @@ msgstr ""
 msgid "Requires: ``hv-vapic``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:174
+#: ../../../system/i386/hyperv.rst:181
 msgid "``hv-stimer-direct``"
 msgstr ""
 
@@ -338,7 +338,7 @@ msgstr ""
 msgid "Requires: ``hv-vpindex``, ``hv-synic``, ``hv-time``, ``hv-stimer``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:183
+#: ../../../system/i386/hyperv.rst:188
 msgid "``hv-avic`` (``hv-apicv``)"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgid ""
 "effect on guest's performance."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:190
+#: ../../../system/i386/hyperv.rst:202
 msgid "``hv-no-nonarch-coresharing`` = on/off/auto"
 msgstr ""
 
@@ -374,7 +374,7 @@ msgid ""
 "conjunction with exposing correct vCPU topology and vCPU pinning."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:204
+#: ../../../system/i386/hyperv.rst:216
 msgid ""
 "``hv-version-id-build``, ``hv-version-id-major``, ``hv-version-id-minor``, "
 "``hv-version-id-spack``, ``hv-version-id-sbranch``, ``hv-version-id-snumber``"
@@ -416,7 +416,7 @@ msgid ""
 "identification when specified without any other enlightenments."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:218
+#: ../../../system/i386/hyperv.rst:229
 msgid "``hv-syndbg``"
 msgstr ""
 
@@ -428,8 +428,8 @@ msgid ""
 "additional communication facilities to the guest: SynDbg messages. This new "
 "communication is used by Windows Kernel debugger rather than sending packets "
 "via serial/network, adding significant performance boost over the other comm "
-"channels. This enlightenment requires a VMBus device (-device vmbus-bridge,"
-"irq=15)."
+"channels. This enlightenment requires a VMBus device (-device vmbus-"
+"bridge,irq=15)."
 msgstr ""
 
 #: ../../../system/i386/hyperv.rst:229
@@ -438,7 +438,7 @@ msgid ""
 "synic``, ``hv-runtime``, ``hv-stimer``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:231
+#: ../../../system/i386/hyperv.rst:238
 msgid "``hv-emsr-bitmap``"
 msgstr ""
 
@@ -455,7 +455,7 @@ msgstr ""
 msgid "Recommended: ``hv-evmcs`` (Intel)"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:240
+#: ../../../system/i386/hyperv.rst:243
 msgid "``hv-xmm-input``"
 msgstr ""
 
@@ -467,7 +467,7 @@ msgid ""
 "memory."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:245
+#: ../../../system/i386/hyperv.rst:249
 msgid "``hv-tlbflush-ext``"
 msgstr ""
 
@@ -481,7 +481,7 @@ msgstr ""
 msgid "Requires: ``hv-tlbflush``"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:251
+#: ../../../system/i386/hyperv.rst:260
 msgid "``hv-tlbflush-direct``"
 msgstr ""
 
@@ -498,7 +498,7 @@ msgstr ""
 msgid "Supplementary features"
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:265
+#: ../../../system/i386/hyperv.rst:280
 msgid "``hv-passthrough``"
 msgstr ""
 
@@ -530,7 +530,7 @@ msgid ""
 "enabled enlightenments may differ between target and destination hosts."
 msgstr ""
 
-#: ../../../system/i386/hyperv.rst:282
+#: ../../../system/i386/hyperv.rst:287
 msgid "``hv-enforce-cpuid``"
 msgstr ""
 
