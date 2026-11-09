@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en-US" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CI &mdash; QEMU 6.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=7ab3649f" />
+      <link rel="stylesheet" type="text/css" href="../_static/theme_overrides.css?v=08e6c168" />
+
+  
+    <link rel="shortcut icon" href="../_static/qemu_32x32.png"/>
+    <link rel="canonical" href="https://projects.localizethedocs.org/qemu-docs-l10n/devel/ci.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5b09935f"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="QTest Device Emulation Testing Framework" href="qtest.html" />
+    <link rel="prev" title="QEMU and the stable process" href="stable-process.html" />
+ 
+<script type="text/javascript" src="../ltd-provenance.js"></script>
+<script type="text/javascript" src="../ltd-current.js"></script>
+<script type="text/javascript" src="../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../ltd-flyout.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #802400" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QEMU
+              <img src="../_static/qemu_128x128.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system/index.html">System Emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Mode Emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interop/index.html">System Emulation Management and Interoperability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../specs/index.html">System Emulation Guest Hardware Specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Information</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="code-of-conduct.html">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conflict-resolution.html">Conflict Resolution Policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html">The QEMU build system architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html">QEMU Coding Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kconfig.html">QEMU and Kconfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing in QEMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fuzzing.html">Fuzzing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control-flow-integrity.html">Control-Flow Integrity (CFI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html">Load and Store APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html">The memory API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atomics.html">Atomic operations in QEMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable-process.html">QEMU and the stable process</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#custom-ci-cd-variables">Custom CI/CD variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#set-variable-globally-in-the-user-s-ci-namespace">Set variable globally in the user’s CI namespace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-variable-manually-when-pushing-a-branch-or-tag-to-the-user-s-repository">Set variable manually when pushing a branch or tag to the user’s repository</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#jobs-on-custom-runners">Jobs on Custom Runners</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#machine-setup-howto">Machine Setup Howto</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qtest.html">QTest Device Emulation Testing Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decodetree.html">Decodetree Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secure-coding-practices.html">Secure Coding Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tcg.html">Translator Internals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tcg-icount.html">TCG Instruction Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html">Multi-threaded TCG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tcg-plugins.html">QEMU TCG Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bitops.html">Bitwise operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui.html">Qemu UI subsystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset.html">Reset in QEMU: the Resettable interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s390-dasd-ipl.html">Booting from real channel-attached devices on s390x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html">Modelling a clock tree in QEMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qom.html">The QEMU Object Model (QOM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html">Qemu modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="block-coroutine-wrapper.html">block-coroutine-wrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi-process.html">Multi-process QEMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf_rss.html">eBPF RSS virtio-net support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vfio-migration.html">VFIO device Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qapi-code-gen.html">How to use the QAPI code generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-qmp-commands.html">How to write QMP commands using the QAPI framework</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #802400" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QEMU</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Developer Information</a></li>
+      <li class="breadcrumb-item active">CI</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://gitlab.com/qemu-project/qemu/blob/master/docs/devel/ci.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ci">
+<h1>CI<a class="headerlink" href="#ci" title="Link to this heading"></a></h1>
+<p>QEMU has configurations enabled for a number of different CI services.
+The most up to date information about them and their status can be
+found at:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">wiki</span><span class="o">.</span><span class="n">qemu</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">Testing</span><span class="o">/</span><span class="n">CI</span>
+</pre></div>
+</div>
+<section id="custom-ci-cd-variables">
+<h2>Custom CI/CD variables<a class="headerlink" href="#custom-ci-cd-variables" title="Link to this heading"></a></h2>
+<p>QEMU CI pipelines can be tuned by setting some CI environment variables.</p>
+<section id="set-variable-globally-in-the-user-s-ci-namespace">
+<h3>Set variable globally in the user’s CI namespace<a class="headerlink" href="#set-variable-globally-in-the-user-s-ci-namespace" title="Link to this heading"></a></h3>
+<p>Variables can be set globally in the user’s CI namespace setting.</p>
+<p>For further information about how to set these variables, please refer to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">gitlab</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ee</span><span class="o">/</span><span class="n">ci</span><span class="o">/</span><span class="n">variables</span><span class="o">/</span><span class="c1">#add-a-cicd-variable-to-a-project</span>
+</pre></div>
+</div>
+</section>
+<section id="set-variable-manually-when-pushing-a-branch-or-tag-to-the-user-s-repository">
+<h3>Set variable manually when pushing a branch or tag to the user’s repository<a class="headerlink" href="#set-variable-manually-when-pushing-a-branch-or-tag-to-the-user-s-repository" title="Link to this heading"></a></h3>
+<p>Variables can be set manually when pushing a branch or tag, using
+git-push command line arguments.</p>
+<p>Example setting the QEMU_CI_EXAMPLE_VAR variable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">o</span> <span class="n">ci</span><span class="o">.</span><span class="n">variable</span><span class="o">=</span><span class="s2">&quot;QEMU_CI_EXAMPLE_VAR=value&quot;</span> <span class="n">myrepo</span> <span class="n">mybranch</span>
+</pre></div>
+</div>
+<p>For further information about how to set these variables, please refer to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">gitlab</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ee</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">push_options</span><span class="o">.</span><span class="n">html</span><span class="c1">#push-options-for-gitlab-cicd</span>
+</pre></div>
+</div>
+<p>Here is a list of the most used variables:</p>
+<section id="qemu-ci-avocado-testing">
+<h4>QEMU_CI_AVOCADO_TESTING<a class="headerlink" href="#qemu-ci-avocado-testing" title="Link to this heading"></a></h4>
+<p>By default, tests using the Avocado framework are not run automatically in
+the pipelines (because multiple artifacts have to be downloaded, and if
+these artifacts are not already cached, downloading them make the jobs
+reach the timeout limit). Set this variable to have the tests using the
+Avocado framework run automatically.</p>
+</section>
+</section>
+</section>
+<section id="jobs-on-custom-runners">
+<h2>Jobs on Custom Runners<a class="headerlink" href="#jobs-on-custom-runners" title="Link to this heading"></a></h2>
+<p>Besides the jobs run under the various CI systems listed before, there
+are a number additional jobs that will run before an actual merge.
+These use the same GitLab CI’s service/framework already used for all
+other GitLab based CI jobs, but rely on additional systems, not the
+ones provided by GitLab as “shared runners”.</p>
+<p>The architecture of GitLab’s CI service allows different machines to
+be set up with GitLab’s “agent”, called gitlab-runner, which will take
+care of running jobs created by events such as a push to a branch.
+Here, the combination of a machine, properly configured with GitLab’s
+gitlab-runner, is called a “custom runner”.</p>
+<p>The GitLab CI jobs definition for the custom runners are located under:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">gitlab</span><span class="o">-</span><span class="n">ci</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">custom</span><span class="o">-</span><span class="n">runners</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>Custom runners entail custom machines.  To see a list of the machines
+currently deployed in the QEMU GitLab CI and their maintainers, please
+refer to the QEMU <a class="reference external" href="https://wiki.qemu.org/AdminContacts">wiki</a>.</p>
+<section id="machine-setup-howto">
+<h3>Machine Setup Howto<a class="headerlink" href="#machine-setup-howto" title="Link to this heading"></a></h3>
+<p>For all Linux based systems, the setup can be mostly automated by the
+execution of two Ansible playbooks.  Create an <code class="docutils literal notranslate"><span class="pre">inventory</span></code> file
+under <code class="docutils literal notranslate"><span class="pre">scripts/ci/setup</span></code>, such as this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fully</span><span class="o">.</span><span class="n">qualified</span><span class="o">.</span><span class="n">domain</span>
+<span class="n">other</span><span class="o">.</span><span class="n">machine</span><span class="o">.</span><span class="n">hostname</span>
+</pre></div>
+</div>
+<p>You may need to set some variables in the inventory file itself.  One
+very common need is to tell Ansible to use a Python 3 interpreter on
+those hosts.  This would look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fully</span><span class="o">.</span><span class="n">qualified</span><span class="o">.</span><span class="n">domain</span> <span class="n">ansible_python_interpreter</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python3</span>
+<span class="n">other</span><span class="o">.</span><span class="n">machine</span><span class="o">.</span><span class="n">hostname</span> <span class="n">ansible_python_interpreter</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python3</span>
+</pre></div>
+</div>
+<section id="build-environment">
+<h4>Build environment<a class="headerlink" href="#build-environment" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">scripts/ci/setup/build-environment.yml</span></code> Ansible playbook will
+set up machines with the environment needed to perform builds and run
+QEMU tests.  This playbook consists on the installation of various
+required packages (and a general package update while at it).  It
+currently covers a number of different Linux distributions, but it can
+be expanded to cover other systems.</p>
+<p>The minimum required version of Ansible successfully tested in this
+playbook is 2.8.0 (a version check is embedded within the playbook
+itself).  To run the playbook, execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">scripts</span><span class="o">/</span><span class="n">ci</span><span class="o">/</span><span class="n">setup</span>
+<span class="n">ansible</span><span class="o">-</span><span class="n">playbook</span> <span class="o">-</span><span class="n">i</span> <span class="n">inventory</span> <span class="n">build</span><span class="o">-</span><span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>Please note that most of the tasks in the playbook require superuser
+privileges, such as those from the <code class="docutils literal notranslate"><span class="pre">root</span></code> account or those obtained
+by <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.  If necessary, please refer to <code class="docutils literal notranslate"><span class="pre">ansible-playbook</span></code>
+options such as <code class="docutils literal notranslate"><span class="pre">--become</span></code>, <code class="docutils literal notranslate"><span class="pre">--become-method</span></code>, <code class="docutils literal notranslate"><span class="pre">--become-user</span></code>
+and <code class="docutils literal notranslate"><span class="pre">--ask-become-pass</span></code>.</p>
+</section>
+<section id="gitlab-runner-setup-and-registration">
+<h4>gitlab-runner setup and registration<a class="headerlink" href="#gitlab-runner-setup-and-registration" title="Link to this heading"></a></h4>
+<p>The gitlab-runner agent needs to be installed on each machine that
+will run jobs.  The association between a machine and a GitLab project
+happens with a registration token.  To find the registration token for
+your repository/project, navigate on GitLab’s web UI to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Settings (the gears-like icon at the bottom of the left hand side
+vertical toolbar), then</p></li>
+<li><p>CI/CD, then</p></li>
+<li><p>Runners, and click on the “Expand” button, then</p></li>
+<li><p>Under “Set up a specific Runner manually”, look for the value under
+“And this registration token:”</p></li>
+</ul>
+</div></blockquote>
+<p>Copy the <code class="docutils literal notranslate"><span class="pre">scripts/ci/setup/vars.yml.template</span></code> file to
+<code class="docutils literal notranslate"><span class="pre">scripts/ci/setup/vars.yml</span></code>.  Then, set the
+<code class="docutils literal notranslate"><span class="pre">gitlab_runner_registration_token</span></code> variable to the value obtained
+earlier.</p>
+<p>To run the playbook, execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">scripts</span><span class="o">/</span><span class="n">ci</span><span class="o">/</span><span class="n">setup</span>
+<span class="n">ansible</span><span class="o">-</span><span class="n">playbook</span> <span class="o">-</span><span class="n">i</span> <span class="n">inventory</span> <span class="n">gitlab</span><span class="o">-</span><span class="n">runner</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>Following the registration, it’s necessary to configure the runner tags,
+and optionally other configurations on the GitLab UI.  Navigate to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Settings (the gears like icon), then</p></li>
+<li><p>CI/CD, then</p></li>
+<li><p>Runners, and click on the “Expand” button, then</p></li>
+<li><p>“Runners activated for this project”, then</p></li>
+<li><p>Click on the “Edit” icon (next to the “Lock” Icon)</p></li>
+</ul>
+</div></blockquote>
+<p>Tags are very important as they are used to route specific jobs to
+specific types of runners, so it’s a good idea to double check that
+the automatically created tags are consistent with the OS and
+architecture.  For instance, an Ubuntu 20.04 aarch64 system should
+have tags set as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ubuntu_20</span><span class="mf">.04</span><span class="p">,</span><span class="n">aarch64</span>
+</pre></div>
+</div>
+<p>Because the job definition at <code class="docutils literal notranslate"><span class="pre">.gitlab-ci.d/custom-runners.yml</span></code>
+would contain:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ubuntu</span><span class="o">-</span><span class="mf">20.04</span><span class="o">-</span><span class="n">aarch64</span><span class="o">-</span><span class="nb">all</span><span class="p">:</span>
+ <span class="n">tags</span><span class="p">:</span>
+ <span class="o">-</span> <span class="n">ubuntu_20</span><span class="mf">.04</span>
+ <span class="o">-</span> <span class="n">aarch64</span>
+</pre></div>
+</div>
+<p>It’s also recommended to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>increase the “Maximum job timeout” to something like <code class="docutils literal notranslate"><span class="pre">2h</span></code></p></li>
+<li><p>give it a better Description</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="stable-process.html" class="btn btn-neutral float-left" title="QEMU and the stable process" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="qtest.html" class="btn btn-neutral float-right" title="QTest Device Emulation Testing Framework" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, The QEMU Project Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+
+<!-- Empty para to force a blank line after "Built with Sphinx ..." -->
+<p></p>
+
+<p>This documentation is for QEMU version 6.1.</p>
+
+
+<p><a href="../about/license.html">QEMU and this manual are released under the
+GNU General Public License, version 2.</a></p>
+
+ 
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
