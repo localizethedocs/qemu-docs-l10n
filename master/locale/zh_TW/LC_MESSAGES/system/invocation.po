@@ -88,7 +88,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:71
 msgid "``accel=accels1[:accels2[:...]]``"
-msgstr ""
+msgstr "``accel=accels1[:accels2[:...]]``"
 
 #: ../../../../qemu-options.hx:72 ../../../../qemu-options.hx:258
 msgid ""
@@ -100,7 +100,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:78
 msgid "``vmport=on|off|auto``"
-msgstr ""
+msgstr "``vmport=on|off|auto``"
 
 #: ../../../../qemu-options.hx:79
 msgid ""
@@ -111,7 +111,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:83
 msgid "``dump-guest-core=on|off``"
-msgstr ""
+msgstr "``dump-guest-core=on|off``"
 
 #: ../../../../qemu-options.hx:84
 msgid "Include guest memory in a core dump. The default is on."
@@ -119,7 +119,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:86
 msgid "``mem-merge=on|off``"
-msgstr ""
+msgstr "``mem-merge=on|off``"
 
 #: ../../../../qemu-options.hx:87
 msgid ""
@@ -141,7 +141,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:97
 msgid "``dea-key-wrap=on|off``"
-msgstr ""
+msgstr "``dea-key-wrap=on|off``"
 
 #: ../../../../qemu-options.hx:98
 msgid ""
@@ -152,7 +152,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:103
 msgid "``nvdimm=on|off``"
-msgstr ""
+msgstr "``nvdimm=on|off``"
 
 #: ../../../../qemu-options.hx:104
 msgid "Enables or disables NVDIMM support. The default is off."
@@ -160,7 +160,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:106
 msgid "``confidential-guest-support=<id>``"
-msgstr ""
+msgstr "``confidential-guest-support=<id>``"
 
 #: ../../../../qemu-options.hx:107
 msgid "confidential guest support object to use. The default is none."
@@ -168,7 +168,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:109
 msgid "``memory-encryption=<id>``"
-msgstr ""
+msgstr "``memory-encryption=<id>``"
 
 #: ../../../../qemu-options.hx:110
 msgid ""
@@ -178,7 +178,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:113
 msgid "``hmat=on|off``"
-msgstr ""
+msgstr "``hmat=on|off``"
 
 #: ../../../../qemu-options.hx:114
 msgid ""
@@ -188,7 +188,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:117
 msgid "``spcr=on|off``"
-msgstr ""
+msgstr "``spcr=on|off``"
 
 #: ../../../../qemu-options.hx:118
 msgid ""
@@ -198,7 +198,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:121
 msgid "``aux-ram-share=on|off``"
-msgstr ""
+msgstr "``aux-ram-share=on|off``"
 
 #: ../../../../qemu-options.hx:122
 msgid ""
@@ -215,7 +215,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:131
 msgid "``memory-backend='id'``"
-msgstr ""
+msgstr "``memory-backend='id'``"
 
 #: ../../../../qemu-options.hx:132
 msgid ""
@@ -225,7 +225,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:135 ../../../../qemu-options.hx:151
 msgid "For example: ::"
-msgstr ""
+msgstr "例如：\\ ::"
 
 #: ../../../../qemu-options.hx:138
 msgid ""
@@ -234,6 +234,10 @@ msgid ""
 "-machine memory-backend=pc.ram\n"
 "-m 512M"
 msgstr ""
+"-object memory-backend-file,id=pc.ram,size=512M,mem-path=/"
+"hugetlbfs,prealloc=on,share=on\n"
+"-machine memory-backend=pc.ram\n"
+"-m 512M"
 
 #: ../../../../qemu-options.hx:142
 msgid "Migration compatibility note:"
@@ -266,6 +270,8 @@ msgid ""
 "``cxl-fmw.0.targets.0=firsttarget,cxl-fmw.0.targets.1=secondtarget,cxl-"
 "fmw.0.size=size[,cxl-fmw.0.interleave-granularity=granularity]``"
 msgstr ""
+"``cxl-fmw.0.targets.0=firsttarget,cxl-fmw.0.targets.1=secondtarget,cxl-"
+"fmw.0.size=size[,cxl-fmw.0.interleave-granularity=granularity]``"
 
 #: ../../../../qemu-options.hx:159
 msgid "Define a CXL Fixed Memory Window (CFMW)."
@@ -313,7 +319,7 @@ msgstr ""
 #: ../../../../qemu-options.hx:3804 ../../../../qemu-options.hx:3958
 #: ../../../../qemu-options.hx:4041 ../../../../qemu-options.hx:4758
 msgid "Example:"
-msgstr ""
+msgstr "範例："
 
 #: ../../../../qemu-options.hx:188
 msgid ""
@@ -407,11 +413,11 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:257
 msgid "``-accel name[,prop=value[,...]]``"
-msgstr ""
+msgstr "``-accel name[,prop=value[,...]]``"
 
 #: ../../../../qemu-options.hx:264
 msgid "``igd-passthru=on|off``"
-msgstr ""
+msgstr "``igd-passthru=on|off``"
 
 #: ../../../../qemu-options.hx:265
 msgid ""
@@ -433,7 +439,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:276
 msgid "``kvm-shadow-mem=size``"
-msgstr ""
+msgstr "``kvm-shadow-mem=size``"
 
 #: ../../../../qemu-options.hx:277
 msgid "Defines the size of the KVM shadow MMU."
@@ -441,7 +447,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:279
 msgid "``one-insn-per-tb=on|off``"
-msgstr ""
+msgstr "``one-insn-per-tb=on|off``"
 
 #: ../../../../qemu-options.hx:280
 msgid ""
