@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-03 08:39+0000\n"
+"POT-Creation-Date: 2026-11-09 18:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,7 +100,7 @@ msgstr ""
 msgid "9p filesystem device (legacy)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:32
+#: ../../../specs/pci-ids.rst:33
 msgid "1af4:1012"
 msgstr ""
 
@@ -108,7 +108,7 @@ msgstr ""
 msgid "vsock device (bug compatibility)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:35
+#: ../../../specs/pci-ids.rst:41
 msgid "1af4:1040 to 1af4:10ef"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgid ""
 "``include/standard-headers/``."
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:43
+#: ../../../specs/pci-ids.rst:46
 msgid "1af4:10f0 to 1a4f:10ff"
 msgstr ""
 
@@ -132,201 +132,229 @@ msgid ""
 "shipping a distro/product) to avoid conflicts."
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:48
+#: ../../../specs/pci-ids.rst:51
 msgid "1af4:1100"
 msgstr ""
 
 #: ../../../specs/pci-ids.rst:49
 msgid ""
-"Used as PCI Subsystem ID for existing hardware devices emulated by QEMU."
-msgstr ""
-
-#: ../../../specs/pci-ids.rst:52
-msgid "1af4:1110"
-msgstr ""
-
-#: ../../../specs/pci-ids.rst:53
-msgid "ivshmem device (:doc:`ivshmem-spec`)"
+"Used as PCI Subsystem ID for existing hardware devices emulated by QEMU, "
+"such as the intel chipset devices.  Also used for virtio devices and generic "
+"pci class devices (1b36:00xx, see below)."
 msgstr ""
 
 #: ../../../specs/pci-ids.rst:55
-msgid "All other device IDs are reserved."
+msgid "1af4:1101"
+msgstr ""
+
+#: ../../../specs/pci-ids.rst:54
+msgid ""
+"PCI Subsystem ID for OSMates (github.com/osmates), will be used for virtio "
+"devices and pci class devices (xhci, nvme)."
 msgstr ""
 
 #: ../../../specs/pci-ids.rst:58
-msgid "1b36 vendor ID"
+msgid "1af4:1110"
+msgstr ""
+
+#: ../../../specs/pci-ids.rst:58
+msgid "ivshmem device (:doc:`ivshmem-spec`)"
 msgstr ""
 
 #: ../../../specs/pci-ids.rst:60
+msgid "All other device IDs are reserved."
+msgstr ""
+
+#: ../../../specs/pci-ids.rst:63
+msgid "1b36 vendor ID"
+msgstr ""
+
+#: ../../../specs/pci-ids.rst:65
 msgid ""
 "The 0000 -> 00ff device ID range is used as follows for QEMU-specific PCI "
 "devices (other than virtio):"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:63
+#: ../../../specs/pci-ids.rst:68
 msgid "1b36:0001"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:64
+#: ../../../specs/pci-ids.rst:69
 msgid "PCI-PCI bridge"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:65
+#: ../../../specs/pci-ids.rst:70
 msgid "1b36:0002"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:66
+#: ../../../specs/pci-ids.rst:71
 msgid "PCI serial port (16550A) adapter (:doc:`pci-serial`)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:67
+#: ../../../specs/pci-ids.rst:72
 msgid "1b36:0003"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:68
+#: ../../../specs/pci-ids.rst:73
 msgid "PCI Dual-port 16550A adapter (:doc:`pci-serial`)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:69
+#: ../../../specs/pci-ids.rst:74
 msgid "1b36:0004"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:70
+#: ../../../specs/pci-ids.rst:75
 msgid "PCI Quad-port 16550A adapter (:doc:`pci-serial`)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:71
+#: ../../../specs/pci-ids.rst:76
 msgid "1b36:0005"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:72
+#: ../../../specs/pci-ids.rst:77
 msgid "PCI test device (:doc:`pci-testdev`)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:73
+#: ../../../specs/pci-ids.rst:78
 msgid "1b36:0006"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:74
+#: ../../../specs/pci-ids.rst:79
 msgid "PCI Rocker Ethernet switch device"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:75
+#: ../../../specs/pci-ids.rst:80
 msgid "1b36:0007"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:76
+#: ../../../specs/pci-ids.rst:81
 msgid "PCI SD Card Host Controller Interface (SDHCI)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:77
+#: ../../../specs/pci-ids.rst:82
 msgid "1b36:0008"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:78
+#: ../../../specs/pci-ids.rst:83
 msgid "PCIe host bridge"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:79
+#: ../../../specs/pci-ids.rst:84
 msgid "1b36:0009"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:80
+#: ../../../specs/pci-ids.rst:85
 msgid "PCI Expander Bridge (``-device pxb``)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:81
+#: ../../../specs/pci-ids.rst:86
 msgid "1b36:000a"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:82
+#: ../../../specs/pci-ids.rst:87
 msgid "PCI-PCI bridge (multiseat)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:83
+#: ../../../specs/pci-ids.rst:88
 msgid "1b36:000b"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:84
+#: ../../../specs/pci-ids.rst:89
 msgid "PCIe Expander Bridge (``-device pxb-pcie``)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:85
+#: ../../../specs/pci-ids.rst:90
 msgid "1b36:000c"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:86
+#: ../../../specs/pci-ids.rst:91
 msgid "PCIe Root Port (``-device pcie-root-port``)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:87
+#: ../../../specs/pci-ids.rst:92
 msgid "1b36:000d"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:88
+#: ../../../specs/pci-ids.rst:93
 msgid "PCI xhci usb host adapter"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:89
+#: ../../../specs/pci-ids.rst:94
 msgid "1b36:000e"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:90
+#: ../../../specs/pci-ids.rst:95
 msgid "PCIe-to-PCI bridge (``-device pcie-pci-bridge``)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:91
+#: ../../../specs/pci-ids.rst:96
 msgid "1b36:000f"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:92
+#: ../../../specs/pci-ids.rst:97
 msgid "mdpy (mdev sample device), ``linux/samples/vfio-mdev/mdpy.c``"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:93
+#: ../../../specs/pci-ids.rst:98
 msgid "1b36:0010"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:94
+#: ../../../specs/pci-ids.rst:99
 msgid "PCIe NVMe device (``-device nvme``)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:95
+#: ../../../specs/pci-ids.rst:100
 msgid "1b36:0011"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:96
+#: ../../../specs/pci-ids.rst:101
 msgid "PCI PVPanic device (``-device pvpanic-pci``)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:97
+#: ../../../specs/pci-ids.rst:102
 msgid "1b36:0012"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:98
+#: ../../../specs/pci-ids.rst:103
 msgid "PCI ACPI ERST device (``-device acpi-erst``)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:99
+#: ../../../specs/pci-ids.rst:104
 msgid "1b36:0013"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:100
+#: ../../../specs/pci-ids.rst:105
 msgid "PCI UFS device (``-device ufs``)"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:101
+#: ../../../specs/pci-ids.rst:106
 msgid "1b36:0014"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:102
+#: ../../../specs/pci-ids.rst:107
 msgid "PCI RISC-V IOMMU device"
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:104
+#: ../../../specs/pci-ids.rst:108
+msgid "1b36:0015"
+msgstr ""
+
+#: ../../../specs/pci-ids.rst:109
+msgid "PCIe Upstream Switch Port (``-device pcie-upstream-port``)"
+msgstr ""
+
+#: ../../../specs/pci-ids.rst:111
+msgid "1b36:0016"
+msgstr ""
+
+#: ../../../specs/pci-ids.rst:111
+msgid "PCIe Downstream Switch Port (``-device pcie-downstream-port``)"
+msgstr ""
+
+#: ../../../specs/pci-ids.rst:113
 msgid "All these devices are documented in :doc:`index`."
 msgstr ""
 
-#: ../../../specs/pci-ids.rst:106
+#: ../../../specs/pci-ids.rst:115
 msgid "The 0100 device ID is used for the QXL video card device."
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 16:46+0000\n"
+"POT-Creation-Date: 2026-11-09 18:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -572,8 +572,8 @@ msgid ""
 "sufficient for most devices. Some devices change behaviour based on the "
 "attributes used for the memory transaction, or need to be able to respond "
 "that the access should provoke a bus error rather than completing "
-"successfully; those devices can use the ->read_with_attrs() and -"
-">write_with_attrs() callbacks instead."
+"successfully; those devices can use the ->read_with_attrs() and "
+"->write_with_attrs() callbacks instead."
 msgstr ""
 
 #: ../../../devel/memory.rst:346
@@ -645,7 +645,7 @@ msgstr ""
 msgid "**Members**"
 msgstr ""
 
-#: ../../../../include/system/memory.h:90
+#: ../../../../include/system/memory.h:91
 msgid "``size``"
 msgstr ""
 
@@ -653,7 +653,7 @@ msgstr ""
 msgid "the size of the section; will not exceed **mr**'s boundaries"
 msgstr ""
 
-#: ../../../../include/system/memory.h:87
+#: ../../../../include/system/memory.h:88
 msgid "``mr``"
 msgstr ""
 
@@ -661,7 +661,7 @@ msgstr ""
 msgid "the region, or ``NULL`` if empty"
 msgstr ""
 
-#: ../../../../include/system/memory.h:88
+#: ../../../../include/system/memory.h:89
 msgid "``fv``"
 msgstr ""
 
@@ -669,7 +669,7 @@ msgstr ""
 msgid "the flat view of the address space the region is mapped in"
 msgstr ""
 
-#: ../../../../include/system/memory.h:89
+#: ../../../../include/system/memory.h:90
 msgid "``offset_within_region``"
 msgstr ""
 
@@ -677,7 +677,7 @@ msgstr ""
 msgid "the beginning of the section, relative to **mr**'s start"
 msgstr ""
 
-#: ../../../../include/system/memory.h:91
+#: ../../../../include/system/memory.h:93
 msgid "``offset_within_address_space``"
 msgstr ""
 
@@ -687,7 +687,7 @@ msgid ""
 "address space"
 msgstr ""
 
-#: ../../../../include/system/memory.h:93
+#: ../../../../include/system/memory.h:94
 msgid "``readonly``"
 msgstr ""
 
@@ -695,7 +695,7 @@ msgstr ""
 msgid "writes to this section are ignored"
 msgstr ""
 
-#: ../../../../include/system/memory.h:94
+#: ../../../../include/system/memory.h:95
 msgid "``nonvolatile``"
 msgstr ""
 
@@ -820,7 +820,7 @@ msgstr ""
 msgid "**Parameters**"
 msgstr ""
 
-#: ../../../../include/system/memory.h:544
+#: ../../../../include/system/memory.h:541
 msgid "``IOMMUTLBEntry *iotlb``"
 msgstr ""
 
@@ -837,16 +837,16 @@ msgid ""
 "return the offset of the entry from the start of the returned MemoryRegion."
 msgstr ""
 
-#: ../../../../include/system/memory.h:545
-#: ../../../../include/system/memory.h:1124
-#: ../../../../include/system/memory.h:1154
-#: ../../../../include/system/memory.h:1188
-#: ../../../../include/system/memory.h:1219
-#: ../../../../include/system/memory.h:1341
-#: ../../../../include/system/memory.h:1387
-#: ../../../../include/system/memory.h:1420
-#: ../../../../include/system/memory.h:1621
-#: ../../../../include/system/memory.h:2359
+#: ../../../../include/system/memory.h:544
+#: ../../../../include/system/memory.h:1123
+#: ../../../../include/system/memory.h:1153
+#: ../../../../include/system/memory.h:1187
+#: ../../../../include/system/memory.h:1218
+#: ../../../../include/system/memory.h:1340
+#: ../../../../include/system/memory.h:1386
+#: ../../../../include/system/memory.h:1419
+#: ../../../../include/system/memory.h:1620
+#: ../../../../include/system/memory.h:2358
 msgid "``Error **errp``"
 msgstr ""
 
@@ -924,18 +924,19 @@ msgid ""
 "};"
 msgstr ""
 
-#: ../../../../include/system/memory.h:633
+#: ../../../../include/system/memory.h:640
 msgid "``begin``"
 msgstr ""
 
 #: ../../../../include/system/memory.h:634
 msgid ""
 "Called at the beginning of an address space update transaction. Followed by "
-"calls to :c:type:`MemoryListener.region_add\\(\\) <MemoryListener>`, :c:type:"
-"`MemoryListener.region_del\\(\\) <MemoryListener>`, :c:type:`MemoryListener."
-"region_nop\\(\\) <MemoryListener>`, :c:type:`MemoryListener.log_start\\(\\) "
-"<MemoryListener>` and :c:type:`MemoryListener.log_stop\\(\\) "
-"<MemoryListener>` in increasing address order."
+"calls to :c:type:`MemoryListener.region_add\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.region_del\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.region_nop\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.log_start\\(\\) <MemoryListener>` "
+"and :c:type:`MemoryListener.log_stop\\(\\) <MemoryListener>` in increasing "
+"address order."
 msgstr ""
 
 #: ../../../../include/system/memory.h:640
@@ -945,21 +946,21 @@ msgstr ""
 msgid "**listener**: The :c:type:`MemoryListener <MemoryListener>`."
 msgstr ""
 
-#: ../../../../include/system/memory.h:646
+#: ../../../../include/system/memory.h:652
 msgid "``commit``"
 msgstr ""
 
 #: ../../../../include/system/memory.h:647
 msgid ""
 "Called at the end of an address space update transaction, after the last "
-"call to :c:type:`MemoryListener.region_add\\(\\) <MemoryListener>`, :c:type:"
-"`MemoryListener.region_del\\(\\) <MemoryListener>` or :c:type:"
-"`MemoryListener.region_nop\\(\\) <MemoryListener>`, :c:type:`MemoryListener."
-"log_start\\(\\) <MemoryListener>` and :c:type:`MemoryListener.log_stop\\(\\) "
-"<MemoryListener>`."
+"call to :c:type:`MemoryListener.region_add\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.region_del\\(\\) "
+"<MemoryListener>` or :c:type:`MemoryListener.region_nop\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.log_start\\(\\) <MemoryListener>` "
+"and :c:type:`MemoryListener.log_stop\\(\\) <MemoryListener>`."
 msgstr ""
 
-#: ../../../../include/system/memory.h:658
+#: ../../../../include/system/memory.h:664
 msgid "``region_add``"
 msgstr ""
 
@@ -976,7 +977,7 @@ msgid ""
 "The new :c:type:`MemoryRegionSection <MemoryRegionSection>`."
 msgstr ""
 
-#: ../../../../include/system/memory.h:670
+#: ../../../../include/system/memory.h:676
 msgid "``region_del``"
 msgstr ""
 
@@ -993,7 +994,7 @@ msgid ""
 "The old :c:type:`MemoryRegionSection <MemoryRegionSection>`."
 msgstr ""
 
-#: ../../../../include/system/memory.h:682
+#: ../../../../include/system/memory.h:688
 msgid "``region_nop``"
 msgstr ""
 
@@ -1012,17 +1013,18 @@ msgid ""
 "The :c:type:`MemoryRegionSection <MemoryRegionSection>`."
 msgstr ""
 
-#: ../../../../include/system/memory.h:694
+#: ../../../../include/system/memory.h:705
 msgid "``log_start``"
 msgstr ""
 
 #: ../../../../include/system/memory.h:695
 msgid ""
-"Called during an address space update transaction, after one of :c:type:"
-"`MemoryListener.region_add\\(\\) <MemoryListener>`, :c:type:`MemoryListener."
-"region_del\\(\\) <MemoryListener>` or :c:type:`MemoryListener."
-"region_nop\\(\\) <MemoryListener>`, if dirty memory logging clients have "
-"become active since the last transaction."
+"Called during an address space update transaction, after one "
+"of :c:type:`MemoryListener.region_add\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.region_del\\(\\) "
+"<MemoryListener>` or :c:type:`MemoryListener.region_nop\\(\\) "
+"<MemoryListener>`, if dirty memory logging clients have become active since "
+"the last transaction."
 msgstr ""
 
 #: ../../../../include/system/memory.h:700
@@ -1035,21 +1037,22 @@ msgid ""
 "active in the current transaction."
 msgstr ""
 
-#: ../../../../include/system/memory.h:712
+#: ../../../../include/system/memory.h:724
 msgid "``log_stop``"
 msgstr ""
 
 #: ../../../../include/system/memory.h:713
 msgid ""
-"Called during an address space update transaction, after one of :c:type:"
-"`MemoryListener.region_add\\(\\) <MemoryListener>`, :c:type:`MemoryListener."
-"region_del\\(\\) <MemoryListener>` or :c:type:`MemoryListener."
-"region_nop\\(\\) <MemoryListener>` and possibly after :c:type:"
-"`MemoryListener.log_start\\(\\) <MemoryListener>`, if dirty memory logging "
-"clients have become inactive since the last transaction."
+"Called during an address space update transaction, after one "
+"of :c:type:`MemoryListener.region_add\\(\\) "
+"<MemoryListener>`, :c:type:`MemoryListener.region_del\\(\\) "
+"<MemoryListener>` or :c:type:`MemoryListener.region_nop\\(\\) "
+"<MemoryListener>` and possibly after :c:type:`MemoryListener.log_start\\(\\) "
+"<MemoryListener>`, if dirty memory logging clients have become inactive "
+"since the last transaction."
 msgstr ""
 
-#: ../../../../include/system/memory.h:731
+#: ../../../../include/system/memory.h:737
 msgid "``log_sync``"
 msgstr ""
 
@@ -1061,7 +1064,7 @@ msgid ""
 "<MemoryRegionSection>`."
 msgstr ""
 
-#: ../../../../include/system/memory.h:743
+#: ../../../../include/system/memory.h:752
 msgid "``log_sync_global``"
 msgstr ""
 
@@ -1081,27 +1084,27 @@ msgid ""
 "for once after all VCPUs have been stopped."
 msgstr ""
 
-#: ../../../../include/system/memory.h:758
+#: ../../../../include/system/memory.h:763
 msgid "``log_clear``"
 msgstr ""
 
 #: ../../../../include/system/memory.h:759
 msgid ""
-"Called before reading the dirty memory bitmap for a :c:type:"
-"`MemoryRegionSection <MemoryRegionSection>`."
+"Called before reading the dirty memory bitmap for "
+"a :c:type:`MemoryRegionSection <MemoryRegionSection>`."
 msgstr ""
 
-#: ../../../../include/system/memory.h:769
+#: ../../../../include/system/memory.h:779
 msgid "``log_global_start``"
 msgstr ""
 
 #: ../../../../include/system/memory.h:770
 msgid ""
 "Called by memory_global_dirty_log_start(), which enables the "
-"``DIRTY_LOG_MIGRATION`` client on all memory regions in the address space.  :"
-"c:type:`MemoryListener.log_global_start\\(\\) <MemoryListener>` is also "
-"called when a :c:type:`MemoryListener <MemoryListener>` is added, if global "
-"dirty logging is active at that time."
+"``DIRTY_LOG_MIGRATION`` client on all memory regions in the address "
+"space.  :c:type:`MemoryListener.log_global_start\\(\\) <MemoryListener>` is "
+"also called when a :c:type:`MemoryListener <MemoryListener>` is added, if "
+"global dirty logging is active at that time."
 msgstr ""
 
 #: ../../../../include/system/memory.h:776
@@ -1114,7 +1117,7 @@ msgstr ""
 msgid "Return: true on success, else false setting **errp** with error."
 msgstr ""
 
-#: ../../../../include/system/memory.h:785
+#: ../../../../include/system/memory.h:790
 msgid "``log_global_stop``"
 msgstr ""
 
@@ -1124,17 +1127,17 @@ msgid ""
 "``DIRTY_LOG_MIGRATION`` client on all memory regions in the address space."
 msgstr ""
 
-#: ../../../../include/system/memory.h:796
+#: ../../../../include/system/memory.h:800
 msgid "``log_global_after_sync``"
 msgstr ""
 
 #: ../../../../include/system/memory.h:797
 msgid ""
-"Called after reading the dirty memory bitmap for any :c:type:"
-"`MemoryRegionSection <MemoryRegionSection>`."
+"Called after reading the dirty memory bitmap for "
+"any :c:type:`MemoryRegionSection <MemoryRegionSection>`."
 msgstr ""
 
-#: ../../../../include/system/memory.h:806
+#: ../../../../include/system/memory.h:815
 msgid "``eventfd_add``"
 msgstr ""
 
@@ -1154,7 +1157,7 @@ msgid ""
 "<EventNotifier>` parameter for the new ioeventfd."
 msgstr ""
 
-#: ../../../../include/system/memory.h:822
+#: ../../../../include/system/memory.h:831
 msgid "``eventfd_del``"
 msgstr ""
 
@@ -1170,11 +1173,12 @@ msgid ""
 "**listener**: The :c:type:`MemoryListener <MemoryListener>`. **section**: "
 "The new :c:type:`MemoryRegionSection <MemoryRegionSection>`. **match_data**: "
 "The **match_data** parameter for the dropped ioeventfd. **data**: The "
-"**data** parameter for the dropped ioeventfd. **e**: The :c:type:"
-"`EventNotifier <EventNotifier>` parameter for the dropped ioeventfd."
+"**data** parameter for the dropped ioeventfd. **e**: "
+"The :c:type:`EventNotifier <EventNotifier>` parameter for the dropped "
+"ioeventfd."
 msgstr ""
 
-#: ../../../../include/system/memory.h:838
+#: ../../../../include/system/memory.h:846
 msgid "``coalesced_io_add``"
 msgstr ""
 
@@ -1194,7 +1198,7 @@ msgid ""
 "coalesced MMIO range."
 msgstr ""
 
-#: ../../../../include/system/memory.h:853
+#: ../../../../include/system/memory.h:861
 msgid "``coalesced_io_del``"
 msgstr ""
 
@@ -1205,7 +1209,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: ../../../../include/system/memory.h:867
+#: ../../../../include/system/memory.h:870
 msgid "``priority``"
 msgstr ""
 
@@ -1216,7 +1220,7 @@ msgid ""
 "or \"stop\" callbacks."
 msgstr ""
 
-#: ../../../../include/system/memory.h:876
+#: ../../../../include/system/memory.h:877
 msgid "``name``"
 msgstr ""
 
@@ -1334,7 +1338,7 @@ msgid ""
 "offset_in_region, void *opaque)``"
 msgstr ""
 
-#: ../../../../include/system/memory.h:965
+#: ../../../../include/system/memory.h:954
 msgid "``Int128 start``"
 msgstr ""
 
@@ -1342,7 +1346,7 @@ msgstr ""
 msgid "start address of the range within the FlatView"
 msgstr ""
 
-#: ../../../../include/system/memory.h:956
+#: ../../../../include/system/memory.h:955
 msgid "``Int128 len``"
 msgstr ""
 
@@ -1350,23 +1354,23 @@ msgstr ""
 msgid "length of the range in bytes"
 msgstr ""
 
-#: ../../../../include/system/memory.h:957
+#: ../../../../include/system/memory.h:956
 #: ../../../../include/system/memory.h:1439
 #: ../../../../include/system/memory.h:1446
-#: ../../../../include/system/memory.h:1453
-#: ../../../../include/system/memory.h:1465
-#: ../../../../include/system/memory.h:1474
-#: ../../../../include/system/memory.h:1487
-#: ../../../../include/system/memory.h:1497
+#: ../../../../include/system/memory.h:1451
+#: ../../../../include/system/memory.h:1463
+#: ../../../../include/system/memory.h:1473
+#: ../../../../include/system/memory.h:1486
+#: ../../../../include/system/memory.h:1496
 #: ../../../../include/system/memory.h:1516
-#: ../../../../include/system/memory.h:1527
-#: ../../../../include/system/memory.h:1689
-#: ../../../../include/system/memory.h:1698
+#: ../../../../include/system/memory.h:1526
+#: ../../../../include/system/memory.h:1687
+#: ../../../../include/system/memory.h:1696
 #: ../../../../include/system/memory.h:1708
-#: ../../../../include/system/memory.h:1719
-#: ../../../../include/system/memory.h:1731
-#: ../../../../include/system/memory.h:1743
-#: ../../../../include/system/memory.h:1772
+#: ../../../../include/system/memory.h:1717
+#: ../../../../include/system/memory.h:1729
+#: ../../../../include/system/memory.h:1742
+#: ../../../../include/system/memory.h:1777
 #: ../../../../include/system/memory.h:2130
 #: ../../../../include/system/memory.h:2229
 msgid "``const MemoryRegion *mr``"
@@ -1376,7 +1380,7 @@ msgstr ""
 msgid "MemoryRegion covering this range"
 msgstr ""
 
-#: ../../../../include/system/memory.h:958
+#: ../../../../include/system/memory.h:957
 msgid "``hwaddr offset_in_region``"
 msgstr ""
 
@@ -1384,10 +1388,10 @@ msgstr ""
 msgid "offset of the first byte of the range within **mr**"
 msgstr ""
 
-#: ../../../../include/system/memory.h:959
-#: ../../../../include/system/memory.h:973
-#: ../../../../include/system/memory.h:1101
-#: ../../../../include/system/memory.h:1416
+#: ../../../../include/system/memory.h:958
+#: ../../../../include/system/memory.h:972
+#: ../../../../include/system/memory.h:1100
+#: ../../../../include/system/memory.h:1415
 msgid "``void *opaque``"
 msgstr ""
 
@@ -1403,7 +1407,7 @@ msgstr ""
 msgid "Iterate through a FlatView"
 msgstr ""
 
-#: ../../../../include/system/memory.h:975
+#: ../../../../include/system/memory.h:970
 msgid "``FlatView *fv``"
 msgstr ""
 
@@ -1411,7 +1415,7 @@ msgstr ""
 msgid "the FlatView to iterate through"
 msgstr ""
 
-#: ../../../../include/system/memory.h:972
+#: ../../../../include/system/memory.h:971
 msgid "``flatview_cb cb``"
 msgstr ""
 
@@ -1435,9 +1439,9 @@ msgstr ""
 msgid "Copy a memory region section"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1000
-#: ../../../../include/system/memory.h:1010
-#: ../../../../include/system/memory.h:1020
+#: ../../../../include/system/memory.h:999
+#: ../../../../include/system/memory.h:1009
+#: ../../../../include/system/memory.h:1017
 msgid "``MemoryRegionSection *s``"
 msgstr ""
 
@@ -1472,7 +1476,7 @@ msgstr ""
 msgid "the :c:type:`MemoryRegionSection <MemoryRegionSection>` to be adjusted"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1019
+#: ../../../../include/system/memory.h:1018
 msgid "``uint64_t offset``"
 msgstr ""
 
@@ -1480,22 +1484,22 @@ msgstr ""
 msgid "the offset of the given range in the memory region"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1020
-#: ../../../../include/system/memory.h:1053
-#: ../../../../include/system/memory.h:1103
-#: ../../../../include/system/memory.h:1121
-#: ../../../../include/system/memory.h:1151
-#: ../../../../include/system/memory.h:1180
-#: ../../../../include/system/memory.h:1213
-#: ../../../../include/system/memory.h:1244
-#: ../../../../include/system/memory.h:1271
+#: ../../../../include/system/memory.h:1019
+#: ../../../../include/system/memory.h:1052
+#: ../../../../include/system/memory.h:1102
+#: ../../../../include/system/memory.h:1120
+#: ../../../../include/system/memory.h:1150
+#: ../../../../include/system/memory.h:1179
+#: ../../../../include/system/memory.h:1212
+#: ../../../../include/system/memory.h:1243
+#: ../../../../include/system/memory.h:1270
 #: ../../../../include/system/memory.h:1294
-#: ../../../../include/system/memory.h:1323
-#: ../../../../include/system/memory.h:1340
-#: ../../../../include/system/memory.h:1386
-#: ../../../../include/system/memory.h:1419
-#: ../../../../include/system/memory.h:1989
-#: ../../../../include/system/memory.h:2299
+#: ../../../../include/system/memory.h:1322
+#: ../../../../include/system/memory.h:1339
+#: ../../../../include/system/memory.h:1385
+#: ../../../../include/system/memory.h:1418
+#: ../../../../include/system/memory.h:1988
+#: ../../../../include/system/memory.h:2298
 msgid "``uint64_t size``"
 msgstr ""
 
@@ -1511,53 +1515,53 @@ msgstr ""
 msgid "Initialize a memory region"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1050
-#: ../../../../include/system/memory.h:1066
-#: ../../../../include/system/memory.h:1083
-#: ../../../../include/system/memory.h:1097
-#: ../../../../include/system/memory.h:1118
-#: ../../../../include/system/memory.h:1144
-#: ../../../../include/system/memory.h:1178
-#: ../../../../include/system/memory.h:1212
-#: ../../../../include/system/memory.h:1241
-#: ../../../../include/system/memory.h:1262
-#: ../../../../include/system/memory.h:1290
-#: ../../../../include/system/memory.h:1338
-#: ../../../../include/system/memory.h:1374
-#: ../../../../include/system/memory.h:1403
-#: ../../../../include/system/memory.h:1507
-#: ../../../../include/system/memory.h:1614
-#: ../../../../include/system/memory.h:1644
-#: ../../../../include/system/memory.h:1800
-#: ../../../../include/system/memory.h:1810
-#: ../../../../include/system/memory.h:1820
-#: ../../../../include/system/memory.h:1832
-#: ../../../../include/system/memory.h:1845
-#: ../../../../include/system/memory.h:1861
-#: ../../../../include/system/memory.h:1893
-#: ../../../../include/system/memory.h:1906
-#: ../../../../include/system/memory.h:1921
-#: ../../../../include/system/memory.h:1939
-#: ../../../../include/system/memory.h:1950
-#: ../../../../include/system/memory.h:1961
+#: ../../../../include/system/memory.h:1049
+#: ../../../../include/system/memory.h:1072
+#: ../../../../include/system/memory.h:1084
+#: ../../../../include/system/memory.h:1096
+#: ../../../../include/system/memory.h:1116
+#: ../../../../include/system/memory.h:1146
+#: ../../../../include/system/memory.h:1175
+#: ../../../../include/system/memory.h:1209
+#: ../../../../include/system/memory.h:1239
+#: ../../../../include/system/memory.h:1267
+#: ../../../../include/system/memory.h:1287
+#: ../../../../include/system/memory.h:1335
+#: ../../../../include/system/memory.h:1381
+#: ../../../../include/system/memory.h:1412
+#: ../../../../include/system/memory.h:1504
+#: ../../../../include/system/memory.h:1616
+#: ../../../../include/system/memory.h:1642
+#: ../../../../include/system/memory.h:1797
+#: ../../../../include/system/memory.h:1807
+#: ../../../../include/system/memory.h:1819
+#: ../../../../include/system/memory.h:1831
+#: ../../../../include/system/memory.h:1847
+#: ../../../../include/system/memory.h:1876
+#: ../../../../include/system/memory.h:1890
+#: ../../../../include/system/memory.h:1905
+#: ../../../../include/system/memory.h:1925
+#: ../../../../include/system/memory.h:1938
+#: ../../../../include/system/memory.h:1949
+#: ../../../../include/system/memory.h:1963
 #: ../../../../include/system/memory.h:1975
 #: ../../../../include/system/memory.h:1986
 #: ../../../../include/system/memory.h:2001
-#: ../../../../include/system/memory.h:2012
-#: ../../../../include/system/memory.h:2024
+#: ../../../../include/system/memory.h:2013
+#: ../../../../include/system/memory.h:2026
 #: ../../../../include/system/memory.h:2037
-#: ../../../../include/system/memory.h:2048
-#: ../../../../include/system/memory.h:2071
-#: ../../../../include/system/memory.h:2091
-#: ../../../../include/system/memory.h:2108
-#: ../../../../include/system/memory.h:2139
-#: ../../../../include/system/memory.h:2238
+#: ../../../../include/system/memory.h:2050
+#: ../../../../include/system/memory.h:2070
+#: ../../../../include/system/memory.h:2094
+#: ../../../../include/system/memory.h:2113
+#: ../../../../include/system/memory.h:2137
+#: ../../../../include/system/memory.h:2237
 #: ../../../../include/system/memory.h:2248
-#: ../../../../include/system/memory.h:2259
-#: ../../../../include/system/memory.h:2268
-#: ../../../../include/system/memory.h:2279
-#: ../../../../include/system/memory.h:2384
-#: ../../../../include/system/memory.h:2399
+#: ../../../../include/system/memory.h:2256
+#: ../../../../include/system/memory.h:2265
+#: ../../../../include/system/memory.h:2296
+#: ../../../../include/system/memory.h:2381
+#: ../../../../include/system/memory.h:2396
 msgid "``MemoryRegion *mr``"
 msgstr ""
 
@@ -1566,19 +1570,19 @@ msgstr ""
 msgid "the :c:type:`MemoryRegion <MemoryRegion>` to be initialized"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1051
-#: ../../../../include/system/memory.h:1098
-#: ../../../../include/system/memory.h:1118
-#: ../../../../include/system/memory.h:1148
-#: ../../../../include/system/memory.h:1177
-#: ../../../../include/system/memory.h:1211
-#: ../../../../include/system/memory.h:1241
-#: ../../../../include/system/memory.h:1269
-#: ../../../../include/system/memory.h:1289
-#: ../../../../include/system/memory.h:1321
+#: ../../../../include/system/memory.h:1050
+#: ../../../../include/system/memory.h:1097
+#: ../../../../include/system/memory.h:1117
+#: ../../../../include/system/memory.h:1147
+#: ../../../../include/system/memory.h:1176
+#: ../../../../include/system/memory.h:1210
+#: ../../../../include/system/memory.h:1240
+#: ../../../../include/system/memory.h:1268
+#: ../../../../include/system/memory.h:1288
+#: ../../../../include/system/memory.h:1320
 #: ../../../../include/system/memory.h:1337
-#: ../../../../include/system/memory.h:1383
-#: ../../../../include/system/memory.h:1414
+#: ../../../../include/system/memory.h:1382
+#: ../../../../include/system/memory.h:1413
 msgid "``Object *owner``"
 msgstr ""
 
@@ -1597,20 +1601,20 @@ msgstr ""
 msgid "the object that tracks the region's reference count"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1052
-#: ../../../../include/system/memory.h:1102
+#: ../../../../include/system/memory.h:1051
+#: ../../../../include/system/memory.h:1101
 #: ../../../../include/system/memory.h:1119
 #: ../../../../include/system/memory.h:1149
 #: ../../../../include/system/memory.h:1178
-#: ../../../../include/system/memory.h:1212
+#: ../../../../include/system/memory.h:1211
 #: ../../../../include/system/memory.h:1242
-#: ../../../../include/system/memory.h:1270
-#: ../../../../include/system/memory.h:1290
-#: ../../../../include/system/memory.h:1322
-#: ../../../../include/system/memory.h:1339
+#: ../../../../include/system/memory.h:1269
+#: ../../../../include/system/memory.h:1289
+#: ../../../../include/system/memory.h:1321
+#: ../../../../include/system/memory.h:1338
 #: ../../../../include/system/memory.h:1384
 #: ../../../../include/system/memory.h:1417
-#: ../../../../include/system/memory.h:2414
+#: ../../../../include/system/memory.h:2413
 msgid "``const char *name``"
 msgstr ""
 
@@ -1690,7 +1694,7 @@ msgid "the :c:type:`MemoryRegion <MemoryRegion>` to be initialized."
 msgstr ""
 
 #: ../../../../include/system/memory.h:1099
-#: ../../../../include/system/memory.h:1415
+#: ../../../../include/system/memory.h:1414
 msgid "``const MemoryRegionOps *ops``"
 msgstr ""
 
@@ -1743,8 +1747,8 @@ msgid ""
 msgstr ""
 
 #: ../../../../include/system/memory.h:1122
-#: ../../../../include/system/memory.h:1183
-#: ../../../../include/system/memory.h:1214
+#: ../../../../include/system/memory.h:1184
+#: ../../../../include/system/memory.h:1215
 msgid "``uint32_t ram_flags``"
 msgstr ""
 
@@ -1787,7 +1791,7 @@ msgstr ""
 msgid "used size of the region."
 msgstr ""
 
-#: ../../../../include/system/memory.h:1152
+#: ../../../../include/system/memory.h:1151
 msgid "``uint64_t max_size``"
 msgstr ""
 
@@ -1795,7 +1799,7 @@ msgstr ""
 msgid "max size of the region."
 msgstr ""
 
-#: ../../../../include/system/memory.h:1153
+#: ../../../../include/system/memory.h:1152
 msgid "``void (*resized)(const char*, uint64_t length, void *host)``"
 msgstr ""
 
@@ -1826,7 +1830,7 @@ msgid ""
 "RAM_GUEST_MEMFD_PRIVATE"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1186
+#: ../../../../include/system/memory.h:1185
 msgid "``const char *path``"
 msgstr ""
 
@@ -1834,8 +1838,8 @@ msgstr ""
 msgid "the path in which to allocate the RAM."
 msgstr ""
 
-#: ../../../../include/system/memory.h:1187
-#: ../../../../include/system/memory.h:1218
+#: ../../../../include/system/memory.h:1186
+#: ../../../../include/system/memory.h:1217
 msgid "``ram_addr_t offset``"
 msgstr ""
 
@@ -1848,7 +1852,7 @@ msgstr ""
 msgid "the name of the region."
 msgstr ""
 
-#: ../../../../include/system/memory.h:1217
+#: ../../../../include/system/memory.h:1216
 msgid "``int fd``"
 msgstr ""
 
@@ -1866,9 +1870,9 @@ msgid ""
 "region will modify memory directly."
 msgstr ""
 
-#: ../../../../include/system/memory.h:1245
-#: ../../../../include/system/memory.h:1272
-#: ../../../../include/system/memory.h:1753
+#: ../../../../include/system/memory.h:1244
+#: ../../../../include/system/memory.h:1271
+#: ../../../../include/system/memory.h:1760
 msgid "``void *ptr``"
 msgstr ""
 
@@ -1915,10 +1919,10 @@ msgid ""
 "**offset** and **offset** + **size** - 1."
 msgstr ""
 
-#: ../../../../include/system/memory.h:1293
-#: ../../../../include/system/memory.h:1988
-#: ../../../../include/system/memory.h:2096
-#: ../../../../include/system/memory.h:2115
+#: ../../../../include/system/memory.h:1292
+#: ../../../../include/system/memory.h:1987
+#: ../../../../include/system/memory.h:2095
+#: ../../../../include/system/memory.h:2114
 msgid "``hwaddr offset``"
 msgstr ""
 
@@ -1930,7 +1934,7 @@ msgstr ""
 msgid "Initialize a memory region of a custom type that translates addresses"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1309
+#: ../../../../include/system/memory.h:1317
 msgid "``void *_iommu_mr``"
 msgstr ""
 
@@ -1938,7 +1942,7 @@ msgstr ""
 msgid "the :c:type:`IOMMUMemoryRegion <IOMMUMemoryRegion>` to be initialized"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1319
+#: ../../../../include/system/memory.h:1318
 msgid "``size_t instance_size``"
 msgstr ""
 
@@ -1946,7 +1950,7 @@ msgstr ""
 msgid "the IOMMUMemoryRegion subclass instance size"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1320
+#: ../../../../include/system/memory.h:1319
 msgid "``const char *mrtypename``"
 msgstr ""
 
@@ -2150,11 +2154,11 @@ msgid "returns iommu memory region class if an iommu or NULL if not"
 msgstr ""
 
 #: ../../../../include/system/memory.h:1546
-#: ../../../../include/system/memory.h:1563
-#: ../../../../include/system/memory.h:1573
+#: ../../../../include/system/memory.h:1562
+#: ../../../../include/system/memory.h:1572
 #: ../../../../include/system/memory.h:1632
-#: ../../../../include/system/memory.h:1655
-#: ../../../../include/system/memory.h:1671
+#: ../../../../include/system/memory.h:1656
+#: ../../../../include/system/memory.h:1668
 #: ../../../../include/system/memory.h:1681
 msgid "``IOMMUMemoryRegion *iommu_mr``"
 msgstr ""
@@ -2181,7 +2185,7 @@ msgstr ""
 msgid "the memory region that was changed"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1574
+#: ../../../../include/system/memory.h:1573
 msgid "``int iommu_idx``"
 msgstr ""
 
@@ -2189,7 +2193,7 @@ msgstr ""
 msgid "the IOMMU index for the translation table which has changed"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1575
+#: ../../../../include/system/memory.h:1576
 msgid "``const IOMMUTLBEvent event``"
 msgstr ""
 
@@ -2225,7 +2229,7 @@ msgstr ""
 msgid "the notifier to be notified"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1591
+#: ../../../../include/system/memory.h:1592
 msgid "``const IOMMUTLBEvent *event``"
 msgstr ""
 
@@ -2249,16 +2253,16 @@ msgstr ""
 msgid "the memory region to observe"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1618
-#: ../../../../include/system/memory.h:1634
+#: ../../../../include/system/memory.h:1619
+#: ../../../../include/system/memory.h:1633
 #: ../../../../include/system/memory.h:1644
 msgid "``IOMMUNotifier *n``"
 msgstr ""
 
 #: ../../../../include/system/memory.h:1617
 msgid ""
-"the IOMMUNotifier to be added; the notify callback receives a pointer to an :"
-"c:type:`IOMMUTLBEntry <IOMMUTLBEntry>` as the opaque value; the pointer "
+"the IOMMUNotifier to be added; the notify callback receives a pointer to "
+"an :c:type:`IOMMUTLBEntry <IOMMUTLBEntry>` as the opaque value; the pointer "
 "ceases to be valid on exit from the notifier."
 msgstr ""
 
@@ -2308,7 +2312,7 @@ msgstr ""
 msgid "the memory region"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1658
+#: ../../../../include/system/memory.h:1657
 msgid "``enum IOMMUMemoryRegionAttr attr``"
 msgstr ""
 
@@ -2316,7 +2320,7 @@ msgstr ""
 msgid "the requested attribute"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1659
+#: ../../../../include/system/memory.h:1658
 msgid "``void *data``"
 msgstr ""
 
@@ -2339,11 +2343,11 @@ msgstr ""
 #: ../../../../include/system/memory.h:1670
 #: ../../../../include/system/memory.h:2386
 #: ../../../../include/system/memory.h:2401
-#: ../../../../include/system/memory.h:2467
-#: ../../../../include/system/memory.h:2485
-#: ../../../../include/system/memory.h:2511
-#: ../../../../include/system/memory.h:2749
-#: ../../../../include/system/memory.h:2795
+#: ../../../../include/system/memory.h:2466
+#: ../../../../include/system/memory.h:2484
+#: ../../../../include/system/memory.h:2510
+#: ../../../../include/system/memory.h:2748
+#: ../../../../include/system/memory.h:2794
 msgid "``MemTxAttrs attrs``"
 msgstr ""
 
@@ -2367,7 +2371,7 @@ msgstr ""
 msgid "return whether a memory region is logging writes"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1698
+#: ../../../../include/system/memory.h:1697
 msgid "``uint8_t client``"
 msgstr ""
 
@@ -2428,7 +2432,7 @@ msgstr ""
 msgid "the host pointer to be converted"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1762
+#: ../../../../include/system/memory.h:1761
 msgid "``ram_addr_t *offset``"
 msgstr ""
 
@@ -2471,25 +2475,25 @@ msgstr ""
 msgid "the memory region to be msync"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1799
-#: ../../../../include/system/memory.h:1809
-#: ../../../../include/system/memory.h:1833
-#: ../../../../include/system/memory.h:1878
-#: ../../../../include/system/memory.h:1893
-#: ../../../../include/system/memory.h:1907
+#: ../../../../include/system/memory.h:1798
+#: ../../../../include/system/memory.h:1808
+#: ../../../../include/system/memory.h:1832
+#: ../../../../include/system/memory.h:1877
+#: ../../../../include/system/memory.h:1892
+#: ../../../../include/system/memory.h:1906
 #: ../../../../include/system/memory.h:1927
-#: ../../../../include/system/memory.h:2052
-#: ../../../../include/system/memory.h:2072
-#: ../../../../include/system/memory.h:2219
-#: ../../../../include/system/memory.h:2298
-#: ../../../../include/system/memory.h:2383
-#: ../../../../include/system/memory.h:2398
-#: ../../../../include/system/memory.h:2466
-#: ../../../../include/system/memory.h:2484
-#: ../../../../include/system/memory.h:2510
+#: ../../../../include/system/memory.h:2051
+#: ../../../../include/system/memory.h:2071
+#: ../../../../include/system/memory.h:2218
+#: ../../../../include/system/memory.h:2297
+#: ../../../../include/system/memory.h:2382
+#: ../../../../include/system/memory.h:2397
+#: ../../../../include/system/memory.h:2465
+#: ../../../../include/system/memory.h:2483
+#: ../../../../include/system/memory.h:2509
 #: ../../../../include/system/memory.h:2613
-#: ../../../../include/system/memory.h:2748
-#: ../../../../include/system/memory.h:2792
+#: ../../../../include/system/memory.h:2747
+#: ../../../../include/system/memory.h:2791
 msgid "``hwaddr addr``"
 msgstr ""
 
@@ -2499,11 +2503,11 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:1800
 #: ../../../../include/system/memory.h:1810
-#: ../../../../include/system/memory.h:1834
-#: ../../../../include/system/memory.h:1879
+#: ../../../../include/system/memory.h:1833
+#: ../../../../include/system/memory.h:1878
 #: ../../../../include/system/memory.h:1894
-#: ../../../../include/system/memory.h:1908
-#: ../../../../include/system/memory.h:1929
+#: ../../../../include/system/memory.h:1907
+#: ../../../../include/system/memory.h:1928
 msgid "``hwaddr size``"
 msgstr ""
 
@@ -2538,7 +2542,7 @@ msgstr ""
 msgid "the memory region being updated."
 msgstr ""
 
-#: ../../../../include/system/memory.h:1821
+#: ../../../../include/system/memory.h:1820
 msgid "``bool log``"
 msgstr ""
 
@@ -2546,8 +2550,8 @@ msgstr ""
 msgid "whether dirty logging is to be enabled or disabled."
 msgstr ""
 
-#: ../../../../include/system/memory.h:1822
-#: ../../../../include/system/memory.h:1880
+#: ../../../../include/system/memory.h:1821
+#: ../../../../include/system/memory.h:1879
 #: ../../../../include/system/memory.h:1909
 msgid "``unsigned client``"
 msgstr ""
@@ -2592,7 +2596,7 @@ msgstr ""
 msgid "the memory region to clear the dirty log upon"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1849
+#: ../../../../include/system/memory.h:1848
 msgid "``hwaddr start``"
 msgstr ""
 
@@ -2600,12 +2604,12 @@ msgstr ""
 msgid "start address offset within the memory region"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1850
-#: ../../../../include/system/memory.h:2469
-#: ../../../../include/system/memory.h:2487
-#: ../../../../include/system/memory.h:2513
-#: ../../../../include/system/memory.h:2751
-#: ../../../../include/system/memory.h:2794
+#: ../../../../include/system/memory.h:1849
+#: ../../../../include/system/memory.h:2468
+#: ../../../../include/system/memory.h:2486
+#: ../../../../include/system/memory.h:2512
+#: ../../../../include/system/memory.h:2750
+#: ../../../../include/system/memory.h:2793
 msgid "``hwaddr len``"
 msgstr ""
 
@@ -2670,7 +2674,7 @@ msgid ""
 "snapshot."
 msgstr ""
 
-#: ../../../../include/system/memory.h:1892
+#: ../../../../include/system/memory.h:1891
 msgid "``DirtyBitmapSnapshot *snap``"
 msgstr ""
 
@@ -2741,7 +2745,7 @@ msgstr ""
 msgid "Turn a memory region read-only (or read-write)"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1940
+#: ../../../../include/system/memory.h:1939
 msgid "``bool readonly``"
 msgstr ""
 
@@ -2759,7 +2763,7 @@ msgstr ""
 msgid "Turn a memory region non-volatile"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1951
+#: ../../../../include/system/memory.h:1950
 msgid "``bool nonvolatile``"
 msgstr ""
 
@@ -2777,7 +2781,7 @@ msgstr ""
 msgid "enable/disable ROMD mode"
 msgstr ""
 
-#: ../../../../include/system/memory.h:1965
+#: ../../../../include/system/memory.h:1964
 msgid "``bool romd_mode``"
 msgstr ""
 
@@ -2891,8 +2895,8 @@ msgstr ""
 msgid "the address within **mr** that is to be monitored"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2053
-#: ../../../../include/system/memory.h:2073
+#: ../../../../include/system/memory.h:2052
+#: ../../../../include/system/memory.h:2072
 msgid "``unsigned size``"
 msgstr ""
 
@@ -2901,8 +2905,8 @@ msgstr ""
 msgid "the size of the access to trigger the eventfd"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2054
-#: ../../../../include/system/memory.h:2074
+#: ../../../../include/system/memory.h:2053
+#: ../../../../include/system/memory.h:2073
 msgid "``bool match_data``"
 msgstr ""
 
@@ -2911,9 +2915,9 @@ msgstr ""
 msgid "whether to match against **data**, instead of just **addr**"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2055
-#: ../../../../include/system/memory.h:2075
-#: ../../../../include/system/memory.h:2399
+#: ../../../../include/system/memory.h:2054
+#: ../../../../include/system/memory.h:2074
+#: ../../../../include/system/memory.h:2398
 msgid "``uint64_t data``"
 msgstr ""
 
@@ -2922,8 +2926,8 @@ msgstr ""
 msgid "the data to match against the guest write"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2056
-#: ../../../../include/system/memory.h:2076
+#: ../../../../include/system/memory.h:2055
+#: ../../../../include/system/memory.h:2075
 msgid "``EventNotifier *e``"
 msgstr ""
 
@@ -2968,9 +2972,9 @@ msgstr ""
 msgid "the offset relative to **mr** where **subregion** is added."
 msgstr ""
 
-#: ../../../../include/system/memory.h:2097
-#: ../../../../include/system/memory.h:2116
-#: ../../../../include/system/memory.h:2139
+#: ../../../../include/system/memory.h:2096
+#: ../../../../include/system/memory.h:2115
+#: ../../../../include/system/memory.h:2138
 msgid "``MemoryRegion *subregion``"
 msgstr ""
 
@@ -2992,7 +2996,7 @@ msgstr ""
 msgid "Add a subregion to a container with overlap."
 msgstr ""
 
-#: ../../../../include/system/memory.h:2117
+#: ../../../../include/system/memory.h:2116
 msgid "``int priority``"
 msgstr ""
 
@@ -3036,8 +3040,8 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:2211
 msgid ""
-"checks if an address relative to a **container** translates into :c:type:"
-"`MemoryRegion <MemoryRegion>` within **container**"
+"checks if an address relative to a **container** translates "
+"into :c:type:`MemoryRegion <MemoryRegion>` within **container**"
 msgstr ""
 
 #: ../../../../include/system/memory.h:2217
@@ -3075,8 +3079,8 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:2232
 msgid ""
-"get the :c:type:`RamDiscardManager <RamDiscardManager>` for a :c:type:"
-"`MemoryRegion <MemoryRegion>`"
+"get the :c:type:`RamDiscardManager <RamDiscardManager>` for "
+"a :c:type:`MemoryRegion <MemoryRegion>`"
 msgstr ""
 
 #: ../../../../include/system/memory.h:2233
@@ -3087,18 +3091,18 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:2242
 msgid ""
-"check whether a :c:type:`MemoryRegion <MemoryRegion>` has a :c:type:"
-"`RamDiscardManager <RamDiscardManager>` assigned"
+"check whether a :c:type:`MemoryRegion <MemoryRegion>` has "
+"a :c:type:`RamDiscardManager <RamDiscardManager>` assigned"
 msgstr ""
 
 #: ../../../../include/system/memory.h:2253
 msgid ""
-"add a :c:type:`RamDiscardSource <RamDiscardSource>` for a :c:type:"
-"`MemoryRegion <MemoryRegion>`"
+"add a :c:type:`RamDiscardSource <RamDiscardSource>` for "
+"a :c:type:`MemoryRegion <MemoryRegion>`"
 msgstr ""
 
 #: ../../../../include/system/memory.h:2258
-#: ../../../../include/system/memory.h:2267
+#: ../../../../include/system/memory.h:2266
 msgid "``RamDiscardSource *source``"
 msgstr ""
 
@@ -3108,8 +3112,8 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:2262
 msgid ""
-"remove a :c:type:`RamDiscardSource <RamDiscardSource>` for a :c:type:"
-"`MemoryRegion <MemoryRegion>`"
+"remove a :c:type:`RamDiscardSource <RamDiscardSource>` for "
+"a :c:type:`MemoryRegion <MemoryRegion>`"
 msgstr ""
 
 #: ../../../../include/system/memory.h:2266
@@ -3122,8 +3126,8 @@ msgstr ""
 
 #: ../../../../include/system/memory.h:2273
 msgid ""
-"translate an address/size relative to a MemoryRegion into a :c:type:"
-"`MemoryRegionSection <MemoryRegionSection>`."
+"translate an address/size relative to a MemoryRegion into "
+"a :c:type:`MemoryRegionSection <MemoryRegionSection>`."
 msgstr ""
 
 #: ../../../../include/system/memory.h:2296
@@ -3173,7 +3177,7 @@ msgstr ""
 msgid "synchronize the dirty log for all memory"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2310
+#: ../../../../include/system/memory.h:2308
 msgid "``bool last_stage``"
 msgstr ""
 
@@ -3185,8 +3189,7 @@ msgstr ""
 msgid "Synchronizes the dirty page log for all address spaces."
 msgstr ""
 
-#: ../../../../include/system/memory.h:2319
-#: ../../../../include/system/memory.h:2330
+#: ../../../../include/system/memory.h:1
 #: ../../../../include/system/memory.h:2338
 msgid "``void``"
 msgstr ""
@@ -3199,8 +3202,8 @@ msgstr ""
 msgid ""
 "Synchronizes the vCPUs with a thread that is reading the dirty bitmap. This "
 "function must be called after the dirty log bitmap is cleared, and before "
-"dirty guest memory pages are read.  If you are using :c:type:"
-"`DirtyBitmapSnapshot <DirtyBitmapSnapshot>`, "
+"dirty guest memory pages are read.  If you are "
+"using :c:type:`DirtyBitmapSnapshot <DirtyBitmapSnapshot>`, "
 "memory_region_snapshot_and_clear_dirty() takes care of doing this."
 msgstr ""
 
@@ -3224,7 +3227,7 @@ msgid ""
 "into an address space"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2344
+#: ../../../../include/system/memory.h:2342
 #: ../../../../include/system/memory.h:2354
 msgid "``MemoryListener *listener``"
 msgstr ""
@@ -3253,7 +3256,7 @@ msgstr ""
 msgid "begin dirty logging for all regions"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2361
+#: ../../../../include/system/memory.h:2357
 #: ../../../../include/system/memory.h:2371
 msgid "``unsigned int flags``"
 msgstr ""
@@ -3284,7 +3287,7 @@ msgstr ""
 msgid "address within that region"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2384
+#: ../../../../include/system/memory.h:2383
 msgid "``uint64_t *pval``"
 msgstr ""
 
@@ -3292,8 +3295,8 @@ msgstr ""
 msgid "pointer to uint64_t which the data is written to"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2385
-#: ../../../../include/system/memory.h:2400
+#: ../../../../include/system/memory.h:2384
+#: ../../../../include/system/memory.h:2399
 msgid "``MemOp op``"
 msgstr ""
 
@@ -3319,11 +3322,11 @@ msgstr ""
 msgid "initializes an address space"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2415
-#: ../../../../include/system/memory.h:2425
+#: ../../../../include/system/memory.h:2411
+#: ../../../../include/system/memory.h:2432
 #: ../../../../include/system/memory.h:2443
-#: ../../../../include/system/memory.h:2499
-#: ../../../../include/system/memory.h:2614
+#: ../../../../include/system/memory.h:2508
+#: ../../../../include/system/memory.h:2611
 msgid "``AddressSpace *as``"
 msgstr ""
 
@@ -3331,7 +3334,7 @@ msgstr ""
 msgid "an uninitialized :c:type:`AddressSpace <AddressSpace>`"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2413
+#: ../../../../include/system/memory.h:2412
 msgid "``MemoryRegion *root``"
 msgstr ""
 
@@ -3384,7 +3387,7 @@ msgstr ""
 msgid "unregister all listeners of an address space"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2454
+#: ../../../../include/system/memory.h:2453
 #: ../../../../include/system/memory.h:2464
 #: ../../../../include/system/memory.h:2482
 #: ../../../../include/system/memory.h:2746
@@ -3432,8 +3435,8 @@ msgstr ""
 msgid "memory transaction attributes"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2468
-#: ../../../../include/system/memory.h:2750
+#: ../../../../include/system/memory.h:2467
+#: ../../../../include/system/memory.h:2749
 msgid "``void *buf``"
 msgstr ""
 
@@ -3448,7 +3451,7 @@ msgstr ""
 msgid "the number of bytes to read or write"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2470
+#: ../../../../include/system/memory.h:2469
 msgid "``bool is_write``"
 msgstr ""
 
@@ -3469,8 +3472,8 @@ msgstr ""
 msgid "write to address space."
 msgstr ""
 
-#: ../../../../include/system/memory.h:2486
-#: ../../../../include/system/memory.h:2512
+#: ../../../../include/system/memory.h:2485
+#: ../../../../include/system/memory.h:2511
 msgid "``const void *buf``"
 msgstr ""
 
@@ -3506,7 +3509,7 @@ msgstr ""
 msgid "move data from or to ramblock"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2680
+#: ../../../../include/system/memory.h:2676
 msgid "``void *dst``"
 msgstr ""
 
@@ -3514,7 +3517,7 @@ msgstr ""
 msgid "destination where the data is moved to"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2678
+#: ../../../../include/system/memory.h:2677
 msgid "``const void *src``"
 msgstr ""
 
@@ -3522,7 +3525,7 @@ msgstr ""
 msgid "source where the data is moved from"
 msgstr ""
 
-#: ../../../../include/system/memory.h:2679
+#: ../../../../include/system/memory.h:2678
 msgid "``size_t n``"
 msgstr ""
 
@@ -3580,7 +3583,7 @@ msgstr ""
 msgid "Fill address space with a constant byte."
 msgstr ""
 
-#: ../../../../include/system/memory.h:2793
+#: ../../../../include/system/memory.h:2792
 msgid "``uint8_t c``"
 msgstr ""
 

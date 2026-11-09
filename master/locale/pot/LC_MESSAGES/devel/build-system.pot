@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 16:46+0000\n"
+"POT-Creation-Date: 2026-11-09 18:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,7 +135,7 @@ msgid ""
 "and operating systems:"
 msgstr ""
 
-#: ../../../devel/build-system.rst:75
+#: ../../../devel/build-system.rst:77
 msgid "``error_exit $MESSAGE $MORE...``"
 msgstr ""
 
@@ -145,7 +145,7 @@ msgid ""
 "configure script with non-zero status."
 msgstr ""
 
-#: ../../../devel/build-system.rst:79
+#: ../../../devel/build-system.rst:82
 msgid "``has $COMMAND``"
 msgstr ""
 
@@ -156,7 +156,7 @@ msgid ""
 "Meson is ``find_program()``."
 msgstr ""
 
-#: ../../../devel/build-system.rst:84
+#: ../../../devel/build-system.rst:88
 msgid "``probe_target_compiler $TARGET``"
 msgstr ""
 
@@ -168,7 +168,7 @@ msgid ""
 "``$target_ar``, etc. to non-empty values."
 msgstr ""
 
-#: ../../../devel/build-system.rst:90
+#: ../../../devel/build-system.rst:94
 msgid "``write_target_makefile``"
 msgstr ""
 
@@ -186,7 +186,7 @@ msgid ""
 "These are performed using a few more helper functions:"
 msgstr ""
 
-#: ../../../devel/build-system.rst:100
+#: ../../../devel/build-system.rst:103
 msgid "``compile_object $CFLAGS``"
 msgstr ""
 
@@ -196,7 +196,7 @@ msgid ""
 "The test program must have been previously written to a file called $TMPC."
 msgstr ""
 
-#: ../../../devel/build-system.rst:105
+#: ../../../devel/build-system.rst:108
 msgid "``compile_prog $CFLAGS $LDFLAGS``"
 msgstr ""
 
@@ -207,7 +207,7 @@ msgid ""
 "have been previously written to a file called $TMPC."
 msgstr ""
 
-#: ../../../devel/build-system.rst:110
+#: ../../../devel/build-system.rst:111
 msgid "``check_define $NAME``"
 msgstr ""
 
@@ -215,7 +215,7 @@ msgstr ""
 msgid "Determine if the macro $NAME is defined by the system C compiler."
 msgstr ""
 
-#: ../../../devel/build-system.rst:113
+#: ../../../devel/build-system.rst:118
 msgid "``do_compiler $CC $ARGS...``"
 msgstr ""
 
@@ -228,7 +228,7 @@ msgid ""
 "``pc-bios/option-rom/Makefile``)."
 msgstr ""
 
-#: ../../../devel/build-system.rst:120
+#: ../../../devel/build-system.rst:123
 msgid "``write_c_skeleton``"
 msgstr ""
 
@@ -387,7 +387,7 @@ msgid ""
 "one of four groups:"
 msgstr ""
 
-#: ../../../devel/build-system.rst:227
+#: ../../../devel/build-system.rst:237
 msgid "Subsystem sourcesets:"
 msgstr ""
 
@@ -404,12 +404,12 @@ msgid ""
 "libchardev = static_library('chardev', chardev_ss.sources(),\n"
 "                            build_by_default: false)\n"
 "\n"
-"chardev = declare_dependency(objects: libchardev."
-"extract_all_objects(recursive: false),\n"
+"chardev = declare_dependency(objects: "
+"libchardev.extract_all_objects(recursive: false),\n"
 "                             dependencies: chardev_ss.dependencies())"
 msgstr ""
 
-#: ../../../devel/build-system.rst:239
+#: ../../../devel/build-system.rst:248
 msgid "Target-independent emulator sourcesets:"
 msgstr ""
 
@@ -429,7 +429,7 @@ msgid ""
 "emulators."
 msgstr ""
 
-#: ../../../devel/build-system.rst:250
+#: ../../../devel/build-system.rst:279
 msgid "Target-dependent emulator sourcesets:"
 msgstr ""
 
@@ -483,7 +483,7 @@ msgid ""
 "target_system_arch += {'arm': arm_system_ss}"
 msgstr ""
 
-#: ../../../devel/build-system.rst:281
+#: ../../../devel/build-system.rst:296
 msgid "Module sourcesets:"
 msgstr ""
 
@@ -512,7 +512,7 @@ msgid ""
 "modules += { 'hw-display': hw_display_modules }"
 msgstr ""
 
-#: ../../../devel/build-system.rst:298
+#: ../../../devel/build-system.rst:311
 msgid "Utility sourcesets:"
 msgstr ""
 
@@ -540,7 +540,7 @@ msgid ""
 "each emulator:"
 msgstr ""
 
-#: ../../../devel/build-system.rst:316
+#: ../../../devel/build-system.rst:323
 msgid "``configs/devices/*.mak``"
 msgstr ""
 
@@ -558,7 +558,7 @@ msgid ""
 "CONFIG_XLNX_VERSAL=y"
 msgstr ""
 
-#: ../../../devel/build-system.rst:325
+#: ../../../devel/build-system.rst:328
 msgid "``*/Kconfig``"
 msgstr ""
 
@@ -569,7 +569,7 @@ msgid ""
 "models.  They are described in :ref:`kconfig`"
 msgstr ""
 
-#: ../../../devel/build-system.rst:330
+#: ../../../devel/build-system.rst:334
 msgid "``configs/targets/*.mak``"
 msgstr ""
 
@@ -774,16 +774,16 @@ msgstr ""
 #: ../../../devel/build-system.rst:453
 msgid ""
 "If desired, it is also possible to use ``ninja`` and ``pyvenv/bin/meson "
-"test``, respectively to build emulators and run tests defined in meson."
-"build. The main difference is that ``make`` needs the ``-jN`` flag in order "
-"to enable parallel builds or tests."
+"test``, respectively to build emulators and run tests defined in "
+"meson.build. The main difference is that ``make`` needs the ``-jN`` flag in "
+"order to enable parallel builds or tests."
 msgstr ""
 
 #: ../../../devel/build-system.rst:459
 msgid "Useful make targets"
 msgstr ""
 
-#: ../../../devel/build-system.rst:461
+#: ../../../devel/build-system.rst:462
 msgid "``help``"
 msgstr ""
 
@@ -791,7 +791,7 @@ msgstr ""
 msgid "Print a help message for the most common build targets."
 msgstr ""
 
-#: ../../../devel/build-system.rst:464
+#: ../../../devel/build-system.rst:467
 msgid "``print-VAR``"
 msgstr ""
 
@@ -815,7 +815,7 @@ msgid ""
 "dynamically created files listed later."
 msgstr ""
 
-#: ../../../devel/build-system.rst:479
+#: ../../../devel/build-system.rst:482
 msgid "``Makefile``"
 msgstr ""
 
@@ -826,7 +826,7 @@ msgid ""
 "component."
 msgstr ""
 
-#: ../../../devel/build-system.rst:484
+#: ../../../devel/build-system.rst:488
 msgid "``*/meson.build``"
 msgstr ""
 
@@ -838,7 +838,7 @@ msgid ""
 "meson.build files spread throughout the QEMU source tree."
 msgstr ""
 
-#: ../../../devel/build-system.rst:490
+#: ../../../devel/build-system.rst:493
 msgid "``python/scripts/mkvenv.py``"
 msgstr ""
 
@@ -849,7 +849,7 @@ msgid ""
 "bin``, and calling ``pip`` to install dependencies."
 msgstr ""
 
-#: ../../../devel/build-system.rst:495
+#: ../../../devel/build-system.rst:496
 msgid "``tests/Makefile.include``"
 msgstr ""
 
@@ -857,7 +857,7 @@ msgstr ""
 msgid "Rules for external test harnesses like the TCG tests."
 msgstr ""
 
-#: ../../../devel/build-system.rst:498
+#: ../../../devel/build-system.rst:501
 msgid "``tests/docker/Makefile.include``"
 msgstr ""
 
@@ -868,7 +868,7 @@ msgid ""
 "will influence the entire build system."
 msgstr ""
 
-#: ../../../devel/build-system.rst:503
+#: ../../../devel/build-system.rst:506
 msgid "``tests/vm/Makefile.include``"
 msgstr ""
 
@@ -895,7 +895,7 @@ msgstr ""
 msgid "Built by configure:"
 msgstr ""
 
-#: ../../../devel/build-system.rst:518
+#: ../../../devel/build-system.rst:528
 msgid "``run``"
 msgstr ""
 
@@ -916,7 +916,7 @@ msgid ""
 "``qmp-shell-wrap`` and spawn the QEMU emulator from the build directory."
 msgstr ""
 
-#: ../../../devel/build-system.rst:530
+#: ../../../devel/build-system.rst:537
 msgid "``config-host.mak``"
 msgstr ""
 
@@ -993,7 +993,7 @@ msgstr ""
 msgid "Built by Meson:"
 msgstr ""
 
-#: ../../../devel/build-system.rst:571
+#: ../../../devel/build-system.rst:573
 msgid "``config-host.h``"
 msgstr ""
 
@@ -1003,7 +1003,7 @@ msgid ""
 "set of enabled features for the entire build."
 msgstr ""
 
-#: ../../../devel/build-system.rst:575
+#: ../../../devel/build-system.rst:577
 msgid "``${TARGET-NAME}-config-devices.mak``"
 msgstr ""
 
@@ -1013,7 +1013,7 @@ msgid ""
 "using files under ``configs/devices`` as input."
 msgstr ""
 
-#: ../../../devel/build-system.rst:579
+#: ../../../devel/build-system.rst:581
 msgid "``${TARGET-NAME}-config-target.mak``"
 msgstr ""
 
@@ -1023,7 +1023,7 @@ msgid ""
 "generated by Meson using files under ``configs/targets`` as input."
 msgstr ""
 
-#: ../../../devel/build-system.rst:583
+#: ../../../devel/build-system.rst:588
 msgid "``$TARGET_NAME-config-target.h``, ``$TARGET_NAME-config-devices.h``"
 msgstr ""
 
@@ -1036,7 +1036,7 @@ msgid ""
 "respectively."
 msgstr ""
 
-#: ../../../devel/build-system.rst:590
+#: ../../../devel/build-system.rst:592
 msgid "``build.ninja``"
 msgstr ""
 
@@ -1048,7 +1048,7 @@ msgstr ""
 msgid "Built by Makefile:"
 msgstr ""
 
-#: ../../../devel/build-system.rst:596
+#: ../../../devel/build-system.rst:598
 msgid "``Makefile.ninja``"
 msgstr ""
 
@@ -1058,14 +1058,14 @@ msgid ""
 "is mostly a list of targets that Meson included in build.ninja."
 msgstr ""
 
-#: ../../../devel/build-system.rst:600
+#: ../../../devel/build-system.rst:604
 msgid "``Makefile.mtest``"
 msgstr ""
 
 #: ../../../devel/build-system.rst:601
 msgid ""
-"The Makefile definitions that let \"make check\" run tests defined in meson."
-"build.  The rules are produced from Meson's JSON description of tests "
+"The Makefile definitions that let \"make check\" run tests defined in "
+"meson.build.  The rules are produced from Meson's JSON description of tests "
 "(obtained with \"meson introspect --tests\") through the script scripts/"
 "mtest2make.py."
 msgstr ""
