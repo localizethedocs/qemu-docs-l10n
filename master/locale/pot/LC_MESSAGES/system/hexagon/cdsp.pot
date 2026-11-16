@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QEMU master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 16:46+0000\n"
+"POT-Creation-Date: 2026-11-16 18:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,132 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../../../system/hexagon/cdsp.rst:4
-msgid "Compute DSP"
+msgid "Board-specific boot firmware"
 msgstr ""
 
 #: ../../../system/hexagon/cdsp.rst:6
 msgid ""
-"A Hexagon CDSP is designed as a computation offload device for an SoC.  The "
-"``V66G_1024`` machine contains:"
+"The CDSP/NSP machines can use the host firmware shipped in ``pc-bios``, "
+"selected with ``-bios``. These images contain H2 and either the ``booter`` "
+"or ``loadlinux`` loader. Use ``-L`` to specify QEMU's firmware directory "
+"when running an uninstalled build."
 msgstr ""
 
-#: ../../../system/hexagon/cdsp.rst:9
-msgid "L2VIC interrupt controller"
+#: ../../../system/hexagon/cdsp.rst:14
+msgid "Machine"
 msgstr ""
 
-#: ../../../system/hexagon/cdsp.rst:10
-msgid "QTimer timer device"
+#: ../../../system/hexagon/cdsp.rst:15
+msgid "CPU"
 msgstr ""
 
-#: ../../../system/hexagon/cdsp.rst:12
-msgid "This machine will support any Hexagon CPU, but will default to ``v66``."
+#: ../../../system/hexagon/cdsp.rst:16
+msgid "``-kernel`` address"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:17
+msgid "Image suffix"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:18
+msgid "``qcs6490-cdsp``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:19
+msgid "``v68``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:20
+msgid "``0xa1000000``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:21
+msgid "``qcs6490_cdsp``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:22
+msgid "``sa8775p-cdsp``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:23
+msgid "``v73``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:24 ../../../system/hexagon/cdsp.rst:28
+#: ../../../system/hexagon/cdsp.rst:32 ../../../system/hexagon/cdsp.rst:36
+msgid "``0xa0000000``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:25
+msgid "``sa8775p_cdsp``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:26
+msgid "``sm8975-nsp``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:27
+msgid "``v85``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:29
+msgid "``sm8975_nsp``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:30
+msgid "``sc8480xp-nsp0``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:31 ../../../system/hexagon/cdsp.rst:35
+msgid "``v81``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:33
+msgid "``sc8480xp_nsp0``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:34
+msgid "``sa8797p-nsp0``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:37
+msgid "``sa8797p_nsp0``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:43
+msgid "``hexagon_loadlinux_<suffix>``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:40
+msgid ""
+"Boots a guest operating system written for the Hexagon VM interface. Despite "
+"the name, it is not specific to Linux. H2 starts the guest from an image "
+"that QEMU has placed at the ``-kernel`` address in the table above."
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:57
+msgid "``hexagon_booter_<suffix>``"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:46
+msgid ""
+"Runs H2 user programs.  The booter creates a VM, loads a program that it "
+"reads from the host through semihosting, and waits for the program to exit::"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:50
+msgid ""
+"qemu-system-hexagon -M qcs6490-cdsp -serial stdio -display none \\\n"
+"    -bios hexagon_booter_qcs6490_cdsp \\\n"
+"    -semihosting-config enable=on,target=native,arg=booter,arg=prog.elf"
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:54
+msgid ""
+"Programs are loaded at ``0xa2000000`` by default; the booter's ``--"
+"guest_base`` option changes this (``arg=--help`` lists its options)."
+msgstr ""
+
+#: ../../../system/hexagon/cdsp.rst:57
+msgid "For more info, see <https://github.com/qualcomm/hexagon-hypervisor>."
 msgstr ""
