@@ -1343,7 +1343,7 @@ msgstr ""
 #: ../../../../qemu-options.hx:990 ../../../../qemu-options.hx:1038
 #: ../../../../qemu-options.hx:1108
 msgid "``in|out.dev=device``"
-msgstr ""
+msgstr "``in|out.dev=device``"
 
 #: ../../../../qemu-options.hx:991
 msgid ""
@@ -1816,7 +1816,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:1223
 msgid "``-device isa-ipmi-kcs,bmc=id[,ioport=val][,irq=val]``"
-msgstr ""
+msgstr "``-device isa-ipmi-kcs,bmc=id[,ioport=val][,irq=val]``"
 
 #: ../../../../qemu-options.hx:1224
 msgid ""
@@ -1852,7 +1852,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:1239
 msgid "``-device isa-ipmi-bt,bmc=id[,ioport=val][,irq=val]``"
-msgstr ""
+msgstr "``-device isa-ipmi-bt,bmc=id[,ioport=val][,irq=val]``"
 
 #: ../../../../qemu-options.hx:1240
 msgid ""
@@ -1862,7 +1862,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:1243
 msgid "``-device pci-ipmi-kcs,bmc=id``"
-msgstr ""
+msgstr "``-device pci-ipmi-kcs,bmc=id``"
 
 #: ../../../../qemu-options.hx:1244
 msgid "Add a KCS IPMI interface on the PCI bus."
@@ -1870,7 +1870,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:1249
 msgid "``-device pci-ipmi-bt,bmc=id``"
-msgstr ""
+msgstr "``-device pci-ipmi-bt,bmc=id``"
 
 #: ../../../../qemu-options.hx:1250
 msgid "Like the KCS interface, but defines a BT interface on the PCI bus."
@@ -1878,7 +1878,7 @@ msgstr ""
 
 #: ../../../../qemu-options.hx:1252
 msgid "``-device intel-iommu[,option=...]``"
-msgstr ""
+msgstr "``-device intel-iommu[,option=...]``"
 
 #: ../../../../qemu-options.hx:1253
 msgid ""
@@ -6408,6 +6408,11 @@ msgid ""
 "-device virtconsole,chardev=hub0 \\\n"
 "-vnc 0.0.0.0:0"
 msgstr ""
+"-chardev pty,path=/tmp/pty,id=pty0 \\\n"
+"-chardev vc,id=vc0 \\\n"
+"-chardev hub,id=hub0,chardevs.0=pty0,chardevs.1=vc0 \\\n"
+"-device virtconsole,chardev=hub0 \\\n"
+"-vnc 0.0.0.0:0"
 
 #: ../../../../qemu-options.hx:4328
 msgid ""
@@ -6984,6 +6989,8 @@ msgid ""
 "``-device loader,addr=<addr>,data=<data>,data-len=<data-len>[,data-be=<data-"
 "be>][,cpu-num=<cpu-num>]``"
 msgstr ""
+"``-device loader,addr=<addr>,data=<data>,data-len=<data-len>[,data-be=<data-"
+"be>][,cpu-num=<cpu-num>]``"
 
 #: ../../../../qemu-options.hx:4683
 msgid ""
@@ -6997,6 +7004,8 @@ msgid ""
 "``-device guest-loader,addr=<addr>[,kernel=<path>,[bootargs=<arguments>]]"
 "[,initrd=<path>]``"
 msgstr ""
+"``-device guest-loader,addr=<addr>[,kernel=<path>,[bootargs=<arguments>]]"
+"[,initrd=<path>]``"
 
 #: ../../../../qemu-options.hx:4702
 msgid ""
