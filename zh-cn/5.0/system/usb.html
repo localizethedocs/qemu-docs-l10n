@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>USB emulation &#8212; QEMU 5.0.1 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=55795b44"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
+    <link rel="canonical" href="https://projects.localizethedocs.org/qemu-docs-l10n/system/usb.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Inter-VM Shared Memory device" href="ivshmem.html" />
+    <link rel="prev" title="Network emulation" href="net.html" />
+
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+<script type="text/javascript" src="../ltd-provenance.js"></script>
+<script type="text/javascript" src="../ltd-current.js"></script>
+<script type="text/javascript" src="../../../ltd-config.js"></script>
+<script type="text/javascript" src="../../../ltd-flyout.js"></script>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="usb-emulation">
+<span id="pcsys-005fusb"></span><h1>USB emulation<a class="headerlink" href="#usb-emulation" title="Link to this heading">¶</a></h1>
+<p>QEMU can emulate a PCI UHCI, OHCI, EHCI or XHCI USB controller. You can
+plug virtual USB devices or real host USB devices (only works with
+certain host operating systems). QEMU will automatically create and
+connect virtual USB hubs as necessary to connect multiple USB devices.</p>
+<section id="connecting-usb-devices">
+<span id="usb-005fdevices"></span><h2>Connecting USB devices<a class="headerlink" href="#connecting-usb-devices" title="Link to this heading">¶</a></h2>
+<p>USB devices can be connected with the <code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">usb-...</span></code> command line
+option or the <code class="docutils literal notranslate"><span class="pre">device_add</span></code> monitor command. Available devices are:</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-mouse</span></code></dt><dd><p>Virtual Mouse. This will override the PS/2 mouse emulation when
+activated.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-tablet</span></code></dt><dd><p>Pointer device that uses absolute coordinates (like a touchscreen).
+This means QEMU is able to report the mouse position without having
+to grab the mouse. Also overrides the PS/2 mouse emulation when
+activated.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-storage,drive=drive_id</span></code></dt><dd><p>Mass storage device backed by drive_id (see
+<a class="reference internal" href="images.html#disk-005fimages"><span class="std std-ref">Disk Images</span></a>)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-uas</span></code></dt><dd><p>USB attached SCSI device, see
+<a class="reference external" href="https://git.qemu.org/?p=qemu.git;a=blob_plain;f=docs/usb-storage.txt">usb-storage.txt</a>
+for details</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-bot</span></code></dt><dd><p>Bulk-only transport storage device, see
+<a class="reference external" href="https://git.qemu.org/?p=qemu.git;a=blob_plain;f=docs/usb-storage.txt">usb-storage.txt</a>
+for details here, too</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-mtp,rootdir=dir</span></code></dt><dd><p>Media transfer protocol device, using dir as root of the file tree
+that is presented to the guest.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-host,hostbus=bus,hostaddr=addr</span></code></dt><dd><p>Pass through the host device identified by bus and addr</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-host,vendorid=vendor,productid=product</span></code></dt><dd><p>Pass through the host device identified by vendor and product ID</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-wacom-tablet</span></code></dt><dd><p>Virtual Wacom PenPartner tablet. This device is similar to the
+<code class="docutils literal notranslate"><span class="pre">tablet</span></code> above but it can be used with the tslib library because in
+addition to touch coordinates it reports touch pressure.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-kbd</span></code></dt><dd><p>Standard USB keyboard. Will override the PS/2 keyboard (if present).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-serial,chardev=id</span></code></dt><dd><p>Serial converter. This emulates an FTDI FT232BM chip connected to
+host character device id.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-braille,chardev=id</span></code></dt><dd><p>Braille device. This will use BrlAPI to display the braille output on
+a real or fake device referenced by id.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-net[,netdev=id]</span></code></dt><dd><p>Network adapter that supports CDC ethernet and RNDIS protocols. id
+specifies a netdev defined with <code class="docutils literal notranslate"><span class="pre">-netdev</span> <span class="pre">…,id=id</span></code>. For instance,
+user-mode networking can be used with</p>
+<pre class="literal-block">qemu-system-x86_64 [...] -netdev user,id=net0 -device usb-net,netdev=net0</pre>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-ccid</span></code></dt><dd><p>Smartcard reader device</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb-audio</span></code></dt><dd><p>USB audio device</p>
+</dd>
+</dl>
+</section>
+<section id="using-host-usb-devices-on-a-linux-host">
+<span id="host-005fusb-005fdevices"></span><h2>Using host USB devices on a Linux host<a class="headerlink" href="#using-host-usb-devices-on-a-linux-host" title="Link to this heading">¶</a></h2>
+<p>WARNING: this is an experimental feature. QEMU will slow down when using
+it. USB devices requiring real time streaming (i.e. USB Video Cameras)
+are not supported yet.</p>
+<ol class="arabic">
+<li><p>If you use an early Linux 2.4 kernel, verify that no Linux driver is
+actually using the USB device. A simple way to do that is simply to
+disable the corresponding kernel module by renaming it from
+<code class="docutils literal notranslate"><span class="pre">mydriver.o</span></code> to <code class="docutils literal notranslate"><span class="pre">mydriver.o.disabled</span></code>.</p></li>
+<li><p>Verify that <code class="docutils literal notranslate"><span class="pre">/proc/bus/usb</span></code> is working (most Linux distributions
+should enable it by default). You should see something like that:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">bus</span><span class="o">/</span><span class="n">usb</span>
+<span class="mi">001</span>  <span class="n">devices</span>  <span class="n">drivers</span>
+</pre></div>
+</div>
+</li>
+<li><p>Since only root can access to the USB devices directly, you can
+either launch QEMU as root or change the permissions of the USB
+devices you want to use. For testing, the following suffices:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chown</span> <span class="o">-</span><span class="n">R</span> <span class="n">myuid</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">bus</span><span class="o">/</span><span class="n">usb</span>
+</pre></div>
+</div>
+</li>
+<li><p>Launch QEMU and do in the monitor:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="n">usbhost</span>
+  <span class="n">Device</span> <span class="mf">1.2</span><span class="p">,</span> <span class="n">speed</span> <span class="mi">480</span> <span class="n">Mb</span><span class="o">/</span><span class="n">s</span>
+    <span class="n">Class</span> <span class="mi">00</span><span class="p">:</span> <span class="n">USB</span> <span class="n">device</span> <span class="mi">1234</span><span class="p">:</span><span class="mi">5678</span><span class="p">,</span> <span class="n">USB</span> <span class="n">DISK</span>
+</pre></div>
+</div>
+<p>You should see the list of the devices you can use (Never try to use
+hubs, it won't work).</p>
+</li>
+<li><p>Add the device in QEMU by using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">device_add</span> <span class="n">usb</span><span class="o">-</span><span class="n">host</span><span class="p">,</span><span class="n">vendorid</span><span class="o">=</span><span class="mh">0x1234</span><span class="p">,</span><span class="n">productid</span><span class="o">=</span><span class="mh">0x5678</span>
+</pre></div>
+</div>
+<p>Normally the guest OS should report that a new USB device is plugged.
+You can use the option <code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">usb-host,...</span></code> to do the same.</p>
+</li>
+<li><p>Now you can try to use the host USB device in QEMU.</p></li>
+</ol>
+<p>When relaunching QEMU, you may have to unplug and plug again the USB
+device to make it work again (this is a bug).</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">QEMU</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">QEMU System Emulation User's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html">Invocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keys.html">Keys in the graphical frontends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mux-chardev.html">Keys in the character backend multiplexer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">QEMU Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html">Disk Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="net.html">Network emulation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">USB emulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ivshmem.html">Inter-VM Shared Memory device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxboot.html">Direct Linux Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vnc-security.html">VNC security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tls.html">TLS setup for network services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gdb.html">GDB usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="managed-startup.html">Managed start up options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="targets.html">QEMU System Emulator Targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html">Deprecated features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#recently-removed-features">Recently removed features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-platforms.html">Supported build platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">QEMU User Mode Emulation User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">QEMU Tools Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interop/index.html">QEMU System Emulation Management and Interoperability Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../specs/index.html">QEMU System Emulation Guest Hardware Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devel/index.html">QEMU Developer's Guide</a></li>
+</ul>
+
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
