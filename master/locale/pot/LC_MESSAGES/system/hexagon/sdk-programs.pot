@@ -1,0 +1,329 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-16 18:27+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/hexagon/sdk-programs.rst:4
+msgid "Running SDK programs"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:6
+msgid ""
+"``qemu-system-hexagon`` can run SDK programs that normally run under "
+"``hexagon-sim``. The boot image depends on the runtime the program expects:"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:12
+msgid "Use case"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:13
+msgid "Initial image"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:14
+msgid "Subsequent stages"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:15
+msgid "SDK standalone OS"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:16
+msgid "``-kernel prog.elf``"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:17
+msgid "Startup code calls the program's ``main()``"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:18
+msgid "SDK QuRT dynamic program"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:19
+msgid "``-kernel runelf.pbn``"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:20
+msgid "QuRT loads ``run_main_on_hexagon_sim``, which loads ``userprog.so``"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:23
+msgid "SDK programs and semihosting"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:25
+msgid ""
+"The simulator-compatible machines, such as ``V66G_1024`` and ``V68N_1024``, "
+"provide semihosting by default. The SDK runtime uses ``trap0`` calls for "
+"services such as console I/O, host file access, and program termination."
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:30
+msgid "See :ref:`hexagon-semihosting` for more info."
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:32
+msgid "The examples below use v68 SDK artifacts with ``-M V68N_1024``."
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:35
+msgid "Standalone OS programs"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:37
+msgid ""
+"By default, ``hexagon-clang`` links a bare-metal executable with the SDK's "
+"standalone OS startup code and C runtime. This small runtime initializes the "
+"machine, calls ``main()``, and implements hosted services through "
+"semihosting."
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:42
+msgid "For example, save the following as ``prog.c``:"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:44
+msgid ""
+"#include <stdio.h>\n"
+"\n"
+"int main(int argc, char **argv)\n"
+"{\n"
+"    for (int i = 0; i < argc; i++) {\n"
+"        printf(\"argv[%d] = %s\\n\", i, argv[i]);\n"
+"    }\n"
+"    return 0;\n"
+"}"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:56
+msgid "With the SDK tools on ``PATH``, build and run it with:"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:58
+msgid ""
+"hexagon-clang -mv68 prog.c -o prog.elf\n"
+"qemu-system-hexagon -M V68N_1024 -display none \\\n"
+"    -kernel ./prog.elf -append \"foo bar\""
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:64
+msgid "The program prints:"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:66
+msgid ""
+"argv[0] = ./prog.elf\n"
+"argv[1] = foo\n"
+"argv[2] = bar"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:73
+msgid "Guest command-line arguments"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:75
+msgid ""
+"The example above passes the arguments with ``-append``. QEMU uses the ``-"
+"kernel`` filename as the first semihosting argument and splits ``-append`` "
+"on spaces to supply the remaining arguments. The host shell quotes keep "
+"``foo bar`` together as the value of the QEMU option; the guest runtime "
+"subsequently parses the semihosting command line."
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:81
+msgid ""
+"You can instead specify the semihosting command line with ``arg=`` options:"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:83
+msgid ""
+"qemu-system-hexagon -M V68N_1024 -display none -kernel ./prog.elf \\\n"
+"    -semihosting-config 'enable=on,target=native,arg=./"
+"prog.elf,arg=foo,arg=bar'"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:88
+msgid "Include the program name as the first ``arg=`` value."
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:90
+msgid ""
+"``target=native`` selects QEMU's implementation of semihosting even when a "
+"debugger is connected. To connect the semihosting console explicitly to the "
+"terminal, add a character device and select it with ``chardev=``:"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:94
+msgid ""
+"qemu-system-hexagon -M V68N_1024 -display none \\\n"
+"    -chardev stdio,id=semi \\\n"
+"    -semihosting-config enable=on,target=native,chardev=semi \\\n"
+"    -kernel ./prog.elf -append \"foo bar\""
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:102
+msgid "QuRT programs and the SDK loader chain"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:104
+msgid "An SDK QuRT dynamic test consists of three guest images:"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:106
+msgid "``runelf.pbn`` boots QuRT and loads a user process from a host file."
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:107
+msgid ""
+"``run_main_on_hexagon_sim`` is that process. It initializes the dynamic "
+"loader and loads the application's shared object."
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:109
+msgid ""
+"``userprog.so`` exports ``main(int argc, char **argv)``, which the runner "
+"invokes."
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:112
+msgid ""
+"QEMU initially loads only ``runelf.pbn``. The subsequent stages read the "
+"other images through semihosting. Use matching SDK architecture variants for "
+"the boot image, runner, and application. For example, with Hexagon SDK 6.4 "
+"and its toolv19 v68 artifacts:"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:117
+msgid ""
+"runelf=\"$HEXAGON_SDK_ROOT/rtos/qurt/computev68/sdksim_bin/runelf.pbn\"\n"
+"runner=\"$HEXAGON_SDK_ROOT/libs/run_main_on_hexagon/ship/hexagon_toolv19_v68/"
+"run_main_on_hexagon_sim\"\n"
+"qemu-system-hexagon -M V68N_1024 -display none \\\n"
+"    -kernel \"$runelf\" -append \"$runner -- ./userprog.so foo bar\""
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:124
+msgid ""
+"Build ``userprog.so`` with the SDK's QuRT shared-library build rules, "
+"including any libraries needed by the application, and place its shared "
+"dependencies where the SDK dynamic loader can find them."
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:128
+msgid "The command line exposed through semihosting is:"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:130
+msgid "<runelf.pbn path> <runner path> -- ./userprog.so foo bar"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:134
+msgid "The fields have the following roles:"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "Field"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "Consumer"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "Meaning"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "<runelf.pbn path>"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "SDK startup"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "Boot image name"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "<runner path>"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "runelf.pbn"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "Process ELF to load"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "--"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "run_main_on_hexagon_sim"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "End of runner options"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "./userprog.so"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "Dynamic loader"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "Shared object exporting main()"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "foo bar"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "Application"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:1
+msgid "argv[1] and argv[2]"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:145
+msgid ""
+"The application's ``argv[0]`` is ``./userprog.so``. When translating an SDK "
+"simulator command ``runelf.pbn -- runner -- userprog.so``, omit the "
+"separator immediately after ``runelf.pbn`` from QEMU's ``-append`` value. "
+"The separator after the runner remains part of the guest command line."
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:150
+msgid "The equivalent explicit semihosting configuration is:"
+msgstr ""
+
+#: ../../../system/hexagon/sdk-programs.rst:152
+msgid ""
+"qemu-system-hexagon -M V68N_1024 -display none -kernel \"$runelf\" \\\n"
+"    -semihosting-config "
+"\"enable=on,target=native,arg=$runelf,arg=$runner,arg=--,arg=./"
+"userprog.so,arg=foo,arg=bar\""
+msgstr ""
