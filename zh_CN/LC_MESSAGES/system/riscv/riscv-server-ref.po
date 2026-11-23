@@ -1,0 +1,128 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-19 16:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/riscv/riscv-server-ref.rst:4
+msgid "RISC-V Server Platform Reference board (``riscv-server-ref``)"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:6
+msgid ""
+"The RISC-V Server Platform specification `spec`_ defines a standardized set "
+"of hardware and software capabilities that portable system software, such as "
+"OS and hypervisors, can rely on being present in a RISC-V server platform.  "
+"This machine aims to emulate this specification, providing an environment "
+"for firmware/OS development and testing."
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:12
+msgid ""
+"`spec`_ is version 1.0 at the introduction of this board.  For each new "
+"supported spec version a new versioned board will be added, keeping \"riscv-"
+"server-ref\" as an alias for the newest version supported.  E.g. for spec "
+"version 2.0:"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:17
+msgid "riscv-server-ref-1.0 - board that complies with spec version 1.0"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:18
+msgid "riscv-server-ref-2.0 - board that complies with spec version 2.0"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:19
+msgid "riscv-server-ref - alias for riscv-server-ref-2.0"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:21
+msgid "The main features included in the riscv-server-ref board are:"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:23
+msgid "IOMMU platform device (riscv-iommu-sys)"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:24
+msgid "AIA"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:25
+msgid "No AHCI (can be added via command line)"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:26
+msgid "No NIC (can be added via command line)"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:27
+msgid "No virtio mmio bus"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:28
+msgid "No fw_cfg device"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:29
+msgid "No ACPI table"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:30
+msgid "Minimal device tree nodes"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:32
+msgid ""
+"There are multiple ways of using this reference board.  The spec compliant "
+"way is using an EDK2 image and a TPM device.  The board was tested with the "
+"TPM device ``tpm-tis`` that uses the external ``swtpm`` emulator.  More info "
+"on how to use this device can be found in `tpm`_."
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:37
+msgid ""
+"To use this board coupled with the tpm-tis device, first start the ``swtpm`` "
+"process in a shell (the ``log`` parameter is optional):"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:40
+msgid ""
+"$ mkdir /tmp/mytpm1\n"
+"$ swtpm socket --tpmstate dir=/tmp/mytpm1 \\\n"
+"        --ctrl type=unixio,path=/tmp/mytpm1/swtpm-sock \\\n"
+"        --tpm2 \\\n"
+"        --log level=20"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:48
+msgid "And then start QEMU with:"
+msgstr ""
+
+#: ../../../system/riscv/riscv-server-ref.rst:50
+msgid ""
+"qemu-system-riscv64 -M riscv-server-ref \\\n"
+"    -bios fw_dynamic.bin \\\n"
+"    -kernel EDK2.fd \\\n"
+"    -drive file=nvme_disk.ext2,format=raw,id=hd0,if=none \\\n"
+"    -device nvme,drive=hd0,serial=ddaaddaa \\\n"
+"    -chardev socket,id=chrtpm,path=/tmp/mytpm1/swtpm-sock \\\n"
+"    -tpmdev emulator,id=tpm0,chardev=chrtpm \\\n"
+"    -device tpm-tis-device,tpmdev=tpm0 \\\n"
+"    -netdev user,id=net0 -device e1000e,netdev=net0 \\\n"
+"    -nographic"
+msgstr ""

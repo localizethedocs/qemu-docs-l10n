@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-19 16:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/riscv/milkv-duo.rst:2
+msgid "Milk-V Duo board (``milkv-duo``)"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:4
+msgid ""
+"The ``milkv-duo`` machine is compatible with the Milk-V Duo development "
+"board."
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:6
+msgid ""
+"The Milk-V Duo is an ultra-compact embedded development platform based on "
+"the Sophgo CV1800B SoC. The CV1800B features T-Head C906 RISC-V processing "
+"cores along with integrated peripherals."
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:10
+msgid "For more information, see <https://milkv.io/duo>"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:13
+msgid "Supported devices"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:14
+msgid "The ``milkv-duo`` machine supports the following devices:"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:16
+msgid "T-Head C906 cores"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:17
+msgid "Core Local Interruptor (CLINT)"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:18
+msgid "Platform-Level Interrupt Controller (PLIC)"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:19
+msgid "DesignWare APB UART (dw8250)"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:20
+msgid "SDHCI controller"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:21
+msgid "CV1800B clock controller"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:24
+msgid "Boot options"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:25
+msgid ""
+"The ``milkv-duo`` machine supports direct boot using a generic RISC-V "
+"OpenSBI firmware and a Linux kernel. The root filesystem can be provided via "
+"the emulated SD card."
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:30
+msgid "Running"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:31
+msgid ""
+"To boot the machine, you need a Linux kernel (built with CV1800B support), a "
+"device tree blob (DTB), and a root filesystem image (e.g., built via BusyBox "
+"or Buildroot)."
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:35
+msgid ""
+"Use the following command to boot the system directly to the Linux shell:"
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:37
+msgid ""
+"$ qemu-system-riscv64 -M milkv-duo -nographic \\\n"
+"   -bios pc-bios/opensbi-riscv64-generic-fw_dynamic.bin \\\n"
+"   -dtb /path/to/linux/arch/riscv/boot/dts/sophgo/cv1800b-milkv-duo.dtb \\\n"
+"   -kernel /path/to/linux/arch/riscv/boot/Image \\\n"
+"   -drive file=/path/to/rootfs.ext4,format=raw,id=sd-card \\\n"
+"   -device sd-card,drive=sd-card \\\n"
+"   -append \"console=ttyS0,115200 root=/dev/mmcblk0 rootwait earlycon\""
+msgstr ""
+
+#: ../../../system/riscv/milkv-duo.rst:47
+msgid ""
+"This command boots the generic OpenSBI firmware, loads the Linux Image and "
+"the specified DTB, and mounts the ext4 root filesystem from the emulated SD "
+"card. The console output is routed to the ``ttyS0`` serial port."
+msgstr ""
