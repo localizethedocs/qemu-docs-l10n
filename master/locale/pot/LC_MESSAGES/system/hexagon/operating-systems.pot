@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, The QEMU Project Developers
+# This file is distributed under the same license as the QEMU package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: QEMU master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-23 20:35+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../system/hexagon/operating-systems.rst:4
+msgid "Booting guest operating systems"
+msgstr ""
+
+#: ../../../system/hexagon/operating-systems.rst:6
+msgid ""
+"Hexagon VM guests require a Hexagon VM host. QEMU ships board-specific host "
+"firmware in ``pc-bios``. Guest operating systems boot with the "
+"``hexagon_loadlinux_*`` images; the ``hexagon_booter_*`` images run H2 user "
+"programs instead (see :doc:`cdsp`). Select a matching machine, firmware, and "
+"guest memory layout from :doc:`cdsp`."
+msgstr ""
+
+#: ../../../system/hexagon/operating-systems.rst:13
+msgid "Linux"
+msgstr ""
+
+#: ../../../system/hexagon/operating-systems.rst:15
+msgid ""
+"The kernel must be built for the Hexagon VM interface and include the PL011 "
+"console and required virtio-mmio device drivers."
+msgstr ""
+
+#: ../../../system/hexagon/operating-systems.rst:18
+msgid "For a preloaded kernel and separate initramfs:"
+msgstr ""
+
+#: ../../../system/hexagon/operating-systems.rst:20
+msgid ""
+"qemu-system-hexagon -M qcs6490-cdsp -display none -serial stdio \\\n"
+"    -bios hexagon_loadlinux_qcs6490_cdsp \\\n"
+"    -kernel ./vmlinux -initrd ./initramfs.cpio.gz \\\n"
+"    -append \"console=ttyAMA0 rdinit=/init\""
+msgstr ""
+
+#: ../../../system/hexagon/operating-systems.rst:27
+msgid ""
+"``ttyAMA0`` selects the PL011 console. ``-append`` sets the boot arguments "
+"in QEMU's DTB; the guest and its VM host determine how those arguments are "
+"consumed. Add any platform-specific memory or delay-calibration parameters "
+"required by the kernel image."
+msgstr ""
+
+#: ../../../system/hexagon/operating-systems.rst:33
+msgid "Guest operating systems on virt"
+msgstr ""
+
+#: ../../../system/hexagon/operating-systems.rst:35
+msgid ""
+"The ``virt`` machine boots a guest operating system through the same "
+"firmware:"
+msgstr ""
+
+#: ../../../system/hexagon/operating-systems.rst:38
+msgid ""
+"qemu-system-hexagon -M virt -display none -serial stdio \\\n"
+"    -bios hexagon_loadlinux_sa8775p_cdsp \\\n"
+"    -kernel ./guest.elf -append \"console=ttyAMA0\""
+msgstr ""
+
+#: ../../../system/hexagon/operating-systems.rst:44
+msgid ""
+"QEMU loads the guest ELF at its declared physical addresses. QEMU enters the "
+"firmware with the DTB address in ``r1:r0`` (see :ref:`hexagon-vm-boot`). The "
+"guest must use the Hexagon VM interface for interrupts and timers, the PL011 "
+"at ``0x10000000``, and the virtio-mmio transports listed in :doc:`machines`."
+msgstr ""
